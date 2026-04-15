@@ -95,7 +95,7 @@ A skill is only complete when it is:
 - A human or external workflow owns the handoff between creator and reviewer.
 
 ## Naming
-- Directory name: lowercase-hyphen
+- Directory name: lowercase kebab-case
 - Skill name in frontmatter: match the directory when possible
 - Avoid vague names such as `general-helper` or `do-everything`
 
