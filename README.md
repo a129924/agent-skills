@@ -87,7 +87,15 @@ inside a skill folder unless the repository spec gives them a fixed role.
    workflow.
 6. Promote the skill to the stable library only after it returns `approved`.
 
-## Initial skills
+## Versioning
+- The root `VERSION` file is the canonical version baseline for this repository.
+- It versions the Agent Skills project itself, not a Python package.
+- Versioning follows SemVer:
+  - `MAJOR`: breaking repository policy or skill-usage changes
+  - `MINOR`: new stable skills or backward-compatible capabilities
+  - `PATCH`: non-breaking fixes and wording corrections
+
+## Current skills
 | Skill | Role |
 | --- | --- |
 | `agent-skill-creator` | creates new repo-compliant skills |
