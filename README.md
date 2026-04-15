@@ -101,6 +101,8 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `agent-skill-creator` | creates new repo-compliant skills |
 | `agent-skill-reviewer` | checks skills against the repository rules |
 | `agent-skill-template` | provides the canonical template and reference shape |
+| `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
+| `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
