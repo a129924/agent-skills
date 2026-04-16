@@ -103,6 +103,8 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `agent-skill-template` | provides the canonical template and reference shape |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
+| `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
+| `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
