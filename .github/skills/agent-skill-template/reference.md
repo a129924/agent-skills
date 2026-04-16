@@ -12,9 +12,16 @@ A stable skill in this repository usually has:
 ## Example depth rule
 
 - simple skills may rely on concise `SKILL.md` examples when they already cover
-  most routine usage
+  about 80% of routine usage
 - higher-complexity skills should include `examples.md`
 - reviewer may still require `examples.md` when the brief examples are not enough
+
+## Reference split rule
+
+- keep `reference.md` focused when one file is enough
+- split into `references/` when local reference detail grows beyond about 1,000
+  tokens or more than 3 logic topics
+- list each split reference file in `Local references` and state its role
 
 ## Split signals
 

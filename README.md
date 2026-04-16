@@ -38,6 +38,8 @@ Every stable skill should:
 Each skill folder uses:
 - a required core: `SKILL.md` plus `reference.md` or `examples.md`
 - optional additions only when each file or folder has a clear declared role
+- `references/` as an explicit split-reference folder when one `reference.md`
+  would become too broad
 
 ## Canonical ownership
 - `.github/copilot-instructions.md` is the canonical source for the compliant
@@ -52,6 +54,7 @@ Each skill folder uses:
 | --- | --- |
 | `SKILL.md` | executable instruction contract with concise positive/negative examples |
 | `reference.md` | stable local reference knowledge |
+| `references/` | split topic-specific reference files when one reference file is too broad |
 | `examples.md` | detailed inputs, outputs, anti-patterns, and patterns |
 | `checklist.md` | repeatable verification steps |
 | scripts | local automation with one explicit job |
@@ -63,10 +66,18 @@ inside a skill folder unless the repository spec gives them a fixed role.
 ## Example policy
 - `SKILL.md` should include one concise positive example and one concise
   negative example
+- `examples.md` may stay optional when the concise `SKILL.md` examples already
+  cover about 80% of routine usage
 - `examples.md` becomes required for higher-complexity skills, such as
   refactoring, branching workflows, script/tool usage, or higher-risk outputs
 - reviewer may still require `examples.md` when the concise examples are not
   enough
+
+## Reference policy
+- keep `reference.md` focused when one file is enough
+- split into `references/` when `reference.md` grows beyond about 1,000 tokens
+  or more than 3 logic topics
+- list each split file and its role in `SKILL.md` → `Local references`
 
 ## Lifecycle
 1. `draft` — still being shaped

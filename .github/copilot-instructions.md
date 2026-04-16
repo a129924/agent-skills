@@ -30,8 +30,8 @@ Ownership model:
 Each stable skill directory should contain:
 - `SKILL.md`
 - `examples.md` or `reference.md`
-- optional `checklist.md`, scripts, or local subfolders only when the skill truly
-  needs them
+- optional `checklist.md`, scripts, `references/`, or local subfolders only when
+  the skill truly needs them
 
 Optional additions are allowed only when their role is explicit and local to the
 skill.
@@ -41,6 +41,7 @@ skill.
 | --- | --- | --- |
 | `SKILL.md` | Executable instruction contract for the skill, including concise positive and negative examples | Required |
 | `reference.md` | Stable local knowledge, constraints, edge cases, and usage notes | Required or choose `examples.md` |
+| `references/` | Split topic-specific reference files when one `reference.md` would become too broad | Optional |
 | `examples.md` | Detailed example inputs, outputs, anti-patterns, and usage patterns | Required for high-complexity skills or when `SKILL.md` examples are not enough |
 | `checklist.md` | Repeatable verification or operational checklist | Optional |
 | scripts | Local automation with one explicit operational job | Optional |
@@ -53,6 +54,15 @@ Rules for optional items:
 - `Local references` must name the item and say what it is for
 - avoid vague catch-all names such as `docs/`, `misc/`, `helpers/`, or `stuff/`
   unless the repository spec later assigns them a fixed role
+
+## Reference policy
+- Keep `reference.md` focused when one file is enough.
+- If `reference.md` grows beyond about 1,000 tokens or covers more than 3 logic
+  topics, split it into topic files under `references/`.
+- When `references/` exists, `SKILL.md` must list each split file in
+  `Local references` and state the role of each file.
+- Reviewer may still require a split when the file remains too broad even if the
+  rough threshold is not exceeded.
 
 Each `SKILL.md` should contain:
 - YAML frontmatter with `name` and `description`
@@ -70,6 +80,8 @@ In `Local references`, name local files or folders and state what each one is fo
 ## Example policy
 - Every `SKILL.md` must include at least one concise correct example and one
   concise incorrect example.
+- `examples.md` may stay optional when the concise `SKILL.md` examples already
+  cover about 80% of routine usage.
 - `examples.md` is required when the skill:
   - handles code refactoring
   - has branching or multi-path decisions

@@ -24,3 +24,16 @@ Typical reasons:
 - more than one responsibility
 - trigger is too broad
 - missing required example depth
+
+## Needs-rework example: oversized reference file
+
+A folder with one `reference.md` that mixes multiple rule systems, exceptions,
+and decision tables without splitting them into `references/`.
+
+Typical verdict:
+- needs-rework
+
+Typical reasons:
+- `reference.md` is too broad
+- split reference files are needed
+- local reference roles are not explicit enough

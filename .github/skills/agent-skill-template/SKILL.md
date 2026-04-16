@@ -28,10 +28,11 @@ Do not use this skill when:
 3. Replace placeholders with one clear responsibility.
 4. Add concise positive and negative examples to `SKILL.md`.
 5. Add `reference.md` or `examples.md`.
-6. Add `examples.md` when the skill is high complexity or the concise examples are not enough.
-7. If you add optional files or folders, declare each role in `Local references`.
-8. Stop at `review-ready`.
-9. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
+6. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logic topics.
+7. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+8. If you add optional files or folders, declare each role in `Local references`.
+9. Stop at `review-ready`.
+10. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
 
 # Examples
 - Positive: Use this template to draft a focused skill with concise positive and negative examples in `SKILL.md`.

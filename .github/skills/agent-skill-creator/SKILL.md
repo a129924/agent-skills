@@ -20,6 +20,7 @@ Do not use this skill when:
 - the skill's single responsibility
 - the situations that should trigger the skill
 - the skill's boundaries
+- the reference material, if any
 - any local assets the skill truly needs
 - the complexity level, if it is already known
 
@@ -30,9 +31,10 @@ Do not use this skill when:
 4. Keep the skill focused on one job.
 5. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 6. Add `reference.md` or `examples.md`.
-7. Add `examples.md` when the skill is high complexity or the concise examples are not enough.
-8. If you add optional files or subfolders, declare each role in `Local references`.
-9. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
+7. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logic topics.
+8. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+9. If you add optional files or subfolders, declare each role in `Local references`.
+10. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
 
 # Examples
 - Positive: Draft `release-note-shortener` with a clear trigger, brief positive and negative examples in `SKILL.md`, and local file roles.
@@ -42,12 +44,14 @@ Do not use this skill when:
 - a new `.github/skills/<skill-name>/` folder, using lowercase kebab-case
 - `SKILL.md` with concise positive and negative examples
 - `examples.md` for high-complexity skills, or `reference.md` for local detail
+- `references/` when local reference detail must be split by topic
 - optional local additions with explicit roles
 - a `review-ready` skill draft and explicit handoff message
 
 # Boundaries
 - Do not draft when the responsibility, trigger, or boundaries are still ambiguous.
 - Do not create multi-purpose skills.
+- Do not leave oversized multi-topic reference material in one undifferentiated file.
 - Do not rely on hidden context outside the skill folder.
 - Do not claim `approved` or `stable`.
 - Do not approve your own output.
