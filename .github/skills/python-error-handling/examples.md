@@ -12,11 +12,24 @@ class BaseAppError(Exception):
 class InvalidConfigError(BaseAppError):
     pass
 
+class StartupError(BaseAppError):
+    pass
+
 class UserNotFoundError(BaseAppError):
+    pass
+
+class UserAlreadyExistsError(BaseAppError):
+    pass
+
+class ProjectLoadError(BaseAppError):
+    pass
+
+class InvalidUserInputError(BaseAppError):
     pass
 ```
 
 - A package should have one stable custom root error.
+- Later snippets reuse these leaf errors as members of the same custom error family.
 - Leaf errors should carry the main business or package meaning.
 
 ### Add topic-level bases only when they earn their keep
