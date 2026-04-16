@@ -3,9 +3,9 @@
 ## Baseline
 - Treat `pyright --strict` as the default compatibility target.
 - Annotate public function and method parameters and return values.
-- Use PEP 604 unions such as `User | None`.
-- Use built-in generics such as `list[str]` and `dict[str, int]`.
-- Introduce `TypeAlias` for repeated or complex types.
+- For Python 3.10+, use PEP 604 unions such as `User | None`; for Python 3.8/3.9 compatibility, use `Optional[User]` or `Union[...]`.
+- For Python 3.9+, use built-in generics such as `list[str]` and `dict[str, int]`; for Python 3.8 compatibility, use `List[str]` and `Dict[str, int]`.
+- For Python 3.10+, use `TypeAlias` for repeated or complex types; for older baselines, use `typing_extensions.TypeAlias` when available or keep the alias pattern explicit with compatible `typing` spellings.
 - Annotate empty collections and mutable attributes when inference would be ambiguous.
 
 ## Preferred patterns

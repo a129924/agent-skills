@@ -24,12 +24,12 @@ Do not use this skill when:
 # Process
 1. Start from `pyright --strict` as the default baseline.
 2. Require explicit parameter and return annotations on public functions and methods.
-3. Prefer PEP 604 unions and built-in generics over legacy `typing` spellings.
+3. Match syntax to the supported Python version: for Python 3.10+ prefer `User | None`; for Python 3.9+ prefer `list[str]`; for Python 3.8/3.9 compatibility use `Optional[User]`, `Union[...]`, and `List[str]` where needed.
 4. Limit `Any`, `cast`, and ignore comments to explicit, justified edge cases.
 5. Put reusable details and exceptions in `reference.md`.
 
 # Examples
-- Positive: Require `User | None`, `list[str]`, and a named `TypeAlias` for complex repeated types.
+- Positive: Require version-appropriate strict annotations (for example, `User | None` and `list[str]` on Python 3.10+, or `Optional[User]` and `List[str]` on Python 3.8/3.9); use a named alias when supported by the baseline and helpful for repeated complex types.
 - Negative: Allow implicit `Any`, untyped public APIs, or routine ignore comments with no justification.
 
 # Outputs

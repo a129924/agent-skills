@@ -19,7 +19,11 @@ It is optimized for three equal jobs:
 └── skills/
     ├── agent-skill-creator/
     ├── agent-skill-reviewer/
-    └── agent-skill-template/
+    ├── agent-skill-template/
+    ├── python-control-flow/
+    ├── python-model-selection/
+    ├── python-naming/
+    └── python-type-hints-strict/
 ```
 
 ## Repository rules
