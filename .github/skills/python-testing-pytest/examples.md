@@ -1,6 +1,6 @@
 # Pytest unit-testing examples
 
-Use these examples after `SKILL.md` narrows the task to pure unit tests with mocks.
+Use these examples after `SKILL.md` narrows the task to pure unit tests, using mocks when needed.
 
 ## Inline arrange vs fixtures
 
