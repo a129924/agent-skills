@@ -26,7 +26,7 @@ Do not use this skill when:
 2. Require explicit parameter and return annotations on public functions and methods.
 3. Match syntax to the supported Python version: for Python 3.10+ prefer `User | None`; for Python 3.9+ prefer `list[str]`; for Python 3.8/3.9 compatibility use `Optional[User]`, `Union[...]`, and `List[str]` where needed.
 4. Limit `Any`, `cast`, and ignore comments to explicit, justified edge cases.
-5. Put reusable details and exceptions in `reference.md`.
+5. Put reusable compatibility notes and escape-hatch rules in `reference.md`, and put version-path examples and anti-patterns in `examples.md`.
 
 # Examples
 - Positive: Require version-appropriate strict annotations (for example, `User | None` and `list[str]` on Python 3.10+, or `Optional[User]` and `List[str]` on Python 3.8/3.9); use a named alias when supported by the baseline and helpful for repeated complex types.
@@ -35,7 +35,7 @@ Do not use this skill when:
 # Outputs
 - a review-ready strict typing rule set or skill draft
 - explicit allowed and disallowed typing patterns
-- a local reference file for edge cases and escape hatches
+- local reference files for compatibility rules, edge cases, and anti-patterns
 
 # Boundaries
 - Do not choose between `Enum`, `dataclass`, `ABC`, or `Protocol`.
@@ -43,4 +43,5 @@ Do not use this skill when:
 - Do not relax strict typing without an explicit repository-level exception.
 
 # Local references
-- `reference.md`: strict typing defaults, allowed exceptions, and short examples
+- `reference.md`: strict typing defaults, compatibility rules, and allowed exceptions
+- `examples.md`: version-path examples and strict typing anti-patterns

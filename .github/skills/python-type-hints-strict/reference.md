@@ -21,6 +21,6 @@
 
 ## Avoid
 - Untyped public APIs.
-- Legacy spellings like `Optional[X]`, `Union[A, B]`, `List[X]`, or `Dict[K, V]` when modern syntax works.
+- Legacy spellings like `Optional[X]`, `Union[A, B]`, `List[X]`, or `Dict[K, V]` when the supported Python version already allows modern syntax.
 - Routine `cast` or ignore comments as a replacement for modeling the type correctly.
 - Return signatures that bounce between unrelated types.
