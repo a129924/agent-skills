@@ -126,6 +126,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
 | `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
 | `python-testing-pytest` | defines pure Python pytest unit-testing rules for fixtures, parametrization, assertions, mocks, and coverage as a quality target |
+| `python-error-handling` | defines general Python exception-handling rules for custom errors, translation boundaries, chaining, propagation, and benign suppression |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
