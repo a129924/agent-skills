@@ -58,7 +58,7 @@ class BankAccount:
 
 ### Use a factory when creation needs translation or named intent
 ```py
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 
 class Session:
@@ -73,7 +73,7 @@ class Session:
         expires_at = datetime.fromisoformat(payload["expires_at"])
         return cls(
             user_id=payload["user_id"],
-            expires_at=expires_at.astimezone(UTC),
+            expires_at=expires_at.astimezone(timezone.utc),
         )
 ```
 
@@ -83,14 +83,14 @@ class Session:
 
 ### Avoid stretching `__init__` into a parser
 ```py
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 
 
 class Session:
     def __init__(self, payload: dict[str, str]) -> None:
         raw_expires_at = payload["expires_at"]
         parsed = datetime.fromisoformat(raw_expires_at)
-        expires_at = parsed.astimezone(UTC)
+        expires_at = parsed.astimezone(timezone.utc)
         if expires_at.tzinfo is None:
             raise ValueError("expires_at must be timezone-aware")
         self._user_id = payload["user_id"]
@@ -256,7 +256,7 @@ class RetryPolicy:
     MAX_ATTEMPTS = 5
 
     def __init__(self, timeout: int | None = None) -> None:
-        self._timeout = timeout or self.DEFAULT_TIMEOUT
+        self._timeout = timeout if timeout is not None else self.DEFAULT_TIMEOUT
 ```
 
 - Class attributes work well for stable constants and metadata.
