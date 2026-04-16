@@ -19,7 +19,11 @@ It is optimized for three equal jobs:
 └── skills/
     ├── agent-skill-creator/
     ├── agent-skill-reviewer/
-    └── agent-skill-template/
+    ├── agent-skill-template/
+    ├── python-control-flow/
+    ├── python-model-selection/
+    ├── python-naming/
+    └── python-type-hints-strict/
 ```
 
 ## Repository rules
@@ -101,6 +105,10 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `agent-skill-creator` | creates new repo-compliant skills |
 | `agent-skill-reviewer` | checks skills against the repository rules |
 | `agent-skill-template` | provides the canonical template and reference shape |
+| `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
+| `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
+| `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
+| `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
