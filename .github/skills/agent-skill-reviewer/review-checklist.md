@@ -25,6 +25,7 @@ A skill is `approved` only if all of these are true:
 - optional additions follow the responsibility matrix
 - generic catch-all names such as `docs/`, `misc/`, or `helpers/` are rejected
   unless the repository spec gives them a fixed role
+- each file inside `references/` has a clear topic and role
 
 ## Quality
 - the skill has one responsibility
@@ -36,9 +37,17 @@ A skill is `approved` only if all of these are true:
 - `SKILL.md` includes at least one concise incorrect example
 
 ## Example depth
+- `examples.md` may stay optional when the concise `SKILL.md` examples already cover about 80% of routine usage
 - `examples.md` exists when the skill is high complexity
 - `examples.md` exists when the concise `SKILL.md` examples are not enough
 - detailed examples match the skill's main paths and anti-patterns
+
+## Reference depth
+- `reference.md` stays focused when one file is enough
+- `references/` supplements split reference detail and does not replace the required companion-file rule
+- split into `references/` when local reference detail grows beyond about 1,000 tokens
+- split into `references/` when local reference detail covers more than 3 logical topics
+- each split reference file is listed in `Local references` with its role
 
 ## High-complexity triggers
 - code refactoring
@@ -57,6 +66,8 @@ A skill is `approved` only if all of these are true:
 - missing required core files
 - missing concise positive or negative examples in `SKILL.md`
 - missing `examples.md` for a high-complexity skill
+- oversized multi-topic `reference.md` left unsplit
+- split reference files missing role labels in `Local references`
 - optional additions with no declared role
 - vague boundaries
 - review comments that would require inventing a different skill

@@ -46,3 +46,23 @@ Why this needs `examples.md`:
 - refactoring is high complexity
 - brief examples in `SKILL.md` are not enough
 - scripts and branching paths need detailed positive and negative cases
+
+## Example 4: split oversized reference material
+
+Goal:
+- draft a skill with several distinct rule clusters and edge-case notes
+
+Result:
+```text
+.github/skills/policy-auditor/
+├── SKILL.md
+├── reference.md
+└── references/
+    ├── severity-rules.md
+    └── exception-cases.md
+```
+
+Why this split passes:
+- the reference material covers more than 3 logical topics
+- each split file has one clear role
+- `Local references` can name each file and explain its job

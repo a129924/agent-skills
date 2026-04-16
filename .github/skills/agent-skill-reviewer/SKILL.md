@@ -24,16 +24,18 @@ Do not use this skill when:
 1. Read `review-checklist.md`.
 2. Confirm the required core exists.
 3. Inspect frontmatter and required sections in `SKILL.md`, including concise positive and negative examples.
-4. Confirm each optional file or folder has a clear declared role.
+4. Confirm each optional file or folder has a clear declared role, including each file inside `references/` when that folder exists.
 5. Confirm the skill has one clear responsibility.
 6. Confirm the skill is portable, independent, and self-contained.
-7. If the skill is high complexity or the concise examples are not enough, require `examples.md`.
-8. Confirm it has an explicit `Trigger / When to use` section.
-9. Return `approved` or `needs-rework` with concrete fixes.
+7. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
+8. If `reference.md` is too broad, require it to be split into `references/`.
+9. If the skill is high complexity or the concise examples are not enough for about 80% of routine usage, require `examples.md`.
+10. Confirm it has an explicit `Trigger / When to use` section.
+11. Return `approved` or `needs-rework` with concrete fixes.
 
 # Examples
 - Positive: Review a refactoring skill whose `SKILL.md` has brief positive and negative examples and whose `examples.md` covers the complex branches.
-- Negative: Approve a draft that has no negative example in `SKILL.md` or no `examples.md` for a branching refactor skill.
+- Negative: Approve a draft that has no negative example in `SKILL.md`, no `examples.md` for a branching refactor skill, or one oversized `reference.md` with unlabeled topics.
 
 # Outputs
 - `approved` or `needs-rework`
