@@ -38,8 +38,13 @@ This document mirrors the canonical repository policy in
 
 ## Reference policy
 - keep `reference.md` focused when one file is enough
+- `references/` is a split-reference supplement, not by itself a replacement for
+  the required companion-file rule
 - split into `references/` when `reference.md` grows beyond about 1,000 tokens
-  or more than 3 logic topics
+  or more than 3 logical topics
+- if `reference.md` is the chosen companion file and becomes too broad, keep it
+  focused or reduce it to a short overview while moving detailed topics into
+  `references/`
 - list each split file in `Local references` and state its role
 
 ## Role declaration rule

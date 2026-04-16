@@ -19,8 +19,13 @@ A stable skill in this repository usually has:
 ## Reference split rule
 
 - keep `reference.md` focused when one file is enough
+- treat `references/` as a split-reference supplement, not as a replacement for
+  the required companion-file rule
 - split into `references/` when local reference detail grows beyond about 1,000
-  tokens or more than 3 logic topics
+  tokens or more than 3 logical topics
+- if `reference.md` is the chosen companion file and becomes too broad, keep it
+  focused or reduce it to a short overview while moving detailed topics into
+  `references/`
 - list each split reference file in `Local references` and state its role
 
 ## Split signals

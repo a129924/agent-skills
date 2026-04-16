@@ -14,8 +14,10 @@ Use this as the default folder shape for a `review-ready` skill.
 ```
 
 - Use `reference.md` or `examples.md` as the required companion file.
+- Use `references/` only as a split-reference supplement, not as a replacement
+  for the required companion file.
 - Add `references/` when one `reference.md` would exceed about 1,000 tokens or
-  more than 3 logic topics.
+  more than 3 logical topics.
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 
@@ -69,6 +71,9 @@ Do not use this skill when:
 - Keep the skill single-purpose.
 - Keep supporting material in the same folder.
 - Split oversized reference material into `references/` by topic.
+- If `reference.md` is the chosen companion file and becomes too broad, keep it
+  focused or reduce it to a short overview while moving detailed topics into
+  `references/`.
 - Put concise positive and negative examples in `SKILL.md`.
 - Add `examples.md` when the skill is high complexity or the brief examples are not enough for about 80% of routine usage.
 - Add optional files or folders only when each one has a clear role.

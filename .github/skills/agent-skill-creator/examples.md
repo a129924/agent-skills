@@ -63,6 +63,6 @@ Result:
 ```
 
 Why this split passes:
-- the reference material covers more than 3 logic topics
+- the reference material covers more than 3 logical topics
 - each split file has one clear role
 - `Local references` can name each file and explain its job

@@ -31,10 +31,12 @@ Do not use this skill when:
 4. Keep the skill focused on one job.
 5. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 6. Add `reference.md` or `examples.md`.
-7. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logic topics.
-8. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
-9. If you add optional files or subfolders, declare each role in `Local references`.
-10. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
+7. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
+8. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
+9. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
+10. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+11. If you add optional files or subfolders, declare each role in `Local references`.
+12. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
 
 # Examples
 - Positive: Draft `release-note-shortener` with a clear trigger, brief positive and negative examples in `SKILL.md`, and local file roles.

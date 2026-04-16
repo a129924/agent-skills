@@ -14,8 +14,10 @@ Use this as the default starting point for a `review-ready` skill.
 ```
 
 - Use `reference.md` or `examples.md` as the required companion file.
+- Use `references/` only as a split-reference supplement, not as a replacement
+  for the required companion file.
 - Add `references/` when one `reference.md` would exceed about 1,000 tokens or
-  more than 3 logic topics.
+  more than 3 logical topics.
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 
@@ -65,6 +67,9 @@ Do not use this skill when:
 ## Companion file guidance
 - Use `reference.md` or `examples.md` for reusable detail.
 - Split oversized reference material into `references/` when one file becomes too broad.
+- If `reference.md` is the chosen companion file and becomes too broad, keep it
+  focused or reduce it to a short overview while moving detailed topics into
+  `references/`.
 - Add `checklist.md` only when the skill has repeatable review steps.
 - Keep scripts local to the skill that needs them.
 - Optional files or folders must declare their role in `Local references`.

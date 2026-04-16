@@ -44,8 +44,9 @@ A skill is `approved` only if all of these are true:
 
 ## Reference depth
 - `reference.md` stays focused when one file is enough
+- `references/` supplements split reference detail and does not replace the required companion-file rule
 - split into `references/` when local reference detail grows beyond about 1,000 tokens
-- split into `references/` when local reference detail covers more than 3 logic topics
+- split into `references/` when local reference detail covers more than 3 logical topics
 - each split reference file is listed in `Local references` with its role
 
 ## High-complexity triggers

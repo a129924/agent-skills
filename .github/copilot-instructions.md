@@ -57,8 +57,13 @@ Rules for optional items:
 
 ## Reference policy
 - Keep `reference.md` focused when one file is enough.
-- If `reference.md` grows beyond about 1,000 tokens or covers more than 3 logic
+- `references/` is a split-reference supplement, not by itself a replacement for
+  the required companion-file rule.
+- If `reference.md` grows beyond about 1,000 tokens or covers more than 3 logical
   topics, split it into topic files under `references/`.
+- If `reference.md` is the chosen companion file and becomes too broad, keep it
+  focused or reduce it to a short overview while moving detailed topics into
+  `references/`.
 - When `references/` exists, `SKILL.md` must list each split file in
   `Local references` and state the role of each file.
 - Reviewer may still require a split when the file remains too broad even if the
