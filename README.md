@@ -22,12 +22,14 @@ It is optimized for three equal jobs:
     ├── agent-skill-template/
     ├── git-branch-naming/
     ├── git-commit-convention/
+    ├── git-post-merge-workflow/
     ├── git-release-management/
     ├── python-api-signature/
     ├── python-class-design/
     ├── python-control-flow/
     ├── python-error-handling/
     ├── python-model-selection/
+    ├── python-module-boundaries/
     ├── python-naming/
     ├── python-testing-pytest/
     └── python-type-hints-strict/
@@ -130,6 +132,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `agent-skill-template` | provides the canonical template and reference shape |
 | `git-branch-naming` | names or repairs development branches with semantic prefixes and migration guidance |
 | `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
+| `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
