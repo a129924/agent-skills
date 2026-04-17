@@ -317,9 +317,10 @@ from warnings import warn
 from .service import UserService
 
 
+# Deprecated bridge: remove in v2.0; use package.UserService instead.
 def LegacyUserService(*args: object, **kwargs: object) -> UserService:
     warn(
-        "package.LegacyUserService is deprecated; use package.UserService",
+        "package.LegacyUserService is deprecated and will be removed in v2.0; use package.UserService",
         DeprecationWarning,
         stacklevel=2,
     )
@@ -329,7 +330,8 @@ __all__ = ["UserService"]
 ```
 
 - The new public path already exists.
-- The deprecated bridge is clearly marked, warns, and stays out of the fresh intended surface.
+- The deprecated bridge is clearly marked, warns, and includes a removal plan.
+- It is intentionally excluded from `__all__` so new callers do not treat it as part of the fresh intended surface.
 
 ### Avoid silent permanent baggage
 ```py
