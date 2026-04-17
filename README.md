@@ -29,6 +29,7 @@ It is optimized for three equal jobs:
     ├── python-control-flow/
     ├── python-error-handling/
     ├── python-model-selection/
+    ├── python-module-boundaries/
     ├── python-naming/
     ├── python-testing-pytest/
     └── python-type-hints-strict/

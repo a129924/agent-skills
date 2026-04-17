@@ -6,15 +6,39 @@ Use these examples after `SKILL.md` has already narrowed the task to post-merge 
 
 ### Merged PR and standard cleanup
 ```bash
-default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+remote_name=$(git remote | head -n 1)
+current_branch=$(git branch --show-current)
+tracking_remote=$(git config --get "branch.$current_branch.remote" || true)
+
+if [ -n "$tracking_remote" ]; then
+	remote_name="$tracking_remote"
+fi
+
+if [ -z "$remote_name" ]; then
+	echo "Blocked cleanup: no git remote found"
+	exit 1
+fi
+
+default_branch=$(git symbolic-ref "refs/remotes/$remote_name/HEAD" 2>/dev/null | sed "s@^refs/remotes/$remote_name/@@")
+
+if [ -z "$default_branch" ]; then
+	default_branch=$(git remote show "$remote_name" | sed -n '/HEAD branch/s/.*: //p')
+fi
+
+if [ -z "$default_branch" ]; then
+	echo "Blocked cleanup: cannot detect default branch for remote '$remote_name'"
+	exit 1
+fi
+
 git checkout "$default_branch"
-git pull --ff-only origin "$default_branch"
-git push origin --delete feat/andrew/post-merge-workflow
+git pull --ff-only "$remote_name" "$default_branch"
+git push "$remote_name" --delete feat/andrew/post-merge-workflow
 git branch -d feat/andrew/post-merge-workflow
 git branch -vv
 ```
 
 - Use dynamic default-branch detection, not hardcoded names.
+- Prefer branch-tracking remote first, then fall back to first configured remote.
 - Remote deletion is default after confirmed merge.
 
 ## Safety checks
