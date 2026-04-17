@@ -20,6 +20,9 @@ It is optimized for three equal jobs:
     ├── agent-skill-creator/
     ├── agent-skill-reviewer/
     ├── agent-skill-template/
+    ├── git-branch-naming/
+    ├── git-commit-convention/
+    ├── git-release-management/
     ├── python-control-flow/
     ├── python-model-selection/
     ├── python-naming/
@@ -121,6 +124,9 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `agent-skill-creator` | creates new repo-compliant skills |
 | `agent-skill-reviewer` | checks skills against the repository rules |
 | `agent-skill-template` | provides the canonical template and reference shape |
+| `git-branch-naming` | names or repairs development branches with semantic prefixes and migration guidance |
+| `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
+| `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
 | `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
