@@ -49,6 +49,21 @@ Repair:
 
 - Do not silently fall back to non-fast-forward pull.
 
+### Failure example: Non-FF divergence on default branch
+```text
+Blocked sync:
+- local `main` has 2 commits not present on `origin/main`
+- remote `origin/main` has 5 new commits
+
+Repair guidance:
+1. this is an abnormal state; default branch should not receive direct local commits
+2. inspect the extra local commits with `git log --oneline --graph --decorate --all -n 30`
+3. if this was accidental, realign with `git reset --hard origin/main`
+4. if these commits are intentional, move them to a dedicated feature branch with cherry-pick
+```
+
+- Resolve divergence deliberately before rerunning post-merge cleanup.
+
 ## Exception path
 
 ### Keep remote branch for audit retention
