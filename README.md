@@ -23,9 +23,13 @@ It is optimized for three equal jobs:
     ├── git-branch-naming/
     ├── git-commit-convention/
     ├── git-release-management/
+    ├── python-api-signature/
+    ├── python-class-design/
     ├── python-control-flow/
+    ├── python-error-handling/
     ├── python-model-selection/
     ├── python-naming/
+    ├── python-testing-pytest/
     └── python-type-hints-strict/
 ```
 
