@@ -1,16 +1,27 @@
-# python-context-management examples
+# Python Context-Management Examples
+
+Snippets assume these imports where applicable:
+
+```py
+import logging
+import os
+from contextlib import ExitStack, contextmanager
+from types import TracebackType
+```
+
+---
 
 ## 1. Ordinary `with` over manual `close()`
 
 **Positive — use `with`:**
-```python
+```py
 # Correct: protocol handles close on both normal and error exit
 with open(path, "r") as f:
     data = f.read()
 ```
 
 **Negative — manual close when `with` fits:**
-```python
+```py
 # Wrong: manual pattern adds noise and can miss close on some error paths
 f = open(path, "r")
 try:
@@ -25,10 +36,14 @@ finally:
 
 Manual `close()` is allowed only when the resource lifetime genuinely crosses
 function boundaries and a `with` block cannot contain it. This is a deliberate
-exception to the default `with`-first rule and does not change the principle
-that effectful acquisition belongs in `__enter__`, not `__init__`.
+exception to the default `with`-first rule.
 
-```python
+Note: `StreamHandler` below does **not** implement the context-manager
+protocol, so the rule "effectful acquisition belongs in `__enter__`, not
+`__init__`" does not apply here — that rule governs classes that implement
+`__enter__` and `__exit__`.
+
+```py
 # Acceptable: lifetime spans __init__ and close(), not one block
 class StreamHandler:
     def __init__(self, path: str) -> None:
@@ -44,7 +59,7 @@ class StreamHandler:
 Always pair cross-boundary lifetime with explicit cleanup in `finally` at the
 call site:
 
-```python
+```py
 handler = StreamHandler(path)
 try:
     process(handler)
@@ -61,9 +76,7 @@ would cleanly contain the lifetime.
 
 ### Choose `@contextmanager` when the flow is short and mostly stateless
 
-```python
-from contextlib import contextmanager
-
+```py
 @contextmanager
 def temporary_cwd(path: str):
     original = os.getcwd()
@@ -81,7 +94,7 @@ Use `@contextmanager` when:
 
 ### Choose a class-based manager when state or richer behavior matters
 
-```python
+```py
 class ManagedConnection:
     def __init__(self, dsn: str) -> None:
         self._dsn = dsn
@@ -118,7 +131,7 @@ that `@contextmanager` would express more clearly.
 Translate known setup errors using the semantic custom-error model and
 preserve the original cause with `raise X from Y`.
 
-```python
+```py
 class DatabaseSession:
     def __enter__(self) -> Session:
         try:
@@ -131,7 +144,7 @@ class DatabaseSession:
 ```
 
 **Anti-pattern — swallowing the cause:**
-```python
+```py
     def __enter__(self) -> Session:
         try:
             self._session = self._pool.acquire()
@@ -140,7 +153,7 @@ class DatabaseSession:
 ```
 
 Propagate unknown errors without wrapping:
-```python
+```py
     def __enter__(self) -> Session:
         try:
             self._session = self._pool.acquire()
@@ -158,7 +171,7 @@ When a business error is raised inside the `with` block and cleanup also
 fails, the cleanup error must not silently replace the primary error.
 
 **Correct — log cleanup error, re-raise original:**
-```python
+```py
     def __exit__(
         self,
         exc_type: type[BaseException] | None,
@@ -176,7 +189,7 @@ fails, the cleanup error must not silently replace the primary error.
 ```
 
 **Anti-pattern — cleanup error silently hides business error:**
-```python
+```py
     def __exit__(self, exc_type, exc_val, tb) -> None:
         self._conn.close()   # if this raises, the original exc_val is lost
 ```
@@ -184,7 +197,7 @@ fails, the cleanup error must not silently replace the primary error.
 For Python 3.11+ only, `ExceptionGroup` is an advanced option when both
 errors genuinely need to surface together (rare). Do not use it as the default
 cleanup-failure strategy; the log-and-re-raise pattern above covers most cases.
-```python
+```py
         except Exception as cleanup_exc:
             if exc_val is not None:
                 raise ExceptionGroup(
@@ -198,7 +211,7 @@ cleanup-failure strategy; the log-and-re-raise pattern above covers most cases.
 
 ### Default: do not suppress
 
-```python
+```py
     def __exit__(self, exc_type, exc_val, tb) -> None:
         self._resource.release()
         # Returns None implicitly — exception propagates
@@ -209,7 +222,7 @@ cleanup-failure strategy; the log-and-re-raise pattern above covers most cases.
 Suppress only a specific, well-understood exception type and document the
 reason clearly.
 
-```python
+```py
 class SuppressNotFound:
     """
     Suppresses FileNotFoundError only.
@@ -231,7 +244,7 @@ class SuppressNotFound:
 ```
 
 **Anti-pattern — broad suppression:**
-```python
+```py
     def __exit__(self, exc_type, exc_val, tb) -> bool:
         return True  # Silently swallows all exceptions — dangerous
 ```
@@ -245,7 +258,7 @@ partial acquisition must roll back already-acquired resources.
 
 ### Dynamic resource set
 
-```python
+```py
 from contextlib import ExitStack
 
 def process_files(paths: list[str]) -> None:
@@ -257,7 +270,7 @@ def process_files(paths: list[str]) -> None:
 
 ### Partial-acquisition rollback (atomic entry)
 
-```python
+```py
 class MultiLock:
     def __init__(self, locks: list[Lock]) -> None:
         self._locks = locks
@@ -292,7 +305,7 @@ error exit.
 
 ### Current working directory
 
-```python
+```py
 @contextmanager
 def working_directory(path: str):
     original = os.getcwd()
@@ -305,7 +318,7 @@ def working_directory(path: str):
 
 ### Environment variable
 
-```python
+```py
 @contextmanager
 def env_override(key: str, value: str):
     original = os.environ.get(key)
@@ -321,7 +334,7 @@ def env_override(key: str, value: str):
 
 ### Logging level
 
-```python
+```py
 @contextmanager
 def log_level(logger: logging.Logger, level: int):
     original = logger.level
@@ -333,7 +346,7 @@ def log_level(logger: logging.Logger, level: int):
 ```
 
 **Anti-pattern — partial restoration:**
-```python
+```py
 @contextmanager
 def bad_env_override(key: str, value: str):
     os.environ[key] = value
@@ -350,7 +363,7 @@ multiple `with` blocks is not safe unless the class contract explicitly allows
 and tests it.
 
 **Anti-pattern — reusing a one-shot instance:**
-```python
+```py
 mgr = ManagedConnection(dsn)
 with mgr:
     mgr.execute("SELECT 1")
@@ -360,7 +373,7 @@ with mgr:              # Second use: _conn may be None or stale
 ```
 
 **Correct — fresh instance per block:**
-```python
+```py
 with ManagedConnection(dsn) as conn:
     conn.execute("SELECT 1")
 
@@ -371,7 +384,7 @@ with ManagedConnection(dsn) as conn:
 If a class is designed for reuse, state it explicitly in the docstring and
 reset all internal state in `__exit__` before returning:
 
-```python
+```py
 class ReusableSession:
     """
     Reusable context manager.
