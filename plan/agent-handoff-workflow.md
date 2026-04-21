@@ -153,9 +153,12 @@ Creator may directly commit fixes for:
 
 #### Do NOT directly apply (requires reviewer re-check)
 - **Trigger logic**: changes to when the skill should be used
-- **Core examples**: changes to core decision logic in SKILL.md or examples.md
+- **Core examples**: changes to example's decision flow, assumption set, or logic
+- **Missing requirements**: adding imports, dependencies, or prerequisites to examples
+  - These are NOT meta-fixes; they change what the example demonstrates
 - **Process or Boundaries**: changes to skill definition or scope
 - **Scope expansion**: new sections, new features, or changed responsibilities
+- **Example behavior**: changes that affect whether example code is runnable or produces different output
 
 If a comment requires changes outside direct-apply scope, open a discussion or route back to reviewer.
 
