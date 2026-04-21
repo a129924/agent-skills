@@ -267,10 +267,148 @@ Handoff
 - if `needs-rework`: return to creator with the blocking issues only
 ```
 
-## VS Code and CLI notes
+## VS Code and CLI Workflow Examples
+
+### VS Code Complete Workflow
+
+Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
+
+```markdown
+# Agent Skill Release Workflow (VS Code)
+
+開發分支命名
+  ↓ [User or auto-detect]
+@file:git-branch-naming <skill_name>
+  ↓
+@file:agent-skill-creator <path/to/topic_plan.md>
+  → Creator drafts skill files
+  → Creator outputs: "This skill is review-ready"
+  ↓
+@runSubagent run @file:agent-skill-reviewer
+  → Reviewer evaluates against review-checklist.md
+  → Returns: approved or needs-rework
+  ↓ [if approved, continue; if needs-rework, loop back to creator]
+交互確認: 讀 topic plan 的 Stable library metadata
+  → Confirm README row format
+  → Confirm VERSION bump direction
+  ↓ [User manual step]
+手動或自動化:
+  - 更新 README.md 按照 metadata 指定的 row format
+  - 更新 VERSION 按照 metadata 指定的 bump direction
+  ↓
+@file:git-commit-convention
+  → Draft or review commit message
+  → Stage and commit all changes (skill files + README + VERSION)
+  ↓
+提交 commit + 開 PR
+  → git push
+  → gh pr create --base dev
+  ↓ [Human review + merge via GitHub]
+@runSubagent run @file:git-post-merge-workflow
+  → Clean up local branches
+  → Sync with remote
+  ↓
+@runSubagent run @file:git-release-management
+  → Validate release readiness
+  → Create annotated tag
+  → Push tag to remote
+```
+
+**Key interaction points:**
+- After Phase 3 (Creator): User or automation triggers Reviewer
+- After Phase 4 (Reviewer): User confirms metadata + manually updates README/VERSION (or automation)
+- After Phase 5 (Publish): User decides commit scope (direct-apply rules from Phase 7 apply)
+- After Phase 8 (Merge): User or automation runs post-merge workflow
+
+### CLI Complete Workflow
+
+Use this pattern in Copilot CLI with `/fleet` and `copilot skill` syntax:
+
+```bash
+#!/bin/bash
+# Agent Skill Release Workflow (CLI)
+
+SKILL_NAME="my-skill"
+SKILL_PATH=".github/skills/${SKILL_NAME}"
+TOPIC_PLAN="plan/${SKILL_NAME}/${SKILL_NAME}.plan.md"
+
+# Phase 1: Plan (user-created; not automated)
+# Expected: $TOPIC_PLAN exists with all 11 sections + Stable library metadata
+
+# Phase 2: Branch
+git checkout -b feat/a129924/${SKILL_NAME}
+
+# Phase 3: Creator draft
+copilot skill agent-skill-creator ${TOPIC_PLAN}
+# Creator outputs: "This skill is review-ready"
+
+# Phase 4: Reviewer (independent SubAgent via /fleet)
+/fleet 根據 .github/skills/agent-skill-reviewer/review-checklist.md 評審 ${SKILL_PATH}
+# Outputs: approved or needs-rework
+# If needs-rework, loop back to Phase 3
+
+# Phase 5: Stable library metadata confirmation (user manual)
+echo "Confirm from $TOPIC_PLAN:"
+grep -A 10 "## Stable library metadata" ${TOPIC_PLAN}
+read -p "Press enter to confirm metadata, then manually update README.md and VERSION"
+
+# Manual steps (or automation if parsing metadata):
+# - Update README.md per metadata format
+# - Update VERSION per metadata direction
+
+# Phase 6: Commit + Push + PR
+git add .
+copilot skill git-commit-convention
+# Review commit message, then:
+git push origin feat/a129924/${SKILL_NAME}
+gh pr create --base dev
+
+# Phase 8: Merge (human via GitHub)
+# After merge, continue:
+
+# Phase 9: Post-merge workflow
+copilot skill git-post-merge-workflow
+
+# Phase 10: Release (if applicable)
+copilot skill git-release-management
+# Tag and push
+```
+
+**Key differences from VS Code:**
+- `/fleet` launches independent SubAgent (vs `@runSubagent` in VS Code)
+- Metadata confirmation is user manual (could be automated with parsing)
+- Uses `copilot skill` command instead of `@file:` syntax
+
+### Tool Mapping
+
+| VS Code | CLI | Purpose |
+|---|---|---|
+| `@file:<skill>` | `copilot skill <skill>` | Invoke skill |
+| `@runSubagent` | `/fleet` (+ natural language) | Independent SubAgent |
+| `@file:` file reference | shell variable + path | Pass context |
+| Inline @runSubagent | Separate command | Sequence steps |
+
+---
+
+## Implementation Notes
+
+1. **Topic plan metadata is mandatory** when skill enters stable library
+   - Must include README row format, VERSION direction, rationale
+   - Both VSCode and CLI workflows expect this section
+
+2. **Direct-apply boundary** (Phase 7) applies to both environments
+   - VSCode and CLI handle PR comments the same way
+   - Only style/typo/meta fixes directly applied; others route back to reviewer
+
+3. **Status model** is repo-visible (not session-specific)
+   - topic plan status field updated consistently across environments
+   - Both environments read the same review-checklist.md
+
+## VS Code and CLI Notes
+
 - VS Code may orchestrate multiple main/sub-agents from one broad task, but the
   workflow still depends on repo-visible artifacts rather than hidden tab state.
-- CLI may launch separate agents more explicitly, but the workflow should read
+- CLI may launch separate agents more explicitly via `/fleet`, but the workflow should read
   the same topic plan and use the same status model.
 - Worktrees are optional execution mechanics, not part of the canonical contract.
 
