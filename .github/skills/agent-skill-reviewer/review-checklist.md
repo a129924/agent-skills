@@ -60,6 +60,25 @@ A skill is `approved` only if all of these are true:
 - reviewer returns `approved` or `needs-rework`
 - reviewer does not produce the final implementation directly
 
+## Reviewer independence
+- Reviewer is a **separate agent** (SubAgent in VS Code; `/fleet` in CLI)
+  - Must not inherit creator's session context or assumptions
+  - Must apply checklist objectively
+- Reviewer outputs: `approved` or `needs-rework` only
+  - Includes explicit reasoning and blocking issues (if `needs-rework`)
+- Creator may patch PR after reviewer approves (Phase 7)
+  - Direct-apply fixes only (style, typo, meta, formatting)
+  - Reviewer does NOT re-check these patches
+  - Major changes require reviewer to re-evaluate
+
+## Stable library metadata (if applicable)
+When the skill is intended for the stable library, review-checklist.md must verify:
+- Topic plan includes `Stable library metadata` section
+- README row format is complete and matches repo table schema
+- README row positioned correctly (alphabetical order or policy-defined position)
+- VERSION bump direction is specified and justified
+- VERSION direction aligns with commit semantics (MINOR for new skill, PATCH for correction)
+
 ## Reject signals
 - multiple unrelated trigger families
 - "do everything" language
