@@ -10,7 +10,7 @@ zero-dependency `sense_env` scaffold, including:
 
 The intended code artifact is:
 
-- `scripts/sense_env.py`
+- `.github/skills/sense-env-scaffold/scripts/sense_env.py`
 
 This topic plan exists so an executor Agent can implement the scaffold without
 re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
@@ -18,7 +18,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 ## Scope
 - Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
 - Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
-- Create `scripts/sense_env.py`.
+- Create `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 - Keep the script standard-library only and compatible with Python 3.10+.
 - Implement the agreed CLI surface, exit-code model, fenced-block extraction, and
   stable JSON output shape.
@@ -29,8 +29,8 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 
 ## Locked decisions
 - Script path is fixed:
-  - `scripts/sense_env.py`
-- Create `scripts/` even though it does not exist yet.
+  - `.github/skills/sense-env-scaffold/scripts/sense_env.py`
+- Create `.github/skills/sense-env-scaffold/scripts/` even though it does not exist yet.
 - This repo-root script is a **topic-specific prototype exception requested by the
   Human**, not a new general repository policy. Executor must not generalize this
   into “repo-root scripts are normally allowed here.”
@@ -59,7 +59,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   - `gaps`
 - All JSON keys should use `snake_case`.
 - JSON output should be formatted for human inspection with stable indentation.
-- Snapshot export stays inside `scripts/sense_env.py`; do not create a separate
+- Snapshot export stays inside `.github/skills/sense-env-scaffold/scripts/sense_env.py`; do not create a separate
   exporter script.
 - Snapshot output must normalize paths to repo-relative form and must not include
   secrets, usernames, absolute local paths, or machine-specific identifiers.
@@ -122,7 +122,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   - `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`
   - `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`
 - Script scaffold to create:
-  - `scripts/sense_env.py`
+  - `.github/skills/sense-env-scaffold/scripts/sense_env.py`
 - Primary runtime outputs after implementation:
   - `.github/env-manifest.json`
   - `.github/env-manifest.snapshot.json`
@@ -130,10 +130,10 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 ## Execution checklist
 - [ ] Read the three read-first documents before editing.
 - [ ] Re-confirm that this task is executing under the Human-approved prototype
-      exception for `scripts/sense_env.py`.
+      exception for `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 - [ ] Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
 - [ ] Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
-- [ ] Create `scripts/` and `scripts/sense_env.py`.
+- [ ] Create `scripts/` and `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 - [ ] Implement `argparse` with all four required flags.
 - [ ] Implement repo-root detection and document it in the CLI reference.
 - [ ] Implement acceptance-mode contract lookup in the agreed order.
@@ -152,7 +152,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 1. Read the repo policy and the existing pipeline reference so the implementation
    stays aligned with the already-locked workflow.
 2. Treat this topic as a repo-internal prototype exception:
-   - allowed because the Human explicitly requested `scripts/sense_env.py`
+   - allowed because the Human explicitly requested `.github/skills/sense-env-scaffold/scripts/sense_env.py`
    - not a new repo-wide default
    - if branch / reviewer context rejects this exception, stop and return
      `needs-rework` rather than silently relocating the script
@@ -176,7 +176,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
      - acceptance with explicit contract
      - acceptance with implicit lookup
      - snapshot export
-5. Create `scripts/sense_env.py` and define:
+5. Create `.github/skills/sense-env-scaffold/scripts/sense_env.py` and define:
    - exit-code constants
    - typed manifest-construction helpers
    - typed assertion / gap record helpers
@@ -272,9 +272,9 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   fixed contract.
 - `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md` exists and reflects the same flags,
   modes, exit codes, and path rules as the script.
-- `scripts/sense_env.py` exists under `scripts/`.
+- `.github/skills/sense-env-scaffold/scripts/sense_env.py` exists under `scripts/`.
 - The script imports only standard-library modules.
-- `python3 scripts/sense_env.py --help` succeeds.
+- `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --help` succeeds.
 - The CLI reference explicitly defines:
   - `--snapshot` as a boolean flag
   - default live-manifest output path
