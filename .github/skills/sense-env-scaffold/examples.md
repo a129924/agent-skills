@@ -205,5 +205,5 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
 | Run `--mode acceptance` with no contract and expect success | Exit `30`; no contract means no assertions can be evaluated |
 | Check for snapshot file after a non-zero run | Snapshot is only written on exit `0` |
 | Use unsupported assertion kinds and expect `PASS` | Exit `30` (contract error); the run stops before evaluating assertions |
-| Modify `scripts/sense_env.py` as part of skill invocation | The script is a fixed prototype tool; changes require a separate planning topic |
+| Modify `scripts/sense_env.py` or `scripts/sense_env_runtime/` as part of skill invocation | The sensing implementation is fixed prototype tooling; changes require a separate planning topic |
 | Invoke from outside the repository directory tree | `find_repo_root` falls back to cwd; the manifest is still written but `repo_root_marker` may be absent |

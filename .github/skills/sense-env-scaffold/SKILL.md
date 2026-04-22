@@ -61,8 +61,8 @@ Do not use this skill when:
 - non-zero exit code and a JSON manifest describing the failure when errors occur
 
 # Boundaries
-- Do not modify `.github/skills/sense-env-scaffold/scripts/sense_env.py` as part of invoking this skill; treat it as
-  a fixed prototype tool.
+- Do not modify `.github/skills/sense-env-scaffold/scripts/sense_env.py` or its local
+  runtime package as part of invoking this skill; treat them as fixed prototype tooling.
 - Do not interpret exit `20` as a fatal environment error; it means assertions failed
   and the `gaps` section describes what is missing.
 - Do not promote a snapshot unless the run exited `0`; the script enforces this but
@@ -76,5 +76,7 @@ Do not use this skill when:
   definitions, gap and assertion record shapes, and snapshot filtering rules
 - `references/sense-env-cli-contract.md`: CLI synopsis, flag semantics, mode
   semantics, exit-code table, path-resolution rules, and invocation examples
-- `scripts/sense_env.py`: prototype implementation; stdlib-only Python 3.10+ script
-  that performs discovery and acceptance sensing runs
+- `scripts/sense_env.py`: thin CLI entrypoint for discovery and acceptance sensing runs
+- `scripts/sense_env_runtime/`: local internal package that holds the manifest models,
+  contract parsing, assertion evaluation, snapshot shaping, and run-mode logic used by
+  the CLI entrypoint
