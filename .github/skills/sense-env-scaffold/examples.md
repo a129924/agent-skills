@@ -117,15 +117,29 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 
 ## Reading acceptance failures
 
-When exit is `20`, the manifest `gaps` array describes what failed:
+When exit is `20`, the manifest `assertions` and `gaps` arrays describe what failed:
 
 ```json
 {
+  "assertions": [
+    {
+      "id": "a0",
+      "kind": "path_exists",
+      "target": "pyproject.toml",
+      "state": "FAIL",
+      "expected": true,
+      "observed": false,
+      "remediation_type": "CREATE_FILE"
+    }
+  ],
   "gaps": [
     {
-      "type": "FAIL",
+      "id": "g0",
+      "kind": "path_exists",
       "target": "pyproject.toml",
-      "detail": "path_exists: expected true, got false"
+      "state": "UNRESOLVED",
+      "detail": "path_exists: expected True, got False",
+      "remediation_type": "CREATE_FILE"
     }
   ]
 }
@@ -138,28 +152,34 @@ Next action: fix the environment gap, then re-run acceptance.
 ## Unsupported assertion kind
 
 If the contract contains an assertion kind outside the v1 subset
-(`path_exists`, `path_type`, `command_available`), the script does **not**
-exit `30`. Instead:
+(`path_exists`, `path_type`, `command_available`), the script exits `30`
+(contract error) — it does **not** silently continue.
+
+The gap record in that manifest uses kind `CONTRACT_ERROR`:
 
 ```json
 {
-  "result": "UNSUPPORTED",
-  "kind": "config_key_exists"
+  "gaps": [
+    {
+      "id": "g0",
+      "kind": "CONTRACT_ERROR",
+      "target": "<assertion>",
+      "state": "UNRESOLVED",
+      "detail": "assertion kind 'config_key_exists' is not in the v1 supported subset (path_exists, path_type, command_available)",
+      "remediation_type": "REVISE_CONTRACT"
+    }
+  ]
 }
 ```
-
-A gap entry is added and the run continues. Exit `20` is **not** triggered by
-UNSUPPORTED alone; only a `result == "FAIL"` assertion causes exit `20`.
 
 Anti-pattern:
 
 ```bash
-# Wrong: writing a contract with rich assertion kinds and expecting them to pass
+# Wrong: writing a contract with unsupported assertion kinds
 - kind: config_key_exists
-  key: tool.poetry.name
-  required: true
-  expected: true
-# This produces result: UNSUPPORTED, not a pass.
+  target: tool.poetry.name
+  expected: "true"
+# This causes exit 30 (contract error), not PASS or UNSUPPORTED.
 # Extend the script in a separate planning topic before using new kinds.
 ```
 
@@ -184,6 +204,6 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
 |---|---|
 | Run `--mode acceptance` with no contract and expect success | Exit `30`; no contract means no assertions can be evaluated |
 | Check for snapshot file after a non-zero run | Snapshot is only written on exit `0` |
-| Use unsupported assertion kinds and expect `PASS` | Result is `UNSUPPORTED`; required unsupported assertions count as failures |
+| Use unsupported assertion kinds and expect `PASS` | Exit `30` (contract error); the run stops before evaluating assertions |
 | Modify `scripts/sense_env.py` as part of skill invocation | The script is a fixed prototype tool; changes require a separate planning topic |
 | Invoke from outside the repository directory tree | `find_repo_root` falls back to cwd; the manifest is still written but `repo_root_marker` may be absent |

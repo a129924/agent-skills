@@ -7,12 +7,18 @@ This script uses only Python standard-library modules.
 
 This script lives at .github/skills/sense-env-scaffold/scripts/sense_env.py.
 
+Supported assertion kinds (v1): path_exists, path_type, command_available.
+Unknown kinds in acceptance mode cause exit 30 (contract error).
+
 Exit codes:
     0  — success
-    10 — operational error (I/O failure)
-    20 — acceptance failure (assertions evaluated, one or more FAIL;
-         UNSUPPORTED results do not by themselves cause exit 20)
-    30 — contract error (missing file, missing fenced block, malformed block)
+    10 — operational error (I/O failure writing manifest)
+    20 — acceptance failure (one or more assertions evaluated as FAIL)
+    30 — contract error (missing/unreadable file, missing fenced block,
+         malformed block, or unknown assertion kind in acceptance mode)
+
+On I/O failure, the script attempts to emit the manifest JSON to stderr
+as a fallback before returning exit 10.
 """
 
 from __future__ import annotations
@@ -58,6 +64,10 @@ SECRET_PATTERNS = re.compile(
     r"(token|secret|password|api_key|apikey|credential|auth)",
     re.IGNORECASE,
 )
+
+
+class UnsupportedAssertionKindError(ValueError):
+    """Raised when an assertion kind is outside the v1 supported subset."""
 
 # ---------------------------------------------------------------------------
 # Repo-root detection
@@ -152,23 +162,38 @@ def make_facts(repo_root: Path) -> dict[str, Any]:
     }
 
 
-def make_gap(gap_type: str, target: str, detail: str) -> dict[str, str]:
-    return {"type": gap_type, "target": target, "detail": detail}
+def make_gap(
+    kind: str,
+    target: str,
+    detail: str,
+    remediation_type: str | None,
+) -> dict[str, Any]:
+    """Build a gap record (without id; caller assigns id before appending)."""
+    return {
+        "kind": kind,
+        "target": target,
+        "state": "UNRESOLVED",
+        "detail": detail,
+        "remediation_type": remediation_type,
+    }
 
 
 def make_assertion_record(
     kind: str,
     target: str,
+    state: str,
     expected: Any,
-    actual: Any,
-    result: str,
+    observed: Any,
+    remediation_type: str | None,
 ) -> dict[str, Any]:
+    """Build an assertion record (without id; caller assigns id before appending)."""
     return {
         "kind": kind,
         "target": target,
+        "state": state,
         "expected": expected,
-        "actual": actual,
-        "result": result,
+        "observed": observed,
+        "remediation_type": remediation_type,
     }
 
 
@@ -255,10 +280,12 @@ def parse_assertions(block: str) -> list[dict[str, str]]:
 def evaluate_assertion(
     record: dict[str, str],
     repo_root: Path,
-) -> tuple[dict[str, Any], dict[str, str] | None]:
+) -> tuple[dict[str, Any], dict[str, Any] | None]:
     """
     Evaluate one assertion record.
-    Returns (assertion_result_dict, gap_dict_or_None).
+
+    Returns (assertion_record_without_id, gap_without_id | None).
+    Raises UnsupportedAssertionKindError for any kind outside the v1 subset.
     """
     kind = record.get("kind", "")
     target = record.get("target", "")
@@ -266,53 +293,60 @@ def evaluate_assertion(
 
     if kind == "path_exists":
         expected = expected_raw.lower() in ("true", "yes", "1")
-        actual = (repo_root / target).exists()
-        result = "PASS" if actual == expected else "FAIL"
+        observed = (repo_root / target).exists()
+        state = "PASS" if observed == expected else "FAIL"
         gap = None
-        if result == "FAIL":
+        if state == "FAIL":
+            remediation = "CREATE_FILE" if expected else "REMOVE_PATH"
             gap = make_gap(
-                "MISSING" if expected else "MISMATCH",
+                kind,
                 target,
-                f"path_exists assertion failed: expected {expected}, got {actual}",
+                f"path_exists: expected {expected}, got {observed}",
+                remediation,
             )
-        return make_assertion_record(kind, target, expected, actual, result), gap
+        return make_assertion_record(kind, target, state, expected, observed, None if state == "PASS" else remediation), gap
 
     if kind == "path_type":
         path = repo_root / target
         if path.is_dir():
-            actual = "directory"
+            observed: Any = "directory"
         elif path.is_file():
-            actual = "file"
+            observed = "file"
         else:
-            actual = None
+            observed = None
         expected = expected_raw.strip()
-        result = "PASS" if actual == expected else "FAIL"
+        state = "PASS" if observed == expected else "FAIL"
         gap = None
-        if result == "FAIL":
-            gap_type = "MISSING" if actual is None else "MISMATCH"
+        if state == "FAIL":
+            remediation = "CREATE_PATH" if observed is None else "FIX_PATH_TYPE"
             gap = make_gap(
-                gap_type,
+                kind,
                 target,
-                f"path_type assertion failed: expected {expected!r}, got {actual!r}",
+                f"path_type: expected {expected!r}, got {observed!r}",
+                remediation,
             )
-        return make_assertion_record(kind, target, expected, actual, result), gap
+        return make_assertion_record(kind, target, state, expected, observed, None if state == "PASS" else remediation), gap
 
     if kind == "command_available":
         expected = expected_raw.lower() in ("true", "yes", "1")
-        actual = shutil.which(target) is not None
-        result = "PASS" if actual == expected else "FAIL"
+        observed = shutil.which(target) is not None
+        state = "PASS" if observed == expected else "FAIL"
         gap = None
-        if result == "FAIL":
+        if state == "FAIL":
+            remediation = "INSTALL_TOOL" if expected else "REMOVE_TOOL"
             gap = make_gap(
-                "MISSING" if expected else "MISMATCH",
+                kind,
                 target,
-                f"command_available assertion failed: expected {expected}, got {actual}",
+                f"command_available: expected {expected}, got {observed}",
+                remediation,
             )
-        return make_assertion_record(kind, target, expected, actual, result), gap
+        return make_assertion_record(kind, target, state, expected, observed, None if state == "PASS" else remediation), gap
 
-    # Unsupported kind — record but do not hard-fail
-    gap = make_gap("MISSING", target, f"unsupported assertion kind: {kind!r}")
-    return make_assertion_record(kind, target, expected_raw, None, "UNSUPPORTED"), gap
+    # Unknown assertion kind — contract error in acceptance mode
+    raise UnsupportedAssertionKindError(
+        f"assertion kind {kind!r} is not in the v1 supported subset "
+        f"(path_exists, path_type, command_available)"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -367,6 +401,24 @@ def write_manifest(manifest: dict[str, Any], output_path: Path) -> None:
         f.write("\n")
 
 
+def _try_emit(manifest: dict[str, Any], output_path: Path) -> bool:
+    """
+    Try to write manifest to output_path.
+    On failure, annotates manifest with the error and emits to stderr.
+    Returns True if written to disk, False if fell back to stderr.
+    """
+    try:
+        write_manifest(manifest, output_path)
+        return True
+    except Exception as exc:
+        manifest.setdefault("meta", {})["error"] = str(exc)
+        try:
+            print(json.dumps(manifest, indent=2, ensure_ascii=False), file=sys.stderr)
+        except Exception:
+            pass
+        return False
+
+
 # ---------------------------------------------------------------------------
 # Run modes
 # ---------------------------------------------------------------------------
@@ -381,18 +433,13 @@ def run_discovery(repo_root: Path, output_path: Path, snapshot: bool) -> int:
         "gaps": [],
     }
 
-    try:
-        write_manifest(manifest, output_path)
-    except Exception as exc:
-        manifest["meta"]["error"] = str(exc)
+    if not _try_emit(manifest, output_path):
         return EXIT_IO_ERROR
 
     if snapshot:
         snap = shape_snapshot(manifest, repo_root)
         snap_path = repo_root / ".github" / "env-manifest.snapshot.json"
-        try:
-            write_manifest(snap, snap_path)
-        except Exception:
+        if not _try_emit(snap, snap_path):
             return EXIT_IO_ERROR
 
     return EXIT_OK
@@ -413,17 +460,18 @@ def run_acceptance(
             "facts": make_facts(repo_root),
             "assertions": [],
             "gaps": [
-                make_gap(
-                    "MISSING",
-                    str(contract_path) if contract_path else "<none>",
-                    "no readable contract file found",
-                )
+                {
+                    "id": "g0",
+                    **make_gap(
+                        "CONTRACT_MISSING",
+                        str(contract_path) if contract_path else "<none>",
+                        "no readable contract file found",
+                        "LOCATE_CONTRACT_FILE",
+                    ),
+                }
             ],
         }
-        try:
-            write_manifest(manifest, output_path)
-        except Exception:
-            pass
+        _try_emit(manifest, output_path)
         return EXIT_CONTRACT_ERROR
 
     try:
@@ -435,13 +483,18 @@ def run_acceptance(
             "facts": make_facts(repo_root),
             "assertions": [],
             "gaps": [
-                make_gap("MISSING", str(contract_path), "contract file not readable")
+                {
+                    "id": "g0",
+                    **make_gap(
+                        "CONTRACT_MISSING",
+                        str(contract_path),
+                        "contract file not readable",
+                        "LOCATE_CONTRACT_FILE",
+                    ),
+                }
             ],
         }
-        try:
-            write_manifest(manifest, output_path)
-        except Exception:
-            pass
+        _try_emit(manifest, output_path)
         return EXIT_CONTRACT_ERROR
 
     block = extract_assertions_block(contract_text)
@@ -452,17 +505,18 @@ def run_acceptance(
             "facts": make_facts(repo_root),
             "assertions": [],
             "gaps": [
-                make_gap(
-                    "MISSING",
-                    str(contract_path),
-                    "no ```yaml [sensing-assertions] block found in contract",
-                )
+                {
+                    "id": "g0",
+                    **make_gap(
+                        "CONTRACT_MALFORMED",
+                        str(contract_path),
+                        "no ```yaml [sensing-assertions] block found in contract",
+                        "REVISE_CONTRACT",
+                    ),
+                }
             ],
         }
-        try:
-            write_manifest(manifest, output_path)
-        except Exception:
-            pass
+        _try_emit(manifest, output_path)
         return EXIT_CONTRACT_ERROR
 
     try:
@@ -474,26 +528,56 @@ def run_acceptance(
             "facts": make_facts(repo_root),
             "assertions": [],
             "gaps": [
-                make_gap("MISSING", str(contract_path), f"malformed assertion block: {exc}")
+                {
+                    "id": "g0",
+                    **make_gap(
+                        "CONTRACT_MALFORMED",
+                        str(contract_path),
+                        f"malformed assertion block: {exc}",
+                        "REVISE_CONTRACT",
+                    ),
+                }
             ],
         }
-        try:
-            write_manifest(manifest, output_path)
-        except Exception:
-            pass
+        _try_emit(manifest, output_path)
         return EXIT_CONTRACT_ERROR
 
     assertion_results: list[dict[str, Any]] = []
-    gaps: list[dict[str, str]] = []
+    gaps: list[dict[str, Any]] = []
     any_fail = False
+    gap_idx = 0
 
-    for record in raw_records:
-        result_dict, gap = evaluate_assertion(record, repo_root)
-        assertion_results.append(result_dict)
-        if gap:
-            gaps.append(gap)
-        if result_dict["result"] == "FAIL":
-            any_fail = True
+    try:
+        for idx, record in enumerate(raw_records):
+            a_dict, g_dict = evaluate_assertion(record, repo_root)
+            a_dict["id"] = f"a{idx}"
+            assertion_results.append(a_dict)
+            if g_dict is not None:
+                g_dict["id"] = f"g{gap_idx}"
+                gap_idx += 1
+                gaps.append(g_dict)
+            if a_dict["state"] == "FAIL":
+                any_fail = True
+    except UnsupportedAssertionKindError as exc:
+        manifest = {
+            "meta": make_meta("acceptance"),
+            "fingerprint": make_fingerprint(repo_root),
+            "facts": make_facts(repo_root),
+            "assertions": assertion_results,
+            "gaps": [
+                {
+                    "id": f"g{gap_idx}",
+                    **make_gap(
+                        "CONTRACT_ERROR",
+                        "<assertion>",
+                        str(exc),
+                        "REVISE_CONTRACT",
+                    ),
+                }
+            ],
+        }
+        _try_emit(manifest, output_path)
+        return EXIT_CONTRACT_ERROR
 
     manifest = {
         "meta": make_meta("acceptance"),
@@ -503,10 +587,7 @@ def run_acceptance(
         "gaps": gaps,
     }
 
-    try:
-        write_manifest(manifest, output_path)
-    except Exception as exc:
-        manifest["meta"]["error"] = str(exc)
+    if not _try_emit(manifest, output_path):
         return EXIT_IO_ERROR
 
     if any_fail:
@@ -515,9 +596,7 @@ def run_acceptance(
     if snapshot:
         snap = shape_snapshot(manifest, repo_root)
         snap_path = repo_root / ".github" / "env-manifest.snapshot.json"
-        try:
-            write_manifest(snap, snap_path)
-        except Exception:
+        if not _try_emit(snap, snap_path):
             return EXIT_IO_ERROR
 
     return EXIT_OK

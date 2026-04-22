@@ -143,9 +143,9 @@ this narrow subset produces a contract error: exit `30`.
 | `path_type` | Repo-relative path string | `"file"` / `"directory"` |
 | `command_available` | Executable name | `"true"` / `"false"` |
 
-Any other `kind` value is unsupported in v1. Unsupported kinds are placed in `gaps`
-with type `MISSING` and the run continues. They do not trigger exit `30` (contract
-format error) unless the record itself is malformed.
+Any other `kind` value in acceptance mode causes exit `30` (contract error). The
+script treats unknown kinds as a contract problem — it does not silently skip or
+record them. Add new kinds by extending the script in a separate planning topic.
 
 ---
 
@@ -168,13 +168,14 @@ under `<repo_root>/.github/`.
 
 | Code | Meaning | JSON emitted |
 |---|---|---|
-| `0` | Success; manifest written | Yes |
-| `10` | Operational error (I/O failure, parent-dir creation failure) | Yes |
-| `20` | Acceptance failure; one or more required assertions failed | Yes |
-| `30` | Contract error; contract file not found, not readable, or fenced block absent or malformed | Yes |
+| `0` | Success; manifest written | Yes, to output path |
+| `10` | Operational error (I/O failure writing manifest) | Attempted to output path; falls back to stderr |
+| `20` | Acceptance failure; one or more assertions evaluated as FAIL | Yes, to output path |
+| `30` | Contract error: file not found, not readable, block absent, block malformed, or unknown assertion kind | Yes (attempted); falls back to stderr on write failure |
 
-All exit paths (including `10`, `20`, `30`) emit a JSON manifest to the output path
-so that callers have structured diagnostic information.
+All exit paths attempt to emit a JSON manifest to the output path. On I/O failure
+(exit `10`), or if the output write fails during a contract-error path, the manifest
+is emitted to stderr as a fallback.
 
 ---
 

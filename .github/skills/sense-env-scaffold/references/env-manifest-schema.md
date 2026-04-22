@@ -120,21 +120,25 @@ Each assertion record:
 
 ```json
 {
+  "id": "a0",
   "kind": "path_exists",
-  "target": "scripts/sense_env.py",
+  "target": ".github/skills/sense-env-scaffold/scripts/sense_env.py",
+  "state": "PASS",
   "expected": true,
-  "actual": true,
-  "result": "PASS"
+  "observed": true,
+  "remediation_type": null
 }
 ```
 
 | Field | Type | Notes |
 |---|---|---|
+| `id` | string | Sequential identifier: `"a0"`, `"a1"`, … |
 | `kind` | string | One of the v1 supported kinds (see below) |
 | `target` | string | The subject of the assertion |
+| `state` | string | `"PASS"` or `"FAIL"` |
 | `expected` | any | Expected value as parsed from the contract |
-| `actual` | any | Observed value at run time |
-| `result` | string | `"PASS"`, `"FAIL"`, or `"UNSUPPORTED"` |
+| `observed` | any | Observed value at run time |
+| `remediation_type` | string or null | Hint for how to resolve a FAIL; `null` when state is PASS |
 
 ### V1 supported assertion kinds
 
@@ -144,36 +148,61 @@ Each assertion record:
 | `path_type` | Repo-relative path | `"file"` / `"directory"` |
 | `command_available` | Executable name | `true` / `false` |
 
-Any assertion kind outside this list is recorded as `"UNSUPPORTED"` and placed in
-`gaps` with type `MISSING`. The script does not claim general YAML support; only a
-narrow documented subset is parsed.
+Any assertion kind outside this list in acceptance mode causes exit `30` (contract
+error). The script does not claim general YAML support; only the v1 narrow subset is
+evaluated.
 
 ---
 
 ## `gaps` module
 
-Records items that failed assertion, were unsupported, or represent missing optional
-components discovered in discovery mode.
+Records items that require attention: assertion failures, contract errors,
+or missing optional components found in discovery mode.
 
 ```json
 {
-  "type": "MISSING",
+  "id": "g0",
+  "kind": "path_exists",
   "target": "pyproject.toml",
-  "detail": "path_exists assertion failed: path not found"
+  "state": "UNRESOLVED",
+  "detail": "path_exists: expected True, got False",
+  "remediation_type": "CREATE_FILE"
 }
 ```
 
 | Field | Type | Notes |
 |---|---|---|
-| `type` | string | `"MISSING"`, `"MISMATCH"`, or `"DEPRECATED"` |
+| `id` | string | Sequential identifier: `"g0"`, `"g1"`, … |
+| `kind` | string | Mirrors the assertion `kind` for assertion failures; or a contract-level kind (see below) |
 | `target` | string | The subject that has the gap |
+| `state` | string | Always `"UNRESOLVED"` in v1 |
 | `detail` | string | Human-readable explanation |
+| `remediation_type` | string or null | Hint for how to resolve the gap (see below) |
 
-| Gap type | Meaning |
+### Assertion-failure gap kinds
+
+Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `"command_available"`).
+
+### Contract-level gap kinds
+
+| Kind | Meaning |
 |---|---|
-| `MISSING` | Expected item is absent |
-| `MISMATCH` | Item exists but value or type does not match expectation |
-| `DEPRECATED` | Item is present but marked as no longer valid by the contract |
+| `CONTRACT_MISSING` | Contract file not found or not readable |
+| `CONTRACT_MALFORMED` | Fenced block absent or block parse failed |
+| `CONTRACT_ERROR` | Evaluation error (e.g., unknown assertion kind) |
+
+### Remediation types
+
+| Value | Meaning |
+|---|---|
+| `CREATE_FILE` | Expected file is absent; create it |
+| `REMOVE_PATH` | Unexpected path is present; remove it |
+| `CREATE_PATH` | Expected path does not exist at all |
+| `FIX_PATH_TYPE` | Path exists but is the wrong type |
+| `INSTALL_TOOL` | Required command is not available |
+| `REMOVE_TOOL` | Unexpected command is present |
+| `LOCATE_CONTRACT_FILE` | Contract file cannot be found or read |
+| `REVISE_CONTRACT` | Contract block is malformed or uses unsupported syntax |
 
 ---
 
@@ -244,25 +273,32 @@ components discovered in discovery mode.
   },
   "assertions": [
     {
+      "id": "a0",
       "kind": "path_exists",
       "target": "pyproject.toml",
+      "state": "FAIL",
       "expected": true,
-      "actual": false,
-      "result": "FAIL"
+      "observed": false,
+      "remediation_type": "CREATE_FILE"
     },
     {
+      "id": "a1",
       "kind": "command_available",
       "target": "python3",
+      "state": "PASS",
       "expected": true,
-      "actual": true,
-      "result": "PASS"
+      "observed": true,
+      "remediation_type": null
     }
   ],
   "gaps": [
     {
-      "type": "MISSING",
+      "id": "g0",
+      "kind": "path_exists",
       "target": "pyproject.toml",
-      "detail": "path_exists assertion failed: path not found"
+      "state": "UNRESOLVED",
+      "detail": "path_exists: expected True, got False",
+      "remediation_type": "CREATE_FILE"
     }
   ]
 }
