@@ -31,9 +31,9 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 - Script path is fixed:
   - `.github/skills/sense-env-scaffold/scripts/sense_env.py`
 - Create `.github/skills/sense-env-scaffold/scripts/` even though it does not exist yet.
-- This repo-root script is a **topic-specific prototype exception requested by the
+- This skill-folder script is a **topic-specific prototype exception requested by the
   Human**, not a new general repository policy. Executor must not generalize this
-  into “repo-root scripts are normally allowed here.”
+  into “skill-folder scripts are normally allowed here.”
 - CLI flags must include:
   - `--mode discovery|acceptance`
   - `--contract-file`
@@ -133,7 +133,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
       exception for `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 - [ ] Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
 - [ ] Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
-- [ ] Create `scripts/` and `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
+- [ ] Create `.github/skills/sense-env-scaffold/scripts/` and `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 - [ ] Implement `argparse` with all four required flags.
 - [ ] Implement repo-root detection and document it in the CLI reference.
 - [ ] Implement acceptance-mode contract lookup in the agreed order.

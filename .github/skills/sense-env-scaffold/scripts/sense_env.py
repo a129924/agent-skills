@@ -10,7 +10,8 @@ This script lives at .github/skills/sense-env-scaffold/scripts/sense_env.py.
 Exit codes:
     0  — success
     10 — operational error (I/O failure)
-    20 — acceptance failure (assertions evaluated, one or more required FAIL)
+    20 — acceptance failure (assertions evaluated, one or more FAIL;
+         UNSUPPORTED results do not by themselves cause exit 20)
     30 — contract error (missing file, missing fenced block, malformed block)
 """
 
@@ -40,7 +41,7 @@ EXIT_ACCEPTANCE_FAIL = 20
 EXIT_CONTRACT_ERROR = 30
 
 FENCED_BLOCK_RE = re.compile(
-    r"^\s*```yaml\s+\[sensing-assertions\]\s*\n(.*?)```",
+    r"^\s*```yaml\s+\[sensing-assertions\]\s*\r?\n(.*?)```",
     re.MULTILINE | re.DOTALL,
 )
 

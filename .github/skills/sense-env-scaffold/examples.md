@@ -23,8 +23,8 @@ Resulting manifest shape:
 ```json
 {
   "meta":        { "schema_version": "1", "run_mode": "discovery", ... },
-  "fingerprint": { "repo_root": "...", "python_version": "3.x.y", ... },
-  "facts":       { "git_branch": "...", "readme_exists": true, ... },
+  "fingerprint": { "repo_root_marker": ".git", "python_version": "3.x.y", ... },
+  "facts":       { "current_branch": "...", "repo_present": true, ... },
   "assertions":  [],
   "gaps":        []
 }
@@ -73,13 +73,11 @@ The contract file must contain a fenced block tagged `yaml [sensing-assertions]`
 ~~~markdown
 ```yaml [sensing-assertions]
 - kind: path_exists
-  path: pyproject.toml
-  required: true
-  expected: true
+  target: pyproject.toml
+  expected: "true"
 - kind: command_available
-  command: python3
-  required: true
-  expected: true
+  target: python3
+  expected: "true"
 ```
 ~~~
 
@@ -87,8 +85,8 @@ Expected outcomes by exit code:
 
 | Exit | Meaning |
 |---|---|
-| `0` | All `required: true` assertions passed |
-| `20` | One or more `required: true` assertions failed; read `gaps` in manifest |
+| `0` | All assertions passed (or only UNSUPPORTED — no FAIL) |
+| `20` | One or more assertions result is FAIL; read `gaps` in manifest |
 | `30` | Contract file not readable, or fenced block absent or malformed |
 
 ---
@@ -125,12 +123,9 @@ When exit is `20`, the manifest `gaps` array describes what failed:
 {
   "gaps": [
     {
-      "kind": "path_exists",
-      "path": "pyproject.toml",
-      "expected": "true",
-      "observed": "false",
-      "result": "FAIL",
-      "required": true
+      "type": "FAIL",
+      "target": "pyproject.toml",
+      "detail": "path_exists: expected true, got false"
     }
   ]
 }
@@ -153,8 +148,8 @@ exit `30`. Instead:
 }
 ```
 
-A gap entry is added and the run continues. Exit `20` is returned if any
-required assertion is UNSUPPORTED.
+A gap entry is added and the run continues. Exit `20` is **not** triggered by
+UNSUPPORTED alone; only a `result == "FAIL"` assertion causes exit `20`.
 
 Anti-pattern:
 
@@ -179,9 +174,7 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode discovery --output /tmp/ci-manifest.json
 ```
 
-- Relative paths are resolved against `<repo_root>`.
-- Parent directory is created automatically only when the path is under
-  `<repo_root>/.github/`. For other directories, the parent must exist.
+- Parent directory is created unconditionally (`parents=True, exist_ok=True`).
 
 ---
 
@@ -193,4 +186,4 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
 | Check for snapshot file after a non-zero run | Snapshot is only written on exit `0` |
 | Use unsupported assertion kinds and expect `PASS` | Result is `UNSUPPORTED`; required unsupported assertions count as failures |
 | Modify `scripts/sense_env.py` as part of skill invocation | The script is a fixed prototype tool; changes require a separate planning topic |
-| Invoke from outside the repository directory tree | `find_repo_root` raises an error; script exits `10` |
+| Invoke from outside the repository directory tree | `find_repo_root` falls back to cwd; the manifest is still written but `repo_root_marker` may be absent |

@@ -30,12 +30,12 @@ Do not use this skill when:
 - whether a snapshot export is required (`--snapshot` flag)
 
 # Process
-1. Confirm `.github/skills/sense-env-scaffold/scripts/sense_env.py` is present in the repository root.
+1. Confirm `.github/skills/sense-env-scaffold/scripts/sense_env.py` is present in the skill folder.
 2. Choose the mode:
    - `discovery` for a harmless fact-collection run; no contract required
    - `acceptance` to evaluate assertions from a contract file
 3. Construct the command using the locked CLI contract (see `references/sense-env-cli-contract.md`).
-4. Run the command from the repository root.
+4. Run the command from the repository working directory.
 5. Read the exit code:
    - `0` — success; manifest written
    - `10` — operational error (I/O failure); check the JSON for details

@@ -29,7 +29,7 @@ resolves the repository root upward from the current working directory.
 | Value | Behaviour |
 |---|---|
 | `discovery` | Collect environment facts. Tolerant: missing optional tools produce `null` values, not errors. Always exits `0` when sensing completes, regardless of optional-tool availability. |
-| `acceptance` | Load contract, extract assertions, evaluate each one. Fails hard when required assertions do not pass. |
+| `acceptance` | Load contract, extract assertions, evaluate each one. Fails hard when one or more assertions do not pass. |
 
 ### `--contract-file`
 
@@ -43,8 +43,7 @@ resolves the repository root upward from the current working directory.
 
 - Overrides the live manifest destination only.
 - If relative: resolved against `repo_root`.
-- Parent directory `.github/` is created automatically when the output path is
-  under `<repo_root>/.github/`.
+- Parent directory is created unconditionally (`parents=True, exist_ok=True`).
 - If parent-directory creation or file write fails: exit `10`.
 
 ### `--snapshot`
@@ -95,7 +94,9 @@ The script extracts assertions from a fenced block with this exact tag:
 ````
 
 - A regex-based extractor is used.
-- Minor surrounding noise (BOM, extra blank lines, small indentation drift) is tolerated.
+- Minor surrounding noise (BOM, extra blank lines) is tolerated; Windows `\r\n` line
+  endings inside the fenced block are normalized, but general `\r\n` tolerance across
+  the whole file is not guaranteed in v1.
 - In acceptance mode, absence of this block in the contract file is a contract error:
   exit `30`.
 - The parser supports only the v1 narrow YAML-like subset (see Assertion format below).

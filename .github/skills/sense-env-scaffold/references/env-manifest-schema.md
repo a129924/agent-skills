@@ -1,7 +1,7 @@
 # Env Manifest Schema
 
 Defines the structure of `.github/env-manifest.json` and
-`.github/env-manifest.snapshot.json` produced by `scripts/sense_env.py`.
+`.github/env-manifest.snapshot.json` produced by `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
 
 ## Purpose
 
@@ -134,7 +134,7 @@ Each assertion record:
 | `target` | string | The subject of the assertion |
 | `expected` | any | Expected value as parsed from the contract |
 | `actual` | any | Observed value at run time |
-| `result` | string | `"PASS"` or `"FAIL"` |
+| `result` | string | `"PASS"`, `"FAIL"`, or `"UNSUPPORTED"` |
 
 ### V1 supported assertion kinds
 
@@ -275,17 +275,22 @@ components discovered in discovery mode.
 When `--snapshot` is used, the script writes a second file:
 `.github/env-manifest.snapshot.json`
 
-Snapshot shaping rules (applied before writing):
+Snapshot shaping rules in v1 (applied before writing):
 
-| Data category | Treatment |
+| Data category | Treatment in v1 |
 |---|---|
-| Absolute local paths | Replaced with repo-relative form or removed |
-| Usernames in paths | Stripped |
-| Machine-specific identifiers (hostname, UID) | Removed |
-| Secret-shaped values (tokens, keys, passwords) | Removed |
-| Branch names | Kept (treated as non-sensitive) |
+| Selected fingerprint fields that are machine-local | Removed (only `repo_root_marker`, `python_version`, `platform` are kept) |
+| Facts fields whose keys match secret-related patterns | Removed |
+| Absolute local paths inside `key_paths` | Replaced with `null` |
+| Usernames in paths | Not specifically scrubbed in v1 |
+| Machine-specific identifiers (hostname, UID) | Not broadly guaranteed to be removed in v1 |
+| Secret-shaped values (tokens, keys, passwords) | Not inspected by value in v1; only key-pattern matching is applied |
+| Branch names | Kept |
 | Platform string | Kept |
 | Python version | Kept |
+
+The v1 snapshot is only partially sanitized. It should not be treated as a complete
+scrub of usernames, host identifiers, or secret-like values based on their content.
 
 The snapshot is written only when the run exits `0`. If the run exits `10`, `20`, or
 `30`, no snapshot is written. This is enforced by the script; callers should not
