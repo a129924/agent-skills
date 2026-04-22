@@ -28,7 +28,7 @@ in different contexts.
 | Planning actor | Define scope, locked decisions, boundaries, and handoff artifacts | Skip the repo-visible plan file |
 | Creator | Draft or revise the implementation from the topic plan until it is `review-ready` | Approve its own output |
 | Reviewer | Evaluate the latest creator output and return `approved` or `needs-rework` | Author the final implementation directly |
-| Publisher / release actor | Handle commit, push, PR, review-comment triage, merge follow-up, and release/version actions | Change planning intent retroactively without updating the plan |
+| Main Agent (publisher / release actor) | Handle commit, push, PR, review-comment triage, merge follow-up, and release/version actions, while stopping for explicit human confirmations where the workflow requires them | Change planning intent retroactively without updating the plan |
 
 ## Canonical artifacts
 | Artifact | Path | Purpose |
@@ -62,15 +62,18 @@ Every topic handoff plan must include these fixed sections:
 | `reviewer-in-progress` | Reviewer is evaluating the latest draft | Reviewer | `approved`, `needs-rework` |
 | `needs-rework` | Reviewer found blocking issues and returned the work | Reviewer | `creator-in-progress` |
 | `approved` | Reviewer accepted the draft | Reviewer | `publish-in-progress` |
-| `publish-in-progress` | Approved work is being committed, pushed, and prepared for PR / stable-surface updates | Publisher / release actor | `pr-open`, `merged` |
-| `pr-open` | PR is open and comment triage is active | Publisher / release actor | `needs-rework`, `merged` |
-| `merged` | Changes are merged; local sync and optional release follow-up remain | Publisher / release actor / human | `released`, terminal |
-| `released` | Version and tag actions are complete when the change requires them | Publisher / release actor | terminal |
+| `publish-in-progress` | Approved work is being committed, pushed, and prepared for PR / stable-surface updates | Main Agent (publisher / release actor) | `pr-open`, `merged` |
+| `pr-open` | PR is open and comment triage is active | Main Agent (publisher / release actor) | `needs-rework`, `merged` |
+| `merged` | Changes are merged; local sync and optional release follow-up remain | Main Agent (publisher / release actor) | `released`, terminal |
+| `released` | Version and tag actions are complete when the change requires them | Main Agent (publisher / release actor) | terminal |
 
 Notes:
 - `merged` is terminal for changes that do not require a release action.
 - `released` is required when a merge also performs a repository release step.
 - Reviewer comments on an open PR may send the work back to `needs-rework`.
+- Human interaction still exists at explicit stop points (for example, manual merge on
+  GitHub), but those stop points do not transfer overall Phase 5-10 ownership away
+  from Main Agent.
 
 ## Workflow phases
 

@@ -41,6 +41,10 @@ Phase 8:   User merges (manual)
 Phase 9-10: Post-merge + release
 ```
 
+Main Agent remains the orchestrating actor through Phase 10. Human actions at the
+two stop points authorize or complete specific transitions, but they do not replace
+Main Agent as the owner of the surrounding publish, post-merge, and release phases.
+
 **Key Decisions** (from workflow validation):
 - ✅ Two-layer review: Copilot (code quality) + Reviewer (design quality)
 - ✅ Pre-commit stop points (avoid fake state in git history)
@@ -76,8 +80,13 @@ review-ready
                        merged (Phase 9: post-merge sync)
                          ↓ (Phase 10: release if needed)
                          ↓
-                         released (or terminal)
+                          released (or terminal)
 ```
+
+Ownership note:
+- Main Agent owns the workflow from `planned` through `released`.
+- Human actions affect the STOP 1 / STOP 2 transitions, especially manual merge,
+  but they do not become a separate owner for Phase 9-10.
 
 ---
 
