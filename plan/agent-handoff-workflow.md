@@ -91,6 +91,13 @@ Notes:
 4. Stable-library files such as `README.md` and `VERSION` stay untouched until
    reviewer approval unless the topic plan explicitly says otherwise.
 
+Execution note:
+- Phase 3 uses the creator skill as a normal drafting step (`@file:agent-skill-creator`
+  in VS Code or `copilot skill agent-skill-creator` in CLI).
+- Phase 3 is **not** the independent reviewer-style SubAgent handoff used in Phase 4.
+- The explicit SubAgent boundary starts at reviewer pass, where independence from
+  the creator context is required.
+
 ### 4. Reviewer pass (Two-Layer Independent Review)
 
 The reviewer role is independent from the creator and ensures quality gate before publishing.
@@ -414,12 +421,16 @@ Human merges the PR when ready.
 
 ### 9. Post-merge local sync
 
-Run `git-post-merge-workflow` skill to synchronize local branches and clean up.
+After the merge is confirmed, Main Agent continues the workflow and runs
+`git-post-merge-workflow` as a normal post-merge skill step to synchronize local
+branches and clean up. This is not a new reviewer-style independent SubAgent
+handoff.
 
 ### 10. Release (if applicable)
 
 If topic plan specified a release action:
-1. Run `git-release-management` skill to validate release readiness
+1. Main Agent continues and runs `git-release-management` as a normal release
+   skill step to validate release readiness
 2. Create annotated tag with semantic version
 3. Push tag to remote
 4. Move topic to `released`
@@ -535,6 +546,7 @@ Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
 @file:git-branch-naming <skill_name>
   ↓
 @file:agent-skill-creator <path/to/topic_plan.md>
+  → Normal creator skill invocation (not `@runSubagent`)
   → Creator drafts skill files
   → Creator outputs: "This skill is review-ready"
   ↓
@@ -558,11 +570,13 @@ Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
   → git push
   → gh pr create --base dev
   ↓ [Human review + merge via GitHub]
-@runSubagent run @file:git-post-merge-workflow
+@file:git-post-merge-workflow
+  → Main Agent continues after merge confirmation
   → Clean up local branches
   → Sync with remote
   ↓
-@runSubagent run @file:git-release-management
+@file:git-release-management
+  → Main Agent continues with release checks
   → Validate release readiness
   → Create annotated tag
   → Push tag to remote
@@ -572,7 +586,7 @@ Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
 - After Phase 3 (Creator): User or automation triggers Reviewer
 - After Phase 4 (Reviewer): User confirms metadata + manually updates README/VERSION (or automation)
 - After Phase 5 (Publish): User decides commit scope (direct-apply rules from Phase 7 apply)
-- After Phase 8 (Merge): User or automation runs post-merge workflow
+- After Phase 8 (Merge): User confirms merge; Main Agent continues with post-merge and release steps
 
 ### CLI Complete Workflow
 
@@ -593,6 +607,7 @@ TOPIC_PLAN="plan/${SKILL_NAME}/${SKILL_NAME}.plan.md"
 git checkout -b feat/a129924/${SKILL_NAME}
 
 # Phase 3: Creator draft
+# Normal skill invocation, not an independent /fleet SubAgent
 copilot skill agent-skill-creator ${TOPIC_PLAN}
 # Creator outputs: "This skill is review-ready"
 
@@ -620,10 +635,12 @@ gh pr create --base dev
 # Phase 8: Merge (human via GitHub)
 # After merge, continue:
 
-# Phase 9: Post-merge workflow
+# Phase 9: Post-merge workflow (Main Agent continues after merge)
+# Normal skill invocation under Main Agent control, not a separate operator-owned handoff
 copilot skill git-post-merge-workflow
 
-# Phase 10: Release (if applicable)
+# Phase 10: Release (if applicable; still Main Agent-controlled)
+# Normal skill invocation under Main Agent control
 copilot skill git-release-management
 # Tag and push
 ```
@@ -632,6 +649,8 @@ copilot skill git-release-management
 - `/fleet` launches independent SubAgent (vs `@runSubagent` in VS Code)
 - Metadata confirmation is user manual (could be automated with parsing)
 - Uses `copilot skill` command instead of `@file:` syntax
+- Phase 9-10 remain Main Agent phases even when the CLI surface uses
+  `copilot skill ...` syntax for the concrete skill invocation
 
 ### Tool Mapping
 
@@ -657,6 +676,9 @@ copilot skill git-release-management
 3. **Status model** is repo-visible (not session-specific)
    - topic plan status field updated consistently across environments
    - Both environments read the same review-checklist.md
+4. **Phase 9-10 ownership** stays with Main Agent
+   - post-merge and release are follow-up phases in the same workflow
+   - command syntax does not change the actor model
 
 ## VS Code and CLI Notes
 
@@ -664,6 +686,8 @@ copilot skill git-release-management
   workflow still depends on repo-visible artifacts rather than hidden tab state.
 - CLI may launch separate agents more explicitly via `/fleet`, but the workflow should read
   the same topic plan and use the same status model.
+- In both environments, Phase 9-10 are Main Agent continuation steps; only the
+  reviewer pass requires the explicit independent SubAgent boundary.
 - Worktrees are optional execution mechanics, not part of the canonical contract.
 
 ## Boundaries
