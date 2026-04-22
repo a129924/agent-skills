@@ -475,7 +475,7 @@ def run_acceptance(
         return EXIT_CONTRACT_ERROR
 
     try:
-        contract_text = contract_path.read_text(encoding="utf-8")
+        contract_text = contract_path.read_text(encoding="utf-8-sig")
     except Exception:
         manifest = {
             "meta": make_meta("acceptance"),

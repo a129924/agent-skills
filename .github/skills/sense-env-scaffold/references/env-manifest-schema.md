@@ -10,7 +10,8 @@ at the time of a `sense_env.py` run. It is designed to be:
 
 - human-readable (stable JSON indentation)
 - machine-parseable (fixed top-level keys, `snake_case` throughout)
-- safe to commit (snapshot variant strips machine-local and secret-shaped data)
+- safe to commit only after human review (snapshot variant strips selected
+  machine-local and secret-shaped data; see Snapshot filtering for v1 limits)
 
 ---
 
@@ -317,7 +318,7 @@ Snapshot shaping rules in v1 (applied before writing):
 | Usernames in paths | Not specifically scrubbed in v1 |
 | Machine-specific identifiers (hostname, UID) | Not broadly guaranteed to be removed in v1 |
 | Secret-shaped values (tokens, keys, passwords) | Not inspected by value in v1; only key-pattern matching is applied |
-| Branch names | Kept |
+| Branch names | Kept; may expose usernames if the branch follows a `user/topic` naming convention — callers should assess before committing |
 | Platform string | Kept |
 | Python version | Kept |
 
