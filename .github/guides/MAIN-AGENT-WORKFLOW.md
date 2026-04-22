@@ -119,10 +119,16 @@ review-ready
 **Input**: `skill_name`, locked decisions
 
 **Task**:
-1. Invoke `agent-skill-creator` SubAgent
-   - Pass plan.md path
-   - Output: .github/skills/<skill-name>/ with SKILL.md + examples/reference + optional files
+1. Invoke `agent-skill-creator` as the creator drafting skill
+    - Pass plan.md path
+    - Output: .github/skills/<skill-name>/ with SKILL.md + examples/reference + optional files
 2. Verify files exist
+
+**Execution note**:
+- In VS Code, this maps to `@file:agent-skill-creator <path/to/topic_plan.md>`.
+- In CLI, this maps to `copilot skill agent-skill-creator <path/to/topic_plan.md>`.
+- Phase 3 is a normal creator-skill invocation, not the independent reviewer-style
+  SubAgent handoff used in Phase 4.
 
 **Output**: Draft complete; Status → `creator-in-progress`
 
@@ -531,4 +537,3 @@ Ready to proceed after merge?
   - Max 3 PR iterations
   - Checkpoint-based resumability
   - Ask-user-only error handling
-
