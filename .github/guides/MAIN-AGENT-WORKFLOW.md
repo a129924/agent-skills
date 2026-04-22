@@ -362,7 +362,8 @@ Ready to merge?
 
 **Task**:
 1. Detect merge (poll GitHub or git fetch)
-2. Run `git-post-merge-workflow`:
+2. Main Agent invokes `git-post-merge-workflow` as a normal skill step
+   (not an independent reviewer-style SubAgent handoff):
    - Sync default branch
    - Clean up feature branch
 3. Status → `merged`
@@ -380,7 +381,8 @@ Ready to merge?
    - If NO → terminal at `merged` ✅
    - If YES → proceed
 
-2. Run `git-release-management` skill (7 gates):
+2. Main Agent invokes `git-release-management` as a normal release skill step
+   (not a separate operator-owned phase) and applies the 7 gates:
    1. Workspace clean
    2. Versions sync
    3. Tests pass
