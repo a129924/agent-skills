@@ -85,9 +85,9 @@ Expected outcomes by exit code:
 
 | Exit | Meaning |
 |---|---|
-| `0` | All assertions passed (or only UNSUPPORTED — no FAIL) |
+| `0` | All assertions passed |
 | `20` | One or more assertions result is FAIL; read `gaps` in manifest |
-| `30` | Contract file not readable, or fenced block absent or malformed |
+| `30` | Contract file not readable, fenced block absent or malformed, or unknown assertion kind |
 
 ---
 
@@ -123,23 +123,23 @@ When exit is `20`, the manifest `assertions` and `gaps` arrays describe what fai
 {
   "assertions": [
     {
-      "id": "a0",
+      "id": "path_exists/0",
       "kind": "path_exists",
       "target": "pyproject.toml",
       "state": "FAIL",
       "expected": true,
       "observed": false,
-      "remediation_type": "CREATE_FILE"
+      "remediation_type": "MISSING"
     }
   ],
   "gaps": [
     {
-      "id": "g0",
+      "id": "path_exists/0",
       "kind": "path_exists",
       "target": "pyproject.toml",
       "state": "UNRESOLVED",
       "detail": "path_exists: expected True, got False",
-      "remediation_type": "CREATE_FILE"
+      "remediation_type": "MISSING"
     }
   ]
 }
@@ -161,12 +161,12 @@ The gap record in that manifest uses kind `CONTRACT_ERROR`:
 {
   "gaps": [
     {
-      "id": "g0",
+      "id": "CONTRACT_ERROR/0",
       "kind": "CONTRACT_ERROR",
       "target": "<assertion>",
       "state": "UNRESOLVED",
       "detail": "assertion kind 'config_key_exists' is not in the v1 supported subset (path_exists, path_type, command_available)",
-      "remediation_type": "REVISE_CONTRACT"
+      "remediation_type": "MALFORMED"
     }
   ]
 }

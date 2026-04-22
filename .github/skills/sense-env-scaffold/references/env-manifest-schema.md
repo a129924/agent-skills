@@ -120,7 +120,7 @@ Each assertion record:
 
 ```json
 {
-  "id": "a0",
+  "id": "path_exists/0",
   "kind": "path_exists",
   "target": ".github/skills/sense-env-scaffold/scripts/sense_env.py",
   "state": "PASS",
@@ -132,13 +132,13 @@ Each assertion record:
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | Sequential identifier: `"a0"`, `"a1"`, … |
+| `id` | string | Kind-prefixed hierarchical identifier: `"<kind>/<index>"` (e.g., `"path_exists/0"`, `"command_available/0"`); index resets per kind |
 | `kind` | string | One of the v1 supported kinds (see below) |
 | `target` | string | The subject of the assertion |
 | `state` | string | `"PASS"` or `"FAIL"` |
 | `expected` | any | Expected value as parsed from the contract |
 | `observed` | any | Observed value at run time |
-| `remediation_type` | string or null | Hint for how to resolve a FAIL; `null` when state is PASS |
+| `remediation_type` | string or null | Semantic hint for how to resolve a FAIL; `null` when state is PASS |
 
 ### V1 supported assertion kinds
 
@@ -161,23 +161,23 @@ or missing optional components found in discovery mode.
 
 ```json
 {
-  "id": "g0",
+  "id": "path_exists/0",
   "kind": "path_exists",
   "target": "pyproject.toml",
   "state": "UNRESOLVED",
   "detail": "path_exists: expected True, got False",
-  "remediation_type": "CREATE_FILE"
+  "remediation_type": "MISSING"
 }
 ```
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | Sequential identifier: `"g0"`, `"g1"`, … |
+| `id` | string | Kind-prefixed hierarchical identifier: `"<kind>/<index>"` (e.g., `"path_exists/0"`, `"CONTRACT_MISSING/0"`); index resets per kind |
 | `kind` | string | Mirrors the assertion `kind` for assertion failures; or a contract-level kind (see below) |
 | `target` | string | The subject that has the gap |
 | `state` | string | Always `"UNRESOLVED"` in v1 |
 | `detail` | string | Human-readable explanation |
-| `remediation_type` | string or null | Hint for how to resolve the gap (see below) |
+| `remediation_type` | string or null | Semantic hint for how to resolve the gap (see below) |
 
 ### Assertion-failure gap kinds
 
@@ -193,16 +193,12 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
 
 ### Remediation types
 
-| Value | Meaning |
-|---|---|
-| `CREATE_FILE` | Expected file is absent; create it |
-| `REMOVE_PATH` | Unexpected path is present; remove it |
-| `CREATE_PATH` | Expected path does not exist at all |
-| `FIX_PATH_TYPE` | Path exists but is the wrong type |
-| `INSTALL_TOOL` | Required command is not available |
-| `REMOVE_TOOL` | Unexpected command is present |
-| `LOCATE_CONTRACT_FILE` | Contract file cannot be found or read |
-| `REVISE_CONTRACT` | Contract block is malformed or uses unsupported syntax |
+| Value | Meaning | When used |
+|---|---|---|
+| `MISSING` | Required thing does not exist | `path_exists` expected true / `path_type` target absent / `command_available` expected true / contract file not found |
+| `MISMATCH` | Thing exists but has wrong type or value | `path_type` target exists with wrong type |
+| `DEPRECATED` | Thing exists but should be removed | `path_exists` expected false / `command_available` expected false |
+| `MALFORMED` | Thing exists but is structurally invalid | Contract block absent, malformed block, or unsupported assertion kind |
 
 ---
 
@@ -273,16 +269,16 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
   },
   "assertions": [
     {
-      "id": "a0",
+      "id": "path_exists/0",
       "kind": "path_exists",
       "target": "pyproject.toml",
       "state": "FAIL",
       "expected": true,
       "observed": false,
-      "remediation_type": "CREATE_FILE"
+      "remediation_type": "MISSING"
     },
     {
-      "id": "a1",
+      "id": "command_available/0",
       "kind": "command_available",
       "target": "python3",
       "state": "PASS",
@@ -293,12 +289,12 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
   ],
   "gaps": [
     {
-      "id": "g0",
+      "id": "path_exists/0",
       "kind": "path_exists",
       "target": "pyproject.toml",
       "state": "UNRESOLVED",
       "detail": "path_exists: expected True, got False",
-      "remediation_type": "CREATE_FILE"
+      "remediation_type": "MISSING"
     }
   ]
 }

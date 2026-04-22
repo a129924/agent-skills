@@ -297,7 +297,7 @@ def evaluate_assertion(
         state = "PASS" if observed == expected else "FAIL"
         gap = None
         if state == "FAIL":
-            remediation = "CREATE_FILE" if expected else "REMOVE_PATH"
+            remediation = "MISSING" if expected else "DEPRECATED"
             gap = make_gap(
                 kind,
                 target,
@@ -318,7 +318,7 @@ def evaluate_assertion(
         state = "PASS" if observed == expected else "FAIL"
         gap = None
         if state == "FAIL":
-            remediation = "CREATE_PATH" if observed is None else "FIX_PATH_TYPE"
+            remediation = "MISSING" if observed is None else "MISMATCH"
             gap = make_gap(
                 kind,
                 target,
@@ -333,7 +333,7 @@ def evaluate_assertion(
         state = "PASS" if observed == expected else "FAIL"
         gap = None
         if state == "FAIL":
-            remediation = "INSTALL_TOOL" if expected else "REMOVE_TOOL"
+            remediation = "MISSING" if expected else "DEPRECATED"
             gap = make_gap(
                 kind,
                 target,
@@ -461,12 +461,12 @@ def run_acceptance(
             "assertions": [],
             "gaps": [
                 {
-                    "id": "g0",
+                    "id": "CONTRACT_MISSING/0",
                     **make_gap(
                         "CONTRACT_MISSING",
                         str(contract_path) if contract_path else "<none>",
                         "no readable contract file found",
-                        "LOCATE_CONTRACT_FILE",
+                        "MISSING",
                     ),
                 }
             ],
@@ -484,12 +484,12 @@ def run_acceptance(
             "assertions": [],
             "gaps": [
                 {
-                    "id": "g0",
+                    "id": "CONTRACT_MISSING/0",
                     **make_gap(
                         "CONTRACT_MISSING",
                         str(contract_path),
                         "contract file not readable",
-                        "LOCATE_CONTRACT_FILE",
+                        "MISSING",
                     ),
                 }
             ],
@@ -506,12 +506,12 @@ def run_acceptance(
             "assertions": [],
             "gaps": [
                 {
-                    "id": "g0",
+                    "id": "CONTRACT_MALFORMED/0",
                     **make_gap(
                         "CONTRACT_MALFORMED",
                         str(contract_path),
                         "no ```yaml [sensing-assertions] block found in contract",
-                        "REVISE_CONTRACT",
+                        "MALFORMED",
                     ),
                 }
             ],
@@ -529,12 +529,12 @@ def run_acceptance(
             "assertions": [],
             "gaps": [
                 {
-                    "id": "g0",
+                    "id": "CONTRACT_MALFORMED/0",
                     **make_gap(
                         "CONTRACT_MALFORMED",
                         str(contract_path),
                         f"malformed assertion block: {exc}",
-                        "REVISE_CONTRACT",
+                        "MALFORMED",
                     ),
                 }
             ],
@@ -545,16 +545,22 @@ def run_acceptance(
     assertion_results: list[dict[str, Any]] = []
     gaps: list[dict[str, Any]] = []
     any_fail = False
-    gap_idx = 0
+    a_kind_counts: dict[str, int] = {}
+    g_kind_counts: dict[str, int] = {}
 
     try:
-        for idx, record in enumerate(raw_records):
+        for record in raw_records:
             a_dict, g_dict = evaluate_assertion(record, repo_root)
-            a_dict["id"] = f"a{idx}"
+            kind = a_dict["kind"]
+            a_idx = a_kind_counts.get(kind, 0)
+            a_dict["id"] = f"{kind}/{a_idx}"
+            a_kind_counts[kind] = a_idx + 1
             assertion_results.append(a_dict)
             if g_dict is not None:
-                g_dict["id"] = f"g{gap_idx}"
-                gap_idx += 1
+                g_kind = g_dict["kind"]
+                g_idx = g_kind_counts.get(g_kind, 0)
+                g_dict["id"] = f"{g_kind}/{g_idx}"
+                g_kind_counts[g_kind] = g_idx + 1
                 gaps.append(g_dict)
             if a_dict["state"] == "FAIL":
                 any_fail = True
@@ -566,12 +572,12 @@ def run_acceptance(
             "assertions": assertion_results,
             "gaps": [
                 {
-                    "id": f"g{gap_idx}",
+                    "id": "CONTRACT_ERROR/0",
                     **make_gap(
                         "CONTRACT_ERROR",
                         "<assertion>",
                         str(exc),
-                        "REVISE_CONTRACT",
+                        "MALFORMED",
                     ),
                 }
             ],
