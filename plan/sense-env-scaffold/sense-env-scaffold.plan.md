@@ -16,8 +16,8 @@ This topic plan exists so an executor Agent can implement the scaffold without
 re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 
 ## Scope
-- Create `plan/references/env-manifest-schema.md`.
-- Create `plan/references/sense-env-cli-contract.md`.
+- Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
+- Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
 - Create `scripts/sense_env.py`.
 - Keep the script standard-library only and compatible with Python 3.10+.
 - Implement the agreed CLI surface, exit-code model, fenced-block extraction, and
@@ -119,8 +119,8 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   - `plan/agent-handoff-workflow.md`
   - `.github/copilot-instructions.md`
 - Reference artifacts to create:
-  - `plan/references/env-manifest-schema.md`
-  - `plan/references/sense-env-cli-contract.md`
+  - `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`
+  - `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`
 - Script scaffold to create:
   - `scripts/sense_env.py`
 - Primary runtime outputs after implementation:
@@ -131,8 +131,8 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
 - [ ] Read the three read-first documents before editing.
 - [ ] Re-confirm that this task is executing under the Human-approved prototype
       exception for `scripts/sense_env.py`.
-- [ ] Create `plan/references/env-manifest-schema.md`.
-- [ ] Create `plan/references/sense-env-cli-contract.md`.
+- [ ] Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
+- [ ] Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
 - [ ] Create `scripts/` and `scripts/sense_env.py`.
 - [ ] Implement `argparse` with all four required flags.
 - [ ] Implement repo-root detection and document it in the CLI reference.
@@ -156,7 +156,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
    - not a new repo-wide default
    - if branch / reviewer context rejects this exception, stop and return
      `needs-rework` rather than silently relocating the script
-3. Create `plan/references/env-manifest-schema.md` with:
+3. Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md` with:
    - purpose of `env-manifest.json`
    - stable top-level schema
    - example discovery-mode manifest
@@ -164,7 +164,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
    - gap semantics
    - assertion record shape
    - snapshot filtering and promotion notes
-4. Create `plan/references/sense-env-cli-contract.md` with:
+4. Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md` with:
    - CLI synopsis
    - flag semantics
    - mode semantics
@@ -268,9 +268,9 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
     for the implementation summary.
 
 ## Validation / acceptance checks
-- `plan/references/env-manifest-schema.md` exists and is self-consistent with the
+- `.github/skills/sense-env-scaffold/references/env-manifest-schema.md` exists and is self-consistent with the
   fixed contract.
-- `plan/references/sense-env-cli-contract.md` exists and reflects the same flags,
+- `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md` exists and reflects the same flags,
   modes, exit codes, and path rules as the script.
 - `scripts/sense_env.py` exists under `scripts/`.
 - The script imports only standard-library modules.
