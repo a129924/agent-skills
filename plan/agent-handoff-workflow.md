@@ -91,31 +91,134 @@ Notes:
 4. Stable-library files such as `README.md` and `VERSION` stay untouched until
    reviewer approval unless the topic plan explicitly says otherwise.
 
-### 4. Reviewer pass (Independent SubAgent review)
+### 4. Reviewer pass (Two-Layer Independent Review)
 
 The reviewer role is independent from the creator and ensures quality gate before publishing.
 
+#### **New: Two-Layer Review Architecture** (as of v2.0)
+
+This phase now includes **two complementary review layers**:
+
+**Layer 1: Copilot PR Review Agent** (automatic)
+- Scans code quality, formatting, style, links, typos
+- Produces PR-like comments
+- Single scan per phase (not continuous)
+
+**Layer 2: Agent-Skill-Reviewer (SubAgent)** (independent)
+- Evaluates SKILL design against `review-checklist.md`
+- Reads topic plan to verify scope alignment
+- Assesses Copilot feedback for reasonableness
+- Returns structured verdict
+
+#### **Three-Step Process**
+
+**Step 4a: Creator Ready**
+- SKILL draft complete (all required files present)
+- Ready for independent review
+
+**Step 4b: Copilot Scans**
+- Copilot Review Agent scans commits one time
+- Produces: code quality, formatting, link, typo comments
+- Main Agent collects comments
+
+**Step 4c: Reviewer Evaluates**
+- SubAgent reads:
+  - SKILL folder: `.github/skills/<skill-name>/`
+  - Topic plan: `plan/<topic>/<topic>.plan.md`
+  - Copilot feedback (for context)
+- Produces: JSON verdict with detailed triage
+
 #### In VS Code
 - Open a SubAgent directly (within the same Copilot context)
-- SubAgent reads the skill folder and applies `review-checklist.md`
-- Returns: `approved` or `needs-rework` with explicit reasoning
+- SubAgent reads the skill folder and topic plan
+- Returns: JSON verdict with `approved` or `needs-rework`
 
 #### In Copilot CLI
 - Use the `/fleet` orchestrator for independent parallel review
 - Command pattern:
   ```
-  /fleet 根據 .github/skills/agent-skill-reviewer/review-checklist.md 評審 .github/skills/<skill-name>/
+  /fleet 根據 review-checklist.md 與 plan 評審 .github/skills/<skill-name>/
   
-  決策：approved 或 needs-rework
-  (附 blocking issues 如需修正)
+  路徑：
+    - Skill folder: .github/skills/<skill-name>/
+    - Topic plan: plan/<topic>/<topic>.plan.md
+  
+  評審內容：
+    1. 符合 plan 的 Implementation steps？
+    2. 例子和參考資料足夠深入？
+    3. Copilot 的評論是否都妥當？(address/discuss/skip)
+  
+  回傳 JSON：
+  {
+    "verdict": "approved|needs-rework",
+    "blocking_issues": [...],
+    "copilot_feedback_triage": {
+      "ADDRESS": [...],
+      "DISCUSS": [...],
+      "SKIP": [...]
+    }
+  }
   ```
 - This ensures reviewer logic is separate from creator's session context
 
+#### **Reviewer Report Format (JSON)**
+
+```json
+{
+  "verdict": "approved|needs-rework",
+  "blocking_issues": [
+    {
+      "issue": "Missing Boundaries section",
+      "file": "SKILL.md",
+      "fix": "Add Boundaries section per SKILL.md template"
+    }
+  ],
+  "copilot_feedback_triage": {
+    "ADDRESS": [
+      {
+        "comment": "H1 title should use Title Case",
+        "location": "SKILL.md line 6",
+        "why": "Matches repo standard for consistency"
+      }
+    ],
+    "DISCUSS": [
+      {
+        "comment": "Consider adding more edge-case examples",
+        "optional": true,
+        "why": "Would help readers, but not required"
+      }
+    ],
+    "SKIP": [
+      {
+        "comment": "Use Markdown tables instead of ASCII",
+        "why": "Not applicable; already using tables in examples.md"
+      }
+    ]
+  }
+}
+```
+
 #### Decision routing
-1. If verdict is `needs-rework`: route feedback to creator; move topic to `creator-in-progress`
-2. If verdict is `approved`: proceed to next phase; move topic to `publish-in-progress`
+1. If verdict is `needs-rework`: 
+   - Extract blocking issues
+   - Route to creator; move topic to `creator-in-progress`
+   - Creator fixes and loops back to Step 4a
+2. If verdict is `approved`:
+   - Creator applies `ADDRESS` feedback (required)
+   - Creator optionally applies `DISCUSS` feedback
+   - Creator skips `SKIP` feedback
+   - Commit fixes with appropriate message
+   - Move topic to `publish-in-progress`
 
 **Note**: Reviewer is not creator. Reviewer does not approve own work.
+
+#### Main Agent Implementation Detail
+
+See `.github/guides/MAIN-AGENT-WORKFLOW.md` → Section "Phase 4: Two-Layer Review" for full orchestration logic including:
+- How to invoke SubAgent with correct context
+- How to parse JSON reviewer report
+- How to route feedback back to creator
+- Retry logic and error handling
 
 ### 5. Stable library update (if applicable)
 
@@ -132,15 +235,86 @@ Only applies when the skill is entering the stable library (per topic plan).
 **Note**: Topic plan MUST include the `Stable library metadata` section before this phase.
 If topic plan lacks this section, the skill is not intended for stable library.
 
-### 6. Commit, push, and PR
+### 6. Commit, push, and PR (with Pre-Commit Gate)
 
-1. Commit all approved changes (skill files + stable-library updates if applicable)
-   using `git-commit-convention` skill
-2. Push the branch to remote
-3. Open a PR against the default branch
-4. Move the topic to `pr-open`
+#### Staging Phase (Phase 5-6: Pre-Commit Checks)
 
-### 7. Creator patches on PR (Direct application only)
+Before committing, validate and stage changes:
+
+1. **Validation** (Phase 5):
+   - Verify all required files exist (SKILL.md, examples or reference)
+   - Check SKILL.md structure (all 8 required sections)
+   - Verify examples have positive and negative cases
+   - Run lint/type checks if applicable
+
+2. **Staging** (Phase 6):
+   - Stage approved SKILL files
+   - If topic plan specifies stable-library update:
+     - Stage README.md updates (per `Stable library metadata`)
+     - Stage VERSION bump (per `Stable library metadata`)
+   - Display final preview of all staged changes
+
+#### **[STOP POINT 1]** Before Commit
+
+Main Agent displays:
+```
+✅ VALIDATION COMPLETE
+
+Staged changes:
+  - .github/skills/<skill-name>/SKILL.md
+  - .github/skills/<skill-name>/examples.md
+  - README.md (new row added)
+  - VERSION (bumped: 0.11.0 → 0.12.0)
+
+Ready to commit + push + open PR on GitHub?
+[Y] Proceed
+[N] Back to Phase 5 (make more changes)
+```
+
+**If [N]**: Discard all staged changes; creator can modify further; ask again when ready
+
+**If [Y]**: Proceed to commit
+
+#### Commit and Push (Phase 6)
+
+1. Commit all approved changes:
+   ```bash
+   git commit -m "feat: add <skill-name> skill to stable library
+   
+   - Implements [topic-name] plan
+   - SKILL.md with all required sections
+   - examples.md with positive/negative cases
+   - README.md updated (new row per stable-library metadata)
+   - VERSION bumped: [old] → [new]
+   
+   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+   ```
+
+2. Commit plan status update:
+   ```bash
+   git commit -m "chore: mark plan status as pr-open
+   
+   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+   ```
+
+3. Push the branch to remote:
+   ```bash
+   git push
+   ```
+
+4. Open a PR using GitHub CLI:
+   ```bash
+   gh pr create \
+     --title "Add <skill-name> skill to stable library" \
+     --body "Implements plan/<topic>/<topic>.plan.md
+
+   See detailed spec in `.github/guides/MAIN-AGENT-WORKFLOW.md`" \
+     --base main
+   ```
+
+5. Move topic to `pr-open`
+
+### 7. Creator patches on PR with Termination Logic (Phase 7-8: MAX 3 ITERATIONS)
 
 After PR is open, comments may arrive (Copilot reviewer, CI checks, or human review).
 
@@ -155,14 +329,84 @@ Creator may directly commit fixes for:
 - **Trigger logic**: changes to when the skill should be used
 - **Core examples**: changes to example's decision flow, assumption set, or logic
 - **Missing requirements**: adding imports, dependencies, or prerequisites to examples
-  - These are NOT meta-fixes; they change what the example demonstrates
 - **Process or Boundaries**: changes to skill definition or scope
 - **Scope expansion**: new sections, new features, or changed responsibilities
-- **Example behavior**: changes that affect whether example code is runnable or produces different output
+- **Example behavior**: changes that affect whether example code is runnable
 
-If a comment requires changes outside direct-apply scope, open a discussion or route back to reviewer.
+#### PR Comment Loop Logic (Phase 7-8)
 
-Each direct-apply fix gets a new commit or amend (per your preference).
+```
+iteration = 0
+max_iterations = 3
+
+LOOP:
+  1. Fetch latest PR comments from GitHub
+  
+  2. If NO comments:
+     → PR is clean ✅
+     → Exit loop, proceed to [STOP POINT 2]
+  
+  3. If comments exist:
+     a. Classify each comment (direct-apply? / needs-reviewer?)
+     b. If ALL are direct-apply:
+        - Creator applies fixes
+        - Commit: git commit -m "fix: address PR feedback on [specific items]"
+        - Push: git push
+        - iteration += 1
+        - Sleep 30 seconds (wait for Copilot to re-scan)
+        - Loop back to step 1
+     c. If ANY require reviewer re-check:
+        - Route back to Phase 4 (invoke reviewer again)
+        - Reviewer evaluates new issues
+        - If approved: continue Phase 7-8 loop
+        - If needs-rework: back to creator Phase 3
+  
+  4. If iteration >= max_iterations:
+     - Display: "Reached max PR iterations (3)"
+     - Force exit loop
+     - Proceed to [STOP POINT 2]
+```
+
+**Iteration Limit**: After 3 loops of direct-apply fixes, Main Agent forces exit (prevents infinite loop).
+
+**Reviewer Re-routing**: If any comment falls outside direct-apply, immediately route back to Phase 4 for re-evaluation.
+
+#### **[STOP POINT 2]** Before Manual Merge
+
+Main Agent displays:
+```
+✅ PR READY FOR MERGE
+
+PR: #<number> <github.com/.../pull/<number>>
+Branch: feature/<username>/<skill-name>
+Status: All checks ✅ green
+Comments: All addressed ✅
+Iterations: 2/3 (within limit)
+
+Next step: Merge manually on GitHub (human responsibility)
+
+After merge, Main Agent will:
+  - Run git-post-merge-workflow
+  - Run git-release-management (if plan specifies)
+  - Update local branches
+
+Ready to merge?
+[Y] Go merge on GitHub, then confirm here
+[N] Not yet, ask me again later
+```
+
+**If [N]**: Main Agent waits, asks again every 30 seconds
+
+**If [Y]**: 
+- Instruct user: "Go to [PR link] and click Merge"
+- Poll GitHub PR status until merged
+- Continue to Phase 9
+
+#### Each direct-apply fix gets a new commit
+
+- Commits are atomic (one logical fix per commit)
+- Commit message uses `git-commit-convention`
+- Messages must reference the PR comment being fixed
 
 ### 8. Merge
 
@@ -241,31 +485,41 @@ When this skill is approved, it enters the stable library. Specify:
 
 **Note**: Reviewer will validate this section exists and is complete before approving.
 
-## Fixed reviewer report schema
-Reviewer output should use this shape:
+## New: Main Agent Orchestration Specification
 
-```markdown
-Verdict: approved | needs-rework
+For detailed Main Agent implementation logic, including phase transitions, checkpoint-based resumability, error handling patterns, and SubAgent communication formats, see:
 
-Blocking issues
-- none
-- or a short numbered list of blocking issues
+**`.github/guides/MAIN-AGENT-WORKFLOW.md`** (NEW in v2.0)
 
-Evidence
-| Check | Result | Evidence | Notes |
-| --- | --- | --- | --- |
-| Required core | Pass / Fail | file paths or sections | concise rationale |
-| Scope / boundaries | Pass / Fail | file paths or sections | concise rationale |
-| Example depth | Pass / Fail | file paths or sections | concise rationale |
-| Portability / independence | Pass / Fail | file paths or sections | concise rationale |
+This guide covers:
+- All 10 phases with executable logic
+- Two-layer review architecture (Copilot + Reviewer)
+- Pre-commit stop points (avoid fake git state)
+- PR loop with max 3 iterations (prevent infinite loops)
+- JSON-formatted SubAgent reports (structured communication)
+- Checkpoint-based crash recovery
+- Ask-user-only error handling (maximum transparency)
 
-Optional polish
-- short non-blocking suggestions only
+**When to use**:
+- Main Agent developers: Reference for orchestration logic
+- Skill creators: Understand phase flow and human stop points
+- Reviewers: Understand what Main Agent expects from SubAgent
+- Testers: Use for workflow verification and debugging
 
-Handoff
-- if `approved`: safe to publish / merge according to the topic plan
-- if `needs-rework`: return to creator with the blocking issues only
-```
+## Version History
+
+### v2.0 (2026-04-22)
+- **New**: `.github/guides/MAIN-AGENT-WORKFLOW.md` with full 10-phase executable spec
+- **New**: Two-layer review architecture (Copilot + agent-skill-reviewer with JSON reports)
+- **New**: Pre-commit stop points (Phase 6, BEFORE commit)
+- **New**: PR loop max 3 iterations + termination logic
+- **New**: Checkpoint-based resumability for crash recovery
+- **Enhanced**: Phase 4 section with detailed three-step review process
+- **Enhanced**: Phase 6-7 sections with stop points and loop termination
+- **Updated**: Reviewer report format (JSON + Markdown)
+
+### v1.0 (earlier)
+- Initial workflow definition (single-review model)
 
 ## VS Code and CLI Workflow Examples
 
