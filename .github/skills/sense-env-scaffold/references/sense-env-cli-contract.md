@@ -1,13 +1,13 @@
 # Sense-Env CLI Contract
 
-Defines the complete CLI surface of `scripts/sense_env.py` v1.
+Defines the complete CLI surface of `.github/skills/sense-env-scaffold/scripts/sense_env.py` v1.
 
 ---
 
 ## Synopsis
 
 ```
-python3 scripts/sense_env.py [OPTIONS]
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py [OPTIONS]
 ```
 
 Must be invoked from within the repository (any subdirectory). The script
@@ -108,7 +108,7 @@ The fenced block must contain a top-level sequence of assertion records.
 
 ```yaml
 - kind: path_exists
-  target: scripts/sense_env.py
+  target: .github/skills/sense-env-scaffold/scripts/sense_env.py
   expected: "true"
 
 - kind: path_type
@@ -182,7 +182,7 @@ so that callers have structured diagnostic information.
 ### Discovery (default output path)
 
 ```bash
-python3 scripts/sense_env.py --mode discovery
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery
 # Writes: .github/env-manifest.json
 # Exit:   0 (always, unless I/O fails)
 ```
@@ -190,7 +190,7 @@ python3 scripts/sense_env.py --mode discovery
 ### Discovery with custom output path
 
 ```bash
-python3 scripts/sense_env.py --mode discovery --output /tmp/my-manifest.json
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --output /tmp/my-manifest.json
 # Writes: /tmp/my-manifest.json
 # Exit:   0
 ```
@@ -198,7 +198,7 @@ python3 scripts/sense_env.py --mode discovery --output /tmp/my-manifest.json
 ### Discovery with snapshot export
 
 ```bash
-python3 scripts/sense_env.py --mode discovery --snapshot
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --snapshot
 # Writes: .github/env-manifest.json
 # Writes: .github/env-manifest.snapshot.json  (only when exit is 0)
 # Exit:   0
@@ -207,7 +207,7 @@ python3 scripts/sense_env.py --mode discovery --snapshot
 ### Acceptance with explicit contract file
 
 ```bash
-python3 scripts/sense_env.py --mode acceptance --contract-file plan/my-blueprint.md
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file plan/my-blueprint.md
 # Loads assertions from plan/my-blueprint.md
 # Exit:   0 (all assertions pass) / 20 (any FAIL) / 30 (contract error)
 ```
@@ -215,7 +215,7 @@ python3 scripts/sense_env.py --mode acceptance --contract-file plan/my-blueprint
 ### Acceptance with implicit contract lookup
 
 ```bash
-python3 scripts/sense_env.py --mode acceptance
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 # Looks for: retrofit-plan.md, then blueprint.md in repo root
 # Exit:   0 / 20 / 30
 ```
@@ -223,7 +223,7 @@ python3 scripts/sense_env.py --mode acceptance
 ### Acceptance with snapshot export
 
 ```bash
-python3 scripts/sense_env.py --mode acceptance --contract-file blueprint.md --snapshot
+python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md --snapshot
 # Snapshot is written only when exit would be 0
 ```
 

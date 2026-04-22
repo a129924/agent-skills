@@ -76,3 +76,5 @@ Do not use this skill when:
   definitions, gap and assertion record shapes, and snapshot filtering rules
 - `references/sense-env-cli-contract.md`: CLI synopsis, flag semantics, mode
   semantics, exit-code table, path-resolution rules, and invocation examples
+- `scripts/sense_env.py`: prototype implementation; stdlib-only Python 3.10+ script
+  that performs discovery and acceptance sensing runs
