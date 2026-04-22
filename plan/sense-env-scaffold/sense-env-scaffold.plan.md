@@ -97,7 +97,7 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   canonical repository shape.
 
 ## Status / allowed transitions
-- Current status: `publish-in-progress`
+- Current status: `pr-open`
 - Allowed transitions:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
