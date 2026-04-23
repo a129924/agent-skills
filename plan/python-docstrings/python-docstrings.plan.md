@@ -1,14 +1,14 @@
 # Python Docstrings Skill Plan
 
 ## Goal / Outcome
-Design a `python-docstrings` Agent Skill that teaches when and how to write clear, contract-first docstrings using Google Style format. The skill emphasizes **explicit over implicit** — docstrings should capture intent, boundaries, and semantic contracts so code is self-documenting and business contracts are visible.
+Design a `python-docstrings` Agent Skill that teaches when and how to write clear, contract-first docstrings using Google Style format. The skill emphasizes **explicit over implicit** — docstrings should capture intent, boundaries, and semantic contracts so code is self-documenting and business contracts are visible. The skill must never invent hidden business rationale: when intent cannot be inferred from explicit signals in code and nearby context, it falls back to documenting the callable contract clearly.
 
 ## Scope
 - **In scope**:
   - Google Style docstring format (one-liner + description + Args/Returns/Raises/Examples)
   - Public API docstring requirements (classes, public methods, dataclass fields)
   - Private/internal method docstring guidelines (one-liner vs full documentation)
-  - Semantic intent capture: "why and when" vs "what the code does"
+  - Semantic intent capture from explicit signals: "why and when" vs "what the code does"
   - Boundary and DDD context documentation
   - Error semantics (traditional Raises, also business-type returns like Result[T, E])
   - Dataclass and structured data field-level documentation
@@ -27,7 +27,7 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 ### 1. Docstring style: Google Style (non-negotiable)
 - Format: one-liner → extended description → Args/Returns/Raises/Examples/Yields
 - Reason: widely adopted Python industry standard; provides clear contract sections (Args/Returns/Raises/Examples); supports both traditional exceptions and modern business-return types (Raises vs Result[T,E])
-- Note: Alignment with vendor-bcp-exporter is incidental; style choice is justified by broad adoption and structure, not by single-project dependency
+- Note: Alignment with surveyed real-world code is incidental; style choice is justified by broad adoption and structure, not by single-project dependency
 
 ### 2. Public API definition: Full contract boundary
 - **Public** = classes, public methods, dataclass fields, module-level functions
@@ -35,8 +35,12 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 - **Private** (prefix `_`) = internal implementation detail
 - **Private method docstring rule**:
   - Always write one-liner explaining intent
-  - If method is simple (<15 lines, self-evident): one-liner is sufficient
-  - If method is complex (>15 lines) or contains business logic: add full docstring with Args/Returns
+  - One-liner is sufficient when the method is a local implementation helper with no independent caller-facing contract
+  - Add a full docstring only when the private method has its own non-obvious contract, shown by one or more explicit signals:
+    - it mutates object or external state
+    - it translates, suppresses, or raises domain-specific errors
+    - it returns a structured/domain value whose meaning is not obvious from name + type
+    - it is reused from multiple call sites and its preconditions/postconditions matter
   - Exception for @property: one-liner or skip if getter is trivial (e.g., `return self._value`)
 
 ### 3. Error semantics: Support both traditional and result-typed patterns
@@ -47,16 +51,27 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 ### 4. Semantic intent > implementation how
 - Docstring job: explain **why** this exists, **when** to call it, **what contract** it enforces
 - Not: explain line-by-line how the code works
-- Reason: strong names + types + guards make code self-evident; docstring adds business/design intent
+- **Method for deriving semantic intent**:
+  - infer from explicit signals only: symbol name, module/class role, parameter names, return type, named errors, surrounding public API, and explicit constraints already stated in code-adjacent context
+  - if those signals reveal a boundary or domain role, document that role briefly
+  - if those signals do **not** reveal a trustworthy "why", do not invent one; write a contract-focused docstring instead
+  - use "why" only when it is explicit from code-adjacent context; otherwise prefer "what contract / when to use"
+- Reason: strong names + types + guards make code mechanics self-evident; docstring adds the missing contract or boundary meaning when that meaning is explicit
 
 ### 5. Dataclass and field-level documentation (in scope: semantic role only)
 - **Dataclass class docstring**: semantic role, boundary context, any invariants
 - **Dataclass field docstring**: per-attribute semantic intent, optional/required status, domain meaning
-- **IN SCOPE**: "user ID field", "optional run-scoped identifier", "must be >0"
+- **IN SCOPE**:
+  - "user ID field"
+  - "optional run-scoped identifier"
+  - domain constraints only when they are already explicit in the public contract and matter to callers
 - **OUT OF SCOPE** (delegate to other skills):
   - Type choices (int vs float, Optional vs Union) → `python-type-hints-strict`
   - Validation logic (@validator) → `python-model-selection`
   - Serialization strategy (JSONSchema) → framework-specific skills
+- **How to phrase boundary cases**:
+  - acceptable: "Positive quantity expected by downstream pricing rules" when that constraint is already explicit in public API or validation contract
+  - not acceptable: implementation-level validation advice such as "validated by @field_validator" or speculative constraints not stated elsewhere
 - Reason: structured data often carries DDD domain semantics; explicit per-field semantic docs make contracts visible without prescribing structure
 
 ### 6. Inline comments: Rare; docstring-first
@@ -67,7 +82,7 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 ## Boundaries / Exclusions
 
 - **Not a code formatter**: does not recommend specific linting tools or auto-formatters
-- **Type hint alignment (IN scope)**: docstring Args/Returns types must match signature types (consistency check); choosing type shapes (Optional vs Union) is OUT of scope → `python-type-hints-strict`
+- **Type hint alignment (IN scope)**: when a docstring mentions a type, it must not contradict the signature; docstrings do not need to restate every type annotation verbatim. Choosing type shapes (Optional vs Union) is OUT of scope → `python-type-hints-strict`
 - **Not a naming guide**: delegates to `python-naming` skill (docstrings should mention clear names, not prescribe them)
 - **Not a model/structure guide**: delegates to `python-model-selection` (skill documents semantic intent of fields that exist; doesn't choose ABC vs dataclass or prescribe validation)
 - **Not framework-specific**: stays focused on pure Python docstring patterns; framework integrations (FastAPI, Pydantic, SQLAlchemy) are out of scope
@@ -88,7 +103,7 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 | Topic plan | `plan/python-docstrings/python-docstrings.plan.md` | Main Agent (planning phase) | Handoff contract between planning and creator |
 | Skill folder | `.github/skills/python-docstrings/` | Creator Agent | Implementation delivery |
 | Core SKILL.md | `.github/skills/python-docstrings/SKILL.md` | Creator | Executable instruction contract |
-| Reference | `.github/skills/python-docstrings/reference.md` + `references/` (split structure) | Creator | Overview + topic split files (google-style-template, semantic-intent, error-semantics, dataclass-patterns) |
+| Reference | `.github/skills/python-docstrings/reference.md` + `references/` (split structure) | Creator | One reference layer: `reference.md` is navigation/overview and `references/` holds the topic splits reviewed as one set |
 | Examples | `.github/skills/python-docstrings/examples.md` (required: high-complexity skill) | Creator | Multi-path usage patterns, anti-patterns, real-world scenarios |
 | Checklist | `.github/skills/python-docstrings/checklist.md` (optional) | Creator | Review/audit checklist for evaluating docstring compliance |
 
@@ -101,35 +116,39 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
    - Purpose: explicit contract focus
    - Trigger / When to use: when? (public API, dataclass fields) when not? (private trivial methods, obvious one-liners)
    - Inputs: code context (class/function signature)
-   - Process: step-by-step docstring workflow (identify public vs private → check error paths → write one-liner → fill Args/Returns)
-   - **Examples section (SKILL.md only)**: 2 positive + 1 negative (brief, concise)
-     - Positive: well-documented public class (semantic + contract)
-     - Positive: private method with appropriate one-liner (simple vs complex distinction)
-     - Negative: missing intent or implicit error (anti-pattern indicator)
+   - Process: step-by-step docstring workflow (identify public vs private → inspect explicit intent signals → choose contract-only or semantic-intent wording → check error paths → fill Args/Returns/Raises)
+   - **Examples section (SKILL.md only)**: 3 positive + 1 negative (brief, concise)
+     - Positive: public callable where semantic role is explicit from name + boundary context
+     - Positive: public callable where "why" is not explicit, so the docstring stays contract-focused
+     - Positive: private helper with appropriate one-liner because it has no independent contract
+     - Negative: invented rationale, contradictory type wording, or implicit error contract
    - Outputs: complete Google Style docstring
    - Boundaries: what it doesn't cover (type choice, model design, naming prescription)
    - Local references: list reference.md and examples.md roles
 
 2. **Draft reference materials (clear single-path structure)**
    - **LOCKED: Use Option B (split references/)**
-     - Create `reference.md` as focused overview (~300-400 tokens max) listing split files + their roles
+     - Treat `reference.md` + `references/` as one reference responsibility with split storage
+     - Create `reference.md` as focused overview (~300-400 tokens max) listing split files + their roles and serving as navigation only
      - Create four topic files under `references/`:
        - `references/google-style-template.md` — Google Style structure (one-liner, description, Args/Returns/Raises/Examples format + examples)
-       - `references/semantic-intent.md` — Capturing intent and boundary context; DDD patterns
-       - `references/error-semantics.md` — Traditional Raises vs business-return patterns (Result[T,E]); documenting error cases
-       - `references/dataclass-patterns.md` — Field-level documentation; semantic role capture; what NOT to document (validation, type choice)
+       - `references/semantic-intent.md` — How to derive semantic intent from explicit signals; when to fall back to contract-only wording; 5-7 concrete examples including one bad invented-why example
+       - `references/error-semantics.md` — Traditional Raises vs business-return patterns (Result[T,E]); documenting error cases without choosing the design pattern
+       - `references/dataclass-patterns.md` — Field-level documentation; semantic role capture; contract-vs-validation boundary and examples
      - List all split files explicitly in SKILL.md Local references with role labels
    - Do NOT use Option A (single file). Commit to split structure to avoid >1000 token consolidation later.
 
 3. **Draft examples.md** (REQUIRED — high complexity skill)
-   - Contains 4 positive + 2 negative representative scenarios with detailed explanations
+   - Contains 5 positive + 3 negative representative scenarios with detailed explanations
    - Scenarios to cover:
-     - a. Public class with semantic intent + method docstring (e.g., DTO, use case)
-     - b. Private helper method: simple (<15 lines) vs complex (>15 lines) with one-liner vs full docs
-     - c. Dataclass with field-level semantic documentation (per-field intent)
-     - d. Function returning traditional exception type vs Result[T,E] business type
-     - e. Over-documented trivial code (anti-pattern)
-     - f. Missing intent / implicit error handling (anti-pattern)
+     - a. Public class/function where semantic intent is explicit from boundary context
+     - b. Public class/function where intent is not explicit, so the docstring stays contract-focused and does not invent rationale
+     - c. Private helper with no independent contract → one-liner only
+     - d. Private helper with independent contract (side effect / error translation / reused preconditions) → full docstring
+     - e. Dataclass with field-level semantic documentation, including contract-vs-validation boundary
+     - f. Function returning traditional exception type vs Result[T,E] business type
+     - g. Anti-pattern: invented "why" not supported by code or nearby context
+     - h. Anti-pattern: docstring contradicts signature types or error behavior
    - Each example: code snippet + explanation of correctness or why pattern is wrong
 
 4. **Optional: checklist.md**
@@ -144,9 +163,9 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 
 1. **Verify required core** (SKILL.md + reference/examples present)
 2. **Check structure**: YAML, Purpose, Trigger, Inputs, Process, Examples, Outputs, Boundaries, Local references
-3. **Validate examples**: 2+ positive, 2+ negative; cover public/private/dataclass/error patterns
+3. **Validate examples**: confirm the required scenario set is present in both concise and detailed form (semantic-intent derivation, contract-only fallback, private helper rules, dataclass boundary, error patterns, anti-patterns)
 4. **Check single responsibility**: is scope pure docstring guidance? (not naming, not types, not model choice)
-5. **Verify portability**: can skill be used outside vendor-bcp-exporter? (reference material generic, not project-specific)
+5. **Verify portability**: confirm all guidance is generic after removing repo-specific names; no step should rely on project-specific architecture knowledge
 6. **Evidence table**: collect findings (structure ok, examples sufficient, boundaries clear, local reference roles explicit)
 7. **Verdict**: approved or needs-rework with specific guidance
 
@@ -154,33 +173,44 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 
 ### Creator readiness (before handoff to reviewer)
 - [ ] SKILL.md complete with all 9 required sections
-- [ ] **SKILL.md Examples section**: 2 positive + 1 negative (brief, concise guidance)
-- [ ] **examples.md present (REQUIRED for high-complexity skill)**: 4 positive + 2 negative detailed scenarios
-  - [ ] Scenario a: Public class with semantic intent + method docstring
-  - [ ] Scenario b: Private method complexity tiers (simple <15 lines vs complex >15 lines; documentation expectations)
-  - [ ] Scenario c: Dataclass with field-level semantic documentation (per-field intent)
-  - [ ] Scenario d: Function with traditional exception vs Result[T,E] business-return pattern
-  - [ ] Anti-pattern e: Over-documented trivial code
-  - [ ] Anti-pattern f: Missing intent / implicit error handling
+- [ ] **SKILL.md Examples section**: 3 positive + 1 negative (brief, concise guidance)
+  - [ ] semantic-intent-from-explicit-context example
+  - [ ] contract-only-when-why-is-not-explicit example
+  - [ ] private-helper-one-liner example
+  - [ ] negative invented-rationale / contradictory-contract example
+- [ ] **examples.md present (REQUIRED for high-complexity skill)**: 5 positive + 3 negative detailed scenarios
+  - [ ] Scenario a: semantic intent derived from explicit boundary context
+  - [ ] Scenario b: contract-only fallback when rationale is not explicit
+  - [ ] Scenario c: private helper with no independent contract
+  - [ ] Scenario d: private helper with independent contract (state mutation / error translation / reused preconditions)
+  - [ ] Scenario e: dataclass field documentation with contract-vs-validation boundary
+  - [ ] Scenario f: traditional exception vs Result[T,E] documentation pattern
+  - [ ] Anti-pattern g: invented "why" unsupported by code/context
+  - [ ] Anti-pattern h: type or error contract contradiction
 - [ ] **reference.md + references/ (split structure)**:
-  - [ ] reference.md (~300-400 tokens): overview listing all split files + roles
+  - [ ] reference.md (~300-400 tokens): navigation overview listing all split files + roles
   - [ ] references/google-style-template.md: format and structure
-  - [ ] references/semantic-intent.md: intent capture, DDD context
+  - [ ] references/semantic-intent.md: intent derivation method, fallback rules, bad-example coverage
   - [ ] references/error-semantics.md: exception and Result[T,E] patterns
-  - [ ] references/dataclass-patterns.md: field-level semantic docs + scope boundaries
+  - [ ] references/dataclass-patterns.md: field-level semantic docs + contract-vs-validation boundary
   - [ ] All split files listed in SKILL.md Local references with role labels
-- [ ] All examples use real-world code patterns (vendor-bcp-exporter-inspired or generic)
-- [ ] No hidden project-specific context; skill is portable
-- [ ] Manually tested: skill can guide someone on unfamiliar codebase (not vendor-specific)
+- [ ] All examples use real-world code patterns expressed with generic or clearly generalized names
+- [ ] No hidden project-specific context:
+  - [ ] no repo-specific paths, proprietary type names, or architecture-only assumptions in core guidance
+  - [ ] examples use generic names or clearly generalized variants
+  - [ ] semantic-intent guidance never requires knowledge unavailable from explicit code-adjacent context
+- [ ] Creator portability spot-check:
+  - [ ] at least one example is authored directly with generic names, or rewritten from a real-world pattern into generic names, and still follows the same rules
+  - [ ] the rewritten example does not depend on project-specific architecture knowledge
 
 ### Reviewer approval criteria
 - [ ] Required core present: SKILL.md + reference.md + references/ (all 4 split files) + examples.md
 - [ ] SKILL.md structure complete (9 sections + frontmatter)
-- [ ] SKILL.md Examples: 2 positive + 1 negative (concise)
-- [ ] examples.md Examples: 4 positive + 2 negative (detailed), covering all scenarios
-- [ ] Examples sufficient for 80%+ of routine docstring tasks
+- [ ] SKILL.md Examples: 3 positive + 1 negative (concise)
+- [ ] examples.md Examples: 5 positive + 3 negative (detailed), covering all required scenarios a-h
 - [ ] Single responsibility: pure docstring guidance (no scope creep into naming, types, models)
-- [ ] Portability: reference and examples are generic, reusable outside vendor-bcp-exporter context
+- [ ] Portability: reference and examples are generic, reusable outside the surveyed source project
+- [ ] Portability spot-check: reviewer can remove any remaining project nouns from the chosen rewritten example without changing the guidance
 - [ ] Boundaries are clear; no ambiguity about what is/isn't covered
 - [ ] Local file roles explicitly named in Local references
 - [ ] Evidence: reviewer fills in table with specific findings
@@ -199,7 +229,7 @@ Evidence:
 |-----------|---------|--------|
 | Required core (SKILL.md + reference + examples) | [present/missing] | [ok/fail] |
 | Structure (9 sections + frontmatter) | [complete/incomplete] | [ok/fail] |
-| Examples coverage | [covers public/private/dataclass/error] | [ok/fail] |
+| Examples coverage | [covers semantic-intent derivation, contract-only fallback, private helper tiers, dataclass boundary, error patterns, anti-patterns] | [ok/fail] |
 | Single responsibility | [pure docstring guidance] | [ok/fail] |
 | Portability | [generic, reusable] | [ok/fail] |
 | Boundaries clarity | [explicit, unambiguous] | [ok/fail] |
@@ -218,9 +248,9 @@ Review notes: [summary of key findings, any polish suggestions]
 ## Open Questions / Unresolved Items
 
 1. **Checklist.md priority**: optional for this skill; reviewer may request if additional audit tools prove valuable
-2. **Async docstring patterns**: out of scope for first draft, but if Creator discovers repeated async patterns during implementation, can add concise anti-pattern example to examples.md as polish (non-blocking follow-up)
-3. **Deprecation and versioning**: out of scope for first draft; future skill if demand arises
-4. **Framework integration expectations**: out of scope; stays focused on pure Python patterns (SQLAlchemy, FastAPI, Pydantic specifics belong in framework-focused skills or extensions)
+2. **Async docstring patterns**: explicitly deferred; do not add async-specific guidance or examples in this draft
+3. **Deprecation and versioning**: explicitly deferred; future skill if demand arises
+4. **Framework integration expectations**: explicitly deferred; stays focused on pure Python patterns (SQLAlchemy, FastAPI, Pydantic specifics belong in framework-focused skills or extensions)
 
 ---
 
@@ -231,18 +261,18 @@ Review notes: [summary of key findings, any polish suggestions]
 **Key decisions LOCKED** (non-negotiable):
 - **Google Style format**: one-liner + description + Args/Returns/Raises/Examples sections (industry standard; supports traditional + business-return patterns)
 - **Public API contract**: full docstring required for public classes, methods, fields, functions
-- **Private method rule**: simple (<15 lines) = one-liner; complex (>15 lines, business logic) = full docstring
+- **Private method rule**: one-liner by default; full docstring only when the private method has an explicit independent contract (state mutation, error translation, structured/domain return, or reused pre/postconditions)
 - **Error semantics**: support both `Raises:` (traditional) and `Returns:` (Result[T,E] business-type)
-- **Semantic intent > implementation how**: docstring captures why/when/what-contract, not line-by-line code
-- **Dataclass field docs (semantic role only)**: IN scope; type choice/validation OUT of scope
-- **Type hint alignment**: Args/Returns types must match signature (consistency); type shape choice OUT of scope
-- **Reference structure (split)**: LOCKED to Option B (reference.md overview + references/ split by topic); no single-file fallback
+- **Semantic intent method**: derive only from explicit code-adjacent signals; if rationale is not explicit, use contract-only wording and do not invent "why"
+- **Dataclass field docs (semantic role only)**: IN scope; validation mechanics and type choice OUT of scope
+- **Type hint alignment**: docstrings may omit type syntax, but any stated type must not contradict the signature
+- **Reference structure (split)**: one reference responsibility implemented as `reference.md` navigation + `references/` topic splits
 - **Inline comments**: rare; docstring-first philosophy
 - **Boundaries**: no naming guidance, no type-hint shape decisions, no model/validator design, no framework specifics
 
 **Deliverables**:
-- SKILL.md (9 sections): 2 positive + 1 negative examples (concise)
-- examples.md (REQUIRED): 4 positive + 2 negative detailed scenarios
+- SKILL.md (9 sections): 3 positive + 1 negative concise examples
+- examples.md (REQUIRED): 5 positive + 3 negative detailed scenarios
 - reference.md (overview ~300-400 tokens)
 - references/ (4 split files):
   - google-style-template.md
@@ -252,8 +282,9 @@ Review notes: [summary of key findings, any polish suggestions]
 - Optional checklist.md for review audit
 
 **Success criteria**:
-- SKILL.md Examples clear and brief; examples.md Examples comprehensive and multi-scenario
-- Skill is portable (no vendor-bcp-exporter specific context; inspired by real patterns, but generic application)
+- SKILL.md Examples stand on their own for standard usage; examples.md covers edge cases and anti-patterns in depth
+- Skill is portable (no repo-specific context; grounded in real patterns but written generically)
 - Clear boundaries (doesn't encroach on naming, type choices, model design, framework specifics)
 - All local files have explicit roles in SKILL.md Local references
-- Private method rule is executable (not "judgment call"—simple <15 lines vs complex >15 lines criterion is objective)
+- Semantic-intent guidance is executable because it names explicit sources and a contract-only fallback
+- Private method rule is executable because it depends on explicit contract signals, not line-count guesswork
