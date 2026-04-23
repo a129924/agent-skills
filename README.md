@@ -144,6 +144,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 | `python-api-signature` | defines public Python function and method signature rules for safe defaults, clear parameter ordering, keyword-only clarity, and explicit call-site contracts |
 | `python-module-boundaries` | defines regular Python package and module boundary rules for explicit public surfaces, internal-module contracts, import style, and safe import behavior |
 | `python-context-management` | defines synchronous Python context-manager rules for resource lifetime, `@contextmanager` versus class-based choice, cleanup-failure handling, ambient-state restoration, and `ExitStack` usage |
+| `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
