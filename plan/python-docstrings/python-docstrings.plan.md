@@ -79,6 +79,14 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 - Prefer: clear variable names, guard clauses, early returns, strong types
 - If you need an inline comment, consider whether a docstring or better naming would be clearer
 
+### 7. Publication boundary: review-ready topic only
+- This topic does **not** publish `python-docstrings` into the stable library.
+- `README.md`, `VERSION`, release notes, and `.github/copilot-instructions.md`
+  remain untouched in this topic.
+- Stable-library promotion, release timing, and version bump decisions are
+  deferred to a future dedicated publish topic once the skill content is proven
+  review-ready.
+
 ## Boundaries / Exclusions
 
 - **Not a code formatter**: does not recommend specific linting tools or auto-formatters
@@ -87,25 +95,65 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 - **Not a model/structure guide**: delegates to `python-model-selection` (skill documents semantic intent of fields that exist; doesn't choose ABC vs dataclass or prescribe validation)
 - **Not framework-specific**: stays focused on pure Python docstring patterns; framework integrations (FastAPI, Pydantic, SQLAlchemy) are out of scope
 - **Error semantics (IN scope)**: supporting both `Raises:` (traditional) and `Returns:` (business-type Result) is about documenting what can go wrong, not about choosing which pattern to use in code design
+- **Not a stable-library publish topic**: this plan does not update `README.md`,
+  `VERSION`, `.github/copilot-instructions.md`, or release notes; those belong
+  to a later publish-focused topic if the skill graduates to stable library
 
 ## Status / Allowed Transitions
 
 - **Current**: `planned`
-- **Workflow target**: `creator-in-progress` → `review-ready` → reviewer approval
-- **Allowed transitions from `planned`**:
-  - `planned` → `creator-in-progress` (when creator picks up implementation)
-  - `planned` → `review-ready` (when plan is locked and creator is ready to implement in next step)
+- **Execution model**: follow the canonical creator → reviewer → publish → merge
+  path, but stop at `merged`; this topic does not declare a release action
+- **Allowed transitions**:
+  - `planned` → `creator-in-progress`
+  - `creator-in-progress` → `review-ready`
+  - `review-ready` → `reviewer-in-progress`
+  - `reviewer-in-progress` → `approved`
+  - `reviewer-in-progress` → `needs-rework`
+  - `needs-rework` → `creator-in-progress`
+  - `approved` → `creator-in-progress`
+  - `approved` → `publish-in-progress`
+  - `publish-in-progress` → `pr-open`
+  - `publish-in-progress` → `merged`
+  - `pr-open` → `needs-rework`
+  - `pr-open` → `merged`
+  - `merged` → terminal
+
+Routing notes:
+- `approved` does **not** mean the topic may skip directly to publish work.
+- After reviewer approval, the creator / main flow must first apply any
+  required reviewer JSON `ADDRESS` feedback and complete the necessary
+  revisions before Main Agent runs the Phase 4.5 planner contract alignment
+  checkpoint defined by `plan/agent-handoff-workflow.md`.
+- Phase 4.5 is therefore an approval-plus-feedback-applied checkpoint, not an
+  immediate post-approval step.
+- If Phase 4.5 finds drift in locked decisions, artifact paths, or other
+  plan-level contract semantics, route the topic back to
+  `creator-in-progress` before any publish work continues.
+- Only after reviewer approval, required feedback application, and a passing
+  Phase 4.5 checkpoint may Main Agent move the topic to `publish-in-progress`.
 
 ## Artifact Paths
 
 | Artifact | Path | Owner | Role |
 |----------|------|-------|------|
-| Topic plan | `plan/python-docstrings/python-docstrings.plan.md` | Main Agent (planning phase) | Handoff contract between planning and creator |
-| Skill folder | `.github/skills/python-docstrings/` | Creator Agent | Implementation delivery |
+| Topic plan | `plan/python-docstrings/python-docstrings.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Skill folder | `.github/skills/python-docstrings/` | Creator | Root output location for the draft skill |
 | Core SKILL.md | `.github/skills/python-docstrings/SKILL.md` | Creator | Executable instruction contract |
-| Reference | `.github/skills/python-docstrings/reference.md` + `references/` (split structure) | Creator | One reference layer: `reference.md` is navigation/overview and `references/` holds the topic splits reviewed as one set |
-| Examples | `.github/skills/python-docstrings/examples.md` (required: high-complexity skill) | Creator | Multi-path usage patterns, anti-patterns, real-world scenarios |
-| Checklist | `.github/skills/python-docstrings/checklist.md` (optional) | Creator | Review/audit checklist for evaluating docstring compliance |
+| Reference overview | `.github/skills/python-docstrings/reference.md` | Creator | Navigation overview for the split reference set |
+| Split references | `.github/skills/python-docstrings/references/` | Creator | Topic-specific reference files listed in `SKILL.md` |
+| Examples | `.github/skills/python-docstrings/examples.md` | Creator | Detailed positive and negative scenarios for the skill |
+| Checklist | `.github/skills/python-docstrings/checklist.md` (optional) | Creator | Optional audit checklist if the creator includes it |
+
+Artifact path notes:
+- This topic does **not** modify `README.md`, `VERSION`, or
+  `.github/copilot-instructions.md`.
+- `Stable library metadata` is intentionally absent because this topic is not a
+  stable-library publish topic.
+- The listed paths are an executable contract, not an informational appendix.
+- If creator output, reviewer findings, or planner alignment reveals repo-visible
+  changes outside these paths, treat that drift as a plan violation and route
+  the topic back to `creator-in-progress` before continuing.
 
 ## Implementation Steps
 
@@ -166,8 +214,14 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 3. **Validate examples**: confirm the required scenario set is present in both concise and detailed form (semantic-intent derivation, contract-only fallback, private helper rules, dataclass boundary, error patterns, anti-patterns)
 4. **Check single responsibility**: is scope pure docstring guidance? (not naming, not types, not model choice)
 5. **Verify portability**: confirm all guidance is generic after removing repo-specific names; no step should rely on project-specific architecture knowledge
-6. **Evidence table**: collect findings (structure ok, examples sufficient, boundaries clear, local reference roles explicit)
-7. **Verdict**: approved or needs-rework with specific guidance
+6. **Use reviewer inputs explicitly**:
+   - SKILL folder: `.github/skills/python-docstrings/`
+   - Topic plan: `plan/python-docstrings/python-docstrings.plan.md`
+   - Copilot feedback collected by Main Agent in Phase 4b, used as context for
+     `ADDRESS` / `DISCUSS` / `SKIP` triage
+7. **Structured findings**: record concrete findings as blocking issues and
+   feedback triage rationale in the reviewer JSON output
+8. **Verdict**: approved or needs-rework with specific guidance
 
 ## Validation / Acceptance Checks
 
@@ -213,37 +267,68 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 - [ ] Portability spot-check: reviewer can remove any remaining project nouns from the chosen rewritten example without changing the guidance
 - [ ] Boundaries are clear; no ambiguity about what is/isn't covered
 - [ ] Local file roles explicitly named in Local references
-- [ ] Evidence: reviewer fills in table with specific findings
+- [ ] Reviewer records specific findings in JSON `blocking_issues` and feedback
+      triage entries
+- [ ] Reviewer handoff output follows the workflow JSON contract
+- [ ] Reviewer input includes Copilot feedback context and triages it through
+      `ADDRESS` / `DISCUSS` / `SKIP`
+- [ ] No stable-library surfaces are included in this topic (`README.md`,
+      `VERSION`, `.github/copilot-instructions.md`, release notes)
+- [ ] Any repo-visible path drift outside listed `Artifact Paths` is treated as
+      a plan violation and routed back before publish
 
 ## Reviewer Handoff
 
 **Fixed report format** (from `plan/agent-handoff-workflow.md` schema):
 
+```json
+{
+  "verdict": "approved|needs-rework",
+  "blocking_issues": [
+    {
+      "issue": "Description of the unmet requirement",
+      "file": "path/to/file.md",
+      "fix": "Concrete change required before re-review"
+    }
+  ],
+  "copilot_feedback_triage": {
+    "ADDRESS": [
+      {
+        "comment": "Text of Copilot comment",
+        "location": "path/to/file.md:line",
+        "why": "Why this feedback should be applied"
+      }
+    ],
+    "DISCUSS": [
+      {
+        "comment": "Text of optional feedback",
+        "optional": true,
+        "why": "Why this is worth discussing but not required"
+      }
+    ],
+    "SKIP": [
+      {
+        "comment": "Text of inapplicable feedback",
+        "why": "Why it should not change the draft"
+      }
+    ]
+  }
+}
 ```
-Skill: python-docstrings
-Verdict: [approved | needs-rework]
-Blocking issues: [none | list specific unmet criteria]
 
-Evidence:
-| Criterion | Finding | Status |
-|-----------|---------|--------|
-| Required core (SKILL.md + reference + examples) | [present/missing] | [ok/fail] |
-| Structure (9 sections + frontmatter) | [complete/incomplete] | [ok/fail] |
-| Examples coverage | [covers semantic-intent derivation, contract-only fallback, private helper tiers, dataclass boundary, error patterns, anti-patterns] | [ok/fail] |
-| Single responsibility | [pure docstring guidance] | [ok/fail] |
-| Portability | [generic, reusable] | [ok/fail] |
-| Boundaries clarity | [explicit, unambiguous] | [ok/fail] |
-| Local references roles | [explicit labels] | [ok/fail] |
+Reviewer output must be a single JSON object with no trailing prose. Keep all
+rationale inside the structured JSON fields so the handoff remains safely
+machine-consumable.
 
-Review notes: [summary of key findings, any polish suggestions]
-```
+## Post-merge / release actions
 
-## Post-Approval Actions (Publisher / Release)
-
-1. Add `python-docstrings` entry to README.md Stable Skills list (after reviewer approval)
-2. Update `.github/copilot-instructions.md` to reflect new skill availability (if instructions mention available skills)
-3. Tag skill in release notes when published
-4. Optional: link from python-naming, python-type-hints-strict in README cross-references
+1. After merge, run the normal post-merge local sync flow for the working branch.
+2. Do **not** update `README.md`, `VERSION`, `.github/copilot-instructions.md`, or
+   release notes in this topic.
+3. No repository release action is required for this topic.
+4. Stable-library publication for `python-docstrings` is deferred to a later
+   publish-focused topic once the skill is proven review-ready.
+5. This topic is terminal at `merged`.
 
 ## Open Questions / Unresolved Items
 
@@ -251,6 +336,9 @@ Review notes: [summary of key findings, any polish suggestions]
 2. **Async docstring patterns**: explicitly deferred; do not add async-specific guidance or examples in this draft
 3. **Deprecation and versioning**: explicitly deferred; future skill if demand arises
 4. **Framework integration expectations**: explicitly deferred; stays focused on pure Python patterns (SQLAlchemy, FastAPI, Pydantic specifics belong in framework-focused skills or extensions)
+5. **Stable-library promotion**: explicitly deferred; if `python-docstrings`
+   later enters the stable library, create a separate publish-focused topic with
+   `Stable library metadata`
 
 ---
 
@@ -269,6 +357,9 @@ Review notes: [summary of key findings, any polish suggestions]
 - **Reference structure (split)**: one reference responsibility implemented as `reference.md` navigation + `references/` topic splits
 - **Inline comments**: rare; docstring-first philosophy
 - **Boundaries**: no naming guidance, no type-hint shape decisions, no model/validator design, no framework specifics
+- **Publication boundary**: this topic does not touch `README.md`, `VERSION`,
+  `.github/copilot-instructions.md`, or release notes; stable-library publish is
+  deferred to a later topic
 
 **Deliverables**:
 - SKILL.md (9 sections): 3 positive + 1 negative concise examples
@@ -288,3 +379,5 @@ Review notes: [summary of key findings, any polish suggestions]
 - All local files have explicit roles in SKILL.md Local references
 - Semantic-intent guidance is executable because it names explicit sources and a contract-only fallback
 - Private method rule is executable because it depends on explicit contract signals, not line-count guesswork
+- The topic plan remains workflow-compatible without declaring stable-library
+  publish or release work
