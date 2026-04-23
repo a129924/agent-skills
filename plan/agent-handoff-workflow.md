@@ -101,18 +101,22 @@ Notes:
 
 ### Git execution view (trigger / input / output)
 
-This table is the compact execution contract for running the git-facing parts of
-the workflow. The detailed phase text below explains the same phases in more
-depth, while `.github/guides/MAIN-AGENT-WORKFLOW.md` turns them into executable
-command patterns and recovery logic.
+This table is the compact execution contract for the workflow phases that gate
+git-visible execution. Some rows are not themselves git-mutating, but they
+still define required trigger / input / output contracts for later git work.
+The detailed phase text below explains the same phases in more depth, while
+`.github/guides/MAIN-AGENT-WORKFLOW.md` turns them into executable command
+patterns and recovery logic.
 
 | Phase | Trigger | Required input | Output / transition | Owner |
 | --- | --- | --- | --- | --- |
 | 1. Plan the topic | New topic accepted for execution | Repo-visible planning intent; target topic name; locked scope once decided | `plan/<topic>/<topic>.plan.md` exists and topic can be marked `planned` | Planning actor / human |
 | 2. Prepare the branch | Valid topic plan exists and execution is starting | Topic plan; branch naming policy; current branch/worktree state | Semantic execution branch is ready for work | Main Agent |
+| 3. Creator implementation | Execution branch is ready and the topic plan is locked for drafting | Topic plan; repo instructions; target output paths | Draft stays within locked scope and reaches `review-ready`, or remains in creator rework | Creator |
+| 4. Reviewer pass | Creator returns a `review-ready` draft | Skill folder; topic plan; Copilot feedback for context | Independent JSON verdict returns `approved` or `needs-rework` | Reviewer |
 | 4.5 Planner contract alignment | Reviewer returned `approved` and required fixes are applied | Latest draft; latest topic plan; locked decisions; artifact paths | Either route back to `creator-in-progress` or move to `publish-in-progress` | Main Agent |
 | 5. Stable library handling | Planner alignment passed and topic may affect stable-library surfaces | Stable library metadata; approved draft; current README / VERSION baseline | Stable-library timing decision is resolved: stage now, defer to release, or skip | Main Agent |
-| 6. Commit, push, and PR | Validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
+| 6. Commit, push, and PR | Pre-commit validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
 | 7-8. PR comment loop | PR is open and checks or comments may require action | PR comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or clean PR ready for merge | Main Agent |
 | 9. Post-merge local sync | Merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state | Local repo is synchronized and topic reaches `merged` | Main Agent |
 | 10. Release | Topic plan declares a release action | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
@@ -127,6 +131,8 @@ Execution boundary:
 - Phase 1 defines the prerequisite execution contract: later phases consume a
   valid topic plan, but they do not define the full authoring methodology for a
   planning-specific tool or skill.
+- This workflow does not define a separate numbered Phase 0; planning is the
+  formal Phase 1 prerequisite in this repository.
 - A future `plan-creator` may satisfy this prerequisite, but this workflow
   remains focused on execution after a valid topic plan exists.
 
@@ -347,7 +353,7 @@ If topic plan lacks this section, the skill is not intended for stable library.
 ### 6. Commit, push, and PR (with Pre-Commit Gate)
 
 Execution contract:
-- Trigger: Phase 5 validation passed and the human approves Stop Point 1.
+- Trigger: Pre-commit validation passed and the human approves Stop Point 1.
 - Input: validated staged changes, execution branch, commit scope, and PR target
   branch.
 - Output: git history advances with the publish commits, remote branch is

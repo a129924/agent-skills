@@ -5,7 +5,7 @@ description: Executable specification for Main Agent orchestration across all 10
 
 # Main Agent Workflow - Executable Specification
 
-**Purpose**: Define how Main Agent (Creator role) autonomously executes all 10 phases of the skill creation workflow based on a valid repo-visible `plan/<topic>/<topic>.plan.md` file.
+**Purpose**: Define how Main Agent (publisher / release actor / orchestrator) autonomously executes all 10 phases of the skill creation workflow based on a valid repo-visible `plan/<topic>/<topic>.plan.md` file.
 
 **Audience**: Main Agent implementation logic, skill executors, workflow testers
 
