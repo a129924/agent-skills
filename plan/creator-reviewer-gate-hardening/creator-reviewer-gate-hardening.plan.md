@@ -78,7 +78,7 @@
   canonical policy owner.
 
 ## Status / allowed transitions
-- **Current status**: `publish-in-progress`
+- **Current status**: `pr-open`
 - **Execution model**: follow the canonical creator → reviewer → publish → merge
   path, but stop at `merged`; no release action is declared for this topic.
 - **Allowed transitions**:
