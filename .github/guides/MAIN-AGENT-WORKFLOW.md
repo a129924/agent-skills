@@ -32,7 +32,8 @@ Main Agent reads `plan/<topic>/<topic>.plan.md` and orchestrates 10 phases:
 ```
 Phase 1-3: Planner → Creator (branch + initial SKILL draft)
 Phase 4:   Copilot + Reviewer (two-layer review)
-Phase 5-6: Validate & stage (pre-commit checks)
+Phase 4.5: Planner contract alignment checkpoint
+Phase 5-6: Stable-library handling + validate/stage (pre-commit checks)
            [STOP 1: User confirm before commit]
 Phase 6:   Commit & push, open PR
 Phase 7-8: PR comment loop (max 3 iterations)
@@ -47,9 +48,11 @@ Main Agent as the owner of the surrounding publish, post-merge, and release phas
 
 **Key Decisions** (from workflow validation):
 - ✅ Two-layer review: Copilot (code quality) + Reviewer (design quality)
+- ✅ Planner contract alignment: independent checkpoint after reviewer approval
 - ✅ Pre-commit stop points (avoid fake state in git history)
 - ✅ PR loop max 3 iterations (prevent infinite loops)
 - ✅ JSON-formatted SubAgent reports (structured, not fragile text parsing)
+- ✅ Stable-library timing declared in topic plan (not guessed by Main Agent)
 - ✅ Ask-user-only error handling (maximum transparency)
 
 ---
@@ -65,11 +68,14 @@ review-ready
   ↓ (Phase 4: two-layer review, auto-loop if needs-rework)
   ├─ [If needs-rework] → back to Phase 4
   └─ [If approved]
-       ↓
-       publish-in-progress (Phase 5-6, no commit yet)
-         ↓ [STOP 1: User "Ready to push?"]
-           ├─ [NO] → back to Phase 5
-           └─ [YES] → commit + push, open PR
+       ↓ (Phase 4.5: planner contract alignment)
+       ├─ [If drift found] → creator-in-progress
+       └─ [If aligned]
+            ↓
+            publish-in-progress (Phase 5-6, no commit yet)
+          ↓ [STOP 1: User "Ready to push?"]
+            ├─ [NO] → back to Phase 5
+            └─ [YES] → commit + push, open PR
                ↓
                pr-open
                  ↓ (Phase 7-8: PR loop, max 3 iterations)
@@ -102,7 +108,8 @@ Ownership note:
 3. Extract metadata:
    - `topic_name`, `skill_name`
    - `locked_decisions` → which skills/references to create
-   - `stable_library_metadata` → README/VERSION bump requirements
+   - `artifact_paths` → executable output locations
+   - `stable_library_metadata` → README/VERSION rules + timing
 
 **Output**: Parsed plan data; Status check passes
 
@@ -115,9 +122,11 @@ Ownership note:
 **Input**: `topic_name`, `skill_name`
 
 **Task**:
-1. Use `git-branch-naming` skill: `feature/<username>/<skill-name>`
+1. Use `git-branch-naming` skill to choose a semantic development branch:
+   `<type>/<username>/<short-description>`
 2. Create or verify branch exists
 3. Ensure workspace clean
+4. Treat the branch as semantic work naming, not a hard-coded `feature/...` shape
 
 **Output**: Branch ready; Status: `planned` (no change yet)
 
@@ -173,10 +182,11 @@ Copilot comments:
    - Plan file: plan/<topic>/<topic>.plan.md
    - Copilot comments: [list above]
    
-   評審內容：
-   1. 符合 plan 的 Implementation steps？
-   2. 例子和參考資料足夠深入？
-   3. Copilot 的評論是否都妥當？ (address/discuss/skip)
+    評審內容：
+    1. 符合 plan 的 Implementation steps？
+    2. 例子和參考資料足夠深入？
+    3. Copilot 的評論是否都妥當？ (address/discuss/skip)
+    4. `Artifact paths` 是否有效且與實際輸出位置一致？
    
    回傳 JSON 格式。
    ```
@@ -222,12 +232,30 @@ Copilot comments:
   
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
   ```
-- Status → `review-ready`
-- Continue to Phase 5
+- Continue to Phase 4.5
 
 **Error Handling**:
 - Reviewer crashed → use checkpoint to retry
 - Network timeout → retry 3x with backoff
+
+---
+
+### Phase 4.5: Planner Contract Alignment
+
+**Input**: Reviewer-approved draft plus latest topic plan
+
+**Owner**: Main Agent
+
+**Task**:
+1. Verify locked decisions still match the current draft
+2. Check contract / schema / record-shape semantics against the topic plan
+3. Treat plan-level drift as a routing failure, not as a style-only comment
+
+**Output**:
+- If aligned → continue to Phase 5-6; Status → `publish-in-progress`
+- If drift found → Status → `creator-in-progress`
+
+**Error**: If planner alignment cannot be completed → STOP, resolve plan ambiguity first
 
 ---
 
@@ -241,7 +269,7 @@ Copilot comments:
 5. Run lint (if applicable)
 
 **Phase 6: Staging**
-1. If `Stable library metadata` in plan:
+1. If `Stable library metadata` in plan with `publish-in-progress` timing:
    - Prepare README.md update
    - Prepare VERSION bump
    - Stage both (do NOT commit)
@@ -267,8 +295,8 @@ Validation: ✅ PASSED
 Staged changes:
   - .github/skills/<skill-name>/SKILL.md
   - .github/skills/<skill-name>/examples.md
-  - README.md (new row added)
-  - VERSION (0.11.0 → 0.12.0)
+  - README.md (new row added, if publish timing)
+  - VERSION (0.11.0 → 0.12.0, if publish timing)
 
 Ready to commit + push + open PR?
 [Y] Yes, proceed
@@ -371,11 +399,14 @@ Ready to merge?
 
 **Task**:
 1. Detect merge (poll GitHub or git fetch)
-2. Main Agent invokes `git-post-merge-workflow` as a normal skill step
+2. Inspect worktree, untracked files, and preserved local state before sync
+3. Distinguish upstream history change from local-only state
+4. Capture any local state that still needs preservation
+5. Main Agent invokes `git-post-merge-workflow` as a normal skill step
    (not an independent reviewer-style SubAgent handoff):
    - Sync default branch
-   - Clean up feature branch
-3. Status → `merged`
+   - Clean up working branch
+6. Status → `merged`
 
 **Error**: If git-post-merge-workflow fails → log; don't block release
 
@@ -390,7 +421,11 @@ Ready to merge?
    - If NO → terminal at `merged` ✅
    - If YES → proceed
 
-2. Main Agent invokes `git-release-management` as a normal release skill step
+2. If `Stable library metadata` schedules README / VERSION at `release` timing:
+   - Apply README.md update now
+   - Apply VERSION bump now
+
+3. Main Agent invokes `git-release-management` as a normal release skill step
    (not a separate operator-owned phase) and applies the 7 gates:
    1. Workspace clean
    2. Versions sync
@@ -400,14 +435,14 @@ Ready to merge?
    6. Tag unique
    7. Documentation updated
 
-3. If all gates pass:
-   - Create tag: `v<new-version>`
-   - Push tag
-   - Status → `released` ✅
+4. If all gates pass:
+    - Create tag: `v<new-version>`
+    - Push tag
+    - Status → `released` ✅
 
-4. If gates fail:
-   - Display failures
-   - Ask: "Fix and retry?" or "Manual later?"
+5. If gates fail:
+    - Display failures
+    - Ask: "Fix and retry?" or "Manual later?"
 
 ---
 
@@ -418,7 +453,8 @@ Ready to merge?
 **Checkpoints** (in memory or local file):
 ```
 PHASE_3_DRAFT_DONE: SKILL files exist
-PHASE_4C_APPROVED: Reviewer approved (status=review-ready)
+PHASE_4C_APPROVED: Reviewer approved
+PHASE_4_5_PLANNER_ALIGNED: Planner checkpoint passed
 PHASE_5_VALIDATION_DONE: All checks pass
 PHASE_6_PR_OPEN: Push + PR created (status=pr-open)
 PHASE_8_APPROVED: No blocking comments
@@ -525,7 +561,7 @@ Ready to push and open PR on GitHub?
 ```
 ✅ PR READY FOR MERGE
 
-Branch: feature/<username>/<skill-name>
+Branch: <type>/<username>/<short-description>
 PR: #<number> (<link>)
 Status: All checks ✅ green
 Comments: All addressed ✅

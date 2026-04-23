@@ -60,6 +60,11 @@ A skill is `approved` only if all of these are true:
 - reviewer returns `approved` or `needs-rework`
 - reviewer does not produce the final implementation directly
 
+## Topic plan alignment
+- locked `Artifact paths` are valid and align with the actual output locations
+- repo-visible artifacts are not mixed with session-only or local-only artifacts
+- path drift is sent back for plan repair instead of being silently tolerated
+
 ## Reviewer independence
 - Reviewer is a **separate agent** (SubAgent in VS Code; `/fleet` in CLI)
   - Must not inherit creator's session context or assumptions
@@ -78,6 +83,7 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - README row positioned correctly (alphabetical order or policy-defined position)
 - VERSION bump direction is specified and justified
 - VERSION direction aligns with commit semantics (MINOR for new skill, PATCH for correction)
+- timing for README / VERSION actions is declared explicitly
 
 ## Reject signals
 - multiple unrelated trigger families
