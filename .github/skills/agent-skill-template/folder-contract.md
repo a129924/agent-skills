@@ -33,7 +33,7 @@ This document mirrors the canonical repository policy in
   - code refactoring
   - branching or multi-path decisions
   - script or external-tool usage
-- higher-risk outputs
+  - higher-risk outputs
 - reviewer may still require `examples.md` when the concise examples are not enough
 
 ## Risk-based validation
