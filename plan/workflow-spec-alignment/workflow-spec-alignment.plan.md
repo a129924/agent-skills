@@ -45,7 +45,7 @@
   repo-visible topic plan exists.
 
 ## Status / allowed transitions
-- Current status: `publish-in-progress`
+- Current status: `pr-open`
 - Allowed transitions:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
