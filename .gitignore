@@ -1,3 +1,6 @@
 /other-project-examples
 /.vscode/
 .DS_Store
+# sense-env runtime outputs
+.github/env-manifest.json
+.github/env-manifest.snapshot.json
