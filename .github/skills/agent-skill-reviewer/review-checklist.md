@@ -42,6 +42,18 @@ A skill is `approved` only if all of these are true:
 - `examples.md` exists when the concise `SKILL.md` examples are not enough
 - detailed examples match the skill's main paths and anti-patterns
 
+## Risk-based validation fit
+- validation weight matches the skill's risk, branching, external-tool usage, and
+  downstream impact
+- lightweight skills are not burdened with heavyweight validation that does not
+  improve real misuse prevention
+- higher-risk or gatekeeping skills include stronger validation signals or
+  equivalent local guidance
+- stronger validation may appear as explicit verification guidance, red flags,
+  rationalizations, a checklist, or another clearly declared local mechanism
+- when ambiguity would materially change the output, the draft tells the agent to
+  stop and ask instead of silently guessing
+
 ## Reference depth
 - `reference.md` stays focused when one file is enough
 - `references/` supplements split reference detail and does not replace the required companion-file rule
@@ -64,6 +76,10 @@ A skill is `approved` only if all of these are true:
 - locked `Artifact paths` are valid and align with the actual output locations
 - repo-visible artifacts are not mixed with session-only or local-only artifacts
 - path drift is sent back for plan repair instead of being silently tolerated
+- when a topic plan locks creator/reviewer-first rollout, downstream regular skills
+  must remain untouched in that topic
+- scope drift from a creator/reviewer-first topic into downstream regular-skill
+  rollout returns `needs-rework`
 
 ## Reviewer independence
 - Reviewer is a **separate agent** (SubAgent in VS Code; `/fleet` in CLI)
@@ -93,6 +109,9 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - missing required core files
 - missing concise positive or negative examples in `SKILL.md`
 - missing `examples.md` for a high-complexity skill
+- missing stronger validation for a higher-risk or gatekeeping skill
+- scope drift into downstream regular-skill rollout when the topic plan locks a
+  creator/reviewer-first phase
 - oversized multi-topic `reference.md` left unsplit
 - split reference files missing role labels in `Local references`
 - optional additions with no declared role

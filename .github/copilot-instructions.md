@@ -99,6 +99,21 @@ In `Local references`, name local files or folders and state what each one is fo
 - Reviewer may still require `examples.md` when the `SKILL.md` examples are not
   enough.
 
+## Risk-based validation policy
+- Validation weight should match the skill's risk, branching, external-tool usage,
+  and downstream impact.
+- Lightweight skills may stay concise when `Trigger / When to use`,
+  `Boundaries`, and brief positive / negative examples already prevent routine misuse.
+- Medium-complexity skills should make their main decision path explicit and may
+  add brief verification guidance when needed.
+- Higher-risk or gatekeeping skills should include stronger validation signals or
+  equivalent local guidance, such as explicit verification, red flags,
+  rationalizations, or a checklist.
+- Stronger validation is optional-by-need, not a new mandatory top-level shape for
+  every skill.
+- Reviewer may require stronger validation when the skill controls review,
+  release, external tools, or other higher-impact flows.
+
 ## Quality bar
 A skill is only complete when it is:
 - single responsibility

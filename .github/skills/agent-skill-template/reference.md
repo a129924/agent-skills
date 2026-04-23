@@ -16,6 +16,19 @@ A stable skill in this repository usually has:
 - higher-complexity skills should include `examples.md`
 - reviewer may still require `examples.md` when the brief examples are not enough
 
+## Risk-based validation rule
+
+- validation weight should match the skill's risk, branching, external-tool usage,
+  and downstream impact
+- lightweight skills may stay concise when trigger, boundaries, and brief examples
+  already prevent routine misuse
+- medium-complexity skills may add brief verification guidance when the main
+  decision path would otherwise be too easy to misuse
+- higher-risk or gatekeeping skills should include stronger validation signals or
+  equivalent local guidance, such as explicit verification, red flags,
+  rationalizations, or a checklist
+- stronger validation is optional-by-need, not mandatory for every skill
+
 ## Reference split rule
 
 - keep `reference.md` focused when one file is enough

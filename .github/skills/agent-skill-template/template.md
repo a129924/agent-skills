@@ -7,8 +7,8 @@ Use this as the default starting point for a `review-ready` skill.
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
-├── examples.md             # required for high-complexity skills
-├── checklist.md           # optional
+├── examples.md             # required for high-complexity or clearly higher-risk skills
+├── checklist.md            # optional, useful for repeatable higher-risk validation
 ├── run-task.sh            # optional
 └── assets/                # optional
 ```
@@ -20,6 +20,7 @@ Use this as the default starting point for a `review-ready` skill.
   more than 3 logical topics.
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
+- Add stronger validation guidance only when the skill's risk warrants it.
 
 ## `SKILL.md` skeleton
 
@@ -54,6 +55,15 @@ Do not use this skill when:
 # Outputs
 - ...
 
+# Verification
+- ...                       <!-- optional for higher-risk or easier-to-misuse skills -->
+
+# Red Flags
+- ...                       <!-- optional for higher-risk skills -->
+
+# Common Rationalizations
+- ...                       <!-- optional for higher-risk skills -->
+
 # Boundaries
 - ...
 
@@ -75,3 +85,5 @@ Do not use this skill when:
 - Optional files or folders must declare their role in `Local references`.
 - Add `examples.md` when the skill is high complexity or when the concise
   examples in `SKILL.md` are not enough.
+- Add stronger validation signals only when risk, branching, tooling, or
+  downstream impact justify them.
