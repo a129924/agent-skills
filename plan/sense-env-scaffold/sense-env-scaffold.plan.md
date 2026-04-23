@@ -128,25 +128,25 @@ re-deciding workflow, CLI semantics, manifest shape, or acceptance behavior.
   - `.github/env-manifest.snapshot.json`
 
 ## Execution checklist
-- [ ] Read the three read-first documents before editing.
-- [ ] Re-confirm that this task is executing under the Human-approved prototype
+- [x] Read the three read-first documents before editing.
+- [x] Re-confirm that this task is executing under the Human-approved prototype
       exception for `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
-- [ ] Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
-- [ ] Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
-- [ ] Create `.github/skills/sense-env-scaffold/scripts/` and `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
-- [ ] Implement `argparse` with all four required flags.
-- [ ] Implement repo-root detection and document it in the CLI reference.
-- [ ] Implement acceptance-mode contract lookup in the agreed order.
-- [ ] Implement fenced Markdown block extraction for `[sensing-assertions]`.
-- [ ] Implement the narrow supported assertion subset only.
-- [ ] Implement stable top-level JSON assembly with the five fixed modules.
-- [ ] Implement exit-code routing for `0 / 10 / 20 / 30`.
-- [ ] Keep imports standard-library only.
-- [ ] Ensure discovery mode stays harmless when optional tools are absent.
-- [ ] Ensure acceptance failures emit JSON and exit `20`.
-- [ ] Ensure contract-input failures emit JSON and exit `30`.
-- [ ] Ensure `--snapshot` behavior matches the locked CLI contract.
-- [ ] Confirm snapshot filtering removes machine-local and secret-shaped data.
+- [x] Create `.github/skills/sense-env-scaffold/references/env-manifest-schema.md`.
+- [x] Create `.github/skills/sense-env-scaffold/references/sense-env-cli-contract.md`.
+- [x] Create `.github/skills/sense-env-scaffold/scripts/` and `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
+- [x] Implement `argparse` with all four required flags.
+- [x] Implement repo-root detection and document it in the CLI reference.
+- [x] Implement acceptance-mode contract lookup in the agreed order.
+- [x] Implement fenced Markdown block extraction for `[sensing-assertions]`.
+- [x] Implement the narrow supported assertion subset only.
+- [x] Implement stable top-level JSON assembly with the five fixed modules.
+- [x] Implement exit-code routing for `0 / 10 / 20 / 30`.
+- [x] Keep imports standard-library only.
+- [x] Ensure discovery mode stays harmless when optional tools are absent.
+- [x] Ensure acceptance failures emit JSON and exit `20`.
+- [x] Ensure contract-input failures emit JSON and exit `30`.
+- [x] Ensure `--snapshot` behavior matches the locked CLI contract.
+- [x] Confirm snapshot filtering removes machine-local and secret-shaped data.
 
 ## Implementation steps
 1. Read the repo policy and the existing pipeline reference so the implementation
