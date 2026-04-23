@@ -5,7 +5,7 @@ description: Executable specification for Main Agent orchestration across all 10
 
 # Main Agent Workflow - Executable Specification
 
-**Purpose**: Define how Main Agent (Creator role) autonomously executes all 10 phases of the skill creation workflow based on a `plan/<topic>/<topic>.plan.md` file.
+**Purpose**: Define how Main Agent (Creator role) autonomously executes all 10 phases of the skill creation workflow based on a valid repo-visible `plan/<topic>/<topic>.plan.md` file.
 
 **Audience**: Main Agent implementation logic, skill executors, workflow testers
 
@@ -27,7 +27,8 @@ description: Executable specification for Main Agent orchestration across all 10
 
 ## Overview
 
-Main Agent reads `plan/<topic>/<topic>.plan.md` and orchestrates 10 phases:
+Main Agent reads a valid repo-visible `plan/<topic>/<topic>.plan.md` and
+orchestrates 10 phases:
 
 ```
 Phase 1-3: Planner → Creator (branch + initial SKILL draft)
@@ -45,6 +46,15 @@ Phase 9-10: Post-merge + release
 Main Agent remains the orchestrating actor through Phase 10. Human actions at the
 two stop points authorize or complete specific transitions, but they do not replace
 Main Agent as the owner of the surrounding publish, post-merge, and release phases.
+
+Boundary note:
+- `plan/agent-handoff-workflow.md` owns the canonical phase semantics and the
+  trigger / input / output contract.
+- This guide translates that contract into executable sequencing, command
+  patterns, retries, checkpoints, and environment-specific notes.
+- The guide assumes a valid repo-visible topic plan already exists; it does not
+  define the full authoring methodology for a future planning-specific skill
+  such as `plan-creator`.
 
 **Key Decisions** (from workflow validation):
 - ✅ Two-layer review: Copilot (code quality) + Reviewer (design quality)
@@ -100,7 +110,7 @@ Ownership note:
 
 ### Phase 1: Read Plan & Validate
 
-**Input**: `plan/<topic>/<topic>.plan.md`
+**Input**: valid repo-visible `plan/<topic>/<topic>.plan.md`
 
 **Task**:
 1. Read the topic plan file
@@ -115,11 +125,16 @@ Ownership note:
 
 **Error**: If plan missing/malformed → STOP, ask user to create/fix
 
+**Boundary**:
+- The plan may be authored by a human planning actor today or by a future
+  planning-specific tool, but this guide starts once that repo-visible plan
+  already exists.
+
 ---
 
 ### Phase 2: Prepare Branch
 
-**Input**: `topic_name`, `skill_name`
+**Input**: `topic_name`, `skill_name`, current branch/worktree state, branch policy
 
 **Task**:
 1. Use `git-branch-naming` skill to choose a semantic development branch:
@@ -128,7 +143,7 @@ Ownership note:
 3. Ensure workspace clean
 4. Treat the branch as semantic work naming, not a hard-coded `feature/...` shape
 
-**Output**: Branch ready; Status: `planned` (no change yet)
+**Output**: Semantic execution branch ready; Status: `planned` (no change yet)
 
 ---
 

@@ -61,6 +61,15 @@ Additional contract rules:
   the intended output location, fix the topic plan before continuing execution.
 - When stable-library or release work applies, the topic plan must declare the
   timing of README / VERSION actions instead of leaving Main Agent to infer it.
+- A valid repo-visible topic plan is the execution prerequisite for the rest of
+  this workflow; later phases must not infer missing planning intent from chat
+  history alone.
+- The planning actor may be a human today and may later be a dedicated planning
+  tool or skill such as a future `plan-creator`, but the authoring method for
+  that planner is outside the scope of this execution workflow.
+- If execution reaches Phase 2 or later without a valid topic plan, stop and
+  repair the plan instead of improvising downstream git, review, or release
+  decisions.
 
 ## Status model
 | Status | Meaning | Owner | Allowed next |
@@ -90,10 +99,36 @@ Notes:
 
 ## Workflow phases
 
+### Git execution view (trigger / input / output)
+
+This table is the compact execution contract for running the git-facing parts of
+the workflow. The detailed phase text below explains the same phases in more
+depth, while `.github/guides/MAIN-AGENT-WORKFLOW.md` turns them into executable
+command patterns and recovery logic.
+
+| Phase | Trigger | Required input | Output / transition | Owner |
+| --- | --- | --- | --- | --- |
+| 1. Plan the topic | New topic accepted for execution | Repo-visible planning intent; target topic name; locked scope once decided | `plan/<topic>/<topic>.plan.md` exists and topic can be marked `planned` | Planning actor / human |
+| 2. Prepare the branch | Valid topic plan exists and execution is starting | Topic plan; branch naming policy; current branch/worktree state | Semantic execution branch is ready for work | Main Agent |
+| 4.5 Planner contract alignment | Reviewer returned `approved` and required fixes are applied | Latest draft; latest topic plan; locked decisions; artifact paths | Either route back to `creator-in-progress` or move to `publish-in-progress` | Main Agent |
+| 5. Stable library handling | Planner alignment passed and topic may affect stable-library surfaces | Stable library metadata; approved draft; current README / VERSION baseline | Stable-library timing decision is resolved: stage now, defer to release, or skip | Main Agent |
+| 6. Commit, push, and PR | Validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
+| 7-8. PR comment loop | PR is open and checks or comments may require action | PR comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or clean PR ready for merge | Main Agent |
+| 9. Post-merge local sync | Merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state | Local repo is synchronized and topic reaches `merged` | Main Agent |
+| 10. Release | Topic plan declares a release action | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
+
 ### 1. Plan the topic
-1. Capture the topic in `plan/<topic>/<topic>.plan.md`.
+1. Planning actor captures the topic in `plan/<topic>/<topic>.plan.md`.
 2. Lock scope, decisions, and boundaries before execution.
-3. Mark the topic as `planned`.
+3. Keep the plan repo-visible before any downstream git / review work starts.
+4. Mark the topic as `planned`.
+
+Execution boundary:
+- Phase 1 defines the prerequisite execution contract: later phases consume a
+  valid topic plan, but they do not define the full authoring methodology for a
+  planning-specific tool or skill.
+- A future `plan-creator` may satisfy this prerequisite, but this workflow
+  remains focused on execution after a valid topic plan exists.
 
 ### 2. Prepare the branch
 1. Create or repair the execution branch using the repository branch policy.
@@ -280,6 +315,15 @@ Notes:
 
 Only applies when the skill is entering the stable library (per topic plan).
 
+Execution contract:
+- Trigger: planner contract alignment passed and the topic may update stable
+  library surfaces.
+- Input: approved draft, topic plan `Stable library metadata`, and current
+  README / VERSION baseline.
+- Output: a resolved timing decision for README / VERSION changes: stage now in
+  `publish-in-progress`, defer to Phase 10 release, or skip because the topic is
+  not entering the stable library.
+
 1. Read the topic plan's `Stable library metadata` section for:
    - README row format (exact table entry to add)
    - VERSION bump direction (MAJOR | MINOR | PATCH)
@@ -301,6 +345,13 @@ Only applies when the skill is entering the stable library (per topic plan).
 If topic plan lacks this section, the skill is not intended for stable library.
 
 ### 6. Commit, push, and PR (with Pre-Commit Gate)
+
+Execution contract:
+- Trigger: Phase 5 validation passed and the human approves Stop Point 1.
+- Input: validated staged changes, execution branch, commit scope, and PR target
+  branch.
+- Output: git history advances with the publish commits, remote branch is
+  updated, PR is opened, and topic status moves to `pr-open`.
 
 #### Staging Phase (Phase 5-6: Pre-Commit Checks)
 
@@ -385,6 +436,14 @@ Ready to commit + push + open PR on GitHub?
 ### 7. Creator patches on PR with Termination Logic (Phase 7-8: MAX 3 ITERATIONS)
 
 After PR is open, comments may arrive (Copilot reviewer, CI checks, or human review).
+
+Execution contract:
+- Trigger: topic status is `pr-open` and new comments or failed checks require
+  action.
+- Input: latest PR comments, current check state, direct-apply rules, and the
+  reroute rule for reviewer-required changes.
+- Output: either a new patch commit on the same PR, a route back to Phase 4 for
+  reviewer re-check, or a clean PR that is ready for merge.
 
 #### Direct-apply (no reviewer loop needed)
 Creator may directly commit fixes for:
@@ -487,6 +546,13 @@ After the merge is confirmed, Main Agent continues the workflow and runs
 branches and clean up. This is not a new reviewer-style independent SubAgent
 handoff.
 
+Execution contract:
+- Trigger: merge is confirmed on GitHub.
+- Input: merged PR state, local worktree state, untracked files, and any local
+  state that still needs preservation.
+- Output: local repository is safely synchronized, branch cleanup is complete,
+  and topic status reaches `merged`.
+
 Required guardrails and sequence:
 1. Inspect the current worktree, including untracked files and any preserved local
    state, before syncing.
@@ -497,6 +563,13 @@ Required guardrails and sequence:
 4. Only then run the normal post-merge cleanup / sync actions.
 
 ### 10. Release (if applicable)
+
+Execution contract:
+- Trigger: the topic plan declares a release action after merge.
+- Input: release timing instructions, stable-library metadata when deferred to
+  release timing, and release-readiness checks.
+- Output: annotated tag is created and pushed with topic status `released`, or
+  the topic remains terminal at `merged` when no release action applies.
 
 If topic plan specified a release action:
 1. Read the topic plan's release timing instructions.
@@ -585,6 +658,13 @@ When this skill is approved, it enters the stable library. Specify:
 For detailed Main Agent implementation logic, including phase transitions, checkpoint-based resumability, error handling patterns, and SubAgent communication formats, see:
 
 **`.github/guides/MAIN-AGENT-WORKFLOW.md`** (NEW in v2.0)
+
+Responsibility split:
+- `plan/agent-handoff-workflow.md` owns the canonical phase semantics,
+  trigger/input/output contract, role boundaries, and stop-point meaning.
+- `.github/guides/MAIN-AGENT-WORKFLOW.md` owns executable orchestration detail:
+  command patterns, retries, checkpoints, and environment-specific execution
+  notes.
 
 This guide covers:
 - All 10 phases with executable logic
