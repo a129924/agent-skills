@@ -36,6 +36,18 @@ This document mirrors the canonical repository policy in
   - higher-risk outputs
 - reviewer may still require `examples.md` when the concise examples are not enough
 
+## Risk-based validation
+- validation weight should match the skill's risk, branching, external-tool usage,
+  and downstream impact
+- lightweight skills may stay concise when trigger, boundaries, and brief examples
+  already prevent routine misuse
+- medium-complexity skills may need clearer process or brief verification guidance
+- higher-risk or gatekeeping skills should include stronger validation signals or
+  equivalent local guidance, such as explicit verification, red flags,
+  rationalizations, or a checklist
+- do not force heavyweight validation onto simple low-risk skills without a clear
+  reason
+
 ## Reference policy
 - keep `reference.md` focused when one file is enough
 - `references/` is a split-reference supplement, not by itself a replacement for

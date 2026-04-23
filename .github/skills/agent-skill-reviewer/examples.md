@@ -1,16 +1,34 @@
 # Reviewer examples
 
-## Approved example
+## Approved example: lightweight skill stays lightweight
+
+A folder with:
+- `SKILL.md`
+- `reference.md`
+- one clear trigger family
+- concise positive and negative examples in `SKILL.md`
+- a narrow output pattern
+- no unnecessary heavyweight validation copied from a release or reviewer skill
+
+Typical verdict:
+- approved
+
+## Approved example: higher-risk skill has stronger guardrails
 
 A folder with:
 - `SKILL.md`
 - `examples.md`
-- one clear trigger family
+- `checklist.md`
+- a gatekeeping or higher-risk responsibility
 - concise positive and negative examples in `SKILL.md`
-- a narrow output pattern
+- explicit verification or equivalent misuse-prevention guidance
 
 Typical verdict:
 - approved
+
+Typical reasons:
+- validation weight matches downstream impact
+- reviewer can see how ambiguity and misuse are handled
 
 ## Needs-rework example
 
@@ -24,6 +42,20 @@ Typical reasons:
 - more than one responsibility
 - trigger is too broad
 - missing required example depth
+
+## Needs-rework example: higher-risk skill with weak validation
+
+A folder for release or reviewer gating that has only a bare `SKILL.md`, no
+stronger misuse-prevention guidance, and no local material that explains how to
+verify or safely route ambiguous cases.
+
+Typical verdict:
+- needs-rework
+
+Typical reasons:
+- validation weight is too weak for the risk
+- higher-risk behavior is easy to misuse
+- reviewer cannot see enough evidence that the gate is safe
 
 ## Needs-rework example: oversized reference file
 

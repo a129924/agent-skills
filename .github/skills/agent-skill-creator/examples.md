@@ -47,7 +47,42 @@ Why this needs `examples.md`:
 - brief examples in `SKILL.md` are not enough
 - scripts and branching paths need detailed positive and negative cases
 
-## Example 4: split oversized reference material
+## Example 4: use heavier validation only when risk warrants it
+
+Goal:
+- draft a release-gating skill that can block or defer repository-visible actions
+
+Result:
+```text
+.github/skills/release-gate-checker/
+├── SKILL.md
+├── examples.md
+└── checklist.md
+```
+
+Why this heavier shape passes:
+- the skill is a gatekeeper with higher downstream impact
+- the draft can justify explicit verification or checklist guidance
+- the extra validation is proportionate to the risk
+
+## Example 5: keep a lightweight skill lightweight
+
+Goal:
+- draft a naming-convention skill with one clear trigger family
+
+Result:
+```text
+.github/skills/simple-naming-rule/
+├── SKILL.md
+└── reference.md
+```
+
+Why this stays lightweight:
+- the main misuse prevention is already covered by trigger, boundaries, and examples
+- adding release-grade checklists or rationalization tables would be unnecessary
+- the creator keeps validation proportional instead of copying a heavier pattern
+
+## Example 6: split oversized reference material
 
 Goal:
 - draft a skill with several distinct rule clusters and edge-case notes
