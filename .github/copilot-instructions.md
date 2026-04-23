@@ -1,5 +1,9 @@
 # agent-skills repository instructions
 
+## Agent Preferences
+
+- **Language**: Respond in Traditional Chinese (繁體中文) by default.
+
 This repository is an Agent Skills workbench, not an application codebase or a
 Python package.
 

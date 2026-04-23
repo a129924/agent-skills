@@ -1,6 +1,13 @@
 /other-project-examples
 /.vscode/
 .DS_Store
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+
 # sense-env runtime outputs
 .github/env-manifest.json
 .github/env-manifest.snapshot.json
+
