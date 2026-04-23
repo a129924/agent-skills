@@ -19,6 +19,8 @@ in different contexts.
   conversation state.
 - Topic execution should start from `plan/<topic>/<topic>.plan.md`.
 - Stable-library updates happen only after reviewer approval.
+- Topic plans that trigger stable-library or release work must declare when those
+  actions occur.
 - The workflow should stay reusable and independent of one exact UI or launch
   command.
 
@@ -53,6 +55,13 @@ Every topic handoff plan must include these fixed sections:
 - `Post-merge / release actions`
 - `Open questions / unresolved items`
 
+Additional contract rules:
+- `Artifact paths` is an executable contract, not an informational appendix.
+- If a listed artifact path is invalid, contradicts repo policy, or drifts from
+  the intended output location, fix the topic plan before continuing execution.
+- When stable-library or release work applies, the topic plan must declare the
+  timing of README / VERSION actions instead of leaving Main Agent to infer it.
+
 ## Status model
 | Status | Meaning | Owner | Allowed next |
 | --- | --- | --- | --- |
@@ -61,7 +70,7 @@ Every topic handoff plan must include these fixed sections:
 | `review-ready` | Creator finished the latest draft and hands it off | Creator | `reviewer-in-progress` |
 | `reviewer-in-progress` | Reviewer is evaluating the latest draft | Reviewer | `approved`, `needs-rework` |
 | `needs-rework` | Reviewer found blocking issues and returned the work | Reviewer | `creator-in-progress` |
-| `approved` | Reviewer accepted the draft | Reviewer | `publish-in-progress` |
+| `approved` | Reviewer accepted the draft and handed it to post-review routing | Reviewer -> Main Agent | `creator-in-progress`, `publish-in-progress` |
 | `publish-in-progress` | Approved work is being committed, pushed, and prepared for PR / stable-surface updates | Main Agent (publisher / release actor) | `pr-open`, `merged` |
 | `pr-open` | PR is open and comment triage is active | Main Agent (publisher / release actor) | `needs-rework`, `merged` |
 | `merged` | Changes are merged; local sync and optional release follow-up remain | Main Agent (publisher / release actor) | `released`, terminal |
@@ -71,6 +80,10 @@ Notes:
 - `merged` is terminal for changes that do not require a release action.
 - `released` is required when a merge also performs a repository release step.
 - Reviewer comments on an open PR may send the work back to `needs-rework`.
+- `approved` means reviewer acceptance passed, but planner contract alignment may
+  still route the topic back to `creator-in-progress` before publish.
+- Reviewer ownership ends when it issues `approved`; Main Agent owns the
+  Phase 4.5 routing decision that follows.
 - Human interaction still exists at explicit stop points (for example, manual merge on
   GitHub), but those stop points do not transfer overall Phase 5-10 ownership away
   from Main Agent.
@@ -137,6 +150,8 @@ This phase now includes **two complementary review layers**:
   - Topic plan: `plan/<topic>/<topic>.plan.md`
   - Copilot feedback (for context)
 - Produces: JSON verdict with detailed triage
+- Confirms that actual draft locations still match the locked `Artifact paths`
+  from the topic plan
 
 #### In VS Code
 - Open a SubAgent directly (within the same Copilot context)
@@ -153,10 +168,11 @@ This phase now includes **two complementary review layers**:
     - Skill folder: .github/skills/<skill-name>/
     - Topic plan: plan/<topic>/<topic>.plan.md
   
-  評審內容：
-    1. 符合 plan 的 Implementation steps？
-    2. 例子和參考資料足夠深入？
-    3. Copilot 的評論是否都妥當？(address/discuss/skip)
+   評審內容：
+     1. 符合 plan 的 Implementation steps？
+     2. 例子和參考資料足夠深入？
+     3. Copilot 的評論是否都妥當？(address/discuss/skip)
+     4. `Artifact paths` 是否有效且與實際輸出位置一致？
   
   回傳 JSON：
   {
@@ -218,7 +234,8 @@ This phase now includes **two complementary review layers**:
    - Creator optionally applies `DISCUSS` feedback
    - Creator skips `SKIP` feedback
    - Commit fixes with appropriate message
-   - Move topic to `publish-in-progress`
+   - Continue to planner contract alignment before moving topic to
+     `publish-in-progress`
 
 **Note**: Reviewer is not creator. Reviewer does not approve own work.
 
@@ -230,7 +247,36 @@ See `.github/guides/MAIN-AGENT-WORKFLOW.md` → Section "Phase 4: Two-Layer Revi
 - How to route feedback back to creator
 - Retry logic and error handling
 
-### 5. Stable library update (if applicable)
+### 4.5 Planner contract alignment checkpoint
+
+This checkpoint runs after reviewer approval and after required reviewer feedback
+is applied, but before publish work begins.
+
+Owner:
+- Main Agent runs this checkpoint and owns the routing decision that follows
+  reviewer approval.
+
+Purpose:
+- verify that locked decisions in the topic plan still match the current draft
+- verify that contract / schema / record-shape semantics did not drift during the
+  creator + reviewer loop
+- catch planner-level contract mismatches that are not ordinary code-quality or
+  formatting feedback
+
+Routing:
+1. If planner contract alignment fails:
+   - route the topic back to `creator-in-progress`
+   - update the topic plan status accordingly
+   - fix the drift before re-entering reviewer / planner gates per the status model
+2. If planner contract alignment passes:
+   - move topic to `publish-in-progress`
+
+Notes:
+- This is an independent checkpoint, not a rewrite of reviewer ownership.
+- It exists because reviewer approval alone does not guarantee that plan-level
+  contract semantics stayed aligned.
+
+### 5. Stable library handling (if applicable)
 
 Only applies when the skill is entering the stable library (per topic plan).
 
@@ -238,9 +284,18 @@ Only applies when the skill is entering the stable library (per topic plan).
    - README row format (exact table entry to add)
    - VERSION bump direction (MAJOR | MINOR | PATCH)
    - Rationale (why this bump)
-2. Update `README.md` per the specified format
-3. Update `VERSION` per the specified direction
-4. Commit both changes together with skill files
+   - Timing (when README / VERSION actions occur)
+2. If the section is absent, treat the topic as not entering the stable library.
+3. If the section exists but timing is missing, stop and fix the topic plan before
+   continuing.
+4. If timing places README / VERSION updates at `publish-in-progress` timing,
+   prepare them during Phase 5-6.
+5. If timing places README / VERSION updates at `release` timing, the topic plan
+   MUST also declare a release action that executes Phase 10.
+6. If timing is `release` but no release action is declared, treat the topic plan
+   as invalid, stop, and fix the plan before continuing.
+7. If timing places README / VERSION updates at `release` timing and a release
+   action is declared, defer them to Phase 10.
 
 **Note**: Topic plan MUST include the `Stable library metadata` section before this phase.
 If topic plan lacks this section, the skill is not intended for stable library.
@@ -258,13 +313,16 @@ Before committing, validate and stage changes:
    - Run lint/type checks if applicable
 
 2. **Staging** (Phase 6):
-   - Stage approved SKILL files
-   - If topic plan specifies stable-library update:
-     - Stage README.md updates (per `Stable library metadata`)
-     - Stage VERSION bump (per `Stable library metadata`)
-   - Display final preview of all staged changes
+    - Stage approved SKILL files
+    - If topic plan specifies stable-library update with `publish-in-progress` timing:
+      - Stage README.md updates (per `Stable library metadata`)
+      - Stage VERSION bump (per `Stable library metadata`)
+    - Display final preview of all staged changes
 
 #### **[STOP POINT 1]** Before Commit
+
+README / VERSION appear in the staged set only when the topic plan schedules them
+before PR creation.
 
 Main Agent displays:
 ```
@@ -273,8 +331,8 @@ Main Agent displays:
 Staged changes:
   - .github/skills/<skill-name>/SKILL.md
   - .github/skills/<skill-name>/examples.md
-  - README.md (new row added)
-  - VERSION (bumped: 0.11.0 → 0.12.0)
+  - README.md (new row added, if publish timing)
+  - VERSION (bumped: 0.11.0 → 0.12.0, if publish timing)
 
 Ready to commit + push + open PR on GitHub?
 [Y] Proceed
@@ -388,7 +446,7 @@ Main Agent displays:
 ✅ PR READY FOR MERGE
 
 PR: #<number> <github.com/.../pull/<number>>
-Branch: feature/<username>/<skill-name>
+Branch: <type>/<username>/<short-description>
 Status: All checks ✅ green
 Comments: All addressed ✅
 Iterations: 2/3 (within limit)
@@ -429,14 +487,26 @@ After the merge is confirmed, Main Agent continues the workflow and runs
 branches and clean up. This is not a new reviewer-style independent SubAgent
 handoff.
 
+Required guardrails and sequence:
+1. Inspect the current worktree, including untracked files and any preserved local
+   state, before syncing.
+2. Distinguish repo-history changes from local-only state so users do not mistake
+   local loss or drift for an upstream rollback.
+3. If local state still needs preservation, capture it safely before cleanup or
+   sync steps proceed.
+4. Only then run the normal post-merge cleanup / sync actions.
+
 ### 10. Release (if applicable)
 
 If topic plan specified a release action:
-1. Main Agent continues and runs `git-release-management` as a normal release
-   skill step to validate release readiness
-2. Create annotated tag with semantic version
-3. Push tag to remote
-4. Move topic to `released`
+1. Read the topic plan's release timing instructions.
+2. If stable-library metadata scheduled README / VERSION changes at `release`
+   timing, apply them now before release completion.
+3. Main Agent continues and runs `git-release-management` as a normal release
+   skill step to validate release readiness.
+4. Create annotated tag with semantic version.
+5. Push tag to remote.
+6. Move topic to `released`.
 
 If no release action: topic is terminal at `merged`.
 
@@ -458,7 +528,7 @@ Every skill topic plan must include these fixed sections (11 required):
 
 ### New: Stable library metadata (if applicable)
 
-If the skill is intended to enter the stable library, add this section before Phase 5 (Stable library update):
+If the skill is intended to enter the stable library, add this section before Phase 5 (Stable library handling):
 
 ```markdown
 ## Stable library metadata
@@ -479,6 +549,12 @@ When this skill is approved, it enters the stable library. Specify:
 - New version: (calculated)
 - Reason: (e.g., "New stable skill" or "Backward-compatible feature addition")
 
+### Timing
+- README/VERSION timing: (choose one: `publish-in-progress` | `release`)
+- Why this timing is correct for the topic
+- If timing is `release`, `Post-merge / release actions` must declare the release
+  action that executes Phase 10
+
 **Example from python-context-management:**
 ```
 ### README update
@@ -494,10 +570,15 @@ When this skill is approved, it enters the stable library. Specify:
 - Direction: MINOR (new stable skill)
 - New: 0.12.0
 - Reason: New stable skill (non-breaking capability)
+
+### Timing
+- README/VERSION timing: `release`
+- Reason: stable-library row and version bump are part of the post-merge release step for this topic
+- Release action: declared in `Post-merge / release actions`
 ```
 ```
 
-**Note**: Reviewer will validate this section exists and is complete before approving.
+**Note**: Reviewer will validate this section exists, is complete, and declares timing before approving.
 
 ## New: Main Agent Orchestration Specification
 
