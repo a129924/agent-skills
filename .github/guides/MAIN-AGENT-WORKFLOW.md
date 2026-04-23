@@ -273,7 +273,11 @@ Copilot comments:
    - Prepare README.md update
    - Prepare VERSION bump
    - Stage both (do NOT commit)
-2. Final preview
+2. If `Stable library metadata` uses `release` timing but the plan does not
+   declare a release action:
+   - STOP
+   - Fix the plan before continuing
+3. Final preview
 
 **Output**: Validation ✅; Files staged; Status → `publish-in-progress`
 

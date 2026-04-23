@@ -36,7 +36,10 @@
 - This topic does not introduce a release action for the repository itself.
 
 ## Boundaries / exclusions
-- Do not modify `.github/skills/` skill content as part of this topic.
+- Do not modify `.github/skills/` skill content as part of this topic, except for
+  narrowly scoped consistency updates to the explicitly coupled reviewer
+  checklist in `Artifact paths`
+  (`.github/skills/agent-skill-reviewer/review-checklist.md`).
 - Do not change `README.md` or `VERSION` for this workflow-spec task.
 - Do not rewrite the entire workflow from scratch when targeted clarification is
   sufficient.

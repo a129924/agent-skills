@@ -290,8 +290,12 @@ Only applies when the skill is entering the stable library (per topic plan).
    continuing.
 4. If timing places README / VERSION updates at `publish-in-progress` timing,
    prepare them during Phase 5-6.
-5. If timing places README / VERSION updates at `release` timing, defer them to
-   Phase 10.
+5. If timing places README / VERSION updates at `release` timing, the topic plan
+   MUST also declare a release action that executes Phase 10.
+6. If timing is `release` but no release action is declared, treat the topic plan
+   as invalid, stop, and fix the plan before continuing.
+7. If timing places README / VERSION updates at `release` timing and a release
+   action is declared, defer them to Phase 10.
 
 **Note**: Topic plan MUST include the `Stable library metadata` section before this phase.
 If topic plan lacks this section, the skill is not intended for stable library.
@@ -548,6 +552,8 @@ When this skill is approved, it enters the stable library. Specify:
 ### Timing
 - README/VERSION timing: (choose one: `publish-in-progress` | `release`)
 - Why this timing is correct for the topic
+- If timing is `release`, `Post-merge / release actions` must declare the release
+  action that executes Phase 10
 
 **Example from python-context-management:**
 ```
@@ -568,6 +574,7 @@ When this skill is approved, it enters the stable library. Specify:
 ### Timing
 - README/VERSION timing: `release`
 - Reason: stable-library row and version bump are part of the post-merge release step for this topic
+- Release action: declared in `Post-merge / release actions`
 ```
 ```
 

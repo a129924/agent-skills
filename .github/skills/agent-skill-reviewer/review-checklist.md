@@ -84,6 +84,8 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - VERSION bump direction is specified and justified
 - VERSION direction aligns with commit semantics (MINOR for new skill, PATCH for correction)
 - timing for README / VERSION actions is declared explicitly
+- if timing is `release`, the topic plan also declares a release action that will
+  execute Phase 10
 
 ## Reject signals
 - multiple unrelated trigger families
