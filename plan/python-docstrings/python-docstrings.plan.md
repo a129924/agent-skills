@@ -114,25 +114,30 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
   - `approved` → `creator-in-progress`
   - `approved` → `publish-in-progress`
   - `publish-in-progress` → `pr-open`
+  - `publish-in-progress` → `merged`
   - `pr-open` → `needs-rework`
   - `pr-open` → `merged`
   - `merged` → terminal
 
 Routing notes:
 - `approved` does **not** mean the topic may skip directly to publish work.
-- After reviewer approval, Main Agent must run the Phase 4.5 planner contract
-  alignment checkpoint defined by `plan/agent-handoff-workflow.md`.
+- After reviewer approval, the creator / main flow must first apply any
+  required reviewer JSON `ADDRESS` feedback and complete the necessary
+  revisions before Main Agent runs the Phase 4.5 planner contract alignment
+  checkpoint defined by `plan/agent-handoff-workflow.md`.
+- Phase 4.5 is therefore an approval-plus-feedback-applied checkpoint, not an
+  immediate post-approval step.
 - If Phase 4.5 finds drift in locked decisions, artifact paths, or other
   plan-level contract semantics, route the topic back to
   `creator-in-progress` before any publish work continues.
-- Only when Phase 4.5 passes may Main Agent move the topic to
-  `publish-in-progress`.
+- Only after reviewer approval, required feedback application, and a passing
+  Phase 4.5 checkpoint may Main Agent move the topic to `publish-in-progress`.
 
 ## Artifact Paths
 
 | Artifact | Path | Owner | Role |
 |----------|------|-------|------|
-| Topic plan | `plan/python-docstrings/python-docstrings.plan.md` | Planning actor / Main Agent | Repo-visible execution contract for this topic |
+| Topic plan | `plan/python-docstrings/python-docstrings.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Skill folder | `.github/skills/python-docstrings/` | Creator | Root output location for the draft skill |
 | Core SKILL.md | `.github/skills/python-docstrings/SKILL.md` | Creator | Executable instruction contract |
 | Reference overview | `.github/skills/python-docstrings/reference.md` | Creator | Navigation overview for the split reference set |
@@ -311,8 +316,9 @@ Artifact path notes:
 }
 ```
 
-Reviewer may append short prose notes after the JSON object, but the JSON object
-is the fixed machine-consumable handoff contract.
+Reviewer output must be a single JSON object with no trailing prose. Keep all
+rationale inside the structured JSON fields so the handoff remains safely
+machine-consumable.
 
 ## Post-merge / release actions
 
