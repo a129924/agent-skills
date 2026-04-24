@@ -100,7 +100,8 @@
 - Do not introduce a release action in this topic.
 
 ## Status / allowed transitions
-- **Current status**: `publish-in-progress`
+- **Current status**: `pr-open`
+- **Open PR**: `#21` — `https://github.com/a129924/agent-skills/pull/21`
 - **Execution model**: follow the canonical creator → reviewer → publish → merge
   path, but stop at `merged`; no release action is declared for this topic.
 - **Allowed transitions**:
