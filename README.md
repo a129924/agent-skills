@@ -129,6 +129,16 @@ inside a skill folder unless the repository spec gives them a fixed role.
   - `MINOR`: new stable skills or backward-compatible capabilities
   - `PATCH`: non-breaking fixes and wording corrections
 
+## Guides
+
+Process documentation and workflow guidance for repository operations:
+
+| Guide | Purpose |
+| --- | --- |
+| `MAIN-AGENT-WORKFLOW.md` | canonical agent handoff workflow; defines phases 1-10 for topic planning, creation, review, PR, and post-merge cleanup |
+| `REFERENCE-INTAKE-PROCESS.md` | lightweight 5-layer process for evaluating, triaging, and adopting ideas from external Agent Skills repositories |
+| `OTHER-PROJECT-EXAMPLES.md` | changelog of external ideas adopted into this repository's stable library via the reference intake workflow |
+
 ## Current skills
 | Skill | Role |
 | --- | --- |
