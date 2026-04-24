@@ -96,6 +96,13 @@ Notes:
 - Human interaction still exists at explicit stop points (for example, manual merge on
   GitHub), but those stop points do not transfer overall Phase 5-10 ownership away
   from Main Agent.
+- Once STOP POINT 2 is reached, Main Agent must fully stop and wait for a new
+  explicit human resume message; it must not keep polling or waiting in the
+  background for merge completion.
+- If a late defect is discovered after merge but before release completes, route
+  it explicitly; do not silently rewrite the original topic intent to make the
+  defect disappear. Once a topic is `released`, use a follow-up repair topic
+  instead of rolling the original topic back.
 
 ## Workflow phases
 
@@ -118,8 +125,8 @@ patterns and recovery logic.
 | 5. Stable library handling | Planner alignment passed and topic may affect stable-library surfaces | Stable library metadata; approved draft; current README / VERSION baseline | Stable-library timing decision is resolved: stage now, defer to release, or skip | Main Agent |
 | 6. Commit, push, and PR | Pre-commit validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
 | 7-8. PR comment loop | PR is open and checks or comments may require action | PR comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or clean PR ready for merge | Main Agent |
-| 9. Post-merge local sync | Merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state | Local repo is synchronized and topic reaches `merged` | Main Agent |
-| 10. Release | Topic plan declares a release action | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
+| 9. Post-merge local sync | Human explicitly resumes after merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state; human resume signal | Local repo is synchronized and topic reaches `merged` | Main Agent |
+| 10. Release | Topic plan declares a release action and post-merge execution was explicitly resumed | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
 
 ### 1. Plan the topic
 1. Planning actor captures the topic in `plan/<topic>/<topic>.plan.md`.
@@ -138,8 +145,20 @@ Execution boundary:
 
 ### 2. Prepare the branch
 1. Create or repair the execution branch using the repository branch policy.
-2. Keep the branch scoped to one topic or one tightly related change family.
-3. Do not start creator work from uncommitted chat-only planning notes.
+2. Verify branch readiness before creator work begins:
+   - current branch matches the topic intent, or a clear repair path is chosen
+   - branch naming policy has been applied
+   - current worktree state is understood and safe for this topic
+   - unrelated dirty or untracked state is either intentionally preserved,
+     explicitly approved, or treated as a stop condition
+3. Keep the branch scoped to one topic or one tightly related change family.
+4. Stop if branch readiness cannot be proven; do not begin creator work
+   speculatively.
+5. Do not start creator work from uncommitted chat-only planning notes.
+
+Execution guardrail:
+- Phase 3 must not start until Main Agent has verified the semantic execution
+  branch and the current worktree state for this topic.
 
 ### 3. Creator implementation
 1. Hand the topic plan plus relevant repo instructions to the creator.
@@ -370,11 +389,21 @@ Before committing, validate and stage changes:
    - Run lint/type checks if applicable
 
 2. **Staging** (Phase 6):
-    - Stage approved SKILL files
+    - Stage only the allowed file set for this topic:
+      1. artifact paths locked in the topic plan
+      2. direct-apply PR-fix files for the current loop
+      3. extra files explicitly approved by a human
+    - `README.md` and `VERSION` are **not** automatic exceptions; each file is
+      allowed only when it is explicitly listed in the topic plan `Artifact paths`
+    - Do not use broad staging defaults such as `git add -A` or `git add .`
+      for publish work
     - If topic plan specifies stable-library update with `publish-in-progress` timing:
-      - Stage README.md updates (per `Stable library metadata`)
-      - Stage VERSION bump (per `Stable library metadata`)
-    - Display final preview of all staged changes
+      - Stage README.md updates only if `README.md` is explicitly listed in
+        `Artifact paths`
+      - Stage VERSION bump only if `VERSION` is explicitly listed in
+        `Artifact paths`
+    - Display final preview of all staged changes; if unrelated files appear in
+      the staged set, unstage and repair before STOP POINT 1
 
 #### **[STOP POINT 1]** Before Commit
 
@@ -518,22 +547,29 @@ Iterations: 2/3 (within limit)
 
 Next step: Merge manually on GitHub (human responsibility)
 
-After merge, Main Agent will:
-  - Run git-post-merge-workflow
-  - Run git-release-management (if plan specifies)
-  - Update local branches
+After handoff, Main Agent will:
+  - Stop here completely immediately after handoff
+  - Resume only after a human sends a new explicit merge-confirmation message
+  - After that resume, run git-post-merge-workflow
+  - After that resume, run git-release-management (if plan specifies)
+  - After that resume, update local branches
 
 Ready to merge?
-[Y] Go merge on GitHub, then confirm here
-[N] Not yet, ask me again later
+[Y] Hand off to human merge and stop here
+[N] Stop here; a human may resume later with a new explicit message
 ```
 
-**If [N]**: Main Agent waits, asks again every 30 seconds
+**If [N]**:
+- Stop the current execution.
+- Do not poll, wait in the background, or ask again automatically.
+- A human may later resume from this stop point with a new explicit message.
 
 **If [Y]**: 
 - Instruct user: "Go to [PR link] and click Merge"
-- Poll GitHub PR status until merged
-- Continue to Phase 9
+- Stop the current execution immediately after handoff.
+- Do not poll GitHub for merge detection.
+- Resume at Phase 9 only when a human sends a new explicit message confirming
+  merge.
 
 #### Each direct-apply fix gets a new commit
 
@@ -547,26 +583,29 @@ Human merges the PR when ready.
 
 ### 9. Post-merge local sync
 
-After the merge is confirmed, Main Agent continues the workflow and runs
+After a human explicitly resumes the workflow and the merge is confirmed, Main Agent continues the workflow and runs
 `git-post-merge-workflow` as a normal post-merge skill step to synchronize local
 branches and clean up. This is not a new reviewer-style independent SubAgent
 handoff.
 
 Execution contract:
-- Trigger: merge is confirmed on GitHub.
-- Input: merged PR state, local worktree state, untracked files, and any local
-  state that still needs preservation.
+- Trigger: a human explicitly resumes the workflow after merge and merge is
+  confirmed on GitHub.
+- Input: merged PR state, local worktree state, untracked files, any local
+  state that still needs preservation, and the human resume signal.
 - Output: local repository is safely synchronized, branch cleanup is complete,
   and topic status reaches `merged`.
 
 Required guardrails and sequence:
-1. Inspect the current worktree, including untracked files and any preserved local
+1. Confirm that the referenced PR or merge path actually merged before cleanup
+   starts.
+2. Inspect the current worktree, including untracked files and any preserved local
    state, before syncing.
-2. Distinguish repo-history changes from local-only state so users do not mistake
+3. Distinguish repo-history changes from local-only state so users do not mistake
    local loss or drift for an upstream rollback.
-3. If local state still needs preservation, capture it safely before cleanup or
+4. If local state still needs preservation, capture it safely before cleanup or
    sync steps proceed.
-4. Only then run the normal post-merge cleanup / sync actions.
+5. Only then run the normal post-merge cleanup / sync actions.
 
 ### 10. Release (if applicable)
 
@@ -583,9 +622,17 @@ If topic plan specified a release action:
    timing, apply them now before release completion.
 3. Main Agent continues and runs `git-release-management` as a normal release
    skill step to validate release readiness.
-4. Create annotated tag with semantic version.
-5. Push tag to remote.
-6. Move topic to `released`.
+4. If a late defect is discovered during Phase 10:
+   - stop release work immediately
+   - do not silently rewrite the original topic's locked intent
+   - if the topic is already `merged` but not yet `released`, route the next step
+     explicitly with human judgment (for example, limited rollback or a follow-up
+     repair topic)
+   - if the topic is already `released`, use a new repair topic instead of
+     rolling the original topic back
+5. Create annotated tag with semantic version.
+6. Push tag to remote.
+7. Move topic to `released`.
 
 If no release action: topic is terminal at `merged`.
 
@@ -734,14 +781,18 @@ Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
   ↓
 @file:git-commit-convention
   → Draft or review commit message
-  → Stage and commit all changes (skill files + README + VERSION)
+  → Stage only the allowed file set (artifact paths + approved extras)
+  → Commit after staged preview is confirmed
   ↓
 提交 commit + 開 PR
   → git push
   → gh pr create --base dev
   ↓ [Human review + merge via GitHub]
+  → Main Agent stops completely at STOP POINT 2
+  → Human returns later with explicit merge confirmation
+  ↓
 @file:git-post-merge-workflow
-  → Main Agent continues after merge confirmation
+  → Main Agent resumes after explicit human message
   → Clean up local branches
   → Sync with remote
   ↓
@@ -756,7 +807,7 @@ Use this pattern in VS Code Copilot with `@file` and `@runSubagent` syntax:
 - After Phase 3 (Creator): User or automation triggers Reviewer
 - After Phase 4 (Reviewer): User confirms metadata + manually updates README/VERSION (or automation)
 - After Phase 5 (Publish): User decides commit scope (direct-apply rules from Phase 7 apply)
-- After Phase 8 (Merge): User confirms merge; Main Agent continues with post-merge and release steps
+- At STOP POINT 2: Main Agent fully stops; user later resumes with an explicit merge-confirmation message before post-merge and release steps continue
 
 ### CLI Complete Workflow
 
@@ -796,16 +847,18 @@ read -p "Press enter to confirm metadata, then manually update README.md and VER
 # - Update VERSION per metadata direction
 
 # Phase 6: Commit + Push + PR
-git add .
+# Stage only the allowed file set for this topic; do not use git add -A / git add .
+git add <locked-artifact-paths> [approved-extra-files]
 copilot skill git-commit-convention
 # Review commit message, then:
 git push origin feat/a129924/${SKILL_NAME}
 gh pr create --base dev
 
 # Phase 8: Merge (human via GitHub)
-# After merge, continue:
+# STOP here completely; no background polling
+# Human returns later with explicit merge confirmation, then continue:
 
-# Phase 9: Post-merge workflow (Main Agent continues after merge)
+# Phase 9: Post-merge workflow (Main Agent resumes after explicit human message)
 # Normal skill invocation under Main Agent control, not a separate operator-owned handoff
 copilot skill git-post-merge-workflow
 
@@ -848,6 +901,7 @@ copilot skill git-release-management
    - Both environments read the same review-checklist.md
 4. **Phase 9-10 ownership** stays with Main Agent
    - post-merge and release are follow-up phases in the same workflow
+   - they resume only after an explicit human message following STOP POINT 2
    - command syntax does not change the actor model
 
 ## VS Code and CLI Notes
@@ -856,8 +910,9 @@ copilot skill git-release-management
   workflow still depends on repo-visible artifacts rather than hidden tab state.
 - CLI may launch separate agents more explicitly via `/fleet`, but the workflow should read
   the same topic plan and use the same status model.
-- In both environments, Phase 9-10 are Main Agent continuation steps; only the
-  reviewer pass requires the explicit independent SubAgent boundary.
+- In both environments, Phase 9-10 are Main Agent continuation steps after an
+  explicit human resume following STOP POINT 2; only the reviewer pass requires
+  the explicit independent SubAgent boundary.
 - Worktrees are optional execution mechanics, not part of the canonical contract.
 
 ## Boundaries
