@@ -29,15 +29,16 @@ Do not use this skill when:
 
 # Process
 1. Confirm the task is really topic-plan authoring, not creator drafting, review, publish, or release execution.
-2. Read the current workflow contract and write the topic plan as a repo-visible execution artifact.
+2. Read the current workflow contract, then start from `templates/topic-plan-template.md` instead of drafting the plan from scratch.
 3. Decide whether the topic is:
    - review-ready-only with no stable-library surfaces, or
-   - a topic that explicitly affects stable-library surfaces and therefore needs declared timing
-4. Lock scope, boundaries, and role ownership before drafting the plan body.
+   - a topic that explicitly affects stable-library surfaces and therefore needs declared timing and stable-library metadata
+4. Lock scope, boundaries, and role ownership before drafting the plan body in the local template.
 5. Enumerate exact `Artifact Paths`; do not use vague catch-all path descriptions.
-6. Write the required topic-plan sections in canonical order.
-7. Use only canonical workflow transitions and require machine-consumable reviewer handoff JSON.
-8. If scope, artifact paths, role ownership, stable-library timing, or release intent is unclear, stop and ask instead of filling placeholders.
+6. Write the required topic-plan sections in canonical order from the template.
+7. If the topic affects stable-library surfaces, add a `## Stable library metadata` section and fill all workflow-required fields needed by later phases, including README row, VERSION bump, timing, and any release-related metadata. If it does not affect stable-library surfaces, make that non-stable intent explicit instead of leaving the contract implicit.
+8. Use only canonical workflow transitions and require machine-consumable reviewer handoff JSON.
+9. If scope, artifact paths, role ownership, stable-library timing, stable-library metadata, or release intent is unclear, stop and ask instead of filling placeholders.
 
 # Examples
 - Positive: Draft `plan/python-docstrings/python-docstrings.plan.md` so it explicitly declares non-stable intent, exact artifact paths, canonical transitions, JSON reviewer handoff, and correct post-merge timing before creator implementation begins.

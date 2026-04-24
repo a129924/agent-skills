@@ -121,7 +121,7 @@ Conditional rule:
 
 ## Status / Allowed Transitions
 
-- **Current**: `pr-open`
+- **Current**: `publish-in-progress`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path, but stop at `merged`; this topic does not declare a release action
 - **Allowed transitions**:

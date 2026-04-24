@@ -47,6 +47,11 @@ Delete prompt text after replacing it with real topic-specific content.
   - `pr-open` -> `merged`
   - `merged` -> terminal
 
+Conditional transition rule:
+
+- If this topic explicitly declares a release action, add `merged` -> `released`
+  and update the terminal-state wording accordingly.
+
 Routing notes:
 
 - Keep any topic-specific routing details here.
@@ -70,10 +75,14 @@ Artifact path notes:
 - Include this section **only when** the topic affects stable-library surfaces or
   defers release timing.
 - When present, declare:
-  - README row
-  - VERSION bump direction
-  - timing
-  - rationale
+  - `README row`: exact table row, entry, or explicit no-change decision
+  - `VERSION bump`: exact bump direction or explicit no-bump decision
+  - `timing`: whether changes happen at `publish-in-progress` or `release`
+  - `rationale`: why this stable-library action exists
+  - any release-note expectations or other release-timing metadata, when relevant
+- Cross-checks:
+  - if `timing=release`, `Post-merge / release actions` must declare the release action that executes Phase 10
+  - if `timing=publish-in-progress`, the stable-library files must be included in `Artifact Paths`
 
 ## Implementation Steps
 
