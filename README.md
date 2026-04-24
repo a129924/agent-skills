@@ -150,6 +150,7 @@ Process documentation and workflow guidance for repository operations:
 | `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `plan-creator` | creates repo-visible topic plans with strict workflow, artifact, and stable-library timing contracts |
+| `plan-reviewer` | independently reviews repo-visible topic plans before execution, returning structured JSON verdicts against workflow and plan-authoring rules |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
 | `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
