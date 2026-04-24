@@ -71,8 +71,41 @@ wrapped callable contract.
   decorators.
 - Do not drop to `Callable[..., Any]` just because the wrapped callable is later
   bound as a method.
-- If the method decorator stays transparent, preserve the callable contract the
-  same way.
+- If the method decorator needs instance state, keep the receiver typed in the
+  decorator contract instead of recovering it from `args[0]`.
+- Use a receiver type variable plus `Concatenate` when the wrapper must inspect
+  `self` or another leading bound object.
+
+```python
+from collections.abc import Callable
+from functools import wraps
+from typing import Concatenate, ParamSpec, Protocol, TypeVar
+
+P = ParamSpec("P")
+R = TypeVar("R")
+
+
+class ActiveSession(Protocol):
+    def is_active(self) -> bool:
+        ...
+
+
+class HasSession(Protocol):
+    session: ActiveSession
+
+
+S = TypeVar("S", bound=HasSession)
+
+
+def require_session(
+    func: Callable[Concatenate[S, P], R],
+) -> Callable[Concatenate[S, P], R]:
+    @wraps(func)
+    def wrapper(self: S, *args: P.args, **kwargs: P.kwargs) -> R:
+        return func(self, *args, **kwargs)
+
+    return wrapper
+```
 
 ## Anti-patterns
 

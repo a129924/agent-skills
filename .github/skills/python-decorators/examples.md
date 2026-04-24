@@ -45,19 +45,32 @@ Why this is correct:
 ```python
 from collections.abc import Callable
 from functools import wraps
-from typing import ParamSpec, TypeVar
+from typing import Concatenate, ParamSpec, Protocol, TypeVar
 
 P = ParamSpec("P")
 R = TypeVar("R")
 
 
-def require_active_session(func: Callable[P, R]) -> Callable[P, R]:
+class ActiveSession(Protocol):
+    def is_active(self) -> bool:
+        ...
+
+
+class HasSession(Protocol):
+    session: ActiveSession
+
+
+S = TypeVar("S", bound=HasSession)
+
+
+def require_active_session(
+    func: Callable[Concatenate[S, P], R],
+) -> Callable[Concatenate[S, P], R]:
     @wraps(func)
-    def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
-        self = args[0]
+    def wrapper(self: S, *args: P.args, **kwargs: P.kwargs) -> R:
         if not self.session.is_active():
             raise RuntimeError("session is not active")
-        return func(*args, **kwargs)
+        return func(self, *args, **kwargs)
 
     return wrapper
 
@@ -70,6 +83,7 @@ class ExportService:
 
 Why this is correct:
 - method decoration still preserves the callable contract
+- receiver typing stays explicit instead of being recovered from `args[0]`
 - the decorator adds a narrow call-time guard
 - the rule is explicit from the decorator name
 
