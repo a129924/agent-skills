@@ -12,14 +12,14 @@ Define and implement a formal, lightweight, repeatable 5-layer process for triag
 
 ### In scope
 
-- Create `other-project-examples/reference-agent-skills/CATALOG.md` (registry of external references with metadata and triage status)
-- Create `other-project-examples/reference-agent-skills/addyosmani/INTAKE.md` (triage decision for the existing addyosmani/agent-skills reference)
 - Create `.github/guides/REFERENCE-INTAKE-PROCESS.md` (executable process documentation for future reference intake)
 - Create `.github/guides/OTHER-PROJECT-EXAMPLES.md` (changelog of adopted external ideas with links to commits and PRs)
-- Document the triage and translation decisions for addyosmani in the INTAKE.md (no implementation of creator/reviewer changes yet)
+- Document the decision to **NOT track external reference files in the repository** (other-project-examples/ contains sensitive info, other projects' code, company data)
+- The intake workflow will be documented for local use; triage decisions will be recorded locally but not committed to the repo
 
 ### Out of scope
 
+- Committing `CATALOG.md` or `INTAKE.md` to the repository (user policy: other-project-examples/ is not to be committed)
 - Implementing creator/reviewer validation rule changes themselves (that work belongs to a follow-up topic)
 - Applying adopted ideas to local skills (pilot application is Phase 2 of a follow-up)
 - Changing repository policy or templating beyond intake process documentation
@@ -28,10 +28,11 @@ Define and implement a formal, lightweight, repeatable 5-layer process for triag
 ## Locked Decisions
 
 - This topic is **a process-only topic with no stable-library surfaces affecting README or VERSION**
-- External references stay in `other-project-examples/` with sibling `INTAKE.md` decision files; they do not become merged into `.github/skills/`
-- Triage decisions must be traceable (stored in `INTAKE.md`), not left in session context
-- All external ideas, once adopted via triage, must flow through the standard `creator -> reviewer -> PR -> release` workflow, not be imported ad-hoc
-- The intake process itself is documented in `.github/guides/`, where it can be referenced by future creators and reviewers
+- External references stay in `other-project-examples/` (local use only, **NOT committed to repo** — contains sensitive info, other projects' code, company data)
+- `CATALOG.md` and `INTAKE.md` files will be used locally for decision tracking; they will NOT be committed
+- Intake process documentation goes in `.github/guides/` and IS committed
+- Triage decisions and local copies of INTAKE.md are for team reference only, stored outside version control
+- All external ideas, once adopted via triage, must flow through the standard `creator -> reviewer -> PR -> release` workflow
 - The status of this topic does **not** require a release action; it terminates at `merged`
 
 ## Boundaries / Exclusions
@@ -43,7 +44,7 @@ Define and implement a formal, lightweight, repeatable 5-layer process for triag
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `review-ready`
 - **Execution model**: Follow the canonical `creator -> reviewer -> publish -> merge` path; this topic does not require a release action.
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
@@ -61,34 +62,19 @@ Define and implement a formal, lightweight, repeatable 5-layer process for triag
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/reference-intake-workflow/reference-intake-workflow.plan.md` | Planning actor | Repo-visible execution contract for this topic |
-| CATALOG | `other-project-examples/reference-agent-skills/CATALOG.md` | Creator | Index and registry of all external references with triage status |
-| addyosmani INTAKE | `other-project-examples/reference-agent-skills/addyosmani/INTAKE.md` | Creator | Triage decision, translation checklist, and adoption roadmap for the addyosmani reference |
 | Intake process guide | `.github/guides/REFERENCE-INTAKE-PROCESS.md` | Creator | Executable process documentation for evaluating and triaging future external references |
 | Adoption changelog | `.github/guides/OTHER-PROJECT-EXAMPLES.md` | Creator | Changelog of adopted external ideas, linking to PRs and commits that implement them |
 
 Artifact path notes:
 
 - This topic **does not modify** `README.md`, `VERSION`, or `.github/copilot-instructions.md`
-- All new artifacts are additions to the repository; no existing files are deleted
-- The external-reference folder structure is preserved as-is; INTAKE.md is added as a sibling
+- This topic **does NOT commit CATALOG.md or INTAKE.md** (these remain local; other-project-examples/ contains sensitive information)
+- All new committed artifacts are additions to `.github/guides/`; no existing files are deleted
+- The external-reference folder structure remains excluded from version control (.gitignore)
 
 ## Implementation Steps
 
-1. **Create CATALOG.md** with:
-   - Index of external reference repositories (starting with addyosmani)
-   - Metadata: author, source URL, license, discovery date, primary domain
-   - Triage status for each (adopt, adapt, reject, monitor)
-   - Quick lookup for future reference reviewers
-
-2. **Create INTAKE.md for addyosmani** with:
-   - Metadata section (author, source, license, focus area)
-   - Triage questions (gaps addressed, pattern portability, license compatibility, improvement suggestions)
-   - Decision: **ADOPT + ADAPT** (adopt the rigor of validation/lifecycle/red-flags; adapt format to local split-model)
-   - Specific ideas to adopt (validation checklist richness, lifecycle framing, error-pattern focus, example quality enforcement)
-   - Ideas to reject (monolithic SKILL.md model, single-file-only structure)
-   - Translation tasks (linked to follow-up topic for creator/reviewer updates)
-
-3. **Create REFERENCE-INTAKE-PROCESS.md** with:
+1. **Create REFERENCE-INTAKE-PROCESS.md** (`.github/guides/`) with:
    - 5-layer process explanation (storage, review, extraction, rollout, maintenance)
    - Triage question template (copy-friendly for future references)
    - Decision framework (ADOPT vs ADAPT vs REJECT vs MONITOR rationale)
@@ -96,10 +82,21 @@ Artifact path notes:
    - Anti-patterns and what-not-to-do checklist
    - Maintenance and deprecation guidance
 
-4. **Create OTHER-PROJECT-EXAMPLES.md** with:
+2. **Create OTHER-PROJECT-EXAMPLES.md** (`.github/guides/`) with:
    - Table template: Reference | Idea adopted | When (commit/PR) | Creator/reviewer change | Status
    - Instructions for future record-keeping
    - Quarterly refresh checklist
+
+3. **Create local CATALOG.md & INTAKE.md** (in other-project-examples/, NOT committed):
+   - CATALOG: Index of external references with metadata and triage status
+   - INTAKE (addyosmani): Triage decision, translation checklist, adoption roadmap
+   - These files support local decision-making but are excluded from version control
+
+4. **Document the policy**: Update OTHER-PROJECT-EXAMPLES.md to note:
+   - External references are NOT committed to the repo
+   - CATALOG.md and INTAKE.md are used locally for tracking
+   - The published process guide (REFERENCE-INTAKE-PROCESS.md) explains the workflow
+   - Future adoptions will be recorded in OTHER-PROJECT-EXAMPLES.md with links to PRs/commits
 
 ## Validation / Acceptance Checks
 
@@ -146,6 +143,9 @@ Artifact path notes:
 
 ## Topic Status Marker
 
-- **Status**: `planned`
+- **Status**: `review-ready` ← Phase 3 (Creator implementation) complete
 - **Last updated**: 2026-04-24
-- **Next phase trigger**: Creator begins Phase 3 (implementation) when this plan is committed and approved.
+- **Implementation commits**: 
+  - `bdc3028`: plan(reference-intake-workflow): initial topic plan
+  - `3cf3c89`: feat(reference-intake): implement 5-layer external reference intake workflow
+- **Next phase trigger**: Reviewer evaluates Phase 4 (Reviewer pass) per agent-skill-reviewer
