@@ -87,16 +87,16 @@ review-ready
             ├─ [NO] → back to Phase 5
             └─ [YES] → commit + push, open PR
                ↓
-               pr-open
-                 ↓ (Phase 7-8: PR loop, max 3 iterations)
-                 [STOP 2: User "Ready to merge?"]
-                   ├─ [NO] → wait
-                   └─ [YES] → user merges on GitHub
-                       ↓
-                       merged (Phase 9: post-merge sync)
-                         ↓ (Phase 10: release if needed)
-                         ↓
-                          released (or terminal)
+                pr-open
+                  ↓ (Phase 7-8: PR loop, max 3 iterations)
+                  [STOP 2: Human merge handoff]
+                    ├─ [NOT READY] → stop; human returns later
+                    └─ [HANDOFF] → human merges on GitHub
+                        ↓ [new human message confirms merge]
+                        merged (Phase 9: post-merge sync)
+                          ↓ (Phase 10: release if needed)
+                          ↓
+                           released (or terminal)
 ```
 
 Ownership note:
@@ -140,8 +140,15 @@ Ownership note:
 1. Use `git-branch-naming` skill to choose a semantic development branch:
    `<type>/<username>/<short-description>`
 2. Create or verify branch exists
-3. Ensure workspace clean
+3. Run a branch-preflight check before creator work:
+   - current branch matches topic intent, or a repair path is chosen
+   - branch naming policy has been applied
+   - worktree state is understood and safe for this topic
+   - unrelated dirty or untracked files are either intentionally preserved,
+     explicitly approved, or treated as a stop condition
 4. Treat the branch as semantic work naming, not a hard-coded `feature/...` shape
+5. If preflight fails, STOP. Do not invoke creator until the branch/worktree state
+   is explicitly safe.
 
 **Output**: Semantic execution branch ready; Status: `planned` (no change yet)
 
@@ -284,15 +291,22 @@ Copilot comments:
 5. Run lint (if applicable)
 
 **Phase 6: Staging**
-1. If `Stable library metadata` in plan with `publish-in-progress` timing:
+1. Stage only the allowed file set for the topic:
+   - artifact paths locked in the topic plan
+   - PR direct-apply files for the current loop
+   - extra files explicitly approved by a human
+2. Do **not** use broad staging defaults such as `git add -A` or `git add .`
+   in publish flow.
+3. If `Stable library metadata` in plan with `publish-in-progress` timing:
    - Prepare README.md update
    - Prepare VERSION bump
    - Stage both (do NOT commit)
-2. If `Stable library metadata` uses `release` timing but the plan does not
+4. If `Stable library metadata` uses `release` timing but the plan does not
    declare a release action:
    - STOP
    - Fix the plan before continuing
-3. Final preview
+5. Final preview of staged files; if unrelated files are staged, unstage and
+   repair before STOP POINT 1
 
 **Output**: Validation ✅; Files staged; Status → `publish-in-progress`
 
@@ -316,6 +330,10 @@ Staged changes:
   - .github/skills/<skill-name>/examples.md
   - README.md (new row added, if publish timing)
   - VERSION (0.11.0 → 0.12.0, if publish timing)
+
+Rule:
+  - staged files must stay within the allowed file set for this topic
+  - broad staging defaults (git add -A / git add .) are not allowed here
 
 Ready to commit + push + open PR?
 [Y] Yes, proceed
@@ -402,22 +420,31 @@ Comments: All addressed ✅
 Next: Merge manually on GitHub, then confirm here.
 
 Ready to merge?
-[Y] Yes, go merge on GitHub, I'll continue after
-[N] Not yet, ask again later
+[Y] Yes, hand off to human merge and stop here
+[N] Not yet; stop here and I will return later
 ```
 
-**If NO**: Wait (check every 30 sec); ask again
+**If NO**:
+- Stop the current execution.
+- Do not wait in the background.
+- Do not poll or ask again automatically.
+- A human may later resume from this stop point with a new explicit message.
 
-**If YES**: Instruct user to merge on GitHub; wait for merge detection
+**If YES**:
+- Instruct user to merge on GitHub.
+- Stop the current execution immediately after handoff.
+- Do not wait for merge detection.
+- Phase 9 resumes only when a human later sends a new explicit
+  merge-confirmation message.
 
 ---
 
 ### Phase 9: Post-Merge Local Sync
 
-**Input**: PR merged on GitHub
+**Input**: explicit human resume message plus PR merged on GitHub
 
 **Task**:
-1. Detect merge (poll GitHub or git fetch)
+1. Confirm the referenced PR or merge path actually merged before cleanup starts
 2. Inspect worktree, untracked files, and preserved local state before sync
 3. Distinguish upstream history change from local-only state
 4. Capture any local state that still needs preservation
@@ -455,13 +482,22 @@ Ready to merge?
    7. Documentation updated
 
 4. If all gates pass:
-    - Create tag: `v<new-version>`
-    - Push tag
-    - Status → `released` ✅
+     - Create tag: `v<new-version>`
+     - Push tag
+     - Status → `released` ✅
 
 5. If gates fail:
-    - Display failures
-    - Ask: "Fix and retry?" or "Manual later?"
+   - Display failures
+   - Ask: "Fix and retry?" or "Manual later?"
+
+6. If a late topic-plan or release-routing defect is discovered during Phase 10:
+   - Stop release work immediately
+   - Do not silently rewrite the original topic's locked intent
+   - If the topic is `merged` but not yet `released`, route the next step with
+     explicit human judgment (for example, limited rollback or a follow-up
+     repair topic)
+   - If the topic is already `released`, use a new repair topic instead of
+     rolling the original topic back
 
 ---
 
