@@ -86,15 +86,15 @@ Args:
 - Always document non-None returns; optional to document if return is always None
 - Describe the return **meaning**, not just the type
 - If returning multiple types (e.g., `Union[User, None]`), clarify which is success and which is error
-- If using business-return patterns (e.g., `Result[T, E]`), explain both Ok and Err branches
+- If using business-return patterns (e.g., `Result[T, E]`), explain both Ok and Err branches in the Returns section
 
 **Example**:
 ```python
 Returns:
     User: A user object with populated id, email, and roles extracted from token claims.
     
-    Raises (if error-handling pattern):
-    Result[User, AuthError]: Ok(user) on successful authentication; Err(auth_error) on failure.
+    Result[User, AuthError]: For result-type returns, Ok(user) on successful
+        authentication; Err(auth_error) on failure.
 ```
 
 ### Raises (For exception-based error handling)

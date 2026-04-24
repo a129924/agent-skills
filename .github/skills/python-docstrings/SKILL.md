@@ -36,7 +36,7 @@ Guide developers to write clear, contract-first docstrings in Google Style forma
 **Step-by-step docstring workflow**:
 
 1. **Identify scope**: Is this a public API (class, public method, public function, dataclass field) or private helper?
-   - **Public**: Always write full docstring (one-liner + description + Args/Returns/Raises/Examples)
+   - **Public**: Always write a full Google Style docstring (one-liner + description + applicable sections such as Args/Returns/Raises/Examples as needed)
    - **Private**: Write one-liner; add full docstring only if explicit contract signals exist (state mutation, error translation, structured/domain return, reused preconditions)
 
 2. **Extract explicit signals**:
@@ -67,94 +67,53 @@ Guide developers to write clear, contract-first docstrings in Google Style forma
 
 ## Examples
 
-### Positive Example 1: Public Function with Semantic Intent Derived from Explicit Boundary Context
+### ✅ Positive Example: Contract-First Docstring with Explicit Boundary
 
 ```python
 def authenticate_user(token: str, secret_key: str) -> User:
     """Authenticate a user using a JWT token.
     
-    Verifies the JWT signature against the provided secret key and extracts the 
-    embedded user identity. This is the primary authentication entry point for 
-    REST API requests.
+    Verifies signature against the secret key and extracts user identity.
+    Primary entry point for REST API authentication.
     
     Args:
-        token: A JWT-formatted bearer token from the request Authorization header.
-        secret_key: The HMAC secret key used to verify the token signature.
+        token: JWT-formatted bearer token from Authorization header.
+        secret_key: HMAC secret key to verify token signature.
     
     Returns:
-        A User object with populated id, email, and roles extracted from the token claims.
+        User object with id, email, and roles from token claims.
     
     Raises:
-        JWTError: If the token signature is invalid or the token is expired.
-        ValueError: If the token is malformed or missing required claims.
-    
-    Example:
-        user = authenticate_user(token="eyJ0...", secret_key="secret123")
+        JWTError: Token signature invalid or expired.
+        ValueError: Token malformed or missing required claims.
     """
 ```
 
-**Why this is correct**: The docstring captures the **why** (primary authentication entry point) and **when** (REST API requests) from explicit code-adjacent context (function name, parameter names, return type, exception types). No invented rationale.
+**Why correct**: Captures **why** and **when** from explicit context (function name, parameters, return type, exception types). No invented rationale.
 
 ---
 
-### Positive Example 2: Public Function Where Intent Is Not Explicit, So Contract-Only Docstring
-
-```python
-def _normalize_email(email: str) -> str:
-    """Return a lowercase, trimmed email address.
-    
-    Args:
-        email: An email string, potentially with leading/trailing whitespace or mixed case.
-    
-    Returns:
-        The email in lowercase and trimmed.
-    """
-```
-
-**Why this is correct**: The function name and type signature already convey purpose. The docstring **does not invent** a business "why" (e.g., "to match user records in our database"). Instead, it states the contract clearly: what goes in, what comes out. This stays portable and generic.
-
----
-
-### Positive Example 3: Private Helper with No Independent Contract (One-Liner Only)
-
-```python
-class UserRepository:
-    def _build_query_filter(self, role: str) -> dict:
-        """Build a database query filter dict for the given role."""
-        return {"role": role, "is_active": True}
-```
-
-**Why this is correct**: This is a local implementation detail with no independent caller-facing contract outside the method. The one-liner is sufficient. No full docstring needed.
-
----
-
-### Negative Example: Invented Rationale and Type Contradiction
+### ❌ Negative Example: Invented Rationale and Speculation
 
 ```python
 def process_order(order_id: int) -> Order:
     """Process an order to generate revenue for the platform.
     
-    This method is important for business because orders drive our company's 
-    growth metrics. We call it from the payment service whenever a user completes 
-    checkout.
+    This is important for business growth. Called from payment service 
+    during checkout.
     
     Args:
         order_id: The order ID. It's a number.
     
     Returns:
-        order: An Order object. This is the main data structure we use.
+        An Order object. Main data structure.
     
     Raises:
-        OrderNotFound: If the order does not exist (probably because the user 
-                       deleted it or it was corrupted by some race condition).
+        OrderNotFound: Probably from user deletion or race condition.
     """
 ```
 
-**Why this is wrong**:
-1. **Invented rationale**: "to generate revenue for the platform" is not discoverable from code or visible API boundary
-2. **Over-explaining obvious**: "It's a number" and "This is the main data structure" add noise
-3. **Vague error semantics**: Raises description speculates ("probably because...") instead of stating contract clearly
-4. **Redundant Returns**: Restates type information already in signature
+**Why wrong**: (1) Invented rationale not in code, (2) Over-explains obvious, (3) Speculates on error causes, (4) Restates type info
 
 ---
 

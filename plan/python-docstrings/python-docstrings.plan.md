@@ -101,7 +101,7 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator → reviewer → publish → merge
   path, but stop at `merged`; this topic does not declare a release action
 - **Allowed transitions**:

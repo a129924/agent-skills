@@ -98,7 +98,7 @@ def authenticate(token: str) -> Union[User, AuthError]:
 1. **Document both branches** (success and failure)
 2. **Explain when each branch occurs** (What makes the operation fail?)
 3. **For the Err branch, include error codes or error types** if they convey semantics
-4. **Do NOT mix Raises and Returns for error cases** — pick one pattern per callable
+4. **Do NOT use both Raises and Returns to describe the same error case**; it is acceptable to use `Returns:` for expected business failures and `Raises:` for true exceptional failures
 5. **If using generic types like Result[T, E]**, clarify what T and E represent
 
 ### Example: Result[T, E] (Rust-Like)
@@ -152,7 +152,7 @@ def authenticate(token: str) -> Success | Failure:
 
 - Errors are **expected, recoverable outcomes** (not exceptional failures)
 - Callers **always check the result** before using it (not just on error)
-- You want **type-safe error handling** (compiler can enforce error handling)
+- You want **type-safe error handling** (a type checker or static analysis can enforce handling of both branches)
 - Examples: Validation results, parsing attempts, optional lookups, database searches that may not find a record
 
 ---

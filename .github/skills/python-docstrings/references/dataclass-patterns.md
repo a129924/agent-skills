@@ -149,7 +149,7 @@ class PaymentOrder:
 
 ### ✅ Always Document
 
-- Fields with **non-obvious names**: `created_at`, `is_active`, `batch_size` (purpose is clear from name)
+- Fields with **obvious names but caller-visible semantics or conventions**: `created_at` (which event/time source?), `is_active` (what qualifies as active?), `batch_size` (items per batch for which operation?)
 - Fields with **domain semantics**: `user_tier` (why does this matter?), `risk_score` (what does this measure?)
 - Fields with **constraints**: `amount_cents` (why cents, not dollars?), `status` (what values are valid?)
 - **Foreign keys or relationships**: `customer_id` (what does this link to?)
