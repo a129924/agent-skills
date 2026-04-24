@@ -100,8 +100,8 @@
 - Do not introduce a release action in this topic.
 
 ## Status / allowed transitions
-- **Current status**: `pr-open`
-- **Open PR**: `#21` — `https://github.com/a129924/agent-skills/pull/21`
+- **Current status**: `merged`
+- **Merged PR**: `#21` — `https://github.com/a129924/agent-skills/pull/21`
 - **PR feedback reroute**: `pr-open` → `needs-rework` → `creator-in-progress`
   because PR #21 comments require reviewer re-check before merge handoff resumes.
 - **Execution model**: follow the canonical creator → reviewer → publish → merge
