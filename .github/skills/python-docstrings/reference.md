@@ -14,7 +14,7 @@ This folder provides comprehensive guidance on writing clear, contract-first doc
 ## When to Use Each File
 
 - **Starting with Google Style?** → Read **google-style-template.md** first
-- **Unsure whether to document "why"?** → **semantic-intent.md** clarifies when to invent intent vs stay contract-focused
+- **Unsure whether to document "why"?** → **semantic-intent.md** clarifies when to document semantic intent vs stay contract-focused
 - **Handling errors?** → **error-semantics.md** covers both exception and Result patterns
 - **Documenting dataclass fields?** → **dataclass-patterns.md** shows field-level contracts and domain semantics
 

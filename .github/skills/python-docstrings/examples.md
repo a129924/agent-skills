@@ -424,4 +424,4 @@ This version:
 **Negative scenarios teach**:
 - F: Never invent business rationale not discoverable from code
 - G: Never contradict signature or error contract in docstring
-- H: Never mix error patterns (exception-based vs Result-type) in one callable
+- H: Never describe the same error scenario using both Raises and Result; use Raises for exceptional failures and Result for expected failures
