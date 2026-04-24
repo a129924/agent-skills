@@ -147,7 +147,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path, but stop at `merged`; this topic does not declare a release action
 - **Allowed transitions**:
