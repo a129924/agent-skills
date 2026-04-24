@@ -9,7 +9,18 @@ execution begins.
   - [ ] `.github/skills/plan-creator/reference.md`
   - [ ] `.github/skills/plan-creator/checklist.md`
   - [ ] `.github/skills/plan-creator/templates/topic-plan-template.md`
-- [ ] `Goal / Outcome`, `Scope`, `Locked Decisions`, and `Boundaries / Exclusions` are present.
+- [ ] All workflow-required plan sections are present, using the canonical section list from `plan/agent-handoff-workflow.md` (case-insensitive title matching is acceptable):
+  - [ ] `Goal / outcome`
+  - [ ] `Scope`
+  - [ ] `Locked decisions`
+  - [ ] `Boundaries / exclusions`
+  - [ ] `Status / allowed transitions`
+  - [ ] `Artifact paths`
+  - [ ] `Implementation steps`
+  - [ ] `Validation / acceptance checks`
+  - [ ] `Reviewer handoff`
+  - [ ] `Post-merge / release actions`
+  - [ ] `Open questions / unresolved items`
 - [ ] `Status / Allowed Transitions` uses canonical workflow transitions only.
 - [ ] The current status matches the actual topic state.
 - [ ] `Artifact Paths` are exact, bounded, repo-visible, and role-labeled.

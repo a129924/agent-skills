@@ -34,7 +34,12 @@ Do not use this skill when:
 4. Treat placeholders such as `TBD`, `later`, or `follow normal process` as contract failures when the workflow requires explicit decisions.
 5. Treat missing sections, invalid transitions, vague artifact paths, undeclared stable intent, wrong timing, non-JSON reviewer handoff, and role-boundary confusion as blocking issues.
 6. Keep the review focused on contract-breaking issues rather than wording polish or stylistic preferences that do not change workflow meaning.
-7. Return exactly one JSON object with `verdict`, `blocking_issues`, and `copilot_feedback_triage` using `ADDRESS`, `DISCUSS`, and `SKIP`.
+7. Return exactly one JSON object with this fixed schema:
+   - `verdict`: `approved` or `needs-rework`
+   - `blocking_issues[]`: objects with `issue`, `file`, and `fix`
+   - `copilot_feedback_triage.ADDRESS[]`: objects with `comment`, `location`, and `why`
+   - `copilot_feedback_triage.DISCUSS[]`: objects with `comment`, `optional`, and `why`
+   - `copilot_feedback_triage.SKIP[]`: objects with `comment` and `why`
 
 # Examples
 - Positive: Review `plan/python-docstrings/python-docstrings.plan.md` after the plan exists, reject no contract-breaking issues, and return one JSON object that confirms non-stable intent, exact artifact paths, canonical transitions, and machine-consumable reviewer handoff.
@@ -43,8 +48,10 @@ Do not use this skill when:
 # Outputs
 - exactly one machine-consumable JSON object and no trailing prose
 - `verdict`: `approved` or `needs-rework`
-- `blocking_issues`: only true contract-breaking problems
-- `copilot_feedback_triage` with `ADDRESS`, `DISCUSS`, and `SKIP`
+- `blocking_issues`: only true contract-breaking problems; each item contains `issue`, `file`, and `fix`
+- `copilot_feedback_triage.ADDRESS`: direct required feedback items; each item contains `comment`, `location`, and `why`
+- `copilot_feedback_triage.DISCUSS`: optional discussion items; each item contains `comment`, `optional`, and `why`
+- `copilot_feedback_triage.SKIP`: explicitly inapplicable feedback items; each item contains `comment` and `why`
 
 # Verification
 - confirm the review basis explicitly includes all four contract sources
