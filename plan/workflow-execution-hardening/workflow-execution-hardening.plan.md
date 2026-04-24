@@ -102,6 +102,8 @@
 ## Status / allowed transitions
 - **Current status**: `pr-open`
 - **Open PR**: `#21` — `https://github.com/a129924/agent-skills/pull/21`
+- **PR feedback reroute**: `pr-open` → `needs-rework` → `creator-in-progress`
+  because PR #21 comments require reviewer re-check before merge handoff resumes.
 - **Execution model**: follow the canonical creator → reviewer → publish → merge
   path, but stop at `merged`; no release action is declared for this topic.
 - **Allowed transitions**:
@@ -220,7 +222,9 @@ Artifact path notes:
   - Main Agent guide: `.github/guides/MAIN-AGENT-WORKFLOW.md`
   - Any conditionally edited git skill files listed in `Artifact paths`
 - Latest independent reviewer verdict:
-  - `approved`
+  - prior pre-PR verdict: `approved`
+  - prior PR-loop verdict: `needs-rework`
+  - latest PR-loop re-review verdict: `approved`
   - blocking issues: none
 - Review focus:
   - whether the hardened workflow now prevents the known Phase 2 skip

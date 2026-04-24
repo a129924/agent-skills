@@ -393,11 +393,15 @@ Before committing, validate and stage changes:
       1. artifact paths locked in the topic plan
       2. direct-apply PR-fix files for the current loop
       3. extra files explicitly approved by a human
+    - `README.md` and `VERSION` are **not** automatic exceptions; each file is
+      allowed only when it is explicitly listed in the topic plan `Artifact paths`
     - Do not use broad staging defaults such as `git add -A` or `git add .`
       for publish work
     - If topic plan specifies stable-library update with `publish-in-progress` timing:
-      - Stage README.md updates (per `Stable library metadata`)
-      - Stage VERSION bump (per `Stable library metadata`)
+      - Stage README.md updates only if `README.md` is explicitly listed in
+        `Artifact paths`
+      - Stage VERSION bump only if `VERSION` is explicitly listed in
+        `Artifact paths`
     - Display final preview of all staged changes; if unrelated files appear in
       the staged set, unstage and repair before STOP POINT 1
 
@@ -543,16 +547,16 @@ Iterations: 2/3 (within limit)
 
 Next step: Merge manually on GitHub (human responsibility)
 
-After merge, Main Agent will:
-  - Stop here completely
+After handoff, Main Agent will:
+  - Stop here completely immediately after handoff
   - Resume only after a human sends a new explicit merge-confirmation message
-  - Then run git-post-merge-workflow
-  - Then run git-release-management (if plan specifies)
-  - Then update local branches
+  - After that resume, run git-post-merge-workflow
+  - After that resume, run git-release-management (if plan specifies)
+  - After that resume, update local branches
 
 Ready to merge?
 [Y] Hand off to human merge and stop here
-[N] Stop here; I will come back later
+[N] Stop here; a human may resume later with a new explicit message
 ```
 
 **If [N]**:

@@ -295,12 +295,18 @@ Copilot comments:
    - artifact paths locked in the topic plan
    - PR direct-apply files for the current loop
    - extra files explicitly approved by a human
+   - `README.md` and `VERSION` are **not** automatic exceptions; each file is
+     allowed only when it is explicitly listed in the topic plan `Artifact paths`
 2. Do **not** use broad staging defaults such as `git add -A` or `git add .`
    in publish flow.
 3. If `Stable library metadata` in plan with `publish-in-progress` timing:
-   - Prepare README.md update
-   - Prepare VERSION bump
-   - Stage both (do NOT commit)
+   - Prepare `README.md` update only if `README.md` is explicitly listed in the
+     topic plan `Artifact paths`
+   - Prepare `VERSION` bump only if `VERSION` is explicitly listed in the topic
+     plan `Artifact paths`
+   - Stage only those prepared files that satisfy both conditions above
+     (scheduled stable-library metadata **and** explicit `Artifact paths`
+     listing)
 4. If `Stable library metadata` uses `release` timing but the plan does not
    declare a release action:
    - STOP
@@ -417,11 +423,12 @@ PR: #<number> <link>
 Status: All checks ✅ green
 Comments: All addressed ✅
 
-Next: Merge manually on GitHub, then confirm here.
+Next: Merge manually on GitHub; Main Agent stops here and resumes only after a
+later explicit human message.
 
-Ready to merge?
+Ready to hand off to human merge?
 [Y] Yes, hand off to human merge and stop here
-[N] Not yet; stop here and I will return later
+[N] Not yet; stop here and a human may resume later with a new explicit message
 ```
 
 **If NO**:
@@ -622,11 +629,11 @@ Status: All checks ✅ green
 Comments: All addressed ✅
 
 Go to GitHub and merge manually.
-Confirm when merged and I'll continue.
+Main Agent stops immediately after this handoff.
 
-Ready to proceed after merge?
-[Y] Waiting for merge, then continue to Phase 9
-[N] I'll merge later and restart
+Ready to hand off to human merge?
+[Y] Hand off to human merge and stop here
+[N] Stop here; a human may resume later with a new explicit message
 ```
 
 ---
