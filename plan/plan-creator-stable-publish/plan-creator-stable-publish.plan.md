@@ -89,7 +89,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `pr-open`
+- **Current**: `released`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path for a stable-library promotion topic
 - **Allowed transitions**:
