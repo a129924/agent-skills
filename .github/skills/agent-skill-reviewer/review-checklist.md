@@ -35,6 +35,8 @@ A skill is `approved` only if all of these are true:
 - the skill includes example or reference material in the same folder
 - `SKILL.md` includes at least one concise correct example
 - `SKILL.md` includes at least one concise incorrect example
+- **each SKILL.md example is typically 10–20 lines** (code + explanation combined)
+- **Examples section in SKILL.md occupies no more than 10–15% of total SKILL.md length**
 
 ## Example depth
 - `examples.md` may stay optional when the concise `SKILL.md` examples already cover about 80% of routine usage
@@ -117,3 +119,4 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - optional additions with no declared role
 - vague boundaries
 - review comments that would require inventing a different skill
+- **Examples section in SKILL.md exceeds 15% of total file length or individual examples exceed 20 lines** (signals over-documentation; defer detailed scenarios to `examples.md`)
