@@ -115,6 +115,11 @@ inside a skill folder unless the repository spec gives them a fixed role.
 5. Send the draft to `agent-skill-reviewer` through a human or external
    workflow.
 6. Promote the skill to the stable library only after it returns `approved`.
+7. Prepare and verify the semantic execution branch before creator work starts.
+8. In publish flow, stage only the topic's allowed file set; broad staging
+   defaults such as `git add -A` or `git add .` are not allowed.
+9. At manual merge handoff, stop completely and resume only after a new explicit
+   human message.
 
 ## Versioning
 - The root `VERSION` file is the canonical version baseline for this repository.
