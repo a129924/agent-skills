@@ -90,7 +90,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path for a stable-library promotion topic
 - **Allowed transitions**:
