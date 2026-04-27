@@ -19,7 +19,7 @@ description: Executable specification for Main Agent orchestration across all 10
 4. [Key Mechanisms](#key-mechanisms)
    - [Phase 4: Two-Layer Review](#phase-4-two-layer-review)
    - [Phase 5-6: Pre-commit Staging](#phase-5-6-pre-commit-staging)
-   - [Phase 7-8: PR Loop with Termination](#phase-7-8-pr-loop-with-termination)
+   - [Phase 7-8: PR Loop with Bounded Observation](#phase-7-8-pr-loop-with-bounded-observation)
    - [Error Handling & Recovery](#error-handling--recovery)
    - [Checkpoint-Based Resumability](#checkpoint-based-resumability)
 
@@ -369,9 +369,10 @@ Ready to commit + push + open PR?
 
 ### Phase 7-8: PR Loop with Bounded Observation
 
-#### **Phase 7: PR Comment Check**
+#### **Phase 7: PR Signal Check**
 
-1. Fetch review comments, issue comments, and check runs from GitHub
+1. Fetch PR reviews / current review state, review comments, issue comments,
+   and check runs from GitHub
 2. Classify each comment:
     - **Direct-apply**: style, typo, meta, formatting
     - **Needs-reviewer**: logic, scope, trigger, examples, requirements
@@ -379,6 +380,9 @@ Ready to commit + push + open PR?
    proof of a clean PR snapshot.
 4. The bounded observation shape is `consecutive-empty-checks`, not a one-time
    empty fetch.
+5. Blocking signals include blocking PR review states (especially
+   `CHANGES_REQUESTED`), unresolved blocking review threads, actionable review
+   comments, actionable issue comments, and any non-clean check run state.
 
 #### **Phase 8: Creator Fix Loop**
 
@@ -386,16 +390,18 @@ Ready to commit + push + open PR?
 iteration = 0
 max_iterations = 3
 empty_checks = 0
-observation_waits = [30, 60, 120]
+observation_waits_seconds = [30, 60, 120]
 
 LOOP:
-  1. Fetch latest review comments, latest issue comments, and current check runs
+  1. Fetch latest PR reviews / current review state, latest review comments,
+     latest issue comments, and current check runs
 
   2. If any blocking signal exists:
      - Reset empty_checks = 0
-     - Treat failed checks, unresolved blocking comment state, or other newly
+     - Treat blocking PR review state, unresolved blocking review thread,
+       blocking comment state, failed or non-complete checks, or other newly
        blocking PR state as NOT clean
-     - Classify comments
+     - Classify comments and review outcomes
 
      a. If ALL actionable items are direct-apply:
         - Creator applies fixes
@@ -408,17 +414,18 @@ LOOP:
         - Route back to Phase 4 (reviewer re-check)
         - Reviewer produces new verdict
         - If approved: continue
-        - If needs-rework: back to Phase 4
+        - If needs-rework: back to Phase 3
 
   3. If no blocking signal exists in the current snapshot:
      - empty_checks += 1
      - If empty_checks < 3:
-        - Sleep observation_waits[empty_checks - 1]
+        - Sleep observation_waits_seconds[empty_checks - 1]
         - Loop back to step 1
      - If empty_checks == 3:
         - Exit the bounded observation window
         - Report only:
           1. no new blocking signal was observed within the bounded window
+             across PR reviews, comments, and check runs
           2. this is not a guarantee that later feedback will not arrive
           3. a human must decide whether to inspect the PR and hand off merge
         - Continue to the human merge-readiness confirmation gate
@@ -444,7 +451,8 @@ is eligible for human merge-readiness confirmation while status remains
 PR: #<number> <link>
 Observation: 3 consecutive clean checks (`30s -> 60s -> 120s`)
 Gate shape: `consecutive-empty-checks`
-Signals checked: review comments, issue comments, check runs
+Signals checked: PR reviews / review state, review comments, issue comments,
+check runs
 Result: No new blocking signal observed within the bounded window
 
 Important:
@@ -655,7 +663,9 @@ Ready to push and open PR on GitHub?
 Branch: <type>/<username>/<short-description>
 PR: #<number> (<link>)
 Observation: 3 consecutive clean checks (`30s -> 60s -> 120s`)
-Signals checked: review comments, issue comments, check runs
+Gate shape: `consecutive-empty-checks`
+Signals checked: PR reviews / review state, review comments, issue comments,
+check runs
 Result: No new blocking signal observed within the bounded window
 
 Important:

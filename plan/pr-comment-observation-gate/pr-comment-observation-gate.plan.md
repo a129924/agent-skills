@@ -6,9 +6,9 @@ Create a repo-visible execution plan for a workflow-contract topic that fixes th
 PR comment loop before manual merge handoff. The completed topic should update
 the canonical workflow documents so they no longer treat one empty PR-comment
 fetch as proof that a PR is merge-ready. Instead, the workflow should require a
-bounded observation window plus explicit human merge-readiness confirmation
-before entering `STOP POINT 2`, while still preserving the hard-stop rule that
-no automatic polling or resume may happen after handoff.
+bounded observation window that makes the PR eligible for the `STOP POINT 2`
+human merge-confirmation prompt, while still preserving the hard-stop rule that
+no automatic polling or resume may happen after merge handoff.
 
 ## Scope
 
@@ -17,8 +17,8 @@ no automatic polling or resume may happen after handoff.
   - update `.github/guides/MAIN-AGENT-WORKFLOW.md`
   - define the bounded observation-window contract for PR comment and check
     monitoring before merge handoff
-  - define the human-confirmed gate that must exist between an exhausted clean
-    observation window and `STOP POINT 2`
+  - define how an exhausted clean observation window becomes eligible for the
+    `STOP POINT 2` human merge-confirmation prompt
   - make the pre-handoff / post-handoff stop semantics explicit so the workflow
     does not silently re-check merge state after handoff
 
@@ -50,14 +50,25 @@ no automatic polling or resume may happen after handoff.
     - second wait: 60 seconds
     - third wait: 120 seconds
   - observation signals must include:
+    - PR reviews / current review state
     - review comments
     - issue comments
     - check runs
+  - blocking signals must include any newly observed:
+    - PR review with a blocking review state, especially `CHANGES_REQUESTED`
+    - unresolved blocking review thread
+    - actionable review comment that still requires action
+    - actionable issue comment that still requires action
+    - non-clean check run state:
+      - status is not `completed`, or
+      - conclusion is not a success-like state such as `success`, `neutral`, or
+        `skipped`
 - Exhausting a clean observation window does **not** automatically trigger merge
   handoff.
 - After the observation window is exhausted with no blocking signal, the agent
   may report only:
-  - that no new blocking signal was seen within the bounded observation window
+  - that no new blocking signal was seen within the bounded observation window,
+    including PR reviews, comments, and check runs
   - that this is not a guarantee no later feedback will arrive
   - that a human must decide whether to check the PR and hand off merge
 - `STOP POINT 2` remains a hard stop:
@@ -140,11 +151,13 @@ Artifact path notes:
 1. Update `plan/agent-handoff-workflow.md` Phase 7-8 logic so the PR loop no
    longer treats one empty comment fetch as merge readiness.
 2. Define the bounded observation window explicitly:
-   - `consecutive-empty-checks`
-   - backoff schedule `30s -> 60s -> 120s`
-   - signals: review comments, issue comments, check runs
-3. Define which events reset the observation window, including new comments,
-   unresolved comment signals, failed checks, or other newly blocking PR state.
+    - `consecutive-empty-checks`
+    - backoff schedule `30s -> 60s -> 120s`
+    - signals: PR reviews / review state, review comments, issue comments,
+      check runs
+3. Define which events reset the observation window, including new actionable
+   comments, blocking PR review states, unresolved blocking comment or thread
+   signals, failed checks, or other newly blocking PR state.
 4. Separate the workflow states conceptually so the documents no longer collapse
    these into one step:
    - clean snapshot
@@ -167,16 +180,20 @@ Artifact path notes:
 2. Verify the old rule `If NO comments -> PR is clean` is no longer the
    operative merge-handoff gate.
 3. Verify the bounded observation window is explicit and includes:
-   - `consecutive-empty-checks`
-   - `30s -> 60s -> 120s`
-   - review comments, issue comments, and check runs
-4. Verify exhausting the clean observation window does **not** automatically
-   move the workflow to `STOP POINT 2`.
-5. Verify the human-confirmed gate is explicit between observation completion
-   and merge handoff.
-6. Verify both documents still preserve the hard-stop semantics after
-   `STOP POINT 2`.
-7. Verify the guide mirrors the canonical contract instead of diverging from it.
+    - `consecutive-empty-checks`
+    - `30s -> 60s -> 120s`
+    - PR reviews / review state, review comments, issue comments, and check runs
+ 4. Verify the blocking-signal definition is explicit and includes blocking PR
+    review states, unresolved blocking threads, comments, and non-clean check
+    states.
+5. Verify exhausting the clean observation window does **not** automatically
+    move the workflow to `STOP POINT 2`.
+6. Verify observation-window exhaustion becomes eligible for the `STOP POINT 2`
+   human merge-confirmation prompt rather than bypassing or duplicating that
+   stop point.
+7. Verify both documents still preserve the hard-stop semantics after
+    `STOP POINT 2`.
+8. Verify the guide mirrors the canonical contract instead of diverging from it.
 
 ### Main Agent Publish Phase (after approval + planner alignment)
 
@@ -206,9 +223,13 @@ Artifact path notes:
   - [ ] no single empty fetch may trigger merge handoff
   - [ ] the bounded observation window is defined as `consecutive-empty-checks`
   - [ ] the backoff schedule is `30s -> 60s -> 120s`
-  - [ ] observation signals include review comments, issue comments, and check runs
+  - [ ] observation signals include PR reviews / review state, review comments,
+    issue comments, and check runs
+  - [ ] blocking signals explicitly include blocking PR review states,
+    unresolved blocking threads, comments, and non-clean check states
   - [ ] observation-window exhaustion does not auto-handoff merge
-  - [ ] a human-confirmed gate exists before `STOP POINT 2`
+  - [ ] observation-window exhaustion becomes eligible for the `STOP POINT 2`
+    human merge-confirmation prompt
 - [ ] `STOP POINT 2` remains a true hard stop:
   - [ ] no merge polling after handoff
   - [ ] no automatic re-check after handoff

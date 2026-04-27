@@ -124,7 +124,7 @@ patterns and recovery logic.
 | 4.5 Planner contract alignment | Reviewer returned `approved` and required fixes are applied | Latest draft; latest topic plan; locked decisions; artifact paths | Either route back to `creator-in-progress` or move to `publish-in-progress` | Main Agent |
 | 5. Stable library handling | Planner alignment passed and topic may affect stable-library surfaces | Stable library metadata; approved draft; current README / VERSION baseline | Stable-library timing decision is resolved: stage now, defer to release, or skip | Main Agent |
 | 6. Commit, push, and PR | Pre-commit validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
-| 7-8. PR comment loop | PR is open and checks or comments may require action | Review comments; issue comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or a bounded clean-window report that is eligible for human merge-readiness confirmation | Main Agent |
+| 7-8. PR loop + bounded observation | PR is open and checks or comments may require action | PR reviews / review state; review comments; issue comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or a bounded clean-window report that is eligible for human merge-readiness confirmation | Main Agent |
 | 9. Post-merge local sync | Human explicitly resumes after merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state; human resume signal | Local repo is synchronized and topic reaches `merged` | Main Agent |
 | 10. Release | Topic plan declares a release action and post-merge execution was explicitly resumed | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
 
@@ -475,8 +475,9 @@ After PR is open, comments may arrive (Copilot reviewer, CI checks, or human rev
 Execution contract:
 - Trigger: topic status is `pr-open` and new comments or failed checks require
   action.
-- Input: latest review comments, latest issue comments, current check state,
-  direct-apply rules, and the reroute rule for reviewer-required changes.
+- Input: latest PR reviews / current review state, latest review comments,
+  latest issue comments, current check state, direct-apply rules, and the
+  reroute rule for reviewer-required changes.
 - Output: either a new patch commit on the same PR, a route back to Phase 4 for
   reviewer re-check, or a bounded clean-window report that is eligible for
   human merge-readiness confirmation.
@@ -495,6 +496,18 @@ Creator may directly commit fixes for:
 - **Process or Boundaries**: changes to skill definition or scope
 - **Scope expansion**: new sections, new features, or changed responsibilities
 - **Example behavior**: changes that affect whether example code is runnable
+
+#### Blocking signal definition
+A PR snapshot is blocking when any newly observed signal indicates the branch is
+not yet safe for merge handoff. Blocking signals include:
+- a PR review with a blocking review state, especially `CHANGES_REQUESTED`
+- an unresolved blocking review thread
+- a review comment that still requires action
+- an issue comment that still requires action
+- a check run that is not yet clean:
+  - status is not `completed`, or
+  - conclusion is not a success-like state such as `success`, `neutral`, or
+    `skipped`
 
 #### PR Observation States (before handoff)
 - **Clean snapshot**: one fetch found no blocking signal, but the observation
@@ -515,16 +528,18 @@ Creator may directly commit fixes for:
 iteration = 0
 max_iterations = 3
 empty_checks = 0
-observation_waits = [30, 60, 120]
+observation_waits_seconds = [30, 60, 120]
 
 LOOP:
-  1. Fetch latest review comments, latest issue comments, and current check runs
+  1. Fetch latest PR reviews / current review state, latest review comments,
+     latest issue comments, and current check runs
 
   2. If any blocking signal exists:
      - Reset empty_checks = 0
-     - Treat failed checks, unresolved blocking comment state, or other newly
+     - Treat blocking PR review state, unresolved blocking review thread,
+       blocking comment state, failed or non-complete checks, or other newly
        blocking PR state as NOT clean
-     - Classify comments (direct-apply? / needs-reviewer?)
+     - Classify comments and review outcomes (direct-apply? / needs-reviewer?)
      - If ALL actionable items are direct-apply:
         - Creator applies fixes
         - Commit: git commit -m "fix: address PR feedback on [specific items]"
@@ -540,12 +555,13 @@ LOOP:
   3. If no blocking signal exists in the current snapshot:
      - empty_checks += 1
      - If empty_checks < 3:
-        - Sleep observation_waits[empty_checks - 1]
+        - Sleep observation_waits_seconds[empty_checks - 1]
         - Loop back to step 1
      - If empty_checks == 3:
         - Exit the bounded observation window
         - Report only:
           1. no new blocking signal was observed within the bounded window
+             across PR reviews, comments, and check runs
           2. this is not a guarantee that later feedback will not arrive
           3. a human must decide whether to inspect the PR and hand off merge
         - Continue to the human merge-readiness confirmation gate
@@ -571,7 +587,8 @@ Main Agent displays:
 PR: #<number> <github.com/.../pull/<number>>
 Branch: <type>/<username>/<short-description>
 Observation: 3 consecutive clean checks (`30s -> 60s -> 120s`)
-Signals checked: review comments, issue comments, check runs
+Signals checked: PR reviews / review state, review comments, issue comments,
+check runs
 Result: No new blocking signal observed within the bounded window
 
 Important:
