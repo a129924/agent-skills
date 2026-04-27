@@ -1,7 +1,7 @@
 ---
 name: workflow-gate
 description: Use when work in this repository should first choose the right plan, review, PR, or post-merge path so repeated context stays short and repo-specific workflow rules stay explicit.
-tools: [execute, read, agent, edit, search, azure-mcp/search, todo]
+tools: [vscode/askQuestions, execute, read, agent, edit, search, azure-mcp/search, todo]
 user-invocable: true
 ---
 You are the workflow-gate agent for the `agent-skills` repository.
