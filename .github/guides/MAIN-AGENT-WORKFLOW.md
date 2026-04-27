@@ -37,7 +37,7 @@ Phase 4.5: Planner contract alignment checkpoint
 Phase 5-6: Stable-library handling + validate/stage (pre-commit checks)
            [STOP 1: User confirm before commit]
 Phase 6:   Commit & push, open PR
-Phase 7-8: PR comment loop (max 3 iterations)
+Phase 7-8: PR loop + bounded observation
            [STOP 2: User confirm before manual merge]
 Phase 8:   User merges (manual)
 Phase 9-10: Post-merge + release
@@ -88,7 +88,7 @@ review-ready
             └─ [YES] → commit + push, open PR
                ↓
                 pr-open
-                  ↓ (Phase 7-8: PR loop, max 3 iterations)
+                   ↓ (Phase 7-8: PR loop + bounded observation)
                   [STOP 2: Human merge handoff]
                     ├─ [NOT READY] → stop; human returns later
                     └─ [HANDOFF] → human merges on GitHub
@@ -367,49 +367,71 @@ Ready to commit + push + open PR?
 
 ---
 
-### Phase 7-8: PR Loop with Termination (MAX 3 ITERATIONS)
+### Phase 7-8: PR Loop with Bounded Observation
 
 #### **Phase 7: PR Comment Check**
 
-1. Fetch PR comments from GitHub
+1. Fetch review comments, issue comments, and check runs from GitHub
 2. Classify each comment:
-   - **Direct-apply**: style, typo, meta, formatting
-   - **Needs-reviewer**: logic, scope, trigger, examples, requirements
+    - **Direct-apply**: style, typo, meta, formatting
+    - **Needs-reviewer**: logic, scope, trigger, examples, requirements
+3. Failed checks or any other newly blocking PR state are blocking signals, not
+   proof of a clean PR snapshot.
+4. The bounded observation shape is `consecutive-empty-checks`, not a one-time
+   empty fetch.
 
 #### **Phase 8: Creator Fix Loop**
 
 ```
 iteration = 0
 max_iterations = 3
+empty_checks = 0
+observation_waits = [30, 60, 120]
 
 LOOP:
-  1. Fetch PR comments
-  
-  2. If NO comments:
-     → PR approved ✅ → exit loop
-  
-  3. If comments exist:
-     
-     a. If ALL are direct-apply:
+  1. Fetch latest review comments, latest issue comments, and current check runs
+
+  2. If any blocking signal exists:
+     - Reset empty_checks = 0
+     - Treat failed checks, unresolved blocking comment state, or other newly
+       blocking PR state as NOT clean
+     - Classify comments
+
+     a. If ALL actionable items are direct-apply:
         - Creator applies fixes
         - Commit: git commit -m "fix: address PR comments"
         - Push: git push
         - iteration += 1
         - Loop back to step 1
-     
-     b. If ANY need reviewer:
+
+     b. If ANY actionable item needs reviewer:
         - Route back to Phase 4 (reviewer re-check)
         - Reviewer produces new verdict
         - If approved: continue
         - If needs-rework: back to Phase 4
-  
+
+  3. If no blocking signal exists in the current snapshot:
+     - empty_checks += 1
+     - If empty_checks < 3:
+        - Sleep observation_waits[empty_checks - 1]
+        - Loop back to step 1
+     - If empty_checks == 3:
+        - Exit the bounded observation window
+        - Report only:
+          1. no new blocking signal was observed within the bounded window
+          2. this is not a guarantee that later feedback will not arrive
+          3. a human must decide whether to inspect the PR and hand off merge
+        - Continue to the human merge-readiness confirmation gate
+
   4. If iteration >= max_iterations:
-     - Force exit
      - Display: "Max PR iterations reached (3)"
-     - Exit loop
+     - Stop the direct-apply loop
+     - Remain in `pr-open` until a human decides the next step
 ```
 
-**Output**: No blocking comments; Status → `pr-approved`
+**Output**: Either a patch/re-review route, or a bounded observation result that
+is eligible for human merge-readiness confirmation while status remains
+`pr-open`
 
 ---
 
@@ -417,11 +439,18 @@ LOOP:
 
 **Prompt to User**:
 ```
-✅ PHASE 8: PR READY FOR MERGE
+✅ PHASE 8: BOUNDED PR OBSERVATION COMPLETE
 
 PR: #<number> <link>
-Status: All checks ✅ green
-Comments: All addressed ✅
+Observation: 3 consecutive clean checks (`30s -> 60s -> 120s`)
+Gate shape: `consecutive-empty-checks`
+Signals checked: review comments, issue comments, check runs
+Result: No new blocking signal observed within the bounded window
+
+Important:
+  - This is not a guarantee that later feedback will not arrive
+  - Main Agent is not declaring the PR merge-ready on its own
+  - A human must inspect the PR and decide whether to hand off merge
 
 Next: Merge manually on GitHub; Main Agent stops here and resumes only after a
 later explicit human message.
@@ -438,7 +467,7 @@ Ready to hand off to human merge?
 - A human may later resume from this stop point with a new explicit message.
 
 **If YES**:
-- Instruct user to merge on GitHub.
+- Instruct user to inspect the PR and merge on GitHub if they judge it ready.
 - Stop the current execution immediately after handoff.
 - Do not wait for merge detection.
 - Phase 9 resumes only when a human later sends a new explicit
@@ -519,7 +548,7 @@ PHASE_4C_APPROVED: Reviewer approved
 PHASE_4_5_PLANNER_ALIGNED: Planner checkpoint passed
 PHASE_5_VALIDATION_DONE: All checks pass
 PHASE_6_PR_OPEN: Push + PR created (status=pr-open)
-PHASE_8_APPROVED: No blocking comments
+PHASE_8_OBSERVATION_COMPLETE: Bounded observation window completed; human handoff gate ready
 PHASE_9_MERGED: Merged (status=merged)
 ```
 
@@ -533,7 +562,7 @@ PHASE_9_MERGED: Merged (status=merged)
 Example:
   - plan.md status = pr-open
   - PHASE_6_PR_OPEN completed
-  - Resume: Phase 7 (check PR comments)
+  - Resume: Phase 7 (resume PR observation / comment triage)
 ```
 
 ---
@@ -619,16 +648,22 @@ Ready to push and open PR on GitHub?
 [N] Back to Phase 5 (make more changes)
 ```
 
-### After Phase 8: PR Approved
+### After Phase 8: Bounded PR Observation Complete
 ```
-✅ PR READY FOR MERGE
+✅ BOUNDED PR OBSERVATION COMPLETE
 
 Branch: <type>/<username>/<short-description>
 PR: #<number> (<link>)
-Status: All checks ✅ green
-Comments: All addressed ✅
+Observation: 3 consecutive clean checks (`30s -> 60s -> 120s`)
+Signals checked: review comments, issue comments, check runs
+Result: No new blocking signal observed within the bounded window
 
-Go to GitHub and merge manually.
+Important:
+  - This is not a guarantee that later feedback will not arrive
+  - Main Agent is not declaring the PR merge-ready on its own
+  - A human must inspect the PR and decide whether to hand off merge
+
+If the human judges the PR ready, go to GitHub and merge manually.
 Main Agent stops immediately after this handoff.
 
 Ready to hand off to human merge?
