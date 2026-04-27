@@ -107,7 +107,7 @@ generators without drifting into framework-specific runtime policy.
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path; this topic reaches `released` because it declares a
   post-merge tag action.
