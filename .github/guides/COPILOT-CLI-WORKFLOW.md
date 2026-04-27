@@ -108,7 +108,7 @@ creator-versus-reviewer boundary.
 Good examples:
 
 ```text
-/fleet 根據 plan-reviewer 的規則評審 @plan/cli-workflow-alignment/cli-workflow-alignment.plan.md，只回傳 JSON verdict。
+/fleet 根據 plan-reviewer 的規則評審 @plan/cli-workflow-alignment/cli-workflow-alignment.plan.md，只回傳單一 machine-consumable JSON object，且 object 外不得有任何 prose。
 ```
 
 ```text
@@ -220,7 +220,7 @@ PR 已經 merge。只從 post-merge sync 繼續，不要重跑 creator 或 revie
 ```
 
 ```text
-現在不要再看 diff，改成對 @plan/<topic>/<topic>.plan.md 做獨立 plan review，只回傳 JSON。
+現在不要再看 diff，改成對 @plan/<topic>/<topic>.plan.md 做獨立 plan review，只回傳單一 JSON object，且 object 外不得有任何 prose。
 ```
 
 ## Replace repeated `skill-context` blocks with anchored prompts
@@ -234,7 +234,7 @@ Instead of repeatedly pasting long `skill-context` blocks, prefer:
 Better patterns:
 
 ```text
-Use plan-reviewer on @plan/cli-workflow-alignment/cli-workflow-alignment.plan.md and return JSON only.
+Use plan-reviewer on @plan/cli-workflow-alignment/cli-workflow-alignment.plan.md and return exactly one JSON object with no prose outside the object.
 ```
 
 ```text
