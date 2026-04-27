@@ -164,6 +164,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-context-management` | defines synchronous Python context-manager rules for resource lifetime, `@contextmanager` versus class-based choice, cleanup-failure handling, ambient-state restoration, and `ExitStack` usage |
 | `python-docstrings` | guides contract-first docstring writing in Google Style format with explicit intent derivation, error semantics documentation, and dataclass field-level contracts |
 | `python-decorators` | defines ordinary Python decorator rules for when to use decorators, how to preserve signature transparency, and when explicit calls or context managers are clearer |
+| `python-async-await` | defines general Python async/await rules for choosing async boundaries, preserving structured concurrency, and handling cancellation, async protocols, and grouped task failure explicitly |
 | `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
 ## Notes
