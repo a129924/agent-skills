@@ -41,14 +41,20 @@ Why this is correct:
 
 ```py
 import asyncio
-from collections.abc import Awaitable
+from collections.abc import Coroutine
+from typing import Any
 
 
-async def gather_owned(*coroutines: Awaitable[object]) -> list[object]:
+async def gather_owned(*coroutines: Coroutine[Any, Any, object]) -> list[object]:
     tasks = [asyncio.create_task(coro) for coro in coroutines]
     try:
         return await asyncio.gather(*tasks)
-    except BaseException:
+    except asyncio.CancelledError:
+        for task in tasks:
+            task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+        raise
+    except Exception:
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
@@ -177,6 +183,9 @@ Why this is correct:
 ### Scenario I: Supplementary AnyIO Note
 
 ```py
+import anyio
+
+
 async def sync_pair() -> tuple[User, Project]:
     async with anyio.create_task_group() as tg:
         user_box: list[User] = []

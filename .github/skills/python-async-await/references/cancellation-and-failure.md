@@ -39,6 +39,9 @@ Why this is the mainline:
 ## Timeout boundary
 
 ```py
+import asyncio
+
+
 async def load_snapshot() -> Snapshot:
     try:
         return await asyncio.wait_for(fetch_snapshot(), timeout=2.0)
@@ -62,7 +65,7 @@ class SyncFanoutError(BaseAppError):
 
 async def run_fanout() -> None:
     try:
-        await gather_owned(sync_customer(), sync_orders())
+        await gather_owned(refresh_customers(), refresh_orders())
     except BaseAppError:
         raise
     except Exception as exc:

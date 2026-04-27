@@ -48,13 +48,20 @@ Prefer direct `await` when:
 
 ```py
 import asyncio
+from collections.abc import Coroutine
+from typing import Any
 
 
-async def gather_owned(*coroutines):
+async def gather_owned(*coroutines: Coroutine[Any, Any, object]) -> list[object]:
     tasks = [asyncio.create_task(coro) for coro in coroutines]
     try:
         return await asyncio.gather(*tasks)
-    except BaseException:
+    except asyncio.CancelledError:
+        for task in tasks:
+            task.cancel()
+        await asyncio.gather(*tasks, return_exceptions=True)
+        raise
+    except Exception:
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
