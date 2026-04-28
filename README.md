@@ -168,6 +168,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-async-await` | defines general Python async/await rules for choosing async boundaries, preserving structured concurrency, and handling cancellation, async protocols, and grouped task failure explicitly |
 | `python-generators-iterators` | defines general Python generator and iterator rules for choosing concrete collections versus generators, generator functions versus custom iterators, lazy evaluation discipline, and iterator-protocol design |
 | `python-project-init-greenfield` | executes Greenfield project initialization from blueprint contracts, including required skill installation, toolchain configuration, structural scaffolding, and acceptance handoff |
+| `python-project-retrofit` | retrofits existing Python projects with safe structural conflict detection (Shadow File Detection), implicit configuration discovery (Implicit Config Mining), Git safety checks, and Sensing Delta Report for transparent state transformation |
 | `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
 ## Notes
