@@ -136,7 +136,7 @@ so the build-and-acceptance loop closes immediately and verifiably.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: creator -> reviewer -> publish -> merge (terminal)
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
