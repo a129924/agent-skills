@@ -12,6 +12,15 @@ in different contexts.
 - It does not replace task-specific skill instructions inside
   `.github/skills/<skill-name>/`.
 
+## Workflow layering
+- This document defines the repo-level phase semantics, ownership, stop points,
+  and handoff rules.
+- Topic plans define execution contract for one topic within those repo-level
+  semantics.
+- Skill-local instructions may define task-specific execution detail, but they
+  must not contradict repo-level stop points, ownership, or status transitions.
+- Hidden chat context must never override repo-visible workflow artifacts.
+
 ## Core principles
 - Planning decisions must be captured in repo-visible files, not left in hidden
   session context.
@@ -23,6 +32,30 @@ in different contexts.
   actions occur.
 - The workflow should stay reusable and independent of one exact UI or launch
   command.
+
+## State machine rules
+- Each workflow state must have a clear entry condition, allowed next status, and
+  stop rule.
+- If the required entry condition is not met, remain in the current state instead
+  of inferring progress.
+- STOP POINT 1 is a positive authorization gate:
+  - it blocks commit / push / PR creation until explicit human approval exists
+  - once approval exists and no blocking conflict remains, execution may continue
+    directly
+- STOP POINT 2 is a terminal / no-op gate:
+  - after merge handoff, the current execution must stop
+  - no background polling, implicit wait, or inferred transition is allowed
+  - only a new explicit human resume message may re-enter the workflow
+- Human confirmation gates are explicit transitions, not implied progress
+  markers.
+
+## Source of truth
+- Repo-visible topic plans are the authoritative execution contract for a single
+  topic.
+- This file is the authoritative repo-level workflow contract.
+- Skill-local instructions are authoritative only within their own skill
+  boundary.
+- Hidden chat context must never override repo-visible workflow artifacts.
 
 ## Roles
 | Role | Primary responsibility | Must not do |
@@ -96,6 +129,9 @@ Notes:
 - Human interaction still exists at explicit stop points (for example, manual merge on
   GitHub), but those stop points do not transfer overall Phase 5-10 ownership away
   from Main Agent.
+- STOP POINT 1 is intentionally not a terminal state; it is a human approval gate
+  that may continue directly once approval exists and staged-scope conflicts are
+  resolved.
 - Once STOP POINT 2 is reached, Main Agent must fully stop and wait for a new
   explicit human resume message; it must not keep polling or waiting in the
   background for merge completion.
@@ -407,6 +443,10 @@ Before committing, validate and stage changes:
 
 #### **[STOP POINT 1]** Before Commit
 
+STOP POINT 1 is a positive authorization gate, not a terminal pause. Its job is
+to prevent unsafe commit / push / PR creation, not to force an artificial halt
+after the staged set is already valid.
+
 README / VERSION appear in the staged set only when the topic plan schedules them
 before PR creation.
 
@@ -427,7 +467,10 @@ Ready to commit + push + open PR on GitHub?
 
 **If [N]**: Discard all staged changes; creator can modify further; ask again when ready
 
-**If [Y]**: Proceed to commit
+**If [Y]**:
+- Proceed directly to commit.
+- Do not add a second artificial waiting phase if the staged set is already valid
+  and no blocking scope conflict remains.
 
 #### Commit and Push (Phase 6)
 
@@ -580,6 +623,10 @@ itself prove merge readiness or skip the observation / human gate.
 
 #### **[STOP POINT 2]** Before Manual Merge
 
+STOP POINT 2 is a terminal / no-op gate. After human merge handoff, the current
+execution must stop completely. It is not a "wait here and keep checking"
+boundary.
+
 Main Agent displays:
 ```
 ✅ BOUNDED PR OBSERVATION COMPLETE
@@ -620,7 +667,7 @@ Ready to hand off to human merge and stop here?
 - Stop the current execution immediately after handoff.
 - Do not poll GitHub for merge detection.
 - Resume at Phase 9 only when a human sends a new explicit message confirming
-  merge.
+  merge and telling the workflow to continue.
 
 #### Each direct-apply fix gets a new commit
 

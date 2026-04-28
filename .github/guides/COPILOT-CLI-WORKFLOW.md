@@ -136,6 +136,33 @@ Good examples:
 Check whether the reviewer or shell work for this topic is still running before starting another pass.
 ```
 
+## Stop-point operating model
+
+- **STOP POINT 1** is a positive authorization gate:
+  - use it to confirm staged scope and commit / push intent
+  - once approval exists and no serious conflict remains, the workflow may
+    continue directly
+- **STOP POINT 2** is a terminal / no-op gate:
+  - after merge handoff, the active run must stop
+  - do not treat silence, background updates, or generic "請繼續" follow-ups as
+    enough to resume
+  - resume only after a new explicit human message confirms merge completion and
+    asks the workflow to continue
+
+## Autopilot and continuation limits
+
+- `--max-autopilot-continues <count>` limits autonomous continuation turns.
+- Treat the flag as an operator safeguard, not as permission to bypass the
+  workflow contract.
+- Practical patterns:
+  - `copilot --max-autopilot-continues 3` for bounded straight-through work
+    before the next meaningful human gate
+  - `copilot --max-autopilot-continues 1` when approaching STOP POINT 2
+  - leave autopilot before STOP POINT 2 if you want the cleanest terminal-stop
+    behavior
+- The flag helps bound waste, but STOP POINT 2 still requires an explicit later
+  resume message after merge.
+
 ## Four common repository scenarios
 
 ### 1. Plan / workflow gate
@@ -204,6 +231,11 @@ Good examples:
 - `你再看一次，還是只看 workflow transitions`
 - `處理剩下的 blocking issues`
 
+Why these can be enough:
+- they stay inside the same phase
+- they do not cross a stop point
+- they do not change the target artifacts or output shape
+
 ## When short follow-ups are **not** enough
 
 Restate scope explicitly when any of these changed:
@@ -212,11 +244,16 @@ Restate scope explicitly when any of these changed:
 - the target artifact changed, such as from topic plan to skill folder
 - the output shape changed, such as from prose review to JSON verdict
 - a stop point was crossed and human confirmation resumed the workflow
+- STOP POINT 2 was reached and merge completion must now be confirmed explicitly
 
 Better examples:
 
 ```text
 PR 已經 merge。只從 post-merge sync 繼續，不要重跑 creator 或 review。
+```
+
+```text
+PR #27 已 merge，請只從 post-merge cleanup 繼續。
 ```
 
 ```text
@@ -253,3 +290,5 @@ Use git-post-merge-workflow for the current branch after merge confirmation. Do 
 - This guide is intentionally limited to the command lanes that most directly
   improve this repository's current workflow: `/pr`, `/review`, `/fleet`, and
   `/tasks`.
+- This guide does not treat autopilot as a substitute for explicit STOP POINT 2
+  resume semantics.
