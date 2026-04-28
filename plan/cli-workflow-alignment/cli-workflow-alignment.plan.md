@@ -85,7 +85,7 @@ a generic CLI manual.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `review-ready`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path; this topic ends at `merged` with no separate Phase 10 release
   action.
