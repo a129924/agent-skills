@@ -159,6 +159,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-testing-pytest` | defines pure Python pytest unit-testing rules for fixtures, parametrization, assertions, mocks, and coverage as a quality target |
 | `python-error-handling` | defines general Python exception-handling rules for custom errors, translation boundaries, chaining, propagation, and benign suppression |
 | `python-class-design` | defines ordinary Python class-design rules for public surfaces, thin constructors, disciplined instance state, properties, factories, and limited name mangling |
+| `python-data-model-methods` | defines general Python data-model method rules for choosing foundational dunder methods, base container protocols, dataclass-generated behavior boundaries, and safe equality/hash semantics |
 | `python-api-signature` | defines public Python function and method signature rules for safe defaults, clear parameter ordering, keyword-only clarity, and explicit call-site contracts |
 | `python-module-boundaries` | defines regular Python package and module boundary rules for explicit public surfaces, internal-module contracts, import style, and safe import behavior |
 | `python-context-management` | defines synchronous Python context-manager rules for resource lifetime, `@contextmanager` versus class-based choice, cleanup-failure handling, ambient-state restoration, and `ExitStack` usage |
