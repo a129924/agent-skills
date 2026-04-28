@@ -3,6 +3,9 @@
 This file covers representative scenarios, anti-patterns, and split signals for
 choosing foundational data-model methods and base container protocols.
 
+Examples in this skill use Python 3.10+ typing syntax to match the repository's
+current Python baseline.
+
 ## Scenario A: `__repr__` versus `__str__`
 
 **Good**: Diagnostic `__repr__`, user-facing `__str__`
@@ -65,12 +68,11 @@ class Money:
 
 ```py
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass(unsafe_hash=True)
 class SearchFilter:
-    tags: List[str]
+    tags: list[str]
     limit: int
 ```
 
@@ -81,12 +83,11 @@ silently break.
 
 ```py
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass
 class SearchFilter:
-    tags: List[str]
+    tags: list[str]
     limit: int
 ```
 
@@ -121,11 +122,8 @@ class CatalogItem:
 **Good**: Truthiness matches real domain meaning
 
 ```py
-from typing import List
-
-
 class ValidationErrors:
-    def __init__(self, messages: List[str]) -> None:
+    def __init__(self, messages: list[str]) -> None:
         self._messages = messages
 
     def __len__(self) -> int:
@@ -137,11 +135,8 @@ Here no separate `__bool__` is needed; emptiness already has a natural meaning.
 **Good**: Explicit truth semantics when length is not the right model
 
 ```py
-from typing import Optional
-
-
 class AuthResult:
-    def __init__(self, token: Optional[str]) -> None:
+    def __init__(self, token: str | None) -> None:
         self.token = token
 
     def __bool__(self) -> bool:
@@ -167,11 +162,8 @@ status.
 **Good**: Domain collection behaves like a collection
 
 ```py
-from typing import List
-
-
 class OrderLines:
-    def __init__(self, lines: List[str]) -> None:
+    def __init__(self, lines: list[str]) -> None:
         self._lines = list(lines)
 
     def __len__(self) -> int:
@@ -190,11 +182,8 @@ protocols fit naturally.
 **Anti-pattern**: Service object pretending to be a container
 
 ```py
-from typing import List
-
-
 class ReportService:
-    def __init__(self, reports: List[str]) -> None:
+    def __init__(self, reports: list[str]) -> None:
         self._reports = reports
 
     def __iter__(self):
@@ -209,11 +198,8 @@ confuses the public meaning.
 **Good**: Read-only indexed access is intentional
 
 ```py
-from typing import List
-
-
 class Leaderboard:
-    def __init__(self, entries: List[str]) -> None:
+    def __init__(self, entries: list[str]) -> None:
         self._entries = list(entries)
 
     def __getitem__(self, index: int) -> str:
@@ -223,11 +209,8 @@ class Leaderboard:
 **Anti-pattern**: Indexing added because internal storage is a list
 
 ```py
-from typing import List
-
-
 class ImportJob:
-    def __init__(self, staged_files: List[str]) -> None:
+    def __init__(self, staged_files: list[str]) -> None:
         self._staged_files = staged_files
 
     def __getitem__(self, index: int) -> str:
@@ -250,16 +233,10 @@ class CustomerId:
 **Anti-pattern**: Parsing and orchestration hidden in `__init__`
 
 ```py
-from typing import Dict
-
-
 class CustomerId:
-    def __init__(self, payload: Dict[str, object]) -> None:
+    def __init__(self, payload: dict[str, object]) -> None:
         raw = str(payload["customer_id"]).strip().upper()
-        if raw.startswith("CUST-"):
-            self.value = raw[len("CUST-"):]
-        else:
-            self.value = raw
+        self.value = raw.removeprefix("CUST-")
 ```
 
 When creation logic becomes named or parsing-heavy, hand off to
@@ -270,11 +247,8 @@ When creation logic becomes named or parsing-heavy, hand off to
 **Good**: Simple iteration declaration
 
 ```py
-from typing import List
-
-
 class Batch:
-    def __init__(self, items: List[str]) -> None:
+    def __init__(self, items: list[str]) -> None:
         self._items = list(items)
 
     def __iter__(self):

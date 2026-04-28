@@ -5,6 +5,9 @@ for ordinary classes. The reference is split into topic files so equality/hash
 rules, representation semantics, and container behavior stay portable and easy
 to navigate.
 
+Examples in this skill use Python 3.10+ typing syntax to match the repository's
+current Python baseline.
+
 ## Reference Files
 
 | File | Role |

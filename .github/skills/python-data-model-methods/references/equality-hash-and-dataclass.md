@@ -32,11 +32,10 @@ compatible. A mutable hashable value object is a common silent bug source.
 
 ```py
 from dataclasses import dataclass
-from typing import List
 
 @dataclass(unsafe_hash=True)
 class UserFilter:
-    tags: List[str]
+    tags: list[str]
 ```
 
 `unsafe_hash=True` does not make mutation safe; it only suppresses the default

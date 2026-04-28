@@ -87,9 +87,10 @@ questions to `python-async-await` and iteration-heavy design questions to
   - `__eq__` / `__hash__` pairing safety is a central decision path, especially
     for mutable objects
 - **Version baseline**:
-  - implementation guidance should work on **Python 3.7+** because
-    `@dataclass` is part of the standard library baseline for this topic
-  - examples should avoid Python 3.10+ only syntax unless clearly version-gated
+  - implementation guidance should work on **Python 3.10+** to match the
+    repository's existing Python typing baseline
+  - examples may use modern built-in generics and PEP 604 unions
+  - examples should avoid Python 3.11+ only syntax unless clearly version-gated
 
 ## Boundaries / Exclusions
 
@@ -236,8 +237,8 @@ Artifact path notes:
    - anti-patterns for meaningless `__repr__`, unsafe hashing of mutable
      objects, cosmetic `__bool__`, and accidental over-containerization
    - split signals for `@dataclass` generation versus manual implementation
-7. Ensure all examples are self-contained and runnable on Python 3.7+.
-8. Mark any examples requiring Python 3.10+ or later as version-gated notes.
+7. Ensure all examples are self-contained and runnable on Python 3.10+.
+8. Mark any examples requiring Python 3.11+ or later as version-gated notes.
 9. Verify no drift into async protocols, operator overloading, descriptor policy,
    or deep iterator-strategy guidance.
 
@@ -249,7 +250,7 @@ Artifact path notes:
   - optional `references/` if reference depth requires splitting
   - `examples.md` (required for branching topic)
 - all files contain explicit examples and clear boundaries
-- all code examples run on Python 3.7+ or are clearly version-gated
+- all code examples run on Python 3.10+ or are clearly version-gated
 
 ## Validation / Acceptance Checks
 
@@ -269,7 +270,7 @@ Artifact path notes:
    are safe and when manual override is required.
 7. **Example quality**: all examples are self-contained and runnable; no hidden
    imports or dependencies.
-8. **Version portability**: no Python 3.10+ hard requirement unless explicitly
+8. **Version portability**: no Python 3.11+ hard requirement unless explicitly
    version-gated in examples and justified.
 9. **Reference structure**: if `references/` is used, each file is named and
    role-labeled in `SKILL.md` under `Local references`.
@@ -300,7 +301,7 @@ The reviewer is responsible for checking:
 - artifact paths match the plan
 - equality/hash guidance is semantically safe and dataclass boundaries are
   explicit
-- all code examples are runnable and Python 3.7+ portable or version-gated
+- all code examples are runnable and Python 3.10+ portable or version-gated
 
 ## Post-merge / release actions
 
