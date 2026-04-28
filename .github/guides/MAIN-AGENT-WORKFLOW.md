@@ -56,6 +56,33 @@ Boundary note:
   define the full authoring methodology for a future planning-specific skill
   such as `plan-creator`.
 
+## Workflow layering
+
+- `plan/agent-handoff-workflow.md` is the repo-level source for phase semantics,
+  stop points, ownership, and allowed transitions.
+- This guide is the executable operating layer for those same semantics.
+- Skill-local instructions and shorter user prompts may add task detail, but they
+  must not override repo-level stop points or invent implied transitions.
+- Hidden chat context must never outrank a repo-visible topic plan or the
+  canonical workflow contract.
+
+## State machine rules
+
+- Every phase transition needs an explicit entry condition and an allowed next
+  status.
+- If the entry condition is not met, remain in the current phase instead of
+  inferring progress from silence or background activity.
+- STOP POINT 1 is a positive authorization gate:
+  - it blocks commit / push / PR creation until human approval exists
+  - once approval exists and no blocking conflict remains, Main Agent may
+    continue directly
+- STOP POINT 2 is a terminal / no-op gate:
+  - after merge handoff, the current execution must stop
+  - do not poll, do not background-wait, and do not infer merge completion
+  - only a new explicit human resume message may unlock Phase 9
+- Autopilot or continuation limits may reduce runtime drift, but they do not
+  replace the workflow contract.
+
 **Key Decisions** (from workflow validation):
 - ✅ Two-layer review: Copilot (code quality) + Reviewer (design quality)
 - ✅ Planner contract alignment: independent checkpoint after reviewer approval
@@ -322,6 +349,10 @@ Copilot comments:
 
 ### [STOP POINT 1] Confirm Before Commit
 
+STOP POINT 1 is a positive authorization gate. It exists to prevent unsafe
+commit / push / PR creation, not to create a terminal pause when the staged set
+is already valid.
+
 **Prompt to User**:
 ```
 ✅ PHASE 6: READY TO PUSH
@@ -348,7 +379,10 @@ Ready to commit + push + open PR?
 
 **If NO**: Discard staged changes (git reset); go back to Phase 5
 
-**If YES**: Continue to Phase 6 final commit
+**If YES**:
+- Continue directly to Phase 6 final commit.
+- Do not manufacture a second stop when the staged set is valid and no serious
+  scope conflict remains.
 
 ---
 
@@ -444,6 +478,10 @@ is eligible for human merge-readiness confirmation while status remains
 
 ### [STOP POINT 2] Confirm Before Merge
 
+STOP POINT 2 is a terminal / no-op gate. After merge handoff, Main Agent must
+stop the current execution completely and exit the active run. It must not keep
+watching for merge completion.
+
 **Prompt to User**:
 ```
 ✅ PHASE 8: BOUNDED PR OBSERVATION COMPLETE
@@ -460,8 +498,8 @@ Important:
   - Main Agent is not declaring the PR merge-ready on its own
   - A human must inspect the PR and decide whether to hand off merge
 
-Next: Merge manually on GitHub; Main Agent stops here and resumes only after a
-later explicit human message.
+Next: Merge manually on GitHub; Main Agent stops here, exits the active run, and
+resumes only after a later explicit human message.
 
 Ready to hand off to human merge?
 [Y] Yes, hand off to human merge and stop here
@@ -479,13 +517,18 @@ Ready to hand off to human merge?
 - Stop the current execution immediately after handoff.
 - Do not wait for merge detection.
 - Phase 9 resumes only when a human later sends a new explicit
-  merge-confirmation message.
+  merge-confirmation message that also tells the workflow to continue.
 
 ---
 
 ### Phase 9: Post-Merge Local Sync
 
 **Input**: explicit human resume message plus PR merged on GitHub
+
+Resume rule:
+- A valid resume message must explicitly confirm that the merge completed.
+- Short follow-ups like `請繼續` are not enough after STOP POINT 2 unless they
+  also explicitly confirm merge completion and resume intent.
 
 **Task**:
 1. Confirm the referenced PR or merge path actually merged before cleanup starts
