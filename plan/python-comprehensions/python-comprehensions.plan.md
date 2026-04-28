@@ -93,7 +93,7 @@ boundaries, nested structures, filter/map trade-offs, and anti-patterns.
 
 ## Status / Allowed Transitions
 
-**Current status**: `pr-open`
+**Current status**: `released`
 
 Canonical allowed transitions:
 - `planned` → `creator-in-progress` (when this plan is committed and ready)
