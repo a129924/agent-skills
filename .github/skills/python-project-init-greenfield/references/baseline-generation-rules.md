@@ -11,7 +11,7 @@ The default greenfield layout is:
 .
 ├── .github/
 │   ├── copilot-instructions.md
-│   ├── env-manifest.json
+│   ├── skills-provenance.json
 │   └── skills/
 ├── .gitignore
 ├── .env.example
@@ -91,7 +91,7 @@ Include at least:
 - project title and short summary
 - `## Governance` section listing installed skills and versions
 - uv quick-start notes
-- acceptance note pointing to `sense_env.py`
+- acceptance note pointing to the canonical `sense-env-scaffold` CLI path
 
 ## Placeholder-only surfaces
 
@@ -106,7 +106,7 @@ repo-specific policy that is not supported by the installed skills.
 The placeholder `.github/copilot-instructions.md` should explicitly:
 
 - tell Copilot to consult installed skills under `.github/skills/`
-- prefer `sense_env.py` / acceptance flow before deeper repo-specific assumptions
+- prefer the canonical `sense-env-scaffold` acceptance command before deeper repo-specific assumptions
 - avoid inventing business-domain policy that the repository has not declared yet
 
 ## Required-skills deployment
@@ -122,8 +122,7 @@ Do not create fake placeholder skill folders just to satisfy the blueprint.
 
 ## Provenance recording
 
-Record installed-skill provenance in `.github/env-manifest.json` under a
-dedicated `governance` module or section.
+Record installed-skill provenance in `.github/skills-provenance.json`.
 
 Capture at least:
 
@@ -155,13 +154,13 @@ Greenfield init is not complete until it closes the loop with acceptance.
 
 Expected handoff:
 
-1. ensure `sense_env.py` is locally available
+1. ensure `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py` is locally available
 2. run acceptance against `blueprint.md`
 3. read the resulting success or gap output
 4. stop on acceptance gaps instead of inventing unapproved fixes
 
-If `sense_env.py` is unavailable, the skill must stop and explain that the acceptance
-handoff cannot be completed yet.
+If that canonical CLI path is unavailable, the skill must stop and explain that the
+acceptance handoff cannot be completed yet.
 
 ## Non-goals
 

@@ -55,8 +55,8 @@ Detailed examples for `python-project-init-greenfield`.
 - create `src/weather_service/main.py` with typed starter boilerplate
 - generate uv-aligned `pyproject.toml` with pytest / ruff / pyright config
 - copy the three listed skills into `.github/skills/`
-- write governance provenance into `.github/env-manifest.json`
-- run acceptance against `blueprint.md`
+- write governance provenance into `.github/skills-provenance.json`
+- run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 
 **Expected result**
 - the repository is baseline-ready without invented business logic
@@ -178,12 +178,12 @@ the skill must stop with a concrete error.
 
 ## Acceptance handoff requires a real sensing implementation
 
-If the blueprint requires acceptance but the target repo does not end up with
-`sense_env.py` available locally, the skill must not claim completion.
+If the blueprint requires acceptance but the target repo does not end up with the
+canonical CLI path available locally, the skill must not claim completion.
 
 **Correct behavior**
 - ensure `sense-env-scaffold` was copied or an equivalent local install already exists
-- run acceptance against `blueprint.md`
+- run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 - if acceptance cannot run, stop and explain why the handoff is incomplete
 
 ---

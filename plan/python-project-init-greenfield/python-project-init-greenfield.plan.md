@@ -12,7 +12,8 @@ builds a minimal yet complete Python project baseline, including:
 - Placeholder configuration surfaces
 - Version / provenance recording in manifest
 
-Upon completion, the skill hands the built workspace into `sense_env.py --mode acceptance`
+Upon completion, the skill hands the built workspace into
+`python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 so the build-and-acceptance loop closes immediately and verifiably.
 
 ## Scope
@@ -31,7 +32,7 @@ so the build-and-acceptance loop closes immediately and verifiably.
   - directory and entrypoint creation
   - `pyproject.toml` generation
   - Required Skills copying with validation
-  - `.github/env-manifest.json` provenance recording
+  - `.github/skills-provenance.json` provenance recording
   - README + placeholder instructions generation
   - hard-blocking blueprint-validation failures
   - safe conflict handling and Human confirmation gates
@@ -101,7 +102,7 @@ so the build-and-acceptance loop closes immediately and verifiably.
 - copy from current repo library with version pinning
 - validate that each source skill folder contains at least `SKILL.md`
 - copy full skill folder (including `references/`, `scripts/`, `templates/`)
-- record provenance in `.github/env-manifest.json` under `governance` module
+- record provenance in `.github/skills-provenance.json`
 - if target repo already contains the same-named skill with divergent content,
   **always ask Human** rather than overwrite or merge
 
@@ -126,9 +127,9 @@ so the build-and-acceptance loop closes immediately and verifiably.
   - validation responsibility belongs upstream in Human / planner review
 - this skill does not **execute** assertions
   - assertion execution and acceptance verification happen downstream in
-    `sense_env.py --mode acceptance`
+    `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 - this skill does not **replace** Human-authored design or business logic
-  - it only builds the project baseline and geoskeleton
+  - it only builds the project baseline and skeleton
 - this skill does not **migrate** or **retrofit** existing projects
   - retrofit-specific init logic is a separate skill
 - this skill does not **generate** copilot-instructions content
@@ -145,8 +146,10 @@ so the build-and-acceptance loop closes immediately and verifiably.
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
   - `needs-rework` -> `creator-in-progress`
+  - `approved` -> `creator-in-progress`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
+  - `publish-in-progress` -> `merged`
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
@@ -160,7 +163,7 @@ this topic.
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/python-project-init-greenfield/python-project-init-greenfield.plan.md` | Planning actor | Repo-visible execution contract for this topic |
-| Skill folder | `.github/skills/python-project-init-greenfield/` | Creator | New stable skill folder |
+| Skill folder | `.github/skills/python-project-init-greenfield/` | Creator | New skill folder for this topic |
 | SKILL.md | `.github/skills/python-project-init-greenfield/SKILL.md` | Creator | Executable contract for the skill |
 | examples.md | `.github/skills/python-project-init-greenfield/examples.md` | Creator | Multi-path usage patterns and anti-patterns |
 | Reference: blueprint parsing | `.github/skills/python-project-init-greenfield/references/blueprint-parsing-contract.md` | Creator | How to interpret the blueprint contract and optional-item behavior |
@@ -171,8 +174,6 @@ this topic.
 - This topic does **not** modify `README.md` or `VERSION`
 - This topic creates a new **skill folder only**, not a stable-library-affecting
   change
-- Later stable-library updates (e.g., adding this skill to README after it is
-  approved) are handled separately by main agent during `publish-in-progress`
 - All paths listed above are exact and must be created
 - If creator work drifts outside these paths, that is a plan-alignment issue and
   must be discussed before merging
@@ -219,29 +220,32 @@ this topic.
      - Validate that it contains at least `SKILL.md`
      - Copy full skill folder to target repo's `.github/skills/`
      - If divergent content already exists at target, ask Human before overwriting
-     - Record skill name, version, source hash in `.github/env-manifest.json`
+     - Record skill name, version, source hash in `.github/skills-provenance.json`
 
 7. **Configuration surface generation**
    - Create `.gitignore` with Python-appropriate defaults
    - Create `.env.example` as a placeholder (no real secrets)
    - Create `.pre-commit-config.yaml` placeholder
-   - Create placeholder `.github/copilot-instructions.md` referencing skills and
-     `sense_env.py`
+   - Create placeholder `.github/copilot-instructions.md` referencing installed skills
+     and the canonical acceptance command path
 
 8. **README generation**
    - Include project title and brief description
    - Include `## Governance` section listing installed skills and versions
    - Include quick-start section showing how to use `uv`
-   - Include link to `sense_env.py` for acceptance verification
+   - Include the canonical acceptance command for verification:
+     `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 
 9. **Manifest recording**
-   - Create or update `.github/env-manifest.json`
-   - Record skill installation under `governance` module
+   - Create or update `.github/skills-provenance.json`
+   - Record skill installation in that provenance file
    - Include skill name, version, source hash for later comparison
 
 10. **Post-init guidance**
     - After successful init, print summary of what was created
-    - Suggest running `sense_env.py --mode acceptance` to verify baseline
+    - Suggest running
+      `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
+      to verify baseline
     - Preserve `blueprint.md` as the persistent design contract
 
 ## Validation / Acceptance Checks

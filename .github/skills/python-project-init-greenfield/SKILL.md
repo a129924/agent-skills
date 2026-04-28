@@ -1,6 +1,6 @@
 ---
 name: python-project-init-greenfield
-description: Create a governed Python project baseline from a locked `blueprint.md` contract. Use this when a greenfield repository needs its first uv-aligned structure, copied Agent Skills, and a closed acceptance handoff through `sense_env.py`.
+description: Create a governed Python project baseline from a locked `blueprint.md` contract. Use this when a greenfield repository needs its first uv-aligned structure, copied Agent Skills, and a closed acceptance handoff through the canonical `sense-env-scaffold` CLI path.
 ---
 
 # Purpose
@@ -11,7 +11,7 @@ Use this skill when:
 - a new or near-empty repository already has a review-ready `blueprint.md`
 - the task is to create the first Python baseline rather than retrofit an existing project
 - the repository should start with uv-aligned tooling, required Agent Skills, and acceptance-ready structure
-- the workflow needs build-first execution followed by `sense_env.py --mode acceptance`
+- the workflow needs build-first execution followed by `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 
 Do not use this skill when:
 - the repository already has meaningful structure and needs retrofit or selective reinforcement
@@ -56,36 +56,35 @@ Do not use this skill when:
    - Validate each source skill folder contains at least `SKILL.md`.
    - Copy the full skill folder, including companion files and local assets.
    - If the target already contains materially different skill content, stop and ask the human instead of overwriting or merging.
-7. Record governance provenance in `.github/env-manifest.json`.
-   - Use a dedicated `governance` module or section.
+7. Record governance provenance in `.github/skills-provenance.json`.
    - Capture at least skill name, source version, and source hash.
-   - Keep the manifest governance-oriented; do not invent unrelated environment facts here.
+   - Keep the provenance file governance-oriented; do not overload the sensing manifest.
 8. Merge only when safe.
    - Additive, low-risk updates may be merged.
    - Materially different config, README, or skill content requires explicit human guidance.
 9. Close the loop with acceptance.
-   - Ensure `sense_env.py` is actually available through an installed `sense-env-scaffold` skill or an already-present equivalent local install.
+   - Ensure the canonical CLI path is actually available through an installed `sense-env-scaffold` skill or an already-present equivalent local install.
    - Run acceptance against `blueprint.md`.
    - If acceptance fails, report the concrete gaps and stop; do not silently reinterpret the contract.
 10. Leave `blueprint.md` in place as the persistent design contract and clean up any scratch artifacts created during init.
 
 # Examples
-- Positive: Read a locked `blueprint.md`, create the uv baseline under `src/` and `tests/`, copy the listed skills, record provenance in `.github/env-manifest.json`, then run `sense_env.py --mode acceptance --contract-file blueprint.md`.
+- Positive: Read a locked `blueprint.md`, create the uv baseline under `src/` and `tests/`, copy the listed skills, record provenance in `.github/skills-provenance.json`, then run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`.
 - Negative: Use this skill to retrofit an existing service with lots of pre-existing structure, invent missing blueprint fields, or overwrite divergent governance files without asking the human.
 
 # Outputs
 - a greenfield Python baseline aligned to `blueprint.md`
 - copied required skill folders under `.github/skills/`
-- governance provenance recorded in `.github/env-manifest.json`
+- governance provenance recorded in `.github/skills-provenance.json`
 - a repository ready for acceptance verification against the same `blueprint.md`
 
 # Verification
 - confirm `blueprint.md` follows the fixed heading order and contains a valid `[sensing-assertions]` block
 - confirm every required skill exists in the source library before copying starts
 - confirm generated outputs include uv-aligned `pyproject.toml`, governance-aware `README.md`, and typed entrypoint boilerplate
-- confirm placeholder `.github/copilot-instructions.md` tells Copilot to consult installed skills and prefer sensing / acceptance flow first
+- confirm placeholder `.github/copilot-instructions.md` tells Copilot to consult installed skills and prefer the canonical sensing / acceptance command first
 - confirm placeholder files remain placeholders and do not contain business logic or secrets
-- confirm acceptance is run only when `sense_env.py` is available locally
+- confirm acceptance is run only when `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py` is available locally
 
 # Red Flags
 - a request to "just guess" missing blueprint sections or assertion kinds

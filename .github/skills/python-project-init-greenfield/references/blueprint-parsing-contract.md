@@ -19,6 +19,7 @@ Missing any required section is a contract error for greenfield init.
 
 - `## Acceptance Criteria` is mandatory.
 - A fenced block tagged ````yaml [sensing-assertions]```` must appear immediately after that heading.
+- If human-readable explanation is needed, it must appear only after the fenced block, not before it.
 - Each v1 assertion record must contain:
   - `kind`
   - `target`
@@ -102,11 +103,21 @@ do not authorize the initializer to invent extra governance rules.
 
 ## Normalization rules
 
+These normalization rules apply to semantic keys such as Toolchain, Structural
+Invariant prefixes, and Quality Threshold labels. They do **not** rewrite
+`Required Skills` directory names.
+
 - key parsing is case-insensitive
 - underscores and hyphens normalize to the same semantic key
   - `type_checking` == `type-checking`
 - keys outside the recommended sets are allowed when their purpose is clear
 - unknown keys should be translated from stated purpose, not treated as automatic errors
+
+For `Required Skills` specifically:
+
+- do not normalize case
+- do not rewrite `_` and `-`
+- only trim surrounding whitespace and ignore the trailing `(Optional)` marker when present
 
 ## Optional-item semantics
 
