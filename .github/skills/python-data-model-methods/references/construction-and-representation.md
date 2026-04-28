@@ -20,8 +20,11 @@ data-model semantics.
 **Anti-pattern**:
 
 ```py
+from typing import Dict
+
+
 class UserReport:
-    def __init__(self, payload: dict[str, object]) -> None:
+    def __init__(self, payload: Dict[str, object]) -> None:
         self.user_id = int(payload["user_id"])
         self.name = str(payload["name"]).strip().title()
         self.start_network_session()
