@@ -27,7 +27,7 @@
 ## Scoping rules
 
 ### Python 3: Comprehensions have their own scope
-- **In Python 3.x**, comprehension variables (loop variables, intermediate results) leak into the enclosing scope **only if you explicitly reference them** after the comprehension.
+- **In Python 3.x**, comprehension variables (loop variables, intermediate results) do **not** leak into the enclosing scope; referencing them after the comprehension raises `NameError`.
 - **Key difference from Python 2**: Python 2 leaks the loop variable; Python 3 does not.
 - Example (Python 3):
   ```python
@@ -77,9 +77,10 @@
 ### Try/except inside comprehension
 - **Smell**: Indicates error handling should happen at a different layer.
 - **Refactor**: Use an explicit loop or a helper function that handles the exception.
-- Example (bad):
+- Example (bad, pseudo-code only — not valid Python syntax):
   ```python
-  values = [int(s) for s in strings if try: int(s) except ValueError: None]
+  # pseudo-code: "trying" to put try/except logic inside a comprehension
+  values = [int(s) for s in strings if <try: int(s) except ValueError: skip>]
   ```
 - Example (better):
   ```python
@@ -88,7 +89,8 @@
           return int(s)
       except ValueError:
           return None
-  values = [to_int_or_none(s) for s in strings if to_int_or_none(s) is not None]
+  converted = (to_int_or_none(s) for s in strings)
+  values = [value for value in converted if value is not None]
   ```
 
 ### Comprehension as a side-effect function

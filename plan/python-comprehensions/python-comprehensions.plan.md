@@ -132,8 +132,8 @@ Canonical allowed transitions:
 3. **Publish phase** (if `approved`):
    - commit skill files to dev branch
    - add row to `README.md` (alphabetically after `python-class-design`)
-   - update `VERSION` (MINOR bump, e.g., 0.23.0 → 0.24.0)
-   - create annotated git tag `v0.24.0`
+   - update `VERSION` (MINOR bump, e.g., X.Y.Z → X.(Y+1).0)
+   - create annotated git tag matching the version
    - push tag and commit
    - update topic plan status to `released`
 
@@ -146,7 +146,7 @@ Canonical allowed transitions:
   └── examples.md                 # 5–8 scenarios: simple, nested, edge cases, anti-patterns
 
 README.md                          # add row at stable-library-affecting-now
-VERSION                            # update to 0.24.0
+VERSION                            # update to next MINOR version
 plan/python-comprehensions/
   └── python-comprehensions.plan.md # this file; repo-visible execution contract
 ```
@@ -168,8 +168,8 @@ plan/python-comprehensions/
 **Publish phase success**:
 - [ ] committed to dev
 - [ ] README.md updated with alphabetical row
-- [ ] VERSION bumped to 0.24.0
-- [ ] git tag `v0.24.0` created and pushed
+- [ ] VERSION bumped to next MINOR version
+- [ ] git tag created and pushed matching the version
 - [ ] status verified as released
 
 ## Reviewer Handoff
@@ -198,18 +198,18 @@ When `approved` and merged to dev:
 
 1. **Stable-library promotion** (stable-library-affecting-now):
    - README.md row added (alphabetically after `python-class-design`)
-   - VERSION bumped: 0.23.0 → 0.24.0
+   - VERSION bumped: X.Y.Z → X.(Y+1).0
    - plan status updated to `publish-in-progress`
 
 2. **Release tagging** (post-merge):
-   - Create annotated tag: `git tag -a v0.24.0 -m "Release v0.24.0: add python-comprehensions skill"`
-   - Push tag: `git push origin v0.24.0`
+   - Create annotated tag matching the version: `git tag -a v<VERSION> -m "Release v<VERSION>: add python-comprehensions skill"`
+   - Push tag: `git push origin v<VERSION>`
    - plan status updated to `released`
 
 3. **Verification**:
    - Confirm tag exists on remote
    - Confirm README includes new skill row
-   - Confirm VERSION file is 0.24.0
+   - Confirm VERSION file matches the new version
 
 ## Open Questions / Unresolved Items
 

@@ -51,13 +51,19 @@ large_squares = (x ** 2 for x in huge_list)
 
 **Negative (use explicit loop or reconsider)**:
 ```python
-# Too nested; hard to read at first glance
-flattened = [x for sublist in [[1, 2], [3, 4]] for x in sublist]
-# Better: use explicit nested loop or itertools.chain
+# Too nested (3 levels) with complex conditions; hard to parse
+flattened = [
+    value
+    for row_group in matrix_groups
+    for row in row_group
+    for value in row
+    if value is not None and value > 0
+]
+# Better: use explicit nested loops with named steps
 
-# Try/except inside comprehension: smells like error handling belongs elsewhere
-results = [int(s) for s in strings if try: int(s) except ValueError: None]
-# Better: explicit loop with exception handling
+# Side-effect comprehension: legal Python, but hides validation and intent
+[results.append(int(s)) for s in strings if s.isdigit()]
+# Better: explicit loop
 
 # Chained filters that would be clearer as separate steps
 filtered = [x for x in data if x > 10 if x < 100 if x % 2 == 0]
