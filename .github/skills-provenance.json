@@ -1,0 +1,17 @@
+{
+  "entries": [
+    {
+      "skill_name": "python-project-retrofit",
+      "topic_plan": "plan/python-project-retrofit/python-project-retrofit.plan.md",
+      "source_version": "0.23.0",
+      "creator": "agent-skill-creator",
+      "created_at": "2026-04-28T07:39:20Z",
+      "phase_status": "review-ready",
+      "delta_report_reference": {
+        "contract": ".github/skills/python-project-retrofit/references/sensing-delta-contract.md",
+        "runtime_artifact": "delta_summary JSON generated during retrofit execution"
+      },
+      "acceptance_handoff": "python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md"
+    }
+  ]
+}
