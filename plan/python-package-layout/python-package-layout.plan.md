@@ -108,7 +108,7 @@ extras, without drifting into architecture-policy or release-automation rules.
 
 ## Status / Allowed Transitions
 
-**Current status**: `pr-open`
+**Current status**: `released`
 
 Canonical allowed transitions:
 - `planned` → `creator-in-progress` (when branch is prepared and drafting starts)
