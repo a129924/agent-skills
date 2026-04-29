@@ -165,7 +165,7 @@ When complete, this topic should provide a repo-visible skill that:
 
 ## Status / Allowed Transitions
 
-- **Current**: `approved`
+- **Current**: `released`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path for a stable-library-affecting topic
 - **Allowed transitions**:
