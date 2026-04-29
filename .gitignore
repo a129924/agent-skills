@@ -11,3 +11,6 @@ __pycache__/
 .github/env-manifest.json
 .github/env-manifest.snapshot.json
 
+# 專案參考資料
+docs/legacy-reference/
+
