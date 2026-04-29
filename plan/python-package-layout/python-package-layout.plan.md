@@ -196,7 +196,7 @@ Artifact path notes:
 
 4. **Publish phase** (if `approved`):
    - commit skill files to the execution branch
-   - add row to `README.md` in alphabetical order
+   - add row to `README.md` immediately after `python-naming` and before `python-project-init-greenfield`
    - update `VERSION` (MINOR bump, e.g., X.Y.Z → X.(Y+1).0)
    - open PR after STOP POINT 1 approval
    - after merge and explicit human resume, create annotated git tag matching the
@@ -215,7 +215,7 @@ Artifact path notes:
       model-selection, and error-handling rules
 - [ ] no file assumes hidden repo context or project-specific architecture
 
-**Review phase verdict**: `approved`
+**Review phase verdict**: `approved` or `needs-rework`
 
 **Publish phase success**:
 - [ ] committed to the execution branch
