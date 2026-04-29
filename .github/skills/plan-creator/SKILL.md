@@ -1,6 +1,6 @@
 ---
 name: plan-creator
-description: Create a valid, repo-visible `plan/<topic>/<topic>.plan.md` for this repository, with correct workflow phases, status transitions, artifact paths, reviewer handoff contract, and stable-library intent handling. Use this when a new repository topic needs a real execution plan before creator work starts.
+description: Create a valid, repo-visible `plan/<topic>/<topic>.plan.md` for this repository, with correct workflow phases, status transitions, artifact paths, analysis-layer handling, reviewer handoff contract, and stable-library intent handling.
 ---
 
 # Purpose
@@ -25,30 +25,39 @@ Do not use this skill when:
 - the expected repo-visible artifact paths
 - whether the topic affects stable-library surfaces
 - any locked decisions that should not be rediscovered during implementation
+- optional analysis-layer artifacts at `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md`
+- any explicit human `override` instruction if chat-time guidance should outrank analysis artifacts
 - the current workflow contract from `plan/agent-handoff-workflow.md`
 
 # Process
 1. Confirm the task is really topic-plan authoring, not creator drafting, review, publish, or release execution.
 2. Read the current workflow contract, then start from `templates/topic-plan-template.md` instead of drafting the plan from scratch.
-3. Decide whether the topic is:
+3. Inspect `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md` if either exists before deciding the plan scope.
+4. Route analysis-layer priority before drafting:
+   - if both files exist, enter strict mode: treat `analysis/<topic>/technical-spec.md` as the execution-facing source of truth, use `analysis/<topic>/requirements.md` as the business-intent guardrail, and map the output plan 100% to the technical spec instead of inventing alternative work from chat context
+   - if one file exists without the other, emit an explicit semantic warning that names the missing companion artifact and explains that the analysis layer is incomplete
+   - if neither file exists, emit an explicit semantic warning that the plan is being authored without the optional analysis layer
+   - analysis-layer artifacts outrank conversation-time instructions unless a human explicitly says `override`
+5. Decide whether the topic is:
    - review-ready-only with no stable-library surfaces, or
    - a topic that explicitly affects stable-library surfaces and therefore needs declared timing and stable-library metadata
-4. Lock scope, boundaries, and role ownership before drafting the plan body in the local template.
-5. Enumerate exact `Artifact Paths`; do not use vague catch-all path descriptions.
-6. Write the required topic-plan sections in canonical order from the template.
-7. If the topic affects stable-library surfaces, add a `## Stable library metadata` section and fill all workflow-required fields needed by later phases, including README row, VERSION bump, timing, and any release-related metadata. If it does not affect stable-library surfaces, make that non-stable intent explicit instead of leaving the contract implicit.
-8. Use only canonical workflow transitions and require machine-consumable reviewer handoff JSON.
-9. If scope, artifact paths, role ownership, stable-library timing, stable-library metadata, or release intent is unclear, stop and ask instead of filling placeholders.
+6. Lock scope, boundaries, and role ownership before drafting the plan body in the local template.
+7. Enumerate exact `Artifact Paths`; do not use vague catch-all path descriptions.
+8. Write the required topic-plan sections in canonical order from the template.
+9. If the topic affects stable-library surfaces, add a `## Stable library metadata` section and fill all workflow-required fields needed by later phases, including README row, VERSION bump, timing, and any release-related metadata. If it does not affect stable-library surfaces, make that non-stable intent explicit instead of leaving the contract implicit.
+10. Use only canonical workflow transitions and require machine-consumable reviewer handoff JSON.
+11. If scope, artifact paths, role ownership, stable-library timing, stable-library metadata, release intent, or analysis-layer priority is unclear, stop and ask instead of filling placeholders.
 
 # Examples
-- Positive: Draft `plan/python-docstrings/python-docstrings.plan.md` so it explicitly declares non-stable intent, exact artifact paths, canonical transitions, JSON reviewer handoff, and correct post-merge timing before creator implementation begins.
-- Negative: Draft a plan that says "README/VERSION maybe later", leaves artifact paths as "skill folder and docs", uses free-form reviewer prose instead of JSON, or mixes planning, creator, and release responsibilities in one topic.
+- Positive: Draft `plan/offline-order-capture/offline-order-capture.plan.md` so it uses exact artifact paths, canonical transitions, and JSON reviewer handoff, while entering strict mode because both `analysis/offline-order-capture/requirements.md` and `analysis/offline-order-capture/technical-spec.md` exist.
+- Negative: Ignore existing analysis files because a newer chat instruction sounds easier, skip semantic warnings when analysis inputs are missing, or draft a plan that says `README/VERSION maybe later`.
 
 # Outputs
 - a repo-visible `plan/<topic>/<topic>.plan.md`
-- explicit scope, boundaries, and locked decisions for the topic
+- explicit scope, boundaries, locked decisions, and analysis-layer routing for the topic
 - exact artifact paths and workflow transitions
 - clear stable-library intent: declared or explicitly absent
+- explicit semantic warnings when analysis inputs are missing or incomplete
 - a topic plan that is ready to hand to creator work
 
 # Verification
@@ -57,25 +66,32 @@ Do not use this skill when:
 - confirm `Artifact Paths` are exact, bounded, and role-labeled
 - confirm reviewer handoff stays a single machine-consumable JSON object
 - confirm post-merge / release timing matches the topic's actual scope
+- confirm strict mode maps the plan 100% to `analysis/<topic>/technical-spec.md` when both analysis artifacts exist
+- confirm missing analysis artifacts produce explicit semantic warnings instead of silent fallback
+- confirm chat-time instructions do not outrank analysis artifacts unless a human explicitly says `override`
 
 # Red Flags
 - the plan mixes review-ready-only work with undeclared stable-library publish intent
-- the plan says "TBD", "later", or "follow normal process" where the workflow needs an explicit contract
+- the plan says `TBD`, `later`, or `follow normal process` where the workflow needs an explicit contract
 - artifact paths are broad labels instead of concrete repo-visible paths
 - creator, reviewer, and main-agent ownership are blended together
 - reviewer handoff is written as Markdown notes instead of JSON
+- existing analysis artifacts are ignored because chat context points somewhere else
 
 # Common Rationalizations
-- "Reviewer can infer the missing contract later."
-- "We can decide whether this touches README or VERSION after implementation."
-- "Artifact paths do not need to be exact as long as the scope sounds right."
-- "A rough status model is good enough if the intent is obvious."
+- `Reviewer can infer the missing contract later.`
+- `We can decide whether this touches README or VERSION after implementation.`
+- `Artifact paths do not need to be exact as long as the scope sounds right.`
+- `A rough status model is good enough if the intent is obvious.`
+- `The latest chat instruction should automatically override analysis files.`
 
 # Boundaries
 - Do not implement the topic's actual skill or code artifact.
 - Do not review, approve, or publish the topic.
 - Do not guess stable-library timing or release intent.
 - Do not rely on hidden chat context instead of a repo-visible plan.
+- Do not let absent analysis files fail silently; warn explicitly.
+- Do not let casual chat instructions override analysis artifacts without an explicit human `override`.
 - Do not generate a generic project-management plan for another repository.
 
 # Local references
