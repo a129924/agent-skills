@@ -1,4 +1,4 @@
-# copilot-instructions-init checklist
+# Copilot Instructions Init Checklist
 
 Use this checklist when reviewing or self-checking this higher-risk skill draft.
 

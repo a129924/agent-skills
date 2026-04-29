@@ -1,4 +1,4 @@
-# copilot-instructions-init examples
+# Copilot Instructions Init Examples
 
 Use these examples when the concise `SKILL.md` examples are not enough.
 
