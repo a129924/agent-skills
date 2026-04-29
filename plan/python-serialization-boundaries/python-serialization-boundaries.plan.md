@@ -123,7 +123,7 @@ internal logic.
 
 ## Status / Allowed Transitions
 
-**Current status**: `publish-in-progress`
+**Current status**: `released`
 
 Canonical allowed transitions:
 - `planned` → `creator-in-progress` (when branch is prepared and drafting starts)
