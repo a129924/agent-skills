@@ -112,7 +112,7 @@ backup_required: true
 5. require explicit human authorization before any destructive step
 6. run Gate 3 immediately before the approved move, delete, or overwrite
 7. apply only the approved operations
-8. generate the Delta Report and hand off to acceptance
+8. generate the Sensing Delta Report and hand off to acceptance
 
 ---
 
@@ -182,7 +182,7 @@ Migration Direction: replace root entrypoint with package entrypoint after reloc
 ## Acceptance handoff is still mandatory
 
 **Correct behavior**
-- once retrofit work and the Delta Report are complete, run:
+- once retrofit work and the Sensing Delta Report are complete, run:
 
 ```bash
 python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md

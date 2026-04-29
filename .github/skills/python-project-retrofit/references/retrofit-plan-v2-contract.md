@@ -33,7 +33,8 @@ Parsing rules:
 - `risk_level` must be `LOW` or `HIGH`
 - `MEDIUM` is reserved and should be treated as unsupported for current execution
 - `destructive_actions` must be a YAML sequence, even when empty
-- `backup_required` must be boolean-like YAML
+- `backup_required` must be the explicit YAML boolean `true` or `false`
+- any other `backup_required` value or type is a contract parsing error
 - prose may explain the strategy, but the YAML block is the execution source of truth
 
 ### `## Acceptance Criteria`
@@ -74,4 +75,5 @@ Treat these as blocking parse errors:
 - missing or malformed `yaml [migration-strategy]`
 - missing or malformed `yaml [sensing-assertions]`
 - unsupported `risk_level`
+- `backup_required` set to any value other than the YAML boolean `true` or `false`
 - destructive execution implied by the plan while `destructive_actions` is empty or incomplete

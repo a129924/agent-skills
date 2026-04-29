@@ -65,7 +65,7 @@ Do not use this skill when:
    - Do not continue until the human confirms the disposition of each config family.
 8. Choose the runtime confirmation lane from `risk_level`.
    - `LOW`: use the lightweight confirmation path for additive or non-destructive work only.
-   - `HIGH`: generate a destructive preview from `destructive_actions` plus current scan results, then require explicit human authorization before any destructive step.
+   - `HIGH`: generate a destructive preview from `destructive_actions` plus current scan results, regenerate or update that preview if Gate 1 or Gate 2 decisions change the destructive scope, then require explicit human authorization for the final destructive scope before any destructive step.
    - Neither lane bypasses Gate 1, Gate 2, or Git safety.
 9. Run **Gate 3: Git safety and pre-destructive check** immediately before any move, deletion, or overwrite.
    - Inspect Git working-tree status immediately before the destructive step.

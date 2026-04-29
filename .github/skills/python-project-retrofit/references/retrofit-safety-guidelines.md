@@ -36,7 +36,8 @@ If the contract remains aligned to `LOW` after scanning:
 
 - use the lightweight confirmation path
 - keep work additive or non-destructive
-- continue to Gate 3 only if a later step unexpectedly becomes destructive, and then stop because the risk lane no longer matches
+- if scanning or later analysis shows any move, delete, overwrite, relocation, or equivalent destructive action would occur, stop before Gate 3 or any destructive flow
+- require plan and risk metadata repair before retrying, for example by updating the contract to `HIGH` and populating `destructive_actions`
 
 ## HIGH lane
 
