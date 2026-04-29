@@ -155,6 +155,7 @@ Process documentation and workflow guidance for repository operations:
 | `plan-creator` | creates repo-visible topic plans with strict workflow, artifact, and stable-library timing contracts |
 | `plan-reviewer` | independently reviews repo-visible topic plans before execution, returning structured JSON verdicts against workflow and plan-authoring rules |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
+| `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
 | `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
 | `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
