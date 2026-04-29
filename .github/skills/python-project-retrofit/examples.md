@@ -4,24 +4,93 @@ Detailed examples for `python-project-retrofit`.
 
 ---
 
-## Happy path: clean retrofit with explicit human confirmations
+## LOW path: additive Retrofit V2 execution
 
 **Input retrofit plan shape**
 
 ~~~markdown
-## Project Overview
-- Current entrypoint: app.py
-- Current package: none
+## Survey Summary
+- current package: weather_service/
+- current entrypoint: weather_service/cli.py
+- current config: requirements.txt
 
-## Target Structure
-- path: src/weather_service
-- path: tests
-- entrypoint: src/weather_service/main.py
+## Gap Analysis
+- tests/ is missing
+- pyproject.toml is missing
+
+## Target Transformation
+- retain entrypoint: weather_service/cli.py
+- add path: tests/
+- add file: pyproject.toml
+
+## Migration Strategy
+```yaml [migration-strategy]
+risk_level: LOW
+destructive_actions: []
+backup_required: false
+```
 
 ## Acceptance Criteria
 ```yaml [sensing-assertions]
 - kind: path_exists
-  target: src/weather_service/main.py
+  target: pyproject.toml
+  expected: "true"
+- kind: path_exists
+  target: tests
+  expected: "true"
+```
+~~~
+
+**Observed workspace**
+- `weather_service/cli.py` already exists
+- `requirements.txt` exists and will remain during the transition
+- no destructive move, delete, or overwrite is required
+
+**Correct behavior**
+1. parse the V2 headings and both machine-readable blocks
+2. pass the Risk Alignment Check because the runtime scan stays non-destructive
+3. use the lightweight `LOW` confirmation path
+4. add only the missing governed surfaces
+5. generate the Sensing Delta Report
+6. hand off to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
+
+---
+
+## HIGH path: destructive preview and explicit authorization
+
+**Input retrofit plan shape**
+
+~~~markdown
+## Survey Summary
+- current entrypoint: app.py
+- current package root: inventory/
+- current config files: requirements.txt, setup.cfg
+
+## Gap Analysis
+- target entrypoint conflicts semantically with app.py
+- target package root requires relocation into src/
+- target toolchain consolidates config into pyproject.toml
+
+## Target Transformation
+- target path: src/inventory_service/
+- target entrypoint: src/inventory_service/main.py
+- target config: pyproject.toml
+- Migration Direction: staged package relocation with one governed toolchain surface
+
+## Migration Strategy
+```yaml [migration-strategy]
+risk_level: HIGH
+destructive_actions:
+  - move app.py -> src/inventory_service/main.py
+  - relocate inventory/ -> src/inventory_service/
+  - replace requirements.txt + setup.cfg with pyproject.toml
+backup_required: true
+```
+
+## Acceptance Criteria
+```yaml [sensing-assertions]
+- kind: path_exists
+  target: src/inventory_service/main.py
   expected: "true"
 - kind: path_exists
   target: pyproject.toml
@@ -31,230 +100,86 @@ Detailed examples for `python-project-retrofit`.
 
 **Observed workspace**
 - root `app.py` exists
-- `requirements.txt` exists
+- `inventory/` exists at the repository root
+- `requirements.txt` and `setup.cfg` exist
 - Git working tree is clean
 
 **Correct behavior**
-1. detect Gate 1 because `app.py` overlaps the planned entrypoint intent
-2. ask the human to choose `move`, `delete`, `coexist`, or `abort`
-3. detect Gate 2 because `requirements.txt` is an implicit config remnant
-4. ask the human to choose `migrate`, `delete`, `preserve`, or `abort`
-5. run Gate 3 immediately before the approved file move or overwrite
-6. apply only the approved actions
-7. generate the Sensing Delta Report
-8. hand off to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
-
-**Expected result**
-- the project is restructured without silent guesses
-- the gate decisions are explicit and human-owned
-- acceptance either passes or returns concrete gaps
+1. parse the V2 contract and read `risk_level: HIGH`
+2. run Gate 1 for the `app.py` shadow conflict
+3. run Gate 2 for the legacy config remnants
+4. generate a destructive preview from `destructive_actions` plus the current scan
+5. require explicit human authorization before any destructive step
+6. run Gate 3 immediately before the approved move, delete, or overwrite
+7. apply only the approved operations
+8. generate the Delta Report and hand off to acceptance
 
 ---
 
-## Gate 1: Shadow File Detection must offer all four outcomes
+## Risk Alignment Check: mislabeled LOW plan must hard-block
 
-### Option A: `move`
+**Invalid plan fragment**
 
-**Situation**
-- current file: `app.py`
-- target file: `src/inventory/main.py`
-- both represent the primary CLI entrypoint
+~~~markdown
+## Migration Strategy
+```yaml [migration-strategy]
+risk_level: LOW
+destructive_actions: []
+backup_required: false
+```
+~~~
 
-**Correct behavior**
-- explain the semantic overlap
-- ask whether to move `app.py` into `src/inventory/main.py`
-- wait for confirmation before touching either path
-
-### Option B: `delete`
-
-**Situation**
-- current file: `legacy_runner.py`
-- target file: `src/inventory/main.py`
-- the human confirms the target file should replace the legacy runner entirely
+**Observed workspace**
+- root `app.py` exists
+- target transformation requires `src/weather_service/main.py`
+- execution would need a move, delete, or coexistence decision
 
 **Correct behavior**
-- state that deletion is destructive
-- run the Git safety gate first
-- delete only after the human explicitly chooses `delete`
-
-### Option C: `coexist`
-
-**Situation**
-- `app.py` remains as a compatibility shim while the new package entrypoint lives at `src/inventory/main.py`
-
-**Correct behavior**
-- keep both files intentionally
-- record coexistence as a deliberate design choice, not as unresolved drift
-- include the resulting file-state change in the Delta Report
-
-### Option D: `abort`
-
-**Situation**
-- the human is not ready to decide whether the root script and package entrypoint should coexist
-
-**Correct behavior**
-- stop the retrofit cleanly
-- summarize the unresolved shadow conflict
-- do not proceed to Gate 2 or any filesystem change
+- hard-block before execution continues
+- explain that the declared `LOW` risk conflicts with destructive or conflict-bearing runtime facts
+- require plan correction instead of silently escalating the risk in place
 
 **Anti-pattern**
 
 ```text
-Wrong: auto-move the root file because the target path looks more modern.
+Wrong: silently continue with Gate 1 and treat the plan as HIGH without correcting the contract mismatch.
 ```
 
 ---
 
-## Gate 2: Implicit Config Mining must stay explicit
+## Migration Direction is not a runtime shortcut
 
-### Migration path
-
-**Observed remnants**
-- `poetry.lock`
-- `pyproject.toml`
-
-**Correct behavior**
-- explain that the existing toolchain appears Poetry-based
-- ask whether to `migrate` that configuration to the target toolchain
-- stop until the human confirms the migration scope
-
-### Deletion path
-
-**Observed remnants**
-- `.venv`
-- `Pipfile`
-
-**Correct behavior**
-- explain that deletion will remove local-environment or legacy package-manager traces
-- require the Git safety check before any destructive cleanup
-- delete only after the human chooses `delete`
-
-### Preservation path
-
-**Observed remnants**
-- `requirements.txt`
-- `setup.cfg`
-
-**Correct behavior**
-- allow the files to remain when the human chooses `preserve`
-- avoid rewriting them into the target config automatically
-- document the preserved remnants in the Delta Report as unchanged or intentionally retained context
-
-### Abort path
-
-**Correct behavior**
-- if the human chooses `abort`, stop the retrofit rather than guessing which toolchain should win
-
-**Anti-pattern**
+**Plan note**
 
 ```text
-Wrong: merge `setup.cfg`, `requirements.txt`, and `pyproject.toml` into one synthesized config without asking.
+Migration Direction: replace root entrypoint with package entrypoint after relocation
 ```
 
----
-
-## Gate ordering when multiple gates trigger together
-
-**Situation**
-- root `app.py` conflicts with planned `src/service/main.py`
-- `poetry.lock` and `.venv` are present
-- no file operations have run yet
+**Observed workspace**
+- `app.py` still exists at runtime
 
 **Correct behavior**
-1. handle Shadow File Detection first
-2. after the human resolves Gate 1, handle Implicit Config Mining
-3. only then run Git safety immediately before the destructive operation
-
-**Why this matters**
-- the human should not be asked about config migration until the file-layout conflict is understood
-- Git safety is a pre-destructive gate, not a substitute for semantic conflict resolution
+- still present Gate 1 choices: `move | delete | coexist | abort`
+- treat the plan note as strategic intent only
+- do not skip the human choice because the plan prefers replacement
 
 ---
 
-## Gate 3: dirty Git state is a hard block
+## Dirty Git state remains a hard block for destructive work
 
 **Situation**
-- the human chose `move`
+- the plan is `HIGH`
+- the human already approved the destructive preview
 - `git status --short` shows modified files
 
 **Correct behavior**
-- stop before moving, deleting, or overwriting anything
-- state that the working tree is dirty
-- require one of these human-approved paths:
-  - commit the existing changes first
-  - produce a backup first
-- do not offer a bypass option
-
-**Anti-pattern**
-
-```text
-Wrong: continue because the move is small and Git probably has enough history.
-```
+- stop before the destructive step
+- require a human-approved recovery path: commit current changes or create a backup
+- rerun the pre-destructive safety check after that recovery path is ready
 
 ---
 
-## Pre-destructive backup path
-
-**Situation**
-- the working tree is dirty
-- the human cannot commit yet but wants a backup before continuing
-
-**Correct behavior**
-- create the approved backup artifact or location before destructive work resumes
-- confirm the backup exists and is understandable to the human
-- rerun the Git safety check after the backup step and before the destructive operation
-
-**Important**
-- backup is an allowed recovery path
-- backup is not permission to skip explicit gate answers
-
----
-
-## Sensing Delta Report example
-
-**Expected JSON shape**
-
-```json
-{
-  "delta_summary": {
-    "timestamp": "2026-04-28T12:00:00Z",
-    "pre_retrofit_state": {
-      "entrypoints": ["app.py"],
-      "config_files": ["requirements.txt"]
-    },
-    "post_retrofit_state": {
-      "entrypoints": ["src/weather_service/main.py"],
-      "config_files": ["pyproject.toml"]
-    },
-    "changes": [
-      {
-        "fact_key": "primary_entrypoint",
-        "before": "app.py",
-        "after": "src/weather_service/main.py",
-        "operation": "MOVED"
-      },
-      {
-        "fact_key": "dependency_config",
-        "before": "requirements.txt",
-        "after": "pyproject.toml",
-        "operation": "MODIFIED"
-      }
-    ],
-    "new_files": ["src/weather_service/main.py", "pyproject.toml"],
-    "deleted_files": [],
-    "modified_files": ["pyproject.toml"]
-  }
-}
-```
-
-**Correct behavior**
-- keep `before` and `after` human-readable
-- use only `MOVED`, `CREATED`, `MODIFIED`, or `DELETED`
-- make the report understandable as a single-view summary of the retrofit “surgery”
-
----
-
-## Acceptance handoff is mandatory
+## Acceptance handoff is still mandatory
 
 **Correct behavior**
 - once retrofit work and the Delta Report are complete, run:
@@ -272,8 +197,8 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 
 | Anti-pattern | Why it fails |
 | --- | --- |
-| Start moving files before Gate 1 is resolved | Shadow conflicts require an explicit human decision |
-| Auto-merge multiple config surfaces into one guessed toolchain | Conflicting config policy belongs to the human |
-| Treat a dirty working tree as a warning only | Gate 3 is a hard block before destructive work |
-| Skip the Delta Report because the diff is visible in Git | The skill requires a single-view before/after artifact |
+| Accept old Retrofit headings or missing `[migration-strategy]` | Executor must consume the locked V2 contract without compatibility mapping |
+| Treat `LOW` as a soft hint even when runtime scanning finds destructive actions | Risk Alignment Check is a hard block |
+| Skip destructive preview because the plan already implies the result | HIGH-risk execution still needs explicit human authorization |
+| Let `Migration Direction` choose Gate 1 or Gate 2 outcomes | Strategy declaration does not replace runtime gates |
 | Claim success without the acceptance handoff | The retrofit loop is not closed until `sense_env.py --mode acceptance` runs |

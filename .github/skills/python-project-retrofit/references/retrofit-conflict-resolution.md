@@ -1,7 +1,17 @@
 # Retrofit Conflict Resolution
 
 Use this reference when `python-project-retrofit` encounters layout conflicts or
-implicit toolchain remnants during retrofit.
+implicit toolchain remnants while consuming a Retrofit V2 contract.
+
+## Contract inputs from Retrofit V2
+
+- `## Survey Summary` describes the current surfaces the executor should expect
+- `## Gap Analysis` highlights likely shadow conflicts and config-remnant pressure points
+- `## Target Transformation` describes the desired end state
+- `yaml [migration-strategy]` provides risk metadata, but it does not answer runtime gate questions for the human
+
+Before Gate 1 or Gate 2 proceeds, run the Risk Alignment Check. A declared
+`LOW` plan must hard-block if runtime scanning reveals destructive actions.
 
 ## Gate 1: Shadow File Detection
 
@@ -25,7 +35,8 @@ outcomes:
 3. `coexist` — keep both paths intentionally
 4. `abort` — stop the retrofit without changing the workspace
 
-Do not infer the choice from naming style, file age, or path modernity.
+Do not infer the choice from naming style, file age, path modernity, or the
+presence of `Migration Direction` in the plan.
 
 ## Gate 2: Implicit Config Mining
 
@@ -53,12 +64,22 @@ outcomes:
 - stop and ask; do not auto-resolve
 - keep the gate prompt concrete by naming the paths or files involved
 - make destructive consequences explicit before the human answers
-- if one answer changes the meaning of another gate, rerun the affected analysis
-  rather than guessing
+- if one answer changes the destructive scope, refresh the preview before proceeding
+- if one answer changes the meaning of another gate, rerun the affected analysis instead of guessing
+
+## Migration Direction boundary
+
+`Migration Direction` may explain strategic intent, but it does not replace the
+runtime resolution menus.
+
+Examples:
+
+- allowed strategy text: “staged package relocation with compatibility shim retained during transition”
+- not allowed as gate replacement: “delete the old root script automatically”
 
 ## Simultaneous triggers
 
-If both gate families trigger at once, the locked priority order is:
+If both gate families trigger at once, the locked priority order remains:
 
 1. Shadow File Detection
 2. Implicit Config Mining
@@ -90,7 +111,7 @@ Disallowed behavior:
 
 - “best effort” line-by-line merges
 - silent overwrite because one format is newer
-- treating coexistence as implied consent to ignore divergence
+- treating coexistence or migration direction as implied consent to ignore divergence
 
 ## Suggested prompt shape
 
@@ -111,4 +132,4 @@ Detected config remnants:
 Choose one: migrate | delete | preserve | abort
 ```
 
-The skill should prefer a second explicit question over a combined ambiguous one.
+Prefer a second explicit question over a combined ambiguous one.

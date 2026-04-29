@@ -1,7 +1,64 @@
 # Retrofit Safety Guidelines
 
 Use this reference for every destructive or potentially destructive retrofit
-operation.
+operation under Retrofit V2.
+
+## Risk metadata drives the confirmation lane
+
+Read `yaml [migration-strategy]` before executing anything:
+
+- `LOW` means additive or non-destructive work only
+- `HIGH` means the retrofit includes destructive actions that require preview and explicit authorization
+- `MEDIUM` is not executable in the current contract version
+
+Expected current pairing:
+
+- `LOW` -> `destructive_actions: []` and `backup_required: false`
+- `HIGH` -> non-empty `destructive_actions` and `backup_required: true`
+
+## Risk Alignment Check is mandatory
+
+Before Gate 1 or Gate 2 proceeds, compare the declared risk metadata to the
+runtime scan.
+
+If the contract says `LOW` but execution would require a move, delete,
+overwrite, directory relocation, or equivalent destructive step:
+
+- hard-block the retrofit
+- explain the mismatch concretely
+- require plan or risk correction before continuing
+
+Do not silently promote the plan to `HIGH` inside execution.
+
+## LOW lane
+
+If the contract remains aligned to `LOW` after scanning:
+
+- use the lightweight confirmation path
+- keep work additive or non-destructive
+- continue to Gate 3 only if a later step unexpectedly becomes destructive, and then stop because the risk lane no longer matches
+
+## HIGH lane
+
+If the contract is `HIGH`:
+
+- build a destructive preview from `destructive_actions` plus the current scan
+- show the preview before any destructive step runs
+- require explicit human authorization for the approved destructive scope
+- keep the preview concrete enough that the human can see which files or directories are at risk
+
+Example preview language:
+
+```text
+Planned destructive actions:
+- move app.py -> src/weather_service/main.py
+- replace requirements.txt with pyproject.toml
+Required next step: explicit approval for this destructive scope.
+```
+
+`backup_required: true` means the executor must verify a recovery path exists
+before destructive execution. In practice, that recovery path is satisfied by a
+clean committed state or a human-approved backup created before retrying.
 
 ## Gate 3: Git safety is mandatory
 
@@ -11,7 +68,7 @@ Before any move, deletion, or overwrite, inspect the Git working tree.
 
 If the working tree is clean:
 
-- continue to the human-approved destructive step
+- continue to the approved destructive step
 - keep the planned rollback or backup note alongside the operation record
 
 ### Dirty state
@@ -50,29 +107,8 @@ Minimum expectations:
 - the skill confirms the backup completed
 - the skill reruns the pre-destructive safety check after the backup path is ready
 
-Backup does not replace the gate answers for shadow or config conflicts.
-
-## Recommended safety sequence
-
-1. resolve Gate 1 shadow conflicts
-2. resolve Gate 2 config-remnant decisions
-3. identify the exact destructive step to run next
-4. inspect Git state immediately before that step
-5. if dirty, stop for commit-or-backup handling
-6. if clean or backed up, perform only the approved step
-7. record the operation for the Delta Report
-
-## Clear blocking language
-
-Prefer explicit wording such as:
-
-```text
-Retrofit blocked: Git working tree is dirty.
-Pending destructive step: move app.py -> src/weather_service/main.py
-Required next action: commit current changes or create a backup before retrying.
-```
-
-Avoid soft wording such as “warning” or “recommended”.
+Backup does not replace Gate 1 answers, Gate 2 answers, destructive preview,
+or explicit authorization.
 
 ## Failure handling
 
@@ -88,6 +124,7 @@ If a destructive step fails after approval:
 This skill does not:
 
 - invent backup locations without human awareness
+- bypass Risk Alignment Check because the draft “looks close enough”
 - bypass Git safety because the diff seems small
 - rewrite Git history
 - treat untracked local environments such as `.venv` as safe to delete without an explicit decision
