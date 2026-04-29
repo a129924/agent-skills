@@ -91,52 +91,27 @@ Do not use this skill when:
 - local reference and branching examples for common boundary choices and
   anti-patterns
 
-# Verification
-- each external boundary names where raw transport shapes stop
-- PATCH-like or partial-update flows preserve omitted, explicit `null`, and
-  unchanged intent separately when behavior differs
-- core business logic receives normalized semantic values rather than raw
-  transport strings or unparsed containers
-- a claimed internal object or record does not hide nested raw payloads
-- lossy or asymmetric outbound DTOs are intentional and do not leak internal
-  fields by accident
-- shared boundary schemas are justified by shared external contract ownership,
-  not by convenience alone
-
-# Red Flags
-- service or domain methods accept raw payload `dict`s from API/DB/queue edges
-- the same DTO is reused for request bodies, database rows, queue messages, and
-  public responses despite different semantics
-- `None` is carrying both omitted and clear-field meaning in a partial update
-- a top-level typed wrapper still contains raw nested `dict`/list payloads
-- round-trip symmetry is treated as a universal rule
-- a shared schema is extracted before there is a real shared contract
-
-# Common Rationalizations
-- "It is all JSON anyway, so one shape should work everywhere."
-- "`None` can mean missing and clear-the-field at the same time."
-- "We can normalize UUIDs and datetimes later if the code needs it."
-- "The top-level object is typed, so nested raw payloads are fine."
-- "Reusing one DTO everywhere avoids duplication."
-
 # Boundaries
-- Do not define generic type-annotation syntax or strict typing escape hatches;
-  use `python-type-hints-strict`.
-- Do not choose between dataclass, `Enum`, `ABC`, or `Protocol`; use
-  `python-model-selection`.
-- Do not define invalid-payload exception hierarchy or translation policy; use
-  `python-error-handling`.
-- Do not define package gateways, `__all__`, import safety, or deep-import
-  policy; use `python-module-boundaries`.
-- Do not define package/distribution layout or scaffold/retrofit execution; use
-  `python-package-layout`, `python-project-init-greenfield`, or
-  `python-project-retrofit`.
-- Do not broaden into whole-library dependency direction, bounded-context, or
-  theme-architecture policy; leave that to future architecture-scope skills.
+This skill defines semantic translation rules at API, database, and message
+boundaries. It does not cover:
+
+- Type-hint syntax and strict typing rules →
+  `python-type-hints-strict`
+- Choosing dataclass, `Enum`, `ABC`, or `Protocol` →
+  `python-model-selection`
+- Exception hierarchy and invalid-payload translation → `python-error-handling`
+- Package gateways, `__all__`, and import policy →
+  `python-module-boundaries`
+- Package/distribution layout and scaffold/retrofit execution →
+  `python-package-layout`, `python-project-init-greenfield`,
+  `python-project-retrofit`
+- Whole-library dependency direction and architecture slicing → future
+  architecture-scope topics
 
 # Local references
-- `reference.md`: semantic-gatekeeper framing, hard rules, and handoff guidance
-  for adjacent skills
+- `reference.md`: semantic-gatekeeper framing, hard rules, adjacent-skill
+  handoff map, and framework notes; also includes verification criteria, red
+  flags, and common rationalizations to support review
 - `examples.md`: branching examples for PATCH semantics, asymmetric DTOs, type
   normalization, deep conversion, lossy output, and local-vs-shared schema
   choices

@@ -83,7 +83,50 @@ another construct family.
 | package/distribution structure or retrofit/scaffold execution | `python-package-layout`, `python-project-init-greenfield`, `python-project-retrofit` |
 | whole-library dependency direction or architecture slicing | future architecture-scope topics |
 
+## Verification criteria
+
+A boundary design is sound when:
+
+- each external boundary names where raw transport shapes stop
+- PATCH-like or partial-update flows preserve omitted, explicit `null`, and
+  unchanged intent separately when behavior differs
+- core business logic receives normalized semantic values rather than raw
+  transport strings or unparsed containers
+- a claimed internal object or record does not hide nested raw payloads
+- lossy or asymmetric outbound DTOs are intentional and do not leak internal
+  fields by accident
+- shared boundary schemas are justified by shared external contract ownership,
+  not by convenience alone
+
+## Red flags
+
+Watch for these anti-patterns during review:
+
+- service or domain methods accept raw payload `dict`s from API/DB/queue edges
+- the same DTO is reused for request bodies, database rows, queue messages, and
+  public responses despite different semantics
+- `None` is carrying both omitted and clear-field meaning in a partial update
+- a top-level typed wrapper still contains raw nested `dict`/list payloads
+- round-trip symmetry is treated as a universal rule
+- a shared schema is extracted before there is a real shared contract
+
+## Common rationalizations to challenge
+
+When you encounter these justifications, redirect to clearer semantics:
+
+- "It is all JSON anyway, so one shape should work everywhere." → Semantic
+  translation must survive the boundary regardless of transport format.
+- "`None` can mean missing and clear-the-field at the same time." → Preserve
+  intent with a sentinel or a separate omission state.
+- "We can normalize UUIDs and datetimes later if the code needs it." →
+  Normalize at the boundary, not in business logic.
+- "The top-level object is typed, so nested raw payloads are fine." → Convert
+  nested data deeply or stay honest about returning raw data.
+- "Reusing one DTO everywhere avoids duplication." → Separate inbound and
+  outbound semantics; schema duplication is worth the clarity.
+
 ## Framework notes stay supplementary
+
 
 - Framework helpers such as Pydantic unset tracking, ORM row adapters, or queue
   SDK message objects may help implement these rules.
