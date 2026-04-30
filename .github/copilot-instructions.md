@@ -154,17 +154,13 @@ use independent `/fleet` subagents instead of self-performing these roles:
 - When launching subagents, verify they appear in `/tasks` before continuing; if
   not visible, you have not correctly delegated
 
-## STOP POINT 2 Resume Checklist
-After manual merge handoff (STOP POINT 2), do not resume post-merge work until
-verifying:
-1. Merge commit is visible in target branch history (`git log origin/<base>`)
-2. PR is closed (not just merged)
-3. Local branch is synced to the merge commit (`git pull --ff-only origin <base>`)
-4. Feature branch is deleted both locally and on remote
+## STOP POINT 2 Resume Routing
+After manual merge handoff (STOP POINT 2), route post-merge cleanup and local
+sync through `git-post-merge-workflow`.
 
-Only after confirming all four conditions should you proceed to post-merge phases
-(version tagging, README updates, stable-library announcements). A valid resume
-message must explicitly confirm: "I have merged PR #X" plus request to continue.
+Use `.github/skills/git-post-merge-workflow/references/stop-point-2-checklist.md`
+as the portable resume checklist for merge confirmation, local sync entry
+conditions, and branch cleanup checks.
 
 ## Topic Planning with Analysis Layer
 The repository now supports an optional **analysis layer** before plan creation,
