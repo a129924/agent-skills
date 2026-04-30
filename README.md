@@ -147,6 +147,8 @@ Process documentation and workflow guidance for repository operations:
 | `agent-skill-creator` | creates new repo-compliant skills |
 | `agent-skill-reviewer` | checks skills against the repository rules |
 | `agent-skill-template` | provides the canonical template and reference shape |
+| `business-intent-alignment` | collects and aligns business requirements, applying Socratic questioning and extreme-boundary checking to ensure a measurable, contradiction-free intent baseline |
+| `business-to-technical-translation` | translates requirements into technical specification, feasibility checks, and architecture-compliance guidance, surfacing conflicts and cost-of-realization warnings |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions |
 | `git-branch-naming` | names or repairs development branches with semantic prefixes and migration guidance |
 | `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
