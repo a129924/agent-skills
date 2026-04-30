@@ -39,7 +39,10 @@ Use this reference after `SKILL.md` narrows the task to reusable library/package
 | `core` | local pure helpers only | themes, adapters, facade/client, transport code |
 | theme | its own modules, `core` | other themes, facade/client |
 | adapter | its owning theme, `core`, external libraries | unrelated themes, facade/client internals |
-| facade/client | themes, adapters, `core` | inward orchestration pushed back into `core` |
+| facade/client | themes, adapters, `core` | caller application code, web/CLI handlers, peer facade/client internals |
+
+- Do not push facade/client orchestration down into `core` to reduce imports or hide bootstrap complexity.
+- Keep auth coordination, transport/retry setup, and multi-theme flow orchestration at the facade/client or in a dedicated adapter that owns that flow.
 
 ### 5. Facade/client is the composition root
 

@@ -137,8 +137,10 @@ Artifact path notes:
 
 ## Stable library metadata
 
-- `README row`: insert the following row in the stable-skills table after
-  `python-generators-iterators` and before `python-model-selection`:
+- `README row`: insert this exact table row immediately after
+  `| \`python-generators-iterators\` | defines general Python generator and iterator rules for choosing concrete collections versus generators, generator functions versus custom iterators, lazy evaluation discipline, and iterator-protocol design |`
+  and before
+  `| \`python-project-init-greenfield\` | executes Greenfield project initialization from blueprint contracts, including required skill installation, toolchain configuration, structural scaffolding, and acceptance handoff |`:
   `| \`python-library-architecture\` | defines clean Python library/package architecture rules for theme isolation, \`core\` contracts, facade/client composition, and zero-exception cross-theme dependency direction |`
 - `VERSION bump`: `0.31.0` -> `0.32.0`
 - `timing`: `publish-in-progress`
