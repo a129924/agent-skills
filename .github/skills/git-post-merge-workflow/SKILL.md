@@ -32,7 +32,7 @@ Do not use this skill when:
 2. Start only when both are true: merge completion can be verified and a new explicit human resume message requests post-merge follow-up. If either is missing, stop with a no-op handoff and wait.
 3. Inspect the current worktree, untracked files, and any preserved local state before switching branches. If sync or cleanup would overwrite unclear local state, stop and surface the conflict first.
 4. Detect the repository default branch dynamically, then switch to it.
-5. Sync the default branch with `git pull --ff-only`.
+5. Detect the repository's remote and default branch dynamically. Sync the default branch with `git pull <remote>/<default-branch> --ff-only` to ensure FF-only semantics; if upstream is configured, `git pull --ff-only` is acceptable; otherwise use explicit remote+branch form.
 6. Verify local workspace status and ahead/behind state after sync.
 7. Delete the remote feature branch by default after confirmed merge; keep it only when policy or audit retention explicitly requires it.
 8. Delete the local feature branch with `git branch -d`; use `-D` only when explicitly required and after warning about commit-loss risk.
