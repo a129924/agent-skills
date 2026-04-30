@@ -17,7 +17,7 @@ Do not use this skill when:
 - the repository already has meaningful structure, migration pressure, or retrofit conflict surfaces; use `python-retrofit-plan-authoring`
 - the task is to execute a valid blueprint; use `python-project-init-greenfield`
 - the task is to review or approve an existing blueprint
-- the request lacks concrete paths, package names, entrypoints, tool choices, or verifiable acceptance targets
+- the request lacks tool choices or verifiable acceptance targets, or lacks package names or other locatable structural details that cannot be derived safely from explicit intent or the repository name; if a package name is derived, record the concrete derived name in the authored blueprint before handoff
 
 # Inputs
 - the target repository or project name and proof that the lane is truly greenfield or baseline-only
