@@ -131,8 +131,7 @@ creator drifts into `__eq__` implementation guidance, reviewer should flag
 - reference file (binary operators): distinguish three cases precisely:
   1. `return NotImplemented` — correct (allows Python to try reflected operator)
   2. `raise TypeError(...)` — violation (kills dispatch chain prematurely)
-  3. `return None` or returning a sentinel — violation (Python silently
-     interprets as truthy `NotImplemented`-like)
+  3. `return None` or returning a sentinel — violation (Python treats `None` as the arithmetic result, causing silent data loss)
 - Add explicit note: `NotImplemented` (singleton) vs `NotImplementedError`
   (exception) — these are two different Python objects; confusing them is a
   well-known trap

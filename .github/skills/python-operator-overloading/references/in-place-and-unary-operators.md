@@ -23,6 +23,9 @@ to the return value** of `a.__iadd__(b)`.
 ```python
 # BROKEN — missing return self
 class Counter:
+    def __init__(self, value: int = 0) -> None:
+        self.value = value
+
     def __iadd__(self, other: int) -> "Counter":
         self.value += other
         # No return statement — Python implicitly returns None
@@ -36,6 +39,9 @@ print(counter.value)  # AttributeError: 'NoneType' object has no attribute 'valu
 ```python
 # CORRECT
 class Counter:
+    def __init__(self, value: int = 0) -> None:
+        self.value = value
+
     def __iadd__(self, other: int) -> "Counter":
         self.value += other
         return self  # rebinds caller to the same Counter object

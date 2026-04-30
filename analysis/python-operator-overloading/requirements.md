@@ -115,7 +115,7 @@ between operator syntax and explicit named methods.
 - **Metric / decision rule**:
   - `return NotImplemented` → correct; Python continues dispatch
   - `raise TypeError(...)` directly → violation; kills dispatch prematurely
-  - returning a sentinel or `None` → violation; Python misinterprets the result
+  - returning a sentinel or `None` → violation; Python treats it as the arithmetic result (not a dispatch signal), causing silent data loss
 - **Failure meaning**: Third-party types that implement the reflected operator
   cannot interoperate with the class even when a valid operation exists
 
