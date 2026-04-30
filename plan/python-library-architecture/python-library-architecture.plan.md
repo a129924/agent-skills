@@ -91,7 +91,7 @@ folder whose guidance is explicit about:
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish -> PR
   -> merged -> released path for a stable-library-affecting topic.
 - **Allowed transitions**:
