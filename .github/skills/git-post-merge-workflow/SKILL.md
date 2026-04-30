@@ -1,55 +1,73 @@
 ---
 name: git-post-merge-workflow
-description: Run post-merge cleanup and local sync safely after a PR is merged, including branch deletion defaults, fast-forward-only sync, and status verification.
+description: Run post-merge cleanup and local sync safely after a PR is merged, including STOP POINT 2 resume checks, branch deletion defaults, fast-forward-only sync, and final status verification.
 ---
 
 # Purpose
-Standardize post-merge cleanup and local synchronization after a PR is merged.
+Standardize post-merge cleanup and local synchronization after a PR is merged and the workflow is explicitly resumed.
 
 # Trigger / When to use
 Use this skill when:
-- a pull request was merged and the user asks what to do next
-- the user wants to delete feature branches after merge
-- the user wants to sync local mainline state after merge or tagging
-- the user wants a safe post-merge checklist with verification steps
+- a pull request or equivalent merge path is already merged on GitHub
+- a new explicit human resume message confirms the merge completed and asks to continue
+- the next job is post-merge local sync, branch cleanup, or branch-retention exception handling
+- the workflow needs a portable STOP POINT 2 checklist before cleanup starts
 
 Do not use this skill when:
-- the main task is naming a development branch
-- the main task is drafting commit messages
-- the main task is deciding whether a release gate is pass or fail
-- the PR is closed without merge
+- the human is still deciding whether to merge
+- the latest message only says `請繼續`, `continue`, or equivalent without explicit merge confirmation
+- the PR is still open, only approved, or closed without merge
+- the main task is release gating, branch naming, or commit message drafting
 
 # Inputs
-- merge status of the PR (merged vs closed-unmerged)
-- feature branch name
-- repository default branch name (dynamic, not hardcoded)
+- an explicit human resume message that confirms merge completion and asks to continue
+- a merged PR reference or equivalent merge target
+- the feature branch name
+- the repository default branch name (dynamic, not hardcoded)
 - whether remote branch retention is required by policy
-- local workspace cleanliness and ahead/behind status
+- local workspace cleanliness, preserved local state, and ahead/behind status
 
 # Process
-1. Confirm the PR is actually merged. If it was closed without merge, stop and do not run cleanup deletion steps.
-2. Detect the repository default branch dynamically, then switch to it.
-3. Sync default branch with `git pull --ff-only`.
-4. Verify local workspace status is clean and call out ahead/behind state before deletion.
-5. Delete the remote feature branch by default after merge; keep it only when policy or audit retention requires it.
-6. Delete the local feature branch with `git branch -d`; use `-D` only when explicitly required and after warning about risk.
-7. Verify no stale post-merge branch state remains (for example with `git branch -vv`).
-8. Output a concise completion summary plus any follow-up action when an exception path was used.
+1. Validate STOP POINT 2 entry conditions with `references/stop-point-2-checklist.md`.
+2. Start only when both are true: merge completion can be verified and a new explicit human resume message requests post-merge follow-up. If either is missing, stop with a no-op handoff and wait.
+3. Inspect the current worktree, untracked files, and any preserved local state before switching branches. If sync or cleanup would overwrite unclear local state, stop and surface the conflict first.
+4. Detect the repository default branch dynamically, then switch to it.
+5. Sync the default branch with `git pull --ff-only`.
+6. Verify local workspace status and ahead/behind state after sync.
+7. Delete the remote feature branch by default after confirmed merge; keep it only when policy or audit retention explicitly requires it.
+8. Delete the local feature branch with `git branch -d`; use `-D` only when explicitly required and after warning about commit-loss risk.
+9. Verify no stale post-merge branch state remains (for example with `git branch -vv`) and report any exception path that was used.
 
 # Examples
-- Positive: After PR merge, detect default branch, run `git pull --ff-only`, delete remote and local feature branches, and confirm no stale branch remains.
-- Negative: Delete branches before confirming merge, hardcode `main` in a repo whose default branch is `dev`, or force-delete local branches without warning.
+- Positive: User says `I merged PR #42; continue with post-merge cleanup`, merge is verifiable, then sync the default branch with `git pull --ff-only`, delete the merged feature branch, and report final status.
+- Negative: Continue after STOP POINT 2 because the user only says `請繼續`, or delete branches before verifying merge completion and default-branch sync.
 
 # Outputs
+- a go / blocked post-merge decision tied to STOP POINT 2 entry conditions
 - a post-merge action plan with runnable cleanup and sync commands
-- exception guidance when the branch must be retained or cannot be fast-forwarded
-- final verification summary of branch and workspace state
+- exception guidance when branch retention, divergence, or unsafe local state blocks the normal path
+- a final verification summary of branch and workspace state
+
+# Verification
+- Require both a verified merge and an explicit human resume message before cleanup starts.
+- Use the local STOP POINT 2 checklist before branch deletion or post-merge release follow-up.
+- Treat fast-forward sync, workspace safety, and branch-cleanup verification as completion criteria, not optional polish.
+
+# Red Flags
+- merge is assumed from PR approval, silence, or a short `continue` message
+- the default branch is hardcoded instead of detected
+- `git pull` would require merge or rebase instead of `--ff-only`
+- local branch deletion would discard unreviewed or unpreserved commits
+- remote branch retention policy is unclear but deletion is attempted anyway
 
 # Boundaries
+- Do not start post-merge work before STOP POINT 2 is explicitly resumed.
+- Do not poll GitHub, wait in the background, or infer merge completion from silence or indirect signals.
 - Do not decide release readiness, tag policy, or version synchronization gates.
-- Do not design branch names or commit messages.
-- Do not auto-run destructive branch deletion without explicit user confirmation.
+- Do not auto-run destructive branch deletion without explicit confirmation or policy support.
 - Do not assume a fixed default branch name.
+- Do not manage branch naming or commit message wording.
 
 # Local references
 - `examples.md`: normal paths, anti-patterns, exception handling, and verification-oriented command playbooks
+- `references/stop-point-2-checklist.md`: portable STOP POINT 2 resume checklist for merge confirmation, local sync entry conditions, and branch cleanup checks
