@@ -141,3 +141,64 @@ A skill is only complete when it is:
 - If a new skill overlaps an existing one, narrow or split scope instead of
   broadening the old skill.
 - Do not accept a skill into the stable library until the reviewer flow passes.
+
+## Subagent Role Enforcement
+When working through the skill lifecycle (creator → reviewer → stable library),
+use independent `/fleet` subagents instead of self-performing these roles:
+- **Never self-perform creator work** — always use `/fleet @.github/skills/agent-skill-creator/`
+  to draft new skills or modifications, even if you're technically capable
+- **Never self-perform reviewer work** — always use `/fleet @.github/skills/agent-skill-reviewer/`
+  for independent verdicts; the main agent cannot grade its own output
+- **Why this matters** — role separation prevents blind spots, ensures honest
+  feedback, and maintains the integrity of the approval workflow
+- When launching subagents, verify they appear in `/tasks` before continuing; if
+  not visible, you have not correctly delegated
+
+## STOP POINT 2 Resume Checklist
+After manual merge handoff (STOP POINT 2), do not resume post-merge work until
+verifying:
+1. Merge commit is visible in target branch history (`git log origin/<base>`)
+2. PR is closed (not just merged)
+3. Local branch is synced to the merge commit (`git pull --ff-only origin <base>`)
+4. Feature branch is deleted both locally and on remote
+
+Only after confirming all four conditions should you proceed to post-merge phases
+(version tagging, README updates, stable-library announcements). A valid resume
+message must explicitly confirm: "I have merged PR #X" plus request to continue.
+
+## Topic Planning with Analysis Layer
+The repository now supports an optional **analysis layer** before plan creation,
+enabling stronger requirement discipline through two pre-plan artifacts:
+
+### When to use the analysis layer
+- You have fuzzy or conflicting requirements that need clarification before
+  planning begins
+- The topic involves multiple stakeholders or complex business logic that would
+  benefit from a frozen baseline
+- You want `plan-creator` to operate in strict-mode validation (100% mapping
+  between technical-spec and final plan)
+
+### The analysis layer structure
+Create these optional files **before** running `plan-creator`:
+- `analysis/<topic>/requirements.md` — frozen requirement baseline from
+  `business-intent-alignment` (or manually authored and locked)
+- `analysis/<topic>/technical-spec.md` — technical translation and feasibility
+  assessment from `business-to-technical-translation`
+
+### How plan-creator consumes the analysis layer
+- **Strict mode** (both files present): `plan-creator` validates that all scope,
+  artifact paths, and implementation steps in the final plan map 100% to the
+  technical-spec; no self-healing or gap-filling allowed
+- **Soft mode** (one or both files missing): `plan-creator` can proceed but must
+  emit an explicit semantic warning before output, e.g., "偵測到前置分析缺失，
+  計畫可能存在語意漂移風險"
+- **Authority rule**: analysis-layer content always outranks conversation-time
+  instructions unless you explicitly say `override <file>`; when conflict
+  detected and no override given, `plan-creator` must flag the conflict and
+  halt rather than silently merging inputs
+
+### Skills that support this layer
+- `business-intent-alignment` — Socratic interviewer perspective; produces
+  measurable, contradiction-free requirement baseline
+- `business-to-technical-translation` — pessimist implementer perspective;
+  produces feasibility checks, cost-of-realization warnings, and rollback triggers
