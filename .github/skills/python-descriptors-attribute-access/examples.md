@@ -18,23 +18,26 @@ import math
 
 
 class Rectangle:
-    # width: needs a single-attribute invariant on write → rung 2 (@property)
+    # width and height: validated at construction, immutable thereafter
     # area: computed on every read, no storage → rung 2 (@property)
     # diagonal: expensive, pure, computed once → rung 3 (@cached_property)
+    #           valid because _width and _height never change after __init__
 
     def __init__(self, width: float, height: float) -> None:
-        self._width = width          # backing attribute for @property
+        if width <= 0:
+            raise ValueError(f"width must be positive, got {width!r}")
+        if height <= 0:
+            raise ValueError(f"height must be positive, got {height!r}")
+        self._width = width
         self._height = height
 
     @property
     def width(self) -> float:
         return self._width
 
-    @width.setter
-    def width(self, value: float) -> None:
-        if value <= 0:
-            raise ValueError(f"width must be positive, got {value!r}")
-        self._width = value
+    @property
+    def height(self) -> float:
+        return self._height
 
     @property
     def area(self) -> float:
@@ -42,13 +45,17 @@ class Rectangle:
 
     @cached_property
     def diagonal(self) -> float:
-        # Expensive (simulated): computed once, stored in instance __dict__
+        # Computed once, stored in instance __dict__ — valid because
+        # _width and _height are immutable after __init__
         return math.sqrt(self._width ** 2 + self._height ** 2)
 ```
 
 **Why this is correct**: each attribute uses the weakest rung sufficient for its
-semantic. Plain attributes are used for `_height` (no invariant needed). No custom
-descriptor is needed because no logic is shared across three or more attributes.
+semantic. `width` and `height` are read-only (no setter) with construction-time
+invariants, making `_width` and `_height` immutable after `__init__`. This
+immutability is the required precondition for `@cached_property` on `diagonal` —
+the cache never becomes stale. No custom descriptor is needed because no logic is
+shared across three or more attributes.
 
 ---
 

@@ -117,7 +117,8 @@ Escape hatch is permitted ONLY when ALL of the following hold:
 3. `AttributeError` is never silently swallowed — missing attributes raise `AttributeError` with a clear message
 4. Tests cover both the missing-attribute path and the delegated-attribute path
 5. Public API documentation describes the delegation behaviour
-6. Internal state access inside `__getattr__` uses `object.__getattribute__`, not `self._x`, to prevent infinite recursion during `__init__` (see R10)
+
+For the `__init__` initialization hazard this pattern creates when using `__getattr__`, see R10.
 
 **Escape hatch is NOT permitted** for:
 - convenience (avoiding boilerplate)

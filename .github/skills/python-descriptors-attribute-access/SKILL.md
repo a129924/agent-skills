@@ -39,7 +39,7 @@ Do **not** use this skill when:
 - The attribute's intended access semantics (read-only, read-write, lazy, shared validation)
 - Whether the attribute logic must be reused across multiple class attributes
 - Whether the class is a proxy, adapter, or delegation layer
-- The Python version floor of the target codebase (3.6+ required; 3.8+ for `@cached_property`)
+- The Python version floor of the target codebase (example syntax requires Python 3.10+; `@cached_property` requires Python 3.8+; the core descriptor protocol itself is available from Python 3.6+)
 - Any static analysis tools in use (pyright, mypy)
 
 # Process
@@ -52,7 +52,7 @@ Apply the **R1 mechanism selection ladder** as the primary decision entry point.
 3. @cached_property      — lazy, computed-once, pure (Python 3.8+)
 4. custom descriptor     — reusable __get__/__set__/__delete__ across attributes
 5. __getattr__           — discouraged; fallback for missing attributes only
-6. __setattr__           — discouraged; intercepts all attribute assignment
+6. __setattr__ / __delattr__ — discouraged; intercept all attribute assignment and deletion
 7. __getattribute__      — highest-risk; intercepts ALL attribute access including self._x
 ```
 
@@ -62,7 +62,7 @@ For each attribute under design or review:
 2. **Move to rung 2 (`@property`)** only if computed access or single-attribute invariant enforcement is needed. The setter boundary is single-attribute only — cross-field validation belongs in `python-error-handling`.
 3. **Move to rung 3 (`@cached_property`)** only if the value is expensive to compute, pure, and should be stored after first access. Requires Python 3.8+.
 4. **Move to rung 4 (custom descriptor)** only if `@property` logic must be reused across three or more attributes, or if lookup priority must be explicitly controlled.
-5. **Move to rungs 5–6 (`__getattr__` / `__setattr__`)** only if the class is a proxy, adapter, delegation layer, or compatibility shim **and** all five escape-hatch conditions are satisfied (see `references/attribute-hooks.md`).
+5. **Move to rungs 5–6 (`__getattr__` / `__setattr__` / `__delattr__`)** only if the class is a proxy, adapter, delegation layer, or compatibility shim **and** all five escape-hatch conditions are satisfied (see `references/attribute-hooks.md`).
 6. **Move to rung 7 (`__getattribute__`)** only with explicit architectural justification documented in code. Near-absolute discouragement applies.
 
 Any ladder skip must be justified in code comments or documentation.
@@ -95,7 +95,7 @@ def __getattr__(self, name: str) -> str:
 
 # Boundaries
 
-- `@cached_property` requires **Python 3.8+**. For Python 3.6–3.7 codebases, use a manual backing attribute with `@property`.
+- `@cached_property` requires **Python 3.8+**. For Python 3.6–3.7 codebases, use a manual backing attribute with `@property`. The example code in this skill uses Python 3.10+ type-annotation syntax (`dict[str, T]`, `X | Y` unions); for older version floors substitute `Dict[str, T]` and `Optional[T]` from `typing`.
 - Setter validation scope: single-attribute invariant only. If the setter inspects more than `self` and the incoming value, the logic belongs in `python-error-handling`.
 - `__slots__` decisions and memory optimization belong in `python-class-design`.
 - `__new__` and object construction lifecycle belong in `python-class-design`.
