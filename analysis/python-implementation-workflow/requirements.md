@@ -45,10 +45,11 @@ Goal / Non-goals / Current Context / Requirements / Decisions /
 Public Contract & API Changes / Affected Files & Modules / Implementation Steps /
 Test Plan / Validation Commands / Risks / Rollback Plan / Open Questions
 
-**Decisions 節必須明確回答**（最易自行發揮的 6 項）：
+**Decisions 節必須明確回答**（最易自行發揮的 7 項）：
 - 新功能放哪個 module / package
 - 是否新增 public API
-- 是否改動既有 interface / 是否允許 breaking change
+- 是否改動既有 interface
+- 是否允許 breaking change
 - 是否新增 dependency
 - 錯誤處理策略
 - typing 策略

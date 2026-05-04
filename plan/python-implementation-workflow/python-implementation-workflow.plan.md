@@ -37,7 +37,7 @@ python-implementation-review → python-code-review
   - `python-implementation-review`：Does the implementation satisfy the approved plan?
   - `python-code-review`：Is this good Python code?
 - **工具偵測策略**：`python-code-review` 依專案配置自動偵測（`pyproject.toml` → `Makefile` → `README` → fallback）
-- **Reviewer handoff 格式**：JSON `{ "verdict": "approved|needs-rework", "blocking_issues": [] }`
+- **Reviewer handoff 格式**：YAML（格式見各 review skill 的 Outputs 節）
 - **examples.md 必要性**：python-plan-authoring、python-implementation-review、python-code-review 因分支多而必須有 `examples.md`；python-plan-review 因 gatekeeping 性質需 `checklist.md` + `examples.md`
 - **此 topic 影響 stable-library surfaces**：README + VERSION，timing = `publish-in-progress`
 
@@ -80,7 +80,7 @@ python-implementation-review → python-code-review
 | `python-plan-authoring` SKILL.md | `.github/skills/python-plan-authoring/SKILL.md` | Creator | 主合約，含 13 節模板定義與 stop-and-ask 條件 |
 | `python-plan-authoring` examples.md | `.github/skills/python-plan-authoring/examples.md` | Creator | 完整 plan 範例 + 缺節觸發 needs-rework 範例 |
 | `python-plan-authoring` template | `.github/skills/python-plan-authoring/templates/python-plan-template.md` | Creator | 13 節空白模板供 executor 複用 |
-| `python-plan-review` SKILL.md | `.github/skills/python-plan-review/SKILL.md` | Creator | 逐節驗收邏輯、JSON verdict 格式 |
+| `python-plan-review` SKILL.md | `.github/skills/python-plan-review/SKILL.md` | Creator | 逐節驗收邏輯、YAML verdict 格式 |
 | `python-plan-review` checklist.md | `.github/skills/python-plan-review/checklist.md` | Creator | 13 節驗收清單 + 各節合格標準 |
 | `python-plan-review` examples.md | `.github/skills/python-plan-review/examples.md` | Creator | approved 範例 + needs-rework 範例 |
 | `python-implementation-review` SKILL.md | `.github/skills/python-implementation-review/SKILL.md` | Creator | traceability 矩陣、scope creep 偵測、API contract 驗證 |
@@ -114,7 +114,7 @@ Artifact path notes:
    - 移交 `agent-skill-reviewer` 審查，取得 `approved`
 
 2. **使用 `agent-skill-creator` 建立 `python-plan-review`**
-   - 建立 `.github/skills/python-plan-review/SKILL.md`（逐節驗收邏輯、JSON verdict 格式）
+   - 建立 `.github/skills/python-plan-review/SKILL.md`（逐節驗收邏輯、YAML verdict 格式）
    - 建立 `.github/skills/python-plan-review/checklist.md`（13 節驗收清單 + 各節合格標準）
    - 建立 `.github/skills/python-plan-review/examples.md`（approved 範例 + needs-rework 範例）
    - 移交 `agent-skill-reviewer` 審查，取得 `approved`

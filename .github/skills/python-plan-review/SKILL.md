@@ -30,7 +30,7 @@ Do not use this skill when:
 # Process
 1. Confirm the task is plan-document quality review only.
    - Reject authoring, code review, implementation review, and PR diff review.
-   - If the input is not a `*.plan.md`, return a reroute instead of a verdict.
+   - If the input is not a `*.plan.md`, return an `insufficient-context` verdict with a reroute note in `blocking_issues`.
 2. Confirm the plan text is sufficient to evaluate before proceeding.
    - If the document is truncated and one or more sections are absent from the visible
      text → return `insufficient-context`; name every section that cannot be assessed.
@@ -83,8 +83,9 @@ Do not use this skill when:
    - "Write tests" without naming the test file or what to test → fails.
 
 8. Validate **Test Plan**.
-   - Must name specific test case types: happy path, invalid input, edge case, boundary
-     condition, error path, or equivalent.
+   - Must include ALL 5 of the following test case categories: happy path, invalid input,
+     edge case, regression, backward compatibility.
+   - Missing any one of these 5 categories → `needs-rework`.
    - "Add tests for this feature" alone → fails.
 
 9. Validate **Validation Commands**.

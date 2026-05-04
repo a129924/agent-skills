@@ -71,12 +71,12 @@ section before proceeding to quality checks.
 
 ## Test Plan quality
 
-- [ ] Names at least one of the following test case types:
+- [ ] Includes ALL 5 of the following test case categories (missing any one → `needs-rework`):
   - happy path
   - invalid input
   - edge case
-  - boundary condition
-  - error path / exception path
+  - regression
+  - backward compatibility
 - [ ] Does not rely solely on "add tests for this feature" or equivalent vague language
 - [ ] Test cases are tied to the concrete changes described in Implementation Steps
 
