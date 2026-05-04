@@ -180,6 +180,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-blueprint-review` | reviews authored greenfield `blueprint.md` contracts against the locked blueprint v1 schema, exact Required Skills validity, structural locatability, and greenfield-only lane fit before executor handoff |
 | `python-project-retrofit` | retrofits existing Python projects with safe structural conflict detection (Shadow File Detection), implicit configuration discovery (Implicit Config Mining), Git safety checks, and Sensing Delta Report for transparent state transformation |
 | `python-retrofit-plan-authoring` | authors review-ready Retrofit V2 contracts with locked section order, migration-strategy risk metadata, stop-and-ask handling for abstract plans, and strict separation between planning strategy and runtime gate decisions |
+| `python-retrofit-plan-review` | reviews authored Retrofit V2 `retrofit-plan.md` contracts against the locked section order, machine-readable risk metadata, supported sensing assertion kinds, locatability, and retrofit lane fit before executor handoff |
 | `python-serialization-boundaries` | defines Python serialization boundaries as semantic translation gates for API, database, and message payloads, including missing/null intent preservation, type normalization, deep conversion, and asymmetric input/output contracts |
 | `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
