@@ -182,6 +182,10 @@ Process documentation and workflow guidance for repository operations:
 | `python-project-retrofit` | retrofits existing Python projects with safe structural conflict detection (Shadow File Detection), implicit configuration discovery (Implicit Config Mining), Git safety checks, and Sensing Delta Report for transparent state transformation |
 | `python-retrofit-plan-authoring` | authors review-ready Retrofit V2 contracts with locked section order, migration-strategy risk metadata, stop-and-ask handling for abstract plans, and strict separation between planning strategy and runtime gate decisions |
 | `python-retrofit-plan-review` | reviews authored Retrofit V2 `retrofit-plan.md` contracts against the locked section order, machine-readable risk metadata, supported sensing assertion kinds, locatability, and retrofit lane fit before executor handoff |
+| `python-plan-authoring` | creates an executable Python implementation plan (`*.plan.md`) that freezes scope, decisions, affected files, tests, and validation commands before coding begins — an implementation contract, not a todo list |
+| `python-plan-review` | reviews a Python implementation plan against executability criteria, returning `approved`, `needs-rework`, or `insufficient-context` before any coding begins |
+| `python-implementation-review` | reviews a Python implementation against its approved plan, verifying all tasks are complete, no scope creep occurred, and no contracts were broken — not a code quality check |
+| `python-code-review` | reviews Python code quality across 7 dimensions (typing, lint, readability, error handling, anti-patterns, test quality, observability) with tool auto-detection and ordering gate after implementation-review |
 | `python-serialization-boundaries` | defines Python serialization boundaries as semantic translation gates for API, database, and message payloads, including missing/null intent preservation, type normalization, deep conversion, and asymmetric input/output contracts |
 | `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
