@@ -189,6 +189,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-code-review` | reviews Python code quality across 7 dimensions (typing, lint, readability, error handling, anti-patterns, test quality, observability) with tool auto-detection and ordering gate after implementation-review |
 | `python-serialization-boundaries` | defines Python serialization boundaries as semantic translation gates for API, database, and message payloads, including missing/null intent preservation, type normalization, deep conversion, and asymmetric input/output contracts |
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage |
+| `python-pyproject-toolconfig` | Tool sections template + apply script |
 | `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
 
 ## Notes
