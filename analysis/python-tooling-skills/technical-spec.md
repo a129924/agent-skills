@@ -328,7 +328,7 @@
 ✅ **tomllib write 無法** → raw text append + tomllib 讀取偵測  
 ✅ **sed 跨平台差異** → Python str.replace() / re  
 ✅ **参數輸入界面** → CLI args + always-ask-human prompt  
-✅ **T5 output 目標** → stdout（用戶自行 review + redirect）  
+✅ **T5 output 目標** → 直接寫入 pyproject.toml（append mode）；`--dry-run` flag 輸出 stdout 供 preview，不落盤  
 ✅ **Python 版本相容** → inline metadata `>=3.11`，uv 自動選版本  
 ✅ **pre-commit 冪等性** → 內建支援，重複 install 安全
 

@@ -213,7 +213,7 @@ Exit code 0 = 全部通過，才繼續。
 1. 執行 `/fleet @.github/skills/python-pre-commit/` — 建立 `.pre-commit-config.yaml`
 2. 詢問用戶以下參數後執行 `/fleet @.github/skills/python-pyproject-toolconfig/`：
    - `--python-version`：來自 Phase 0 Q3（例如 `3.10`）
-   - `--package-name`：來自 `uv init` 的專案名稱
+   - `--package-name`：必須向用戶明確確認 `src/` 下的實際可匯入套件目錄名稱。注意：`uv init` 使用的 kebab-case 專案名（例如 `my-awesome-lib`）與 `src/` 下的 snake_case 目錄名（`my_awesome_lib`）可能不同；pyright include 路徑需要的是後者，不得自行從 uv init 輸出推斷。
 3. 通知用戶執行安裝（不自動執行）：
    ```
    uv run pre-commit install

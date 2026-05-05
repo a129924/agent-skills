@@ -50,6 +50,10 @@ Do not use this skill when:
    ```
    If the template is not available, produce `.pre-commit-config.yaml` manually following the hook structure in `references/hooks-catalog.md`. Use `entry: uv run <cmd>` for all local hooks.
 
+   After copying the template, apply the pyright decision from Step 3:
+   - **Project uses pyright strict mode**: append the pyright hook block from `references/hooks-catalog.md` to `.pre-commit-config.yaml`.
+   - **Project does not use pyright**: no further action needed; the template already omits the pyright hook.
+
 5. **Provide install command** — after writing the file, output the commands the user must run manually:
    ```
    uv run pre-commit install

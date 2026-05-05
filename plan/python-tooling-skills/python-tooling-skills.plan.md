@@ -4,7 +4,7 @@
 
 v0.41.0 交付完成時，repo 包含：
 1. **python-pre-commit** skill 升版：新增 `templates/pre-commit-config.yaml`（RUFF_VERSION 佔位符），SKILL.md Process Step 4 改為 cp + Python str.replace 替換 RUFF_VERSION，不再靠 Agent 逐行生成 YAML
-2. **python-pyproject-toolconfig** 新 skill：分塊 templates + `apply_toolconfig.py` script（inline metadata `>=3.11`，CLI args，偵測 section 後 append，stdout 輸出），搭配單元測試
+2. **python-pyproject-toolconfig** 新 skill：分塊 templates + `apply_toolconfig.py` script（inline metadata `>=3.11`，CLI args，偵測 section 後直接 append，支援 `--dry-run` preview），搭配單元測試
 3. **python-project-init.agent.md** 補 Phase 6（永遠執行，呼叫兩個新 skill）
 
 ## Scope
@@ -39,7 +39,7 @@ v0.41.0 交付完成時，repo 包含：
 - **Template 化策略**：RUFF_VERSION 用 Python `re.sub` 替換（不用 shell sed，跨平台相容）
 - **T5 分塊 templates**：三個獨立 `.toml.tmpl`（ruff / pyright / pytest），各自偵測對應 section
 - **T5 script 執行**：inline metadata `requires-python = ">=3.11"`，`uv run` 自動選已裝版本
-- **T5 output**：stdout（用戶 review 後自行 redirect 進 pyproject.toml）
+- **T5 output**：直接寫入 pyproject.toml（append mode）；提供 `--dry-run` flag 輸出 stdout 供 preview，不修改檔案
 - **T5 script 參數**：CLI args（`--python-version` / `--package-name`，always-ask-human）
 - **Phase 6 執行**：永遠執行，不問 Q9，Phase 5 acceptance 通過後自動進入
 - **冪等性保證**：section 存在時跳過 append；`pre-commit install` 本身冪等

@@ -4,13 +4,32 @@
 """Apply tool configuration sections to pyproject.toml.
 
 Detects existing [tool.*] sections via tomllib and appends only missing ones
-from the skill's templates directory. Outputs changes to stdout for review
-before writing to disk.
+from the skill's templates directory. Directly modifies pyproject.toml by
+default; use --dry-run to preview changes without writing to disk.
 """
 import argparse
 import re
 import tomllib
 from pathlib import Path
+
+
+def _python_version_type(value: str) -> str:
+    """Validate --python-version is in X.Y format."""
+    if not re.fullmatch(r"^\d+\.\d+$", value):
+        raise argparse.ArgumentTypeError(
+            f"--python-version must be in X.Y format, e.g. 3.10 or 3.12. Got: {value!r}"
+        )
+    return value
+
+
+def _package_name_type(value: str) -> str:
+    """Validate --package-name is a valid importable Python module name."""
+    if not re.fullmatch(r"^[a-zA-Z_][a-zA-Z0-9_]*$", value):
+        raise argparse.ArgumentTypeError(
+            f"--package-name must be a valid importable Python module name "
+            f"(snake_case, e.g. mylib or ml_utils). Got: {value!r}"
+        )
+    return value
 
 
 def _apply_substitutions(content: str, python_version: str, package_name: str) -> str:
@@ -34,12 +53,20 @@ def main() -> None:
     parser.add_argument(
         "--python-version",
         required=True,
-        help="Python version for target-version and pythonVersion (e.g., 3.10)",
+        type=_python_version_type,
+        help="Python version in X.Y format, e.g. 3.10",
     )
     parser.add_argument(
         "--package-name",
         required=True,
-        help="Package name for pyright include path (e.g., mylib)",
+        type=_package_name_type,
+        help="Importable package name under src/, e.g. mylib",
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        default=False,
+        help="Preview sections to be appended without modifying pyproject.toml",
     )
     args = parser.parse_args()
 
@@ -75,6 +102,13 @@ def main() -> None:
 
     if not sections_to_append:
         print("ℹ️  All tool sections already exist — nothing to append")
+        return
+
+    if args.dry_run:
+        print("\n# --- DRY RUN preview ---")
+        for section in sections_to_append:
+            print(section)
+        print("# --- DRY RUN: pyproject.toml not modified ---")
         return
 
     with pyproject_path.open("a") as f:
