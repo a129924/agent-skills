@@ -142,7 +142,7 @@ strict-mode 100% technical-spec mapping.
 
 ## Status / Allowed Transitions
 
-- **Current**: `pr-open`
+- **Current**: `released`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path for a stable-library-affecting topic
 - **Allowed transitions**:
