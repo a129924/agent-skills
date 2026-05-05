@@ -29,7 +29,7 @@ Do not use this skill when:
    - **New config (file does not exist)**: create a fresh file with the full canonical hook set from `references/hooks-catalog.md`.
    - **Update existing config (file exists)**: read the current file, identify which canonical hooks are missing, and merge them in without overwriting hooks the user has already configured.
 
-2. **Determine ruff rev** — check `pyproject.toml` for the ruff version. If a version is pinned (e.g., `ruff>=0.11.0`), use the matching `vX.Y.Z` tag for `ruff-pre-commit`. If no version is pinned, use the current latest stable rev.
+2. **Determine ruff rev** — run `uv run ruff --version` to get the actual resolved version and use that as the `vX.Y.Z` tag for `ruff-pre-commit`. If ruff is not yet installed or the command fails, keep the existing `rev` unchanged and inform the user to verify version alignment manually before committing.
 
 3. **Decide on optional hooks**:
    - Include the `pytest` hook using `stages: [manual]`. It must never be on the default stage.

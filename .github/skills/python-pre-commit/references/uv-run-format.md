@@ -8,7 +8,7 @@ language: system
 
 ## Why `language: system`
 
-pre-commit normally creates an isolated virtualenv for each hook repo. For `repo: local` hooks in a uv project, this would create a separate environment that does not have the project's dependencies installed. Using `language: system` tells pre-commit to use the system Python (which resolves to the uv-managed `.venv` when `uv run` is used as the entry point).
+pre-commit normally creates an isolated virtualenv for each hook repo. `language: system` prevents pre-commit from creating that separate hook virtualenv. `entry: uv run` is then responsible for running the command inside the project's uv-managed environment. Together, `language: system` stops pre-commit from taking over environment management, and `entry: uv run` ensures the hook sees the correct dependencies.
 
 ## Why `uv run` instead of direct binary path
 

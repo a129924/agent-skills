@@ -6,7 +6,7 @@
 
 **Input signals**:
 - No `.pre-commit-config.yaml` in the project root.
-- `pyproject.toml` contains `ruff>=0.11.0` under `[dependency-groups]` or `[tool.ruff]`.
+- `pyproject.toml` contains `ruff>=0.11.0` under `[dependency-groups]`, `[project.dependencies]`, or `[project.optional-dependencies]`.
 - Project does not use pyright strict mode.
 
 **Correct output** — `.pre-commit-config.yaml`:
