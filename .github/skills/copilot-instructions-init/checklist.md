@@ -11,6 +11,9 @@ Use this checklist when reviewing or self-checking this higher-risk skill draft.
   - [ ] stale-facts hard block
   - [ ] materially different existing instructions
   - [ ] missing-facts hard block
+  - [ ] over-specification anti-patterns (bloated output prevention; see Scenario 7)
+- [ ] Generated output uses only the three canonical sections (`## Project Truth`, `## Governance`, `## Implementation Rules`); no custom section headers.
+- [ ] Generated file length target: ≤ 200 lines; each rule passes the AI-control-plane test ("would an agent make a different code decision if this rule were absent?").
 - [ ] The fixed input priority is explicit: facts -> installed skills -> plan contract -> human intent.
 - [ ] Human-intent conflict requires a double-check stop rather than silent override.
 - [ ] Missing facts are a hard block; no downgrade template path exists.
