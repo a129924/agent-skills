@@ -156,6 +156,7 @@ Process documentation and workflow guidance for repository operations:
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `plan-creator` | creates repo-visible topic plans with strict workflow, artifact, and stable-library timing contracts |
 | `plan-reviewer` | independently reviews repo-visible topic plans before execution, returning structured JSON verdicts against workflow and plan-authoring rules |
+| `plan-step-tracker` | queries step status (pending/done) in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when incomplete |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
