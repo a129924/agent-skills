@@ -27,8 +27,8 @@
 | R5 (check_all_succeeded) | count pending → 0 = SUCCESS + exit 0；> 0 = BLOCKED + list + exit 1 | SKILL.md 指令 | 極低 | feasible |
 | R6 (token efficiency) | Python 逐行讀一個檔案；不需讀多檔案 | Python ≥ 3.11 | 無額外 infra | feasible |
 | R7 (scope) | 單一 `plan/<T>/<T>.step.md` | 慣例 | 低 | feasible |
-| R8 (Python CLI) | `scripts/step_tracker.py` — argparse，4 subcommand，uv script header | Python ≥ 3.11 | 低（1 個模組） | feasible |
-| R9 (Tests) | `tests/test_step_tracker.py` — pytest，6 覆蓋範疇，`tmp_path` fixture | pytest | 低–中 | feasible |
+| R8 (Python CLI) | `.github/skills/plan-step-tracker/scripts/step_tracker.py` — argparse，4 subcommand，uv script header | Python ≥ 3.11 | 低（1 個模組） | feasible |
+| R9 (Tests) | `.github/skills/plan-step-tracker/tests/test_step_tracker.py` — pytest，6 覆蓋範疇，`tmp_path` fixture | pytest | 低–中 | feasible |
 
 ---
 
@@ -37,7 +37,7 @@
 1. **`plan/<topic>/<topic>.step.md` 格式規範**（慣例文件，不是程式碼）
    - 定義於 `reference.md`；YAML frontmatter（meta only）+ 內容行 `- [ ]`/`- [X]`
 
-2. **`scripts/step_tracker.py`**（Python CLI，R8）
+2. **`.github/skills/plan-step-tracker/scripts/step_tracker.py`**（Python CLI，R8）
 
    ```python
    # /// script
@@ -59,7 +59,7 @@
    - `check_all_succeeded` 有 pending → print BLOCKED + list → `sys.exit(1)`
    - `[x]` 小寫視為 pending 並輸出 warning（不靜默接受）
 
-3. **`tests/test_step_tracker.py`**（pytest，R9）
+3. **`.github/skills/plan-step-tracker/tests/test_step_tracker.py`**（pytest，R9）
 
    覆蓋範疇：
    | Test class | Cases |
@@ -100,8 +100,8 @@
 | Workstream | Complexity | Sequencing | Burden |
 | --- | --- | --- | --- |
 | 定義 `.step.md` 格式 | 低 | 必須先於 SKILL.md 完成 | 一次性，之後沿用 |
-| 撰寫 `scripts/step_tracker.py` | 低-中 | 依賴格式決定 | 1 個 Python 模組，argparse + dataclass |
-| 撰寫 `tests/test_step_tracker.py` | 中 | 依賴 CLI 完成 | 6 test class，tmp_path fixture |
+| 撰寫 `.github/skills/plan-step-tracker/scripts/step_tracker.py` | 低-中 | 依賴格式決定 | 1 個 Python 模組，argparse + dataclass |
+| 撰寫 `.github/skills/plan-step-tracker/tests/test_step_tracker.py` | 中 | 依賴 CLI 完成 | 6 test class，tmp_path fixture |
 | 撰寫 `SKILL.md` | 低-中 | 依賴 CLI + 格式 | CLI 用法 + grep fallback 指引 |
 | 撰寫 `reference.md` | 低 | 依賴格式決定 | 格式規範 + grep 模式速查 + `[x]` warning 規則 |
 | 撰寫 `examples.md` | 中 | 依賴 SKILL.md | 需涵蓋 4 種操作 + blocking + edge case |
@@ -146,4 +146,4 @@
 此 technical-spec 已凍結（v2），可作為 `plan-creator` 的嚴格模式（strict-mode）輸入。  
 建議 plan 採用 strict-mode（兩份 analysis 文件均存在，C1/C2/C3 均已解決）。
 
-**R8/R9 已加入**：Creator 需同時生成 `scripts/step_tracker.py` 與 `tests/test_step_tracker.py`。
+**R8/R9 已加入**：Creator 需同時生成 `.github/skills/plan-step-tracker/scripts/step_tracker.py` 與 `.github/skills/plan-step-tracker/tests/test_step_tracker.py`。

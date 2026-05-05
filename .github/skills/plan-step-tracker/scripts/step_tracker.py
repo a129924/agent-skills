@@ -24,6 +24,7 @@ class Step:
 
     text: str
     status: Literal["done", "pending"]
+    bracket: str  # Original bracket marker: [X], [x], or [ ]
 
 
 def parse_steps(topic: str, plan_dir: Path = Path("plan")) -> list[Step]:
@@ -53,6 +54,7 @@ def parse_steps(topic: str, plan_dir: Path = Path("plan")) -> list[Step]:
             if match:
                 bracket_char = match.group(1)
                 step_text = match.group(2).strip()
+                bracket = f"[{bracket_char}]"  # Preserve original bracket
 
                 if bracket_char == "X":
                     status = "done"
@@ -72,15 +74,14 @@ def parse_steps(topic: str, plan_dir: Path = Path("plan")) -> list[Step]:
                         file=sys.stderr,
                     )
 
-                steps.append(Step(text=step_text, status=status))
+                steps.append(Step(text=step_text, status=status, bracket=bracket))
 
     return steps
 
 
 def format_step(step: Step) -> str:
-    """Format a step for display."""
-    bracket = "[X]" if step.status == "done" else "[ ]"
-    return f"{bracket} {step.text}"
+    """Format a step for display using original bracket."""
+    return f"{step.bracket} {step.text}"
 
 
 def read_all(topic: str, plan_dir: Path = Path("plan")) -> int:
@@ -188,7 +189,7 @@ def main() -> int:
     args = parser.parse_args()
 
     topic = args.topic
-    plan_dir = Path(args.__dict__.get("plan_dir", "plan"))
+    plan_dir = Path("plan")
 
     if args.operation == "read_all":
         return read_all(topic, plan_dir)

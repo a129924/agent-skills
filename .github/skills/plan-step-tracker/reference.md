@@ -100,26 +100,23 @@ No installation required; `step_tracker.py` is a uv script.
 
 ```bash
 # Direct execution
-python scripts/step_tracker.py <operation> <topic>
-
-# With custom plan directory (optional)
-PLAN_DIR=/custom/path python scripts/step_tracker.py read_all <topic>
+python .github/skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>
 ```
 
 ### Operations
 
 ```bash
 # Read all steps (pending + done)
-python scripts/step_tracker.py read_all my-feature
+python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all my-feature
 
 # Read pending steps only
-python scripts/step_tracker.py read_not_run my-feature
+python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run my-feature
 
 # Read done steps only
-python scripts/step_tracker.py read_success my-feature
+python .github/skills/plan-step-tracker/scripts/step_tracker.py read_success my-feature
 
 # Check if all done (exit 0 if yes, 1 if any pending)
-python scripts/step_tracker.py check_all_succeeded my-feature
+python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded my-feature
 if [ $? -eq 0 ]; then
   echo "All steps complete; proceeding..."
 else
@@ -137,6 +134,6 @@ fi
 ## Common Implementation Notes
 
 - **Token efficiency** (R6): Python reads one file end-to-end, line by line; avoids full file parsing overhead
-- **Consistency guarantee**: Grep patterns and Python CLI produce identical output
+- **Semantic equivalence**: Grep patterns and Python CLI produce semantically equivalent output; format may differ (Python strips `- ` prefix from output)
 - **No side effects**: All operations are read-only; no modification of `.step.md` files
 - **Portability**: Python ≥ 3.11 (matches existing `apply_toolconfig.py` standard); uv script format (`# /// script` header)

@@ -103,9 +103,9 @@ This skill is **review-ready** and prepared for independent review by `agent-ski
 
 ## Deferred Items (Publish-In-Progress Phase)
 
-Per user guidance, these are handled separately:
-- ❌ README.md update (add row to "Current skills" table) — defer
-- ❌ VERSION bump (0.41.0 → 0.42.0) — defer
+Per user guidance, these are now included in this PR:
+- ✅ README.md update (add row to "Current skills" table) — included
+- ✅ VERSION bump (0.41.0 → 0.42.0) — included
 
 ---
 

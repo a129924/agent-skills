@@ -1,6 +1,6 @@
 # Requirements — plan-step-tracker
 
-**Status**: FROZEN v2 — 新增 R8（Python CLI）與 R9（Tests）；C1 仍解決中  
+**Status**: FROZEN v2 — C1/C2/C3 已解決  
 **Topic path**: `analysis/plan-step-tracker/requirements.md`
 
 ---

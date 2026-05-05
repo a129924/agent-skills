@@ -15,7 +15,7 @@ This topic plan operates in **strict mode** (per `plan-creator` requirements) be
 
 - **`analysis/plan-step-tracker/technical-spec.md` v2 (FROZEN)**
   - Maps R1–R9 to technical realization
-  - Core artifacts: `scripts/step_tracker.py` (Python CLI, uv script), `tests/test_step_tracker.py` (pytest 6 test classes)
+  - Core artifacts: `.github/skills/plan-step-tracker/scripts/step_tracker.py` (Python CLI, uv script), `.github/skills/plan-step-tracker/tests/test_step_tracker.py` (pytest 6 test classes)
   - Skill folder: `SKILL.md` (Python CLI primary, grep fallback), `reference.md` (format + patterns), `examples.md` (required: 4 operations + blocking + edge case)
   - README + VERSION 0.41.0 → 0.42.0
 
@@ -29,8 +29,8 @@ Enable Main Agent and users to query step tracking status (pending/done) for `pl
 
 **Concrete repository-visible result:**
 - `.github/skills/plan-step-tracker/` skill folder: Agent Skill with SKILL.md, reference.md, examples.md
-- `scripts/step_tracker.py` deployed: Python CLI (uv script) with 4 subcommands (read_all, read_not_run, read_success, check_all_succeeded)
-- `tests/test_step_tracker.py` deployed: pytest suite covering R1–R9 with 6 test classes
+- `.github/skills/plan-step-tracker/scripts/step_tracker.py` deployed: Python CLI (uv script) with 4 subcommands (read_all, read_not_run, read_success, check_all_succeeded)
+- `.github/skills/plan-step-tracker/tests/test_step_tracker.py` deployed: pytest suite covering R1–R9 with 6 test classes
 - `README.md` updated: New row in "Current skills" table
 - `VERSION` bumped: 0.41.0 → 0.42.0
 
@@ -45,8 +45,8 @@ Enable Main Agent and users to query step tracking status (pending/done) for `pl
   - `reference.md`: Format specification (`.step.md` YAML + content-line markers), grep pattern reference, `[x]` warning rule
   - `examples.md`: 4 operations (read_all, read_not_run, read_success, check_all_succeeded), blocking example, edge cases
 
-- **`scripts/step_tracker.py`** (Python ≥ 3.11, uv script header)
-  - Entry point: `python scripts/step_tracker.py <operation> <topic>`
+- **`.github/skills/plan-step-tracker/scripts/step_tracker.py`** (Python ≥ 3.11, uv script header)
+  - Entry point: `python .github/skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>`
   - `Step` dataclass: `text: str`, `status: Literal["done", "pending"]`
   - `parse_steps(topic, plan_dir)` → filters `.step.md` content lines `^\- \[.\]`
   - 4 subcommands:
@@ -56,7 +56,7 @@ Enable Main Agent and users to query step tracking status (pending/done) for `pl
     - `check_all_succeeded`: Return SUCCESS (exit 0) or BLOCKED + list (exit 1)
   - Warning for `[x]` lowercase → treat as pending, output warning
 
-- **`tests/test_step_tracker.py`** (pytest)
+- **`.github/skills/plan-step-tracker/tests/test_step_tracker.py`** (pytest)
   - 6 test classes covering R1–R9:
     - `TestParseStatus`: `[X]` → done, `[ ]` → pending, non-matching lines ignored, `[x]` → pending + warning
     - `TestReadNotRun`: Mixed → pending only; all done → empty list
@@ -87,7 +87,7 @@ Enable Main Agent and users to query step tracking status (pending/done) for `pl
 
 1. **Format choice (C1 resolved)**: Content-line markers only (`- [X]`/`- [ ]` at start of markdown list items). Frontmatter and headers excluded automatically by `^\- \[.\]` regex. No YAML frontmatter status fields.
 
-2. **Python CLI as primary execution layer (C3 resolved)**: Python `scripts/step_tracker.py` is the canonical implementation. SKILL.md directs Agent to invoke Python CLI first; grep is documented fallback only. Benefits: testable, cross-platform, exit code control for CI blocking.
+2. **Python CLI as primary execution layer (C3 resolved)**: Python `.github/skills/plan-step-tracker/scripts/step_tracker.py` is the canonical implementation. SKILL.md directs Agent to invoke Python CLI first; grep is documented fallback only. Benefits: testable, cross-platform, exit code control for CI blocking.
 
 3. **Scope timing**: This is a stable-library-affecting topic (new skill + VERSION bump + README update). Changes deploy at `publish-in-progress` (not deferred to release).
 
@@ -134,8 +134,8 @@ Enable Main Agent and users to query step tracking status (pending/done) for `pl
 | SKILL.md | `.github/skills/plan-step-tracker/SKILL.md` | Creator | Operational contract + Python CLI primary + grep fallback |
 | reference.md | `.github/skills/plan-step-tracker/reference.md` | Creator | Format spec + grep patterns + `[x]` warning rule |
 | examples.md | `.github/skills/plan-step-tracker/examples.md` | Creator | 4 operations + blocking + edge cases |
-| Python CLI | `scripts/step_tracker.py` | Creator | Executable Python uv script; 4 subcommands; exit code control |
-| Tests | `tests/test_step_tracker.py` | Creator | pytest suite; 6 test classes; tmp_path fixture |
+| Python CLI | `.github/skills/plan-step-tracker/scripts/step_tracker.py` | Creator | Executable Python uv script; 4 subcommands; exit code control |
+| Tests | `.github/skills/plan-step-tracker/tests/test_step_tracker.py` | Creator | pytest suite; 6 test classes; tmp_path fixture |
 | README.md | `README.md` (current-skills row) | Main Agent | Stable-library update at publish-in-progress |
 | VERSION | `VERSION` | Main Agent | Bump 0.41.0 → 0.42.0 at publish-in-progress |
 
@@ -181,7 +181,7 @@ Creator SHALL complete the following, staying within strict-mode technical-spec 
 3. **CLI scaffolding**
    - Use argparse (subparser for 4 operations)
    - uv script header: `# /// script` with `requires-python = ">=3.11"`
-   - Entrypoint: `python scripts/step_tracker.py <operation> <topic>`
+   - Entrypoint: `python .github/skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>`
    - Error handling: `.step.md` not found → explicit FileNotFoundError + stderr message + exit 1
 
 ### Step Group 2: pytest suite (tests/test_step_tracker.py)
@@ -223,7 +223,7 @@ Use `tmp_path` pytest fixture for test data; do not read real `plan/` directory.
    - Trigger: When Agent needs to check incomplete steps during plan execution
    - Inputs: topic name
    - Process:
-     - Primary: Call `python scripts/step_tracker.py <operation> <topic>`
+     - Primary: Call `python .github/skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>`
      - Fallback: Use grep (e.g., `grep -c '^\- \[ \]' plan/<topic>/<topic>.step.md`)
    - Examples: At least 1 positive + 1 negative (e.g., "check incomplete steps for topic X" vs. "cross-topic queries not supported")
    - Outputs: Step list + status
@@ -266,10 +266,10 @@ Creator work is **review-ready** when all of the following pass:
    - README/VERSION changes are deferred to Main Agent (Phases 5–6)
 
 2. **Python CLI functionality**
-   - `python scripts/step_tracker.py read_all test-topic` returns all steps (done + pending)
-   - `python scripts/step_tracker.py read_not_run test-topic` returns pending only (empty if all done)
-   - `python scripts/step_tracker.py read_success test-topic` returns done only (empty if all pending)
-   - `python scripts/step_tracker.py check_all_succeeded test-topic` exits 0 if all done; exit 1 if any pending; BLOCKED message shows pending list
+   - `python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all test-topic` returns all steps (done + pending)
+   - `python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run test-topic` returns pending only (empty if all done)
+   - `python .github/skills/plan-step-tracker/scripts/step_tracker.py read_success test-topic` returns done only (empty if all pending)
+   - `python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded test-topic` exits 0 if all done; exit 1 if any pending; BLOCKED message shows pending list
    - `[x]` lowercase triggers warning to stderr but treats step as pending
 
 3. **pytest suite quality**

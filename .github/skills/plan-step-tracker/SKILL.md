@@ -25,7 +25,6 @@ Do not use this skill when:
 
 - `<topic>`: Required. Topic name matching `plan/<topic>/` directory. Skill looks for `plan/<topic>/<topic>.step.md`.
 - `<operation>`: One of: `read_all`, `read_not_run`, `read_success`, `check_all_succeeded`
-- (Optional) Custom `plan_dir` if steps stored elsewhere (default: `plan/`)
 
 # Process
 
@@ -42,14 +41,14 @@ Do not use this skill when:
    - `check_all_succeeded`: Return SUCCESS (exit 0) if all done; BLOCKED + list + exit 1 if any pending
 5. **Output format**: Structured list (each line: `[X/space] step text`); blocking operations flag completion status clearly.
 
-**Primary execution path**: Use `python scripts/step_tracker.py <operation> <topic>`.  
+**Primary execution path**: Use `python .github/skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>`.  
 **Fallback** (if Python CLI unavailable): Use grep patterns per `reference.md` quick-lookup table.
 
 # Examples
 
 **Positive: Main Agent checks remaining work before final validation**
 ```bash
-$ python scripts/step_tracker.py read_not_run my-feature-topic
+$ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run my-feature-topic
 [ ] Step 2: Implement core logic
 [ ] Step 5: Write integration tests
 
@@ -59,7 +58,7 @@ $ python scripts/step_tracker.py read_not_run my-feature-topic
 
 **Negative: Agent ignores blocking signal and proceeds prematurely**
 ```bash
-$ python scripts/step_tracker.py check_all_succeeded my-feature-topic
+$ python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded my-feature-topic
 ❌ BLOCKED: 3 steps pending (exit code 1)
 [ ] Step 1: Setup environment
 [ ] Step 3: Documentation
