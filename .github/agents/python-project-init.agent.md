@@ -26,6 +26,8 @@ user-invocable: true
 | `uv init` / `uv add` | 你（execute）| 僅在 approved 後才執行 |
 | 目錄結構 | 你（edit）| 最小結構，不建 stub |
 | sense-env acceptance | `sense_env.py` 腳本 | 驗證並回報結果 |
+| Pre-commit 設置 | `/fleet @python-pre-commit/` | Phase 6，永遠執行 |
+| Pyproject toolconfig | `/fleet @python-pyproject-toolconfig/` | Phase 6，永遠執行 |
 
 ---
 
@@ -204,6 +206,23 @@ Exit code 0 = 全部通過，才繼續。
 
 ---
 
+### Phase 6 — Pre-commit & Tooling Setup（永遠執行）
+
+**執行條件**：Phase 5 acceptance exit code 0 後自動進入，不詢問用戶。
+
+1. 執行 `/fleet @.github/skills/python-pre-commit/` — 建立 `.pre-commit-config.yaml`
+2. 詢問用戶以下參數後執行 `/fleet @.github/skills/python-pyproject-toolconfig/`：
+   - `--python-version`：來自 Phase 0 Q3（例如 `3.10`）
+   - `--package-name`：必須向用戶明確確認 `src/` 下的實際可匯入套件目錄名稱。注意：`uv init` 使用的 kebab-case 專案名（例如 `my-awesome-lib`）與 `src/` 下的 snake_case 目錄名（`my_awesome_lib`）可能不同；pyright include 路徑需要的是後者，不得自行從 uv init 輸出推斷。
+3. 通知用戶執行安裝（不自動執行）：
+   ```
+   uv run pre-commit install
+   uv run pre-commit run --all-files
+   ```
+4. 驗證：`uv run pre-commit run --all-files` exit code 0 = Phase 6 成功 ✅
+
+---
+
 ## 禁止行為
 
 - ❌ 跳過 Pre-flight Interview 任何一個問題
@@ -213,6 +232,7 @@ Exit code 0 = 全部通過，才繼續。
 - ❌ 建 stub 檔案（`.py` 除了 `__init__.py` 以外）
 - ❌ `uv add` 前未顯示確認摘要
 - ❌ 不說明哪個 Python binary 實際被使用
+- ❌ Phase 6 在 Phase 5 acceptance 失敗時執行
 
 ## 常見錯誤（Common Rationalizations）
 
@@ -230,3 +250,5 @@ Exit code 0 = 全部通過，才繼續。
 - `python-blueprint-review/SKILL.md` — 被 STOP POINT B 的 /fleet 使用
 - `sense-env-scaffold/` — 有真實腳本（`sense_env.py`），此 agent 直接呼叫
 - `copilot-instructions-init/SKILL.md` — Phase 5 後通知用戶使用
+- `python-pre-commit/SKILL.md` — Phase 6 透過 `/fleet` 呼叫，建立 `.pre-commit-config.yaml`
+- `python-pyproject-toolconfig/SKILL.md` — Phase 6 透過 `/fleet` 呼叫，append 缺少的 `[tool.*]` sections

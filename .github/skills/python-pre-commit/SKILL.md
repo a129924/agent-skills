@@ -35,7 +35,24 @@ Do not use this skill when:
    - Include the `pytest` hook using `stages: [manual]`. It must never be on the default stage.
    - Include the `pyright` hook with `stages: [manual]` only if the project uses pyright strict mode.
 
-4. **Write the config** — produce `.pre-commit-config.yaml` following the hook structure in `references/hooks-catalog.md`. Use `entry: uv run <cmd>` for all local hooks.
+4. **Write the config** — if `templates/pre-commit-config.yaml` exists in the skill folder, use it as the canonical source:
+   ```
+   cp <skill-dir>/templates/pre-commit-config.yaml .pre-commit-config.yaml
+   python -c "
+   import re, subprocess
+   with open('.pre-commit-config.yaml') as f:
+       content = f.read()
+   ruff_version = 'v' + subprocess.check_output(['uv', 'run', 'ruff', '--version']).decode().split()[1]
+   content = re.sub(r'RUFF_VERSION', ruff_version, content)
+   with open('.pre-commit-config.yaml', 'w') as f:
+       f.write(content)
+   "
+   ```
+   If the template is not available, produce `.pre-commit-config.yaml` manually following the hook structure in `references/hooks-catalog.md`. Use `entry: uv run <cmd>` for all local hooks.
+
+   After copying the template, apply the pyright decision from Step 3:
+   - **Project uses pyright strict mode**: append the pyright hook block from `references/hooks-catalog.md` to `.pre-commit-config.yaml`.
+   - **Project does not use pyright**: no further action needed; the template already omits the pyright hook.
 
 5. **Provide install command** — after writing the file, output the commands the user must run manually:
    ```
@@ -70,3 +87,4 @@ Do not use this skill when:
 - `references/uv-run-format.md`: `uv run` + `language: system` entry rationale with correct and incorrect patterns.
 - `references/version-pinning.md`: ruff rev alignment strategy, upgrade steps, and pre-commit-hooks rev guidance.
 - `examples.md`: detailed scenarios for new setup, config merging, pyright strict projects, and anti-patterns.
+- `templates/pre-commit-config.yaml`: canonical pre-commit config template with RUFF_VERSION placeholder; used as the base for new config creation in Process Step 4.
