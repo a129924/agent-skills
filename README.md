@@ -144,9 +144,9 @@ Process documentation and workflow guidance for repository operations:
 ## Current skills
 | Skill | Role |
 | --- | --- |
-| `agent-skill-creator` | creates new repo-compliant skills |
-| `agent-skill-reviewer` | checks skills against the repository rules |
-| `agent-skill-template` | provides the canonical template and reference shape |
+| `agent-skill-creator` | creates new repo-compliant, single-purpose skills with complexity classification, risk-appropriate validation, and explicit local-file roles |
+| `agent-skill-reviewer` | reviews skills for complexity-gated sections, YAML-body alignment, risk-appropriate validation, severity-labeled findings, and lifecycle compliance |
+| `agent-skill-template` | provides the canonical template with complexity-gated sections and risk-based validation guidance |
 | `business-intent-alignment` | collects and aligns business requirements, applying Socratic questioning and extreme-boundary checking to ensure a measurable, contradiction-free intent baseline |
 | `business-to-technical-translation` | translates requirements into technical specification, feasibility checks, and architecture-compliance guidance, surfacing conflicts and cost-of-realization warnings |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions |
