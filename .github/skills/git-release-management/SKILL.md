@@ -80,6 +80,14 @@ Do not use this skill when:
 
 # Validation
 
+## PASS (all gates satisfied — safe to provide tagging commands)
+All of the following must be confirmed positive:
+- All required gate signals are present and confirmed: CI, base tests, strict type checks, lint, documentation sync, reviewer approval (or valid emergency bypass on record)
+- All version sources agree with the intended tag
+- No uncommitted changes in the workspace
+- The target tag does not yet exist in the repository
+- For multi-ecosystem PRs: all touched release surfaces have linked version updates
+
 ## Hard-Block Conditions (BLOCKED — do not proceed)
 - The target tag already exists in the repository — overwriting a tag is destructive and forbidden.
 - The workspace has uncommitted changes — a dirty workspace produces an unreliable release artifact.

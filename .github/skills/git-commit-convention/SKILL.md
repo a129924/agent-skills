@@ -71,7 +71,7 @@ Do not use this skill when:
 
 # Validation
 Main decision path:
-1. **Staging check** — confirm `git status` shows staged changes before drafting; if nothing is staged, BLOCKED.
+1. **Staging check** — confirm `git status` shows staged changes before drafting; if nothing is staged AND the request is not a general commit-policy question, BLOCKED.
 2. **Semantic boundary check** — identify whether staged set represents one intent or multiple; mixed-intent staging requires split recommendation before drafting a single commit.
 3. **Type assignment** — verify chosen type (`feat`, `fix`, `refactor`, etc.) matches business intent, not code mechanics.
 4. **Breaking change check** — if any public interface changes, require `!` marker and body explanation.
@@ -79,7 +79,7 @@ Main decision path:
 
 PASS: staged changes form a coherent intent, type and subject are correctly assigned, any breaking change is marked.  
 SOFT FAIL: staging is partial or intent is ambiguous — continue with best-effort draft, flag the ambiguity explicitly, and ask the user to confirm scope.  
-BLOCKED: no staged changes exist and no `--amend` candidate is identified.
+BLOCKED: no staged changes exist AND the request is not a general commit-policy question AND no `--amend` candidate is identified.
 
 # Failure Handling
 - **Nothing staged**: stop immediately; state that no staged changes were found and ask the user to stage changes before proceeding.

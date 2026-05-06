@@ -5,7 +5,7 @@
 
 ## Status / Allowed Transitions
 
-**Current status**: `planned`
+**Current status**: `pr-open`
 
 | From | To | Condition |
 |---|---|---|
@@ -58,8 +58,8 @@ See Boundaries / Exclusions.
 | # | Skill | Mode | Inferred Complexity | Inferred Risk Profile | Preservation Notes |
 |---|---|---|---|---|---|
 | 1 | `git-commit-convention` | A+ | medium | ambiguity_sensitive | Preserve split-signal logic, repair commands, and breaking-change marker rules |
-| 2 | `git-post-merge-workflow` | A+ | medium | destructive_action | Preserve STOP POINT 2 gate, FF-only sync, and branch deletion defaults |
-| 3 | `git-release-management` | A+ | high | destructive_action, ambiguity_sensitive | Preserve all release gates, emergency exception path, tagging safety, and repair guidance |
+| 2 | `git-post-merge-workflow` | A+ | medium | destructive_action, multi_agent_handoff, external_tooling | Preserve STOP POINT 2 gate, FF-only sync, and branch deletion defaults |
+| 3 | `git-release-management` | A+ | high | destructive_action, ambiguity_sensitive, external_tooling | Preserve all release gates, emergency exception path, tagging safety, and repair guidance |
 
 ---
 
@@ -90,8 +90,8 @@ For each skill, creator must output a **Preservation Map** showing:
 | Skill | Complexity | Reasoning | Risk Profile | Rationale |
 |---|---|---|---|---|
 | `git-commit-convention` | **medium** | Multi-path decisions: single vs split commit, repair paths (`--amend`, `git add -p`), breaking-change markers; branching on staged change set | ambiguity_sensitive | Missing context (e.g., which files are staged) materially changes the output — different commits, different subjects, different footers |
-| `git-post-merge-workflow` | **medium** | Single-path cleanup with hard gate checks (STOP POINT 2, FF-only sync, branch deletion); limited branching but destructive consequence if wrong | destructive_action | Branch deletion is irreversible; FF-only sync can fail if upstream diverges; wrong branch deletion would lose commits |
-| `git-release-management` | **high** | Complex multi-path: normal release gate, emergency exception path, tagging safety, version-source sync, repair guidance; gatekeeping skill with downstream release consequences | destructive_action, ambiguity_sensitive | Tagging and releasing wrong commits is irreversible; ambiguous PR/branch state can lead to releasing unreviewed code; emergency exceptions are high-stakes decisions |
+| `git-post-merge-workflow` | **medium** | Single-path cleanup with hard gate checks (STOP POINT 2, FF-only sync, branch deletion); limited branching but destructive consequence if wrong | destructive_action, multi_agent_handoff, external_tooling | Branch deletion is irreversible; FF-only sync can fail if upstream diverges; wrong branch deletion would lose commits; STOP POINT 2 is an explicit multi-agent handoff gate; git CLI is required for sync and branch operations |
+| `git-release-management` | **high** | Complex multi-path: normal release gate, emergency exception path, tagging safety, version-source sync, repair guidance; gatekeeping skill with downstream release consequences | destructive_action, ambiguity_sensitive, external_tooling | Tagging and releasing wrong commits is irreversible; ambiguous PR/branch state can lead to releasing unreviewed code; emergency exceptions are high-stakes decisions; relies on external tooling (gh CLI, CI APIs) for gate-signal retrieval and tagging commands |
 
 **Policy implications**:
 - `git-commit-convention` (medium): `Validation` recommended; `Failure Handling` recommended.
