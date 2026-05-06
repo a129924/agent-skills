@@ -1,6 +1,25 @@
 ---
 name: python-pyproject-toolconfig
 description: Append missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings.
+complexity: low
+risk_profile:
+  - code_modification
+inputs:
+  - "--python-version: Python 版本字串，必須向人類詢問（例如 3.10、3.12）"
+  - "--package-name: 套件/模組名稱，用於 pyright include 路徑，必須向人類詢問"
+  - "pyproject.toml: 執行前必須已存在於當前工作目錄"
+outputs:
+  - "修改後的 pyproject.toml，補充了缺少的 [tool.ruff]、[tool.pyright]、[tool.pytest.ini_options] section"
+  - "stdout 報告，列出每個 append 或跳過的 section"
+  - "若所有 section 已存在，則不做任何修改"
+use_when:
+  - "Python 專案有 pyproject.toml，但缺少一個或多個 tool 配置 section"
+  - "為新專案或現有專案建立 linting、型別檢查、測試配置"
+  - "跨專案標準化工具設定，同時保留現有客製化設定"
+do_not_use_when:
+  - "專案使用 setup.cfg、tox.ini 或個別工具配置檔，而非 pyproject.toml"
+  - "需要修改或更新現有工具配置（本 skill 只做 append）"
+  - "需要配置 [tool.coverage]、[tool.mypy] 等本 skill 範圍外的工具"
 ---
 
 # Purpose
@@ -71,6 +90,28 @@ description: Append missing ruff, pyright, and pytest configuration sections to 
 - 需要 `uv` 已安裝並可在 `PATH` 中存取
 - 執行前 `pyproject.toml` 必須已存在於當前工作目錄
 - **不負責更新**現有 `[tool.*]` section 的內容；修改現有設定的維護責任由 human 承擔
+
+# Validation
+
+## Required Checks
+- pyproject.toml must exist in target directory before appending
+
+## Quality Checks
+- verify appended sections do not duplicate existing sections
+
+## On Soft Fail
+- If required inputs (python-version, package-name) are missing, stop and ask before proceeding
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if pyproject.toml does not exist or python-version / package-name not provided, stop and ask
+
+## Ambiguous Requirement
+- If package name is ambiguous, ask for clarification; do not guess
+
+## Execution Limitation
+- If pyproject.toml cannot be parsed, report the parse error and stop
 
 # Local references
 

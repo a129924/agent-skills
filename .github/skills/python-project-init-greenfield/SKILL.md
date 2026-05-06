@@ -1,6 +1,31 @@
 ---
 name: python-project-init-greenfield
 description: Create a governed Python project baseline from a locked `blueprint.md` contract. Use this when a greenfield repository needs its first uv-aligned structure, copied Agent Skills, and a closed acceptance handoff through the canonical `sense-env-scaffold` CLI path.
+complexity: high
+risk_profile:
+  - destructive_action
+  - multi_agent_handoff
+inputs:
+  - the target repository root
+  - the blueprint.md path
+  - the source skill-library root used to copy Required Skills
+  - explicit human approval for destructive or ambiguous overwrite decisions
+  - the target repository or directory name for package-name fallback
+outputs:
+  - a greenfield Python baseline aligned to blueprint.md
+  - copied required skill folders under .github/skills/
+  - governance provenance recorded in .github/skills-provenance.json
+  - a repository ready for acceptance verification against the same blueprint.md
+use_when:
+  - a new or near-empty repository already has a review-ready blueprint.md
+  - the task is to create the first Python baseline rather than retrofit an existing project
+  - the repository should start with uv-aligned tooling, required Agent Skills, and acceptance-ready structure
+  - the workflow needs build-first execution followed by the canonical sense-env-scaffold acceptance command
+do_not_use_when:
+  - the repository already has meaningful structure and needs retrofit or selective reinforcement
+  - blueprint.md is missing, malformed, or still being negotiated
+  - the task is only to generate .github/copilot-instructions.md or tweak one existing config file
+  - the user wants business logic, domain models, CI/CD pipelines, or infrastructure setup
 ---
 
 # Purpose
@@ -106,6 +131,45 @@ Do not use this skill when:
 - Do not invent business-domain code, `.env` secrets, CI pipelines, or infrastructure.
 - Do not modify `sense_env.py` or broaden its supported assertion kinds.
 - Do not bypass human approval on destructive or ambiguous overwrite paths.
+
+# Validation
+
+## Required Checks
+- `blueprint.md` must exist at the provided path and be readable before any file generation begins
+- `blueprint.md` must follow the fixed ordered-heading contract from `references/blueprint-parsing-contract.md`
+- `blueprint.md` must contain a valid ` ```yaml [sensing-assertions]` `` ` block with supported assertion kinds only
+- every skill named in `Required Skills` must exist in the source skill library before copying starts
+- the target repository must be empty or baseline-only; stop if meaningful non-baseline structure is detected
+
+## Quality Checks
+- generated `pyproject.toml` is uv-aligned and includes pytest, ruff, and pyright configuration sections
+- governance-aware `README.md` includes `## Governance`, uv quick-start, and acceptance note
+- typed entrypoint boilerplate exists for every `entrypoint:` item declared in `blueprint.md`
+- placeholder `.github/copilot-instructions.md` tells Copilot to consult installed skills and prefer the canonical acceptance command
+- `.github/skills-provenance.json` records at minimum skill name, source version, and source hash for each copied skill
+- `sense-env-scaffold` acceptance command is available locally before it is invoked
+- acceptance run produces a concrete pass/fail result; a silent or skipped run is a quality failure
+
+## On Soft Fail
+- Return `verdict: needs-rework` with explanation; continue with best-effort output when possible
+- Mark INCOMPLETE if partial scaffolding was created but acceptance could not be run or failed
+- Do not silently reinterpret contract gaps; surface them explicitly so the human can decide
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if `blueprint.md` is not provided or cannot be read, stop and ask for the correct path before proceeding
+- BLOCKED — if the source skill-library root is not provided and required skills cannot be located, stop and ask
+
+## Ambiguous Requirement
+- If a `blueprint.md` section is present but ambiguous (e.g., unclear package name, conflicting invariants), surface the ambiguity and ask the human to clarify rather than guessing
+- If an unsupported assertion kind appears in the `[sensing-assertions]` block, treat it as a contract error and stop
+- If a non-matching prose line appears in the blueprint, skip it as a human-only note; do not infer an action from it
+
+## Execution Limitation
+- If a target directory already contains materially different skill content, stop and ask the human rather than overwriting or merging silently
+- If `sense-env-scaffold` is not available locally, report the gap and stop; do not mark acceptance as passed
+- If file generation partially fails (e.g., permission error, disk issue), mark the output INCOMPLETE and report which artifacts were not created
 
 # Local references
 - `examples.md`: detailed greenfield-init scenarios, branching paths, and anti-patterns

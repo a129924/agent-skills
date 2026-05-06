@@ -1,6 +1,35 @@
 ---
 name: python-project-retrofit
 description: Retrofit an existing Python repository from a locked Retrofit V2 `retrofit-plan.md`, with risk-alignment blocking, mandatory human gates, destructive preview for HIGH-risk plans, and acceptance handoff through `sense_env.py`.
+complexity: high
+risk_profile:
+  - destructive_action
+  - multi_agent_handoff
+  - code_modification
+inputs:
+  - target repository root
+  - locked Retrofit V2 retrofit-plan.md path
+  - current filesystem state, including existing entrypoints, packages, and config remnants
+  - current Git working-tree state before any move, deletion, or overwrite
+  - parsed yaml [migration-strategy] fields: risk_level, destructive_actions, and backup_required
+  - explicit human decisions for Gate 1 and Gate 2, plus any HIGH-risk destructive authorization when a clean or backed-up path is ready
+  - provenance destination at .github/skills-provenance.json
+outputs:
+  - existing Python project restructured to the approved Retrofit V2 target
+  - explicit human gate outcomes for shadow files, implicit configs, and destructive paths
+  - Sensing Delta Report JSON artifact with before/after facts and MOVED / CREATED / MODIFIED / DELETED operations
+  - provenance recorded in .github/skills-provenance.json
+  - acceptance handoff result or a concrete blocking error
+use_when:
+  - an existing Python repository already has an approved Retrofit V2 retrofit-plan.md
+  - the task is to execute retrofit work rather than author the retrofit contract
+  - the workflow must detect shadow files, mine implicit configuration remnants, enforce risk alignment, and emit a Sensing Delta Report before acceptance
+  - the retrofit must hand off immediately to sense-env-scaffold acceptance via sense_env.py
+do_not_use_when:
+  - the repository is greenfield or baseline-only; use python-project-init-greenfield
+  - retrofit-plan.md is missing, malformed, still under negotiation, or still uses pre-V2 headings
+  - the task is to author or review the retrofit plan itself
+  - the user expects the agent to auto-merge conflicting config files or guess through ambiguous structure changes
 ---
 
 # Purpose
@@ -130,6 +159,41 @@ Do not use this skill when:
 - Do not auto-merge conflicting configurations.
 - Do not generate `.github/copilot-instructions.md` content.
 - Do not proceed through any gate without explicit human confirmation.
+
+# Validation
+
+## Required Checks
+- `retrofit-plan.md` is present, readable, and contains the locked Retrofit V2 section order
+- `yaml [migration-strategy]` block is parseable and `risk_level` is `LOW` or `HIGH`
+- `yaml [sensing-assertions]` block is parseable under `## Acceptance Criteria`
+- `risk_level` is aligned with observable destructive surfaces before any gate runs
+- Git working-tree is clean before any destructive step (Gate 3)
+
+## Quality Checks
+- All three gates produced explicit human-confirmed outcomes before execution proceeded
+- The Sensing Delta Report includes all required fields: `delta_summary`, `timestamp`, `pre_retrofit_state`, `post_retrofit_state`, `changes`, `new_files`, `deleted_files`, `modified_files`
+- Every change record includes `fact_key`, `before`, `after`, and a valid `operation` value
+- Provenance is recorded in `.github/skills-provenance.json`
+- Acceptance handoff used the exact `sense_env.py --mode acceptance --contract-file retrofit-plan.md` invocation
+
+## On Soft Fail
+- Return `verdict: needs-rework` with explanation; continue with best-effort output when possible
+- Mark INCOMPLETE if partial — e.g., if acceptance cannot run, emit the blocking reason and mark the retrofit INCOMPLETE rather than claiming success
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if `retrofit-plan.md` is not provided or cannot be read, stop and ask for the correct path before proceeding
+
+## Ambiguous Requirement
+- If a `retrofit-plan.md` section is ambiguous or missing required machine-readable blocks, stop and request clarification or a corrected plan; do not infer intent from prose
+- If `risk_level` is `MEDIUM` or absent, hard-block and require a corrected `[migration-strategy]` block
+- If Gate 1 or Gate 2 presents a conflict without a clear human choice, re-present the four options and wait; do not default to any option
+
+## Execution Limitation
+- If the repository cannot be inspected (permissions, missing Git state, or inaccessible paths), stop and report the specific blocking condition
+- If a destructive migration step partially fails, do not attempt to roll back automatically; report what succeeded and what failed, mark the retrofit INCOMPLETE, and require human review before retrying
+- If `sense_env.py` is unavailable or returns a non-zero exit code, report the exact error and mark the retrofit INCOMPLETE rather than claiming success
 
 # Local references
 - `examples.md`: detailed Retrofit V2 execution scenarios, risk-lane behavior, and anti-patterns
