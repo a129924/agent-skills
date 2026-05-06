@@ -116,7 +116,7 @@ $ grep '^\- \[ \]' plan/my-feature/my-feature.step.md
 
 **Limitation**: Grep catches only space-bracket `[ ]`, not lowercase `[x]`. Combine with:
 ```bash
-$ grep '^\- \[\[xX]\]' plan/my-feature/my-feature.step.md  # captures both [ ] and [x]
+$ grep '^\- \[[ x]\]' plan/my-feature/my-feature.step.md  # captures both [ ] and [x]
 ```
 
 ---

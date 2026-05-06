@@ -32,7 +32,7 @@ created: YYYY-MM-DD
 
 ### Rules
 
-1. **YAML Frontmatter** (lines 1–3): metadata only; informational only, not parsed by script
+1. **YAML Frontmatter** (`--- ... ---` block): metadata only; informational only, not parsed by script
 2. **Content lines**: Only lines matching `^\- \[.\]` pattern are parsed:
    - `- [X]` → done
    - `- [ ]` → pending (space inside brackets)
