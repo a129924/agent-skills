@@ -1,6 +1,16 @@
 ---
 name: agent-skill-template
-description: Provide the canonical structure for a review-ready, portable, single-purpose Agent Skill in this repository, including layered example guidance and risk-based validation guidance. Use this when asked for the standard shape of a new skill or when building a new skill manually from a template.
+description: Provide the canonical structure for a review-ready, portable, single-purpose Agent Skill in this repository, including complexity-gated sections and risk-based validation guidance. Use this when asked for the standard shape of a new skill or when building a new skill manually from a template.
+
+complexity: low
+
+use_when:
+  - a new skill needs a clean starting point
+  - you want the canonical section layout for SKILL.md
+
+do_not_use_when:
+  - the task is to review a finished skill
+  - the task only needs a small edit to an existing skill
 ---
 
 # Purpose
@@ -25,7 +35,8 @@ Do not use this skill when:
 
 # Process
 1. Read `template.md` and `folder-contract.md`.
-2. Classify the expected validation weight before copying the skeleton: lightweight, medium-complexity, or higher-risk.
+2. Classify the expected validation weight and `complexity` before copying the skeleton: lightweight (low), medium-complexity (medium), or higher-risk (high).
+3. Identify applicable `risk_profile` tags for medium and high complexity skills.
 3. Copy the folder shape and section layout.
 4. Replace placeholders with one clear responsibility.
 5. Add concise positive and negative examples to `SKILL.md`.
