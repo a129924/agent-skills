@@ -29,28 +29,29 @@ Do not use this skill when:
    - **New config (file does not exist)**: create a fresh file with the full canonical hook set from `references/hooks-catalog.md`.
    - **Update existing config (file exists)**: read the current file, identify which canonical hooks are missing, and merge them in without overwriting hooks the user has already configured.
 
-2. **Determine ruff rev** — run `uv run ruff --version` to get the actual resolved version and use that as the `vX.Y.Z` tag for `ruff-pre-commit`. If ruff is not yet installed or the command fails, keep the existing `rev` unchanged and inform the user to verify version alignment manually before committing.
+2. **Determine ruff rev** — 決定 ruff rev：使用 `scripts/apply_precommit.py` 的 `--ruff-version` 預設值（`v0.15.12`），或自行指定。版本來自 [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases)，與 `uv` 安裝的 ruff 版本脫鉤，需手動更新。
 
 3. **Decide on optional hooks**:
    - Include the `pytest` hook using `stages: [manual]`. It must never be on the default stage.
    - Include the `pyright` hook with `stages: [manual]` only if the project uses pyright strict mode.
 
-4. **Write the config** — if `templates/pre-commit-config.yaml` exists in the skill folder, use it as the canonical source:
+4. **Write the config** — use `scripts/apply_precommit.py` to generate `.pre-commit-config.yaml` from the canonical template:
    ```
-   cp <skill-dir>/templates/pre-commit-config.yaml .pre-commit-config.yaml
-   python -c "
-   import re, subprocess
-   with open('.pre-commit-config.yaml') as f:
-       content = f.read()
-   ruff_version = 'v' + subprocess.check_output(['uv', 'run', 'ruff', '--version']).decode().split()[1]
-   content = re.sub(r'RUFF_VERSION', ruff_version, content)
-   with open('.pre-commit-config.yaml', 'w') as f:
-       f.write(content)
-   "
-   ```
-   If the template is not available, produce `.pre-commit-config.yaml` manually following the hook structure in `references/hooks-catalog.md`. Use `entry: uv run <cmd>` for all local hooks.
+   # New config (preview first):
+   uv run scripts/apply_precommit.py --dry-run
 
-   After copying the template, apply the pyright decision from Step 3:
+   # Write (default ruff version v0.15.12):
+   uv run scripts/apply_precommit.py
+
+   # Write with custom ruff version:
+   uv run scripts/apply_precommit.py --ruff-version v0.15.12
+
+   # Overwrite existing config:
+   uv run scripts/apply_precommit.py --force
+   ```
+   If the script is not available, fall back to manually producing `.pre-commit-config.yaml` following the hook structure in `references/hooks-catalog.md`.
+
+   After writing the config, apply the pyright decision from Step 3:
    - **Project uses pyright strict mode**: append the pyright hook block from `references/hooks-catalog.md` to `.pre-commit-config.yaml`.
    - **Project does not use pyright**: no further action needed; the template already omits the pyright hook.
 
@@ -88,3 +89,5 @@ Do not use this skill when:
 - `references/version-pinning.md`: ruff rev alignment strategy, upgrade steps, and pre-commit-hooks rev guidance.
 - `examples.md`: detailed scenarios for new setup, config merging, pyright strict projects, and anti-patterns.
 - `templates/pre-commit-config.yaml`: canonical pre-commit config template with RUFF_VERSION placeholder; used as the base for new config creation in Process Step 4.
+- `scripts/apply_precommit.py`: CLI script that reads `templates/pre-commit-config.yaml`, substitutes `RUFF_VERSION`, and writes `.pre-commit-config.yaml` to the current directory. Supports `--ruff-version`, `--dry-run`, and `--force`.
+- `tests/`: Unit tests for `scripts/apply_precommit.py`; verifies version substitution, dry-run (no disk write), force-overwrite, and guard-on-existing-file behaviors.

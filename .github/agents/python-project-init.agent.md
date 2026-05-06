@@ -219,7 +219,17 @@ Exit code 0 = 全部通過，才繼續。
    uv run pre-commit install
    uv run pre-commit run --all-files
    ```
-4. 驗證：`uv run pre-commit run --all-files` exit code 0 = Phase 6 成功 ✅
+4. 驗證：`uv run pre-commit run --all-files`
+   - exit code 0 = Phase 6 成功 ✅
+   - exit code ≠ 0：從輸出找到失敗的 hook id，再執行 `uv run pre-commit run <hook-id> --verbose` 單獨診斷：
+
+   | 失敗 hook | 常見原因 | 建議修復 |
+   |-----------|----------|----------|
+   | `ruff` | lint error（autofix 未完全解決）| `uv run ruff check --fix .` |
+   | `ruff-format` | 格式不符 | `uv run ruff format .` |
+   | `pytest` | 測試失敗 | `uv run pytest -v` 看完整錯誤 |
+   | `trailing-whitespace` / `end-of-file-fixer` | 空白/換行問題 | hook 會自動 fix；重新 `git add` 再 commit |
+   | `check-yaml` | YAML syntax error | 手動檢查 `.pre-commit-config.yaml` |
 
 ---
 

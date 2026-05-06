@@ -9,17 +9,20 @@ Canonical YAML blocks for all four supported hook types. Copy these blocks into 
 | Repo URL | `https://github.com/astral-sh/ruff-pre-commit` |
 | Hooks | `ruff` (lint + autofix), `ruff-format` (formatter) |
 | Canonical rev | Use the `vX.Y.Z` tag matching the ruff version in `pyproject.toml`. |
-| Example rev | `v0.11.9` (update to current stable at config creation time) |
+| Example rev | `v0.15.12` (update to current stable at config creation time) |
+| Version source | Manual update from https://github.com/astral-sh/ruff-pre-commit/releases — version is independent of `uv run ruff --version` |
 
 **Canonical block**:
 ```yaml
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.11.9
+  rev: v0.15.12
   hooks:
     - id: ruff
       args: ["--fix"]
     - id: ruff-format
 ```
+
+> **Version note**: The `rev` for `ruff-pre-commit` is independent of the ruff version installed by uv. Always check [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases) and update manually when upgrading. The default used by `scripts/apply_precommit.py` is `v0.15.12`.
 
 - Always add `args: ["--fix"]` to `ruff` so autofix runs on staged files before the commit is blocked.
 - Run `ruff-format` after `ruff` (pre-commit runs hooks in declaration order).

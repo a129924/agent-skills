@@ -9,12 +9,24 @@
 - `pyproject.toml` contains `ruff>=0.11.0` under `[dependency-groups]`, `[project.dependencies]`, or `[project.optional-dependencies]`.
 - Project does not use pyright strict mode.
 
+**How to generate** (using the skill script):
+```
+# Preview first:
+uv run scripts/apply_precommit.py --dry-run
+
+# Write with default ruff version (v0.15.12):
+uv run scripts/apply_precommit.py
+
+# Write with a specific ruff version:
+uv run scripts/apply_precommit.py --ruff-version v0.15.12
+```
+
 **Correct output** — `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.9
+    rev: v0.15.12
     hooks:
       - id: ruff
         args: ["--fix"]
