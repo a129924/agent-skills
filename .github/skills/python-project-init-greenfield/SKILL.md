@@ -151,7 +151,7 @@ Do not use this skill when:
 - acceptance run produces a concrete pass/fail result; a silent or skipped run is a quality failure
 
 ## On Soft Fail
-- Return `verdict: needs-rework` with explanation; continue with best-effort output when possible
+- Mark output as INCOMPLETE; list which artifacts were not created or which steps could not be completed; continue with best-effort output where safe to do so
 - Mark INCOMPLETE if partial scaffolding was created but acceptance could not be run or failed
 - Do not silently reinterpret contract gaps; surface them explicitly so the human can decide
 

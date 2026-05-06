@@ -1,7 +1,7 @@
 ---
 name: python-pyproject-toolconfig
 description: Append missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings.
-complexity: low
+complexity: medium
 risk_profile:
   - code_modification
 inputs:

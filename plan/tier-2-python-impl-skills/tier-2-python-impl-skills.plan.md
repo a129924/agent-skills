@@ -11,7 +11,7 @@ Upgrade 4 Python implementation/code-modification skills to schema v2 standard (
 1. `python-project-init-greenfield` — greenfield Python project scaffolding (complexity: **high**)
 2. `python-project-retrofit` — existing Python project migration (complexity: **high**)
 3. `python-pre-commit` — pre-commit hook configuration (complexity: **medium**)
-4. `python-pyproject-toolconfig` — pyproject.toml tool config append (complexity: **low-medium**)
+4. `python-pyproject-toolconfig` — pyproject.toml tool config append (complexity: **medium**)
 
 ---
 
@@ -37,7 +37,7 @@ All 4 skills are inferred as **upgrade mode (Mode A+)** — preserve existing co
 | 1 | `python-project-init-greenfield` | A+ | high | destructive_action, multi_agent_handoff | Freeze blueprint v1 parsing logic; keep `sense-env-scaffold` handoff explicit |
 | 2 | `python-project-retrofit` | A+ | high | destructive_action, multi_agent_handoff, code_modification | Freeze retrofit v2 section order; keep risk gates + human authorization explicit |
 | 3 | `python-pre-commit` | A+ | medium | code_modification, external_tooling | Freeze canonical hook set; keep ruff/pytest/pyright separation clear |
-| 4 | `python-pyproject-toolconfig` | A+ | low-medium | code_modification | Freeze non-destructive append semantics; keep "no overwrite" guarantee |
+| 4 | `python-pyproject-toolconfig` | A+ | medium | code_modification | Freeze non-destructive append semantics; keep "no overwrite" guarantee |
 
 ---
 
@@ -70,9 +70,9 @@ For each skill, creator must output a **Preservation Map** (in PR description or
 | `python-project-init-greenfield` | **high** | Multi-section output, creates entrypoints, multi-agent handoff to `sense-env-scaffold` | destructive_action, multi_agent_handoff | Creates new files, directories, and scaffolding; hands off to acceptance engine |
 | `python-project-retrofit` | **high** | Multi-section input parsing, destructive file moves/merges, risk gates, human authorization required, multi-agent handoff | destructive_action, multi_agent_handoff, code_modification | Migrates existing projects with preview gates and HIGH-risk blocking |
 | `python-pre-commit` | **medium** | Single-file output, calls external tool (`pre-commit-config.yaml` creation), optional merge logic | code_modification, external_tooling | Modifies config but non-destructive merge strategy; pre-commit is external tooling |
-| `python-pyproject-toolconfig` | **low-medium** | Single-file append, no destructive overwrites, scripted append semantics | code_modification | Appends config sections only; guarantees no existing section overwrites |
+| `python-pyproject-toolconfig` | **medium** | Single-file append, no destructive overwrites, scripted append semantics | code_modification | Appends config sections only; guarantees no existing section overwrites |
 
-- All **require** `Validation` + `Failure Handling` sections per folder-contract.md complexity policy.
+- High-complexity skills **require** `Validation` + `Failure Handling` sections. Medium-complexity skills **should include** both when ambiguity would materially change output. Low-complexity skills may omit both unless risk signals warrant them.
 - High-complexity skills **recommend** `Workflow State Contract` (multi-agent handoff is inherent to greenfield + retrofit).
 
 ### D4: YAML / Body Consistency Check
@@ -157,7 +157,7 @@ grep -A 20 '^# Validation' SKILL.md | head -25
 grep -A 20 '^# Failure Handling' SKILL.md | head -25
 
 # Verify YAML examples consistency (at least one positive, one negative)
-grep -E '^\*\*Example:' SKILL.md | wc -l
+grep -E '^- \*\*(Positive|Negative)\*\*:' SKILL.md | wc -l
 
 # Verify risk_profile tags match risk_profile declared in YAML
 grep 'risk_profile:' SKILL.md
@@ -248,7 +248,7 @@ None identified at plan authoring. All 4 skills have existing `SKILL.md` files a
 
 **Question**: Should these skills include a `# Workflow State Contract` section, or is it optional per the folder-contract.md "recommended" language for high-complexity only?
 
-**Resolution**: Per folder-contract.md § Complexity Policy, Workflow State Contract is **optional** for medium complexity. Only **recommend** it for high-complexity multi-agent handoff. For `python-pre-commit` (medium) and `python-pyproject-toolconfig` (low-medium), include if the creator detects consumer-agent patterns; otherwise, mark as not-required.
+**Resolution**: Per folder-contract.md § Complexity Policy, Workflow State Contract is **optional** for medium complexity. Only **recommend** it for high-complexity multi-agent handoff. For `python-pre-commit` (medium) and `python-pyproject-toolconfig` (medium), include if the creator detects consumer-agent patterns; otherwise, mark as not-required.
 
 ### Q2: python-pyproject-toolconfig Chinese-language Process
 **Context**: The existing SKILL.md for `python-pyproject-toolconfig` contains mixed English (frontmatter, headings) and Traditional Chinese (Purpose, Process, Trigger).

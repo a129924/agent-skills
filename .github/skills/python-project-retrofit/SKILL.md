@@ -177,7 +177,7 @@ Do not use this skill when:
 - Acceptance handoff used the exact `sense_env.py --mode acceptance --contract-file retrofit-plan.md` invocation
 
 ## On Soft Fail
-- Return `verdict: needs-rework` with explanation; continue with best-effort output when possible
+- Mark output as INCOMPLETE; emit the blocking reason explicitly; continue with best-effort output when possible rather than halting entirely
 - Mark INCOMPLETE if partial — e.g., if acceptance cannot run, emit the blocking reason and mark the retrofit INCOMPLETE rather than claiming success
 
 # Failure Handling
