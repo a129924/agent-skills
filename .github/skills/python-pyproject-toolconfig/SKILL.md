@@ -70,6 +70,7 @@ description: Append missing ruff, pyright, and pytest configuration sections to 
 - **不支援** `[tool.coverage]`、`[tool.mypy]` 或其他本 skill 範圍外的工具
 - 需要 `uv` 已安裝並可在 `PATH` 中存取
 - 執行前 `pyproject.toml` 必須已存在於當前工作目錄
+- **不負責更新**現有 `[tool.*]` section 的內容；修改現有設定的維護責任由 human 承擔
 
 # Local references
 
