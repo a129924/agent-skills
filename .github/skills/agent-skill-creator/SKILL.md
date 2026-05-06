@@ -87,7 +87,7 @@ Do not use this skill when:
 
 ## Quality Checks (best effort)
 - `risk_profile` tags match the actual skill behavior
-- `examples.md` is present for medium or high complexity skills
+- `examples.md` is present when the skill is high complexity, involves branching or code modification, or the SKILL.md examples cover less than ~80% of routine usage
 - stronger validation signals are present when risk warrants it
 - `Validation` and `Failure Handling` sections are present for high complexity output
 
@@ -118,6 +118,8 @@ When participating in a multi-agent skill creation workflow, include:
 - status: IN_PROGRESS | COMPLETE | INCOMPLETE | BLOCKED
 
 Omit this section when the skill is created outside a multi-agent handoff flow.
+
+# Boundaries
 - Do not draft when the responsibility, trigger, or boundaries are still ambiguous.
 - Do not create multi-purpose skills.
 - Do not leave oversized multi-topic reference material in one undifferentiated file.

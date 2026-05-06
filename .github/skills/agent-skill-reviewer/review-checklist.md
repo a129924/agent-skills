@@ -8,7 +8,7 @@ A skill is `approved` only if all of these are true:
 
 ## Structure
 - `SKILL.md` has `name` and `description` frontmatter
-- `SKILL.md` frontmatter includes `complexity` field
+- `SKILL.md` frontmatter includes `complexity` field (for new and materially edited skills; see Legacy Skill Policy for unedited legacy skills)
 - `SKILL.md` includes `Purpose`
 - `SKILL.md` includes `Trigger / When to use`
 - `SKILL.md` includes `Inputs`
@@ -127,7 +127,7 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - **Examples section in SKILL.md exceeds 15% of total file length or individual examples exceed 20 lines** (signals over-documentation; defer detailed scenarios to `examples.md`)
 - YAML contradicts body sections
 - `Validation` present for a medium or high complexity skill but defines no SOFT FAIL or BLOCKED conditions
-- medium or high complexity skill missing `Validation` entirely
+- high complexity skill missing `Validation` entirely, or medium complexity skill missing `Validation` when ambiguity would materially change output
 - `Workflow State Contract` present but missing `status` field
 - hard-stop `FAIL → stop` design in Validation for a recoverable gap
 
@@ -137,7 +137,7 @@ low:
 - `Validation`, `Failure Handling`, `Workflow State Contract` are optional
 
 medium:
-- `Validation` present with Required Checks and Quality Checks tiers
+- `Validation` present when ambiguity would materially change output (recommended otherwise)
 - `Failure Handling` present if ambiguity would materially change output
 
 high:

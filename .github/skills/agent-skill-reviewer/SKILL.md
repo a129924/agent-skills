@@ -9,7 +9,7 @@ risk_profile:
   - multi_agent_handoff
 
 use_when:
-  - a new skill has been drafted and marked review-ready
+  - a new skill has been drafted
   - an existing skill has changed materially
   - someone wants an approved or needs-rework verdict
 
@@ -51,7 +51,7 @@ Do not use this skill when:
 11. If the skill is higher-risk or acts as a gatekeeper, require stronger validation signals or equivalent local guidance that makes misuse harder.
 12. Confirm `complexity` field exists in YAML and matches the skill's actual workflow risk, branching, and downstream impact; escalate if risk tags understate behavior.
 13. Confirm YAML governance metadata (`use_when`, `do_not_use_when`, `inputs`, `outputs`) aligns with body sections and does not contradict them.
-14. Confirm `Validation` section exists with Required Checks and Quality Checks tiers for medium and high complexity skills; confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
+14. Confirm `Validation` section exists for high complexity skills; for medium complexity, confirm it exists when ambiguity would materially change output (per folder-contract.md); confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
 15. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
 16. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
 17. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
@@ -72,7 +72,7 @@ Do not use this skill when:
 
 ## Required Checks
 - `review-checklist.md` has been read before any verdict is issued
-- verdict is either `approved` or `needs-rework`, not a partial or conditional answer
+- verdict is `approved` or `needs-rework`; use INCOMPLETE status only when entering soft fail (see On Soft Fail below)
 - every BLOCKER finding is accompanied by a concrete fix description
 
 ## Quality Checks (best effort)
@@ -107,6 +107,8 @@ When participating in a multi-agent review or creator-reviewer handoff, include:
 - status: APPROVED | NEEDS_REWORK | INCOMPLETE | BLOCKED
 
 Omit this section when the review is performed as a standalone action.
+
+# Boundaries
 - Do not rewrite the skill's purpose to force a pass.
 - Do not approve a skill that lacks required core files, required examples, or clear local roles.
 - Do not ignore vague triggers or bundled responsibilities.

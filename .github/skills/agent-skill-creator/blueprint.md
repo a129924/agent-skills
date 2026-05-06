@@ -170,7 +170,7 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
   `references/`.
 - Put concise positive and negative examples in `SKILL.md`.
 - Add `examples.md` when the skill is high complexity or the brief examples are not enough for about 80% of routine usage.
-- Add `Validation` for medium complexity skills; require it for high complexity skills.
+- Add `Validation` for medium complexity skills when ambiguity would materially change output (recommended otherwise); require it for high complexity skills.
 - Add `Failure Handling` when ambiguity would materially change output.
 - Add `Workflow State Contract` only when the skill joins multi-agent handoff.
 - Do not write hard `FAIL → stop` conditions; use SOFT FAIL or BLOCKED instead.
