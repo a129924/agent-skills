@@ -145,9 +145,7 @@ def check_all_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int:
         print(f"✅ SUCCESS: All {total} steps complete")
         return 0
 
-    print(
-        f"❌ BLOCKED: {len(pending_steps)} steps pending (exit code 1)", file=sys.stderr
-    )
+    print(f"❌ BLOCKED: {len(pending_steps)} steps pending (exit code 1)")
     for step in pending_steps:
         print(format_step(step))
 

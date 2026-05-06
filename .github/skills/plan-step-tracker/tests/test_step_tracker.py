@@ -287,10 +287,10 @@ topic: all-complete
         captured = capsys.readouterr()
 
         assert result == 1
-        assert "BLOCKED" in captured.err
-        # Should list pending steps
+        assert "BLOCKED" in captured.out
+        # Should list BLOCKED header + pending steps (all on stdout)
         lines = captured.out.strip().split("\n")
-        assert len(lines) == 4  # 4 pending steps
+        assert len(lines) == 5  # BLOCKED header + 4 pending steps
 
     def test_check_all_succeeded_file_not_found(self, temp_plan_dir, capsys):
         """Return exit code 1 when file not found."""

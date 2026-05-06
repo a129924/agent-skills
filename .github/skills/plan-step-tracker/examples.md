@@ -11,6 +11,13 @@ created: 2025-01-15
 
 # my-feature — Step Tracking
 
+## Workflow Stages
+- [X] plan-authoring
+- [X] plan-review
+- [ ] implementation
+- [ ] implementation-review
+- [ ] code-review
+
 ## Implementation Steps
 
 ### Phase 1: Core
@@ -34,6 +41,11 @@ Returns both done and pending steps.
 
 ```bash
 $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all my-feature
+[X] plan-authoring
+[X] plan-review
+[ ] implementation
+[ ] implementation-review
+[ ] code-review
 [X] 1. Setup environment
 [ ] 2. Implement main logic
 [X] 3. Add basic tests
@@ -42,7 +54,7 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all my-fe
 [ ] 6. Integration tests
 ```
 
-**Output**: 6 lines (all checkbox lines)  
+**Output**: 11 lines (5 workflow stage + 6 implementation checkboxes)  
 **Exit code**: 0  
 **Note**: Lowercase `[x]` included; Agent should see the formatting inconsistency
 
@@ -50,6 +62,11 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all my-fe
 
 ```bash
 $ grep '^\- \[.\]' plan/my-feature/my-feature.step.md
+- [X] plan-authoring
+- [X] plan-review
+- [ ] implementation
+- [ ] implementation-review
+- [ ] code-review
 - [X] 1. Setup environment
 - [ ] 2. Implement main logic
 - [X] 3. Add basic tests
@@ -68,6 +85,9 @@ Returns only steps with `[ ]` or `[x]` (pending markers).
 
 ```bash
 $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run my-feature
+[ ] implementation
+[ ] implementation-review
+[ ] code-review
 [ ] 2. Implement main logic
 [ ] 4. Write documentation
 [x] 5. Code review
@@ -76,16 +96,19 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run m
 
 **Note**: Stderr warning issued:
 ```
-Warning: Found lowercase [x] at line 47; treating as pending
+Warning: Found lowercase [x] at line 25; treating as pending
 ```
 
-**Output**: 4 lines (pending only)  
+**Output**: 7 lines (3 pending workflow stages + 4 pending implementation steps)  
 **Exit code**: 0  
 
 ### Grep Fallback
 
 ```bash
 $ grep '^\- \[ \]' plan/my-feature/my-feature.step.md
+- [ ] implementation
+- [ ] implementation-review
+- [ ] code-review
 - [ ] 2. Implement main logic
 - [ ] 4. Write documentation
 - [ ] 6. Integration tests
@@ -93,7 +116,7 @@ $ grep '^\- \[ \]' plan/my-feature/my-feature.step.md
 
 **Limitation**: Grep catches only space-bracket `[ ]`, not lowercase `[x]`. Combine with:
 ```bash
-$ grep '^\- \[\[xX]\]' plan/my-feature/my-feature.step.md  # captures both [ ] and [x]
+$ grep '^\- \[[ x]\]' plan/my-feature/my-feature.step.md  # captures both [ ] and [x]
 ```
 
 ---
@@ -106,17 +129,21 @@ Returns only steps with `[X]` (done marker).
 
 ```bash
 $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_success my-feature
+[X] plan-authoring
+[X] plan-review
 [X] 1. Setup environment
 [X] 3. Add basic tests
 ```
 
-**Output**: 2 lines (done only)  
+**Output**: 4 lines (2 done workflow stages + 2 done implementation steps)  
 **Exit code**: 0
 
 ### Grep Fallback
 
 ```bash
 $ grep '^\- \[X\]' plan/my-feature/my-feature.step.md
+- [X] plan-authoring
+- [X] plan-review
 - [X] 1. Setup environment
 - [X] 3. Add basic tests
 ```
@@ -140,7 +167,10 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succ
 
 ```bash
 $ python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded my-feature
-❌ BLOCKED: 4 steps pending (exit code 1)
+❌ BLOCKED: 7 steps pending (exit code 1)
+[ ] implementation
+[ ] implementation-review
+[ ] code-review
 [ ] 2. Implement main logic
 [ ] 4. Write documentation
 [x] 5. Code review
