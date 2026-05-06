@@ -1,6 +1,16 @@
 ---
 name: agent-skill-template
-description: Provide the canonical structure for a review-ready, portable, single-purpose Agent Skill in this repository, including layered example guidance and risk-based validation guidance. Use this when asked for the standard shape of a new skill or when building a new skill manually from a template.
+description: Provide the canonical structure for a review-ready, portable, single-purpose Agent Skill in this repository, including complexity-gated sections and risk-based validation guidance. Use this when asked for the standard shape of a new skill or when building a new skill manually from a template.
+
+complexity: low
+
+use_when:
+  - a new skill needs a clean starting point
+  - you want the canonical section layout for SKILL.md
+
+do_not_use_when:
+  - the task is to review a finished skill
+  - the task only needs a small edit to an existing skill
 ---
 
 # Purpose
@@ -25,19 +35,20 @@ Do not use this skill when:
 
 # Process
 1. Read `template.md` and `folder-contract.md`.
-2. Classify the expected validation weight before copying the skeleton: lightweight, medium-complexity, or higher-risk.
-3. Copy the folder shape and section layout.
-4. Replace placeholders with one clear responsibility.
-5. Add concise positive and negative examples to `SKILL.md`.
-6. Add `reference.md` or `examples.md`.
-7. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
-8. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
-9. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
-10. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
-11. Add stronger validation signals only when the skill's risk, branching, tooling, or downstream impact justifies them.
-12. If you add optional files or folders, declare each role in `Local references`.
-13. Stop at `review-ready`.
-14. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
+2. Classify the expected validation weight and `complexity` before copying the skeleton: lightweight (low), medium-complexity (medium), or higher-risk (high).
+3. Identify applicable `risk_profile` tags for medium and high complexity skills.
+4. Copy the folder shape and section layout.
+5. Replace placeholders with one clear responsibility.
+6. Add concise positive and negative examples to `SKILL.md`.
+7. Add `reference.md` or `examples.md`.
+8. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
+9. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
+10. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
+11. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+12. Add stronger validation signals only when the skill's risk, branching, tooling, or downstream impact justifies them.
+13. If you add optional files or folders, declare each role in `Local references`.
+14. Stop at `review-ready`.
+15. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
 
 # Examples
 - Positive: Use this template to draft a focused skill with concise positive and negative examples in `SKILL.md`, then add stronger verification guidance only when the topic is higher-risk.

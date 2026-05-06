@@ -8,6 +8,7 @@ A skill is `approved` only if all of these are true:
 
 ## Structure
 - `SKILL.md` has `name` and `description` frontmatter
+- `SKILL.md` frontmatter includes `complexity` field (for new and materially edited skills; see Legacy Skill Policy for unedited legacy skills)
 - `SKILL.md` includes `Purpose`
 - `SKILL.md` includes `Trigger / When to use`
 - `SKILL.md` includes `Inputs`
@@ -17,6 +18,10 @@ A skill is `approved` only if all of these are true:
 - `SKILL.md` includes `Boundaries`
 - `SKILL.md` includes `Local references`
 - local references name local files or folders and state what each one is for
+- YAML `use_when` and `do_not_use_when` align with body `Trigger / When to use` (if present)
+- YAML `inputs` aligns with body `Inputs` (if present)
+- YAML `outputs` lists artifact names only and does not contradict body `Outputs` (if present)
+- YAML and body sections do not contradict each other
 
 ## Optional additions
 - each optional file or folder has a clear local job
@@ -120,3 +125,100 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - vague boundaries
 - review comments that would require inventing a different skill
 - **Examples section in SKILL.md exceeds 15% of total file length or individual examples exceed 20 lines** (signals over-documentation; defer detailed scenarios to `examples.md`)
+- YAML contradicts body sections
+- `Validation` present for a medium or high complexity skill but defines no SOFT FAIL or BLOCKED conditions
+- high complexity skill missing `Validation` entirely, or medium complexity skill missing `Validation` when ambiguity would materially change output
+- `Workflow State Contract` present but missing `status` field
+- hard-stop `FAIL → stop` design in Validation for a recoverable gap
+
+## Complexity-gated sections
+
+low:
+- `Validation`, `Failure Handling`, `Workflow State Contract` are optional
+
+medium:
+- `Validation` present when ambiguity would materially change output (recommended otherwise)
+- `Failure Handling` present if ambiguity would materially change output
+
+high:
+- `Validation` present and defines both Required and Quality Checks tiers
+- `Failure Handling` present with all three categories (Missing Context,
+  Ambiguous Requirement, Execution Limitation)
+- `Workflow State Contract` present if skill participates in multi-agent handoff
+
+## Complexity and risk profile review
+
+- confirm `complexity` field exists in YAML frontmatter
+- confirm `complexity` matches the skill's actual workflow risk, branching, and
+  downstream impact
+- escalate `low → medium` if the skill has multi-step outputs or downstream dependencies
+- escalate `medium → high` if the skill modifies code, creates plans used by
+  other agents, or participates in multi-agent handoff
+- confirm `risk_profile` tags match actual skill behavior when present
+- escalate `complexity` when `risk_profile` tags understate actual behavior
+- do not approve a skill if required sections are missing after complexity escalation
+
+## Severity levels
+
+BLOCKER — must fix before approved:
+- missing required core files
+- missing `Validation` for a high complexity skill
+- YAML contradicts body
+- `Validation` present but has no SOFT FAIL or BLOCKED conditions
+- hard-stop `FAIL → stop` design for a recoverable gap
+
+WARNING — approved with notes:
+- `Validation` missing Quality Checks tier for medium or high complexity skill
+- `Failure Handling` missing one of the three required categories
+- YAML advisory fields missing but body is complete
+- `risk_profile` absent for a medium or high complexity skill
+
+INFO — optional improvement:
+- `Workflow State Contract` absent for high complexity skill that participates in handoff
+- `complexity` field absent on legacy skill not currently under edit
+
+## Verdict rules
+
+- any BLOCKER → `needs-rework`
+- WARNING only → `approved` with notes
+- INFO only → `approved`
+
+## Legacy Skill Policy
+
+- existing skills without `complexity` are classified as `unclassified`
+- do not reject a legacy skill solely for missing `complexity` or `risk_profile`
+- require classification when the skill is materially edited
+- require classification before the skill is used in multi-agent handoff
+- treat missing governance body sections on unedited legacy skills as INFO, not BLOCKER
+
+## Dry Review Report Format
+
+When running a dry review against an existing skill, produce a report in this
+format:
+
+```
+Target skill:
+- path:
+- inferred complexity:
+- inferred risk_profile:
+
+Verdict:
+- approved | needs-rework
+
+Findings:
+- BLOCKER:
+  - ...
+- WARNING:
+  - ...
+- INFO:
+  - ...
+
+Legacy handling:
+- Is this a legacy skill without new metadata?
+- Should classification be required now or deferred?
+
+Checklist feedback:
+- Did the updated checklist create false positives?
+- Did the updated checklist miss any obvious risk?
+- Should any rule be softened, clarified, or escalated?
+```
