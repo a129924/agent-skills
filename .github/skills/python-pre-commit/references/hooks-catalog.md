@@ -8,7 +8,7 @@ Canonical YAML blocks for all four supported hook types. Copy these blocks into 
 |----------|-------|
 | Repo URL | `https://github.com/astral-sh/ruff-pre-commit` |
 | Hooks | `ruff` (lint + autofix), `ruff-format` (formatter) |
-| Canonical rev | Use the `vX.Y.Z` tag matching the ruff version in `pyproject.toml`. |
+| Canonical rev | Use the tag from https://github.com/astral-sh/ruff-pre-commit/releases — independent of the uv-installed ruff version. |
 | Example rev | `v0.15.12` (update to current stable at config creation time) |
 | Version source | Manual update from https://github.com/astral-sh/ruff-pre-commit/releases — version is independent of `uv run ruff --version` |
 

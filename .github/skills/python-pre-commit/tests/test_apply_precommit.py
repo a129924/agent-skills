@@ -1,6 +1,5 @@
 """Tests for apply_precommit.py script."""
 import subprocess
-import sys
 from pathlib import Path
 
 SCRIPT_PATH = (
@@ -56,3 +55,8 @@ def test_no_force_fails_if_exists(tmp_path: Path) -> None:
     result = _run(tmp_path)
     assert result.returncode != 0
     assert "already exists" in result.stderr or "already exists" in result.stdout
+
+
+def test_template_has_ruff_placeholder() -> None:
+    assert TEMPLATE_PATH.exists()
+    assert "RUFF_VERSION" in TEMPLATE_PATH.read_text()

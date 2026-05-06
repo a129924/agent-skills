@@ -17,8 +17,8 @@ uv run scripts/apply_precommit.py --dry-run
 # Write with default ruff version (v0.15.12):
 uv run scripts/apply_precommit.py
 
-# Write with a specific ruff version:
-uv run scripts/apply_precommit.py --ruff-version v0.15.12
+# Write with a specific ruff version (e.g., an older tag):
+uv run scripts/apply_precommit.py --ruff-version v0.11.9
 ```
 
 **Correct output** — `.pre-commit-config.yaml`:
@@ -87,7 +87,7 @@ repos:
 ```
 
 **Merge decision**:
-- `ruff` and `ruff-format` already present → update `rev` to match current ruff version in `pyproject.toml`; do not remove the existing `ruff` entry.
+- `ruff` and `ruff-format` already present → update `rev` to the matching tag from https://github.com/astral-sh/ruff-pre-commit/releases; do not remove the existing `ruff` entry.
 - `my-custom-check` is user-defined → leave untouched.
 - Missing canonical hooks → add `pre-commit-hooks` block and `pytest` (manual stage).
 
@@ -95,7 +95,7 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.9   # bumped to match pyproject.toml
+    rev: v0.11.9   # updated from ruff-pre-commit releases
     hooks:
       - id: ruff
         args: ["--fix"]   # added --fix per canonical spec
@@ -233,4 +233,4 @@ uv run pre-commit run --hook-stage manual pyright
     rev: v0.4.0   # pinned to old version while pyproject.toml has ruff>=0.11.0
 ```
 
-**Problem**: Different ruff versions may produce different lint results. The pre-commit hook may pass while the CI ruff check fails (or vice versa). Always align the `rev` with the ruff version in `pyproject.toml`.
+**Problem**: Different ruff versions may produce different lint results. The pre-commit hook may pass while the CI ruff check fails (or vice versa). Always align the `rev` with the matching tag from ruff-pre-commit releases (https://github.com/astral-sh/ruff-pre-commit/releases).

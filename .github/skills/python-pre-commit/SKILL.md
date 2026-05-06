@@ -22,14 +22,14 @@ Do not use this skill when:
 - The target project directory path.
 - Whether a `.pre-commit-config.yaml` already exists.
 - Whether pyright strict mode is used in the project (determines whether to include the optional pyright hook).
-- The ruff version in `pyproject.toml` (to align `rev` in ruff-pre-commit).
+- The target ruff rev tag from https://github.com/astral-sh/ruff-pre-commit/releases (independent of the uv-installed ruff version).
 
 # Process
 1. **Check for existing config** — look for `.pre-commit-config.yaml` in the project root.
    - **New config (file does not exist)**: create a fresh file with the full canonical hook set from `references/hooks-catalog.md`.
    - **Update existing config (file exists)**: read the current file, identify which canonical hooks are missing, and merge them in without overwriting hooks the user has already configured.
 
-2. **Determine ruff rev** — 決定 ruff rev：使用 `scripts/apply_precommit.py` 的 `--ruff-version` 預設值（`v0.15.12`），或自行指定。版本來自 [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases)，與 `uv` 安裝的 ruff 版本脫鉤，需手動更新。
+2. **Determine ruff rev** — Use the `--ruff-version` default (`v0.15.12`) from `scripts/apply_precommit.py`, or specify a custom tag. The rev comes from [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases) and is independent of the uv-installed ruff version. Update manually when upgrading.
 
 3. **Decide on optional hooks**:
    - Include the `pytest` hook using `stages: [manual]`. It must never be on the default stage.
@@ -43,8 +43,8 @@ Do not use this skill when:
    # Write (default ruff version v0.15.12):
    uv run scripts/apply_precommit.py
 
-   # Write with custom ruff version:
-   uv run scripts/apply_precommit.py --ruff-version v0.15.12
+   # Write with a specific older ruff version:
+   uv run scripts/apply_precommit.py --ruff-version v0.11.9
 
    # Overwrite existing config:
    uv run scripts/apply_precommit.py --force
