@@ -1,6 +1,33 @@
 ---
 name: python-data-model-methods
 description: Choose clear Python data-model methods. Use this when deciding whether an ordinary class should define foundational dunder methods, expose base container protocols, or rely on dataclass-generated behavior.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - what the object represents in the domain
+  - whether the object is mutable or immutable
+  - whether the object should compare by identity or by value
+  - whether the object should be hashable and where it will be stored
+  - whether the object truly behaves like a collection or sequence
+  - whether "@dataclass" is generating any relevant dunder methods already
+  - whether callers need developer diagnostics, user-facing text, or explicit truth semantics
+outputs:
+  - a decision on which foundational dunder methods should exist and why
+  - a safe equality / hashing stance for the class
+  - a decision on whether the class should expose base container protocols
+  - a clear boundary on when "@dataclass" generation is sufficient versus risky
+use_when:
+  - deciding whether a class should define __repr__, __str__, __eq__, __hash__, or __bool__
+  - deciding whether a class should behave like a container through __len__, __getitem__, __contains__, or __iter__
+  - reviewing whether "@dataclass"-generated dunders are sufficient or should be overridden
+  - checking whether equality, hashing, or truthiness semantics match the real domain meaning of an object
+  - reviewing ordinary Python classes whose dunder behavior is starting to feel accidental or inconsistent
+do_not_use_when:
+  - the main decision is whether the type should be a dataclass, ABC, Protocol, or Enum; use python-model-selection
+  - the main task is broad class public-surface design or constructor/factory design; use python-class-design
+  - the main task is iterator strategy, exhaustion, generator choice, or custom iterator design; use python-generators-iterators
+  - the main task is async protocols such as __aiter__ or __anext__; use python-async-await
+  - the main task is operator overloading or descriptor behavior
 ---
 
 # Purpose

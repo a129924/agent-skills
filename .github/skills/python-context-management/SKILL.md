@@ -1,6 +1,30 @@
 ---
 name: python-context-management
 description: Choose and design synchronous Python context managers for resource lifetime and temporary state restoration. Use this when drafting or reviewing `with` usage, `@contextmanager` versus class-based design, setup/cleanup failure handling, and ambient-state restoration.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - "The resource or state being managed (file, lock, connection, cwd, env var, etc.)"
+  - "Whether acquisition is stateful, multi-step, or failure-prone"
+  - "Whether the resource must be cleaned up on both normal and error paths"
+  - "Whether ambient state must be fully restored after the block"
+  - "Whether the manager may be reused across multiple `with` invocations"
+outputs:
+  - "Decision: `with`, `@contextmanager`, or class-based manager, with clear rationale"
+  - "Correct acquisition, cleanup, and error-handling code"
+  - "Guidance on suppression policy, cause chaining, and cleanup-failure handling"
+  - "`ExitStack` usage when dynamic or multi-resource cleanup is needed"
+use_when:
+  - "Deciding whether to use `with`, `@contextmanager`, or a class-based `__enter__` / `__exit__` manager"
+  - "Designing a custom context manager that must handle acquisition, cleanup, rollback, or ambient-state restoration"
+  - "Reviewing code that uses manual `close()` and deciding if `with` is more appropriate"
+  - "Connecting setup or cleanup failures to the existing semantic error model"
+  - "Using `ExitStack` for dynamic or multi-resource cleanup"
+do_not_use_when:
+  - "The resource involves `async with`, `async for`, or cancellation patterns"
+  - "The task is generic dependency injection, bootstrap, or runtime orchestration"
+  - "The task is pytest fixture design beyond lifetime discipline compatibility"
+  - "The task is decorator-driven implicit lifetime management (`ContextDecorator` dual-use)"
 ---
 
 # Purpose
@@ -52,6 +76,22 @@ Do not use this skill when:
    partial-acquisition rollback only. Ambient-state managers must restore prior
    state in `finally`. Treat instances as one-shot unless reuse is explicit.
 
+# Validation
+
+Before proceeding, confirm:
+- **Resource type known**: what is being managed (file, lock, connection, env var, etc.)
+- **Lifetime scope clear**: does the resource lifetime fit a single `with` block, or must it cross function boundaries?
+- **Error model known**: does the codebase have a semantic exception hierarchy the manager should translate into?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Resource lifetime scope is unclear (cannot determine if a single `with` block covers it)
+- Whether the resource supports reuse across multiple `with` invocations is unknown
+- Whether cleanup failures should suppress, chain, or log-and-propagate is undefined
+
+**BLOCKED** — stop and redirect:
+- Resource involves `async with`, `async for`, or task cancellation → hand off to `python-async-await`
+- Task is pytest fixture scope or `ContextDecorator` dual-use → hand off to the appropriate skill
+
 # Examples
 - Positive: `with open(path) as f:` — the protocol handles `close()` even on
   exceptions; no manual cleanup needed.
@@ -71,6 +111,12 @@ Do not use this skill when:
 - Do not cover: `async with` / cancellation, dependency injection /
   orchestration, pytest fixture design, or `ContextDecorator` dual-use.
   Hand off to specialized skills instead.
+
+# Failure Handling
+
+- **Insufficient context**: if resource type or lifetime scope cannot be determined, emit SOFT FAIL, state what is missing, and ask before recommending a form.
+- **Ambiguous error model**: if the codebase error model is unknown, recommend the safe default (propagate; no suppression) and note that translation rules may need revisiting once the model is confirmed.
+- **Out-of-scope pattern detected**: if the resource is async or the task is decorator-driven lifetime management, stop immediately and redirect to the appropriate skill rather than producing a partial answer.
 
 # Local references
 - `examples.md`: detailed positive and negative patterns covering all

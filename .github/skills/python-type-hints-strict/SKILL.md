@@ -1,6 +1,23 @@
 ---
 name: python-type-hints-strict
 description: Define or enforce Python type-hint rules for projects that run pyright in strict mode. Use this when drafting typing guidance or reviewing code against a strict typing baseline.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - the Python version and typing baseline
+  - any allowed escape hatches
+  - repository policy or examples that already constrain typing
+outputs:
+  - a review-ready strict typing rule set or skill draft
+  - explicit allowed and disallowed typing patterns
+  - local reference files for compatibility rules, edge cases, and anti-patterns
+use_when:
+  - a project mandates `pyright --strict`
+  - code review must decide whether a typing pattern is acceptable
+  - a coding standard needs a strict type-hint section
+do_not_use_when:
+  - the task is only about naming conventions
+  - the task mainly chooses runtime models or control-flow style
 ---
 
 # Purpose

@@ -1,6 +1,32 @@
 ---
 name: python-async-await
 description: Choose and design general Python async/await code with explicit async boundaries, structured concurrency, and clear cancellation and async-protocol behavior.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - whether the underlying work is actually async I/O, streaming, or async resource lifetime
+  - whether concurrency is required or a direct `await` is enough
+  - who owns spawned task lifetime, cancellation, and joining
+  - whether async protocols such as `async with` or `async for` are needed
+  - the Python runtime baseline and whether business code must stay 3.10-compatible
+  - the project's semantic error family, such as `BaseAppError`
+outputs:
+  - a decision on whether code should stay synchronous or become `async`
+  - a clear ownership model for direct awaits versus spawned tasks
+  - structured-concurrency guidance for Python 3.10-compatible async code
+  - boundary guidance for cancellation, grouped failures, and async protocols
+  - supplementary AnyIO notes only when they do not replace the stdlib-first mainline
+use_when:
+  - deciding whether a function should remain synchronous or become `async def`
+  - writing or reviewing coroutine code that awaits other async work
+  - deciding whether work should be directly awaited or run concurrently under an explicit owner
+  - designing `async with`, `async for`, async iterators, or async generators
+  - reviewing cancellation, timeout, or grouped task-failure behavior
+do_not_use_when:
+  - the main task is framework-specific async runtime policy or server bootstrap
+  - the main task is deep async testing guidance; use `python-testing-pytest`
+  - the main task is synchronous `with` design; use `python-context-management`
+  - the main task is general exception hierarchy design outside async-specific failure semantics; use `python-error-handling`
 ---
 
 # Purpose

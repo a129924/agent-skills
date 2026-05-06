@@ -1,6 +1,29 @@
 ---
 name: python-comprehensions
 description: Choose clear Python comprehensions and know when explicit loops or map/filter are more readable. Use this when drafting or reviewing list, dict, set comprehensions, generator expressions, and readability boundaries.
+complexity: low
+risk_profile: []
+inputs:
+  - the data structure and transformation needed
+  - the complexity of the filter or transformation logic
+  - whether the result is used once or repeated
+  - whether lazy evaluation matters
+  - team familiarity with comprehensions vs imperative code
+outputs:
+  - a review-ready decision for comprehension vs loop vs functional tool
+  - explicit readability criteria applied to the code
+  - guidance on when lazy evaluation (generator) vs eager (list) is appropriate
+  - awareness of variable scoping and Python 3+ semantics
+use_when:
+  - code review or design must choose between a comprehension and an explicit loop
+  - a comprehension has become hard to read or debug
+  - the task must decide between comprehension and map/filter/functools equivalents
+  - the code must balance functional style with imperative clarity
+do_not_use_when:
+  - the task is mainly about generator functions or iterator design (use python-generators-iterators)
+  - the task is mainly about functional composition, currying, or functional style patterns
+  - the task is only about naming, type hints, or control flow branching
+  - performance analysis is the primary goal (not readability)
 ---
 
 # Purpose
@@ -15,7 +38,7 @@ Use this skill when:
 
 Do not use this skill when:
 - the task is mainly about generator functions or iterator design (use `python-generators-iterators`)
-- the task is mainly about functional composition, currying, or functional style patterns (use `python-functional-style`)
+- the task is mainly about functional composition, currying, or functional style patterns
 - the task is only about naming, type hints, or control flow branching
 - the performance analysis is the primary goal (not readability)
 
@@ -37,38 +60,18 @@ Do not use this skill when:
 
 # Examples
 
-**Positive (use comprehension)**:
+**Correct** — simple single-level comprehension, readable at a glance:
 ```python
-# Simple list comprehension: clear transformation
 squares = [x ** 2 for x in numbers]
-
-# Dict comprehension with filter: readable at a glance
-name_to_age = {person['name']: person['age'] for person in people if person['age'] >= 18}
-
-# Generator expression: lazy, memory-efficient
-large_squares = (x ** 2 for x in huge_list)
 ```
 
-**Negative (use explicit loop or reconsider)**:
+**Incorrect** — comprehension used for side effects; hides intent and order:
 ```python
-# Too nested (3 levels) with complex conditions; hard to parse
-flattened = [
-    value
-    for row_group in matrix_groups
-    for row in row_group
-    for value in row
-    if value is not None and value > 0
-]
-# Better: use explicit nested loops with named steps
-
-# Side-effect comprehension: legal Python, but hides validation and intent
 [results.append(int(s)) for s in strings if s.isdigit()]
-# Better: explicit loop
-
-# Chained filters that would be clearer as separate steps
-filtered = [x for x in data if x > 10 if x < 100 if x % 2 == 0]
-# Better: explicit loop with named intermediate filters or functools.reduce
+# Better: use an explicit loop
 ```
+
+See `examples.md` for detailed scenarios covering nested, lazy, and filter/map trade-offs.
 
 # Outputs
 - a review-ready decision for comprehension vs loop vs functional tool

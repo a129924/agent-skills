@@ -1,6 +1,32 @@
 ---
 name: python-operator-overloading
 description: Defines Python operator overloading rules for binary arithmetic contracts, reflected operator pairing, in-place return semantics, unary operator purity, comparison ordering consistency, and the NotImplemented dispatch protocol.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - Class definition and operator methods under review or authorship
+  - Types the operator is expected to accept (same-type, mixed-type, or unknown)
+  - Whether the class is mutable or immutable (relevant for in-place return contract)
+  - Whether the class must support reflected arithmetic (e.g., `3 + obj`)
+  - Whether the class should be fully ordered (sort key, comparison operators)
+outputs:
+  - Operator methods that return `NotImplemented` for unsupported types
+  - Reflected operator pairs (`__add__` / `__radd__`) where mixed-type left-hand arithmetic is intended
+  - In-place operator methods with explicit `return self` or `return new_obj`
+  - Unary operators that return new objects without mutating `self`
+  - Ordering operators semantically consistent with the class's `__eq__`
+use_when:
+  - A class defines binary arithmetic operators (`__add__`, `__sub__`, `__mul__`, `__truediv__`, `__floordiv__`, `__mod__`, `__pow__`)
+  - A class defines in-place operators (`__iadd__`, `__imul__`, or similar)
+  - A class defines unary operators (`__neg__`, `__pos__`, `__abs__`)
+  - A class defines ordering operators (`__lt__`, `__le__`, `__gt__`, `__ge__`)
+  - Mixed-type arithmetic must interoperate with a foreign type (e.g., `Money * int`)
+  - A reviewer is checking whether an operator implementation handles unsupported types correctly
+do_not_use_when:
+  - The question is about `__eq__` or `__hash__` definition (use `python-data-model-methods`)
+  - The question is about mutable vs immutable class design (use `python-class-design`)
+  - The question is about `@functools.total_ordering` decorator mechanics (use `python-decorators`)
+  - The operator is framework-specific (SQLAlchemy, NumPy broadcasting, etc.)
 ---
 
 # Purpose
@@ -77,9 +103,23 @@ Do not use this skill when:
    `@functools.total_ordering` to complete the contract. For decorator
    mechanics, signpost to `python-decorators`.
 
-# Examples
+# Validation
 
-**Positive — correct `NotImplemented` return:**
+Before proceeding, confirm:
+- **Operand types clear**: are both left-hand and right-hand operand types known for the binary operator?
+- **Mutability intent defined**: is the class mutable (`+=` returns `self`) or immutable (returns new object)?
+- **Equality contract present**: does `__eq__` already exist or is it being designed together with ordering?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Operand types are unknown → cannot determine if a reflected pair (`__radd__`) is needed; ask before proceeding
+- Mutability intent is undecided → cannot determine in-place return semantics; ask before proceeding
+- Whether `__hash__` must stay consistent with `__eq__` is unclear → ask before defining `__eq__`
+
+**BLOCKED** — stop and redirect:
+- Operator involves framework-specific semantics (SQLAlchemy `==`, NumPy broadcasting) → out of scope; do not proceed
+- Task requires complex cross-type coercion (currency conversion, unit normalization) → delegate to adapter/service layer
+
+# Examples
 ```python
 class Money:
     def __add__(self, other: object) -> "Money":
@@ -121,6 +161,12 @@ class Money:
 - Complex cross-type coercion (currency conversion, unit normalization) is out
   of scope; delegate to an adapter or service layer.
 - Inherited operator MRO resolution is out of scope; consult `python-class-design`.
+
+# Failure Handling
+
+- **Insufficient context**: if operand types or mutability intent cannot be determined, emit SOFT FAIL, state what is missing, and ask before recommending an operator form.
+- **Ambiguous requirement**: if the class's equality contract is undefined, recommend defining `__eq__` and `__hash__` first (using `python-data-model-methods`), then return to operator design.
+- **Out-of-scope pattern detected**: if the task involves framework-specific operators or cross-type coercion delegation, stop and redirect rather than producing a partial answer.
 
 # Local references
 

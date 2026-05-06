@@ -1,6 +1,28 @@
 ---
 name: python-library-architecture
 description: Design or review reusable Python library/package architecture with theme isolation, a side-effect-free `core`, and facade/client composition for multi-theme libraries and SDK-style packages.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - the reusable library or SDK's consumer-facing capabilities
+  - the proposed themes or capability slices inside one package
+  - the contracts shared across themes or external boundaries
+  - the adapters or integrations that touch transport, storage, or vendor APIs
+  - the intended public facade/client entry points
+  - any current dependency smells, such as peer imports or a growing `common/`
+outputs:
+  - a review-ready library-architecture rule set or design recommendation
+  - an explicit dependency-direction model for themes, `core`, adapters, and facade/client entry points
+  - refactor guidance for cross-theme coupling, `core` misuse, and composition-root cleanup
+use_when:
+  - designing or reviewing the internal architecture of a reusable Python library or SDK-style package
+  - deciding where themes, shared contracts, adapters, and the public facade/client should live
+  - refactoring a coupled package that has cross-theme imports, a bloated `common/`, or orchestration in the wrong layer
+do_not_use_when:
+  - the main task is package/distribution layout, `src/`, or `pyproject.toml`
+  - the main task is module export policy, `__all__`, or deep-import rules
+  - the main task is type-hint syntax, model-construct choice, serialization translation, or error policy
+  - the main task is service/application architecture, framework layering, or plugin design
 ---
 
 # Purpose
@@ -46,11 +68,20 @@ Do not use this skill when:
 - an explicit dependency-direction model for themes, `core`, adapters, and facade/client entry points
 - refactor guidance for cross-theme coupling, `core` misuse, and composition-root cleanup
 
-# Verification
+# Validation
+Before proceeding, confirm:
 - confirm no theme imports another theme, with zero exceptions
 - confirm `core` is the shared contract center and stays side-effect-free
 - confirm shared contracts that cross themes or external boundaries are promoted into `core`
 - confirm facade/client entry points compose themes and adapters instead of pushing orchestration down into `core`
+
+**SOFT FAIL** — ask and wait before continuing:
+- Theme boundaries are unclear (what counts as one capability family vs two) → ask before recommending a slice boundary
+- Whether a shared artifact belongs in `core` or a specific theme is ambiguous → ask before recommending promotion
+
+**BLOCKED** — stop and redirect:
+- The main task is package/distribution layout, `src/`, or `pyproject.toml` → redirect to `python-package-layout`
+- The main task is service/application architecture, framework layering, or plugin design → out of scope for this skill
 
 # Boundaries
 - Do not define physical package/distribution layout; use `python-package-layout`.
@@ -60,6 +91,11 @@ Do not use this skill when:
 - Do not define payload translation rules at API, database, or message boundaries; use `python-serialization-boundaries`.
 - Do not define exception hierarchy or translation policy beyond allowing shared base errors in `core`; use `python-error-handling`.
 - Do not widen into service/application architecture, framework-specific layering, or plugin systems.
+
+# Failure Handling
+- **Missing Context**: if theme boundaries, `core` scope, or facade/client intent are unknown, ask once before applying architectural rules.
+- **Ambiguous Requirement**: if the stated goal conflicts with library-architecture boundaries (e.g., the task is really about module gateways or packaging), name the conflict and redirect.
+- **Execution Limitation**: if the task involves service/application architecture or framework-specific plugin systems, stop and redirect to the appropriate skill.
 
 # Local references
 - `reference.md`: hard rules, dependency-direction checklist, smell list, and optional-tooling notes for reusable library/package architecture
