@@ -1,6 +1,30 @@
 ---
 name: git-commit-convention
 description: Draft or review semantic commit messages from staged changes, including split signals, business-facing subjects, breaking-change markers, and repair commands such as `git add -p`, `git reset`, and `git commit --amend`.
+complexity: medium
+risk_profile:
+  - ambiguity_sensitive   # partial staging or unclear intent changes the commit draft meaningfully
+inputs:
+  - staged files, staged hunks, and git status
+  - business intent behind the change from recent conversation
+  - repository's allowed commit types and scope mapping
+  - related issue or PR identifiers if available
+  - whether type-check, test, or pre-commit signals are already failing
+  - whether the latest commit is a better candidate for --amend than a new commit
+outputs:
+  - one or more review-ready semantic commit drafts
+  - split or composite-scope guidance when staged set crosses semantic boundaries
+  - repair commands such as git add -p, git reset, or git commit --amend
+  - warnings when testing, typing, or other quality gates are already failing
+use_when:
+  - user asks for a commit message or wants help before git commit
+  - staged changes are ready and a compliant draft is needed
+  - agent detects git commit intent and should intercept with a structured draft
+  - a recent commit likely needs --amend due to typo, missed file, or footer fix
+do_not_use_when:
+  - main task is branch naming or release/tagging policy
+  - no staged changes and user is not asking for general commit policy
+  - main question is repository-wide CI, testing, or reviewer policy
 ---
 
 # Purpose
@@ -42,8 +66,27 @@ Do not use this skill when:
 13. If the latest commit only needs a narrow correction, prefer an `--amend` recommendation over creating an unnecessary follow-up commit.
 
 # Examples
-- Positive: Split formatter noise away from a business fix, then draft `fix(錯誤處理): 修正語意派例外鏈結遺失` with a body and `Relates-to` footer.
-- Negative: Hide mixed lockfile and feature changes under one `feat: update files`, or describe only code motion such as `refactor: rename class` when the staged change actually fixes user-visible behavior.
+- **Positive**: Split formatter noise away from a business fix, then draft `fix(錯誤處理): 修正語意派例外鏈結遺失` with a body and `Relates-to` footer.
+- **Negative**: Hide mixed lockfile and feature changes under one `feat: update files`, or describe only code motion such as `refactor: rename class` when the staged change actually fixes user-visible behavior.
+
+# Validation
+Main decision path:
+1. **Staging check** — confirm `git status` shows staged changes before drafting; if nothing is staged, BLOCKED.
+2. **Semantic boundary check** — identify whether staged set represents one intent or multiple; mixed-intent staging requires split recommendation before drafting a single commit.
+3. **Type assignment** — verify chosen type (`feat`, `fix`, `refactor`, etc.) matches business intent, not code mechanics.
+4. **Breaking change check** — if any public interface changes, require `!` marker and body explanation.
+5. **Quality gate check** — if type-check or test failures are known, include explicit warning in the draft output.
+
+PASS: staged changes form a coherent intent, type and subject are correctly assigned, any breaking change is marked.  
+SOFT FAIL: staging is partial or intent is ambiguous — continue with best-effort draft, flag the ambiguity explicitly, and ask the user to confirm scope.  
+BLOCKED: no staged changes exist and no `--amend` candidate is identified.
+
+# Failure Handling
+- **Nothing staged**: stop immediately; state that no staged changes were found and ask the user to stage changes before proceeding.
+- **Ambiguous intent**: produce a draft labelled `[DRAFT — scope unclear]` with the clearest interpretation, then list alternative interpretations and ask the user to confirm.
+- **Mixed semantic boundaries**: produce split recommendations with repair commands rather than forcing one message; do not silently merge unrelated changes.
+- **Repository type list unavailable**: fall back to the conventional-commits standard types; note the fallback in output.
+- **Breaking change uncertain**: err toward requiring `!` and a body; explain reasoning so the user can override.
 
 # Outputs
 - one or more review-ready semantic commit drafts
