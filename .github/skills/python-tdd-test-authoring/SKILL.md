@@ -12,7 +12,7 @@ inputs:
   - approved plan.md with clear Requirements section
   - existing test structure (test file layout, naming conventions, helper utilities)
   - D1 classifier output (behavior-change verdict)
-  - validation commands that can verify test status (e.g., pytest --collect-only)
+  - validation commands that can verify test status (e.g., `pytest --no-header -rN <test_file>`)
   - evidence that production code is NOT modified yet
 
 outputs:
@@ -56,7 +56,7 @@ Do not use this skill when:
 - approved `plan.md` with clear Requirements section
 - existing test structure (test file layout, test naming conventions, helper utilities)
 - D1 classifier output (behavior-change verdict)
-- validation commands that can verify test status (e.g., `pytest --collect-only`)
+- validation commands that can verify test status (e.g., `pytest --no-header -rN <test_file>`)
 - evidence that production code is NOT modified yet
 
 # Process
@@ -75,7 +75,7 @@ Do not use this skill when:
 # Examples
 
 - **Positive**: Plan with clear Requirements (feature, two bug fixes, refactor), D1 says non-trivial, tests map to all requirements, coverage includes happy path + 3 error cases + boundary case + state assertion + endpoint mock, expected_initial_status is red, production code unmodified → verdict: `red-tests-ready`.
-- **Negative**: Invoking this skill when production code has already been modified — hard constraint violated; return `abort` immediately, do not produce `test_mapping`. Another misuse: invoking when the plan has not yet been approved — return `insufficient-context`, stop, and ask for the approved plan before proceeding.
+- **Negative**: Invoking this skill when production code has already been modified — hard constraint violated; return `insufficient-context` immediately, do not produce `test_mapping`. Another misuse: invoking when the plan has not yet been approved — return `insufficient-context`, stop, and ask for the approved plan before proceeding.
 
 # Outputs
 
@@ -98,7 +98,7 @@ Do not use this skill when:
 
 - Tests cover all 5 categories: happy path, error/exception, boundary/edge, state/side effects, integration points.
 - Each generated test contains at least one clear assertion.
-- Tests are genuinely RED — they fail before any production code is written (verify with `pytest --collect-only` and confirm no incidental passing).
+- Tests are genuinely RED — they fail before any production code is written (verify by running `pytest --no-header -rN <test_file>` and confirming all new tests fail).
 
 ## On Soft Fail
 

@@ -29,13 +29,13 @@ All 9 skills are inferred as **upgrade mode (Mode A)** — preserve existing con
 |---|---|---|---|---|---|
 | 1 | `python-plan-authoring` | A | high | ambiguity_sensitive, multi_agent_handoff | Freeze 13-section plan structure; keep decision points explicit |
 | 2 | `python-plan-review` | A | high | ambiguity_sensitive, multi_agent_handoff | Freeze boundary between "plan review" vs "implementation review" |
-| 3 | `python-code-review` | A | high | code_modification | Freeze review signal types; keep anti-patterns stable |
-| 4 | `python-implementation-review` | A | high | code_modification | Freeze distinction from `python-code-review` |
-| 5 | `python-blueprint-authoring` | A | medium | ambiguity_sensitive | Freeze blueprint schema v1 lock; keep examples stable |
-| 6 | `python-blueprint-review` | A | medium | ambiguity_sensitive | Freeze review contract against v1 schema |
-| 7 | `python-retrofit-plan-authoring` | A | high | code_modification, multi_agent_handoff | Freeze retrofit v2 section order; keep risk metadata structure |
-| 8 | `python-retrofit-plan-review` | A | high | code_modification, multi_agent_handoff | Freeze risk gates; keep sensing assertion kinds locked |
-| 9 | `python-tdd-test-authoring` | A | high | code_modification | Freeze TDD red→green→refactor flow; preserve examples |
+| 3 | `python-code-review` | A | high | ambiguity_sensitive, multi_agent_handoff, code_modification | Freeze review signal types; keep anti-patterns stable |
+| 4 | `python-implementation-review` | A | high | ambiguity_sensitive, multi_agent_handoff, code_modification | Freeze distinction from `python-code-review` |
+| 5 | `python-blueprint-authoring` | A | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | Freeze blueprint schema v1 lock; keep examples stable |
+| 6 | `python-blueprint-review` | A | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | Freeze review contract against v1 schema |
+| 7 | `python-retrofit-plan-authoring` | A | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | Freeze retrofit v2 section order; keep risk metadata structure |
+| 8 | `python-retrofit-plan-review` | A | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | Freeze risk gates; keep sensing assertion kinds locked |
+| 9 | `python-tdd-test-authoring` | A | high | ambiguity_sensitive, multi_agent_handoff, code_modification | Freeze TDD red→green→refactor flow; preserve examples |
 
 ---
 
@@ -63,7 +63,7 @@ For each skill, creator must output a **Preservation Map** (in PR description or
 
 ### D3: Complexity & Risk Profile Inference
 
-All 9 are **high complexity** and **high risk** (multi_agent_handoff + code_modification + ambiguity_sensitive for most).
+All 9 skills are classified as **complexity: high**. Risk profiles vary per skill — see per-skill table above for authoritative values.
 
 - All **require** `Validation` + `Failure Handling` sections.
 - All **recommend** `Workflow State Contract` (multi-agent handoff is inherent to these skills).

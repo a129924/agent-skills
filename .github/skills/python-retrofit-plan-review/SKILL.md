@@ -123,7 +123,7 @@ Do not use this skill when:
 - BLOCKED — if `retrofit-plan.md` is not provided or cannot be read, stop and ask for the correct path before proceeding; do not attempt a partial review against an absent or unreadable contract
 
 ## Ambiguous Requirement
-- if a section is present but its content is ambiguous on a non-schema dimension (e.g., prose wording is unclear but structurally compliant), record it as a non-blocking observation using `"severity": "warning"` inside `blocking_issues` so executors can distinguish it from hard failures
+- if a section is present but its content is ambiguous on a non-schema dimension (e.g., prose wording is unclear but structurally compliant), record it as a non-blocking observation in a `blocking_issues` entry with `"issue": "WARNING: <description>"` so executors can distinguish it from hard failures
 - block only when the ambiguity directly violates a schema rule (e.g., unreadable YAML block, unsupported assertion kind, missing required field)
 
 ## Execution Limitation

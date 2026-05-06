@@ -18,7 +18,7 @@
 | 5 | Git Helper | 1 | 0 | 🔲 pending |
 | 6 | Other 高風險 | 5 | 0 | 🔲 pending |
 | 7 | Other 低風險 | 2 | 0 | 🔲 pending |
-| **Total** | | **45** | **0** | |
+| **Total** | | **45** | **9** | 🔄 In Progress |
 
 ---
 

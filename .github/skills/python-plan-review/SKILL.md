@@ -237,8 +237,9 @@ blocking_issues:
 
 ## Execution Limitation
 - if codebase files referenced in the plan (e.g., named source files in
-  Implementation Steps) cannot be inspected, note the limitation explicitly in the
-  verdict commentary
+  Implementation Steps) cannot be inspected, record the constraint as a
+  `blocking_issues` entry (section: environment, issue: named file could not be
+  inspected, fix: provide readable file or confirm path before re-review)
 - review only what is present in the plan text; do not fabricate inferred content
   to fill gaps
 

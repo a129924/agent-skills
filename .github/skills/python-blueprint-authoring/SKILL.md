@@ -130,7 +130,7 @@ Do not use this skill when:
 - list the specific missing inputs explicitly; do not fabricate locators, package names, or sensing assertions to fill gaps
 
 ## Ambiguous Requirement
-- note the assumption explicitly in the blueprint under an `## Open Questions` addendum
+- note the assumption explicitly as a sub-bullet under an existing section of the blueprint (e.g., under `## Implementation Notes`)
 - proceed with best-effort draft using the stated assumption
 - flag the assumption clearly so the reviewer and `python-project-init-greenfield` consumer can evaluate it before handoff
 

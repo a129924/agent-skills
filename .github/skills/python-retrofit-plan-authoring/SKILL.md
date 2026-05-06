@@ -141,7 +141,7 @@ BLOCKED — if repository structure or migration intent is not provided, stop an
 If `risk_level` cannot be determined from observable physical traits, default to `HIGH` and note the assumption explicitly in the plan.
 
 ## Execution Limitation
-If the repository cannot be inspected directly, state that limitation clearly in the plan. Use placeholder assertions explicitly marked for human verification before the plan is passed to the executor.
+If the repository cannot be inspected directly, state that limitation clearly in the plan. If target paths or command availability cannot be determined, emit BLOCKED and request the missing information. Do not insert placeholder assertions.
 
 # Verification
 - confirm the section order is exactly Survey Summary -> Gap Analysis -> Target Transformation -> Migration Strategy -> Acceptance Criteria

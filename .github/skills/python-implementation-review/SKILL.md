@@ -14,6 +14,7 @@ inputs:
 
 outputs:
   - YAML verdict block (verdict, traceability_matrix, scope_creep_check, contract_check, test_plan_check)
+  - review_status: "INCOMPLETE (when partial review)"
   - plain-text refusal output when preconditions are unmet
 
 use_when:
@@ -137,7 +138,7 @@ Example 5 for the exact format.
 - Every case type in `## Test Plan` is present in the test files by substance, not merely by test function name.
 
 ## On Soft Fail
-- Mark verdict status as INCOMPLETE.
+- Return `verdict: needs-rework` with `review_status: INCOMPLETE`.
 - Continue with best-effort output, completing all checks that are possible.
 - List which checks could not run and why (e.g., missing plan section, unreadable file, ambiguous step).
 
