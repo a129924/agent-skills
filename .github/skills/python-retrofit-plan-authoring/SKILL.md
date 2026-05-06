@@ -1,6 +1,38 @@
 ---
 name: python-retrofit-plan-authoring
 description: Author a review-ready Retrofit V2 `retrofit-plan.md` for an existing Python repository, with locked section order, machine-readable migration risk metadata, and strict separation between planning strategy and runtime gate decisions.
+complexity: high
+
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+  - destructive_action
+
+inputs:
+  - current repository facts (entrypoints, packages, config surfaces, toolchain remnants)
+  - concrete target paths, files, entrypoints, and tool choices for the post-retrofit state
+  - known conflict surfaces or destructive candidates the strategy must acknowledge
+  - verifiable acceptance targets for yaml [sensing-assertions]
+  - lane-fit facts proving this is retrofit work rather than greenfield initialization
+  - explicit human clarification when the request is abstract, contradictory, or missing locatable detail
+
+outputs:
+  - review-ready Retrofit V2 retrofit-plan.md for an existing Python repository
+  - locked section order with machine-readable migration-strategy and sensing-assertions blocks
+  - explicit risk metadata that executor can consume without a compatibility layer
+  - concrete stop-and-ask feedback when the requested contract is too abstract or misrouted
+
+use_when:
+  - an existing Python repository needs a retrofit contract before execution starts
+  - the task is to author or repair retrofit-plan.md to the locked Retrofit V2 shape
+  - the plan must encode risk_level, destructive_actions, backup_required, and acceptance assertions
+  - the workflow needs explicit stop-and-ask handling for abstract, contradictory, or misrouted retrofit requests
+
+do_not_use_when:
+  - the repository is greenfield or baseline-only; use python-project-init-greenfield
+  - the task is to execute retrofit steps; use python-project-retrofit
+  - the task is to review or approve an existing retrofit plan
+  - the requested contract lacks concrete paths, concrete tool names, or verifiable targets
 ---
 
 # Purpose
@@ -80,6 +112,36 @@ Do not use this skill when:
 - locked section order with machine-readable `migration-strategy` and `sensing-assertions` blocks
 - explicit risk metadata that executor can consume without a compatibility layer
 - concrete stop-and-ask feedback when the requested contract is too abstract or misrouted
+
+# Validation
+
+## Required Checks
+- Locked section order is present exactly: Survey Summary → Gap Analysis → Target Transformation → Migration Strategy → Acceptance Criteria.
+- `yaml [migration-strategy]` block contains all three required fields: `risk_level`, `destructive_actions`, and `backup_required`.
+- `yaml [sensing-assertions]` block uses only supported assertion kinds: `path_exists`, `path_type`, `command_available`.
+- `risk_level` uses only `LOW` or `HIGH`; `MEDIUM` must not appear.
+
+## Quality Checks (best effort)
+- `risk_level` is consistent with `destructive_actions`; `LOW` does not list moves, deletes, overwrites, or package relocations.
+- All section headings match the V2 contract; no V1 headings such as `## Project Overview` are present.
+- Acceptance targets are concrete enough for `sense-env-scaffold` to evaluate without guesswork.
+- Strategy text stays within planning scope and does not authorize runtime gate decisions.
+
+## On Soft Fail
+- Mark the plan as INCOMPLETE.
+- List all missing or non-compliant sections explicitly.
+- Do not block output; deliver the best-effort draft with gaps noted.
+
+# Failure Handling
+
+## Missing Context
+BLOCKED — if repository structure or migration intent is not provided, stop and ask before drafting. Do not invent paths, tool names, or structural facts.
+
+## Ambiguous Requirement
+If `risk_level` cannot be determined from observable physical traits, default to `HIGH` and note the assumption explicitly in the plan.
+
+## Execution Limitation
+If the repository cannot be inspected directly, state that limitation clearly in the plan. Use placeholder assertions explicitly marked for human verification before the plan is passed to the executor.
 
 # Verification
 - confirm the section order is exactly Survey Summary -> Gap Analysis -> Target Transformation -> Migration Strategy -> Acceptance Criteria

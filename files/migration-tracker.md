@@ -11,7 +11,7 @@
 
 | Tier | Description | Skills | Done | Status |
 |---|---|---|---|---|
-| 1 | Python Planning / Review | 9 | 0 | 🔲 pending |
+| 1 | Python Planning / Review | 9 | 9 | ✅ complete |
 | 2 | Python Implementation / Code-modification | 5 | 0 | 🔲 pending |
 | 3 | Python Helper / Reference | 20 | 0 | 🔲 pending |
 | 4 | Git Workflow / Review / Commit | 3 | 0 | 🔲 pending |
@@ -29,15 +29,15 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `python-plan-authoring` | — | — | — | — | 🔲 pending | |
-| `python-plan-review` | — | — | — | — | 🔲 pending | |
-| `python-code-review` | — | — | — | — | 🔲 pending | |
-| `python-implementation-review` | — | — | — | — | 🔲 pending | |
-| `python-blueprint-authoring` | — | — | — | — | 🔲 pending | |
-| `python-blueprint-review` | — | — | — | — | 🔲 pending | |
-| `python-retrofit-plan-authoring` | — | — | — | — | 🔲 pending | |
-| `python-retrofit-plan-review` | — | — | — | — | 🔲 pending | |
-| `python-tdd-test-authoring` | — | — | — | — | 🔲 pending | |
+| `python-plan-authoring` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | warnings fixed |
+| `python-plan-review` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | Workflow State Contract gap noted (non-blocking) |
+| `python-code-review` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | YAML do_not_use_when aligned to 6 body entries |
+| `python-implementation-review` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | Workflow State Contract gap noted (non-blocking) |
+| `python-blueprint-authoring` | A+ | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | ✅ approved | ✅ done | YAML do_not_use_when aligned; Workflow State Contract gap noted |
+| `python-blueprint-review` | A+ | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | ✅ approved | ✅ done | Workflow State Contract gap noted (non-blocking) |
+| `python-retrofit-plan-authoring` | A+ | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | ✅ approved | ✅ done | Workflow State Contract gap noted (non-blocking) |
+| `python-retrofit-plan-review` | A+ | high | ambiguity_sensitive, multi_agent_handoff, destructive_action | ✅ approved | ✅ done | severity marker added to Ambiguous Requirement handler |
+| `python-tdd-test-authoring` | A+ | high | ambiguity_sensitive, multi_agent_handoff, code_modification | ✅ approved | ✅ done | negative example clarified |
 
 ---
 
