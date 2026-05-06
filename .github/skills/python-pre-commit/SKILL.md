@@ -1,6 +1,27 @@
 ---
 name: python-pre-commit
 description: Configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set. Use this when a uv Python project needs pre-commit setup or an existing config needs hooks merged in.
+complexity: medium
+risk_profile:
+  - code_modification
+  - external_tooling
+inputs:
+  - Target project directory path.
+  - Whether `.pre-commit-config.yaml` already exists in the project root.
+  - Whether pyright strict mode is used in the project (determines optional pyright hook inclusion).
+  - Target ruff rev tag from ruff-pre-commit releases (independent of the uv-installed ruff version).
+outputs:
+  - "`.pre-commit-config.yaml` written to the project root."
+  - "Install instructions reported to the user: `uv run pre-commit install` and `uv run pre-commit run --all-files`."
+use_when:
+  - A uv-based Python project has no `.pre-commit-config.yaml` and needs one created from scratch.
+  - An existing `.pre-commit-config.yaml` in a uv project is missing canonical hooks and needs them merged in.
+  - The user asks to "set up pre-commit", "add pre-commit hooks", or "configure commit hooks" for a uv Python project.
+do_not_use_when:
+  - The project does not use uv (pip, poetry, conda, or bare virtualenv).
+  - The request is about CI/CD pipeline configuration (GitHub Actions, pre-commit.ci cloud service).
+  - The request is about secrets scanning hooks (detect-secrets, gitleaks, etc.).
+  - The request asks for `.git/hooks/` file creation rather than `.pre-commit-config.yaml`.
 ---
 
 # Purpose
@@ -80,6 +101,38 @@ Do not use this skill when:
 - Does not manage secrets scanning hooks (detect-secrets, gitleaks, etc.).
 - Does not write `.git/hooks/` files directly; only produces `.pre-commit-config.yaml`.
 - Does not run `uv run pre-commit install` or `uv run pre-commit run --all-files` autonomously; those commands are the user's responsibility.
+
+# Validation
+
+## Required Checks
+- Confirm the target project directory is known and reachable before writing any file.
+- Confirm the project uses uv (e.g., `pyproject.toml` present, `uv.lock` or `[tool.uv]` section); halt if not.
+- Check whether `.pre-commit-config.yaml` already exists to choose create vs. merge path.
+- Verify the ruff rev tag format is a valid semver tag (e.g., `v0.15.12`) before embedding it in the config.
+
+## Quality Checks
+- After writing `.pre-commit-config.yaml`, confirm it is valid YAML (no syntax errors).
+- Confirm all canonical hooks from `references/hooks-catalog.md` are present in the output file.
+- Confirm `pytest` hook (if included) uses `stages: [manual]` — never `stages: [commit]`.
+- Confirm `pyright` hook (if included) uses `stages: [manual]`.
+
+## On Soft Fail
+- Return with a clear explanation of what could not be completed; do not silently produce a partial config.
+- If ruff rev cannot be determined, report the issue and fall back to the default rev (`v0.15.12`) only if the user explicitly accepts the default.
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if the target project directory cannot be determined, stop and ask before proceeding.
+
+## Ambiguous Requirement
+- If the existing `.pre-commit-config.yaml` has conflicting hook entries (e.g., duplicate `repo:` blocks for ruff), report the conflict to the user, show both versions, and ask which to keep before merging.
+- Do not silently overwrite or discard existing hooks; use `--force` only when the user explicitly requests it.
+
+## Execution Limitation
+- If `scripts/apply_precommit.py` is not available, fall back to manually producing `.pre-commit-config.yaml` following `references/hooks-catalog.md`; note the fallback in the output.
+- If the ruff rev cannot be fetched from ruff-pre-commit releases (network unavailable), use the default rev (`v0.15.12`) and explicitly note that the user should verify currency before committing.
+- If `pre-commit` is not installed in the project environment, output the install instructions and note that `uv run pre-commit install` will fail until the dependency is added.
 
 # Local references
 - `reference.md`: index overview pointing to split topic files in `references/`.

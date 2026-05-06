@@ -12,13 +12,13 @@
 | Tier | Description | Skills | Done | Status |
 |---|---|---|---|---|
 | 1 | Python Planning / Review | 9 | 9 | ✅ complete |
-| 2 | Python Implementation / Code-modification | 5 | 0 | 🔲 pending |
+| 2 | Python Implementation / Code-modification | 5 | 4 | ✅ complete (4/5; python-testing-pytest deferred) |
 | 3 | Python Helper / Reference | 20 | 0 | 🔲 pending |
 | 4 | Git Workflow / Review / Commit | 3 | 0 | 🔲 pending |
 | 5 | Git Helper | 1 | 0 | 🔲 pending |
 | 6 | Other 高風險 | 5 | 0 | 🔲 pending |
 | 7 | Other 低風險 | 2 | 0 | 🔲 pending |
-| **Total** | | **45** | **9** | 🔄 In Progress |
+| **Total** | | **45** | **13** | 🔄 In Progress |
 
 ---
 
@@ -48,11 +48,11 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `python-project-init-greenfield` | — | — | — | — | 🔲 pending | |
-| `python-project-retrofit` | — | — | — | — | 🔲 pending | |
-| `python-pre-commit` | — | — | — | — | 🔲 pending | |
-| `python-pyproject-toolconfig` | — | — | — | — | 🔲 pending | |
-| `python-testing-pytest` | — | — | — | — | 🔲 pending | |
+| `python-project-init-greenfield` | A+ | high | destructive_action, multi_agent_handoff | ✅ approved | ✅ done | |
+| `python-project-retrofit` | A+ | high | destructive_action, multi_agent_handoff, code_modification | ✅ approved | ✅ done | |
+| `python-pre-commit` | A+ | medium | code_modification, external_tooling | ✅ approved | ✅ done | |
+| `python-pyproject-toolconfig` | A+ | medium | code_modification | ✅ approved | ✅ done | complexity raised low → medium (code_modification requires medium+) |
+| `python-testing-pytest` | — | — | — | — | 🔲 deferred | not in Tier 2 scope |
 
 ---
 
