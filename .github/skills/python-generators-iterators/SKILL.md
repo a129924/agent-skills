@@ -113,16 +113,34 @@ Do not use this skill when:
 - explicit documentation of exhaustion and side-effect expectations
 - a code review guide for iteration patterns
 
-# Verification
+# Validation
 
-- if the output is a generator, verify the caller iterates once or handles
-  exhaustion correctly
-- if `yield` or `yield from` is used, verify the logic is simpler than a
-  concrete loop
-- if a custom iterator is implemented, verify the `__iter__` and `__next__`
-  protocol serves a real purpose such as reset capability or state management
-- any iteration with side effects is documented and visible at the call site
-- generator expressions stay simple; complex logic uses generator functions
+Before proceeding, confirm:
+- **Caller iteration contract known**: does the caller iterate once, multiple times, or partially?
+- **Side effects documented**: are any side effects in the iterator (I/O, database queries) visible or documented?
+- **Collection size and cost understood**: is the dataset large, infinite, or expensive to compute, or small and bounded?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Caller's iteration ownership is unclear (once vs multiple passes) → cannot safely recommend generator vs concrete collection; ask before proceeding
+- Side effects exist but are undocumented → ask how to surface them before recommending a `yield`-based design
+- Collection size is unknown → ask whether lazy evaluation or eager collection is appropriate for this context
+
+**BLOCKED** — stop and redirect:
+- The main task involves async iteration, `async for`, or async generators → redirect to `python-async-await`
+- The main task is control-flow branching logic → redirect to `python-control-flow`
+
+# Failure Handling
+
+## Missing Context
+- If caller iteration contract, side-effect documentation, or collection characteristics cannot be determined, mark output as INCOMPLETE and list the missing information.
+
+## Ambiguous Requirement
+- If blocking: stop and ask whether the caller needs single-pass or multi-pass iteration before recommending a generator.
+- If non-blocking: proceed with the conservative default (concrete collection) and document the assumption.
+
+## Execution Limitation
+- State the limitation explicitly.
+- Do not invent an iteration pattern that cannot be justified from available context.
 
 # Red Flags
 

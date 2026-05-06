@@ -120,16 +120,35 @@ Do not use this skill when:
 - a decision on whether the class should expose base container protocols
 - a clear boundary on when `@dataclass` generation is sufficient versus risky
 
-# Verification
+# Validation
 
-- `__repr__` exposes developer-meaningful diagnostics instead of generic noise
-- `__str__` exists only when it adds a real user-facing view beyond `__repr__`
-- `__eq__` and `__hash__` were reviewed together, especially for mutable objects
-- `__bool__` reflects real truth semantics, not a cosmetic shortcut
-- container protocols describe what the object is, not just how callers want to
-  loop over it
-- any `@dataclass`-generated dunder behavior was accepted or overridden
-  deliberately
+Before proceeding, confirm:
+- **Mutability intent clear**: is the class mutable or immutable, and is that intent encoded (or missing) at the call site?
+- **Equality/hash scope defined**: are `__eq__` and `__hash__` being designed together in this task, or is only one being reviewed?
+- **Truth semantics explicit**: does the class have a meaningful boolean state, or is `__bool__` cosmetic?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Mutability contract is undefined → cannot determine whether `__eq__` and `__hash__` must be paired; ask before recommending equality rules
+- Truth semantics for `__bool__` are ambiguous → ask what the business-meaningful "falsy" state is before outputting a rule
+- `@dataclass`-generated behavior is present but not yet reviewed → ask whether generated `__eq__` and `__hash__` were deliberately accepted
+
+**BLOCKED** — stop and redirect:
+- The main decision is whether to use `Enum`, `dataclass`, `ABC`, or `Protocol` → redirect to `python-model-selection`
+- The task involves operator overloading beyond equality → redirect to `python-operator-overloading`
+- The task involves `__iter__`, exhaustion, or custom iterator strategy → redirect to `python-generators-iterators`
+
+# Failure Handling
+
+## Missing Context
+- If mutability intent, equality/hash scope, or truth semantics cannot be determined, mark output as INCOMPLETE and list the missing information before proceeding.
+
+## Ambiguous Requirement
+- If blocking: stop and ask whether mutability and hashing must be reconciled before recommending dunder methods.
+- If non-blocking: proceed with the safe default (explicit mutability + paired `__eq__`/`__hash__`) and document the assumption.
+
+## Execution Limitation
+- State the limitation explicitly.
+- Do not fabricate a dunder design that cannot be justified from the available context.
 
 # Red Flags
 

@@ -89,25 +89,55 @@ Guide developers to write clear, contract-first docstrings in Google Style forma
 
 ## Examples
 
-**Correct** — one-liner + contract sections derived from explicit code signals, no invented rationale:
+### ✅ Positive Example: Contract-First Docstring with Explicit Boundary
+
 ```python
 def authenticate_user(token: str, secret_key: str) -> User:
     """Authenticate a user using a JWT token.
+    
+    Verifies signature against the secret key and extracts user identity.
+    Primary entry point for REST API authentication.
+    
+    Args:
+        token: JWT-formatted bearer token from Authorization header.
+        secret_key: HMAC secret key to verify token signature.
+    
+    Returns:
+        User object with id, email, and roles from token claims.
+    
     Raises:
         JWTError: Token signature invalid or expired.
+        ValueError: Token malformed or missing required claims.
     """
 ```
 
-**Incorrect** — invented rationale ("generate revenue") and speculative error causes:
+**Why correct**: Captures **why** and **when** from explicit context (function name, parameters, return type, exception types). No invented rationale.
+
+---
+
+### ❌ Negative Example: Invented Rationale and Speculation
+
 ```python
 def process_order(order_id: int) -> Order:
     """Process an order to generate revenue for the platform.
+    
+    This is important for business growth. Called from payment service 
+    during checkout.
+    
+    Args:
+        order_id: The order ID. It's a number.
+    
+    Returns:
+        An Order object. Main data structure.
+    
     Raises:
         OrderNotFound: Probably from user deletion or race condition.
     """
 ```
 
-See `examples.md` for full annotated positive and negative scenarios.
+**Why wrong**: (1) Invented rationale not in code, (2) Over-explains obvious, (3) Speculates on error causes, (4) Restates type info
+
+---
 
 ## Outputs
 

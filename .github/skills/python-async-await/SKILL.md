@@ -101,16 +101,33 @@ Do not use this skill when:
 - supplementary AnyIO notes only when they do not replace the stdlib-first
   mainline
 
-# Verification
-- async code exists for a real async boundary, not only style or future-proofing
-- every spawned task has an owner, join path, and cancellation/failure policy
-- cancellation cleanup uses `finally` without normalizing swallowed
-  `CancelledError`
-- grouped task failure keeps semantic meaning explicit instead of disappearing
-  into background noise
-- `async with`, `async for`, and async generators are used only when their
-  protocol semantics are genuinely needed
-- AnyIO notes, if any, stay supplementary and do not become the default runtime
+# Validation
+
+Before proceeding, confirm:
+- **Async boundary justified**: is the underlying work truly async I/O, streaming, or async resource lifetime — not just style?
+- **Task ownership defined**: for any spawned tasks, is there an explicit owner, join path, and cancellation or failure policy?
+- **Protocol semantics clear**: is `async with`, `async for`, or an async generator genuinely needed, or would a direct `await` suffice?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Async boundary justification is unclear → cannot determine whether code should stay synchronous or become `async def`; ask before proceeding
+- Task cancellation or failure policy is undefined → cannot safely design structured concurrency; ask before recommending `create_task` or task groups
+
+**BLOCKED** — stop and redirect:
+- The main task is framework-specific async runtime, server bootstrap, or worker lifecycle → out of scope; do not proceed
+- The main task is deep async testing or pytest-asyncio plugin policy → redirect to `python-testing-pytest`
+
+# Failure Handling
+
+## Missing Context
+- If async boundary justification, task ownership, or protocol requirements cannot be determined, mark output as INCOMPLETE and list the missing inputs.
+
+## Ambiguous Requirement
+- If blocking: stop and ask whether the work is truly async before recommending `async def`.
+- If non-blocking: proceed with the synchronous default and document the assumption explicitly.
+
+## Execution Limitation
+- State the limitation explicitly.
+- Do not fabricate an async pattern that cannot be justified by a real async boundary.
 
 # Red Flags
 - `create_task` calls that outlive the scope with no explicit owner

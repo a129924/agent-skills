@@ -113,11 +113,11 @@ Before proceeding, confirm:
 **SOFT FAIL** — ask and wait before continuing:
 - Operand types are unknown → cannot determine if a reflected pair (`__radd__`) is needed; ask before proceeding
 - Mutability intent is undecided → cannot determine in-place return semantics; ask before proceeding
-- Whether `__hash__` must stay consistent with `__eq__` is unclear → ask before defining `__eq__`
 
 **BLOCKED** — stop and redirect:
 - Operator involves framework-specific semantics (SQLAlchemy `==`, NumPy broadcasting) → out of scope; do not proceed
 - Task requires complex cross-type coercion (currency conversion, unit normalization) → delegate to adapter/service layer
+- Task involves defining or reviewing `__eq__` and `__hash__` together → stop and redirect to `python-data-model-methods`
 
 # Examples
 ```python

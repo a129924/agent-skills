@@ -59,6 +59,35 @@ Do not use this skill when:
 - Do not define naming policy or branch-selection rules.
 - Do not relax strict typing without an explicit repository-level exception.
 
+# Validation
+
+Before proceeding, confirm:
+- **Python version target known**: which Python baseline (3.8, 3.9, 3.10+) governs syntax choices?
+- **Escape-hatch list available**: are allowed uses of `Any`, `cast`, and `# type: ignore` defined?
+- **Repository typing policy present**: are there existing type-hint examples or constraints that must be respected?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Python version target is unknown → cannot determine correct syntax (e.g., `User | None` vs `Optional[User]`); ask before outputting any rule
+- Escape-hatch list is undefined → cannot declare which patterns are disallowed; ask before proceeding
+- No existing repo typing examples or policy → flag the gap and ask whether to establish a baseline from scratch or infer from existing code
+
+**BLOCKED** — stop and redirect:
+- Task is choosing between `Enum`, `dataclass`, `ABC`, or `Protocol` → redirect to `python-model-selection`
+- Task is naming conventions or branch-selection style → redirect to `python-naming` or `python-control-flow`
+
+# Failure Handling
+
+## Missing Context
+- If Python version, escape-hatch rules, or existing policy cannot be determined, mark output as INCOMPLETE and list the missing inputs before proceeding.
+
+## Ambiguous Requirement
+- If blocking: stop and ask which typing baseline applies before producing any rule set.
+- If non-blocking: proceed with the safest strict default and document the assumption explicitly.
+
+## Execution Limitation
+- State the limitation explicitly in the output.
+- Do not fabricate a typing rule that cannot be justified from the available inputs.
+
 # Local references
 - `reference.md`: strict typing defaults, compatibility rules, and allowed exceptions
 - `examples.md`: version-path examples and strict typing anti-patterns

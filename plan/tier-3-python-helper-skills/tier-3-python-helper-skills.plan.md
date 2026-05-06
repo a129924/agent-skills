@@ -250,7 +250,7 @@ grep -A 10 '^# Validation' SKILL.md | head -12
 grep -A 10 '^# Failure Handling' SKILL.md | head -12
 
 # Verify at least one positive and one negative example
-grep -E '^- \*\*(Positive|Negative)\*\*:' SKILL.md | wc -l
+grep -E '^- \*\*(Positive|Negative|Correct|Incorrect)\*\*' SKILL.md | wc -l
 
 # Verify risk_profile declared in YAML
 grep 'risk_profile:' SKILL.md
