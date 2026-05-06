@@ -76,7 +76,7 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succ
 
 **For `check_all_succeeded`**:
 - **SUCCESS**: All steps done → `✅ SUCCESS: All N steps complete` + exit code 0
-- **BLOCKED**: Any step pending → `❌ BLOCKED: M steps pending (exit code 1)` + list of pending steps + exit code 1
+- **BLOCKED**: Any step pending → `❌ BLOCKED: M steps pending (exit code 1)` + list of pending steps (both on stdout) + exit code 1
 
 **Error cases** (all exit code 1):
 - `.step.md` file not found → `Error: File not found: plan/<topic>/<topic>.step.md`
@@ -92,6 +92,7 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succ
 - **No integration tests**: Tests use `tmp_path` fixture; does not read real `plan/` directory.
 - **Case-sensitive status**: Only `[X]` (uppercase) is accepted as done; `[x]` (lowercase) triggers warning.
 - **Max 200 steps per file**: No pagination support; assumes reasonable file size.
+- **Entity verification out of scope**: This skill reads declared checkbox state only; whether evidence files or external artifacts for each step actually exist is not checked.
 
 # Verification (Medium-Risk Control)
 
@@ -107,4 +108,4 @@ Because this skill produces blocking signals (exit code 1) used in CI workflows,
 - `reference.md`: `.step.md` format spec, grep quick-lookup patterns, `[x]` lowercase rule, CLI usage, splitting rules
 - `examples.md`: 4 operation examples (CLI + grep fallback), blocking scenario, edge cases (empty file, missing `.step.md`, no checkboxes)
 - `scripts/step_tracker.py`: Python CLI implementation (uv script, `>=3.11`, 4 subcommands)
-- `tests/test_step_tracker.py`: pytest suite covering parse, filter, blocking, and edge cases (6 test classes)
+- `tests/`: pytest validation suite for `scripts/step_tracker.py`; covers parse, filter, blocking, and edge-case behavior (6 test classes); role: CI regression guard for the Python CLI
