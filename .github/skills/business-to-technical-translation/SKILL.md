@@ -1,6 +1,30 @@
 ---
 name: business-to-technical-translation
 description: Translate a frozen business baseline into `analysis/<topic>/technical-spec.md` with technical tasks, feasibility constraints, architecture-compliance checks, cost-of-realization estimates, and rollback-to-alignment behavior when reality conflicts with intent.
+complexity: medium
+risk_profile:
+  - ambiguity_sensitive
+use_when:
+  - "`analysis/<topic>/requirements.md` exists and the next step is technical decomposition or feasibility analysis"
+  - the workflow needs explicit technical tasks, artifacts, constraints, and dependency mapping before execution planning starts
+  - architecture fit, delivery cost, or operational burden must be tested against the business baseline
+  - the request needs a pessimistic implementer view instead of optimistic solution selling
+do_not_use_when:
+  - the business baseline is missing, contradictory, or still vague; route back to `business-intent-alignment`
+  - the task is direct implementation, coding, or runtime debugging
+  - the main work is architecture invention without a frozen baseline to translate
+inputs:
+  - topic name and intended `analysis/<topic>/technical-spec.md` path
+  - "`analysis/<topic>/requirements.md` as the business baseline"
+  - current repository, platform, or system constraints that the design must obey
+  - available architecture rules, dependency boundaries, and compliance obligations
+  - staffing, timeline, integration, operational, and cost constraints
+  - known failure tolerances, rollback expectations, and non-negotiable business priorities
+outputs:
+  - "`analysis/<topic>/technical-spec.md` as the implementation-facing technical baseline"
+  - requirement-to-technical mapping with tasks, artifacts, and dependency notes
+  - cost-of-realization and feasibility constraints for each major workstream
+  - architecture-compliance results, conflicts, and rollback-to-alignment triggers
 ---
 
 # Purpose
@@ -37,8 +61,8 @@ Do not use this skill when:
 8. Write `analysis/<topic>/technical-spec.md` with requirement traceability, technical tasks and artifacts, feasibility assessment, architecture-compliance results, conflict notes, and rollback triggers.
 
 # Examples
-- Positive: Translate a frozen offline-order baseline into a technical spec that names local-storage needs, sync tasks, architecture fit checks, staffing pressure, and a rollback trigger if secure offline storage is unavailable on the approved platform.
-- Negative: Invent a technical plan from a vague request, ignore platform mismatch because the feature is `strategic`, or skip cost and rollback analysis because the team can `figure it out during implementation`.
+- **Positive**: Translate a frozen offline-order baseline into a technical spec that names local-storage needs, sync tasks, architecture fit checks, staffing pressure, and a rollback trigger if secure offline storage is unavailable on the approved platform.
+- **Negative**: Invent a technical plan from a vague request, ignore platform mismatch because the feature is `strategic`, or skip cost and rollback analysis because the team can `figure it out during implementation`.
 
 # Outputs
 - `analysis/<topic>/technical-spec.md` as the implementation-facing technical baseline
@@ -69,6 +93,35 @@ Do not use this skill when:
 - Do not continue when the baseline is too vague to translate honestly.
 - Do not start coding, scaffolding, or runtime execution.
 - Do not hide impossible scope behind optimism or omit rollback triggers.
+
+# Validation
+
+## Required Checks
+- PASS: `analysis/<topic>/requirements.md` exists and is readable before any technical decomposition begins
+- BLOCKED: if the business baseline is missing, vague, or internally contradictory — stop spec authoring and route back to `business-intent-alignment` with the exact gap named
+
+## Quality Checks
+- every business requirement maps to concrete technical work or an explicit blocker
+- cost, sequencing, and operational burden are stated rather than implied
+- architecture-compliance self-check results are explicit
+- material conflicts trigger rollback guidance rather than optimistic hand-waving
+
+## On Soft Fail
+- mark output as INCOMPLETE if partial technical tasks can be mapped but one or more requirements remain untranslatable without further clarification
+- list each untranslatable requirement explicitly rather than silently omitting it
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if `analysis/<topic>/requirements.md` is not provided or cannot be read, stop and route back to `business-intent-alignment`; do not begin technical decomposition
+
+## Ambiguous Requirement
+- if a requirement is present but too vague to translate honestly, surface the specific ambiguity and stop rather than proceeding with guesswork
+- if platform constraints or architecture rules are missing and their absence would change the feasibility result, name them as required inputs before continuing
+
+## Execution Limitation
+- if architecture-compliance rules are unavailable, mark the compliance section as INCOMPLETE and flag that a full architecture check could not be performed; do not omit rollback triggers because rules are missing
+- do not force a technical plan when the baseline is too vague; return the vague requirements as explicit gaps
 
 # Local references
 - `reference.md`: stable rules for frozen-baseline gating, technical-spec shape, cost framing, architecture self-checks, and rollback behavior

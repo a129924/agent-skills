@@ -1,6 +1,32 @@
 ---
 name: plan-reviewer
 description: Independently review a repo-visible `plan/<topic>/<topic>.plan.md` for this repository after the plan exists and before execution proceeds. Use this when a topic plan needs a contract-level verdict against the repository workflow and plan-authoring rules.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+use_when:
+  - a repo-visible `plan/<topic>/<topic>.plan.md` already exists
+  - the plan needs an independent review before branch preparation or creator implementation begins
+  - an existing topic plan was revised and needs contract re-review
+  - Main Agent is routing plan review through `/fleet` or an equivalent independent reviewer path
+do_not_use_when:
+  - the main task is to author or revise the topic plan itself
+  - the task is to review a skill folder or implementation draft
+  - the request is for a generic project plan outside this repository
+  - the task is to rewrite the canonical workflow spec itself
+inputs:
+  - the target `plan/<topic>/<topic>.plan.md`
+  - the current workflow contract from `plan/agent-handoff-workflow.md`
+  - `.github/skills/plan-creator/reference.md`
+  - `.github/skills/plan-creator/checklist.md`
+  - `.github/skills/plan-creator/templates/topic-plan-template.md`
+  - any contextual Copilot feedback, if it exists
+outputs:
+  - exactly one machine-consumable JSON object with no trailing prose
+  - verdict set to approved or needs-rework
+  - blocking_issues list with issue, file, and fix for each contract-breaking problem
+  - copilot_feedback_triage with ADDRESS, DISCUSS, and SKIP arrays
 ---
 
 # Purpose
@@ -42,8 +68,8 @@ Do not use this skill when:
    - `copilot_feedback_triage.SKIP[]`: objects with `comment` and `why`
 
 # Examples
-- Positive: Review `plan/python-docstrings/python-docstrings.plan.md` after the plan exists, reject no contract-breaking issues, and return one JSON object that confirms non-stable intent, exact artifact paths, canonical transitions, and machine-consumable reviewer handoff.
-- Negative: Use this skill to draft the topic plan, approve a plan that says `README/VERSION maybe later`, or return Markdown prose instead of the required JSON verdict.
+- **Positive**: Review `plan/python-docstrings/python-docstrings.plan.md` after the plan exists, reject no contract-breaking issues, and return one JSON object that confirms non-stable intent, exact artifact paths, canonical transitions, and machine-consumable reviewer handoff.
+- **Negative**: Use this skill to draft the topic plan, approve a plan that says `README/VERSION maybe later`, or return Markdown prose instead of the required JSON verdict.
 
 # Outputs
 - exactly one machine-consumable JSON object and no trailing prose
@@ -80,6 +106,48 @@ Do not use this skill when:
 - Do not approve a plan that still has contract-breaking ambiguity.
 - Do not turn this skill into implementation review, branch preparation, or publish execution.
 - Do not emit anything except the single JSON verdict object.
+
+# Validation
+
+## Required Checks
+- PASS: all four contract sources are readable before review begins
+- PASS: the target plan file exists at the expected path
+- BLOCKED: the plan file cannot be read or does not exist — stop and return `needs-rework` with the missing file as a blocking issue
+
+## Quality Checks
+- all required topic-plan sections are present and named correctly
+- canonical status model and transitions are used without invention
+- artifact paths are exact, bounded, and repo-visible
+- stable-library intent is explicitly declared or explicitly absent
+- reviewer handoff is exactly one JSON object with no trailing prose
+- post-merge timing is coherent with the topic scope
+
+## On Soft Fail
+- treat placeholder text (`TBD`, `later`, `follow normal process`) as a contract failure, not a soft gap
+- a plan with any blocking issue must return `needs-rework`; partial approval is not allowed
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if any of the four contract sources cannot be read, stop before issuing any verdict
+- BLOCKED — if the target plan path cannot be resolved, stop; do not guess or infer a path
+
+## Ambiguous Requirement
+- if a section name is subtly wrong but the intent is clear, flag it as a contract failure rather than silently accepting it
+- if the plan's stable-library intent is partially declared, treat partial declaration as undeclared
+
+## Execution Limitation
+- if a plan section is ambiguously present (e.g., combined with another section), flag it and return `needs-rework` rather than accepting ambiguous structure
+- if Copilot feedback input is absent, populate the `ADDRESS`, `DISCUSS`, and `SKIP` lists as empty arrays rather than omitting them
+
+# Workflow State Contract
+
+When participating in a multi-agent plan review or creator-reviewer handoff, include:
+- current_step: <step name from Process>
+- next_step: <next step or DONE>
+- status: APPROVED | NEEDS_REWORK | INCOMPLETE | BLOCKED
+
+Omit this section when the review is performed as a standalone action.
 
 # Local references
 - `reference.md`: stable review basis, severity rules, and workflow-position guidance for topic-plan review
