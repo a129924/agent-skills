@@ -147,6 +147,8 @@ When participating in a multi-agent plan review or creator-reviewer handoff, inc
 - next_step: <next step or DONE>
 - status: APPROVED | NEEDS_REWORK | INCOMPLETE | BLOCKED
 
+These fields are for internal agent state coordination only and MUST NOT appear inside the final JSON verdict object; the delivered output must remain the single fixed-schema JSON object (verdict / blocking_issues / copilot_feedback_triage) in all operating modes, whether standalone or in a multi-agent handoff.
+
 Omit this section when the review is performed as a standalone action.
 
 # Local references
