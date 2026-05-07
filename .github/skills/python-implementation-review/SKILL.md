@@ -9,6 +9,7 @@ risk_profile:
 
 inputs:
   - approved *.plan.md (formal approval confirmed before tracing begins)
+  - optional plan/<topic>/<topic>.step.md for pre-review step gating
   - implementation: code diff or changed file set
   - plan sections: Implementation Steps, Non-goals, Public Contract / API Changes, Test Plan
 
@@ -16,6 +17,7 @@ outputs:
   - YAML verdict block (verdict, traceability_matrix, scope_creep_check, contract_check, test_plan_check)
   - review_status: "INCOMPLETE (when partial review)"
   - plain-text refusal output when preconditions are unmet
+  - BLOCKED plain-text refusal output when pending Implementation Steps remain in *.step.md
 
 use_when:
   - a *.plan.md has been approved by python-plan-review
@@ -31,7 +33,7 @@ do_not_use_when:
 ---
 
 # Purpose
-Verify that a Python implementation satisfies its approved plan — all steps done, no scope creep, Public Contract unchanged, and Test Plan cases present.
+Verify that a Python implementation satisfies its approved plan — all steps done, no scope creep, Public Contract unchanged, and Test Plan cases present — while honoring the pre-review `*.step.md` gate when that file exists.
 
 # Sequencing rule
 Run `python-implementation-review` **before** `python-code-review`.
@@ -52,6 +54,7 @@ Do not use this skill when:
 
 # Inputs
 - an approved `*.plan.md` (approval status must be confirmed before proceeding)
+- optional `plan/<topic>/<topic>.step.md` for backward-compatible pre-review step gating
 - the implementation: code diff or the set of changed files
 - the four plan sections traced by this skill:
   - `## Implementation Steps` — completeness check
@@ -66,10 +69,33 @@ Do not use this skill when:
    - If the plan has not been formally approved, refuse the review and instruct the requester to route through `python-plan-review` first. Do not proceed.
    - If the implementation is absent, halt and request it before continuing.
 
+1.5 **Check step completion (step gate).**
+   - Resolve the topic from the plan path (for example, `plan/my-feature/my-feature.plan.md` → `my-feature`).
+   - If `plan/<topic>/<topic>.step.md` does not exist, emit:
+
+     ```text
+     ⚠️  WARNING: plan/<topic>/<topic>.step.md not found.
+                  Proceeding without step gate check.
+                  Suggestion: re-run python-plan-authoring to produce a step.md.
+     ```
+
+     Then continue to step 2.
+   - If `plan/<topic>/<topic>.step.md` exists, check only the `## Implementation Steps` section for pending lines that match `^\- \[[ x]\]`. Do not scan `## Workflow Stages`.
+   - Portable default:
+
+     ```bash
+     sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep '^\- \[[ x]\]'
+     ```
+
+     No matches → all Implementation Steps are complete → continue to step 2.
+     One or more matches → pending Implementation Steps remain. Lowercase `[x]` is pending, not done.
+   - Optional helper path: a repository may also reference `python .github/skills/plan-step-tracker/scripts/step_tracker.py ...`, but only when that path is narrowed to the same `## Implementation Steps` semantics as the portable check above. It is never a hard dependency for this skill.
+   - If pending Implementation Steps are found, emit the BLOCKED refusal output below and stop immediately. Do not build the traceability matrix, and do not produce a YAML verdict block.
+
 2. **Build the traceability matrix.**
-   - For each numbered item in `## Implementation Steps`, locate evidence in the implementation.
-   - Record `done` (change is fully present), `partial` (only part of the described change exists), or `missing` (no relevant code change found).
-   - Record the evidence location as `file:line` or `"not found"`.
+    - For each numbered item in `## Implementation Steps`, locate evidence in the implementation.
+    - Record `done` (change is fully present), `partial` (only part of the described change exists), or `missing` (no relevant code change found).
+    - Record the evidence location as `file:line` or `"not found"`.
 
 3. **Check the Non-goals boundary.**
    - For each item in `## Non-goals`, scan the implementation for any code that matches or addresses it.
@@ -125,11 +151,28 @@ precondition is unmet and the required routing action (e.g. route the plan throu
 `python-plan-review` first, or provide the implementation diff). See `examples.md`
 Example 5 for the exact format.
 
+**BLOCKED — Step gate failed** (plain text, no YAML):
+
+```text
+BLOCKED — Step gate failed.
+
+The following Implementation Steps are still pending in plan/<topic>/<topic>.step.md:
+
+  - [ ] N. <pending step text>
+  - [ ] M. <pending step text>
+
+Action required:
+  Complete all pending steps and mark them [X] in plan/<topic>/<topic>.step.md
+  before re-submitting for python-implementation-review.
+```
+
 # Validation
 
 ## Required Checks
 - Approved `*.plan.md` must be provided and its formal approval confirmed before tracing begins.
 - Implementation diff or changed file set must be present.
+- If `plan/<topic>/<topic>.step.md` exists, the review must block on any pending line inside `## Implementation Steps` before tracing begins.
+- `## Workflow Stages` must never be used as blocking evidence for the step gate.
 - Every numbered item in `## Implementation Steps` must be explicitly verified against the implementation.
 
 ## Quality Checks (best effort)
@@ -147,6 +190,11 @@ Example 5 for the exact format.
 ## Missing Context
 - BLOCKED — if the approved `*.plan.md` is not provided or its formal approval cannot be confirmed, stop and request the missing artifact; do not produce a verdict.
 - BLOCKED — if the implementation diff or changed file set is absent, stop and request it before continuing.
+- WARN — if `plan/<topic>/<topic>.step.md` is missing, emit the warning, suggest re-running `python-plan-authoring`, and continue with the review.
+
+## Step Gate
+- BLOCKED — if `plan/<topic>/<topic>.step.md` contains pending lines under `## Implementation Steps`, stop before the traceability matrix and use the plain-text BLOCKED output format.
+- Do not produce a YAML verdict block for a BLOCKED step-gate result.
 
 ## Ambiguous Requirement
 - If a plan step is ambiguous (e.g., vague scope description, unclear target file), note it as a soft-fail item in the traceability matrix with `status: partial` and a short note on the ambiguity.

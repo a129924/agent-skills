@@ -16,6 +16,7 @@ inputs:
   - any open questions the author cannot resolve alone
 outputs:
   - "*.plan.md with all 13 required sections in order"
+  - "*.step.md required co-artifact at plan/<topic>/<topic>.step.md"
   - frozen decisions, affected files, test plan, and validation commands
   - stop-and-ask questions when required information is missing
 use_when:
@@ -32,7 +33,7 @@ do_not_use_when:
 ---
 
 # Purpose
-Turn Python implementation intent into a review-ready `*.plan.md` that freezes scope, decisions, affected files, tests, and validation commands before any code changes begin. The plan is an executable implementation contract, not a todo list.
+Turn Python implementation intent into a review-ready `*.plan.md` plus required `plan/<topic>/<topic>.step.md` that freeze scope, decisions, affected files, tests, and validation commands before any code changes begin. The plan is an executable implementation contract, not a todo list.
 
 # Trigger / When to use
 Use this skill when:
@@ -148,15 +149,49 @@ Stop before drafting. Ask the user for the missing information when any of the f
    **13. Open Questions**
    List unresolved questions and who can answer them. State `"None"` if all questions are resolved.
 
-4. Verify the plan before handoff:
+4. Produce `plan/<topic>/<topic>.step.md` alongside the `*.plan.md`, using this canonical template and mirroring every numbered item from `## Implementation Steps` as pending `- [ ]` entries:
+
+   ```markdown
+   ---
+   topic: <topic>
+   phase: plan-authoring
+   created: YYYY-MM-DD
+   ---
+
+   # <topic> — Step Tracking
+
+   > **Executor**: Mark each step `[X]` when complete.
+   > All Implementation Steps must be `[X]` before submitting for `python-implementation-review`.
+   > Update this file at: `plan/<topic>/<topic>.step.md`
+
+   ## Workflow Stages
+
+   - [X] plan-authoring
+   - [ ] plan-review
+   - [ ] tdd-test-authoring
+   - [ ] implementation
+   - [ ] implementation-review
+   - [ ] code-review
+
+   ## Implementation Steps
+
+   - [ ] 1. <mirrored from plan.md step 1>
+   - [ ] 2. <mirrored from plan.md step 2>
+   ...
+   ```
+
+   Keep `plan-step-tracker/reference.md` as the read-only format authority. Do not omit any of the 6 Workflow Stages, and do not use lowercase `[x]` to mark completed work.
+
+5. Verify the plan before handoff:
    - All 13 sections are present in order.
    - `Decisions` addresses all 7 required items.
    - `Non-goals` lists at least 3 items.
    - `Implementation Steps` are executable and reference specific files.
+   - `plan/<topic>/<topic>.step.md` exists, includes `topic`, `phase: plan-authoring`, and `created`, and mirrors every numbered Implementation Step as `- [ ]`.
    - `Test Plan` covers all 5 test categories.
    - `Validation Commands` are present or reference a project config.
    - `Risks` and `Rollback Plan` name concrete items, not placeholders.
-5. Stop at `review-ready`. Do not execute or approve the plan.
+6. Stop at `review-ready`. Do not execute or approve the plan.
 
 # Examples
 
@@ -173,6 +208,7 @@ This plan must be returned for rework before any coding begins.
 
 # Outputs
 - a `*.plan.md` with all 13 required sections in order
+- a required `plan/<topic>/<topic>.step.md` co-artifact with the canonical step-tracking template
 - frozen decisions, affected files, test plan, and validation commands recorded before coding begins
 - explicit stop-and-ask questions when required information is missing
 - a contract that executor can follow step-by-step and reviewer can verify against
@@ -181,9 +217,11 @@ This plan must be returned for rework before any coding begins.
 
 ## Required Checks
 - All 13 required sections are present and in order
+- `plan/<topic>/<topic>.step.md` is produced alongside the plan and contains `topic`, `phase: plan-authoring`, and `created`
 - `Decisions` section addresses all 7 required items (no TBD placeholders in contract-critical fields)
 - `Non-goals` lists at least 3 items
 - `Implementation Steps` reference specific files and executable actions
+- `*.step.md` includes the executor note, all 6 Workflow Stages, and mirrored `## Implementation Steps` entries initialized as `- [ ]`
 - `Test Plan` covers all 5 categories: happy path, invalid input, edge case, regression, backward compatibility
 - `Validation Commands` are present or explicitly reference a project config file
 
@@ -191,6 +229,7 @@ This plan must be returned for rework before any coding begins.
 - `Risks` names a concrete risk, not a placeholder
 - `Rollback Plan` names specific files and revert method
 - `Open Questions` either lists items with owners or explicitly states `None`
+- `*.step.md` stays format-compatible with the read-only rules in `plan-step-tracker/reference.md`
 - Step granularity is sufficient for a reviewer to verify completion without ambiguity
 
 ## On Soft Fail
@@ -221,6 +260,7 @@ This plan must be returned for rework before any coding begins.
 - Do not accept vague Implementation Steps — stop and ask instead.
 - Do not accept fewer than 3 Non-goals items.
 - Do not treat this skill as a generic project planning tool for non-Python work.
+- Do not treat `*.step.md` as optional when producing a `*.plan.md`.
 
 # Local references
 - `examples.md`: complete positive example with all 13 sections, an anti-pattern plan with explanations, and a stop-and-ask example for insufficient context
