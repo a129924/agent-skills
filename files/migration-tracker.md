@@ -12,13 +12,13 @@
 | Tier | Description | Skills | Done | Status |
 |---|---|---|---|---|
 | 1 | Python Planning / Review | 9 | 9 | ✅ complete |
-| 2 | Python Implementation / Code-modification | 5 | 4 | ✅ complete (4/5; python-testing-pytest deferred) |
+| 2 | Python Implementation / Code-modification | 5 | 5 | ✅ complete |
 | 3 | Python Helper / Reference | 20 | 20 | ✅ complete |
 | 4 | Git Workflow / Review / Commit | 3 | 3 | ✅ complete |
 | 5 | Git Helper | 1 | 1 | ✅ complete |
 | 6 | Other 高風險 | 5 | 5 | ✅ complete |
 | 7 | Other 低風險 | 2 | 2 | ✅ complete |
-| **Total** | | **45** | **44** | 🔄 In Progress (44/45; `python-testing-pytest` deferred) |
+| **Total** | | **45** | **45** | ✅ complete |
 
 ---
 
@@ -52,7 +52,7 @@ PR target: `feature/skill-migration-v1`
 | `python-project-retrofit` | A+ | high | destructive_action, multi_agent_handoff, code_modification | ✅ approved | ✅ done | |
 | `python-pre-commit` | A+ | medium | code_modification, external_tooling | ✅ approved | ✅ done | |
 | `python-pyproject-toolconfig` | A+ | medium | code_modification | ✅ approved | ✅ done | complexity raised low → medium (code_modification requires medium+) |
-| `python-testing-pytest` | — | — | — | — | 🔲 deferred | not in Tier 2 scope |
+| `python-testing-pytest` | A+ | medium | code_modification | ✅ approved | ✅ done | reviewer noted Workflow State Contract gap (non-blocking) |
 
 ---
 
