@@ -1,6 +1,29 @@
 ---
 name: git-branch-naming
 description: Name or repair development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance when work has already started on the wrong branch.
+complexity: medium
+risk_profile:
+  - ambiguity_sensitive   # task type, namespace token, or current branch state changes the recommendation meaningfully
+inputs:
+  - the task's business intent
+  - the chosen development type such as `feat`, `fix`, `refactor`, `docs`, or `chore`
+  - the username or approved namespace token
+  - the current branch, including whether work or commits already exist there
+  - any existing branch names that might conflict
+  - the expected commit scope or dominant module
+outputs:
+  - one recommended branch name or a small set of tightly related alternatives
+  - repair commands such as `git checkout -b ...` or `git branch -m ...`
+  - split advice when one task name tries to cover multiple semantic boundaries
+use_when:
+  - the user asks for a branch name
+  - the agent detects `git checkout -b` or `git switch -c` intent
+  - a task has just been confirmed and the agent should suggest a branch before work starts
+  - the current branch is clearly misnamed and the user needs a safe migration path
+do_not_use_when:
+  - the main task is drafting commit messages or deciding release/tagging policy
+  - the branch is a release or hotfix branch whose lifecycle should be governed by `git-release-management`
+  - the user only wants generic Git tutorials unrelated to branch naming
 ---
 
 # Purpose
@@ -38,13 +61,28 @@ Do not use this skill when:
 9. Output the recommended branch name plus the repair or creation command, but do not rename branches automatically.
 
 # Examples
-- Positive: Suggest `feat/andrew/auth-session-timeout` for a new authentication rule, or repair work on `main` with `git checkout -b feat/andrew/auth-session-timeout`.
-- Negative: Approve `misc/update-stuff`, keep coding on `main` without a migration path, or let a `fix/...` branch carry a clearly feature-sized workflow change.
+- **Positive**: Suggest `feat/andrew/auth-session-timeout` for a new authentication rule, or repair work on `main` with `git checkout -b feat/andrew/auth-session-timeout`.
+- **Negative**: Approve `misc/update-stuff`, keep coding on `main` without a migration path, or let a `fix/...` branch carry a clearly feature-sized workflow change.
 
 # Outputs
 - one recommended branch name or a small set of tightly related alternatives
 - repair commands such as `git checkout -b ...` or `git branch -m ...`
 - split advice when one task name tries to cover multiple semantic boundaries
+
+# Validation
+1. **Scope gate** — confirm the request is about naming or repairing a development branch. Release or hotfix lifecycle decisions are BLOCKED and should be handed to `git-release-management`.
+2. **Naming inputs check** — confirm branch type, namespace token, and a truthful short description are known. If the repository does not use personal usernames, require the approved replacement token instead of guessing.
+3. **Current-state check** — determine whether the user needs a fresh branch, an in-place rename, or a branch move from the wrong starting point. Existing work on the current branch changes the recommended command path.
+4. **Conflict check** — if the preferred branch name already exists, verify whether it represents the same task lineage before recommending reuse.
+
+PASS: enough context exists to recommend a truthful branch name and the safest non-automated create / rename / rescue command.  
+SOFT FAIL: task type, namespace token, current branch state, or dominant scope is incomplete or ambiguous; continue with a best-effort recommendation, label the assumptions explicitly, and ask the user to confirm the missing signal.  
+BLOCKED: the request is actually about release or hotfix branch policy, or the branch lineage/state is too unclear to choose between reuse, rename, or split guidance without misleading the user.
+
+# Failure Handling
+- **Missing Context**: if the type, namespace token, or current branch state is unknown, ask for the missing signal first; if a provisional answer is still useful, label it as assumption-based.
+- **Ambiguous Requirement**: if the request could describe multiple task scopes or both a rename and split path, surface the competing interpretations and state which signal decides the recommendation.
+- **Execution Limitation**: do not inspect or mutate Git state automatically; when real branch state cannot be verified, provide safe manual commands and say that local verification is still required.
 
 # Boundaries
 - Do not draft commit bodies, PR gates, release tags, or version policy.
