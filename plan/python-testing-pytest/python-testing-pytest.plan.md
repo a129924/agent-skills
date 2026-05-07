@@ -93,7 +93,7 @@ Artifact path notes:
 
 ## Implementation Steps
 
-1. Prepare and use the dedicated worktree/branch for this topic: `/Users/andrew/code/python/agent-skills-python-testing-pytest` on `migrate/python-testing-pytest-schema-v2`.
+1. Prepare and use a dedicated clean worktree/branch for this topic in this repository on `migrate/python-testing-pytest-schema-v2`.
 2. Send `plan/python-testing-pytest/python-testing-pytest.plan.md` to `/fleet @.github/skills/plan-reviewer/` and do not start creator work until the plan is accepted or repaired.
 3. Send the approved plan plus current skill folder to `/fleet @.github/skills/agent-skill-creator/`:
    - preserve existing purpose, trigger, process, outputs, boundaries, and local-file roles

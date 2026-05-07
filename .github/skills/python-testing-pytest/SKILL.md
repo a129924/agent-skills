@@ -57,7 +57,7 @@ Do not use this skill when:
 3. Use `pytest.mark.parametrize` only when the behavior stays the same and only the data changes.
 4. Prefer state or output assertions; use mock call assertions only when the interaction itself is the contract or unavoidable side effect.
 5. Use stdlib `unittest.mock` as the baseline; keep `pytest` `monkeypatch` as supplementary detail in `examples.md`.
-6. Cover the core decision branches; treat 85%+ as a recommended quality baseline, not a hard gate.
+6. Cover core decision branches and critical behaviors; treat coverage as a supporting signal, not a gate.
 
 # Examples
 - Positive: Parametrize one pure function across data-only cases and assert the returned value; mock a notifier only when sending it is the behavior.
@@ -67,6 +67,17 @@ Do not use this skill when:
 - a review-ready pure pytest unit-testing rule set or skill draft
 - clear defaults for fixtures, parametrization, assertions, and mocks
 - local examples for common cases, anti-patterns, and split signals
+
+# Workflow State Contract
+
+## Allowed States
+- `COMPLETE`: required checks pass and no blocking ambiguity or missing context remains.
+- `INCOMPLETE`: missing context, soft-fail conditions, or execution limitations prevent a fully reliable outcome.
+
+## Output Requirements by State
+- Always include a `status` field with one allowed state value.
+- `COMPLETE` output must include: final recommendation/rule set and key rationale.
+- `INCOMPLETE` output must include: missing inputs or blocking constraints, explicit assumptions (if any), and concrete next-step requests.
 
 # Validation
 
@@ -78,7 +89,7 @@ Do not use this skill when:
 - inline arrange is preferred over fixtures when setup is short and local
 - parametrization is used only when behavior stays the same and only data changes
 - state or output assertions are preferred over mock call assertions when the result is observable
-- coverage aims for core decision branches, treating 85%+ as a recommended quality baseline
+- coverage checks focus on whether core decision branches and critical behaviors are exercised
 
 ## On Soft Fail
 - mark status as INCOMPLETE
