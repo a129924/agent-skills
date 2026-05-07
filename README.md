@@ -20,20 +20,51 @@ It is optimized for three equal jobs:
     ├── agent-skill-creator/
     ├── agent-skill-reviewer/
     ├── agent-skill-template/
+    ├── business-intent-alignment/
+    ├── business-to-technical-translation/
+    ├── copilot-instructions-init/
     ├── git-branch-naming/
     ├── git-commit-convention/
     ├── git-post-merge-workflow/
     ├── git-release-management/
+    ├── plan-creator/
+    ├── plan-reviewer/
+    ├── plan-step-tracker/
     ├── python-api-signature/
+    ├── python-async-await/
+    ├── python-blueprint-authoring/
+    ├── python-blueprint-review/
     ├── python-class-design/
+    ├── python-code-review/
     ├── python-comprehensions/
+    ├── python-context-management/
     ├── python-control-flow/
+    ├── python-data-model-methods/
+    ├── python-decorators/
+    ├── python-descriptors-attribute-access/
+    ├── python-docstrings/
     ├── python-error-handling/
+    ├── python-generators-iterators/
+    ├── python-implementation-review/
+    ├── python-library-architecture/
     ├── python-model-selection/
     ├── python-module-boundaries/
     ├── python-naming/
+    ├── python-operator-overloading/
+    ├── python-package-layout/
+    ├── python-plan-authoring/
+    ├── python-plan-review/
+    ├── python-pre-commit/
+    ├── python-project-init-greenfield/
+    ├── python-project-retrofit/
+    ├── python-pyproject-toolconfig/
+    ├── python-retrofit-plan-authoring/
+    ├── python-retrofit-plan-review/
+    ├── python-serialization-boundaries/
+    ├── python-tdd-test-authoring/
     ├── python-testing-pytest/
-    └── python-type-hints-strict/
+    ├── python-type-hints-strict/
+    └── sense-env-scaffold/
 ```
 
 ## Repository rules
