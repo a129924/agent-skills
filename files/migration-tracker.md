@@ -64,25 +64,25 @@ PR target: `feature/skill-migration-v1`
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
 | `python-naming` | A+ | low | — | ✅ approved | ✅ done | |
-| `python-docstrings` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | PR #59 reviewed; 7 BLOCKERs fixed |
-| `python-type-hints-strict` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-docstrings` | A+ | low | — | ✅ approved | ✅ done | PR #59 reviewed; 7 BLOCKERs fixed |
+| `python-type-hints-strict` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
 | `python-control-flow` | A+ | low | — | ✅ approved | ✅ done | |
 | `python-comprehensions` | A+ | low | — | ✅ approved | ✅ done | |
-| `python-generators-iterators` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-generators-iterators` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
 | `python-context-management` | A+ | medium | — | ✅ approved | ✅ done | |
 | `python-async-await` | A+ | medium | — | ✅ approved | ✅ done | |
-| `python-decorators` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-decorators` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
 | `python-descriptors-attribute-access` | A+ | medium | — | ✅ approved | ✅ done | |
-| `python-data-model-methods` | A+ | low | — | ✅ approved | ✅ done | |
-| `python-operator-overloading` | A+ | low | — | ✅ approved | ✅ done | |
-| `python-class-design` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-data-model-methods` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `python-operator-overloading` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `python-class-design` | A+ | medium | — | ✅ approved | ✅ done | |
 | `python-api-signature` | A+ | medium | — | ✅ approved | ✅ done | |
 | `python-module-boundaries` | A+ | medium | — | ✅ approved | ✅ done | |
 | `python-library-architecture` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
-| `python-package-layout` | A+ | low | — | ✅ approved | ✅ done | |
-| `python-error-handling` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-package-layout` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `python-error-handling` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
 | `python-serialization-boundaries` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
-| `python-model-selection` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-model-selection` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
 
 ---
 

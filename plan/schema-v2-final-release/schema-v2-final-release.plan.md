@@ -83,6 +83,7 @@ Artifact path notes:
 - This topic does **not** modify `.github/copilot-instructions.md` or any skill folder.
 - `files/migration-tracker.md` is intentionally excluded because it already reflects `45/45 complete`.
 - If execution requires files outside the listed paths, stop and repair the plan before continuing.
+- Note: this topic adds no new modifications to `.github/skills/**` or `files/migration-tracker.md`; those paths appear in the PR only because they are part of the accumulated migration history on the source branch, not because this topic's implementation steps touched them. Exception: tracker rows corrected under the plan's own locked-decision exception clause are permitted.
 
 ## Stable library metadata
 
@@ -94,7 +95,7 @@ Artifact path notes:
 
 ## Implementation Steps
 
-1. Work on the dedicated final-release worktree `/Users/andrew/code/python/agent-skills-final-release` on branch `release/schema-v2-final-integration`.
+1. Work on the dedicated final-release worktree for branch `release/schema-v2-final-integration`.
 2. Send `plan/schema-v2-final-release/schema-v2-final-release.plan.md` to `/fleet @.github/skills/plan-reviewer/` and repair it if needed before creator work begins.
 3. Send the approved plan to `/fleet @.github/skills/agent-skill-creator/` for the final release draft:
    - update `README.md` with complete migration-completion information
