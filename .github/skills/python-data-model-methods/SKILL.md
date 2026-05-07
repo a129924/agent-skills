@@ -1,6 +1,33 @@
 ---
 name: python-data-model-methods
 description: Choose clear Python data-model methods. Use this when deciding whether an ordinary class should define foundational dunder methods, expose base container protocols, or rely on dataclass-generated behavior.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - what the object represents in the domain
+  - whether the object is mutable or immutable
+  - whether the object should compare by identity or by value
+  - whether the object should be hashable and where it will be stored
+  - whether the object truly behaves like a collection or sequence
+  - whether "@dataclass" is generating any relevant dunder methods already
+  - whether callers need developer diagnostics, user-facing text, or explicit truth semantics
+outputs:
+  - a decision on which foundational dunder methods should exist and why
+  - a safe equality / hashing stance for the class
+  - a decision on whether the class should expose base container protocols
+  - a clear boundary on when "@dataclass" generation is sufficient versus risky
+use_when:
+  - deciding whether a class should define __repr__, __str__, __eq__, __hash__, or __bool__
+  - deciding whether a class should behave like a container through __len__, __getitem__, __contains__, or __iter__
+  - reviewing whether "@dataclass"-generated dunders are sufficient or should be overridden
+  - checking whether equality, hashing, or truthiness semantics match the real domain meaning of an object
+  - reviewing ordinary Python classes whose dunder behavior is starting to feel accidental or inconsistent
+do_not_use_when:
+  - the main decision is whether the type should be a dataclass, ABC, Protocol, or Enum; use python-model-selection
+  - the main task is broad class public-surface design or constructor/factory design; use python-class-design
+  - the main task is iterator strategy, exhaustion, generator choice, or custom iterator design; use python-generators-iterators
+  - the main task is async protocols such as __aiter__ or __anext__; use python-async-await
+  - the main task is operator overloading or descriptor behavior
 ---
 
 # Purpose
@@ -93,16 +120,35 @@ Do not use this skill when:
 - a decision on whether the class should expose base container protocols
 - a clear boundary on when `@dataclass` generation is sufficient versus risky
 
-# Verification
+# Validation
 
-- `__repr__` exposes developer-meaningful diagnostics instead of generic noise
-- `__str__` exists only when it adds a real user-facing view beyond `__repr__`
-- `__eq__` and `__hash__` were reviewed together, especially for mutable objects
-- `__bool__` reflects real truth semantics, not a cosmetic shortcut
-- container protocols describe what the object is, not just how callers want to
-  loop over it
-- any `@dataclass`-generated dunder behavior was accepted or overridden
-  deliberately
+Before proceeding, confirm:
+- **Mutability intent clear**: is the class mutable or immutable, and is that intent encoded (or missing) at the call site?
+- **Equality/hash scope defined**: are `__eq__` and `__hash__` being designed together in this task, or is only one being reviewed?
+- **Truth semantics explicit**: does the class have a meaningful boolean state, or is `__bool__` cosmetic?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Mutability contract is undefined → cannot determine whether `__eq__` and `__hash__` must be paired; ask before recommending equality rules
+- Truth semantics for `__bool__` are ambiguous → ask what the business-meaningful "falsy" state is before outputting a rule
+- `@dataclass`-generated behavior is present but not yet reviewed → ask whether generated `__eq__` and `__hash__` were deliberately accepted
+
+**BLOCKED** — stop and redirect:
+- The main decision is whether to use `Enum`, `dataclass`, `ABC`, or `Protocol` → redirect to `python-model-selection`
+- The task involves operator overloading beyond equality → redirect to `python-operator-overloading`
+- The task involves `__iter__`, exhaustion, or custom iterator strategy → redirect to `python-generators-iterators`
+
+# Failure Handling
+
+## Missing Context
+- If mutability intent, equality/hash scope, or truth semantics cannot be determined, mark output as INCOMPLETE and list the missing information before proceeding.
+
+## Ambiguous Requirement
+- If blocking: stop and ask whether mutability and hashing must be reconciled before recommending dunder methods.
+- If non-blocking: proceed with the safe default (explicit mutability + paired `__eq__`/`__hash__`) and document the assumption.
+
+## Execution Limitation
+- State the limitation explicitly.
+- Do not fabricate a dunder design that cannot be justified from the available context.
 
 # Red Flags
 

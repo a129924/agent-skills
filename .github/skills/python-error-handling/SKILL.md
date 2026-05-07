@@ -1,6 +1,26 @@
 ---
 name: python-error-handling
 description: Design or review general Python exception handling. Use this when choosing custom errors, translation boundaries, chaining, and when failures should propagate.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - whether the failure is business/package meaning or programmer misuse
+  - whether the boundary is internal or public
+  - whether the API contract is optional or error-signaling
+  - whether the failure is known and controllable
+  - the supported Python version baseline
+outputs:
+  - a review-ready general Python error-handling rule set or skill draft
+  - defaults for error hierarchy, translation, propagation, and benign suppression
+  - local examples for common cases, anti-patterns, and scope boundaries
+use_when:
+  - designing a project or package error hierarchy
+  - deciding when to raise a custom error, keep a built-in, or let a failure propagate
+  - reviewing broad catches, silent fallbacks, exception translation, or benign suppression
+do_not_use_when:
+  - the task is mainly about logging, observability, retry policy, or HTTP/framework exception mapping
+  - the task is mainly about DDD layer-specific error translation
+  - the task is mainly about ExceptionGroup, asyncio.CancelledError, or multi-error aggregation
 ---
 
 # Purpose
@@ -45,6 +65,24 @@ Do not use this skill when:
 - Do not use Python's built-in `BaseException` as the application or package root error.
 - Do not define logging timing, retry policy, or framework-specific exception mapping.
 - Do not cover `ExceptionGroup`, `asyncio.CancelledError`, or multi-error aggregation in the first draft.
+
+# Validation
+Before proceeding, confirm:
+- The failure domain is clear enough to distinguish business/package errors from programmer misuse
+- The boundary type (internal vs public) is known or can be inferred
+
+**SOFT FAIL** — ask and wait before continuing:
+- Whether the failure is a business/package error or programmer misuse is unclear → ask before recommending a custom error vs built-in
+- Whether the boundary is internal or public is unstated → ask before applying translation rules
+
+**BLOCKED** — stop and redirect:
+- The task is mainly about logging, observability, retry policy, or HTTP/framework exception mapping → redirect to the appropriate skill
+- The task involves `ExceptionGroup`, `asyncio.CancelledError`, or multi-error aggregation → out of scope for this skill
+
+# Failure Handling
+- **Missing Context**: if the failure domain, boundary type, or Python version baseline are unknown, ask once clearly before applying defaults.
+- **Ambiguous Requirement**: if the stated goal conflicts with error-handling scope (e.g., the task is really about retry policy or DDD translation), name the conflict and redirect.
+- **Execution Limitation**: if the task involves framework-specific exception mapping, `ExceptionGroup`, or multi-error aggregation, stop and note the out-of-scope condition.
 
 # Local references
 - `examples.md`: hierarchy examples, translation rules, anti-patterns, and Python-version scope notes

@@ -1,6 +1,23 @@
 ---
 name: python-naming
 description: Define or normalize Python naming conventions for identifiers, files, folders, and visibility boundaries. Use this when drafting or reviewing Python code style rules centered on names.
+complexity: low
+risk_profile: []
+inputs:
+  - the Python surfaces being named
+  - any existing repository naming policy
+  - explicit exceptions, if they already exist
+outputs:
+  - a single-purpose naming rule set or skill draft
+  - explicit allowed and disallowed naming patterns
+  - a local reference file with examples and edge cases
+use_when:
+  - a project needs Python naming rules
+  - code review or scaffolding must choose compliant names
+  - a draft guideline mixes naming cases or visibility signals
+do_not_use_when:
+  - the question is mainly about type strictness or pyright rules
+  - the task is to choose between Enum, dataclass, ABC, or Protocol
 ---
 
 # Purpose
