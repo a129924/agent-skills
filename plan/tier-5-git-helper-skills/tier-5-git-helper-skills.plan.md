@@ -5,7 +5,7 @@
 
 ## Status / Allowed Transitions
 
-**Current status**: `planned`
+**Current status**: `pr-open`
 
 | From | To | Condition |
 |---|---|---|
