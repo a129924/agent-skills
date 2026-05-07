@@ -6,27 +6,27 @@ risk_profile:
   - ambiguity_sensitive
   - multi_agent_handoff
 use_when:
-  - a repo-visible `plan/<topic>/<topic>.plan.md` already exists
-  - the plan needs an independent review before branch preparation or creator implementation begins
-  - an existing topic plan was revised and needs contract re-review
-  - Main Agent is routing plan review through `/fleet` or an equivalent independent reviewer path
+  - "a repo-visible `plan/<topic>/<topic>.plan.md` already exists"
+  - "the plan needs an independent review before branch preparation or creator implementation begins"
+  - "an existing topic plan was revised and needs contract re-review"
+  - "Main Agent is routing plan review through `/fleet` or an equivalent independent reviewer path"
 do_not_use_when:
-  - the main task is to author or revise the topic plan itself
-  - the task is to review a skill folder or implementation draft
-  - the request is for a generic project plan outside this repository
-  - the task is to rewrite the canonical workflow spec itself
+  - "the main task is to author or revise the topic plan itself"
+  - "the task is to review a skill folder or implementation draft"
+  - "the request is for a generic project plan outside this repository"
+  - "the task is to rewrite the canonical workflow spec itself"
 inputs:
-  - the target `plan/<topic>/<topic>.plan.md`
-  - the current workflow contract from `plan/agent-handoff-workflow.md`
-  - `.github/skills/plan-creator/reference.md`
-  - `.github/skills/plan-creator/checklist.md`
-  - `.github/skills/plan-creator/templates/topic-plan-template.md`
-  - any contextual Copilot feedback, if it exists
+  - "the target `plan/<topic>/<topic>.plan.md`"
+  - "the current workflow contract from `plan/agent-handoff-workflow.md`"
+  - "`.github/skills/plan-creator/reference.md`"
+  - "`.github/skills/plan-creator/checklist.md`"
+  - "`.github/skills/plan-creator/templates/topic-plan-template.md`"
+  - "any contextual Copilot feedback, if it exists"
 outputs:
-  - exactly one machine-consumable JSON object with no trailing prose
-  - verdict set to approved or needs-rework
-  - blocking_issues list with issue, file, and fix for each contract-breaking problem
-  - copilot_feedback_triage with ADDRESS, DISCUSS, and SKIP arrays
+  - "exactly one machine-consumable JSON object with no trailing prose"
+  - "verdict set to approved or needs-rework"
+  - "blocking_issues list with issue, file, and fix for each contract-breaking problem"
+  - "copilot_feedback_triage with ADDRESS, DISCUSS, and SKIP arrays"
 ---
 
 # Purpose

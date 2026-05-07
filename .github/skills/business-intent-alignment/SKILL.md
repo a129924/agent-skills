@@ -5,22 +5,22 @@ complexity: medium
 risk_profile:
   - ambiguity_sensitive
 inputs:
-  - topic name and intended `analysis/<topic>/requirements.md` path
-  - stated business outcomes, success claims, deadlines, and stakeholder expectations
-  - target users, actors, permissions, and environments
-  - known constraints, dependencies, compliance rules, and failure consequences
-  - any existing notes, tickets, meeting summaries, or prior contradictions
+  - "topic name and intended `analysis/<topic>/requirements.md` path"
+  - "stated business outcomes, success claims, deadlines, and stakeholder expectations"
+  - "target users, actors, permissions, and environments"
+  - "known constraints, dependencies, compliance rules, and failure consequences"
+  - "any existing notes, tickets, meeting summaries, or prior contradictions"
 outputs:
-  - `analysis/<topic>/requirements.md`
+  - "`analysis/<topic>/requirements.md`"
 use_when:
-  - business goals are stated as outcomes, preferences, or urgency without measurable requirements
-  - stakeholders disagree, omit constraints, or mix goals with assumed solutions
-  - the next workflow step needs a frozen baseline before technical planning or task decomposition
-  - the request sounds certain but still hides untested assumptions about users, scale, timing, roles, or failure handling
+  - "business goals are stated as outcomes, preferences, or urgency without measurable requirements"
+  - "stakeholders disagree, omit constraints, or mix goals with assumed solutions"
+  - "the next workflow step needs a frozen baseline before technical planning or task decomposition"
+  - "the request sounds certain but still hides untested assumptions about users, scale, timing, roles, or failure handling"
 do_not_use_when:
-  - `analysis/<topic>/requirements.md` is already frozen and the next task is technical translation; use `business-to-technical-translation`
-  - the task is implementation planning, architecture design, or coding
-  - the user wants uncommitted brainstorming without converting it into a requirements baseline
+  - "`analysis/<topic>/requirements.md` is already frozen and the next task is technical translation; use `business-to-technical-translation`"
+  - "the task is implementation planning, architecture design, or coding"
+  - "the user wants uncommitted brainstorming without converting it into a requirements baseline"
 ---
 
 # Purpose

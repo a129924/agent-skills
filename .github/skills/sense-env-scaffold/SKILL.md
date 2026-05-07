@@ -5,23 +5,23 @@ complexity: medium
 risk_profile:
   - external_tooling
 use_when:
-  - you need a structured JSON record of environment facts before beginning implementation work
-  - you need to verify that the repository satisfies a set of `sensing-assertions` defined in a `blueprint.md` or `retrofit-plan.md`
-  - you want a portable, secret-free snapshot of the current environment for handoff or archival purposes
+  - "you need a structured JSON record of environment facts before beginning implementation work"
+  - "you need to verify that the repository satisfies a set of `sensing-assertions` defined in a `blueprint.md` or `retrofit-plan.md`"
+  - "you want a portable, secret-free snapshot of the current environment for handoff or archival purposes"
 do_not_use_when:
-  - the task only needs a single shell command such as `python --version` or `git status`
-  - you need deep static analysis, linting, or architecture commentary
-  - you need to install dependencies, create virtual environments, or start services
-  - the repository does not have `.github/skills/sense-env-scaffold/scripts/sense_env.py` present
+  - "the task only needs a single shell command such as `python --version` or `git status`"
+  - "you need deep static analysis, linting, or architecture commentary"
+  - "you need to install dependencies, create virtual environments, or start services"
+  - "the repository does not have `.github/skills/sense-env-scaffold/scripts/sense_env.py` present"
 inputs:
-  - the run mode: `discovery` (fact collection) or `acceptance` (contract assertion)
-  - optionally, a contract file path containing a `yaml [sensing-assertions]` fenced block
-  - optionally, a custom output path for the live manifest
-  - whether a snapshot export is required (`--snapshot` flag)
+  - "the run mode: `discovery` (fact collection) or `acceptance` (contract assertion)"
+  - "optionally, a contract file path containing a `yaml [sensing-assertions]` fenced block"
+  - "optionally, a custom output path for the live manifest"
+  - "whether a snapshot export is required (`--snapshot` flag)"
 outputs:
-  - `.github/env-manifest.json` live manifest with five top-level modules: meta, fingerprint, facts, assertions, gaps
-  - `.github/env-manifest.snapshot.json` filtered secret-free snapshot when `--snapshot` is used and the run exits `0`
-  - non-zero exit code and a JSON manifest describing the failure when errors occur
+  - "`.github/env-manifest.json` live manifest with five top-level modules: meta, fingerprint, facts, assertions, gaps"
+  - "`.github/env-manifest.snapshot.json` filtered secret-free snapshot when `--snapshot` is used and the run exits `0`"
+  - "non-zero exit code and a JSON manifest describing the failure when errors occur"
 ---
 
 # Purpose
