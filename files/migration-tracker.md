@@ -16,9 +16,9 @@
 | 3 | Python Helper / Reference | 20 | 20 | ✅ complete |
 | 4 | Git Workflow / Review / Commit | 3 | 3 | ✅ complete |
 | 5 | Git Helper | 1 | 1 | ✅ complete |
-| 6 | Other 高風險 | 5 | 0 | 🔲 pending |
-| 7 | Other 低風險 | 2 | 0 | 🔲 pending |
-| **Total** | | **45** | **37** | 🔄 In Progress |
+| 6 | Other 高風險 | 5 | 5 | ✅ complete |
+| 7 | Other 低風險 | 2 | 2 | ✅ complete |
+| **Total** | | **45** | **44** | 🔄 In Progress (44/45; `python-testing-pytest` deferred) |
 
 ---
 
@@ -117,11 +117,11 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `plan-creator` | — | — | — | — | 🔲 pending | |
-| `plan-reviewer` | — | — | — | — | 🔲 pending | |
-| `sense-env-scaffold` | — | — | — | — | 🔲 pending | |
-| `copilot-instructions-init` | — | — | — | — | 🔲 pending | |
-| `business-to-technical-translation` | — | — | — | — | 🔲 pending | |
+| `plan-creator` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | `reference.md` split into focused overview + `references/`; PR #61 feedback clarified Workflow State Contract does not alter fixed JSON verdict schema |
+| `plan-reviewer` | A+ | high | ambiguity_sensitive, multi_agent_handoff | ✅ approved | ✅ done | fixed-schema JSON verdict contract preserved through PR #61 follow-up |
+| `sense-env-scaffold` | A+ | medium | external_tooling | ✅ approved | ✅ done | non-blocking warning: Validation lacks a Quality Checks tier |
+| `copilot-instructions-init` | A+ | high | ambiguity_sensitive, code_modification | ✅ approved | ✅ done | non-blocking note: recoverable gates could rename `HARD STOP` to `BLOCKED` for consistency |
+| `business-to-technical-translation` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | reviewer noted migration was effectively a no-op because the skill already matched the required contract shape |
 
 ---
 
@@ -132,8 +132,8 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `business-intent-alignment` | — | — | — | — | 🔲 pending | |
-| `plan-step-tracker` | — | — | — | — | 🔲 pending | |
+| `business-intent-alignment` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | contradiction forcing and measurability baseline contract preserved |
+| `plan-step-tracker` | A+ | medium | external_tooling | ✅ approved | ✅ done | CLI command contract and blocking semantics preserved; `reference.md` retained as focused companion file |
 
 ---
 
@@ -142,4 +142,5 @@ PR target: `feature/skill-migration-v1`
 Any governance rule adjustments discovered during migration should be recorded here
 (not directly patched in creator/reviewer/template during migration).
 
-_No notes yet._
+- Tier 6 surfaced one governance correction worth preserving: `plan-creator/reference.md` had to be split once it exceeded the "more than 3 logical topics" threshold, while `reference.md` remained the focused companion overview.
+- PR #61 also clarified that `plan-reviewer` workflow-state fields are internal coordination metadata only and must not widen the fixed JSON verdict schema consumed downstream.
