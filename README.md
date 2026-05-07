@@ -178,7 +178,7 @@ Process documentation and workflow guidance for repository operations:
 | `agent-skill-creator` | creates new repo-compliant, single-purpose skills with complexity classification, risk-appropriate validation, and explicit local-file roles |
 | `agent-skill-reviewer` | reviews skills for complexity-gated sections, YAML-body alignment, risk-appropriate validation, severity-labeled findings, and lifecycle compliance |
 | `agent-skill-template` | provides the canonical template with complexity-gated sections and risk-based validation guidance |
-| `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
+| `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines at `analysis/<topic>/requirements.md` through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
 | `business-to-technical-translation` | translates frozen business baselines into technical specs with feasibility checks, architecture-compliance analysis, cost-of-realization warnings, and rollback-to-alignment triggers |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with stale-fact and overwrite-choice hard stops |
 | `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
@@ -187,7 +187,7 @@ Process documentation and workflow guidance for repository operations:
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `plan-creator` | creates repo-visible topic plans with canonical workflow transitions, analysis-layer routing, exact artifact paths, and stable-library timing contracts |
 | `plan-reviewer` | independently reviews repo-visible topic plans against workflow contracts and returns fixed-schema JSON verdicts before execution |
-| `plan-step-tracker` | queries step status in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when the requested step is incomplete |
+| `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when incomplete |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |

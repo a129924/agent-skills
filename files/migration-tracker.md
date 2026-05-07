@@ -132,8 +132,8 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `business-intent-alignment` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | contradiction forcing and measurability baseline contract preserved |
-| `plan-step-tracker` | A+ | medium | external_tooling | ✅ approved | ✅ done | CLI command contract and blocking semantics preserved; `reference.md` retained as focused companion file |
+| `business-intent-alignment` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | contradiction forcing and measurability baseline contract preserved; PR #62 merged |
+| `plan-step-tracker` | A+ | medium | external_tooling | ✅ approved | ✅ done | CLI command contract and blocking semantics preserved; `reference.md` retained as focused companion file; PR #62 merged with follow-up wording fixes |
 
 ---
 
