@@ -15,10 +15,10 @@
 | 2 | Python Implementation / Code-modification | 5 | 4 | ✅ complete (4/5; python-testing-pytest deferred) |
 | 3 | Python Helper / Reference | 20 | 20 | ✅ complete |
 | 4 | Git Workflow / Review / Commit | 3 | 3 | ✅ complete |
-| 5 | Git Helper | 1 | 0 | 🔲 pending |
+| 5 | Git Helper | 1 | 1 | ✅ complete |
 | 6 | Other 高風險 | 5 | 0 | 🔲 pending |
 | 7 | Other 低風險 | 2 | 0 | 🔲 pending |
-| **Total** | | **45** | **36** | 🔄 In Progress |
+| **Total** | | **45** | **37** | 🔄 In Progress |
 
 ---
 
@@ -106,7 +106,7 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `git-branch-naming` | — | — | — | — | 🔲 pending | |
+| `git-branch-naming` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | PR #60 merged |
 
 ---
 

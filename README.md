@@ -181,7 +181,7 @@ Process documentation and workflow guidance for repository operations:
 | `business-intent-alignment` | collects and aligns business requirements, applying Socratic questioning and extreme-boundary checking to ensure a measurable, contradiction-free intent baseline |
 | `business-to-technical-translation` | translates requirements into technical specification, feasibility checks, and architecture-compliance guidance, surfacing conflicts and cost-of-realization warnings |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions |
-| `git-branch-naming` | names or repairs development branches with semantic prefixes and migration guidance |
+| `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
 | `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
 | `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
