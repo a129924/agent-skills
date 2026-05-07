@@ -161,6 +161,35 @@ inside a skill folder unless the repository spec gives them a fixed role.
   - `MINOR`: new stable skills or backward-compatible capabilities
   - `PATCH`: non-breaking fixes and wording corrections
 
+## Schema v2 migration — complete
+
+As of version `0.48.0`, all **45 stable skills** in this library are fully
+schema v2 compliant. The migration is considered closed and final.
+
+Schema v2 updates applied across every skill include:
+
+- complexity-gated sections aligned to the canonical `SKILL.md` contract
+- risk-appropriate validation signals in `Trigger / When to use` and `Boundaries`
+- concise positive and negative examples required in every `SKILL.md`
+- `reference.md` or `examples.md` companion file required per skill
+- local file roles explicitly declared in `Local references`
+
+The migration covered all seven tiers:
+
+| Tier | Description | Skills |
+| --- | --- | --- |
+| 1 | Python Planning / Review | 9 |
+| 2 | Python Implementation / Code-modification | 5 |
+| 3 | Python Helper / Reference | 20 |
+| 4 | Git Workflow / Review / Commit | 3 |
+| 5 | Git Helper | 1 |
+| 6 | Other — high-risk | 5 |
+| 7 | Other — low-risk | 2 |
+| **Total** | | **45** |
+
+The final deferred-skill closure was completed via PR #63 before this release.
+Full migration history is tracked in `files/migration-tracker.md`.
+
 ## Guides
 
 Process documentation and workflow guidance for repository operations:
