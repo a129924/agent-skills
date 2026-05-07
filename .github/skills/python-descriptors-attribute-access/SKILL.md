@@ -1,6 +1,33 @@
 ---
 name: python-descriptors-attribute-access
 description: Choose and design Python attribute access mechanisms using the least-powerful-sufficient ladder — from plain attributes through @property, @cached_property, custom descriptors, and attribute hook methods — with strict discouragement of __getattr__, __setattr__, and __getattribute__.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - The attribute's intended access semantics (read-only, read-write, lazy, shared validation)
+  - Whether the attribute logic must be reused across multiple class attributes
+  - Whether the class is a proxy, adapter, or delegation layer
+  - The Python version floor of the target codebase
+  - Any static analysis tools in use (pyright, mypy)
+outputs:
+  - An attribute access implementation using the weakest sufficient mechanism
+  - All attribute read/write paths statically navigable (pyright --strict reports no implicit Any)
+  - Any ladder skip justified in code comments or documentation
+  - Escape hatch conditions documented if __getattr__ / __setattr__ / __getattribute__ are used
+use_when:
+  - Choosing between plain attributes, @property, @cached_property, or a custom descriptor for a new attribute
+  - Reviewing code that uses __getattr__, __setattr__, or __getattribute__
+  - Designing a descriptor class intended for reuse across multiple attribute names
+  - Implementing a proxy, adapter, or delegation layer that requires attribute hook methods
+  - A code review flags data flow as invisible or IDE cannot navigate the attribute
+  - A RecursionError during __init__ suggests an attribute hook pitfall
+do_not_use_when:
+  - Choosing between __slots__ vs instance __dict__ (use python-class-design)
+  - Implementing cross-field or DTO-level validation logic (use python-error-handling)
+  - Understanding how the @property decorator wraps functions at the language level (use python-decorators)
+  - Designing __init__ or object construction rules beyond the attribute-hook pitfall (use python-data-model-methods)
+  - Configuring ORM-specific descriptor patterns such as Django or SQLAlchemy
+  - Implementing metaclass attribute handling
 ---
 
 # Purpose
@@ -67,6 +94,23 @@ For each attribute under design or review:
 
 Any ladder skip must be justified in code comments or documentation.
 
+# Validation
+
+Before proceeding, confirm:
+- **Python version floor known**: is the minimum Python version of the codebase known? (`@cached_property` requires 3.8+)
+- **Attribute semantics clear**: is the access pattern read-only, read-write, lazy, shared validation, or proxy/delegation?
+- **Reuse scope defined**: will the logic be shared across 3+ attributes (custom descriptor trigger)?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Python version floor is unknown → cannot safely recommend `@cached_property`; ask for version before proceeding
+- Whether the class is a proxy, adapter, or delegation layer is unclear → ask before allowing rung 5–6 escape hatches
+- Whether attribute logic requires reuse across multiple attributes is unknown → cannot determine if a custom descriptor is justified
+
+**BLOCKED** — stop and redirect:
+- Task involves ORM-specific descriptor patterns (Django, SQLAlchemy) → out of scope; do not proceed
+- Task requires metaclass attribute handling → out of scope; do not proceed
+- `__slots__` optimization is the primary concern → redirect to `python-class-design`
+
 # Examples
 **Correct — `@property` for single-attribute invariant:**
 ```py
@@ -110,6 +154,12 @@ def __getattr__(self, name: str) -> str:
 - `python-class-design` — for `__slots__`, `__new__`, immutability decisions
 - `python-error-handling` — for cross-field validation and domain-layer contracts
 - `python-data-model-methods` — for `__init__` construction rules and `__eq__`/`__hash__` design
+
+# Failure Handling
+
+- **Insufficient context**: if Python version floor or attribute access pattern cannot be determined, emit SOFT FAIL, state what is missing, and ask before recommending a rung.
+- **Ambiguous requirement**: if reuse scope is unclear (1 attribute vs. 3+), recommend the conservative default (`@property`) and note a custom descriptor may be needed if the count grows.
+- **Out-of-scope pattern detected**: if the task involves metaclass attribute handling, ORM-specific descriptors, or `__slots__` decisions, stop immediately and redirect to the appropriate skill.
 
 # Local references
 

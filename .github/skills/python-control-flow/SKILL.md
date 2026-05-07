@@ -1,6 +1,26 @@
 ---
 name: python-control-flow
 description: Choose clear general-purpose Python branching patterns. Use this when drafting or reviewing `if/elif`, `match/case`, guard clauses, and truthiness rules.
+complexity: low
+risk_profile: []
+inputs:
+  - the branch subject or predicate
+  - whether the subject is closed and owned
+  - whether None, empty values, and False mean different things
+  - whether cleanup, resource lifetime, or symmetry matters
+  - any package-specific skill that defines its own exhaustive branching subject
+outputs:
+  - a review-ready control-flow rule set or skill draft
+  - a branch-selection matrix with explicit default choices and exceptions
+  - local examples for common cases and ambiguous edges
+use_when:
+  - code review or design work must choose between if/elif and match/case
+  - a function may benefit from guard clauses or flatter early exits
+  - a condition may need explicit checks instead of plain truthiness
+do_not_use_when:
+  - the task is mainly about naming, type-hint syntax, or model selection
+  - the task is mainly about ternary expressions, walrus, or comprehension style
+  - the task is mainly about framework or DDD-specific workflow policy
 ---
 
 # Purpose

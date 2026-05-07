@@ -1,6 +1,33 @@
 ---
 name: python-implementation-review
 description: Review a Python implementation against its approved plan to confirm all Implementation Steps are complete, no scope has crept beyond Non-goals, the Public Contract is unchanged, and the Test Plan cases are present. Run BEFORE python-code-review.
+complexity: high
+
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+
+inputs:
+  - approved *.plan.md (formal approval confirmed before tracing begins)
+  - implementation: code diff or changed file set
+  - plan sections: Implementation Steps, Non-goals, Public Contract / API Changes, Test Plan
+
+outputs:
+  - YAML verdict block (verdict, traceability_matrix, scope_creep_check, contract_check, test_plan_check)
+  - review_status: "INCOMPLETE (when partial review)"
+  - plain-text refusal output when preconditions are unmet
+
+use_when:
+  - a *.plan.md has been approved by python-plan-review
+  - the implementation (diff or changed file set) is available
+  - the goal is to confirm the implementation matches the plan, not assess code quality
+
+do_not_use_when:
+  - the plan has not yet been formally approved
+  - the implementation does not yet exist
+  - the goal is to review code style, typing, linting, or Python idioms
+  - the goal is to check whether the plan itself is executable (use python-plan-review)
+  - the goal is to judge architecture quality, design patterns, or naming conventions
 ---
 
 # Purpose
@@ -97,6 +124,38 @@ formally approved or when the implementation has not been provided. States which
 precondition is unmet and the required routing action (e.g. route the plan through
 `python-plan-review` first, or provide the implementation diff). See `examples.md`
 Example 5 for the exact format.
+
+# Validation
+
+## Required Checks
+- Approved `*.plan.md` must be provided and its formal approval confirmed before tracing begins.
+- Implementation diff or changed file set must be present.
+- Every numbered item in `## Implementation Steps` must be explicitly verified against the implementation.
+
+## Quality Checks (best effort)
+- No item in `## Non-goals` is violated by the implementation.
+- Every API item in `## Public Contract / API Changes` matches the actual implementation signature, including parameters and exception types.
+- Every case type in `## Test Plan` is present in the test files by substance, not merely by test function name.
+
+## On Soft Fail
+- Return `verdict: needs-rework` with `review_status: INCOMPLETE`.
+- Continue with best-effort output, completing all checks that are possible.
+- List which checks could not run and why (e.g., missing plan section, unreadable file, ambiguous step).
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if the approved `*.plan.md` is not provided or its formal approval cannot be confirmed, stop and request the missing artifact; do not produce a verdict.
+- BLOCKED — if the implementation diff or changed file set is absent, stop and request it before continuing.
+
+## Ambiguous Requirement
+- If a plan step is ambiguous (e.g., vague scope description, unclear target file), note it as a soft-fail item in the traceability matrix with `status: partial` and a short note on the ambiguity.
+- Do not block the overall verdict solely on plan step ambiguity; surface it clearly and continue reviewing the remaining steps.
+
+## Execution Limitation
+- If file inspection is limited (very large diff, binary files, inaccessible paths), note the limitation explicitly in the output.
+- Review whatever is available; do not fabricate evidence for unreachable files.
+- Mark affected traceability steps as `partial` or `missing` with a note explaining the limitation.
 
 # Verification
 - Confirm the plan has formal approval from `python-plan-review` before tracing begins.

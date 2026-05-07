@@ -1,6 +1,33 @@
 ---
 name: python-retrofit-plan-review
 description: Review an authored Retrofit V2 `retrofit-plan.md` contract against the locked section order, machine-readable risk metadata, supported sensing assertion kinds, authoring-versus-executor boundaries, and locatability before `python-project-retrofit` execution begins.
+complexity: high
+
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+  - destructive_action
+
+inputs:
+  - the target `retrofit-plan.md` path
+  - the locked Retrofit V2 review rules already consumed by `python-project-retrofit`
+  - the current supported `sense_env.py` assertion-kind subset
+  - any concrete repository facts needed to judge retrofit-versus-greenfield lane fit
+  - the authored contract text needed to assess risk alignment, runtime-boundary violations, and locatability
+
+outputs:
+  - exactly one machine-consumable JSON verdict object with `verdict` and `blocking_issues`
+
+use_when:
+  - a drafted Retrofit V2 `retrofit-plan.md` already exists and needs review before execution
+  - the workflow needs a domain-specific check for locked section order, `migration-strategy` validity, supported sensing assertion kinds, risk alignment, and locatability
+  - the expected output is a review verdict with blocking issues rather than plan authoring or retrofit execution
+
+do_not_use_when:
+  - the task is to author or repair the retrofit plan; use `python-retrofit-plan-authoring`
+  - the task is to execute a valid retrofit plan; use `python-project-retrofit`
+  - the task is to review a skill folder, topic plan, or implementation diff
+  - the repository is greenfield or baseline-only and needs the blueprint lane instead of retrofit-plan review
 ---
 
 # Purpose
@@ -72,6 +99,36 @@ Do not use this skill when:
 - `verdict`: `approved` or `needs-rework`
 - `blocking_issues`: concrete contract failures with the failing section and required fix
 - reroute guidance only as part of a blocking issue fix when the plan belongs in another lane
+
+# Validation
+
+## Required Checks
+- `retrofit-plan.md` is provided and its path is readable
+- locked Retrofit V2 section order is intact: Survey Summary → Gap Analysis → Target Transformation → Migration Strategy → Acceptance Criteria
+- `## Migration Strategy` contains a parseable fenced `yaml [migration-strategy]` block with `risk_level`, `destructive_actions`, and `backup_required`; `risk_level` is `LOW` or `HIGH` only; `destructive_actions` is a YAML sequence; `backup_required` is a YAML boolean
+- `## Acceptance Criteria` contains a parseable fenced `yaml [sensing-assertions]` block; every assertion record includes `kind`, `target`, and `expected`; every `kind` value is within `path_exists`, `path_type`, or `command_available`
+
+## Quality Checks (best effort)
+- `risk_level` is consistent with the `destructive_actions` list (e.g., `LOW` plans should not list moves, deletes, or overwrites)
+- no `TBD`, placeholder text, or abstract wording appears in contract-critical fields such as source paths, target paths, entrypoints, or tool names
+
+## On Soft Fail
+- mark review as INCOMPLETE
+- return `verdict: needs-rework` with `blocking_issues` populated for each failing check
+- list each missing or malformed section explicitly so the author knows exactly what to repair
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if `retrofit-plan.md` is not provided or cannot be read, stop and ask for the correct path before proceeding; do not attempt a partial review against an absent or unreadable contract
+
+## Ambiguous Requirement
+- if a section is present but its content is ambiguous on a non-schema dimension (e.g., prose wording is unclear but structurally compliant), record it as a non-blocking observation in a `blocking_issues` entry with `"issue": "WARNING: <description>"` so executors can distinguish it from hard failures
+- block only when the ambiguity directly violates a schema rule (e.g., unreadable YAML block, unsupported assertion kind, missing required field)
+
+## Execution Limitation
+- if `yaml [sensing-assertions]` references file paths or commands that cannot be verified in the current environment, note the limitation explicitly in the verdict; assess schema compliance only and do not fabricate runtime verification results
+- do not infer missing YAML fields from prose context; require them to be present in the fenced block
 
 # Verification
 - confirm the review stays inside authored `retrofit-plan.md` contract review scope

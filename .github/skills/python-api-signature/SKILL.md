@@ -1,6 +1,27 @@
 ---
 name: python-api-signature
 description: Design or review public Python function and method signatures for safe defaults, clear parameter ordering, and explicit call-site contracts.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - whether the API is public or internal
+  - whether None is a legal business value or only a missing/default signal
+  - whether the call site becomes ambiguous with positional arguments
+  - whether flags, modes, or repeated related values are crowding the signature
+  - whether the signature is wide enough to deserve a parameter object
+outputs:
+  - a review-ready public Python API-signature rule set or review guide
+  - defaults for safe parameter values, sentinel usage, ordering, keyword-only choices, and refactor signals
+  - local examples for common signature smells, safer alternatives, and split signals
+use_when:
+  - designing or reviewing a public Python function or method signature
+  - deciding whether defaults, keyword-only parameters, or sentinel patterns make an API safer
+  - reviewing boolean flags, broad *args / **kwargs, or crowded parameter lists
+  - deciding when a signature should be refactored into a clearer parameter object
+do_not_use_when:
+  - the main task is type-annotation syntax, strict typing policy, or container-type selection
+  - the main task is choosing Enum, dataclass, ABC, or Protocol
+  - the main task is ordinary class-shape design, naming policy, or error hierarchy design
 ---
 
 # Purpose
@@ -49,6 +70,24 @@ Do not use this skill when:
 - Do not choose the concrete parameter-object model; use `python-model-selection` when the API should extract one.
 - Do not define class internals, naming rules, or framework-specific hook conventions beyond narrow signature-shape exceptions.
 - Do not cover positional-only parameters (`/`) in the first draft except as an explicit out-of-scope note.
+
+# Validation
+Before proceeding, confirm:
+- The question is about signature shape (parameters, defaults, keyword-only choices, refactor signals)
+- Enough context exists to determine whether `None` is a legal business value and whether the API is public or internal
+
+**SOFT FAIL** — ask and wait before continuing:
+- Whether `None` is a legal business value or only a missing-signal is unstated → ask before choosing `None` vs a private sentinel
+- Whether the API is public or internal is unstated → ask before applying keyword-only defaults and refactor thresholds
+
+**BLOCKED** — stop and redirect:
+- The main task is type-annotation syntax, strict typing policy, or container-type selection → redirect to `python-type-hints-strict`
+- The main task is choosing `Enum`, `dataclass`, `ABC`, or `Protocol` for the parameter object → redirect to `python-model-selection`
+
+# Failure Handling
+- **Missing Context**: if `None`-semantics, public-vs-internal scope, or call-site ambiguity are unknown, ask once clearly before applying defaults.
+- **Ambiguous Requirement**: if the stated goal conflicts with signature-shape scope (e.g., the question is really about type-hint syntax), name the conflict and redirect.
+- **Execution Limitation**: if the task is outside scope (e.g., class internals, naming policy, framework-specific hooks), stop and redirect to the appropriate skill.
 
 # Local references
 - `examples.md`: mutable-default examples, sentinel patterns, keyword-only and flag cases, fat-signature refactors, and split signals

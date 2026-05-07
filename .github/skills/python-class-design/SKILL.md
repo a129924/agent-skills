@@ -1,6 +1,28 @@
 ---
 name: python-class-design
 description: Design or review ordinary Python classes with clear public surfaces, disciplined instance state, thin constructors, and limited use of properties and name mangling.
+complexity: medium
+risk_profile:
+  - ambiguity_sensitive
+inputs:
+  - whether the class is behavior-oriented or mainly a data carrier
+  - which methods form the stable public surface
+  - whether object creation needs parsing, normalization, or multiple named entry paths
+  - whether state is instance-specific, shared, or lazily derived
+  - whether inheritance is ordinary or collision-prone enough to justify name mangling
+outputs:
+  - a review-ready ordinary Python class-design rule set or skill draft
+  - defaults for public surface size, constructor boundaries, properties, attribute lifecycle, and class-vs-instance state
+  - local examples for common class-shape decisions, anti-patterns, and split signals
+use_when:
+  - designing or reviewing an ordinary behavior-oriented Python class
+  - deciding what should be public vs internal on a class
+  - deciding what belongs in __init__, a @classmethod factory, a @property, or a semantic method
+  - reviewing instance-attribute lifecycle, class attributes, or name-mangling choices
+do_not_use_when:
+  - the main decision is whether the type should be an Enum, dataclass, ABC, or Protocol
+  - the task is mainly about DDD layering, repository patterns, or framework-specific base classes
+  - the task is mainly about naming, type-hint policy, testing style, or exception hierarchy design
 ---
 
 # Purpose
@@ -48,6 +70,24 @@ Do not use this skill when:
 - Do not restate `python-model-selection` rules for `Enum`, `dataclass`, `ABC`, or `Protocol`.
 - Do not turn method ordering into a hard repository-wide style gate.
 - Do not define DDD entity/value-object policy, framework mixin rules, or package/module layout policy.
+
+# Validation
+Before proceeding, confirm:
+- The class is behavior-oriented (not mainly a data carrier or model construct)
+- The class orientation and inheritance topology are clear enough to apply rules
+
+**SOFT FAIL** — ask and wait before continuing:
+- Class orientation is unclear (behavior vs data carrier) → ask whether to apply class-design rules or redirect to `python-model-selection`
+- Inheritance topology is ambiguous and collision risk for name mangling cannot be assessed → ask before recommending `__double_leading_underscore`
+
+**BLOCKED** — stop and redirect:
+- The main decision is whether the type should be `Enum`, `dataclass`, `ABC`, or `Protocol` → redirect to `python-model-selection`
+- The task is DDD layering, framework-specific base classes, or plugin systems → out of scope for this skill
+
+# Failure Handling
+- **Missing Context**: if class orientation, public-surface intent, or inheritance topology are unknown, ask once clearly before applying defaults.
+- **Ambiguous Requirement**: if the stated goal conflicts with class-design boundaries (e.g., the class is clearly a data carrier), name the conflict, propose redirecting to `python-model-selection`, and wait for confirmation.
+- **Execution Limitation**: if the task is outside scope (e.g., DDD layering, naming policy, testing style), stop and redirect to the appropriate skill.
 
 # Local references
 - `examples.md`: class-shape examples, anti-patterns, factory/property choices, name-mangling notes, and split signals

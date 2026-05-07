@@ -1,6 +1,29 @@
 ---
 name: python-package-layout
 description: Design or review conservative Python package layouts with `src/`, `pyproject.toml`, clear library-vs-CLI placement, and tests that exercise packaged code rather than local-path accidents.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - whether the package is library-only, CLI-enabled, or both
+  - the import package name and any differing distribution name
+  - whether the package ships data files or optional dependency extras
+  - where tests should live relative to the packaged code
+  - whether the repository currently relies on flat-root execution or ad-hoc scripts
+outputs:
+  - a review-ready package-layout rule set or design recommendation
+  - default placement rules for source packages, tests, CLI entrypoints, package data, and extras
+  - local reference and branching examples for normal cases and handoff cases
+use_when:
+  - designing or reviewing the directory layout of a reusable Python package
+  - deciding whether code belongs under src/<package_name>/, tests/, a CLI module, or a non-package script
+  - deciding how pyproject.toml should anchor package metadata, entry points, package data, and extras
+  - repairing a package layout that works only because local execution happens from the repo root
+do_not_use_when:
+  - the main question is package public exports, __all__, or deep-import policy; use python-module-boundaries
+  - the main question is Enum / dataclass / ABC / Protocol choice; use python-model-selection
+  - the main question is custom error hierarchy or exception translation; use python-error-handling
+  - the task is to scaffold or retrofit an actual repository end-to-end; use python-project-init-greenfield or python-project-retrofit
+  - the preferred path is a namespace-package or no-__init__.py design
 ---
 
 # Purpose
@@ -45,10 +68,19 @@ Do not use this skill when:
 - default placement rules for source packages, tests, CLI entrypoints, package data, and extras
 - local reference and branching examples for normal cases and handoff cases
 
-# Verification
+# Validation
+Before proceeding, confirm:
 - confirm importable code lives under `src/<package_name>/` and the package is regular, with `__init__.py`
 - confirm `pyproject.toml` is the single package/distribution anchor for metadata, entry points, extras, and package-data declarations
 - confirm reusable logic is not trapped in scripts or `__main__.py`, and tests do not depend on repo-root import accidents
+
+**SOFT FAIL** — ask and wait before continuing:
+- Whether the package is library-only, CLI-enabled, or both is unstated → ask before applying default layout rules
+- Whether the repository currently uses flat-root execution or ad-hoc scripts is unclear → ask before recommending `src/` migration steps
+
+**BLOCKED** — stop and redirect:
+- The main question is package public exports, `__all__`, or deep-import policy → redirect to `python-module-boundaries`
+- The task is to scaffold or retrofit an actual repository end-to-end → redirect to `python-project-init-greenfield` or `python-project-retrofit`
 
 # Boundaries
 - Do not define package public export policy, `__all__`, or deep-import rules.
@@ -57,6 +89,11 @@ Do not use this skill when:
 - Do not define exception hierarchy, translation, or propagation rules.
 - Do not turn this into a greenfield scaffold or retrofit execution workflow.
 - Do not treat namespace packages as the first-draft default path.
+
+# Failure Handling
+- **Missing Context**: if package type (library-only vs CLI-enabled), distribution name, or test placement are unknown, ask once clearly before applying default layout rules.
+- **Ambiguous Requirement**: if the stated goal conflicts with package-layout scope (e.g., the task is really about public export policy or end-to-end scaffolding), name the conflict and redirect to the appropriate skill.
+- **Execution Limitation**: if the layout involves namespace packages or no-`__init__.py` designs, stop and note the out-of-scope condition.
 
 # Local references
 - `reference.md`: default layout skeleton, `pyproject.toml` anchor rules, and split signals

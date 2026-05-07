@@ -20,20 +20,51 @@ It is optimized for three equal jobs:
     ├── agent-skill-creator/
     ├── agent-skill-reviewer/
     ├── agent-skill-template/
+    ├── business-intent-alignment/
+    ├── business-to-technical-translation/
+    ├── copilot-instructions-init/
     ├── git-branch-naming/
     ├── git-commit-convention/
     ├── git-post-merge-workflow/
     ├── git-release-management/
+    ├── plan-creator/
+    ├── plan-reviewer/
+    ├── plan-step-tracker/
     ├── python-api-signature/
+    ├── python-async-await/
+    ├── python-blueprint-authoring/
+    ├── python-blueprint-review/
     ├── python-class-design/
+    ├── python-code-review/
     ├── python-comprehensions/
+    ├── python-context-management/
     ├── python-control-flow/
+    ├── python-data-model-methods/
+    ├── python-decorators/
+    ├── python-descriptors-attribute-access/
+    ├── python-docstrings/
     ├── python-error-handling/
+    ├── python-generators-iterators/
+    ├── python-implementation-review/
+    ├── python-library-architecture/
     ├── python-model-selection/
     ├── python-module-boundaries/
     ├── python-naming/
+    ├── python-operator-overloading/
+    ├── python-package-layout/
+    ├── python-plan-authoring/
+    ├── python-plan-review/
+    ├── python-pre-commit/
+    ├── python-project-init-greenfield/
+    ├── python-project-retrofit/
+    ├── python-pyproject-toolconfig/
+    ├── python-retrofit-plan-authoring/
+    ├── python-retrofit-plan-review/
+    ├── python-serialization-boundaries/
+    ├── python-tdd-test-authoring/
     ├── python-testing-pytest/
-    └── python-type-hints-strict/
+    ├── python-type-hints-strict/
+    └── sense-env-scaffold/
 ```
 
 ## Repository rules
@@ -130,6 +161,35 @@ inside a skill folder unless the repository spec gives them a fixed role.
   - `MINOR`: new stable skills or backward-compatible capabilities
   - `PATCH`: non-breaking fixes and wording corrections
 
+## Schema v2 migration — complete
+
+As of version `0.48.0`, all **45 stable skills** in this library are fully
+schema v2 compliant. The migration is considered closed and final.
+
+Schema v2 updates applied across every skill include:
+
+- complexity-gated sections aligned to the canonical `SKILL.md` contract
+- risk-appropriate validation signals in `Trigger / When to use` and `Boundaries`
+- concise positive and negative examples required in every `SKILL.md`
+- `reference.md` or `examples.md` companion file required per skill
+- local file roles explicitly declared in `Local references`
+
+The migration covered all seven tiers:
+
+| Tier | Description | Skills |
+| --- | --- | --- |
+| 1 | Python Planning / Review | 9 |
+| 2 | Python Implementation / Code-modification | 5 |
+| 3 | Python Helper / Reference | 20 |
+| 4 | Git Workflow / Review / Commit | 3 |
+| 5 | Git Helper | 1 |
+| 6 | Other — high-risk | 5 |
+| 7 | Other — low-risk | 2 |
+| **Total** | | **45** |
+
+The final deferred-skill closure was completed via PR #63 before this release.
+Full migration history is tracked in `files/migration-tracker.md`.
+
 ## Guides
 
 Process documentation and workflow guidance for repository operations:
@@ -147,16 +207,16 @@ Process documentation and workflow guidance for repository operations:
 | `agent-skill-creator` | creates new repo-compliant, single-purpose skills with complexity classification, risk-appropriate validation, and explicit local-file roles |
 | `agent-skill-reviewer` | reviews skills for complexity-gated sections, YAML-body alignment, risk-appropriate validation, severity-labeled findings, and lifecycle compliance |
 | `agent-skill-template` | provides the canonical template with complexity-gated sections and risk-based validation guidance |
-| `business-intent-alignment` | collects and aligns business requirements, applying Socratic questioning and extreme-boundary checking to ensure a measurable, contradiction-free intent baseline |
-| `business-to-technical-translation` | translates requirements into technical specification, feasibility checks, and architecture-compliance guidance, surfacing conflicts and cost-of-realization warnings |
-| `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions |
-| `git-branch-naming` | names or repairs development branches with semantic prefixes and migration guidance |
+| `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines at `analysis/<topic>/requirements.md` through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
+| `business-to-technical-translation` | translates frozen business baselines into technical specs with feasibility checks, architecture-compliance analysis, cost-of-realization warnings, and rollback-to-alignment triggers |
+| `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with stale-fact and overwrite-choice hard stops |
+| `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
 | `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
 | `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
-| `plan-creator` | creates repo-visible topic plans with strict workflow, artifact, and stable-library timing contracts |
-| `plan-reviewer` | independently reviews repo-visible topic plans before execution, returning structured JSON verdicts against workflow and plan-authoring rules |
-| `plan-step-tracker` | queries step status (pending/done) in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when incomplete |
+| `plan-creator` | creates repo-visible topic plans with canonical workflow transitions, analysis-layer routing, exact artifact paths, and stable-library timing contracts |
+| `plan-reviewer` | independently reviews repo-visible topic plans against workflow contracts and returns fixed-schema JSON verdicts before execution |
+| `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when incomplete |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
 | `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
@@ -190,8 +250,8 @@ Process documentation and workflow guidance for repository operations:
 | `python-code-review` | reviews Python code quality across 7 dimensions (typing, lint, readability, error handling, anti-patterns, test quality, observability) with tool auto-detection and ordering gate after implementation-review |
 | `python-serialization-boundaries` | defines Python serialization boundaries as semantic translation gates for API, database, and message payloads, including missing/null intent preservation, type normalization, deep conversion, and asymmetric input/output contracts |
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
-| `python-pyproject-toolconfig` | Tool sections template + apply script |
-| `sense-env-scaffold` | scaffolds environmental-constraint check scripts with JSON manifest output |
+| `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
+| `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.

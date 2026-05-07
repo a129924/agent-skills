@@ -1,6 +1,32 @@
 ---
 name: python-generators-iterators
 description: Choose clear Python iteration patterns. Use this when deciding whether code should return a concrete collection versus a generator, or when designing generator functions, generator expressions, and custom iterator classes.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - the collection being iterated or the work being performed
+  - whether the collection is large, infinite, or expensive to compute
+  - whether the caller needs to iterate once or multiple times
+  - whether the iteration has side effects or dependencies on internal state
+  - whether readability benefits from lazy evaluation or eager collection
+outputs:
+  - a decision on whether a function should return a concrete collection or a generator
+  - clear choice between generator function, generator expression, and custom iterator class
+  - explicit documentation of exhaustion and side-effect expectations
+  - a code review guide for iteration patterns
+use_when:
+  - deciding whether a function should return a concrete list or a generator
+  - choosing between a generator function, a generator expression, and a custom iterator class
+  - reviewing yield and yield from patterns for readability and correctness
+  - designing iteration behavior for single-pass versus multi-pass expectations
+  - deciding when to implement __iter__ and __next__ protocol
+  - reviewing iterator exhaustion and side effects on repeated iteration
+do_not_use_when:
+  - the main task is async iteration, async generators, or async for; use python-async-await
+  - the main task is control-flow branching; use python-control-flow
+  - the main task is choosing between Enum, dataclass, ABC, or Protocol; use python-model-selection
+  - the main task is package/module boundary design; use python-module-boundaries
+  - the main task is deep test design for lazy evaluation; use python-testing-pytest
 ---
 
 # Purpose
@@ -87,16 +113,34 @@ Do not use this skill when:
 - explicit documentation of exhaustion and side-effect expectations
 - a code review guide for iteration patterns
 
-# Verification
+# Validation
 
-- if the output is a generator, verify the caller iterates once or handles
-  exhaustion correctly
-- if `yield` or `yield from` is used, verify the logic is simpler than a
-  concrete loop
-- if a custom iterator is implemented, verify the `__iter__` and `__next__`
-  protocol serves a real purpose such as reset capability or state management
-- any iteration with side effects is documented and visible at the call site
-- generator expressions stay simple; complex logic uses generator functions
+Before proceeding, confirm:
+- **Caller iteration contract known**: does the caller iterate once, multiple times, or partially?
+- **Side effects documented**: are any side effects in the iterator (I/O, database queries) visible or documented?
+- **Collection size and cost understood**: is the dataset large, infinite, or expensive to compute, or small and bounded?
+
+**SOFT FAIL** — ask and wait before continuing:
+- Caller's iteration ownership is unclear (once vs multiple passes) → cannot safely recommend generator vs concrete collection; ask before proceeding
+- Side effects exist but are undocumented → ask how to surface them before recommending a `yield`-based design
+- Collection size is unknown → ask whether lazy evaluation or eager collection is appropriate for this context
+
+**BLOCKED** — stop and redirect:
+- The main task involves async iteration, `async for`, or async generators → redirect to `python-async-await`
+- The main task is control-flow branching logic → redirect to `python-control-flow`
+
+# Failure Handling
+
+## Missing Context
+- If caller iteration contract, side-effect documentation, or collection characteristics cannot be determined, mark output as INCOMPLETE and list the missing information.
+
+## Ambiguous Requirement
+- If blocking: stop and ask whether the caller needs single-pass or multi-pass iteration before recommending a generator.
+- If non-blocking: proceed with the conservative default (concrete collection) and document the assumption.
+
+## Execution Limitation
+- State the limitation explicitly.
+- Do not invent an iteration pattern that cannot be justified from available context.
 
 # Red Flags
 

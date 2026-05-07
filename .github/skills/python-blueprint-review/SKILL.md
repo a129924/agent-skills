@@ -1,6 +1,29 @@
 ---
 name: python-blueprint-review
 description: Review an authored greenfield `blueprint.md` contract against the locked blueprint v1 schema before `python-project-init-greenfield` execution begins.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+  - destructive_action
+inputs:
+  - target blueprint.md path
+  - active skill-library root used to validate Required Skills
+  - locked blueprint v1 review rules already consumed by python-project-init-greenfield
+  - concrete repository facts needed to judge greenfield-versus-retrofit lane fit
+outputs:
+  - exactly one machine-consumable JSON verdict object
+  - verdict field — approved or needs-rework
+  - blocking_issues array — concrete contract failures with failing section and required fix
+use_when:
+  - a drafted greenfield blueprint.md already exists and needs review before execution
+  - the workflow needs a domain-specific check for blueprint v1 section order, exact Required Skills, structural locatability, and greenfield lane fit
+  - the expected output is a review verdict with blocking issues rather than blueprint authoring or project initialization
+do_not_use_when:
+  - the task is to author or repair the blueprint; use python-blueprint-authoring
+  - the task is to execute a valid blueprint; use python-project-init-greenfield
+  - the task is to review a skill folder, topic plan, or implementation diff
+  - the repository is clearly retrofit-shaped and needs a retrofit contract instead of greenfield blueprint review
 ---
 
 # Purpose
@@ -56,6 +79,37 @@ Do not use this skill when:
 - `verdict`: `approved` or `needs-rework`
 - `blocking_issues`: concrete contract failures with the failing section and required fix
 - reroute guidance only as part of a blocking issue fix when the blueprint belongs in another lane
+
+# Validation
+
+## Required Checks
+- `blueprint.md` is provided and locatable before review begins
+- all six locked schema v1 sections are present in exact order: Project Overview → Required Skills → Toolchain Expectation → Structural Invariants → Quality Thresholds → Acceptance Criteria
+- `## Acceptance Criteria` starts with a parseable `yaml [sensing-assertions]` fenced block immediately under the heading (no prose before it)
+- every sensing assertion includes `kind`, `target`, and `expected`
+- every sensing assertion `kind` is within the v1 supported subset: `path_exists`, `path_type`, `command_available`
+- no placeholder values remain in required fields
+- every required skill name matches a real current-library directory name exactly (no case, `-`, or `_` normalization)
+
+## Quality Checks (best effort)
+- naming consistency — module names and skill references use consistent case convention throughout the blueprint
+- dependency version specificity — no bare `latest` or unpinned version ranges in Toolchain Expectation or Quality Thresholds
+
+## On Soft Fail
+- mark the review as INCOMPLETE
+- do not emit `approved`; emit `needs-rework`
+- list which schema sections are missing, out of order, or incomplete as blocking issues with `fix` guidance
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if `blueprint.md` is not provided or cannot be located at the stated path, stop and ask for the correct path before proceeding; do not attempt a partial review
+
+## Ambiguous Requirement
+- if a blueprint section is structurally present but semantically ambiguous, record it as a warning inside `blocking_issues` with a concrete `fix` note; do not block approval solely for non-schema ambiguity unless the executor would need to guess to proceed
+
+## Execution Limitation
+- if locked blueprint v1 reference files (e.g., `references/blueprint-v1-review-checks.md`) cannot be read, note the limitation explicitly in the verdict; proceed using the schema rules embedded in this SKILL.md and the `# Process` steps
 
 # Verification
 - confirm the review stays inside blueprint-contract review scope

@@ -1,6 +1,26 @@
 ---
 name: python-plan-review
 description: Review a Python *.plan.md for executability — verifying all 13 required sections, decision completeness, step precision, test specificity, and validation coverage before implementation begins.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+inputs:
+  - the target *.plan.md file path
+  - "[optional] the project pyproject.toml, Makefile, or README path — only needed when checking whether a Validation Commands reference is resolvable"
+outputs:
+  - "structured verdict: approved | needs-rework | insufficient-context"
+  - "blocking_issues list — each item names the section, the concrete problem, and the required fix"
+use_when:
+  - a drafted Python *.plan.md already exists and needs review before implementation
+  - the workflow needs a check that the plan is complete, unambiguous, and executable
+  - the expected output is a structured verdict with per-section blocking issues
+do_not_use_when:
+  - the task is to author or repair the plan; use python-plan-authoring instead
+  - the task is to review code, a PR diff, or an implementation against a plan — use python-implementation-review
+  - the task is to review Python code quality — use python-code-review
+  - the plan has not yet been drafted
+  - the input is a skill folder, topic plan, blueprint, or retrofit-plan contract
 ---
 
 # Purpose
@@ -169,6 +189,59 @@ blocking_issues:
     issue: Plan text is truncated; sections below line 45 cannot be evaluated.
     fix: Provide the complete *.plan.md and re-run the review.
 ```
+
+# Validation
+
+## Required Checks
+- all 13 required sections are present in the document (Goal, Non-goals, Current
+  Context, Requirements, Decisions, Public Contract / API Changes, Affected Files /
+  Modules, Implementation Steps, Test Plan, Validation Commands, Risks, Rollback Plan,
+  Open Questions)
+- Decisions section addresses all 7 required decision topics (module/package placement,
+  public API, interface changes, breaking changes, new dependencies,
+  error-handling strategy, typing strategy)
+- Non-goals contains ≥3 explicit "will not" items
+- Implementation Steps are numbered and each references a concrete file, module, or
+  component by name
+- Test Plan names all 5 required categories: happy path, invalid input, edge case,
+  regression, backward compatibility
+- Validation Commands name specific runnable commands or explicitly reference a project
+  config file
+- Risks and Rollback Plan each contain at least one concrete item
+- no Open Question is explicitly marked as blocking implementation start
+
+## Quality Checks (best effort)
+- Risks and Rollback Plan items are concrete and actionable, not generic placeholders
+- Open Questions have named owners or a stated resolution path
+- Decisions rationale is present where "yes" or "no" alone would leave the executor guessing
+
+## On Soft Fail
+- mark the review as INCOMPLETE
+- return a best-effort verdict on every section that could be assessed
+- list each unassessable section explicitly in `blocking_issues` with
+  `issue: Section could not be fully evaluated` and `fix: Provide complete content`
+- do not block output; surface findings even when context is partial
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if the plan document is not provided or cannot be located, stop and
+  ask for the file path before proceeding; do not attempt a review against an absent
+  document
+
+## Ambiguous Requirement
+- if a plan section is present but critically ambiguous (e.g., a Decisions entry
+  that names the topic but gives no resolution), treat it as a soft-fail item
+- list the item in `needs-rework` findings with the exact section name and location
+  so the author can find and fix it without guessing
+
+## Execution Limitation
+- if codebase files referenced in the plan (e.g., named source files in
+  Implementation Steps) cannot be inspected, record the constraint as a
+  `blocking_issues` entry (section: environment, issue: named file could not be
+  inspected, fix: provide readable file or confirm path before re-review)
+- review only what is present in the plan text; do not fabricate inferred content
+  to fill gaps
 
 # Verification
 - confirm the input is a `*.plan.md`, not code or a PR diff

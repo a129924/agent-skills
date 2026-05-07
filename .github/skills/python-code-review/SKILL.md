@@ -1,6 +1,29 @@
 ---
 name: python-code-review
 description: Review Python code quality across typing, lint, readability, error handling, anti-patterns, test quality, and observability. Use this after python-implementation-review has already approved the implementation against the plan.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+inputs:
+  - Python source files under review (or git diff)
+  - Project tooling config (pyproject.toml, Makefile, README.md, CONTRIBUTING.md) — absence acceptable
+  - Confirmation that python-implementation-review has already approved the implementation
+outputs:
+  - verdict: approved | needs-rework
+  - tooling_detected: detected tools or "generic fallback"
+  - findings: per-dimension list with severity, location, issue, and fix
+use_when:
+  - A Python implementation has already passed python-implementation-review
+  - A code review must assess quality independent of plan alignment
+  - A PR is being evaluated for merge readiness on quality grounds
+do_not_use_when:
+  - python-implementation-review has not yet run or has returned needs-rework
+  - The task is to compare code against a plan document (use python-implementation-review)
+  - The task is only about naming conventions (use python-naming)
+  - The task is only about type hints in isolation (use python-type-hints-strict)
+  - The task is only about test structure in isolation (use python-testing-pytest)
+  - The task is only about error handling in isolation (use python-error-handling)
 ---
 
 # Purpose
@@ -180,6 +203,39 @@ findings:
 
 Each finding includes `severity`, `location`, `issue`, and `fix`.
 Dimensions with no findings are emitted as empty lists `[]`.
+
+# Validation
+
+## Required Checks
+
+- Code diff or source files must be provided; the review cannot proceed without reviewable content.
+- Confirmation that `python-implementation-review` has already approved this implementation must be present before any dimension is assessed.
+
+## Quality Checks (best effort)
+
+- All 7 quality dimensions are reviewed: typing, lint, readability, error handling, anti-patterns, test quality, observability.
+- All findings are recorded with severity, location, issue, and fix — even when not blocking.
+- Detected tooling is recorded and used to calibrate severity (e.g., strict-mode escalation for `pyright strict`).
+- Dimensions with no findings are emitted as empty lists `[]`, not omitted.
+
+## On Soft Fail
+
+- If code is not provided: mark the review INCOMPLETE; list which axes could not be assessed; do not emit a verdict.
+- If only some files are available (e.g., test files omitted): note the gap explicitly in the findings; review available code only.
+
+# Failure Handling
+
+## Missing Context
+
+BLOCKED — if no code diff or file content is provided, stop immediately and request the missing input before proceeding. Do not emit a partial verdict.
+
+## Ambiguous Requirement
+
+If code is present but surrounding context (project conventions, caller intent) is unclear: note the assumption explicitly in the output and proceed. Do not block; flag any finding that depends on the assumed context with an `info`-level note.
+
+## Execution Limitation
+
+If referenced test files, dependency modules, or configuration files cannot be inspected: state the limitation explicitly in the output; review only the code that is available; do not fabricate findings for unseen code.
 
 # Boundaries
 

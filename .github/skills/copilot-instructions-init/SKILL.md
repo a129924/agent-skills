@@ -1,6 +1,34 @@
 ---
 name: copilot-instructions-init
 description: Generate or refresh a target project's `.github/copilot-instructions.md` from current sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - code_modification
+use_when:
+  - a target project already has current sensed facts and needs formal `.github/copilot-instructions.md` content
+  - a greenfield project has moved past the placeholder stage and facts now exist
+  - a retrofit or structural refresh changed project truth and the instructions file must be updated
+  - the task is to align target-project instructions with current facts, installed skills, and plan contracts without inventing unsupported tooling
+do_not_use_when:
+  - required facts are missing, stale, or still being sensed
+  - the task is to scaffold a greenfield baseline, retrofit structure, or modify sensing scripts
+  - the task is to edit this repository's own `.github/copilot-instructions.md`, `README.md`, or `VERSION`
+  - an existing target-project instructions file is materially different and the human has not chosen overwrite, keep, or manual merge
+inputs:
+  - the target repository root
+  - a current sensed-facts snapshot for toolchain, installed skills, and project structure / entrypoints
+  - stale-check fingerprints for Git `HEAD`, `pyproject.toml` / `uv.lock`, and `.github/skills/` summary
+  - installed skill inventory for the target project
+  - any applicable plan, blueprint, or retrofit contract
+  - the human request or intent description
+  - the current target `.github/copilot-instructions.md`, if present
+  - explicit human direction when overwrite or manual merge is required
+outputs:
+  - one generated or refreshed target-project `.github/copilot-instructions.md`
+  - a hard-stop result when facts are stale, missing, conflicting, or unsupported
+  - an explicit overwrite / keep / manual-merge choice request when existing instructions are materially different
+  - an update-mode semantic consistency result when the task is refresh rather than first greenfield generation
 ---
 
 # Purpose
@@ -62,8 +90,8 @@ Do not use this skill when:
 10. Return the result, any hard-stop reason, and any required human follow-up without claiming approval beyond the generated instructions.
 
 # Examples
-- Positive: After sensing confirms uv, installed skills, and current entrypoints, replace a greenfield placeholder with `.github/copilot-instructions.md` containing `## Project Truth`, `## Governance`, and `## Implementation Rules`, then run the post-write semantic consistency check only for update or retrofit mode.
-- Negative: Guess a generic instructions file when toolchain facts are missing, merge materially different manual content without asking, or honor a human request for Poetry when sensed facts still show uv.
+- **Positive**: After sensing confirms uv, installed skills, and current entrypoints, replace a greenfield placeholder with `.github/copilot-instructions.md` containing `## Project Truth`, `## Governance`, and `## Implementation Rules`, then run the post-write semantic consistency check only for update or retrofit mode.
+- **Negative**: Guess a generic instructions file when toolchain facts are missing, merge materially different manual content without asking, or honor a human request for Poetry when sensed facts still show uv.
 
 # Outputs
 - one generated or refreshed target-project `.github/copilot-instructions.md`
@@ -100,6 +128,37 @@ Do not use this skill when:
 - Do not invent unsupported tools, skills, commands, layouts, or entrypoints.
 - Do not silently merge materially different existing instructions.
 - Do not bypass the human double-check gate when intent conflicts with sensed facts.
+
+# Validation
+
+## Required Checks
+- HARD STOP: if any required fact category is missing (toolchain, installed skills, project structure / entrypoints), stop and require re-sensing before proceeding
+- HARD STOP: if any stale-check fingerprint has changed since the last sensing snapshot (Git `HEAD`, `pyproject.toml` / `uv.lock`, `.github/skills/` summary), stop and require re-sensing
+- HARD STOP: if human intent conflicts with sensed facts and the human has not explicitly specified which source governs, stop and ask
+- BLOCKED: if an existing `.github/copilot-instructions.md` is materially different from the intended output, stop and present overwrite / keep / manual-merge choices before proceeding
+
+## Quality Checks
+- generated file always contains `## Project Truth`, `## Governance`, and `## Implementation Rules`
+- generated rules mention only toolchains, skills, and layouts that current facts support
+- update or retrofit mode includes a post-write semantic consistency check against current manifests and facts
+- greenfield first generation does not add an extra re-sensing requirement after the initial write
+
+## On Soft Fail
+- mark output as INCOMPLETE if facts are partially available but do not cover all required categories; do not silently downgrade to a generic template
+- if the stale check detects a changed fingerprint, surface which fingerprint changed and block rather than continuing with potentially stale facts
+
+# Failure Handling
+
+## Missing Context
+- HARD STOP — if toolchain facts, installed skill inventory, or project structure facts are missing, stop before drafting; do not fall back to a generic or placeholder instructions file
+
+## Ambiguous Requirement
+- if human intent claims a toolchain that sensed facts do not confirm, stop and ask which source governs; do not honor intent over facts without explicit human direction
+- if the existing instructions file cannot be cleanly categorized as managed, unmanaged, or mixed, surface the ambiguity and present the overwrite / keep / manual-merge choice rather than guessing
+
+## Execution Limitation
+- if sensing cannot be re-run in the current environment, stop and report the limitation; do not continue with stale facts
+- if a post-write semantic consistency check fails in update or retrofit mode, report the inconsistency and mark the output INCOMPLETE rather than leaving potentially false instructions in place
 
 # Local references
 - `examples.md`: branching scenarios for greenfield, retrofit refresh, stale facts, overwrite conflicts, and missing-fact hard blocks

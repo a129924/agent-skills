@@ -1,6 +1,28 @@
 ---
 name: python-docstrings
 description: Write clear, contract-first docstrings using Google Style format with explicit intent and boundaries
+complexity: low
+risk_profile: []
+inputs:
+  - public or private method/class/function signature with type hints
+  - explicit code-adjacent context (parameter names, return types, error types, module/class role)
+  - business contract signals (preconditions, postconditions, error paths, domain semantics)
+outputs:
+  - a complete Google Style docstring following the contract-first philosophy
+  - clear one-liner summarizing intent
+  - Args / Returns / Raises sections stating the contract
+use_when:
+  - writing or reviewing public API docstrings (classes, public methods, module-level functions, dataclass fields)
+  - deciding when a private helper method needs more than a one-liner
+  - choosing between traditional Raises: vs business-return patterns
+  - documenting semantic intent without guessing at hidden business rationale
+  - capturing error semantics and field-level contracts in structured data
+do_not_use_when:
+  - choosing type hint shapes (Optional vs Union) — use python-type-hints-strict
+  - deciding whether to use a dataclass, ABC, or enum — use python-model-selection
+  - defining naming conventions — use python-naming
+  - framework-specific auto-docs (FastAPI, Pydantic, SQLAlchemy) are the focus
+  - writing inline comments on algorithms or control flow
 ---
 
 # Python Docstrings
@@ -148,6 +170,7 @@ A complete Google Style docstring following the contract-first philosophy:
 
 ## Local references
 
+- **examples.md**: Full annotated positive and negative scenarios covering contract-first, semantic-intent, and error-path decisions
 - **reference.md**: Navigation overview; lists split reference files and their roles
 - **references/google-style-template.md**: Google Style structure reference and format guidelines
 - **references/semantic-intent.md**: How to derive semantic intent from explicit signals; fallback rules; anti-pattern examples

@@ -1,6 +1,31 @@
 ---
 name: python-blueprint-authoring
 description: Author a review-ready greenfield `blueprint.md` contract for a new or baseline-only Python repository, reusing the locked blueprint v1 schema already consumed by `python-project-init-greenfield`.
+complexity: high
+risk_profile:
+  - ambiguity_sensitive
+  - multi_agent_handoff
+  - destructive_action
+inputs:
+  - target repository or project name and proof that the lane is truly greenfield or baseline-only
+  - project purpose and baseline scope for Project Overview
+  - exact required skill names that already exist in the current library
+  - concrete toolchain choices and versions for Toolchain Expectation
+  - concrete packages, paths, entrypoints, and other locatable structure for Structural Invariants
+  - measurable quality targets and concrete sensing assertions for Quality Thresholds and Acceptance Criteria
+outputs:
+  - review-ready greenfield blueprint.md using the locked blueprint v1 section order
+  - stop-and-ask feedback when required skills are missing, structure is abstract, or the request is in the wrong lane
+  - a contract that python-project-init-greenfield can consume without schema translation or guessed locators
+use_when:
+  - a new or baseline-only Python repository needs its first review-ready blueprint.md
+  - the task is to author or repair a greenfield blueprint before execution starts
+  - the contract must stay inside the locked blueprint v1 shape already consumed by python-project-init-greenfield
+do_not_use_when:
+  - the repository already has meaningful structure, migration pressure, or retrofit conflict surfaces; use python-retrofit-plan-authoring
+  - the task is to execute a valid blueprint; use python-project-init-greenfield
+  - the task is to review or approve an existing blueprint
+  - the request lacks tool choices, verifiable acceptance targets, or locatable structural details that cannot be derived safely from explicit intent or the repository name
 ---
 
 # Purpose
@@ -76,6 +101,43 @@ Do not use this skill when:
 - a review-ready greenfield `blueprint.md` using the locked blueprint v1 section order
 - exact stop-and-ask feedback when required skills are missing, structure is abstract, or the request is in the wrong lane
 - a contract that `python-project-init-greenfield` can consume without schema translation or guessed locators
+
+# Validation
+
+## Required Checks
+- all six blueprint v1 sections are present in exact order: Project Overview → Required Skills → Toolchain Expectation → Structural Invariants → Quality Thresholds → Acceptance Criteria
+- every schema v1 field is populated with concrete, executor-usable values; no section is left empty or abstract
+- no TBD placeholder or abstract style words (e.g. "modern", "sensible", "clean") appear in any locked field
+- `## Acceptance Criteria` starts with a parseable `yaml [sensing-assertions]` block immediately below the heading
+- every sensing assertion includes `kind`, `target`, and `expected`
+- every named required skill matches a real current-library directory name exactly
+
+## Quality Checks (best effort)
+- naming conventions are consistent across package names, paths, and entrypoints
+- toolchain dependency choices are justified or accompanied by rationale notes
+- `## Project Overview` is concise and hides no missing structural decisions behind general prose
+- sensing assertions cover the main structural invariants declared in `## Structural Invariants`
+
+## On Soft Fail
+- mark blueprint as INCOMPLETE at the top of the draft
+- list every missing or abstract section explicitly
+- do not block output; deliver the partial draft with gaps flagged so the reviewer can act
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if project intent, package name, or key structural decisions are not provided and cannot be safely derived from explicit context, stop and ask before proceeding
+- list the specific missing inputs explicitly; do not fabricate locators, package names, or sensing assertions to fill gaps
+
+## Ambiguous Requirement
+- note the assumption explicitly as a sub-bullet under an existing section of the blueprint (e.g., under `## Implementation Notes`)
+- proceed with best-effort draft using the stated assumption
+- flag the assumption clearly so the reviewer and `python-project-init-greenfield` consumer can evaluate it before handoff
+
+## Execution Limitation
+- if the schema v1 reference (`references/blueprint-contract.md`) cannot be read, note the limitation explicitly in the draft
+- fall back to the known locked section order and block placement rules embedded in this skill's Process
+- do not invent new sections or omit required ones to work around the limitation
 
 # Verification
 - confirm the section order is exactly Project Overview -> Required Skills -> Toolchain Expectation -> Structural Invariants -> Quality Thresholds -> Acceptance Criteria

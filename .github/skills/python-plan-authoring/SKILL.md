@@ -1,6 +1,34 @@
 ---
 name: python-plan-authoring
 description: Create an executable Python implementation plan that freezes scope, contracts, decisions, affected files, tests, and validation commands before coding begins. Not a todo list — an implementation contract that executor can follow and reviewer can verify.
+complexity: high   # creates multi-section plans that gate execution; required sections follow
+risk_profile:
+  - ambiguity_sensitive   # missing input fundamentally changes plan scope
+  - multi_agent_handoff   # output consumed by plan-reviewer, then executor
+inputs:
+  - feature or change intent with scope
+  - relevant codebase context (modules, packages, public APIs)
+  - all 7 required decision answers
+  - at least 3 Non-goals
+  - measurable requirements for the change
+  - test strategy signals
+  - project validation commands or config reference
+  - any open questions the author cannot resolve alone
+outputs:
+  - "*.plan.md with all 13 required sections in order"
+  - frozen decisions, affected files, test plan, and validation commands
+  - stop-and-ask questions when required information is missing
+use_when:
+  - Python feature, refactor, or bug fix needs a frozen contract before coding
+  - change touches more than one file or module
+  - multiple interfaces will be modified
+  - decision records are required
+  - reviewer must verify completed work against a written contract
+do_not_use_when:
+  - change is trivial and isolated (typo, single constant rename)
+  - task is to execute or review an existing plan
+  - no Python code is involved
+  - request is for a generic project management plan unrelated to Python implementation
 ---
 
 # Purpose
@@ -148,6 +176,42 @@ This plan must be returned for rework before any coding begins.
 - frozen decisions, affected files, test plan, and validation commands recorded before coding begins
 - explicit stop-and-ask questions when required information is missing
 - a contract that executor can follow step-by-step and reviewer can verify against
+
+# Validation
+
+## Required Checks
+- All 13 required sections are present and in order
+- `Decisions` section addresses all 7 required items (no TBD placeholders in contract-critical fields)
+- `Non-goals` lists at least 3 items
+- `Implementation Steps` reference specific files and executable actions
+- `Test Plan` covers all 5 categories: happy path, invalid input, edge case, regression, backward compatibility
+- `Validation Commands` are present or explicitly reference a project config file
+
+## Quality Checks (best effort)
+- `Risks` names a concrete risk, not a placeholder
+- `Rollback Plan` names specific files and revert method
+- `Open Questions` either lists items with owners or explicitly states `None`
+- Step granularity is sufficient for a reviewer to verify completion without ambiguity
+
+## On Soft Fail
+- mark output plan as INCOMPLETE
+- list which section or decision point is missing or vague
+- continue with best-effort draft of all remaining sections
+- do not block output if only soft conditions are unmet
+
+# Failure Handling
+
+## Missing Context
+- BLOCKED — if any of the 4 stop-and-ask conditions are triggered (missing Decisions, Non-goals, Validation Commands, or vague Steps): stop, list missing items, ask user before drafting
+- mark any drafted section that relies on missing context as INCOMPLETE
+
+## Ambiguous Requirement
+- if ambiguity is blocking (would change module placement, API shape, or breaking-change decision): stop and ask before proceeding
+- if ambiguity is non-blocking: proceed with stated assumption, list it explicitly in the plan's Open Questions section
+
+## Execution Limitation
+- if codebase context is unavailable: state the limitation explicitly; use placeholder file paths clearly marked as `<to be confirmed>`
+- do not invent module names, signatures, or paths the user has not provided
 
 # Boundaries
 - Do not execute the plan.

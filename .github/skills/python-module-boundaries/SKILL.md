@@ -1,6 +1,27 @@
 ---
 name: python-module-boundaries
 description: Design or review regular Python package and module boundaries with explicit public surfaces, disciplined re-exports, safe imports, and clear internal-module contracts.
+complexity: medium
+risk_profile: [ambiguity_sensitive]
+inputs:
+  - whether the package is a regular package with `__init__.py`
+  - the intended public import paths
+  - which modules are implementation detail only
+  - whether imports stay within one local scope or cross a clearer subpackage boundary
+  - whether the package has import-time setup, compatibility re-exports, or circular dependencies
+outputs:
+  - a review-ready Python module-boundary rule set or review guide
+  - defaults for package gateways, module exports, import style, and import-time safety
+  - local examples for public-surface patterns, anti-patterns, edge cases, and split signals
+use_when:
+  - designing or reviewing a Python package's public import surface
+  - deciding what should be re-exported through `__init__.py`
+  - deciding whether a module is public, internal, too broad, or too side-effectful at import time
+  - reviewing deep imports, wildcard imports, circular imports, or boundary leaks across subpackages
+do_not_use_when:
+  - the main task is DDD layering, repository architecture, or framework-specific project structure
+  - the main task is strict type-hint syntax, API-signature design, or ordinary class internals
+  - the package is a namespace-package or no-`__init__.py` layout and the task is mainly about that structure
 ---
 
 # Purpose
@@ -51,6 +72,24 @@ Do not use this skill when:
 - Do not define strict typing syntax, API-signature rules, or class-internal design rules.
 - Do not treat namespace packages as first-draft in-scope; only flag them and hand off.
 - Do not claim `approved` or `stable`.
+
+# Validation
+Before proceeding, confirm:
+- The package uses a regular layout with `__init__.py` (namespace packages are out of scope)
+- The intended public import surface and which modules are internal are known or can be inferred
+
+**SOFT FAIL** — ask and wait before continuing:
+- Whether the package is a regular package or a namespace/no-`__init__.py` layout is unclear → ask before applying gateway rules
+- Whether a circular import is type-only vs a runtime cycle is unclear → ask before recommending a specific fix path
+
+**BLOCKED** — stop and redirect:
+- The package is explicitly a namespace package or no-`__init__.py` layout and the task is mainly about that structure → note the limitation and redirect
+- The main task is DDD layering, service architecture, or framework-specific project structure → redirect to the appropriate architectural skill
+
+# Failure Handling
+- **Missing Context**: if the public surface, internal module boundaries, or import patterns are unknown, ask once clearly before applying defaults.
+- **Ambiguous Requirement**: if the stated goal conflicts with module-boundary scope (e.g., the question is really about DDD layering), name the conflict and redirect.
+- **Execution Limitation**: if the task involves namespace packages or framework-specific layouts, stop and note the out-of-scope condition.
 
 # Local references
 - `examples.md`: gateway patterns, internal-module rules, import-side-effect anti-patterns, circular-import fixes, script/test edge cases, and deprecated re-export examples
