@@ -13,12 +13,12 @@
 |---|---|---|---|---|
 | 1 | Python Planning / Review | 9 | 9 | ✅ complete |
 | 2 | Python Implementation / Code-modification | 5 | 4 | ✅ complete (4/5; python-testing-pytest deferred) |
-| 3 | Python Helper / Reference | 20 | 0 | 🔲 pending |
-| 4 | Git Workflow / Review / Commit | 3 | 0 | 🔲 pending |
+| 3 | Python Helper / Reference | 20 | 20 | ✅ complete |
+| 4 | Git Workflow / Review / Commit | 3 | 3 | ✅ complete |
 | 5 | Git Helper | 1 | 0 | 🔲 pending |
 | 6 | Other 高風險 | 5 | 0 | 🔲 pending |
 | 7 | Other 低風險 | 2 | 0 | 🔲 pending |
-| **Total** | | **45** | **13** | 🔄 In Progress |
+| **Total** | | **45** | **36** | 🔄 In Progress |
 
 ---
 
@@ -63,26 +63,26 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `python-naming` | — | — | — | — | 🔲 pending | |
-| `python-docstrings` | — | — | — | — | 🔲 pending | |
-| `python-type-hints-strict` | — | — | — | — | 🔲 pending | |
-| `python-control-flow` | — | — | — | — | 🔲 pending | |
-| `python-comprehensions` | — | — | — | — | 🔲 pending | |
-| `python-generators-iterators` | — | — | — | — | 🔲 pending | |
-| `python-context-management` | — | — | — | — | 🔲 pending | |
-| `python-async-await` | — | — | — | — | 🔲 pending | |
-| `python-decorators` | — | — | — | — | 🔲 pending | |
-| `python-descriptors-attribute-access` | — | — | — | — | 🔲 pending | |
-| `python-data-model-methods` | — | — | — | — | 🔲 pending | |
-| `python-operator-overloading` | — | — | — | — | 🔲 pending | |
-| `python-class-design` | — | — | — | — | 🔲 pending | |
-| `python-api-signature` | — | — | — | — | 🔲 pending | |
-| `python-module-boundaries` | — | — | — | — | 🔲 pending | |
-| `python-library-architecture` | — | — | — | — | 🔲 pending | |
-| `python-package-layout` | — | — | — | — | 🔲 pending | |
-| `python-error-handling` | — | — | — | — | 🔲 pending | |
-| `python-serialization-boundaries` | — | — | — | — | 🔲 pending | |
-| `python-model-selection` | — | — | — | — | 🔲 pending | |
+| `python-naming` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-docstrings` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | PR #59 reviewed; 7 BLOCKERs fixed |
+| `python-type-hints-strict` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-control-flow` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-comprehensions` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-generators-iterators` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-context-management` | A+ | medium | — | ✅ approved | ✅ done | |
+| `python-async-await` | A+ | medium | — | ✅ approved | ✅ done | |
+| `python-decorators` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-descriptors-attribute-access` | A+ | medium | — | ✅ approved | ✅ done | |
+| `python-data-model-methods` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-operator-overloading` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-class-design` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-api-signature` | A+ | medium | — | ✅ approved | ✅ done | |
+| `python-module-boundaries` | A+ | medium | — | ✅ approved | ✅ done | |
+| `python-library-architecture` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `python-package-layout` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-error-handling` | A+ | low | — | ✅ approved | ✅ done | |
+| `python-serialization-boundaries` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `python-model-selection` | A+ | low | — | ✅ approved | ✅ done | |
 
 ---
 
@@ -93,9 +93,9 @@ PR target: `feature/skill-migration-v1`
 
 | Skill | Mode | Complexity | Risk Profile | Reviewer Verdict | Status | Notes |
 |---|---|---|---|---|---|---|
-| `git-commit-convention` | — | — | — | — | 🔲 pending | |
-| `git-post-merge-workflow` | — | — | — | — | 🔲 pending | |
-| `git-release-management` | — | — | — | — | 🔲 pending | |
+| `git-commit-convention` | A+ | medium | ambiguity_sensitive | ✅ approved | ✅ done | |
+| `git-post-merge-workflow` | A+ | medium | destructive_action, multi_agent_handoff, external_tooling | ✅ approved | ✅ done | |
+| `git-release-management` | A+ | high | destructive_action, ambiguity_sensitive, external_tooling | ✅ approved | ✅ done | PR #58 reviewed; 5 fixes applied (C1-C5) |
 
 ---
 
