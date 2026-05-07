@@ -90,6 +90,7 @@ Creator must ensure YAML metadata aligns with body behavior for both skills.
 | tier-7 plan | `plan/tier-7-other-low-risk/tier-7-other-low-risk.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | business-intent-alignment | `.github/skills/business-intent-alignment/SKILL.md` | creator | schema v2 upgrade |
 | plan-step-tracker | `.github/skills/plan-step-tracker/SKILL.md` | creator | schema v2 upgrade |
+| plan-step-tracker reference | `.github/skills/plan-step-tracker/reference.md` | creator | preserved CLI contract and fallback guidance |
 
 **Artifact path notes**:
 - This topic does **not** modify `README.md`, `VERSION`, or `files/migration-tracker.md`.

@@ -3,11 +3,12 @@
 ## Canonical file and marker rules
 
 - The tracked file path is `plan/<topic>/<topic>.step.md`.
-- Only checkbox lines that match `- [.]` are relevant to this skill.
-- Marker interpretation is fixed:
+- The Python CLI parses only lines that match the regex `^\- \[(.)\](.*)`.
+- Marker interpretation is fixed for accepted checkbox markers:
   - `[X]` = done
   - `[ ]` = pending
   - `[x]` = pending and warning-worthy
+- Any other single character inside the brackets still matches the parser, emits a warning, and is treated as pending.
 - This skill is read-only; it reports declared checkbox state and does not repair formatting.
 
 ## Python CLI contract
@@ -36,6 +37,12 @@ Error contract:
 
 Use grep only when the Python CLI cannot run.
 
+Output format note:
+
+- grep preserves the original leading `- ` prefix from the `.step.md` line
+- the Python CLI normalizes matching lines to `[X] foo` / `[ ] foo` / `[x] foo`
+- if a caller needs grep output to resemble the CLI contract, normalize it explicitly with `sed 's/^- //'`
+
 ```bash
 # all parsed checkbox lines
 grep '^\- \[.\]' plan/<topic>/<topic>.step.md
@@ -45,6 +52,9 @@ grep '^\- \[[ x]\]' plan/<topic>/<topic>.step.md
 
 # completed lines
 grep '^\- \[X\]' plan/<topic>/<topic>.step.md
+
+# normalized fallback output that more closely matches the Python CLI format
+grep '^\- \[.\]' plan/<topic>/<topic>.step.md | sed 's/^- //'
 ```
 
 Blocking fallback example:
