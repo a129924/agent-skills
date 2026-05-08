@@ -138,7 +138,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 
 ## Skill schema v2 migration — complete
 
-As of version `0.50.0`, all **46 stable skills** in this library are fully
+As of version `0.50.1`, all **46 stable skills** in this library are fully
 schema v2 compliant. This statement covers the skill-schema migration only; it
 does not mean repository path migration is complete. The skill-schema migration
 is considered closed and final.
