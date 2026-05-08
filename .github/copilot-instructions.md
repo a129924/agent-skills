@@ -13,10 +13,18 @@ Python package.
 - Review skills with `agent-skill-reviewer` before treating them as stable.
 
 ## Canonical policy owner
-The canonical definition of a compliant Skill Folder lives in this file.
+This file is the GitHub/Copilot-specific always-on guidance mirror for this
+repository.
+
+Governance and repository positioning authority live in `AGENTS.md` and
+`docs/repo-positioning.md`.
 
 Ownership model:
-- `.github/copilot-instructions.md` owns the policy
+- `AGENTS.md` owns governance rules
+- `docs/repo-positioning.md` owns current state, target architecture, and
+  migration boundary
+- `.github/copilot-instructions.md` mirrors that guidance as GitHub/Copilot
+  always-on instructions
 - `README.md` summarizes it for humans
 - `agent-skill-template` mirrors it in reusable form
 - `agent-skill-creator` applies it during drafting
@@ -24,11 +32,14 @@ Ownership model:
 
 ## Always-on rules
 - Focus on GitHub Agent Skills only.
-- Store project skills under `.github/skills/<skill-name>/`.
+- For governance and positioning questions, follow `AGENTS.md` and
+  `docs/repo-positioning.md`.
+- During the current transition workflow, store project skills under
+  `.github/skills/<skill-name>/`.
 - Keep every skill as self-contained and copy-friendly as possible.
 - Prefer small, single-purpose skills over broad helper bundles.
-- Treat `.github/copilot-instructions.md` as always-on guidance and
-  `.github/skills/*/SKILL.md` as task-specific instructions.
+- Treat `.github/copilot-instructions.md` as GitHub/Copilot always-on guidance
+  and `.github/skills/*/SKILL.md` as task-specific instructions.
 
 ## Required skill shape
 Each stable skill directory should contain:
