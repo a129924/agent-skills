@@ -1,7 +1,12 @@
 # agent-skills
 
-A personal-first GitHub repository for collecting, creating, and reviewing
-reusable Agent Skills.
+This repository is moving toward `skills/` as the canonical skill source.
+
+During transition, `.github/skills/` remains the current Copilot active
+authored and reviewed workflow path.
+
+See [docs/repo-positioning.md](docs/repo-positioning.md) for the full current
+state, target architecture, and migration boundary.
 
 ## What this repository is
 This repository is an Agent Skills workbench.
@@ -14,58 +19,23 @@ It is optimized for three equal jobs:
 
 ## Layout
 ```text
+AGENTS.md
+docs/
 .github/
-├── copilot-instructions.md
-└── skills/
-    ├── agent-skill-creator/
-    ├── agent-skill-reviewer/
-    ├── agent-skill-template/
-    ├── business-intent-alignment/
-    ├── business-to-technical-translation/
-    ├── copilot-instructions-init/
-    ├── git-branch-naming/
-    ├── git-commit-convention/
-    ├── git-post-merge-workflow/
-    ├── git-release-management/
-    ├── plan-creator/
-    ├── plan-reviewer/
-    ├── plan-step-tracker/
-    ├── python-api-signature/
-    ├── python-async-await/
-    ├── python-blueprint-authoring/
-    ├── python-blueprint-review/
-    ├── python-class-design/
-    ├── python-code-review/
-    ├── python-comprehensions/
-    ├── python-context-management/
-    ├── python-control-flow/
-    ├── python-data-model-methods/
-    ├── python-decorators/
-    ├── python-descriptors-attribute-access/
-    ├── python-docstrings/
-    ├── python-error-handling/
-    ├── python-generators-iterators/
-    ├── python-implementation-review/
-    ├── python-library-architecture/
-    ├── python-model-selection/
-    ├── python-module-boundaries/
-    ├── python-naming/
-    ├── python-operator-overloading/
-    ├── python-package-layout/
-    ├── python-plan-authoring/
-    ├── python-plan-review/
-    ├── python-pre-commit/
-    ├── python-project-init-greenfield/
-    ├── python-project-retrofit/
-    ├── python-pyproject-toolconfig/
-    ├── python-retrofit-plan-authoring/
-    ├── python-retrofit-plan-review/
-    ├── python-serialization-boundaries/
-    ├── python-tdd-test-authoring/
-    ├── python-testing-pytest/
-    ├── python-type-hints-strict/
-    └── sense-env-scaffold/
+└── skills/                      # current Copilot active workflow path
+skills/                          # intended canonical skill source
+└── ...
 ```
+
+## Positioning Summary
+
+- `AGENTS.md` is the governance canonical source.
+- `skills/` is the intended canonical skill source / target architecture.
+- `.github/skills/` remains the current Copilot active authored/reviewed
+  workflow path during transition.
+- `.<platform>/skills/...` is the future projection / adapter / compatibility
+  mirror layer, not source of truth.
+- external installer repositories or tools own fetch / install / sync / deploy.
 
 ## Repository rules
 Every stable skill should:
@@ -83,8 +53,10 @@ Each skill folder uses:
   would become too broad
 
 ## Canonical ownership
-- `.github/copilot-instructions.md` is the canonical source for the compliant
-  Skill Folder definition
+- `AGENTS.md` is the governance canonical source
+- `skills/` is the intended canonical skill source / target architecture
+- `.github/skills/` remains the current Copilot active workflow path during
+  transition
 - `README.md` is the human summary
 - `agent-skill-template` mirrors the structure
 - `agent-skill-creator` applies the structure
@@ -255,5 +227,5 @@ Process documentation and workflow guidance for repository operations:
 | `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |
 
 ## Notes
-- Use `.github/copilot-instructions.md` for always-on repository guidance.
+- Use `AGENTS.md` for governance guidance.
 - Use `.github/skills/<skill-name>/SKILL.md` for task-specific instructions.
