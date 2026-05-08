@@ -163,7 +163,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 
 ## Schema v2 migration — complete
 
-As of version `0.49.0`, all **46 stable skills** in this library are fully
+As of version `0.50.0`, all **46 stable skills** in this library are fully
 schema v2 compliant. The migration is considered closed and final.
 
 Schema v2 updates applied across every skill include:
@@ -185,7 +185,7 @@ The migration covered all seven tiers:
 | 5 | Git Helper | 1 |
 | 6 | Other — high-risk | 5 |
 | 7 | Other — low-risk | 2 |
-| **Total** | | **45** |
+| **Total** | | **46** |
 
 The final deferred-skill closure was completed via PR #63 before this release.
 Full migration history is tracked in `files/migration-tracker.md`.
