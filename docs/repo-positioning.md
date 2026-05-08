@@ -14,8 +14,9 @@ Current repository state is:
 - `AGENTS.md` is the governance canonical source.
 - `.github/skills/` remains the current Copilot active authored and reviewed
   workflow path during transition.
-- `skills/` exists as the intended canonical skill-source direction, but this
-  topic does not declare it fully active as the current workflow path.
+- `skills/` is the intended canonical skill-source direction and target
+  architecture, but this topic does not declare it active as the current
+  workflow path.
 - external installer tooling or repositories may consume platform-facing layouts,
   but install orchestration stays outside this repository.
 

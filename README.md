@@ -19,10 +19,13 @@ It is optimized for three equal jobs:
 
 ## Layout
 ```text
+Current workflow layout:
 AGENTS.md
 docs/
 .github/
 └── skills/                      # current Copilot active workflow path
+
+Target architecture after separate migration:
 skills/                          # intended canonical skill source
 └── ...
 ```
@@ -133,12 +136,14 @@ inside a skill folder unless the repository spec gives them a fixed role.
   - `MINOR`: new stable skills or backward-compatible capabilities
   - `PATCH`: non-breaking fixes and wording corrections
 
-## Schema v2 migration — complete
+## Skill schema v2 migration — complete
 
 As of version `0.50.0`, all **46 stable skills** in this library are fully
-schema v2 compliant. The migration is considered closed and final.
+schema v2 compliant. This statement covers the skill-schema migration only; it
+does not mean repository path migration is complete. The skill-schema migration
+is considered closed and final.
 
-Schema v2 updates applied across every skill include:
+Skill-schema v2 updates applied across every skill include:
 
 - complexity-gated sections aligned to the canonical `SKILL.md` contract
 - risk-appropriate validation signals in `Trigger / When to use` and `Boundaries`
@@ -160,7 +165,8 @@ The migration covered all seven tiers:
 | **Total** | | **46** |
 
 The final deferred-skill closure was completed via PR #63 before this release.
-Full migration history is tracked in `files/migration-tracker.md`.
+Full skill-schema migration history is tracked in
+`files/migration-tracker.md`.
 
 ## Guides
 
@@ -228,4 +234,6 @@ Process documentation and workflow guidance for repository operations:
 
 ## Notes
 - Use `AGENTS.md` for governance guidance.
+- Use `docs/repo-positioning.md` for repository positioning and migration
+  boundary.
 - Use `.github/skills/<skill-name>/SKILL.md` for task-specific instructions.
