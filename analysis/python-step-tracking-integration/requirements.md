@@ -171,7 +171,7 @@ Resolved — no schema change needed.
 |----------|---------|
 | Plan has 0 Implementation Steps | step.md has empty `## Implementation Steps` section; check finds no `[ ]`; gate passes |
 | step.md exists but is empty | grep finds no `[ ]`; gate passes (not a false block) |
-| Executor uses lowercase `[x]` | plan-step-tracker warns; grep `^\- \[ \]` won't match; treated as done (acceptable, matches plan-step-tracker spec) |
+| Executor uses lowercase `[x]` | plan-step-tracker warns; the section-scoped pending match for `## Implementation Steps` still catches `^\- \[[ x]\]`; treated as pending and warning-worthy, not done |
 | Plan created before integration (no step.md) | R5: WARN + proceed, no block |
 | step.md format spec changes in future | Both skills reference `plan-step-tracker/reference.md`; format change requires coordinated update |
 | plan-step-tracker CLI absent | R6: grep fallback used; no functional difference |

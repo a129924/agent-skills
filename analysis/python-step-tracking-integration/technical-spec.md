@@ -112,9 +112,10 @@ Insert as new Process step 1.5 in python-implementation-review SKILL.md:
            Exit 0 → all steps done → continue to step 2.
            Exit 1 → pending steps found → go to step 1.5c.
        - Fallback (CLI unavailable — use this by default for portability):
-           PENDING=$(grep -c '^\- \[[ x]\]' plan/<topic>/<topic>.step.md)
-           0 matches → all steps done → continue to step 2.
-           1+ matches → pending steps found → go to step 1.5c.
+           PENDING=$(sed -n '/^## Implementation Steps$/,/^## /p' plan/<topic>/<topic>.step.md | grep -c '^\- \[[ x]\]')
+           0 matches in `## Implementation Steps` → all steps done → continue to step 2.
+           1+ matches in `## Implementation Steps` → pending steps found → go to step 1.5c.
+           `## Workflow Stages` is out of scope for this gate; lowercase `[x]` remains pending.
     c. If pending steps found:
        - Emit the BLOCKED refusal output (see below) and stop.
        - Do NOT produce a YAML verdict block.
