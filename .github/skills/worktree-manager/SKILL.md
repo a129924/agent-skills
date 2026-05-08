@@ -7,10 +7,10 @@ risk_profile:
   - destructive_action
   - external_tooling
 inputs:
-  - requested operation: create, get-worktree, release worktree, or remove worktree
-  - current repository context and target worktree selector when applicable
-  - target branch or worktree name for create
-  - explicit human approval for destructive removal or branch-collision resolution when required
+  - "requested operation: create, get-worktree, release worktree, or remove worktree"
+  - "current repository context and target worktree selector when applicable"
+  - "target branch or worktree name for create"
+  - "explicit human approval for destructive removal or branch-collision resolution when required"
 outputs:
   - create_result
   - get_worktree_result
