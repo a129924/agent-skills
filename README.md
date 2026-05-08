@@ -163,7 +163,7 @@ inside a skill folder unless the repository spec gives them a fixed role.
 
 ## Schema v2 migration — complete
 
-As of version `0.48.0`, all **45 stable skills** in this library are fully
+As of version `0.49.0`, all **46 stable skills** in this library are fully
 schema v2 compliant. The migration is considered closed and final.
 
 Schema v2 updates applied across every skill include:
@@ -252,6 +252,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
 | `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
 | `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
+| `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |
 
 ## Notes
 - Use `.github/copilot-instructions.md` for always-on repository guidance.
