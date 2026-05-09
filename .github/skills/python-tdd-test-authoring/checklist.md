@@ -8,7 +8,7 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 
 - [ ] **1. Plan approval status confirmed**: Plan.md has been reviewed and approved by stakeholder or plan reviewer. Evidence: plan has approval date or reviewer sign-off.
 
-- [ ] **2. D1 classifier decision confirmed**: D1 behavior-change classifier has been run and returned a verdict. If verdict is `trivial` or `skip_with_reason`, skip remaining items and return that verdict immediately. If verdict is `non_trivial`, proceed.
+- [ ] **2. D1 classifier decision confirmed**: D1 behavior-change classifier has been run and returned `d1_verdict: { "verdict": "trivial|non-trivial", "reason": "..." }`. If D1 verdict is `trivial`, return `skip_with_reason` immediately. If D1 verdict is `non-trivial`, proceed.
 
 ---
 
@@ -58,9 +58,10 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
   - Test file(s) exist or will be created in the correct location (e.g., `tests/models/test_user.py`).
   - Test function names follow naming convention (e.g., `test_*` in pytest).
   - Output YAML has all required keys:
-    - `verdict` (one of: `red-tests-ready`, `needs-rework`, `insufficient-context`, `skip_with_reason`)
+    - `verdict` (one of: `red-tests-ready`, `needs-rework`, `insufficient-context`, `skip_with_reason`, `BLOCKED`)
+    - `d1_verdict` (object: `{ "verdict": "trivial|non-trivial", "reason": "..." }`)
     - `test_mapping` (list of objects with keys: `requirement_id`, `test_case_name`, `coverage_category`)
-    - `validation_checks` (object with all 6 checks: d1_decision, requirements_mapped, public_contract_coverage, test_categories_present, expected_initial_status, production_code_modified)
+    - `validation_checks` (object with all checks, including: d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, expected_initial_status, production_code_modified)
     - `issues` (list of strings; empty list if no issues)
     - `next_step` (string describing next action)
   
@@ -70,11 +71,12 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 
 ## Boundary enforcement checks
 
-- [ ] **9. All 4 hard boundaries enforced**:
+- [ ] **9. All 5 hard boundaries enforced**:
   - **Boundary 1 (Never modify production code)**: Verified in item #7 above. If violated → abort.
   - **Boundary 2 (D1 classifier gates verdict)**: If D1 says `trivial`, honor it; do not override to `red-tests-ready`. Return `skip_with_reason` instead.
   - **Boundary 3 (Test mapping must be complete)**: Every requirement has at least one test. If not → `needs-rework`.
   - **Boundary 4 (expected_initial_status must be set)**: Verdict includes expected_initial_status. If missing → `needs-rework`.
+  - **Boundary 5 (non-trivial requires spec.md)**: If D1 is `non-trivial` and `plan/<topic>/<topic>.spec.md` is missing, return `BLOCKED` and route to `python-plan-authoring`.
   
   If any boundary is violated → reflect violation in verdict and issue list.
 
@@ -92,7 +94,7 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 
 **Example success path:**
 - Items 1-9 all ✓
-- D1 verdict: non_trivial
+- D1 verdict: non-trivial
 - No issues found
 - → Return `red-tests-ready`
 
@@ -105,6 +107,11 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 **Example insufficient-context path:**
 - Item 1 ✗ (plan not approved)
 - → Return `insufficient-context`
+
+**Example blocked path:**
+- D1 verdict: non-trivial
+- `plan/<topic>/<topic>.spec.md` missing
+- → Return `BLOCKED` and route to `python-plan-authoring`
 
 ---
 

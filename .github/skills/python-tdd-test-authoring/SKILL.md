@@ -105,7 +105,7 @@ Do not use this skill when:
 
 ## On Soft Fail
 
-- If plan Requirements section is missing or incomplete, mark output as INCOMPLETE.
+- If plan Requirements section is missing or incomplete, return `insufficient-context`.
 - Generate tests only for requirements that are determinable from plan context.
 - List skipped requirements explicitly in the `issues` field of the output YAML.
 
@@ -130,7 +130,7 @@ If a plan step is too vague to produce a testable assertion:
 If existing test files cannot be read (e.g., file system access error):
 - Note the limitation explicitly in the output YAML `issues` field.
 - Generate tests based on plan context only; do not fabricate assertions about existing test structure.
-- Do not block output; proceed with best-effort coverage and mark status as INCOMPLETE.
+- Return `needs-rework` unless all required schema fields can still be completed with sufficient confidence.
 
 # Verification
 
@@ -143,7 +143,7 @@ If existing test files cannot be read (e.g., file system access error):
 # Red Flags
 
 - Plan missing Requirements section or requirements are vague (insufficient-context).
-- D1 verdict is `trivial` but skill is invoked anyway (boundary violation).
+- D1 verdict is `trivial`: this is a valid skip path and must return `skip_with_reason`.
 - D1 verdict is `non-trivial` but `spec.md` is missing (BLOCKED route required).
 - Production code has been modified (hard constraint violated; abort immediately).
 - Fewer than 5 test categories found (needs-rework).
@@ -167,8 +167,8 @@ If existing test files cannot be read (e.g., file system access error):
 
 # Local references
 
-- `examples.md`: 5 detailed scenarios (non_trivial → red-tests-ready, trivial → skip, pass_existing case, needs-rework, insufficient-context) with full inputs/outputs.
+- `examples.md`: 6 detailed scenarios（含 `d1_verdict`、`BLOCKED` 路由、`non-trivial` enum）與完整輸入/輸出。
 - `checklist.md`: 9-item repeatable verification checklist (D1 decision, requirements mapped, public contract, test categories, expected_initial_status, production_code_modified guard, test file structure, YAML schema, boundaries enforced).
-- `references/behavior-change-classifier.md`: D1 classifier rules and examples (non-trivial vs. trivial, feature vs. bug fix, when to skip).
+- `references/behavior-change-classifier.md`: D1 classifier rules and examples (`trivial|non-trivial` only; maps to skill-level verdict paths).
 - `references/codebase-evidence-levels.md`: D2 evidence classification (insufficient, minimal, sufficient context to author tests).
 - `references/atomic-commit-order.md`: Commit sequencing rules (test-first, atomic requirements, enforcement modes).

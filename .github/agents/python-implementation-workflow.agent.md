@@ -42,6 +42,7 @@ user-invocable: true
 2. 判讀 verdict：
    - `approved`：前進 Phase 2
    - `needs-rework`：內部迴路呼叫 `/fleet @.github/skills/python-plan-authoring/` 補修後，重新執行 Phase 1
+   - `insufficient-context`：`BLOCKED`，路由回 `/fleet @.github/skills/python-plan-authoring/` 補齊 plan context 後，重新執行 Phase 1
 
 ---
 
@@ -63,13 +64,29 @@ user-invocable: true
 ## Phase 3 — Implementation Gate
 
 1. 通知 executor 實作並更新 `plan/<topic>/<topic>.step.md`。
-2. 執行 gate：
-   ```bash
-   python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded <topic>
+2. 執行 gate（只檢查 `## Implementation Steps` 區段，不納入 `## Workflow Stages`）：
+    ```bash
+   python -c 'import re,sys,pathlib; t=sys.argv[1]; p=pathlib.Path(f"plan/{t}/{t}.step.md"); s=p.read_text(encoding="utf-8").splitlines(); in_impl=False; pending=[]; seen=False
+for line in s:
+    if line.startswith("## "):
+        in_impl=(line.strip()=="## Implementation Steps")
+    elif in_impl:
+        m=re.match(r"^- \[(.)\]\s*(.+)$", line)
+        if m:
+            seen=True
+            if m.group(1)!="X":
+                pending.append(f"[{m.group(1)}] {m.group(2)}")
+if not seen:
+    print("❌ BLOCKED: no Implementation Steps found"); sys.exit(1)
+if pending:
+    print(f"❌ BLOCKED: {len(pending)} implementation steps pending")
+    [print(x) for x in pending]
+    sys.exit(1)
+print("✅ SUCCESS: all Implementation Steps complete")' <topic>
    ```
 3. exit code 判讀：
-   - `0`：前進 Phase 4
-   - `1`：`BLOCKED`，列出 pending steps，等待 executor 完成後重試
+    - `0`：前進 Phase 4
+    - `1`：`BLOCKED`，列出 pending implementation steps，等待 executor 完成後重試
 
 ---
 
@@ -77,8 +94,11 @@ user-invocable: true
 
 1. 呼叫：`/fleet @.github/skills/python-implementation-review/`
 2. 判讀 verdict：
-   - `approved`：前進 Phase 5
-   - `needs-rework`：通知 executor 回到 Phase 3 修正，之後重新執行 Phase 4（內部迴路）
+    - `approved`：前進 Phase 5
+    - `needs-rework`：通知 executor 回到 Phase 3 修正，之後重新執行 Phase 4（內部迴路）
+    - `BLOCKED`：不可前進，回報阻塞原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 1）
+    - `refusal`：不可前進，回報拒絕原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 1）
+    - 非結構化輸出（缺 `verdict` 或格式不符）：視為 `BLOCKED`，要求同 phase 重跑並補齊結構化結果
 
 ---
 
@@ -86,8 +106,11 @@ user-invocable: true
 
 1. 呼叫：`/fleet @.github/skills/python-code-review/`
 2. 判讀 verdict：
-   - `approved`：workflow `DONE`
-   - `needs-rework`：通知 executor 回到 Phase 3，並走 `Phase 3 → Phase 4 → Phase 5` 內部迴路直到通過
+    - `approved`：workflow `DONE`
+    - `needs-rework`：通知 executor 回到 Phase 3，並走 `Phase 3 → Phase 4 → Phase 5` 內部迴路直到通過
+    - `BLOCKED`：不可前進，回報阻塞原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 4）
+    - `refusal`：不可前進，回報拒絕原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 4）
+    - 非結構化輸出（缺 `verdict` 或格式不符）：視為 `BLOCKED`，要求同 phase 重跑並補齊結構化結果
 
 ---
 
