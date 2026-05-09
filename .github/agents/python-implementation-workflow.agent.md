@@ -64,29 +64,15 @@ user-invocable: true
 ## Phase 3 — Implementation Gate
 
 1. 通知 executor 實作並更新 `plan/<topic>/<topic>.step.md`。
-2. 執行 gate（只檢查 `## Implementation Steps` 區段，不納入 `## Workflow Stages`）：
-    ```bash
-   python -c 'import re,sys,pathlib; t=sys.argv[1]; p=pathlib.Path(f"plan/{t}/{t}.step.md"); s=p.read_text(encoding="utf-8").splitlines(); in_impl=False; pending=[]; seen=False
-for line in s:
-    if line.startswith("## "):
-        in_impl=(line.strip()=="## Implementation Steps")
-    elif in_impl:
-        m=re.match(r"^- \[(.)\]\s*(.+)$", line)
-        if m:
-            seen=True
-            if m.group(1)!="X":
-                pending.append(f"[{m.group(1)}] {m.group(2)}")
-if not seen:
-    print("❌ BLOCKED: no Implementation Steps found"); sys.exit(1)
-if pending:
-    print(f"❌ BLOCKED: {len(pending)} implementation steps pending")
-    [print(x) for x in pending]
-    sys.exit(1)
-print("✅ SUCCESS: all Implementation Steps complete")' <topic>
-   ```
+2. 執行 gate 時一律委派給 `plan-step-tracker`（workflow agent 不自行解析 `step.md`）：
+    - 狀態查詢優先使用既有操作：`read_all`、`read_not_run`。
+    - Gate 判斷使用：
+      ```bash
+      python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded <topic>
+      ```
 3. exit code 判讀：
     - `0`：前進 Phase 4
-    - `1`：`BLOCKED`，列出 pending implementation steps，等待 executor 完成後重試
+    - `1`：`BLOCKED`，依 `plan-step-tracker` 輸出回報 pending steps，等待 executor 完成後重試
 
 ---
 
