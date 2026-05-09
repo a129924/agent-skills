@@ -66,9 +66,9 @@ user-invocable: true
 1. 通知 executor 實作並更新 `plan/<topic>/<topic>.step.md`。
 2. 執行 gate 時一律委派給 `plan-step-tracker`（workflow agent 不自行解析 `step.md`）：
     - 狀態查詢優先使用既有操作：`read_all`、`read_not_run`。
-    - Gate 判斷使用：
+    - Gate 判斷使用（僅掃描 `## Implementation Steps`，不納入 `## Workflow Stages`）：
       ```bash
-      python .github/skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded <topic>
+      python .github/skills/plan-step-tracker/scripts/step_tracker.py check_impl_steps_succeeded <topic>
       ```
 3. exit code 判讀：
     - `0`：前進 Phase 4

@@ -8,10 +8,12 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from step_tracker import (
     parse_steps,
+    parse_impl_steps,
     read_all,
     read_not_run,
     read_success,
     check_all_succeeded,
+    check_impl_steps_succeeded,
 )
 
 
@@ -407,3 +409,183 @@ topic: mixed
         assert steps[0].status == "done"
         assert steps[1].status == "pending"
         assert steps[2].status == "pending"
+
+
+# ---------------------------------------------------------------------------
+# Fixtures shared for section-aware tests
+# ---------------------------------------------------------------------------
+
+SECTIONED_STEP_MD = """\
+---
+topic: sectioned
+phase: plan-authoring
+created: 2025-01-15
+---
+
+# sectioned — Step Tracking
+
+## Workflow Stages
+
+- [X] plan-authoring
+- [X] plan-review
+- [X] tdd-test-authoring
+- [ ] implementation
+- [ ] implementation-review
+- [ ] code-review
+
+## Implementation Steps
+
+- [X] 1. Create module
+- [X] 2. Add tests
+- [ ] 3. Update docs
+"""
+
+SECTIONED_ALL_DONE_IMPL_MD = """\
+---
+topic: sectioned-done
+---
+
+## Workflow Stages
+
+- [X] plan-authoring
+- [ ] implementation-review
+- [ ] code-review
+
+## Implementation Steps
+
+- [X] 1. First step
+- [X] 2. Second step
+"""
+
+SECTIONED_EMPTY_IMPL_MD = """\
+---
+topic: no-impl
+---
+
+## Workflow Stages
+
+- [X] plan-authoring
+- [ ] plan-review
+
+## Implementation Steps
+
+"""
+
+
+class TestParseImplSteps:
+    """Test parse_impl_steps: only parses the Implementation Steps section."""
+
+    def test_ignores_workflow_stages(self, temp_plan_dir):
+        """parse_impl_steps must not include Workflow Stages entries."""
+        topic = "sectioned"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_STEP_MD)
+
+        steps = parse_impl_steps(topic, temp_plan_dir)
+
+        # Only the 3 Implementation Steps should be returned
+        assert len(steps) == 3
+        texts = [s.text for s in steps]
+        assert "1. Create module" in texts
+        assert "2. Add tests" in texts
+        assert "3. Update docs" in texts
+        # Workflow Stages items must not appear
+        assert not any("plan-authoring" in t for t in texts)
+        assert not any("implementation-review" in t for t in texts)
+
+    def test_returns_empty_when_no_impl_section(self, temp_plan_dir):
+        """Return empty list when no ## Implementation Steps heading exists."""
+        topic = "no-section"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        content = "---\ntopic: no-section\n---\n- [X] orphan step\n"
+        (topic_dir / f"{topic}.step.md").write_text(content)
+
+        steps = parse_impl_steps(topic, temp_plan_dir)
+        assert steps == []
+
+    def test_empty_impl_section(self, temp_plan_dir):
+        """Return empty list when Implementation Steps section has no checkboxes."""
+        topic = "no-impl"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_EMPTY_IMPL_MD)
+
+        steps = parse_impl_steps(topic, temp_plan_dir)
+        assert steps == []
+
+    def test_file_not_found(self, temp_plan_dir):
+        """Raise FileNotFoundError when file does not exist."""
+        with pytest.raises(FileNotFoundError):
+            parse_impl_steps("missing", temp_plan_dir)
+
+    def test_status_parsing_in_impl_section(self, temp_plan_dir):
+        """Correctly parses done/pending status within Implementation Steps."""
+        topic = "sectioned"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_STEP_MD)
+
+        steps = parse_impl_steps(topic, temp_plan_dir)
+        done = [s for s in steps if s.status == "done"]
+        pending = [s for s in steps if s.status == "pending"]
+        assert len(done) == 2
+        assert len(pending) == 1
+
+
+class TestCheckImplStepsSucceeded:
+    """Test check_impl_steps_succeeded: only gates on Implementation Steps."""
+
+    def test_succeeds_when_all_impl_steps_done(
+        self, temp_plan_dir, capsys
+    ):
+        """Exit 0 when all Implementation Steps are done, even if Workflow Stages pending."""
+        topic = "sectioned-done"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_ALL_DONE_IMPL_MD)
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "SUCCESS" in captured.out
+
+    def test_blocked_when_impl_step_pending(self, temp_plan_dir, capsys):
+        """Exit 1 and list pending Implementation Steps when any are incomplete."""
+        topic = "sectioned"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_STEP_MD)
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "BLOCKED" in captured.out
+        # Only the pending Implementation Step should appear, not Workflow Stages
+        assert "3. Update docs" in captured.out
+        assert "implementation-review" not in captured.out
+        assert "code-review" not in captured.out
+
+    def test_blocked_when_no_impl_steps_found(self, temp_plan_dir, capsys):
+        """Exit 1 when Implementation Steps section is empty."""
+        topic = "no-impl"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(SECTIONED_EMPTY_IMPL_MD)
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "BLOCKED" in captured.out
+
+    def test_file_not_found(self, temp_plan_dir, capsys):
+        """Exit 1 with error message when step.md does not exist."""
+        result = check_impl_steps_succeeded("missing", temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "not found" in captured.err.lower()
