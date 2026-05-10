@@ -153,6 +153,19 @@ A skill is only complete when it is:
   broadening the old skill.
 - Do not accept a skill into the stable library until the reviewer flow passes.
 
+## Implementation handoff contracts
+- When preparing a prompt for another implementation agent, do not rely on chat
+  memory alone. Name the repo-visible source-of-truth artifacts explicitly
+  (for example `analysis/<topic>/requirements.md`,
+  `analysis/<topic>/technical-spec.md`, and `plan/<topic>/<topic>.plan.md`).
+- When work is expected to happen in a worktree, include the exact worktree path,
+  current branch, intended feature branch, PR target branch, and the allowed file
+  paths to modify. Do not let an implementer infer these from context.
+- Re-state locked decisions, artifact paths, and stop conditions in the
+  implementation prompt so planner intent and implementer execution do not drift.
+- If implementer output conflicts with the frozen plan or analysis artifacts,
+  stop and surface the drift explicitly instead of silently reconciling it.
+
 ## Subagent Role Enforcement
 When working through the skill lifecycle (creator → reviewer → stable library),
 use independent `/fleet` subagents instead of self-performing these roles:
@@ -164,6 +177,9 @@ use independent `/fleet` subagents instead of self-performing these roles:
   feedback, and maintains the integrity of the approval workflow
 - When launching subagents, verify they appear in `/tasks` before continuing; if
   not visible, you have not correctly delegated
+- Loading a skill, paraphrasing what reviewer or creator would do, or claiming a
+  role was delegated is not enough. The creator and reviewer must each exist as
+  visible `/fleet` subagents before work continues.
 
 ## STOP POINT 2 Resume Routing
 After manual merge handoff (STOP POINT 2), route post-merge cleanup and local
@@ -184,6 +200,10 @@ enabling stronger requirement discipline through two pre-plan artifacts:
   benefit from a frozen baseline
 - You want `plan-creator` to operate in strict-mode validation (100% mapping
   between technical-spec and final plan)
+- The topic is a new workflow, agent, or skill that has not been implemented yet
+  and another agent may be asked to execute it later
+- You intend to switch the main agent into an observer / orchestrator role after
+  planning and need repo-visible artifacts for downstream handoff
 
 ### The analysis layer structure
 Create these optional files **before** running `plan-creator`:
@@ -209,3 +229,20 @@ Create these optional files **before** running `plan-creator`:
   measurable, contradiction-free requirement baseline
 - `business-to-technical-translation` — pessimist implementer perspective;
   produces feasibility checks, cost-of-realization warnings, and rollback triggers
+
+## Step-tracking gate semantics
+- If a workflow gate is deciding whether implementation work is complete, it must
+  evaluate only `## Implementation Steps` in `plan/<topic>/<topic>.step.md`.
+- Do not treat `## Workflow Stages` markers as implementation-completion signals
+  for review gates; those stages include future phases and can create false
+  blocking states.
+- When changing step-gate semantics, update the parser / script contract and the
+  corresponding tests together. Do not change only agent prose or plan wording.
+
+## Worktree execution preflight
+- Before implementation starts in a worktree, ensure the worktree is attached to
+  a PR-capable feature branch. Do not begin implementation on `dev`, on a base
+  branch, or on detached HEAD when the task is expected to end in a PR.
+- State the base branch, feature branch, and PR target branch explicitly in the
+  prompt or handoff contract. If branch setup is missing, stop and create or
+  switch to the correct feature branch before continuing.
