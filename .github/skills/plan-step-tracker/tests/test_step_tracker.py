@@ -8,10 +8,13 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 from step_tracker import (
     parse_steps,
+    parse_impl_steps,
     read_all,
     read_not_run,
     read_success,
     check_all_succeeded,
+    check_impl_steps_succeeded,
+    main,
 )
 
 
@@ -407,3 +410,133 @@ topic: mixed
         assert steps[0].status == "done"
         assert steps[1].status == "pending"
         assert steps[2].status == "pending"
+
+
+@pytest.fixture
+def workflow_and_impl_step_file(temp_plan_dir):
+    """Create a .step.md containing both workflow stages and implementation steps."""
+    topic = "workflow-vs-impl"
+    topic_dir = temp_plan_dir / topic
+    topic_dir.mkdir()
+
+    content = """---
+topic: workflow-vs-impl
+---
+
+## Workflow Stages
+- [ ] Plan Review
+- [ ] Code Review
+
+## Implementation Steps
+- [X] Implement feature A
+- [X] Add tests for feature A
+"""
+    (topic_dir / f"{topic}.step.md").write_text(content)
+    return temp_plan_dir, topic
+
+
+class TestImplementationStepsGate:
+    """Test implementation-only gate behavior."""
+
+    def test_parse_impl_steps_only_reads_implementation_section(
+        self, workflow_and_impl_step_file
+    ):
+        """Ignore workflow stage checkboxes when parsing implementation steps."""
+        temp_plan_dir, topic = workflow_and_impl_step_file
+        steps = parse_impl_steps(topic, temp_plan_dir)
+
+        assert len(steps) == 2
+        assert all("feature A" in step.text for step in steps)
+        assert all(step.status == "done" for step in steps)
+
+    def test_check_impl_steps_succeeded_success_ignores_workflow_pending(
+        self, workflow_and_impl_step_file, capsys
+    ):
+        """Workflow stage pending items must not block implementation gate."""
+        temp_plan_dir, topic = workflow_and_impl_step_file
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "SUCCESS" in captured.out
+        assert "implementation steps complete" in captured.out
+
+    def test_check_impl_steps_succeeded_blocked_when_impl_pending(
+        self, temp_plan_dir, capsys
+    ):
+        """Pending implementation items should block gate."""
+        topic = "impl-pending"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+
+        content = """---
+topic: impl-pending
+---
+
+## Workflow Stages
+- [X] Plan Review
+
+## Implementation Steps
+- [X] Done step
+- [ ] Pending step
+"""
+        (topic_dir / f"{topic}.step.md").write_text(content)
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "BLOCKED" in captured.out
+        assert "Pending step" in captured.out
+
+    def test_main_check_impl_steps_succeeded_command_success(
+        self, workflow_and_impl_step_file, monkeypatch, capsys
+    ):
+        """CLI command should dispatch to implementation-only gate."""
+        temp_plan_dir, topic = workflow_and_impl_step_file
+        monkeypatch.chdir(temp_plan_dir.parent)
+        monkeypatch.setattr(
+            sys,
+            "argv",
+            ["step_tracker.py", "check_impl_steps_succeeded", topic],
+        )
+
+        result = main()
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "SUCCESS" in captured.out
+
+    def test_main_check_impl_steps_succeeded_command_blocked(
+        self, temp_plan_dir, monkeypatch, capsys
+    ):
+        """CLI command should return blocked when implementation has pending steps."""
+        topic = "impl-command-blocked"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+
+        content = """---
+topic: impl-command-blocked
+---
+
+## Workflow Stages
+- [X] Plan Review
+
+## Implementation Steps
+- [ ] Pending implementation
+"""
+        (topic_dir / f"{topic}.step.md").write_text(content)
+
+        monkeypatch.chdir(temp_plan_dir.parent)
+        monkeypatch.setattr(
+            sys,
+            "argv",
+            ["step_tracker.py", "check_impl_steps_succeeded", topic],
+        )
+
+        result = main()
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "BLOCKED" in captured.out

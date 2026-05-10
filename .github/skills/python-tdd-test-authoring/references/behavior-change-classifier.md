@@ -29,7 +29,7 @@ The change is trivial if **ALL** of the following are true:
    - Internal refactor with zero observable behavior change (e.g., rename a private variable, extract a helper function).
    - Comment-only or whitespace-only (no functional changes).
 
-**Verdict**: `skip_with_reason: "<reason>"` (e.g., `doc_only`, `config_only`, `internal_refactor`).
+**D1 output**: `{ "verdict": "trivial", "reason": "<reason>" }` (e.g., `doc_only`, `config_only`, `internal_refactor`).
 
 ---
 
@@ -45,7 +45,7 @@ The change is non-trivial if **ANY** of the following are true:
 6. **Refactor with observable behavior change**: Refactor where the external contract changes or new edge cases emerge.
 7. **State or side effect change**: Code now writes to database, filesystem, cache, or other external system in a new way.
 
-**Verdict**: `non_trivial: "<change_type>"` (e.g., `feature`, `bug_fix`, `refactor`, `error_handling`, `api_change`).
+**D1 output**: `{ "verdict": "non-trivial", "reason": "<change_type>" }` (e.g., `feature`, `bug_fix`, `refactor`, `error_handling`, `api_change`).
 
 ---
 
@@ -54,17 +54,17 @@ The change is non-trivial if **ANY** of the following are true:
 ```
 Does the change involve any new public API, new behavior, or bug fixes?
 │
-├─ YES → D1 = non_trivial
+├─ YES → D1 = non-trivial
 │   │ (Classify: feature, bug_fix, refactor, api_change, error_handling, etc.)
 │   └─ Proceed to test authoring
 │
 └─ NO → Is it doc-only, config-only, or internal refactor?
     │
-    ├─ YES → D1 = trivial / skip_with_reason
+    ├─ YES → D1 = trivial
     │   └─ Skip test authoring
     │
     └─ NO → Unclear. Review plan and requirements again.
-        └─ If still unclear, classify as insufficient-context
+        └─ If still unclear, classify as D1 = non-trivial (conservative default)
 ```
 
 ---
@@ -80,7 +80,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - New behavior? YES (user creation logic).
 - Error handling? YES (validation errors for email, password).
 
-**Verdict**: `non_trivial: "feature"`
+**D1 output**: `{ "verdict": "non-trivial", "reason": "feature" }`
 
 **Action**: Require test authoring.
 
@@ -95,7 +95,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - New behavior? NO (type hints are metadata).
 - Bug fix? NO.
 
-**Verdict**: `trivial: "doc_only"`
+**D1 output**: `{ "verdict": "trivial", "reason": "doc_only" }`
 
 **Action**: Skip test authoring.
 
@@ -110,7 +110,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - Behavior changed? YES (previously accepted `" user@example.com "`, now rejects).
 - Bug fix? YES.
 
-**Verdict**: `non_trivial: "bug_fix"`
+**D1 output**: `{ "verdict": "non-trivial", "reason": "bug_fix" }`
 
 **Action**: Require test authoring. Tests must verify the new behavior (rejection of whitespace).
 
@@ -125,7 +125,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - Public behavior changed? NO (create() still works the same).
 - Observable change? NO.
 
-**Verdict**: `trivial: "internal_refactor"`
+**D1 output**: `{ "verdict": "trivial", "reason": "internal_refactor" }`
 
 **Action**: Skip test authoring. Existing tests already cover the behavior.
 
@@ -141,7 +141,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - Config change: trivial on its own.
 - API change? YES (signature changed).
 
-**Overall Verdict**: `non_trivial: "api_change"` (the API change dominates; config is secondary).
+**Overall D1 output**: `{ "verdict": "non-trivial", "reason": "api_change" }` (the API change dominates; config is secondary).
 
 **Action**: Require test authoring for the new `user_ref` parameter path.
 
@@ -156,7 +156,7 @@ Does the change involve any new public API, new behavior, or bug fixes?
 - API changed? NO.
 - Behavior changed? NO (just dependency update).
 
-**Verdict**: `trivial: "dependency_upgrade"`
+**D1 output**: `{ "verdict": "trivial", "reason": "dependency_upgrade" }`
 
 **Action**: Skip test authoring. (Possibly run existing tests to verify compatibility, but no new tests needed.)
 
@@ -166,9 +166,11 @@ Does the change involve any new public API, new behavior, or bug fixes?
 
 1. **When in doubt, classify as non-trivial**. It is safer to author tests and later mark them as "pass_existing" than to skip test authoring for a change that actually needs coverage.
 
-2. **D1 decision gates the verdict in python-tdd-test-authoring skill**. If D1 says `trivial`, the skill must honor it and return `skip_with_reason`. Do not override D1 based on gut feeling.
+2. **D1 decision gates the verdict in python-tdd-test-authoring skill**. If D1 says `trivial`, the skill must honor it and return `skip_with_reason`. If D1 says `non-trivial` but `spec.md` is missing, skill-level verdict must be `BLOCKED` and route to plan-authoring.
 
 3. **D1 is agnostic to test authoring difficulty**. Even if test authoring is complex, if the change is non-trivial, test authoring is required.
+
+4. **`insufficient-context` is a skill-level verdict, not a D1 verdict**. D1 output is always `{ "verdict": "trivial|non-trivial", "reason": "..." }`.
 
 ---
 

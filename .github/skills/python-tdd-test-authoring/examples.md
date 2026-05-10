@@ -1,14 +1,14 @@
 # Examples
 
-This document provides 5 detailed scenarios covering all 3 verdict paths plus edge cases.
+This document provides 6 detailed scenarios covering all verdict paths plus edge cases.
 
 ---
 
-## Scenario 1: non_trivial → red-tests-ready (Feature with complete mapping)
+## Scenario 1: non-trivial → red-tests-ready (Feature with complete mapping)
 
 **Input Context:**
 - Plan.md has been approved by stakeholder.
-- D1 classifier output: `verdict: "non_trivial"`, `change_type: "feature"`.
+- D1 classifier output: `{ "verdict": "non-trivial", "reason": "feature" }`.
 - Plan Requirements:
   - Req#1: Create `UserAccount.create(email, password)` class method; must validate email format.
   - Req#2: Method must hash password using bcrypt before storage.
@@ -40,6 +40,9 @@ This document provides 5 detailed scenarios covering all 3 verdict paths plus ed
 
 ```yaml
 verdict: "red-tests-ready"
+d1_verdict:
+  verdict: "non-trivial"
+  reason: "feature"
 test_mapping:
   - requirement_id: "Req#1"
     test_case_name: "test_create_user_with_valid_email"
@@ -55,7 +58,8 @@ test_mapping:
     coverage_category: "error_cases"
 
 validation_checks:
-  d1_decision: "non_trivial (feature)"
+  d1_decision: "non-trivial (feature)"
+  behavior_contract_source: "spec.md"
   requirements_mapped: true
   public_contract_coverage: true
   test_categories_present: 5
@@ -88,6 +92,9 @@ next_step: "Proceed to implementation. All 4 requirements mapped. 5 test categor
 
 ```yaml
 verdict: "skip_with_reason"
+d1_verdict:
+  verdict: "trivial"
+  reason: "doc_only"
 reason: "doc_only"
 context: "Plan contains only docstring updates. No behavior changes detected. Test authoring not required."
 
@@ -100,11 +107,11 @@ next_step: "Docstring changes approved without test authoring. Return to plan wo
 
 ---
 
-## Scenario 3: pass_existing → red-tests-ready (Pre-existing tests, verified green)
+## Scenario 3: trivial → skip_with_reason (Internal refactor, behavior unchanged)
 
 **Input Context:**
 - Plan.md approved for refactoring.
-- D1 classifier output: `verdict: "non_trivial"`, `change_type: "refactor"` (extract method).
+- D1 classifier output: `{ "verdict": "trivial", "reason": "internal_refactor" }` (extract private method; no observable behavior change).
 - Plan Requirements:
   - Req#1: Extract `_validate_email()` private method from `UserAccount.create()`.
   - Req#2: Behavior of `UserAccount.create()` unchanged; tests must still pass.
@@ -113,42 +120,29 @@ next_step: "Docstring changes approved without test authoring. Return to plan wo
 
 **Process Steps:**
 
-1. D1 verdict is non_trivial (refactor) → proceed.
-2. Map requirements:
-   - Req#1 → `test_create_user_*` (all 6 existing tests exercise `_validate_email` indirectly)
-   - Req#2 → no new tests needed; existing tests confirm behavior unchanged
-3. expected_initial_status: `pass` (existing tests already pass; refactor should keep them passing).
-4. Verify public contract: `UserAccount.create()` signature unchanged → existing tests sufficient.
-5. Test categories: Existing tests cover happy path, 3 error cases, boundary → ✓
-6. Verify production_code_modified: false → ✓
+1. D1 verdict is trivial (`internal_refactor`) → skip test authoring per classifier contract.
+2. Existing 6 passing tests are supporting evidence only; they do not change the skip path.
+3. Verify production_code_modified: false → ✓
 
 **Output YAML:**
 
 ```yaml
-verdict: "red-tests-ready"
-reason: "pass_existing"
-test_mapping:
-  - requirement_id: "Req#1"
-    test_case_name: "test_create_user_with_valid_email (existing)"
-    coverage_category: "happy_path"
-    status: "pass"
-  - requirement_id: "Req#1"
-    test_case_name: "test_create_user_invalid_email_raises_error (existing)"
-    coverage_category: "error_cases"
-    status: "pass"
+verdict: "skip_with_reason"
+d1_verdict:
+  verdict: "trivial"
+  reason: "internal_refactor"
+reason: "internal_refactor"
+context: "Private-method extraction with no observable behavior change. Existing tests remain green; no new RED test authoring required."
+test_mapping: []
 
 validation_checks:
-  d1_decision: "non_trivial (refactor)"
-  requirements_mapped: true
-  public_contract_coverage: true
-  test_categories_present: 5
-  expected_initial_status: "pass"
+  d1_decision: "trivial (internal_refactor)"
   production_code_modified: false
-  refactor_regression_coverage: "confirmed by existing tests"
+  existing_regression_coverage: "confirmed by existing tests"
 
 issues: []
 
-next_step: "Refactor approved. Existing tests cover all requirements. Run full test suite before and after refactor to confirm no regression."
+next_step: "Skip new test authoring. Keep running existing suite before/after refactor to confirm no regression."
 ```
 
 ---
@@ -157,7 +151,7 @@ next_step: "Refactor approved. Existing tests cover all requirements. Run full t
 
 **Input Context:**
 - Plan.md submitted for test authoring.
-- D1 classifier output: `verdict: "non_trivial"`, `change_type: "bug_fix"`.
+- D1 classifier output: `{ "verdict": "non-trivial", "reason": "bug_fix" }`.
 - Plan Requirements:
   - Req#1: Fix bug: `UserAccount.create()` should reject emails with leading/trailing whitespace.
   - Req#2: Error message must include the raw email received.
@@ -167,7 +161,7 @@ next_step: "Refactor approved. Existing tests cover all requirements. Run full t
 
 **Process Steps:**
 
-1. D1 verdict is non_trivial (bug_fix) → proceed.
+1. D1 verdict is non-trivial (bug_fix) → proceed.
 2. Map requirements:
    - Req#1 → `test_create_user_rejects_email_with_leading_whitespace`
    - Req#2 → `test_error_message_includes_raw_email`
@@ -180,6 +174,9 @@ next_step: "Refactor approved. Existing tests cover all requirements. Run full t
 
 ```yaml
 verdict: "needs-rework"
+d1_verdict:
+  verdict: "non-trivial"
+  reason: "bug_fix"
 test_mapping:
   - requirement_id: "Req#1"
     test_case_name: "test_create_user_rejects_email_with_leading_whitespace"
@@ -189,7 +186,8 @@ test_mapping:
     coverage_category: "error_cases"
 
 validation_checks:
-  d1_decision: "non_trivial (bug_fix)"
+  d1_decision: "non-trivial (bug_fix)"
+  behavior_contract_source: "spec.md"
   requirements_mapped: false
   public_contract_coverage: "partial"
   test_categories_present: 2  # missing: boundary (need more edge cases), state, integration
@@ -227,6 +225,9 @@ next_step: "Return to plan review. Clarify Req#3 with specific edge cases. Add e
 
 ```yaml
 verdict: "insufficient-context"
+d1_verdict:
+  verdict: "trivial"
+  reason: "precheck_placeholder_not_from_d1"
 reason: "plan_not_approved"
 test_mapping: []
 
@@ -244,14 +245,50 @@ issues:
 next_step: "Plan must be approved and Requirements must be clarified before test authoring can begin. Contact plan author and stakeholder."
 ```
 
+Note: In this scenario, D1 is not executed. `d1_verdict` is a skill-layer placeholder for schema consistency only, not classifier output.
+
+---
+
+## Scenario 6: BLOCKED (Non-trivial but missing spec.md)
+
+**Input Context:**
+- Plan.md approved.
+- D1 classifier output: `{ "verdict": "non-trivial", "reason": "feature" }`.
+- `plan/<topic>/<topic>.spec.md` is missing.
+
+**Output YAML:**
+
+```yaml
+verdict: "BLOCKED"
+d1_verdict:
+  verdict: "non-trivial"
+  reason: "feature"
+test_mapping: []
+
+validation_checks:
+  d1_decision: "non-trivial (feature)"
+  behavior_contract_source: "missing_spec_md"
+  requirements_mapped: false
+  public_contract_coverage: false
+  test_categories_present: 0
+  expected_initial_status: "unset"
+  production_code_modified: false
+
+issues:
+  - "Missing required plan/<topic>/<topic>.spec.md for non-trivial path."
+
+next_step: "Route to python-plan-authoring to create spec.md, then rerun python-tdd-test-authoring."
+```
+
 ---
 
 ## Summary
 
 - **Scenario 1** (red-tests-ready): Non-trivial feature, complete test_mapping, all 5 categories, production code untouched.
 - **Scenario 2** (skip_with_reason): D1 detects trivial (doc-only) change; skip test authoring entirely (valid outcome).
-- **Scenario 3** (pass_existing): Refactor case; existing tests still pass; no new tests needed but requirements mapped to existing tests.
+- **Scenario 3** (skip_with_reason): Internal refactor classified as trivial; skip new RED test authoring and keep existing regression suite.
 - **Scenario 4** (needs-rework): Vague requirements and incomplete test coverage; returns with specific gaps to fix.
 - **Scenario 5** (insufficient-context): Plan not approved; cannot author tests without approved, clear plan.
+- **Scenario 6** (BLOCKED): D1 is non-trivial but required `spec.md` is missing; route to plan-authoring first.
 
-All 3 verdict paths are covered. Boundaries are enforced (production code modified = abort, D1 trivial = skip, incomplete mapping = needs-rework).
+All verdict paths are covered (`red-tests-ready`, `skip_with_reason`, `needs-rework`, `insufficient-context`, `BLOCKED`). Boundaries are enforced (production code modified = abort, D1 trivial = skip, non-trivial + missing spec = BLOCKED).
