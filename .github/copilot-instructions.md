@@ -36,10 +36,20 @@ Ownership model:
   `docs/repo-positioning.md`.
 - During the current transition workflow, store project skills under
   `.github/skills/<skill-name>/`.
+- Treat `.github/skills/` as the current active authored/reviewed workflow path
+  during transition unless a separate migration topic changes that state.
+- Treat `skills/` as target architecture only in the current runway; do not
+  describe it as the current active workflow path.
 - Keep every skill as self-contained and copy-friendly as possible.
 - Prefer small, single-purpose skills over broad helper bundles.
 - Treat `.github/copilot-instructions.md` as GitHub/Copilot always-on guidance
   and `.github/skills/*/SKILL.md` as task-specific instructions.
+
+## Positioning boundary
+- This runway freezes repository positioning only.
+- Do not treat positioning updates as authorization to perform skill-path
+  migration, platform directory cutover, or creator/reviewer/template contract
+  changes.
 
 ## Required skill shape
 Each stable skill directory should contain:
