@@ -14,7 +14,7 @@ Goal:
 
 Result:
 ```text
-.github/skills/release-note-shortener/
+skills/release-note-shortener/
 ├── SKILL.md
 ├── examples.md
 └── checklist.md
@@ -35,7 +35,7 @@ Goal:
 
 Result:
 ```text
-.github/skills/safe-refactor/
+skills/safe-refactor/
 ├── SKILL.md
 ├── examples.md
 ├── checklist.md
@@ -54,7 +54,7 @@ Goal:
 
 Result:
 ```text
-.github/skills/release-gate-checker/
+skills/release-gate-checker/
 ├── SKILL.md
 ├── examples.md
 └── checklist.md
@@ -72,7 +72,7 @@ Goal:
 
 Result:
 ```text
-.github/skills/simple-naming-rule/
+skills/simple-naming-rule/
 ├── SKILL.md
 └── reference.md
 ```
@@ -89,7 +89,7 @@ Goal:
 
 Result:
 ```text
-.github/skills/policy-auditor/
+skills/policy-auditor/
 ├── SKILL.md
 ├── reference.md
 └── references/
@@ -101,3 +101,15 @@ Why this split passes:
 - the reference material covers more than 3 logical topics
 - each split file has one clear role
 - `Local references` can name each file and explain its job
+
+## Example 7: planning-spine implication is follow-up, not blocker
+
+Goal:
+- draft a skill whose future consumers include planning-spine skills that still
+  reference `.github/skills/`
+
+Result:
+- author the draft under `skills/<skill-name>/`
+- note the downstream planning-spine implication in the handoff
+- do not edit `.github/skills/business-intent-alignment/` or
+  `.github/skills/business-to-technical-translation/` in the same phase
