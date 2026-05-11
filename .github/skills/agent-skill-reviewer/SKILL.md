@@ -44,19 +44,25 @@ Do not use this skill when:
 4. Confirm each optional file or folder has a clear declared role, including each file inside `references/` when that folder exists.
 5. Confirm the skill has one clear responsibility.
 6. Confirm the skill is portable, independent, and self-contained.
-7. Assess whether the skill's validation weight matches its risk, branching, external-tool usage, and downstream impact.
-8. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
-9. If `reference.md` is too broad, require it to be split into `references/`.
-10. If the skill is high complexity or the concise examples are not enough for about 80% of routine usage, require `examples.md`.
-11. If the skill is higher-risk or acts as a gatekeeper, require stronger validation signals or equivalent local guidance that makes misuse harder.
-12. Confirm `complexity` field exists in YAML and matches the skill's actual workflow risk, branching, and downstream impact; escalate if risk tags understate behavior.
-13. Confirm YAML governance metadata (`use_when`, `do_not_use_when`, `inputs`, `outputs`) aligns with body sections and does not contradict them.
-14. Confirm `Validation` section exists for high complexity skills; for medium complexity, confirm it exists when ambiguity would materially change output (per folder-contract.md); confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
-15. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
-16. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
-17. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
-18. Confirm it has an explicit `Trigger / When to use` section.
-19. Return `approved` or `needs-rework` with concrete fixes.
+7. For authoring-target transition topics, confirm the draft lives under
+   `skills/<skill-name>/` as the canonical authoring target and does not claim
+   that `skills/` is already the current active workflow path.
+8. Assess whether the skill's validation weight matches its risk, branching, external-tool usage, and downstream impact.
+9. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
+10. If `reference.md` is too broad, require it to be split into `references/`.
+11. If the skill is high complexity or the concise examples are not enough for about 80% of routine usage, require `examples.md`.
+12. If the skill is higher-risk or acts as a gatekeeper, require stronger validation signals or equivalent local guidance that makes misuse harder.
+13. Confirm `complexity` field exists in YAML and matches the skill's actual workflow risk, branching, and downstream impact; escalate if risk tags understate behavior.
+14. Confirm YAML governance metadata (`use_when`, `do_not_use_when`, `inputs`, `outputs`) aligns with body sections and does not contradict them.
+15. Confirm `Validation` section exists for high complexity skills; for medium complexity, confirm it exists when ambiguity would materially change output (per folder-contract.md); confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
+16. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
+17. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
+18. For transition topics that touch creator / reviewer / template contracts only,
+    treat planning-spine `.github/skills/*` assumptions as downstream follow-up
+    implications unless the inventory already gives explicit blocker evidence.
+19. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
+20. Confirm it has an explicit `Trigger / When to use` section.
+21. Return `approved` or `needs-rework` with concrete fixes.
 
 # Examples
 - Positive: Review a refactoring or release-gating skill whose `SKILL.md` has brief positive and negative examples, whose local files justify stronger validation, and whose `examples.md` covers the complex branches.
@@ -113,6 +119,9 @@ Omit this section when the review is performed as a standalone action.
 - Do not approve a skill that lacks required core files, required examples, or clear local roles.
 - Do not ignore vague triggers or bundled responsibilities.
 - Do not require heavyweight validation on a lightweight skill unless the risk clearly warrants it.
+- Do not fail a creator/reviewer/template transition solely because downstream
+  planning-spine skills still need later follow-up, unless explicit blocker
+  evidence already exists in inventory.
 - Do not author the final implementation directly.
 
 # Local references

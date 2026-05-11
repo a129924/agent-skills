@@ -3,7 +3,7 @@
 Use this as the default starting point for a `review-ready` skill.
 
 ```text
-.github/skills/<skill-name>/
+skills/<skill-name>/
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
@@ -21,6 +21,9 @@ Use this as the default starting point for a `review-ready` skill.
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
+- Treat `skills/<skill-name>/` as the canonical authoring target.
+- Do not interpret this template as promotion or cutover of the current active
+  workflow path.
 
 ## `SKILL.md` skeleton
 

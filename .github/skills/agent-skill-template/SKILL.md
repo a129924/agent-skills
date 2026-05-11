@@ -14,7 +14,8 @@ do_not_use_when:
 ---
 
 # Purpose
-Provide the reference shape for a `review-ready` skill.
+Provide the reference shape for a `review-ready` skill at the canonical
+authoring target.
 
 # Trigger / When to use
 Use this skill when:
@@ -37,7 +38,7 @@ Do not use this skill when:
 1. Read `template.md` and `folder-contract.md`.
 2. Classify the expected validation weight and `complexity` before copying the skeleton: lightweight (low), medium-complexity (medium), or higher-risk (high).
 3. Identify applicable `risk_profile` tags for medium and high complexity skills.
-4. Copy the folder shape and section layout.
+4. Copy the folder shape and section layout for `skills/<skill-name>/`.
 5. Replace placeholders with one clear responsibility.
 6. Add concise positive and negative examples to `SKILL.md`.
 7. Add `reference.md` or `examples.md`.
@@ -47,8 +48,11 @@ Do not use this skill when:
 11. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
 12. Add stronger validation signals only when the skill's risk, branching, tooling, or downstream impact justifies them.
 13. If you add optional files or folders, declare each role in `Local references`.
-14. Stop at `review-ready`.
-15. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
+14. If downstream planning-spine skills or other consumers still assume
+    `.github/skills/`, record that as a follow-up implication instead of
+    editing those surfaces in this phase.
+15. Stop at `review-ready`.
+16. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
 
 # Examples
 - Positive: Use this template to draft a focused skill with concise positive and negative examples in `SKILL.md`, then add stronger verification guidance only when the topic is higher-risk.
@@ -65,6 +69,8 @@ Do not use this skill when:
 - Do not remove the explicit trigger section.
 - Do not depend on repository-global reference files when a local file will do.
 - Do not force heavyweight validation onto a lightweight skill without a clear risk-based reason.
+- Do not treat `.github/skills/` projection, promotion, or runtime/tooling
+  cutover as part of this template.
 - Do not claim `approved` or `stable`.
 
 # Local references
