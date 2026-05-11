@@ -21,9 +21,7 @@ skills/<skill-name>/
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
-- For authoring-target transition topics, treat `skills/<skill-name>/` as the
-  canonical authoring target. For non-transition topics, keep `.github/skills/`
-  as the active authored/reviewed workflow path.
+- Treat `skills/<skill-name>/` as the canonical authoring target.
 - Do not interpret this template as promotion or cutover of the current active
   workflow path.
 
