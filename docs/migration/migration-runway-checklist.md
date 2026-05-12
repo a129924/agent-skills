@@ -14,12 +14,12 @@
   `feat/andrew/copilot-to-codex-migration` first
 - Current Big Feature Branch release version: `0.53.0`
 - Current Big Feature Branch release tag: `v0.53.0`
-- Current checklist snapshot status: `partial-source-of-truth`
+- Current checklist snapshot status: `source-of-truth-complete`
 - Source-of-truth note:
-  - The following requested source artifacts are missing in this worktree:
-    - `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
-  - This checklist does not infer their missing contract contents from evidence
-    artifacts.
+  - The requested runway baseline, phase plans, and downstream evidence
+    artifacts used by this checklist are present in this worktree.
+  - Authority-chain completeness is evaluated from repo-visible artifacts only;
+    evidence still does not replace plan contracts.
 
 ## Phase Status
 
@@ -41,9 +41,9 @@ Notes:
 | Phase / Topic | Purpose | Status | Evidence status | Plan contract status | Working / merge target | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | `positioning-freeze` | Freeze current state, target architecture, and migration boundary wording without active-path cutover | `reflected-in-checklist` | evidence present in frozen docs and phase plan | present | merged into `feat/andrew/copilot-to-codex-migration` | Source-of-truth complete for this checklist |
-| `platform-coupling-inventory` | Inventory path / workflow / artifact / blocker coupling without performing migration | `source-of-truth-incomplete` | evidence present: `docs/migration/platform-coupling-inventory.md` | missing: `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | intended merge target: `feat/andrew/copilot-to-codex-migration` | Evidence cannot replace upstream phase contract |
-| `skill-authoring-path-transition` | Transition creator / reviewer / template contracts only; no full promotion | `reflected-in-checklist` | merged contract-surface changes visible in creator / reviewer / template artifacts | present: `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | Current phase contract is readable; upstream inventory plan contract is still missing, so inherited authority remains partially incomplete |
-| `high-frequency-skill-promotion` | Selectively promote a first wave of high-frequency skills into `skills/` without full-library cutover | `reflected-in-checklist` | evidence present: `docs/migration/high-frequency-skill-promotion.md` and merged `skills/` first-wave results | present: `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | First-wave promotion is complete, but inherited upstream inventory-plan authority is still incomplete |
+| `platform-coupling-inventory` | Inventory path / workflow / artifact / blocker coupling without performing migration | `reflected-in-checklist` | evidence present: `docs/migration/platform-coupling-inventory.md` | present: `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | Authority repair restored the readable upstream phase contract without changing the phase's inventory-only boundary |
+| `skill-authoring-path-transition` | Transition creator / reviewer / template contracts only; no full promotion | `reflected-in-checklist` | merged contract-surface changes visible in creator / reviewer / template artifacts | present: `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | Current phase contract is readable and the upstream inventory plan contract is now readable, so inherited authority is complete for this checklist |
+| `high-frequency-skill-promotion` | Selectively promote a first wave of high-frequency skills into `skills/` without full-library cutover | `reflected-in-checklist` | evidence present: `docs/migration/high-frequency-skill-promotion.md` and merged `skills/` first-wave results | present: `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | First-wave promotion remains selective-only, and inherited upstream inventory-plan authority is now readable |
 
 ## Surface / Skill Status
 
@@ -98,7 +98,7 @@ Frozen boundary status model used here:
 | `FB-04` | Big Feature Branch is `feat/andrew/copilot-to-codex-migration` | `frozen` | `analysis/codex-migration-runway/technical-spec.md` | Phase branches should merge here first |
 | `FB-05` | No direct phase merge to `dev` | `frozen` | `analysis/codex-migration-runway/requirements.md`, `analysis/codex-migration-runway/technical-spec.md` | `dev` stays outside runway phase routing |
 | `FB-06` | inventory, contract transition, runtime/tooling transition, promotion, and installer work must not collapse into one phase | `frozen` | `analysis/codex-migration-runway/requirements.md`, `docs/migration/platform-coupling-inventory.md` | Inventory evidence reinforces this separation |
-| `FB-07` | Evidence cannot replace upstream plan contract | `frozen` | this checklist, plus inventory evidence limitations | Applied because requested source-of-truth set is incomplete |
+| `FB-07` | Evidence cannot replace upstream plan contract | `frozen` | this checklist, plus inventory evidence limitations | Rule remains frozen even though the requested source set is now complete |
 
 ## Authority Chain Checks
 
@@ -120,22 +120,22 @@ Rules:
 | Topic / Chain node | Required plan contract | Evidence artifact | Status | Why it matters | Repair needed |
 | --- | --- | --- | --- | --- | --- |
 | `positioning-freeze` | `plan/positioning-freeze/positioning-freeze.plan.md` | frozen doc changes reflected in governance / positioning artifacts | `complete` | This is the only fully readable phase contract in the requested source set | none |
-| `platform-coupling-inventory` | `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | `docs/migration/platform-coupling-inventory.md` | `missing-upstream-plan` | Inventory evidence exists, but the upstream execution contract is absent, so inherited boundaries and stop conditions cannot be fully verified | add the missing upstream plan contract to the readable source set |
-| `skill-authoring-path-transition` | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged creator / reviewer / template contract changes in the Big Feature Branch | `missing-upstream-plan` | The current phase contract is present, but the inherited upstream inventory plan contract is still missing, so full authority-chain completeness cannot be claimed | add the missing upstream inventory plan contract to the readable source set |
-| `high-frequency-skill-promotion` | `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | `docs/migration/high-frequency-skill-promotion.md` plus merged first-wave `skills/` results | `missing-upstream-plan` | The current phase contract and merged evidence are present, but inherited upstream inventory-plan authority is still incomplete | add the missing upstream inventory plan contract to the readable source set |
-| `platform-coupling-inventory evidence -> downstream use` | upstream plan required separately | `docs/migration/platform-coupling-inventory.md` | `evidence-without-contract` | Evidence cannot replace the upstream phase contract when a later phase inherits dependency handling from inventory work | restore contract + evidence pair |
+| `platform-coupling-inventory` | `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | `docs/migration/platform-coupling-inventory.md` | `complete` | The upstream inventory execution contract is now readable alongside its evidence artifact, so boundaries and stop conditions are verifiable | none |
+| `skill-authoring-path-transition` | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged creator / reviewer / template contract changes in the Big Feature Branch | `complete` | The current phase contract is present and the inherited upstream inventory plan contract is now readable, so full authority-chain completeness can be checked from repo-visible artifacts | none |
+| `high-frequency-skill-promotion` | `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | `docs/migration/high-frequency-skill-promotion.md` plus merged first-wave `skills/` results | `complete` | The current phase contract, merged evidence, and inherited upstream inventory plan contract are all readable in this worktree | none |
+| `platform-coupling-inventory evidence -> downstream use` | upstream plan required separately | `docs/migration/platform-coupling-inventory.md` | `complete` | The contract + evidence pair is now readable, so downstream phases no longer need to inherit inventory evidence without its execution contract | none |
 
 ## Notes
 
 - This checklist was intentionally created only from the readable source-of-truth
   artifacts present in the current worktree.
-- Missing requested source-of-truth artifacts were not reconstructed from memory,
-  branch history, or other worktrees.
+- Requested source-of-truth artifacts are now readable directly in this
+  worktree and do not need reconstruction from memory, branch history, or other
+  worktrees.
 - `skill-authoring-path-transition` is now represented by both its repo-visible
   phase plan and merged contract-surface changes.
 - `high-frequency-skill-promotion` is now represented by its repo-visible phase
   plan, promotion evidence artifact, and merged first-wave `skills/` target
   results.
-- Until the missing upstream inventory plan contract is restored into this
-  worktree, runway-wide status remains partially complete rather than fully
-  authoritative.
+- The restored `platform-coupling-inventory` plan closes the previously known
+  upstream authority gap for this checklist's requested source set.
