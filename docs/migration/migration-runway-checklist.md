@@ -12,11 +12,12 @@
 - Forbidden direct merge branch: `dev`
 - Branch rule: bounded phase branches merge back into
   `feat/andrew/copilot-to-codex-migration` first
+- Current Big Feature Branch release version: `0.52.0`
+- Current Big Feature Branch release tag: `v0.52.0`
 - Current checklist snapshot status: `partial-source-of-truth`
 - Source-of-truth note:
   - The following requested source artifacts are missing in this worktree:
     - `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
-    - `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md`
   - This checklist does not infer their missing contract contents from evidence
     artifacts.
 
@@ -41,7 +42,7 @@ Notes:
 | --- | --- | --- | --- | --- | --- | --- |
 | `positioning-freeze` | Freeze current state, target architecture, and migration boundary wording without active-path cutover | `reflected-in-checklist` | evidence present in frozen docs and phase plan | present | merged into `feat/andrew/copilot-to-codex-migration` | Source-of-truth complete for this checklist |
 | `platform-coupling-inventory` | Inventory path / workflow / artifact / blocker coupling without performing migration | `source-of-truth-incomplete` | evidence present: `docs/migration/platform-coupling-inventory.md` | missing: `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | intended merge target: `feat/andrew/copilot-to-codex-migration` | Evidence cannot replace upstream phase contract |
-| `skill-authoring-path-transition` | Transition creator / reviewer / template contracts only; no full promotion | `source-of-truth-incomplete` | no repo-visible evidence artifact named in requested source set | missing: `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | intended merge target: `feat/andrew/copilot-to-codex-migration` | This phase is tracked, but contract details cannot be confirmed from the requested source set |
+| `skill-authoring-path-transition` | Transition creator / reviewer / template contracts only; no full promotion | `reflected-in-checklist` | merged contract-surface changes visible in creator / reviewer / template artifacts | present: `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | Current phase contract is readable; upstream inventory plan contract is still missing, so inherited authority remains partially incomplete |
 
 ## Surface / Skill Status
 
@@ -65,11 +66,11 @@ Notes:
 
 | Surface / Skill | Surface type | Current role | Current status | Dependency / blocker classification | Owner / next phase | Evidence / contract note |
 | --- | --- | --- | --- | --- | --- | --- |
-| `.github/skills/business-intent-alignment` | planning spine skill | downstream producer / consumer of analysis-layer requirements | `inventory-complete` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence explicitly says tracked dependency and not primary runtime/tooling blocker |
-| `.github/skills/business-to-technical-translation` | planning spine skill | downstream producer / consumer of analysis-layer technical spec | `inventory-complete` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence explicitly says tracked dependency and not primary runtime/tooling blocker |
-| `.github/skills/agent-skill-creator/` | creator contract surface | current authoring-path producer | `inventory-complete` | contract-transition target; workflow + artifact dependency | `skill-authoring-path-transition` | Inventory evidence exists; transition contract source is missing in requested source set |
-| `.github/skills/agent-skill-reviewer/` | reviewer contract surface | current review-path validator | `inventory-complete` | contract-transition target; workflow + artifact dependency | `skill-authoring-path-transition` | Inventory evidence exists; transition contract source is missing in requested source set |
-| `.github/skills/agent-skill-template/` | template contract surface | current scaffold contract source | `inventory-complete` | contract-transition target; workflow + artifact dependency | `skill-authoring-path-transition` | Inventory evidence exists; transition contract source is missing in requested source set |
+| `.github/skills/business-intent-alignment` | planning spine skill | downstream producer / consumer of analysis-layer requirements | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence still applies; no merged transition evidence promoted this skill to blocker status |
+| `.github/skills/business-to-technical-translation` | planning spine skill | downstream producer / consumer of analysis-layer technical spec | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence still applies; no merged transition evidence promoted this skill to blocker status |
+| `.github/skills/agent-skill-creator/` | creator contract surface | current authoring-path producer | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Contract-transition phase is planned and merged; creator surface was updated without declaring active-path cutover |
+| `.github/skills/agent-skill-reviewer/` | reviewer contract surface | current review-path validator | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Reviewer surface was updated and merged in PR #72 as part of the bounded transition phase |
+| `.github/skills/agent-skill-template/` | template contract surface | current scaffold contract source | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Template surface was updated and merged in PR #72 as part of the bounded transition phase |
 | `.github/skills/sense-env-scaffold/` | runtime/tooling surface | executable path dependency | `inventory-complete` | `confirmed-blocker` | future runtime/tooling transition phase | Explicit inventory evidence marks this as runtime/tooling blocker |
 | `.github/skills/plan-step-tracker/` | runtime/tooling surface | executable gate helper path dependency | `inventory-complete` | `confirmed-blocker` | future runtime/tooling transition phase | Explicit inventory evidence marks this as runtime/tooling blocker |
 | `.github/skills/python-project-init-greenfield/` | runtime/tooling surface | generated baseline layout dependency | `inventory-complete` | `confirmed-blocker` | future runtime/tooling transition phase | Explicit inventory evidence marks this as runtime/tooling blocker |
@@ -115,7 +116,7 @@ Rules:
 | --- | --- | --- | --- | --- | --- |
 | `positioning-freeze` | `plan/positioning-freeze/positioning-freeze.plan.md` | frozen doc changes reflected in governance / positioning artifacts | `complete` | This is the only fully readable phase contract in the requested source set | none |
 | `platform-coupling-inventory` | `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | `docs/migration/platform-coupling-inventory.md` | `missing-upstream-plan` | Inventory evidence exists, but the upstream execution contract is absent, so inherited boundaries and stop conditions cannot be fully verified | add the missing upstream plan contract to the readable source set |
-| `skill-authoring-path-transition` | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | no evidence artifact listed in requested source set | `missing-current-plan` | Without the current phase plan contract, writable scope, forbidden paths, and downstream dependency handling rules cannot be verified from source-of-truth | add the missing current phase plan contract to the readable source set |
+| `skill-authoring-path-transition` | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged creator / reviewer / template contract changes in the Big Feature Branch | `missing-upstream-plan` | The current phase contract is present, but the inherited upstream inventory plan contract is still missing, so full authority-chain completeness cannot be claimed | add the missing upstream inventory plan contract to the readable source set |
 | `platform-coupling-inventory evidence -> downstream use` | upstream plan required separately | `docs/migration/platform-coupling-inventory.md` | `evidence-without-contract` | Evidence cannot replace the upstream phase contract when a later phase inherits dependency handling from inventory work | restore contract + evidence pair |
 
 ## Notes
@@ -124,5 +125,8 @@ Rules:
   artifacts present in the current worktree.
 - Missing requested source-of-truth artifacts were not reconstructed from memory,
   branch history, or other worktrees.
-- Until the missing plan contracts are restored into this worktree, runway-wide
-  status remains partially complete rather than fully authoritative.
+- `skill-authoring-path-transition` is now represented by both its repo-visible
+  phase plan and merged contract-surface changes.
+- Until the missing upstream inventory plan contract is restored into this
+  worktree, runway-wide status remains partially complete rather than fully
+  authoritative.
