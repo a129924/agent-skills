@@ -134,23 +134,30 @@ Authority warning:
 ## Status / Allowed Transitions
 
 - **Current**: `planned`
-- **Allowed phase statuses**:
-  - `planned`
-  - `in-progress`
-  - `review-ready`
-  - `approved`
-  - `needs-rework`
-
+- **Execution model**: follow the canonical
+  `creator -> reviewer -> publish -> merge` workflow path for this topic; no
+  repository release action is declared here
 - **Allowed transitions**:
-  - `planned` -> `in-progress`
-  - `in-progress` -> `review-ready`
-  - `review-ready` -> `approved`
-  - `review-ready` -> `needs-rework`
-  - `needs-rework` -> `in-progress`
+  - `planned` -> `creator-in-progress`
+  - `creator-in-progress` -> `review-ready`
+  - `review-ready` -> `reviewer-in-progress`
+  - `reviewer-in-progress` -> `approved`
+  - `reviewer-in-progress` -> `needs-rework`
+  - `needs-rework` -> `creator-in-progress`
+  - `approved` -> `creator-in-progress`
+  - `approved` -> `publish-in-progress`
+  - `publish-in-progress` -> `pr-open`
+  - `publish-in-progress` -> `merged`
+  - `pr-open` -> `needs-rework`
+  - `pr-open` -> `merged`
+  - `merged` -> terminal
 
 Routing notes:
 
 - Merge routing belongs to branch policy, not phase status vocabulary.
+- Active bounded implementation for this topic is limited to the creator /
+  reviewer portion of the canonical workflow plus Main Agent publish / merge
+  routing.
 - If approved, the resulting phase branch merges back into
   `feat/andrew/copilot-to-codex-migration` first.
 - Direct merge from a phase branch to `dev` is not authorized.
@@ -229,7 +236,7 @@ Artifact path notes:
 
 ```md
 你現在在 worktree
-`/Users/andrew/code/python/agent-skills.worktrees/agent-20260512-high-frequency-skill-promotion`
+`<phase worktree path prepared by Main Agent for high-frequency-skill-promotion>`
 中工作。
 
 你的 branch 是：
@@ -332,7 +339,6 @@ stop conditions：
 {
   "verdict": "approved|needs-rework",
   "blocking_issues": [],
-  "selected_wave_validation": [],
   "copilot_feedback_triage": {
     "ADDRESS": [],
     "DISCUSS": [],
