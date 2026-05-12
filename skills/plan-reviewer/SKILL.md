@@ -18,9 +18,9 @@ do_not_use_when:
 inputs:
   - "the target `plan/<topic>/<topic>.plan.md`"
   - "the current workflow contract from `plan/agent-handoff-workflow.md`"
-  - "`.github/skills/plan-creator/reference.md`"
-  - "`.github/skills/plan-creator/checklist.md`"
-  - "`.github/skills/plan-creator/templates/topic-plan-template.md`"
+  - "`skills/plan-creator/reference.md`"
+  - "`skills/plan-creator/checklist.md`"
+  - "`skills/plan-creator/templates/topic-plan-template.md`"
   - "any contextual Copilot feedback, if it exists"
 outputs:
   - "exactly one machine-consumable JSON object with no trailing prose"
@@ -48,9 +48,9 @@ Do not use this skill when:
 # Inputs
 - the target `plan/<topic>/<topic>.plan.md`
 - the current workflow contract from `plan/agent-handoff-workflow.md`
-- `.github/skills/plan-creator/reference.md`
-- `.github/skills/plan-creator/checklist.md`
-- `.github/skills/plan-creator/templates/topic-plan-template.md`
+- `skills/plan-creator/reference.md`
+- `skills/plan-creator/checklist.md`
+- `skills/plan-creator/templates/topic-plan-template.md`
 - any contextual Copilot feedback, if it exists
 
 # Process
@@ -112,7 +112,7 @@ Do not use this skill when:
 ## Required Checks
 - PASS: all four contract sources are readable before review begins
 - PASS: the target plan file exists at the expected path
-- BLOCKED: the plan file cannot be read or does not exist — stop and return `needs-rework` with the missing file as a blocking issue
+- BLOCKED: the plan file cannot be read or does not exist — return `needs-rework` in the fixed JSON schema with the missing file recorded as a blocking issue
 
 ## Quality Checks
 - all required topic-plan sections are present and named correctly
@@ -129,8 +129,8 @@ Do not use this skill when:
 # Failure Handling
 
 ## Missing Context
-- BLOCKED — if any of the four contract sources cannot be read, stop before issuing any verdict
-- BLOCKED — if the target plan path cannot be resolved, stop; do not guess or infer a path
+- BLOCKED — if any of the four contract sources cannot be read, still return the fixed JSON verdict schema with `verdict: "needs-rework"` and a `blocking_issues` entry for each missing source
+- BLOCKED — if the target plan path cannot be resolved, still return the fixed JSON verdict schema with `verdict: "needs-rework"` and a `blocking_issues` entry describing the unresolved path; do not guess or infer a path
 
 ## Ambiguous Requirement
 - if a section name is subtly wrong but the intent is clear, flag it as a contract failure rather than silently accepting it

@@ -6,9 +6,9 @@ execution begins.
 - [ ] The plan path is `plan/<topic>/<topic>.plan.md`.
 - [ ] The review uses all four contract sources:
   - [ ] `plan/agent-handoff-workflow.md`
-  - [ ] `.github/skills/plan-creator/reference.md`
-  - [ ] `.github/skills/plan-creator/checklist.md`
-  - [ ] `.github/skills/plan-creator/templates/topic-plan-template.md`
+  - [ ] `skills/plan-creator/reference.md`
+  - [ ] `skills/plan-creator/checklist.md`
+  - [ ] `skills/plan-creator/templates/topic-plan-template.md`
 - [ ] All workflow-required plan sections are present, using the canonical section list from `plan/agent-handoff-workflow.md` (case-insensitive title matching is acceptable):
   - [ ] `Goal / outcome`
   - [ ] `Scope`

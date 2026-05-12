@@ -7,9 +7,9 @@ Use this file to keep repo-visible topic-plan review aligned with the repository
 Review topic plans against all four contract sources together:
 
 1. `plan/agent-handoff-workflow.md`
-2. `.github/skills/plan-creator/reference.md`
-3. `.github/skills/plan-creator/checklist.md`
-4. `.github/skills/plan-creator/templates/topic-plan-template.md`
+2. `skills/plan-creator/reference.md`
+3. `skills/plan-creator/checklist.md`
+4. `skills/plan-creator/templates/topic-plan-template.md`
 
 Do not treat any one source as sufficient by itself. The workflow defines the
 canonical execution contract, while `plan-creator` materials define the expected
