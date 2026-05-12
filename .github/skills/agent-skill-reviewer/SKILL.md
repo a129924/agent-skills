@@ -44,9 +44,14 @@ Do not use this skill when:
 4. Confirm each optional file or folder has a clear declared role, including each file inside `references/` when that folder exists.
 5. Confirm the skill has one clear responsibility.
 6. Confirm the skill is portable, independent, and self-contained.
-7. For authoring-target transition topics, confirm the draft lives under
-   `skills/<skill-name>/` as the canonical authoring target and does not claim
-   that `skills/` is already the current active workflow path.
+7. For authoring-target transition topics, distinguish canonical-source review
+   from mirror/projection review:
+   - canonical-source review: confirm the draft lives under
+     `skills/<skill-name>/` as the canonical authoring target and does not
+     claim that `skills/` is already the current active workflow path
+   - mirror/projection review: if a `.github/skills/` surface is explicitly in
+     scope, confirm it is treated as a transition mirror/projection surface and
+     not as the canonical source of truth
 8. Assess whether the skill's validation weight matches its risk, branching, external-tool usage, and downstream impact.
 9. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
 10. If `reference.md` is too broad, require it to be split into `references/`.
@@ -57,9 +62,10 @@ Do not use this skill when:
 15. Confirm `Validation` section exists for high complexity skills; for medium complexity, confirm it exists when ambiguity would materially change output (per folder-contract.md); confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
 16. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
 17. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
-18. For transition topics that touch creator / reviewer / template contracts only,
-    treat planning-spine `.github/skills/*` assumptions as downstream follow-up
-    implications unless the inventory already gives explicit blocker evidence.
+18. For transition topics that touch creator / reviewer / template contracts
+    only, treat planning-spine `.github/skills/*` assumptions as downstream
+    follow-up implications unless the inventory already gives explicit blocker
+    evidence.
 19. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
 20. Confirm it has an explicit `Trigger / When to use` section.
 21. Return `approved` or `needs-rework` with concrete fixes.

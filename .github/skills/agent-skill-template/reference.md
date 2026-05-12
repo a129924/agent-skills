@@ -60,6 +60,8 @@ Do not treat a new skill as stable until `agent-skill-reviewer` returns
   work
 - do not infer from this rule that `.github/skills/` has already stopped being
   the current active authored/reviewed workflow path
+- if `.github/skills/` appears in a transition review, treat it as a current
+  transition mirror or projection surface rather than as the canonical source
 - record downstream planning-spine implications as follow-up instead of editing
   those skill folders in the same phase
 

@@ -31,6 +31,26 @@ skills/<skill-name>/
 ---
 name: <skill-name>
 description: <what the skill does and when to use it>
+complexity: low | medium | high
+
+risk_profile:
+  - ambiguity_sensitive       # missing/ambiguous input may change output meaningfully
+  - multi_agent_handoff       # output consumed by another agent or workflow step
+  - destructive_action        # may delete, overwrite, migrate, or irreversibly change
+  - external_tooling          # calls CLI tools, APIs, networked services, package managers
+  - code_modification         # directly edits source code, tests, configuration, or artifacts
+
+inputs:
+  - <input-1>
+
+outputs:
+  - <artifact-1>
+
+use_when:
+  - <trigger scenario>
+
+do_not_use_when:
+  - <exclusion scenario>
 ---
 
 # Purpose
@@ -57,6 +77,46 @@ Do not use this skill when:
 
 # Outputs
 - ...
+
+# Validation
+<!-- Required for complexity: high. Recommended for complexity: medium. -->
+
+## Required Checks
+- <hard condition that must be true>
+
+## Quality Checks (best effort)
+- <soft condition — improves output but not blocking>
+
+## On Soft Fail
+- mark status as INCOMPLETE
+- continue with best-effort output
+- list missing information explicitly
+
+# Failure Handling
+<!-- Required for complexity: high. Required for complexity: medium when ambiguity
+     would materially change output. -->
+
+## Missing Context
+- mark output as INCOMPLETE
+- list required additional inputs explicitly
+
+## Ambiguous Requirement
+- if blocking: stop and ask the user before proceeding
+- if non-blocking: proceed with stated assumptions, list them explicitly
+
+## Execution Limitation
+- state the limitation explicitly in output
+- do not fabricate data to fill gaps
+
+# Workflow State Contract (Optional)
+<!-- Recommended for complexity: high when participating in multi-agent handoff. -->
+
+When participating in multi-agent workflows, include:
+- current_step: <step name from Process>
+- next_step: <next step or DONE>
+- status: IN_PROGRESS | COMPLETE | INCOMPLETE | BLOCKED
+
+Omit this section if the skill is not part of a multi-agent handoff workflow.
 
 # Verification
 - ...                       <!-- optional for higher-risk or easier-to-misuse skills -->
@@ -88,5 +148,10 @@ Do not use this skill when:
 - Optional files or folders must declare their role in `Local references`.
 - Add `examples.md` when the skill is high complexity or when the concise
   examples in `SKILL.md` are not enough.
+- Add `Validation` for medium complexity skills when ambiguity would materially
+  change output (recommended otherwise); require it for high complexity skills.
+- Add `Failure Handling` when ambiguity would materially change output.
+- Add `Workflow State Contract` only when the skill joins multi-agent handoff.
+- Use SOFT FAIL or BLOCKED for recoverable gaps instead of hard `FAIL -> stop`.
 - Add stronger validation signals only when risk, branching, tooling, or
   downstream impact justify them.
