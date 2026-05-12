@@ -12,8 +12,8 @@
 - Forbidden direct merge branch: `dev`
 - Branch rule: bounded phase branches merge back into
   `feat/andrew/copilot-to-codex-migration` first
-- Current Big Feature Branch release version: `0.52.0`
-- Current Big Feature Branch release tag: `v0.52.0`
+- Current Big Feature Branch release version: `0.53.0`
+- Current Big Feature Branch release tag: `v0.53.0`
 - Current checklist snapshot status: `partial-source-of-truth`
 - Source-of-truth note:
   - The following requested source artifacts are missing in this worktree:
@@ -43,6 +43,7 @@ Notes:
 | `positioning-freeze` | Freeze current state, target architecture, and migration boundary wording without active-path cutover | `reflected-in-checklist` | evidence present in frozen docs and phase plan | present | merged into `feat/andrew/copilot-to-codex-migration` | Source-of-truth complete for this checklist |
 | `platform-coupling-inventory` | Inventory path / workflow / artifact / blocker coupling without performing migration | `source-of-truth-incomplete` | evidence present: `docs/migration/platform-coupling-inventory.md` | missing: `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | intended merge target: `feat/andrew/copilot-to-codex-migration` | Evidence cannot replace upstream phase contract |
 | `skill-authoring-path-transition` | Transition creator / reviewer / template contracts only; no full promotion | `reflected-in-checklist` | merged contract-surface changes visible in creator / reviewer / template artifacts | present: `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | Current phase contract is readable; upstream inventory plan contract is still missing, so inherited authority remains partially incomplete |
+| `high-frequency-skill-promotion` | Selectively promote a first wave of high-frequency skills into `skills/` without full-library cutover | `reflected-in-checklist` | evidence present: `docs/migration/high-frequency-skill-promotion.md` and merged `skills/` first-wave results | present: `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | merged into `feat/andrew/copilot-to-codex-migration` | First-wave promotion is complete, but inherited upstream inventory-plan authority is still incomplete |
 
 ## Surface / Skill Status
 
@@ -66,8 +67,12 @@ Notes:
 
 | Surface / Skill | Surface type | Current role | Current status | Dependency / blocker classification | Owner / next phase | Evidence / contract note |
 | --- | --- | --- | --- | --- | --- | --- |
-| `.github/skills/business-intent-alignment` | planning spine skill | downstream producer / consumer of analysis-layer requirements | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence still applies; no merged transition evidence promoted this skill to blocker status |
-| `.github/skills/business-to-technical-translation` | planning spine skill | downstream producer / consumer of analysis-layer technical spec | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | Inventory evidence still applies; no merged transition evidence promoted this skill to blocker status |
+| `.github/skills/business-intent-alignment` | planning spine skill | current active downstream producer / consumer of analysis-layer requirements | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | First-wave promotion now exists under `skills/business-intent-alignment/`, but `.github/skills/` remains the runway-period current active path |
+| `.github/skills/business-to-technical-translation` | planning spine skill | current active downstream producer / consumer of analysis-layer technical spec | `tracked-dependency` | primary tracked dependency: `workflow dependency`, `artifact dependency`; secondary: `contract dependency`, `source/path dependency`; not a default blocker | downstream to later transition work | First-wave promotion now exists under `skills/business-to-technical-translation/`, but `.github/skills/` remains the runway-period current active path |
+| `skills/business-intent-alignment/` | target-architecture promotion result | first-wave target-architecture canonical promotion location for selected planning-spine skill | `transition-complete` | selective-promotion result; not a repo-wide active-path declaration | later cutover / projection follow-up phases | Merged in PR #73; this target result does not make `.github/skills/` a second canonical source or end its current active-path role |
+| `skills/business-to-technical-translation/` | target-architecture promotion result | first-wave target-architecture canonical promotion location for selected planning-spine skill | `transition-complete` | selective-promotion result; not a repo-wide active-path declaration | later cutover / projection follow-up phases | Merged in PR #73; this target result does not make `.github/skills/` a second canonical source or end its current active-path role |
+| `skills/plan-creator/` | target-architecture promotion result | first-wave target-architecture canonical promotion location for selected planning skill | `transition-complete` | selective-promotion result; backward-compatible planning capability addition | later cutover / projection follow-up phases | Merged in PR #73 as part of the first-wave promotion set |
+| `skills/plan-reviewer/` | target-architecture promotion result | first-wave target-architecture canonical promotion location for selected planning skill | `transition-complete` | selective-promotion result; backward-compatible planning capability addition | later cutover / projection follow-up phases | Merged in PR #73 as part of the first-wave promotion set |
 | `.github/skills/agent-skill-creator/` | creator contract surface | current authoring-path producer | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Contract-transition phase is planned and merged; creator surface was updated without declaring active-path cutover |
 | `.github/skills/agent-skill-reviewer/` | reviewer contract surface | current review-path validator | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Reviewer surface was updated and merged in PR #72 as part of the bounded transition phase |
 | `.github/skills/agent-skill-template/` | template contract surface | current scaffold contract source | `transition-complete` | contract-transition target; workflow + artifact dependency | follow-up runtime/tooling and later cutover phases | Template surface was updated and merged in PR #72 as part of the bounded transition phase |
@@ -117,6 +122,7 @@ Rules:
 | `positioning-freeze` | `plan/positioning-freeze/positioning-freeze.plan.md` | frozen doc changes reflected in governance / positioning artifacts | `complete` | This is the only fully readable phase contract in the requested source set | none |
 | `platform-coupling-inventory` | `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | `docs/migration/platform-coupling-inventory.md` | `missing-upstream-plan` | Inventory evidence exists, but the upstream execution contract is absent, so inherited boundaries and stop conditions cannot be fully verified | add the missing upstream plan contract to the readable source set |
 | `skill-authoring-path-transition` | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | merged creator / reviewer / template contract changes in the Big Feature Branch | `missing-upstream-plan` | The current phase contract is present, but the inherited upstream inventory plan contract is still missing, so full authority-chain completeness cannot be claimed | add the missing upstream inventory plan contract to the readable source set |
+| `high-frequency-skill-promotion` | `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md` | `docs/migration/high-frequency-skill-promotion.md` plus merged first-wave `skills/` results | `missing-upstream-plan` | The current phase contract and merged evidence are present, but inherited upstream inventory-plan authority is still incomplete | add the missing upstream inventory plan contract to the readable source set |
 | `platform-coupling-inventory evidence -> downstream use` | upstream plan required separately | `docs/migration/platform-coupling-inventory.md` | `evidence-without-contract` | Evidence cannot replace the upstream phase contract when a later phase inherits dependency handling from inventory work | restore contract + evidence pair |
 
 ## Notes
@@ -127,6 +133,9 @@ Rules:
   branch history, or other worktrees.
 - `skill-authoring-path-transition` is now represented by both its repo-visible
   phase plan and merged contract-surface changes.
+- `high-frequency-skill-promotion` is now represented by its repo-visible phase
+  plan, promotion evidence artifact, and merged first-wave `skills/` target
+  results.
 - Until the missing upstream inventory plan contract is restored into this
   worktree, runway-wide status remains partially complete rather than fully
   authoritative.
