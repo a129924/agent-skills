@@ -79,7 +79,8 @@ Do not use this skill when:
 - ...
 
 # Validation
-<!-- Required for complexity: high. Recommended for complexity: medium. -->
+<!-- Required for complexity: high. Required for complexity: medium when ambiguity
+     would materially change output. -->
 
 ## Required Checks
 - <hard condition that must be true>
@@ -91,6 +92,11 @@ Do not use this skill when:
 - mark status as INCOMPLETE
 - continue with best-effort output
 - list missing information explicitly
+
+## On Blocked
+- mark status as BLOCKED
+- stop when proceeding would materially change the output or create misleading results
+- state exactly what blocker prevents safe completion
 
 # Failure Handling
 <!-- Required for complexity: high. Required for complexity: medium when ambiguity
@@ -149,9 +155,11 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
 - Add `examples.md` when the skill is high complexity or when the concise
   examples in `SKILL.md` are not enough.
 - Add `Validation` for medium complexity skills when ambiguity would materially
-  change output (recommended otherwise); require it for high complexity skills.
+  change output; require it for high complexity skills.
 - Add `Failure Handling` when ambiguity would materially change output.
 - Add `Workflow State Contract` only when the skill joins multi-agent handoff.
-- Use SOFT FAIL or BLOCKED for recoverable gaps instead of hard `FAIL -> stop`.
+- Use `SOFT FAIL` for recoverable gaps and `BLOCKED` only when proceeding would
+  materially change the output or create misleading results, instead of hard
+  `FAIL -> stop`.
 - Add stronger validation signals only when risk, branching, tooling, or
   downstream impact justify them.
