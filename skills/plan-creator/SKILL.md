@@ -138,7 +138,7 @@ Do not use this skill when:
 - Do not let absent analysis files fail silently; warn explicitly.
 - Do not let casual chat instructions override analysis artifacts without an explicit human `override`.
 - Do not generate a generic project-management plan for another repository.
-- `folder-contract.md` is a repo-level governance fallback used only when the topic-plan template is absent; it is not a local file owned by this skill.
+- `references/required-section-meaning.md` is the local fallback section contract when the topic-plan template is absent.
 
 # Failure Handling
 
@@ -152,7 +152,7 @@ Do not use this skill when:
 - if analysis artifacts conflict with chat-time instructions and no explicit human `override` is present, stop and require the human to choose before continuing
 
 ## Execution Limitation
-- if the topic-plan template is absent, fall back to the canonical section list from `folder-contract.md` (a repo-level governance file, not a local skill file) rather than inventing a new shape
+- if the topic-plan template is absent, fall back to the section contract in `references/required-section-meaning.md` rather than inventing a new shape
 - if a human `override` instruction is ambiguous about which analysis file it overrides, ask for clarification before discarding analysis content
 
 # Workflow State Contract

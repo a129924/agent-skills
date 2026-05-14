@@ -6,12 +6,13 @@
 - Source-of-truth order used:
   1. `analysis/codex-migration-runway/technical-spec.md`
   2. `analysis/codex-migration-runway/requirements.md`
-  3. `plan/positioning-freeze/positioning-freeze.plan.md`
+  3. `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
+  4. `plan/positioning-freeze/positioning-freeze.plan.md`
 - Writable scope used: `docs/migration/platform-coupling-inventory.md` only
 - Inventory result: no wording drift found against the frozen `positioning-freeze` boundary
 - Independent plan review result:
-  - No repo-visible topic plan is cited here as an authority input for this inventory document.
-  - This inventory therefore does not reference a separate plan-review verdict in this file.
+  - The repo-visible topic plan contract at `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is now cited as authority input for this inventory document.
+  - This inventory remains an evidence artifact paired to that plan contract rather than a replacement for it.
 
 ## Classification Rules
 
