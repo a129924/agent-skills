@@ -87,6 +87,16 @@ A skill is `approved` only if all of these are true:
   must remain untouched in that topic
 - scope drift from a creator/reviewer-first topic into downstream regular-skill
   rollout returns `needs-rework`
+- for authoring-target transition topics, distinguish canonical-source review
+  from mirror/projection review instead of collapsing them into one path claim
+- for canonical-source review in those topics, creator/template output points to
+  `skills/<skill-name>/` as canonical authoring target
+- for canonical-source review in those topics, the draft does not claim that
+  `skills/` is already the active authored/reviewed workflow path today
+- for mirror/projection review in those topics, `.github/skills/` is treated as
+  a transition mirror/projection surface and not as the canonical source of truth
+- downstream planning-spine implications are recorded as follow-up rather than
+  treated as blockers unless inventory evidence explicitly classifies them as blockers
 
 ## Reviewer independence
 - Reviewer is a **separate agent** (SubAgent in VS Code; `/fleet` in CLI)

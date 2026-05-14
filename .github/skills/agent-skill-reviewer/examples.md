@@ -13,6 +13,22 @@ A folder with:
 Typical verdict:
 - approved
 
+## Approved example: transition mirror review stays a mirror review
+
+A transition-scope review where:
+- canonical authoring intent points to `skills/<skill-name>/`
+- a `.github/skills/...` artifact is reviewed only because the topic keeps it as
+  the current transition mirror / projection surface
+- the reviewed text does not claim `.github/skills/` is the canonical source
+
+Typical verdict:
+- approved
+
+Typical reasons:
+- reviewer distinguishes canonical source from mirror/projection semantics
+- transition wording preserves the current active path without collapsing source
+  of truth
+
 ## Approved example: higher-risk skill has stronger guardrails
 
 A folder with:
@@ -69,3 +85,16 @@ Typical reasons:
 - `reference.md` is too broad
 - split reference files are needed
 - local reference roles are not explicit enough
+
+## Needs-rework example: mirror review collapses source of truth
+
+A transition-scope review where a `.github/skills/...` artifact says it is both
+the current mirror and the canonical source of truth for new authoring work.
+
+Typical verdict:
+- needs-rework
+
+Typical reasons:
+- canonical source and mirror/projection roles are conflated
+- the review would silently re-promote `.github/skills/` as the only source of
+  truth

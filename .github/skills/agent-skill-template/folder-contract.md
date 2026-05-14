@@ -1,7 +1,15 @@
 # Skill folder contract
 
-This document mirrors the canonical repository policy in
-`.github/copilot-instructions.md`.
+This document defines the canonical authoring-target folder contract for
+transition work.
+
+It does not change the current active workflow path. During transition,
+`.github/skills/` may remain the active authored/reviewed path until a later
+promotion or cutover phase updates runtime and workflow surfaces together.
+
+For this contract, `skills/` is the canonical authoring target and
+`.<platform>/skills/` is a future projection or adapter layout, not source of
+truth.
 
 ## Required core
 - `SKILL.md`: the executable instruction contract for the skill
@@ -41,10 +49,13 @@ This document mirrors the canonical repository policy in
   and downstream impact
 - lightweight skills may stay concise when trigger, boundaries, and brief examples
   already prevent routine misuse
-- medium-complexity skills may need clearer process or brief verification guidance
+- medium-complexity skills should make the main decision path explicit and may add
+  brief verification guidance when needed
 - higher-risk or gatekeeping skills should include stronger validation signals or
-  equivalent local guidance, such as explicit verification, red flags,
+  equivalent local guidance, such as explicit verification guidance, red flags,
   rationalizations, or a checklist
+- stronger validation may live in `SKILL.md` or in local companion files, but the
+  reviewer must be able to see that misuse prevention is intentional and sufficient
 - do not force heavyweight validation onto simple low-risk skills without a clear
   reason
 
@@ -69,3 +80,148 @@ This document mirrors the canonical repository policy in
 ## Lifecycle note
 - creator stops at `review-ready`
 - reviewer returns `approved` or `needs-rework`
+
+## Transition boundary
+
+- scaffold new or materially transitioned skill content under
+  `skills/<skill-name>/`
+- do not treat this contract as authorization to promote `skills/` to the
+  current active workflow path
+- do not rewrite runtime/tooling, installer, or projection surfaces here
+- if downstream planning-spine skills still assume `.github/skills/`, record a
+  follow-up implication instead of editing those skills in this phase
+
+## YAML Metadata Policy
+
+Only `name` and `description` are treated as portable runtime discovery fields.
+
+The following fields are repository governance metadata:
+- `inputs`
+- `outputs`
+- `use_when`
+- `do_not_use_when`
+- `complexity`
+- `risk_profile`
+
+These fields are authoritative only for repository consistency review, not for
+platform-level routing behavior. The Markdown body remains the authoritative
+execution contract. YAML and body must not contradict each other; contradiction
+between YAML and body is a reject signal.
+
+## Complexity Policy
+
+`complexity` determines which body sections are required.
+
+complexity: low
+- Validation: optional
+- Failure Handling: optional
+- Workflow State Contract: not required
+
+complexity: medium
+- Validation: recommended; required when ambiguity would materially change output
+- Failure Handling: required when ambiguity would materially change output
+- Workflow State Contract: optional
+
+complexity: high
+- Validation: required
+- Failure Handling: required
+- Workflow State Contract: recommended when participating in multi-agent handoff
+
+## Risk Profile Policy
+
+`risk_profile` is repository governance metadata used to help the creator and
+reviewer classify skill risk.
+
+Allowed values:
+- `ambiguity_sensitive`: use when missing or ambiguous input may change the
+  output meaningfully
+- `multi_agent_handoff`: use when the skill output is consumed by another agent,
+  workflow step, or resume engine
+- `destructive_action`: use when the skill may delete, overwrite, migrate, or
+  irreversibly change files, data, or configuration
+- `external_tooling`: use when the skill calls CLI tools, APIs, networked
+  services, package managers, or other external systems
+- `code_modification`: use when the skill directly edits source code, tests,
+  configuration, or generated artifacts
+
+Rules:
+- `risk_profile` may be empty for low-complexity documentation-only skills
+- any skill with `multi_agent_handoff`, `destructive_action`, or
+  `code_modification` should be at least `medium` complexity
+- any skill with both `code_modification` and `external_tooling` should usually
+  be `high` complexity
+- reviewer may escalate complexity when risk tags understate actual behavior
+
+## Validation Policy
+
+Validation must define both recoverable and non-recoverable outcomes.
+
+Use `SOFT FAIL` for recoverable quality gaps:
+- mark status as INCOMPLETE
+- continue with best-effort output
+- list missing information or limitations explicitly
+
+Use `BLOCKED` only when proceeding would materially change the output or create
+misleading results.
+
+Do not use hard `FAIL -> stop` unless the skill cannot safely produce any useful
+output.
+
+A missing input or ambiguity is considered to "materially change output" if a
+reasonable alternative interpretation would change any of the following:
+- selected workflow path
+- target files or artifacts
+- approval or rejection verdict
+- implementation order
+- risk classification
+- generated code behavior
+- whether the result is safe to use downstream
+
+## Legacy Skill Policy
+
+Existing skills without `complexity` are classified as `unclassified` and must
+not be automatically rejected.
+
+Classification is required when:
+- the skill is materially edited
+- the skill causes workflow ambiguity
+- the skill is used in a multi-agent handoff workflow
+
+Do not reject a legacy skill solely for missing `complexity`, `risk_profile`, or
+the governance body sections.
+
+## Governance Decision Record
+
+### Decision 1 — YAML metadata is governance metadata, not guaranteed runtime routing
+
+Only `name` and `description` are treated as portable skill discovery fields.
+Additional fields such as `inputs`, `outputs`, `use_when`, `do_not_use_when`,
+`complexity`, and `risk_profile` are repository governance metadata.
+
+### Decision 2 — Body is the execution contract
+
+The Markdown body remains authoritative for actual skill behavior. YAML must
+summarize the body and must not contradict it.
+
+### Decision 3 — Validation must be recoverable
+
+Validation should define PASS, SOFT FAIL, and BLOCKED conditions. Avoid hard
+`FAIL -> stop` except when no safe output can be produced.
+
+### Decision 4 — Complexity is proposed by creator and verified by reviewer
+
+Creator proposes `complexity`; reviewer may escalate it based on workflow risk.
+Existing skills without complexity are treated as `unclassified`, not
+automatically invalid.
+
+### Decision 5 — Migration is phased
+
+This change applies immediately to creator, reviewer, and template. Existing
+skills are migrated by priority and are not rejected solely for missing new
+metadata.
+
+### Decision 6 — Risk profile is a review aid, not platform behavior
+
+`risk_profile` is used to guide creator and reviewer judgment. It does not imply
+that Copilot or another agent runtime will parse or enforce these values. Risk
+tags must not contradict the Markdown body.

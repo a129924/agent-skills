@@ -14,15 +14,19 @@ Current repository state is:
 - `AGENTS.md` is the governance canonical source.
 - `.github/skills/` remains the current Copilot active authored and reviewed
   workflow path during transition.
-- `skills/` is the intended canonical skill-source direction and target
-  architecture, but this topic does not declare it active as the current
-  workflow path.
+- `skills/` is not the current active workflow path in this topic.
+- `skills/` belongs to the intended canonical skill-source direction and target
+  architecture only.
 - external installer tooling or repositories may consume platform-facing layouts,
   but install orchestration stays outside this repository.
 
+Current operating state and target architecture are intentionally distinct in
+this runway. This topic freezes both statements without cutting over the active
+workflow path.
+
 ## Target Architecture
 
-Target architecture is:
+Target architecture after a separate migration is:
 
 - `skills/` is the intended canonical skill source.
 - `skills/` is the long-term authoring, review, and promotion source of truth.
@@ -46,6 +50,7 @@ This topic does:
 - define current state clearly
 - define target architecture clearly
 - define future migration boundaries clearly
+- freeze wording without performing active-path cutover
 
 This topic does not:
 
@@ -57,10 +62,11 @@ This topic does not:
 - change template scaffold paths
 - add generator, renderer, or installer scripts
 - add `blueprints/`, `internalized/`, or `agent-runtime/`
+- declare `skills/` as already active today
 
 Transition wording for this topic is:
 
-- `skills/` is the intended canonical skill source / target architecture.
+- `skills/` is the intended canonical skill source in target architecture only.
 - `.github/skills/` remains the current Copilot active authored/reviewed
   workflow path during transition.
 - `.github/skills/` should become a platform projection / compatibility mirror
