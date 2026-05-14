@@ -6,16 +6,15 @@ this worktree. This plan is authored from the frozen runway baseline, the
 runway checklist, the repo-visible inventory evidence, and the already-merged
 `skill-authoring-path-transition` phase contract.
 
-Authority warning:
+Upstream authority chain:
 
-- `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is not
-  present in this worktree.
-- `docs/migration/platform-coupling-inventory.md` is therefore the available
-  upstream evidence artifact, not a replacement for the missing upstream plan
-  contract.
-- If bounded implementation needs inherited upstream role boundaries or stop
-  conditions beyond what the listed artifacts state, execution must stop and
-  return to Setup Agent.
+- `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is
+  present and readable in this worktree.
+- `docs/migration/platform-coupling-inventory.md` remains the paired upstream
+  evidence artifact and does not replace the plan contract.
+- Source-of-truth interpretation for inherited boundaries must read the
+  upstream inventory plan contract before its evidence artifact, then follow
+  the remaining runway and positioning sources.
 
 ## Goal / Outcome
 
@@ -254,20 +253,22 @@ Artifact path notes:
 請先讀以下 source-of-truth artifacts，依此優先順序執行：
 1. `plan/high-frequency-skill-promotion/high-frequency-skill-promotion.plan.md`
 2. `docs/migration/migration-runway-checklist.md`
-3. `docs/migration/platform-coupling-inventory.md`
-4. `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md`
-5. `analysis/codex-migration-runway/technical-spec.md`
-6. `analysis/codex-migration-runway/requirements.md`
-7. `plan/positioning-freeze/positioning-freeze.plan.md`
-8. `AGENTS.md`
-9. `docs/repo-positioning.md`
+3. `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
+4. `docs/migration/platform-coupling-inventory.md`
+5. `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md`
+6. `analysis/codex-migration-runway/technical-spec.md`
+7. `analysis/codex-migration-runway/requirements.md`
+8. `plan/positioning-freeze/positioning-freeze.plan.md`
+9. `AGENTS.md`
+10. `docs/repo-positioning.md`
 
-authority gap：
+upstream authority chain：
 - `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
-  目前不在這個 worktree。
-- 你只能把 `docs/migration/platform-coupling-inventory.md` 視為 upstream
-  evidence，不可把它當作 upstream plan contract 的替代品。
-- 若你需要更多 upstream contract 才能安全繼續，立刻停止並回報。
+  現在已存在且可讀。
+- 你必須先讀 upstream inventory plan contract，再讀
+  `docs/migration/platform-coupling-inventory.md` 這份 paired evidence。
+- 不可把 evidence 當作 plan contract 的替代品；兩者要一起納入同一條
+  source-of-truth 順序。
 
 你的 allowed writable paths 只有：
 - `docs/migration/high-frequency-skill-promotion.md`
@@ -357,9 +358,9 @@ stop conditions：
 
 ## Open Questions / Unresolved Items
 
-- `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is not
-  present in this worktree, so inherited upstream phase-contract detail remains
-  incomplete.
+- This phase assumes the now-readable upstream inventory plan contract plus its
+  paired evidence artifact are sufficient to preserve the inventory-only and
+  runway-only boundaries while promoting only the selected first wave.
 - This phase assumes first-wave promotion can be expressed without modifying
   repo-wide governance artifacts. If execution disproves that assumption, stop
   and route back to Setup Agent instead of broadening scope.

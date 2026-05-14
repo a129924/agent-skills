@@ -12,8 +12,6 @@
 - Forbidden direct merge branch: `dev`
 - Branch rule: bounded phase branches merge back into
   `feat/andrew/copilot-to-codex-migration` first
-- Current Big Feature Branch release version: `0.53.0`
-- Current Big Feature Branch release tag: `v0.53.0`
 - Current checklist snapshot status: `source-of-truth-complete`
 - Source-of-truth note:
   - The requested runway baseline, phase plans, and downstream evidence
@@ -136,6 +134,6 @@ Rules:
   phase plan and merged contract-surface changes.
 - `high-frequency-skill-promotion` is now represented by its repo-visible phase
   plan, promotion evidence artifact, and merged first-wave `skills/` target
-  results.
+  results only within this runway-bounded promotion scope.
 - The restored `platform-coupling-inventory` plan closes the previously known
   upstream authority gap for this checklist's requested source set.

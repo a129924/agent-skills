@@ -22,23 +22,23 @@ does not authorize full migration, promotion, or runtime/tooling repair.
 Use these repo-visible artifacts in this order:
 
 1. `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md`
-2. `docs/migration/platform-coupling-inventory.md`
-3. `analysis/codex-migration-runway/technical-spec.md`
-4. `analysis/codex-migration-runway/requirements.md`
-5. `plan/positioning-freeze/positioning-freeze.plan.md`
-6. `AGENTS.md`
-7. `docs/repo-positioning.md`
+2. `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
+3. `docs/migration/platform-coupling-inventory.md`
+4. `analysis/codex-migration-runway/technical-spec.md`
+5. `analysis/codex-migration-runway/requirements.md`
+6. `plan/positioning-freeze/positioning-freeze.plan.md`
+7. `AGENTS.md`
+8. `docs/repo-positioning.md`
 
-Authority gap:
+Upstream authority chain:
 
-- `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is not
-  present in this worktree.
-- This plan therefore treats `docs/migration/platform-coupling-inventory.md` as
-  the available upstream evidence artifact only.
-- Evidence does not replace the missing upstream phase plan contract.
-- If bounded implementation needs inherited upstream stop conditions or role
-  boundaries beyond what the listed artifacts state, execution must stop and
-  return to Setup Agent.
+- `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is
+  present and readable in this worktree.
+- `docs/migration/platform-coupling-inventory.md` remains the paired upstream
+  evidence artifact and does not replace the plan contract.
+- Inherited stop conditions and role boundaries must be interpreted from the
+  upstream plan contract first, then its evidence artifact, before falling
+  through to the runway baseline and frozen positioning sources.
 
 ## Goal Boundary
 
@@ -187,7 +187,8 @@ Routing notes:
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md` | Setup Agent / Planning actor | Repo-visible authoritative execution contract for this phase; read-only for Bounded Implement Agent |
-| Inventory evidence | `docs/migration/platform-coupling-inventory.md` | Upstream bounded phase output | Repo-visible evidence for dependency and blocker classification; not a replacement for the missing upstream phase contract |
+| Upstream inventory plan contract | `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` | Upstream bounded phase output | Repo-visible upstream execution contract for inherited role boundaries, stop conditions, and inventory-only phase semantics |
+| Inventory evidence | `docs/migration/platform-coupling-inventory.md` | Upstream bounded phase output | Repo-visible evidence for dependency and blocker classification, read after the upstream inventory plan contract in the source-of-truth chain |
 | Runway technical baseline | `analysis/codex-migration-runway/technical-spec.md` | Setup Agent / Planning actor | Execution-facing runway baseline |
 | Runway requirements baseline | `analysis/codex-migration-runway/requirements.md` | Setup Agent / Planning actor | Business-intent boundary baseline |
 | Positioning boundary plan | `plan/positioning-freeze/positioning-freeze.plan.md` | Setup Agent / Planning actor | Frozen upstream boundary for current-vs-target wording and non-migration constraints |
@@ -296,19 +297,21 @@ Artifact path notes:
 
 請先讀以下 source-of-truth artifacts，依此優先順序執行：
 1. `plan/skill-authoring-path-transition/skill-authoring-path-transition.plan.md`
-2. `docs/migration/platform-coupling-inventory.md`
-3. `analysis/codex-migration-runway/technical-spec.md`
-4. `analysis/codex-migration-runway/requirements.md`
-5. `plan/positioning-freeze/positioning-freeze.plan.md`
-6. `AGENTS.md`
-7. `docs/repo-positioning.md`
+2. `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
+3. `docs/migration/platform-coupling-inventory.md`
+4. `analysis/codex-migration-runway/technical-spec.md`
+5. `analysis/codex-migration-runway/requirements.md`
+6. `plan/positioning-freeze/positioning-freeze.plan.md`
+7. `AGENTS.md`
+8. `docs/repo-positioning.md`
 
-authority gap：
+upstream authority chain：
 - `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md`
-  目前不在這個 worktree。
-- 你只能把 `docs/migration/platform-coupling-inventory.md` 視為 upstream
-  evidence，不可把它當作 upstream plan contract 的替代品。
-- 若你需要更多 upstream contract 才能安全繼續，立刻停止並回報。
+  現在已存在且可讀。
+- 你必須先讀 upstream plan contract，再讀
+  `docs/migration/platform-coupling-inventory.md` 這份 paired evidence。
+- 不可把 evidence 當作 plan contract 的替代品；兩者要一起納入同一條
+  source-of-truth 順序。
 
 你的 allowed writable paths 只有：
 - `.github/skills/agent-skill-creator/`
@@ -401,10 +404,10 @@ stop conditions：
 
 ## Open Questions / Unresolved Items
 
-- The upstream plan contract
-  `plan/platform-coupling-inventory/platform-coupling-inventory.plan.md` is not
-  present in this worktree.
-- This plan therefore cannot guarantee that all inherited upstream stop
-  conditions are visible to the bounded implementer.
-- If that missing upstream contract becomes necessary during execution, the
-  phase must stop and return to Setup Agent rather than improvising.
+- This phase assumes the now-readable upstream inventory plan contract plus its
+  paired evidence artifact are sufficient to preserve the inventory-only
+  boundary without broadening into promotion, runtime/tooling transition, or
+  governance rewrite.
+- If execution encounters a dependency that would require changing forbidden
+  paths despite that readable upstream chain, the phase must still stop and
+  return to Setup Agent rather than broadening scope.
