@@ -53,6 +53,43 @@ def group_names(users: List[User]) -> Dict[str, List[str]]:
 - If one rule set must stay source-compatible with Python 3.8 and 3.9, keep the older spellings consistently.
 - Use `typing_extensions.TypeAlias` when stdlib `TypeAlias` is not available on the supported baseline.
 
+## `object` only at true boundaries
+
+### Use
+```py
+from typing import TypeAlias, TypeGuard
+
+UserId: TypeAlias = int
+
+def is_user_id(value: object) -> TypeGuard[UserId]:
+    # narrowing helper: external JSON scalar
+    return isinstance(value, int)
+
+def parse_user_id(raw: object) -> UserId:
+    # boundary: JSON decoder output
+    if is_user_id(raw):
+        return raw
+    raise ValueError("invalid user id")
+```
+
+- `object` appears only at a narrowing-helper input or decoder boundary.
+- The precise repo-owned alias `UserId` is recovered before normal business use.
+- The justification names the boundary or narrowing role instead of using convenience wording.
+
+### Avoid
+```py
+from typing import TypeAlias
+
+UserId: TypeAlias = int
+
+def find_user(user_id: object) -> object:
+    # easier type checking while the service layer changes
+    ...
+```
+
+- Do not weaken a known repo-owned alias or return type to `object`.
+- `easier type checking`, `not sure of the type`, or `we will refine later` are invalid justifications.
+
 ## Avoid routine escape hatches
 
 ```py
