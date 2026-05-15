@@ -157,8 +157,8 @@ Markdown 說明段落固定包含：
 2. 若 reviewer 發現 correction-triggering drift、human direction concern 被 repo-visible evidence 支撐、或 implementation 與 current truth 不一致，必須先產出 `Deviation / Correction Report`，再進行 routing。
 3. 判讀 verdict：
    - `approved`：僅在沒有 open correction、沒有待 Planner 確認的 severity，且 required artifacts 已滿足時，前進 Phase 5
-   - `needs-rework`：若屬 ordinary `needs-rework`，通知 executor 回到 Phase 3 修正，之後重新執行 Phase 4（內部迴路）
-   - `needs-rework`：若屬 correction-triggering drift，停在 Phase 4；Planner 確認 severity 後，`low` 走 `IMPLEMENT_PATCH` 回 Phase 3，`medium|high` 走 `PLANNER_REPLAN`
+   - `needs-rework`（ordinary path）：若屬 ordinary `needs-rework`，通知 executor 回到 Phase 3 修正，之後重新執行 Phase 4（內部迴路）
+   - `needs-rework`（drift path）：若屬 correction-triggering drift，停在 Phase 4；Planner 確認 severity 後，`low` 走 `IMPLEMENT_PATCH` 回 Phase 3，`medium|high` 走 `PLANNER_REPLAN`
    - `BLOCKED`：不可前進，回報阻塞原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 1）
    - `refusal`：不可前進，回報拒絕原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 1）
    - 非結構化輸出（缺 `verdict` 或格式不符）：視為 `BLOCKED`，要求同 phase 重跑並補齊結構化結果
@@ -170,9 +170,9 @@ Markdown 說明段落固定包含：
 1. 呼叫：`/fleet @.github/skills/python-code-review/`
 2. 若 code review 發現 correction-triggering drift、scope semantics 改變、architecture boundary 破壞、或 human direction concern 被確認，必須先產出 `Deviation / Correction Report`，再進行 routing。
 3. 判讀 verdict：
-   - `approved`：僅在沒有 open correction、required reviews 已全部通過、且 Planner 已完成 correction closure 時，workflow `DONE`
-   - `needs-rework`：若屬 ordinary `needs-rework`，通知 executor 回到 Phase 3，並走 `Phase 3 → Phase 4 → Phase 5` 內部迴路直到通過
-   - `needs-rework`：若屬 correction-triggering drift，停在 Phase 5；Planner 確認 severity 後，`low` 走 `IMPLEMENT_PATCH`，`medium|high` 走 `PLANNER_REPLAN`
+   - `approved`：僅在 required reviews 已全部通過、且沒有 open correction 時，workflow `DONE`；若此輪存在 applicable correction，則另需由 Planner 完成 correction closure
+   - `needs-rework`（ordinary path）：若屬 ordinary `needs-rework`，通知 executor 回到 Phase 3，並走 `Phase 3 → Phase 4 → Phase 5` 內部迴路直到通過
+   - `needs-rework`（drift path）：若屬 correction-triggering drift，停在 Phase 5；Planner 確認 severity 後，`low` 走 `IMPLEMENT_PATCH`，`medium|high` 走 `PLANNER_REPLAN`
    - `BLOCKED`：不可前進，回報阻塞原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 4）
    - `refusal`：不可前進，回報拒絕原因並路由到對應修補 phase（通常回 Phase 3 或 Phase 4）
    - 非結構化輸出（缺 `verdict` 或格式不符）：視為 `BLOCKED`，要求同 phase 重跑並補齊結構化結果

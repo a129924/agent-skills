@@ -67,46 +67,46 @@
 - Severity authority is fixed:
   - workflow agent may perform provisional classification
   - planner must confirm final severity
- - Correction closure authority is fixed:
-   - planner closes correction only after the required reviews pass
- - Success signals are fixed and all three are in scope:
-   - medium/high drift cannot silently advance
-   - required correction artifacts and parent sync must occur
-   - role boundaries must remain explicit
- - Workstream A routing contract is fixed:
-   - routing states must be exactly:
-     - `IMPLEMENT_CONTINUE`
-     - `IMPLEMENT_PATCH`
-     - `PLANNER_CLARIFY`
-     - `PLANNER_REPLAN`
-   - the custom agent must include one routing decision table row per state
-   - each routing decision table row must define:
-     - trigger
-     - owner
-     - required artifact
-     - next phase
-     - acceptance condition
- - Workstream A reporting contract is fixed:
-   - the custom agent must define a `Deviation / Correction Report`
-   - that report must include markdown explanatory sections plus a fixed JSON `Machine Verdict` block
- - The ordinary-rework boundary is fixed:
-   - if the issue changes source-of-truth semantics, public contract meaning, architecture boundary, or phase routing, it is correction-triggering drift
-   - otherwise it may remain ordinary `needs-rework`
- - Correction artifact policy is fixed:
-   - low severity -> note only
-   - medium severity -> `*.correction-plan.md`, plus `*.correction-step.md` when multi-step repair is required
-   - high severity -> both correction artifacts and current implementation treated as suspect code
- - Parent artifacts remain current truth; correction artifacts remain historical truth and must not replace the parent contract.
- - Correction artifact retention is fixed:
-   - correction artifacts may be marked `resolved` or `superseded`
-   - direct deletion is forbidden
- - Parent sync note contract is fixed for applicable correction artifacts:
-   - each medium/high correction artifact must include a parent sync note
-   - the parent sync note must state:
-     - which parent plan section is added or corrected
-     - whether acceptance criteria changed
-     - whether phase routing changed
-     - whether existing tasks changed
+- Correction closure authority is fixed:
+  - planner closes correction only after the required reviews pass
+- Success signals are fixed and all three are in scope:
+  - medium/high drift cannot silently advance
+  - required correction artifacts and parent sync must occur
+  - role boundaries must remain explicit
+- Workstream A routing contract is fixed:
+  - routing states must be exactly:
+    - `IMPLEMENT_CONTINUE`
+    - `IMPLEMENT_PATCH`
+    - `PLANNER_CLARIFY`
+    - `PLANNER_REPLAN`
+  - the custom agent must include one routing decision table row per state
+  - each routing decision table row must define:
+    - trigger
+    - owner
+    - required artifact
+    - next phase
+    - acceptance condition
+- Workstream A reporting contract is fixed:
+  - the custom agent must define a `Deviation / Correction Report`
+  - that report must include markdown explanatory sections plus a fixed JSON `Machine Verdict` block
+- The ordinary-rework boundary is fixed:
+  - if the issue changes source-of-truth semantics, public contract meaning, architecture boundary, or phase routing, it is correction-triggering drift
+  - otherwise it may remain ordinary `needs-rework`
+- Correction artifact policy is fixed:
+  - low severity -> note only
+  - medium severity -> `*.correction-plan.md`, plus `*.correction-step.md` when multi-step repair is required
+  - high severity -> both correction artifacts and current implementation treated as suspect code
+- Parent artifacts remain current truth; correction artifacts remain historical truth and must not replace the parent contract.
+- Correction artifact retention is fixed:
+  - correction artifacts may be marked `resolved` or `superseded`
+  - direct deletion is forbidden
+- Parent sync note contract is fixed for applicable correction artifacts:
+  - each medium/high correction artifact must include a parent sync note
+  - the parent sync note must state:
+    - which parent plan section is added or corrected
+    - whether acceptance criteria changed
+    - whether phase routing changed
+    - whether existing tasks changed
 
 ## Boundaries / Exclusions
 
@@ -202,7 +202,7 @@ Artifact path notes:
   - current truth vs historical truth
   - correction closure authority
   - severity-gated correction artifact requirements
- - required parent sync note fields for applicable correction artifacts
+  - required parent sync note fields for applicable correction artifacts
   - resolved / superseded allowed, direct deletion forbidden
 - No new stable-library metadata is required because this topic does not modify `README.md`, `VERSION`, or release timing.
 - No file outside `Artifact Paths` is required to satisfy the plan; if such a file becomes necessary, execution must stop and repair scope first.
