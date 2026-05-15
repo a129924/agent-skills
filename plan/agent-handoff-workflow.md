@@ -55,6 +55,13 @@ in different contexts.
 - This file is the authoritative repo-level workflow contract.
 - Skill-local instructions are authoritative only within their own skill
   boundary.
+- Parent artifacts for a topic remain the current truth:
+  - the locked topic plan
+  - any topic-owned parent artifacts such as `*.spec.md` / `*.step.md` that are
+    explicitly listed in `Artifact paths`
+- Correction artifacts are historical truth only:
+  - they explain why current truth changed
+  - they do not replace the parent contract
 - Hidden chat context must never override repo-visible workflow artifacts.
 
 ## Roles
@@ -65,11 +72,24 @@ in different contexts.
 | Reviewer | Evaluate the latest creator output and return `approved` or `needs-rework` | Author the final implementation directly |
 | Main Agent (publisher / release actor) | Handle commit, push, PR, review-comment triage, merge follow-up, and release/version actions, while stopping for explicit human confirmations where the workflow requires them | Change planning intent retroactively without updating the plan |
 
+### Correction routing roles
+- Human operator may raise a direction concern or point at drift, but chat alone
+  must not override repo-visible source of truth.
+- Workflow agent may make provisional routing / severity decisions to prevent
+  silent advance, but must not confirm final correction severity or close a
+  correction.
+- Planner confirms final severity, freezes the correction direction, and closes
+  correction only after required reviews pass and parent sync is complete.
+- Implementer performs the repair under the frozen direction and must not
+  redefine correctness criteria or skip required correction artifacts.
+
 ## Canonical artifacts
 | Artifact | Path | Purpose |
 | --- | --- | --- |
 | Repo workflow spec | `plan/agent-handoff-workflow.md` | Shared process contract |
 | Topic handoff plan | `plan/<topic>/<topic>.plan.md` | Repo-visible execution contract for one topic |
+| Parent topic artifacts | `plan/<topic>/<topic>.spec.md`, `plan/<topic>/<topic>.step.md`, or other topic-owned parent artifacts when explicitly listed | Current-truth execution details for the topic |
+| Correction artifacts | `plan/<topic>/<topic>.correction-plan.md` and `plan/<topic>/<topic>.correction-step.md` when explicitly listed | Historical-truth correction trail for planner-confirmed drift |
 | Skill draft | `.github/skills/<skill-name>/` | Creator output under repo policy |
 | Stable-library summary | `README.md` | Human-facing stable skill list |
 | Repo version baseline | `VERSION` | Canonical SemVer version for the repository |
@@ -92,6 +112,10 @@ Additional contract rules:
 - `Artifact paths` is an executable contract, not an informational appendix.
 - If a listed artifact path is invalid, contradicts repo policy, or drifts from
   the intended output location, fix the topic plan before continuing execution.
+- If a topic uses correction artifacts, each one must be listed explicitly in
+  `Artifact paths`; they are never implied by chat history or workflow state.
+- Even when correction artifacts exist, parent artifacts remain the current
+  truth and the correction files remain historical truth.
 - When stable-library or release work applies, the topic plan must declare the
   timing of README / VERSION actions instead of leaving Main Agent to infer it.
 - A valid repo-visible topic plan is the execution prerequisite for the rest of
@@ -103,6 +127,33 @@ Additional contract rules:
 - If execution reaches Phase 2 or later without a valid topic plan, stop and
   repair the plan instead of improvising downstream git, review, or release
   decisions.
+
+## Correction layer semantics
+- Ordinary `needs-rework` stays separate from correction-triggering drift.
+- Correction-triggering drift means the issue changes at least one of:
+  - source-of-truth semantics
+  - public contract meaning
+  - architecture boundary
+  - phase routing
+- Severity-gated correction artifact rules:
+  - low severity -> note only; no correction artifact required
+  - medium severity -> `*.correction-plan.md`; add `*.correction-step.md` when
+    the repair is multi-step
+  - high severity -> both correction artifacts are required and the current
+    implementation is treated as suspect code
+- Every applicable correction artifact must include a parent sync note stating:
+  - which parent plan section is added or corrected
+  - whether acceptance criteria changed
+  - whether phase routing changed
+  - whether existing tasks changed
+- Planner owns correction closure:
+  - required reviews must pass before closure
+  - parent sync must complete before closure
+  - correction artifacts may be marked `resolved` or `superseded`
+  - direct deletion is forbidden
+- Open correction work keeps the topic inside its normal execution loop; it does
+  not create a new generic human STOP POINT.
+- STOP POINT 1 and STOP POINT 2 semantics remain unchanged.
 
 ## Status model
 | Status | Meaning | Owner | Allowed next |
@@ -749,6 +800,9 @@ Every skill topic plan must include these fixed sections (11 required):
 9. **Reviewer handoff**
 10. **Post-merge / release actions**
 11. **Open questions / unresolved items**
+
+When correction artifacts apply to a topic, list them explicitly under
+**Artifact paths** beside the parent artifacts they are correcting.
 
 ### New: Stable library metadata (if applicable)
 
