@@ -204,9 +204,10 @@ blocking_issues:
 - Decisions rationale is present where `yes` or `no` alone would leave the executor guessing
 
 ## On Soft Fail
-- mark the review as INCOMPLETE
-- return a best-effort verdict on every section that could be assessed
+- use `verdict: insufficient-context`; do not invent an unsupported review verdict or status
+- return best-effort findings for every section that could be assessed
 - list each unassessable section explicitly in `blocking_issues` with `issue: Section could not be fully evaluated` and `fix: Provide complete content`
+- use `needs-rework` for assessable sections that are conceptually incomplete or ambiguous enough to need repair
 - do not block output; surface findings even when context is partial
 
 # Failure Handling

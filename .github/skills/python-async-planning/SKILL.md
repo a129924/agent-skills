@@ -67,6 +67,10 @@ Do not use this skill when:
 1. Decide whether the topic is actually async-capable.
    - Cite the trigger evidence explicitly.
    - If the topic is exempt, cite the exemption explicitly.
+   - Write or update the first repo-visible line under `## Decisions` as exactly one of:
+     - `- Async-planning status: triggered — cite trigger evidence: ...`
+     - `- Async-planning status: exempt — cite exemption evidence: ...`
+   - Keep this status line at the start of `## Decisions` even when the topic is exempt.
    - Do not route on style alone.
 2. If async planning is triggered, place the async baseline inside `## Decisions` of the plan using these exact named subsections and this exact order:
    - `### Async boundary decision`
@@ -103,7 +107,7 @@ Do not use this skill when:
 - Negative: A reviewer notices async evidence, rewrites the plan decision mentally, and approves without requiring async sections or a contradiction log.
 
 # Outputs
-- a justified async trigger or exemption decision
+- a justified repo-visible `- Async-planning status: triggered|exempt — cite ...` line at the start of `## Decisions`
 - the seven required named async-planning subsections inside `## Decisions` when triggered
 - `retrofit required` guidance for late-discovered async risk
 - a contradiction-log requirement when sources disagree
@@ -114,6 +118,7 @@ Do not use this skill when:
 ## Required Checks
 - the topic is confirmed to be a Python planning task, not implementation or code review
 - trigger evidence or exemption evidence is cited explicitly
+- `## Decisions` begins with the repo-visible `- Async-planning status: triggered|exempt — cite ...` line
 - async-capable topics include all seven required named async-planning subsections under `## Decisions`
 - contradiction handling uses `### Async contradiction log` instead of silent override when sources disagree
 - late-discovered async risk is labeled `retrofit required` rather than passed through silently
@@ -163,6 +168,7 @@ When participating in a multi-agent planning workflow, include:
 # Verification
 - confirm the topic is Python-specific and planning-stage only
 - confirm the trigger or exemption decision can be explained from repo-visible evidence
+- confirm `## Decisions` starts with the repo-visible `- Async-planning status: triggered|exempt — cite ...` line
 - confirm the async-planning subsections use the exact required names when triggered
 - confirm contradictions are logged instead of silently resolved
 - confirm retrofit cases ask for the minimum safe backfill rather than a silent pass or uncontrolled full rewrite

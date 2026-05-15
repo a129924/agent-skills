@@ -4,7 +4,7 @@ Detailed examples for `python-plan-authoring`.
 
 ---
 
-## Complete positive exempt example: adding `validate_email()` to a utils module
+## Positive exempt `## Decisions` excerpt: adding `validate_email()` to a utils module
 
 **Feature request**
 > Add a `validate_email(email: str) -> bool` function to the existing `src/utils/validation.py` module. It should raise `ValueError` for obviously malformed input and return `True` for valid addresses.
