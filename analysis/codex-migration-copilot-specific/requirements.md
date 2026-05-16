@@ -16,6 +16,12 @@ Freeze the Copilot-specific baseline and separate these skills into
 `reference-only` versus `do-not-migrate` conclusions before any migration work
 starts.
 
+## Candidate skill set
+
+The Copilot-specific candidate set is frozen to:
+
+- `.github/skills/copilot-instructions-init/`
+
 ## Actors
 
 - Human decision-maker
@@ -39,6 +45,9 @@ Skills in this topic:
 - primarily serve Copilot-era platform behavior
 - are not good direct migration candidates
 - must be split into `C1. reference-only` or `C2. do-not-migrate`
+
+If a candidate turns out to be portable after all, it must leave this branch
+and be reclassified.
 
 ## Non-goals
 
