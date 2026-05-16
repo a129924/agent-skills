@@ -12,7 +12,10 @@
   - `analysis/codex-migration-copilot-residue-medium/requirements.md`
   - `plan/codex-migration-copilot-residue-medium/codex-migration-copilot-residue-medium.plan.md`
   - `docs/migration/codex-migration-copilot-residue-medium-report.md`
-  - medium-residue candidate skills selected by evidence inside this branch
+  - `.github/skills/agent-skill-creator/`
+  - `.github/skills/agent-skill-reviewer/`
+  - `.github/skills/agent-skill-template/`
+  - `.github/skills/worktree-manager/`
 
 - **Out of scope**:
   - direct-move and low-residue skills
@@ -23,6 +26,11 @@
 ## Locked Decisions
 
 - This branch handles only class `B2. medium Copilot residue`.
+- The candidate set is locked to:
+  - `.github/skills/agent-skill-creator/`
+  - `.github/skills/agent-skill-reviewer/`
+  - `.github/skills/agent-skill-template/`
+  - `.github/skills/worktree-manager/`
 - Allowed remediation may include bounded workflow and contract updates.
 - Runtime/tooling blocker repair is excluded.
 - Skills with strong platform-binding that exceed bounded remediation must leave
@@ -39,7 +47,8 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path; stop this topic at branch-local review-ready or approved outputs
+  merge path for contract compatibility, but active execution for this topic
+  stops at `approved`
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -59,6 +68,9 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-copilot-residue-medium`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
+- Active execution stop point: `approved`
+- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
+  canonical contract compatibility; they are not exercised in this topic
 
 ## Artifact Paths
 
@@ -67,6 +79,10 @@ Routing notes:
 | Topic plan | `plan/codex-migration-copilot-residue-medium/codex-migration-copilot-residue-medium.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-copilot-residue-medium/requirements.md` | Planning actor | Branch-local classification baseline |
 | Migration report | `docs/migration/codex-migration-copilot-residue-medium-report.md` | Implement Agent | Skill verdicts, remediation boundaries, and follow-up items |
+| Medium-residue skill | `.github/skills/agent-skill-creator/` | Implement Agent | Allowed medium-residue candidate path |
+| Medium-residue skill | `.github/skills/agent-skill-reviewer/` | Implement Agent | Allowed medium-residue candidate path |
+| Medium-residue skill | `.github/skills/agent-skill-template/` | Implement Agent | Allowed medium-residue candidate path |
+| Medium-residue skill | `.github/skills/worktree-manager/` | Implement Agent | Allowed medium-residue candidate path |
 
 Artifact path notes:
 
@@ -103,7 +119,10 @@ Artifact path notes:
 ## Post-merge / release actions
 
 - No repository release action is part of this topic.
+- No post-merge action is expected inside this topic because active execution
+  stops at `approved`.
 
 ## Open Questions / Unresolved Items
 
-- Exact medium-residue candidate skill list remains to be frozen by branch-local analysis.
+- No open candidate-list question remains; later changes require explicit
+  reclassification.

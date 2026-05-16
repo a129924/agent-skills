@@ -15,6 +15,15 @@ Freeze the medium-residue baseline so that implementation can distinguish
 bounded contract remediation from work that should be escalated into high
 residue or blocker topics.
 
+## Candidate skill set
+
+The medium-residue candidate set is frozen to:
+
+- `.github/skills/agent-skill-creator/`
+- `.github/skills/agent-skill-reviewer/`
+- `.github/skills/agent-skill-template/`
+- `.github/skills/worktree-manager/`
+
 ## Actors
 
 - Human decision-maker
@@ -39,6 +48,9 @@ Skills in this topic:
 - require workflow or contract remediation
 - do not require runtime/tooling blocker repair
 - do not require platform-specific semantics to remain intact
+
+If executable path or generator assumptions become mandatory, the skill must
+leave this branch and be reclassified.
 
 ## Non-goals
 
