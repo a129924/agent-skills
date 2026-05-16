@@ -12,7 +12,8 @@
   - `analysis/codex-migration-copilot-residue-low/requirements.md`
   - `plan/codex-migration-copilot-residue-low/codex-migration-copilot-residue-low.plan.md`
   - `docs/migration/codex-migration-copilot-residue-low-report.md`
-  - low-residue candidate skills selected by evidence inside this branch
+  - `.github/skills/git-commit-convention/`
+  - `.github/skills/git-branch-naming/`
 
 - **Out of scope**:
   - direct-move skills
@@ -23,6 +24,9 @@
 ## Locked Decisions
 
 - This branch handles only class `B1. low Copilot residue`.
+- The candidate set is locked to:
+  - `.github/skills/git-commit-convention/`
+  - `.github/skills/git-branch-naming/`
 - Allowed remediation is limited to light wording, examples, projection notes,
   and local path cleanup.
 - Any candidate needing workflow or contract redesign must leave this branch.
@@ -38,7 +42,8 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path; stop this topic at branch-local review-ready or approved outputs
+  merge path for contract compatibility, but active execution for this topic
+  stops at `approved`
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -58,6 +63,9 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-copilot-residue-low`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
+- Active execution stop point: `approved`
+- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
+  canonical contract compatibility; they are not exercised in this topic
 
 ## Artifact Paths
 
@@ -66,6 +74,8 @@ Routing notes:
 | Topic plan | `plan/codex-migration-copilot-residue-low/codex-migration-copilot-residue-low.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-copilot-residue-low/requirements.md` | Planning actor | Branch-local classification baseline |
 | Migration report | `docs/migration/codex-migration-copilot-residue-low-report.md` | Implement Agent | Skill verdicts, remediation notes, and follow-up items |
+| Low-residue skill | `.github/skills/git-commit-convention/` | Implement Agent | Allowed low-residue candidate path |
+| Low-residue skill | `.github/skills/git-branch-naming/` | Implement Agent | Allowed low-residue candidate path |
 
 Artifact path notes:
 
@@ -102,7 +112,10 @@ Artifact path notes:
 ## Post-merge / release actions
 
 - No repository release action is part of this topic.
+- No post-merge action is expected inside this topic because active execution
+  stops at `approved`.
 
 ## Open Questions / Unresolved Items
 
-- Exact low-residue candidate skill list remains to be frozen by branch-local analysis.
+- No open candidate-list question remains; later changes require explicit
+  reclassification.

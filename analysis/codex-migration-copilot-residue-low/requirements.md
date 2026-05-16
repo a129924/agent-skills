@@ -15,6 +15,13 @@ path assumptions.
 Freeze the low-residue classification baseline and define what qualifies as
 light remediation before implementation begins.
 
+## Candidate skill set
+
+The low-residue candidate set is frozen to:
+
+- `.github/skills/git-commit-convention/`
+- `.github/skills/git-branch-naming/`
+
 ## Actors
 
 - Human decision-maker
@@ -39,6 +46,9 @@ Skills in this topic:
 - still carry light Copilot-specific residue
 - do not require creator/reviewer/runtime contract redesign
 - do not require blocker repair
+
+If a candidate needs broader workflow or contract changes, it must leave this
+branch and be reclassified.
 
 ## Non-goals
 
