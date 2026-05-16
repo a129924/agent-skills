@@ -13,7 +13,10 @@
   - `analysis/codex-migration-direct-move/requirements.md`
   - `plan/codex-migration-direct-move/codex-migration-direct-move.plan.md`
   - `docs/migration/codex-migration-direct-move-report.md`
-  - direct-move candidate skills selected by evidence inside this branch
+  - `skills/business-intent-alignment/`
+  - `skills/business-to-technical-translation/`
+  - `skills/plan-creator/`
+  - `skills/plan-reviewer/`
 
 - **Out of scope**:
   - residue-low / medium / high branches
@@ -25,8 +28,13 @@
 
 - This branch handles only class `A. direct move`.
 - Confirmed runtime/tooling blockers are excluded from migration execution here.
+- The candidate set is locked to:
+  - `skills/business-intent-alignment/`
+  - `skills/business-to-technical-translation/`
+  - `skills/plan-creator/`
+  - `skills/plan-reviewer/`
 - Implementation starts only after the direct-move candidate set is frozen in
-  the branch-local report.
+  the branch-local report and remains limited to those exact paths.
 - The branch must produce explicit `move` / `do-not-move` decisions with
   reasons.
 - This topic is review-ready-only with no stable-library release action.
@@ -42,7 +50,8 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path; stop this topic at branch-local review-ready or approved outputs
+  merge path for contract compatibility, but active execution for this topic
+  stops at `approved`
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -62,6 +71,9 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-direct-move`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
+- Active execution stop point: `approved`
+- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
+  canonical contract compatibility; they are not exercised in this topic
 - This topic should merge back into its feature branch line, not `dev`.
 
 ## Artifact Paths
@@ -71,6 +83,10 @@ Routing notes:
 | Topic plan | `plan/codex-migration-direct-move/codex-migration-direct-move.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-direct-move/requirements.md` | Planning actor | Branch-local classification baseline |
 | Migration report | `docs/migration/codex-migration-direct-move-report.md` | Implement Agent | Candidate verdicts, move decisions, and follow-up notes |
+| Direct-move skill | `skills/business-intent-alignment/` | Implement Agent | Allowed direct-move candidate path |
+| Direct-move skill | `skills/business-to-technical-translation/` | Implement Agent | Allowed direct-move candidate path |
+| Direct-move skill | `skills/plan-creator/` | Implement Agent | Allowed direct-move candidate path |
+| Direct-move skill | `skills/plan-reviewer/` | Implement Agent | Allowed direct-move candidate path |
 
 Artifact path notes:
 
@@ -113,9 +129,10 @@ Artifact path notes:
 ## Post-merge / release actions
 
 - No repository release action is part of this topic.
-- If approved, branch-local work may continue with implementation inside the
-  frozen direct-move scope.
+- No post-merge action is expected inside this topic because active execution
+  stops at `approved`.
 
 ## Open Questions / Unresolved Items
 
-- Exact candidate skill list remains to be frozen by branch-local analysis.
+- No open candidate-list question remains; later changes require explicit
+  reclassification.

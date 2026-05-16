@@ -19,6 +19,22 @@ Produce a branch-local, reviewable baseline that identifies which skills belong
 to the direct-move class and what evidence is required before those skills are
 actually migrated.
 
+## Candidate skill set
+
+The direct-move candidate set is frozen to:
+
+- `skills/business-intent-alignment/`
+- `skills/business-to-technical-translation/`
+- `skills/plan-creator/`
+- `skills/plan-reviewer/`
+
+The corresponding transition-era comparison inputs are:
+
+- `.github/skills/business-intent-alignment/`
+- `.github/skills/business-to-technical-translation/`
+- `.github/skills/plan-creator/`
+- `.github/skills/plan-reviewer/`
+
 ## Actors
 
 - Human decision-maker
@@ -46,6 +62,9 @@ Skills in this topic must satisfy all of the following before implementation:
 - no mandatory Copilot-only role semantics
 - no runtime CLI, generator, or acceptance-handoff dependency that would force
   a separate transition topic
+
+If a candidate fails any of the above checks, it leaves this branch and must be
+reclassified instead of being implemented here.
 
 ## Non-goals
 
