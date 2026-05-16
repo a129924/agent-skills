@@ -16,6 +16,12 @@ Freeze the high-residue baseline so that branch-local work can separate
 redesign-worthy skills from skills that should be reclassified as
 Copilot-specific or blocker-driven follow-up.
 
+## Candidate skill set
+
+The high-residue candidate set is frozen to:
+
+- `.github/skills/git-post-merge-workflow/`
+
 ## Actors
 
 - Human decision-maker
@@ -40,6 +46,9 @@ Skills in this topic:
 - still appear potentially portable after significant redesign
 - may depend on current `.github/skills/` semantics or Copilot-era workflow
 - must not be silently promoted if they are actually Copilot-specific only
+
+If a candidate is found to be blocker-driven or Copilot-specific-only, it must
+leave this branch and be reclassified.
 
 ## Non-goals
 

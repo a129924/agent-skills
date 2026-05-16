@@ -12,7 +12,7 @@
   - `analysis/codex-migration-copilot-residue-high/requirements.md`
   - `plan/codex-migration-copilot-residue-high/codex-migration-copilot-residue-high.plan.md`
   - `docs/migration/codex-migration-copilot-residue-high-report.md`
-  - high-residue candidate skills selected by evidence inside this branch
+  - `.github/skills/git-post-merge-workflow/`
 
 - **Out of scope**:
   - direct-move and low/medium residue skills
@@ -23,6 +23,8 @@
 ## Locked Decisions
 
 - This branch handles only class `B3. high Copilot residue`.
+- The candidate set is locked to:
+  - `.github/skills/git-post-merge-workflow/`
 - The branch may analyze redesign paths but must not hide Copilot-specific-only
   conclusions.
 - Runtime/tooling blocker repair remains out of scope.
@@ -41,7 +43,8 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path; stop this topic at branch-local review-ready or approved outputs
+  merge path for contract compatibility, but active execution for this topic
+  stops at `approved`
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -61,6 +64,9 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-copilot-residue-high`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
+- Active execution stop point: `approved`
+- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
+  canonical contract compatibility; they are not exercised in this topic
 
 ## Artifact Paths
 
@@ -69,6 +75,7 @@ Routing notes:
 | Topic plan | `plan/codex-migration-copilot-residue-high/codex-migration-copilot-residue-high.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-copilot-residue-high/requirements.md` | Planning actor | Branch-local classification baseline |
 | Migration report | `docs/migration/codex-migration-copilot-residue-high-report.md` | Implement Agent | Skill verdicts, redesign paths, and follow-up items |
+| High-residue skill | `.github/skills/git-post-merge-workflow/` | Implement Agent | Allowed high-residue candidate path |
 
 Artifact path notes:
 
@@ -105,7 +112,10 @@ Artifact path notes:
 ## Post-merge / release actions
 
 - No repository release action is part of this topic.
+- No post-merge action is expected inside this topic because active execution
+  stops at `approved`.
 
 ## Open Questions / Unresolved Items
 
-- Exact high-residue candidate skill list remains to be frozen by branch-local analysis.
+- No open candidate-list question remains; later changes require explicit
+  reclassification.
