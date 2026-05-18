@@ -50,7 +50,8 @@
 
 ## Branch-specific rules
 
-- stay inside the locked direct-move set
+- treat the locked set as verification targets, not default writable migration targets
+- produce `already satisfied`, `no move required`, or `needs follow-up` verdicts
 - no confirmed blocker may be implemented here
 - if any additional candidate appears, stop and report instead of absorbing it
 
