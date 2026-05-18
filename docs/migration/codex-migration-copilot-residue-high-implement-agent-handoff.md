@@ -4,15 +4,19 @@
 
 - `feat/andrew/codex-migration-copilot-residue-high`
 
-## Required worktree path
+## Required worktree
 
-- `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-high`
+- Branch: `feat/andrew/codex-migration-copilot-residue-high`
+- Suggested worktree setup (if not already present):
+  ```
+  git worktree add <your-worktrees-dir>/agent-20260516-codex-migration-copilot-residue-high feat/andrew/codex-migration-copilot-residue-high
+  ```
 
 ## Worktree rules
 
-- Treat the required worktree path above as the only valid execution root for this handoff.
-- If the current workspace path does not match it, stop and report path mismatch instead of continuing.
-- Resolve all repo-relative paths from this worktree root only.
+- Confirm the current workspace is on branch `feat/andrew/codex-migration-copilot-residue-high` before continuing.
+- If the current branch does not match, stop and report a branch mismatch instead of continuing.
+- Resolve all repo-relative paths from the repo root of the checked-out worktree.
 
 ## Current plan-review status
 
