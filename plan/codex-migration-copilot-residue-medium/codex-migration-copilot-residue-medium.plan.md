@@ -45,7 +45,7 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `approved`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path for contract compatibility, but active execution for this topic
   stops at `approved`

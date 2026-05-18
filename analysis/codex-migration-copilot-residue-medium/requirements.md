@@ -1,6 +1,6 @@
 # codex-migration-copilot-residue-medium requirements baseline
 
-Status: DRAFT
+Status: FROZEN
 Topic: `codex-migration-copilot-residue-medium`
 Base branch: `feat/andrew/codex-skills-spec-worktree`
 
