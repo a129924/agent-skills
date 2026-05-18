@@ -66,6 +66,18 @@
 
 - `docs/migration/codex-migration-copilot-residue-high-report.md`
 
+## Required report contents
+
+The report must clearly state:
+
+- candidate skill
+- verdict: `redesign`, `defer`, or `reclassify`
+- migration action in this branch: `none`
+- future move recommended: `yes` or `no`
+- why
+- blocker or residue note when applicable
+- follow-up branch or topic if required
+
 ## Branch-specific rules
 
 - execution mode is report-first and classification-only

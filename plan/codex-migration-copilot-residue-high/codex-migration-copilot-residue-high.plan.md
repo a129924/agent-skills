@@ -113,6 +113,8 @@ Artifact path notes:
 - Copilot-specific-only skills are not forced through redesign.
 - Blocker interactions are visible in the report.
 - The report states whether redesign remains credible or must be reclassified.
+- The report does not use an undefined generic `moved / not moved` field.
+- The report explicitly states that migration action in this branch is `none`.
 - No branch-local candidate-skill modification is performed.
 
 ## Reviewer Handoff
