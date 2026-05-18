@@ -16,8 +16,18 @@
 
 ## Current plan-review status
 
-- Round 1 formal review verdict: `approved`
+- Topic-plan review status: `approved`
 - Requirements baseline status: `FROZEN-FOR-IMPLEMENTATION`
+
+## Approval routing note
+
+- The topic plan is already approved as a repo-visible execution contract.
+- That approval does not mean the topic is complete.
+- The only authorized post-approval execution in this branch is creator-side
+  production or update of
+  `docs/migration/codex-migration-copilot-residue-high-report.md`.
+- The topic reaches its own stop point only after that report artifact is
+  reviewed and the topic returns `approved`.
 
 ## Formal review JSON
 
@@ -67,6 +77,8 @@
   - `reclassify`
 - if the redesign path becomes non-credible, stop and report for reclassification
 - if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
+- do not treat topic-plan approval as authorization for publish, merge, or
+  candidate-skill modification
 
 ## Frozen reclassification triggers
 

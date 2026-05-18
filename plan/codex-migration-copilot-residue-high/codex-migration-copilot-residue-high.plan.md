@@ -51,6 +51,10 @@
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path for contract compatibility, but active execution for this topic
   stops at `approved`
+- **Plan-vs-topic note**: approval of this topic plan authorizes creator-side
+  production of the branch-local report artifact. The topic itself reaches its
+  stop point only when that report artifact is reviewed and the topic returns
+  `approved`.
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -71,6 +75,8 @@ Routing notes:
 - Branch target: `feat/andrew/codex-migration-copilot-residue-high`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
 - Active execution stop point: `approved`
+- The stop point refers to approval of the branch-local report artifact under
+  this topic, not merely approval of the topic plan contract itself.
 - `publish-in-progress`, `pr-open`, and `merged` remain listed only for
   canonical contract compatibility; they are not exercised in this topic
 
