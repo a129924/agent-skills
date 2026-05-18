@@ -12,8 +12,8 @@ This branch remains inside the approved `B2. medium Copilot residue` contract.
 - No executable-path or generator coupling was found that would force reroute
   into a blocker-bearing branch.
 - No repo-wide cutover semantics were changed.
-- Bounded workflow/contract remediation was applied only where local candidate
-  files contradicted their own transition contract.
+- No creator/template path-transition remediation is applied in this branch;
+  current active-path semantics remain unchanged by design.
 
 ## Candidate verdicts
 
@@ -25,17 +25,19 @@ Field semantics for this report:
 
 | candidate skill | verdict | migration status | branch action | why | blocker or residue note | follow-up branch or topic |
 | --- | --- | --- | --- | --- | --- | --- |
-| `.github/skills/agent-skill-creator/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | remediation applied | The skill still belongs to the transition-era `.github/skills/` inventory, but its contract had mixed authoring-target semantics between `SKILL.md` and local contract files. | Remediation applied in `.github/skills/agent-skill-creator/SKILL.md`: new authoring now points to `skills/<skill-name>/` as the canonical transition target. No runtime/tooling blocker found. No repo-wide cutover semantics changed. | Follow repo-wide path/cutover work only in a later dedicated migration topic; none required from this branch. |
+| `.github/skills/agent-skill-creator/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | branch-local correction only | The skill remains in the transition-era `.github/skills/` inventory, and this topic does not authorize changing the active authoring target. | This branch removes the premature `skills/<skill-name>/` authoring-target wording and keeps `.github/skills/<skill-name>/` as the current active workflow path. Separate creator/reviewer/template path transition remains downstream work. | Follow the dedicated `skill-authoring-path-transition` phase for creator/reviewer/template contract transition. |
 | `.github/skills/agent-skill-reviewer/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | classification only; no file change | The skill still encodes transition review semantics that distinguish canonical source from mirror/projection review. | Residue remains at workflow/contract level only. No executable-path or generator coupling found. Report state matches unchanged candidate state. | None required unless a later path-cutover topic changes canonical vs mirror review rules. |
-| `.github/skills/agent-skill-template/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | remediation applied | The skill remains part of the transition inventory and had a local template path that conflicted with its surrounding canonical-target contract. | Remediation applied in `.github/skills/agent-skill-template/template.md`: the starter tree now uses `skills/<skill-name>/` and no longer presents `.github/skills/<skill-name>/` as the authoring target. No runtime/tooling blocker found. No repo-wide cutover semantics changed. | Follow repo-wide path/cutover work only in a later dedicated migration topic; none required from this branch. |
+| `.github/skills/agent-skill-template/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | branch-local correction only | The template remains part of the transition inventory, and this topic does not authorize changing scaffold output paths. | This branch removes the premature `skills/<skill-name>/` scaffold wording and keeps `.github/skills/<skill-name>/` as the current active template target. Separate creator/reviewer/template path transition remains downstream work. | Follow the dedicated `skill-authoring-path-transition` phase for creator/reviewer/template contract transition. |
 | `.github/skills/worktree-manager/` | medium residue confirmed | not migrated in this branch; remains medium-residue candidate | classification only; no file change | The skill is migratable, but still carries transition-sensitive workflow/governance semantics around shared planning files, managed-path policy, and destructive routing. | Residue remains bounded to workflow/contract guidance. No executable-path or generator coupling found in this branch review. Report state matches unchanged candidate state. | Reclassify only if later evidence shows mandatory runtime/tooling repair or path-coupled execution behavior. |
 
-## Bounded remediation applied
+## Branch-local corrections applied
 
-- Updated `.github/skills/agent-skill-creator/SKILL.md` to align its creation
-  target wording with the local canonical-target transition contract.
-- Updated `.github/skills/agent-skill-template/template.md` so the starter tree
-  matches the same canonical-target rule.
+- Reverted premature creator wording that changed the active authoring target
+  from `.github/skills/<skill-name>/` to `skills/<skill-name>/`.
+- Reverted premature template scaffold wording that changed the active starter
+  path from `.github/skills/<skill-name>/` to `skills/<skill-name>/`.
+- Kept migration-status reporting separate from branch-local corrective action so
+  the report reflects frozen positioning accurately.
 
 ## Not changed
 
@@ -45,6 +47,8 @@ Field semantics for this report:
   blocker-bearing executable or generator coupling was found.
 - These unchanged candidates remain classified as medium residue; this branch
   executed no file-level remediation for them.
+- Creator/reviewer/template path transition remains a separate downstream phase;
+  this branch does not claim that follow-up is unnecessary.
 - No runtime/tooling repair was attempted.
 - No README, VERSION, or repo-wide path semantics were changed.
 
