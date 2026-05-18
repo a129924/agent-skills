@@ -51,7 +51,7 @@ Do not use this skill when:
    - higher-risk: gatekeeping, release, tool-driven, or high-impact guidance needs stronger misuse prevention
 4. Propose `complexity` in YAML frontmatter. Propose applicable `risk_profile` tags for medium and high complexity skills.
 5. If a topic plan locks a creator/reviewer-first rollout, keep the work inside creator, reviewer, and the minimum supporting policy/template files. Defer downstream regular skills to later topics instead of broadening the current one.
-6. Create `.github/skills/<skill-name>/` as the current active authoring target during transition, where `<skill-name>` must use lowercase kebab-case.
+6. Create `.github/skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case.
 7. Keep the skill focused on one job.
 8. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 9. Add `reference.md` or `examples.md`.
@@ -62,7 +62,7 @@ Do not use this skill when:
 14. When the skill is higher-risk or easy to misuse, add stronger validation signals in `SKILL.md` or local files, such as explicit verification guidance, red flags, rationalizations, or a checklist.
 15. Do not force heavyweight validation onto a simple low-risk skill just because another skill needed it.
 16. If you add optional files or subfolders, declare each role in `Local references`.
-17. If downstream planning-spine skills or other consumers still assume `.github/skills/`, record that as a follow-up implication instead of editing those surfaces in this phase.
+17. If downstream planning-spine skills or future transition consumers would be affected by later path migration, record that as a follow-up implication instead of editing those surfaces in this phase.
 18. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
 
 # Examples
@@ -70,7 +70,7 @@ Do not use this skill when:
 - Negative: Draft a skill when the responsibility is still vague, mixes creation, review, and publishing, or forces release-grade validation onto a simple naming rule.
 
 # Outputs
-- a new `.github/skills/<skill-name>/` folder as the current active authoring target during transition, using lowercase kebab-case
+- a new `.github/skills/<skill-name>/` folder, using lowercase kebab-case
 - `SKILL.md` with concise positive and negative examples
 - `examples.md` for high-complexity skills, or `reference.md` for local detail
 - `references/` when local reference detail must be split by topic
