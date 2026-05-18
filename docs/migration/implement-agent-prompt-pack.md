@@ -39,6 +39,14 @@ You are not the Plan Reviewer.
 You must not widen the branch scope.
 You must not reclassify other branches unless the branch-local contract explicitly tells you to stop and reroute.
 
+## Worktree binding
+
+The branch-specific appendix will declare one required worktree path.
+
+- Treat that required worktree path as the only valid execution root for the handoff.
+- If the current workspace path does not match it, stop and report path mismatch instead of continuing.
+- Resolve all repo-relative paths from that required worktree root only.
+
 ## Required reading order
 
 Read these repo-visible artifacts first:
@@ -77,6 +85,7 @@ The report must clearly state:
 
 Stop and report instead of continuing when:
 
+- the current cwd/worktree root does not match the required worktree path
 - the candidate skill set no longer matches the branch-local plan
 - implementation would require editing an unlisted path
 - runtime/tooling blocker repair becomes necessary in a non-blocker branch
@@ -99,6 +108,9 @@ Return:
 ```text
 Branch:
 `feat/andrew/codex-migration-direct-move`
+
+Required worktree path:
+`/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-direct-move`
 
 Current plan-review status:
 approved
@@ -129,6 +141,9 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-residue-low`
 
+Required worktree path:
+`/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-low`
+
 Current plan-review status:
 approved
 
@@ -154,6 +169,9 @@ Branch-specific rule:
 ```text
 Branch:
 `feat/andrew/codex-migration-copilot-residue-medium`
+
+Required worktree path:
+`/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-medium`
 
 Current plan-review status:
 approved
@@ -184,6 +202,9 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-residue-high`
 
+Required worktree path:
+`/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-high`
+
 Current plan-review status:
 approved
 
@@ -208,6 +229,9 @@ Branch-specific rule:
 ```text
 Branch:
 `feat/andrew/codex-migration-copilot-specific`
+
+Required worktree path:
+`/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-specific`
 
 Current plan-review status:
 approved
