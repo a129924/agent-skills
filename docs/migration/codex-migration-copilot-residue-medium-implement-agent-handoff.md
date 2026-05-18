@@ -4,6 +4,16 @@
 
 - `feat/andrew/codex-migration-copilot-residue-medium`
 
+## Required worktree path
+
+- `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-medium`
+
+## Worktree rules
+
+- Treat the required worktree path above as the only valid execution root for this handoff.
+- If the current workspace path does not match it, stop and report path mismatch instead of continuing.
+- Resolve all repo-relative paths from this worktree root only.
+
 ## Current plan-review status
 
 - Round 1 formal review verdict: `approved`
@@ -53,6 +63,7 @@
 - bounded workflow and contract remediation is allowed
 - runtime/tooling blocker repair is not allowed
 - if executable-path or generator coupling appears, stop and reroute
+- if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
 
 ## Required final return
 
