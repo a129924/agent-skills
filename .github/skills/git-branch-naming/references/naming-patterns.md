@@ -25,7 +25,7 @@ Keep development branch types aligned with commit semantics:
 - `test`
 - `chore`
 
-Release and hotfix timing decisions belong to `git-release-management`, even if naming style later stays compatible.
+Release and hotfix timing decisions belong to the repository's release or hotfix workflow, even if naming style later stays compatible.
 
 ## Short-description rule
 
