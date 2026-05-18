@@ -12,16 +12,14 @@
 
 - verdict: `redesign`
 - migration action in this branch: `none`
-- actual migration action performed in this branch: `none`
 - future move recommended: `yes`
 
 ## Why
 
 - The skill still expresses a portable post-merge safety workflow rather than a
   Copilot-only behavior.
-- The core behavior is product-agnostic: verify STOP POINT 2 resume
-  conditions, protect local state, perform ff-only sync, and apply guarded
-  branch cleanup.
+- The core behavior is product-agnostic: verify a post-merge resume gate,
+  protect local state, perform ff-only sync, and apply guarded branch cleanup.
 - The current implementation remains tightly coupled to transition-era
   repository workflow semantics, `.github/skills/` placement, and git command
   execution details, so it does not qualify for direct move or low-residue
