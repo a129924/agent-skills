@@ -30,6 +30,8 @@
   branch-local evidence supports reclassification.
 - Confirmed-blocker status must be preserved explicitly in the report when the
   evidence set marks a candidate as runtime/tooling-blocked.
+- Confirmed-blocker status is report context only; it must not replace the
+  final branch-local verdict vocabulary.
 - The branch must not force implementation migration for Copilot-specific-only
   skills.
 - The branch must not perform runtime/tooling blocker repair.
@@ -41,6 +43,7 @@
 - Do not perform repo-wide cutover or blocker repair from this branch.
 - Do not hide `do-not-migrate` conclusions behind vague future-work wording.
 - Do not hide confirmed-blocker status behind a generic Copilot-specific label.
+- Do not treat conceptual reuse or reusable references as migration approval.
 
 ## Status / Allowed Transitions
 
@@ -101,6 +104,7 @@ Artifact path notes:
 - Every candidate has a Copilot-specific verdict.
 - `reference-only` versus `do-not-migrate` is explicit for each skill.
 - Confirmed-blocker status is explicit when supported by repo-visible evidence.
+- Confirmed-blocker status appears as report context, not as a third verdict.
 - No forced migration implementation happens without reclassification.
 - No blocker repair is executed from this branch.
 

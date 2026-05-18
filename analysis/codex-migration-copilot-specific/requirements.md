@@ -1,6 +1,6 @@
 # codex-migration-copilot-specific requirements baseline
 
-Status: DRAFT
+Status: FROZEN-FOR-IMPLEMENTATION
 Topic: `codex-migration-copilot-specific`
 Base branch: `feat/andrew/codex-skills-spec-worktree`
 
@@ -19,6 +19,18 @@ Freeze the Copilot-specific baseline and separate these skills into
 `reference-only` versus `do-not-migrate` conclusions before any migration work
 starts, while recording confirmed-blocker status as part of the branch-local
 report.
+
+## Verdict Rules
+
+- Final branch-local verdicts are limited to:
+  - `reference-only`
+  - `do-not-migrate`
+- `confirmed-blocker` is evidence context and report metadata, not a third
+  final verdict.
+- Conceptual reuse or reusable references do not authorize migration from this
+  branch.
+- If a skill appears portable after all, it must leave this branch and be
+  reclassified before any migration work starts.
 
 ## Candidate skill set
 
@@ -51,6 +63,16 @@ Skills in this topic:
 - are not good direct migration candidates
 - may also be confirmed runtime/tooling blockers
 - must be split into `C1. reference-only` or `C2. do-not-migrate`
+
+Verdict boundary guidance:
+
+- Use `reference-only` when reusable policy, checklist, or heuristic value can
+  be extracted without approving migration of the skill itself.
+- Use `do-not-migrate` when the skill should not be migrated from this branch,
+  even if some isolated ideas remain worth noting separately.
+- Do not treat blocker status itself as the verdict; it explains why a skill is
+  risky or non-portable, but the final branch verdict still stays within the
+  two-value set above.
 
 If a candidate turns out to be portable after all, it must leave this branch
 and be reclassified.

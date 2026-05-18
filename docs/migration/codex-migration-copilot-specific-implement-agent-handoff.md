@@ -7,6 +7,7 @@
 ## Current plan-review status
 
 - Round 1 formal review verdict: `approved`
+- Requirements baseline status: `FROZEN-FOR-IMPLEMENTATION`
 
 ## Formal review JSON
 
@@ -39,6 +40,8 @@
   runtime/tooling surface.
 - This branch is allowed to report that blocker status and classify the skill as
   `reference-only` or `do-not-migrate`.
+- `confirmed-blocker` is report context, not a third final verdict in this
+  branch.
 - This branch is not allowed to repair the blocker or force migration.
 
 ## Required reading order
@@ -59,6 +62,7 @@
 - every final conclusion must remain either `reference-only` or `do-not-migrate`
 - confirmed-blocker status must be reported explicitly when supported by the
   repo-visible evidence set
+- conceptual reuse or reusable references do not equal migration approval
 - do not force migration unless explicit branch-local reclassification occurs
 - do not execute runtime/tooling blocker repair from this branch
 
