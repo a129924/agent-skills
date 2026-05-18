@@ -53,8 +53,9 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path for contract compatibility, but active execution for this topic
-  stops at `approved`
+  merge path for contract compatibility; verification work for this topic is
+  complete at `approved`, while branch packaging and PR handoff may continue
+  afterward without widening the topic into skill migration
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -74,9 +75,10 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-direct-move`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
-- Active execution stop point: `approved`
-- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
-  canonical contract compatibility; they are not exercised in this topic
+- Verification completion point: `approved`
+- `publish-in-progress`, `pr-open`, and `merged` remain valid downstream branch
+  packaging states after verification is complete; they do not authorize new
+  branch-local skill migration work in this topic
 - This topic should merge back into its feature branch line, not `dev`.
 
 ## Artifact Paths

@@ -36,7 +36,7 @@
 - No fifth candidate was absorbed.
 - No blocker was repaired.
 - No `skills/...` or `.github/skills/...` content was edited.
-- Current branch worktree state for `skills/` and `.github/skills/` remains clean; the only branch-local change for this milestone is this report file.
+- Current branch worktree state for `skills/` and `.github/skills/` remains clean; the implementation-side deliverable for this milestone is the report, alongside the branch-local requirements, plan, and implement handoff artifacts that package the verification topic.
 - The correct branch-local outcome is report-only completion:
   - all four candidates are `already satisfied`
   - all four are `not moved` in this branch
