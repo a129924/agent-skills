@@ -1,6 +1,6 @@
 # codex-migration-direct-move requirements baseline
 
-Status: DRAFT
+Status: LOCKED
 Topic: `codex-migration-direct-move`
 Base branch: `feat/andrew/codex-skills-spec-worktree`
 

@@ -12,6 +12,7 @@
 - **In scope**:
   - `analysis/codex-migration-direct-move/requirements.md`
   - `plan/codex-migration-direct-move/codex-migration-direct-move.plan.md`
+  - `docs/migration/codex-migration-direct-move-implement-agent-handoff.md`
   - `docs/migration/codex-migration-direct-move-report.md`
   - `skills/business-intent-alignment/`
   - `skills/business-to-technical-translation/`
@@ -51,7 +52,7 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path for contract compatibility; verification work for this topic is
   complete at `approved`, while branch packaging and PR handoff may continue
@@ -87,6 +88,7 @@ Routing notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/codex-migration-direct-move/codex-migration-direct-move.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-direct-move/requirements.md` | Planning actor | Branch-local classification baseline |
+| Implement agent handoff | `docs/migration/codex-migration-direct-move-implement-agent-handoff.md` | Planning actor | Worktree path, reading order, and output-path contract for the implement agent |
 | Migration report | `docs/migration/codex-migration-direct-move-report.md` | Implement Agent | Candidate verification verdicts and follow-up notes |
 | Verification target | `skills/business-intent-alignment/` | Implement Agent | Read/verify target for direct-use readiness |
 | Verification target | `skills/business-to-technical-translation/` | Implement Agent | Read/verify target for direct-use readiness |
@@ -126,11 +128,17 @@ Artifact path notes:
 
 ```json
 {
-  "verdict": "approved|needs-rework",
+  "verdict": "approved",
   "blocking_issues": [],
   "copilot_feedback_triage": {
     "ADDRESS": [],
-    "DISCUSS": [],
+    "DISCUSS": [
+      {
+        "comment": "If later implementation expands beyond the four locked skill paths, update Artifact Paths and Requirements together before continuing.",
+        "optional": true,
+        "why": "The current contract is consistent, but this branch is especially sensitive to silent candidate-set growth."
+      }
+    ],
     "SKIP": []
   }
 }
