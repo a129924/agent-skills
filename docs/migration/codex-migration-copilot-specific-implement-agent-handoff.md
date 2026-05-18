@@ -32,6 +32,15 @@
 
 - `.github/skills/copilot-instructions-init/`
 
+## Repo-visible blocker note
+
+- `docs/migration/migration-runway-checklist.md` currently classifies
+  `.github/skills/copilot-instructions-init/` as a `confirmed-blocker`
+  runtime/tooling surface.
+- This branch is allowed to report that blocker status and classify the skill as
+  `reference-only` or `do-not-migrate`.
+- This branch is not allowed to repair the blocker or force migration.
+
 ## Required reading order
 
 1. `plan/agent-handoff-workflow.md`
@@ -48,7 +57,10 @@
 ## Branch-specific rules
 
 - every final conclusion must remain either `reference-only` or `do-not-migrate`
+- confirmed-blocker status must be reported explicitly when supported by the
+  repo-visible evidence set
 - do not force migration unless explicit branch-local reclassification occurs
+- do not execute runtime/tooling blocker repair from this branch
 
 ## Required final return
 
