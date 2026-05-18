@@ -72,14 +72,13 @@ Read these repo-visible artifacts first:
 
 Produce or update the branch-local migration report at the exact path declared in the branch-local plan.
 
-The report must clearly state:
+The report must use the branch-local field definitions frozen by the topic plan
+and handoff package.
 
-- candidate skill
-- verdict
-- moved / not moved
-- why
-- blocker or residue note when applicable
-- follow-up branch or topic if required
+- If the branch-local contract defines report fields explicitly, use those
+  fields and do not invent generic migration-status columns.
+- If the branch-local contract does not define the required report fields
+  clearly enough, stop and report a contract gap instead of guessing.
 
 ## Stop rules
 
