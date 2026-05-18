@@ -46,6 +46,7 @@ The branch-specific appendix will declare one required worktree path.
 - Treat that required worktree path as the only valid execution root for the handoff.
 - If the current workspace path does not match it, stop and report path mismatch instead of continuing.
 - Resolve all repo-relative paths from that required worktree root only.
+
 ## Required reading order
 
 Read these repo-visible artifacts first:
@@ -109,6 +110,7 @@ Branch:
 
 Required worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-direct-move`
+
 Current plan-review status:
 approved
 
@@ -140,6 +142,7 @@ Branch:
 
 Required worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-low`
+
 Current plan-review status:
 approved
 
@@ -168,6 +171,7 @@ Branch:
 
 Required worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-medium`
+
 Current plan-review status:
 approved
 
@@ -199,6 +203,7 @@ Branch:
 
 Required worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-high`
+
 Current plan-review status:
 approved
 
@@ -226,6 +231,7 @@ Branch:
 
 Required worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-specific`
+
 Current plan-review status:
 approved
 
