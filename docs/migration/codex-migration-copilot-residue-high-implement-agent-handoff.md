@@ -17,6 +17,7 @@
 ## Current plan-review status
 
 - Round 1 formal review verdict: `approved`
+- Requirements baseline status: `FROZEN-FOR-IMPLEMENTATION`
 
 ## Formal review JSON
 
@@ -57,9 +58,27 @@
 
 ## Branch-specific rules
 
-- redesign-oriented work is allowed only inside the single locked candidate
+- execution mode is report-first and classification-only
+- treat `.github/skills/git-post-merge-workflow/` as read/verify scope, not an
+  authorized modification target in this branch
+- final branch-local verdict must be one of:
+  - `redesign`
+  - `defer`
+  - `reclassify`
 - if the redesign path becomes non-credible, stop and report for reclassification
 - if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
+
+## Frozen reclassification triggers
+
+Treat redesign as non-credible and stop for reclassification when any of the
+following becomes true:
+
+- runtime/tooling blocker repair would be required
+- the skill is better described as Copilot-specific-only or reference-only
+- a bounded redesign objective cannot be stated from repo-visible evidence alone
+- execution would require editing files outside
+  `docs/migration/codex-migration-copilot-residue-high-report.md`
+- execution would change repo-wide cutover semantics
 
 ## Required final return
 

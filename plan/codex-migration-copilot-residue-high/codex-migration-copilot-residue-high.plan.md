@@ -4,7 +4,9 @@
 
 - Freeze the high-residue candidate set.
 - Produce a branch-local report for high Copilot-residue skills.
-- Prepare bounded redesign-oriented implementation planning where appropriate.
+- Freeze redesign-oriented classification and reclassification boundaries from
+  repo-visible evidence.
+- Do not execute branch-local candidate-skill modification from this topic.
 
 ## Scope
 
@@ -28,8 +30,11 @@
 - The branch may analyze redesign paths but must not hide Copilot-specific-only
   conclusions.
 - Runtime/tooling blocker repair remains out of scope.
-- Implementation can proceed only after each skill has a branch-local redesign,
-  defer, or reclassify verdict.
+- Execution mode for this topic is report-first and classification-only.
+- Implementation in this topic means report production, not candidate-skill
+  modification.
+- Each skill must end with a branch-local `redesign`, `defer`, or `reclassify`
+  verdict plus explicit reasons.
 - This topic is review-ready-only with no stable-library release action.
 
 ## Boundaries / Exclusions
@@ -38,6 +43,7 @@
 - Do not absorb runtime/tooling transition work here.
 - Do not force Copilot-specific skills into migration if evidence says
   reference-only or no-migrate.
+- Do not edit `.github/skills/git-post-merge-workflow/` from this branch.
 
 ## Status / Allowed Transitions
 
@@ -75,25 +81,33 @@ Routing notes:
 | Topic plan | `plan/codex-migration-copilot-residue-high/codex-migration-copilot-residue-high.plan.md` | Planning actor | Repo-visible execution contract for this branch topic |
 | Requirements baseline | `analysis/codex-migration-copilot-residue-high/requirements.md` | Planning actor | Branch-local classification baseline |
 | Migration report | `docs/migration/codex-migration-copilot-residue-high-report.md` | Implement Agent | Skill verdicts, redesign paths, and follow-up items |
-| High-residue skill | `.github/skills/git-post-merge-workflow/` | Implement Agent | Allowed high-residue candidate path |
+| High-residue skill | `.github/skills/git-post-merge-workflow/` | Implement Agent | Allowed read/verify candidate path for high-residue classification only |
 
 Artifact path notes:
 
 - This topic does not require `VERSION` changes.
 - This topic does not require `README.md` changes before the candidate set is frozen.
+- The candidate skill path is read/verify scope only.
+- No branch-local candidate-skill modification is authorized by this plan.
 
 ## Implementation Steps
 
 1. Collect candidate skills that fit the high-residue class.
-2. Freeze redesign / defer / reclassify verdicts for each skill.
-3. Produce the branch-local report with explicit redesign boundaries.
-4. Implement only the work that remains inside the frozen high-residue scope.
+2. Evaluate whether a credible redesign path can be described from repo-visible
+   evidence alone without widening scope.
+3. Freeze `redesign`, `defer`, or `reclassify` verdicts for each skill.
+4. Produce the branch-local report with explicit redesign boundaries and
+   reclassification triggers.
+5. Stop at report-ready / approved output; do not modify the candidate skill in
+   this branch.
 
 ## Validation / Acceptance Checks
 
 - Every skill has a high-residue rationale.
 - Copilot-specific-only skills are not forced through redesign.
 - Blocker interactions are visible in the report.
+- The report states whether redesign remains credible or must be reclassified.
+- No branch-local candidate-skill modification is performed.
 
 ## Reviewer Handoff
 
@@ -117,5 +131,11 @@ Artifact path notes:
 
 ## Open Questions / Unresolved Items
 
-- No open candidate-list question remains; later changes require explicit
-  reclassification.
+- A redesign path is non-credible and must trigger reclassification when any of
+  the following becomes true:
+  - runtime/tooling blocker repair would be required
+  - the skill is better described as Copilot-specific-only or reference-only
+  - a bounded redesign objective cannot be stated from repo-visible evidence
+    alone
+  - executing the redesign would require editing files outside the locked report
+    path or changing repo-wide cutover semantics
