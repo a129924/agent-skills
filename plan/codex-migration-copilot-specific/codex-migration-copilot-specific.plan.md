@@ -47,10 +47,10 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path for contract compatibility, but active execution for this topic
-  stops at `approved`
+  merge path through branch-local report production and PR handling, without
+  widening into blocker repair or migration implementation
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -70,9 +70,8 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-migration-copilot-specific`
 - Base branch: `feat/andrew/codex-skills-spec-worktree`
-- Active execution stop point: `approved`
-- `publish-in-progress`, `pr-open`, and `merged` remain listed only for
-  canonical contract compatibility; they are not exercised in this topic
+- Current repo-visible state includes an open PR for this branch, so
+  `publish-in-progress` and `pr-open` are exercised states for this topic
 
 ## Artifact Paths
 
@@ -96,8 +95,8 @@ Artifact path notes:
 3. Freeze `reference-only` versus `do-not-migrate` verdicts for each skill.
 4. Produce the branch-local report with blocker notes and reusable-reference
    notes where relevant.
-5. Stop at report-ready / approved output; do not execute blocker repair or
-   migration implementation from this branch.
+5. Carry the report through branch-local publish / PR handling as needed, but
+   do not execute blocker repair or migration implementation from this branch.
 
 ## Validation / Acceptance Checks
 
@@ -125,8 +124,8 @@ Artifact path notes:
 ## Post-merge / release actions
 
 - No repository release action is part of this topic.
-- No post-merge action is expected inside this topic because active execution
-  stops at `approved`.
+- If this branch merges, only normal branch-local cleanup or handoff is in
+  scope; blocker repair and migration implementation remain out of scope.
 
 ## Open Questions / Unresolved Items
 
