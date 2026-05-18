@@ -198,7 +198,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-implementation-workflow` | orchestrates the end-to-end Python implementation workflow with active gates across plan review, TDD assessment, implementation, implementation review, code review, and medium/high-severity drift correction handling |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
-| `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict` |
+| `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict`, including boundary-only `object` use and preservation of stronger repo-owned types |
 | `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
 | `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
 | `python-testing-pytest` | defines pure Python pytest unit-testing rules for fixtures, parametrization, assertions, mocks, and coverage as a quality target |
