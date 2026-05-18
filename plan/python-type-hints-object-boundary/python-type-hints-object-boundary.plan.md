@@ -66,9 +66,10 @@ typing policy rather than runtime model selection.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge path, but stop at `merged`; this topic does not declare a release action
+- **Current**: `pr-open`
+- **Execution model**: PR #77 is already open, so live routing resumes at
+  `pr-open` and continues through the canonical review-fix -> merge path; this
+  topic does not declare a release action
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -86,12 +87,15 @@ typing policy rather than runtime model selection.
 
 Routing notes:
 
+- Live resume point is `pr-open` for PR #77; do not restart this topic from
+  `planned` unless the plan is explicitly reset.
 - Phase 4.5 planner contract alignment is required after reviewer approval and
   before publish work.
 - If reviewer approval reveals drift in the locked invalid/valid `object`
   contract, artifact paths, or non-stable intent, route back to
   `creator-in-progress`.
-- Human STOP POINT 1 still gates any later commit / push / PR creation.
+- Human STOP POINT 1 has already been passed for this topic because the PR is
+  open; use PR feedback / merge routing from here.
 - This planning topic itself stops after the repo-visible plan is produced and
   human review is complete.
 

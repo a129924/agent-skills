@@ -57,7 +57,7 @@ def group_names(users: List[User]) -> Dict[str, List[str]]:
 
 ### Use
 ```py
-from typing import TypeAlias, TypeGuard
+from typing_extensions import TypeAlias, TypeGuard
 
 UserId: TypeAlias = int
 
@@ -72,13 +72,17 @@ def parse_user_id(raw: object) -> UserId:
     raise ValueError("invalid user id")
 ```
 
+- Keep this boundary example copyable on Python 3.8/3.9 by importing
+  `TypeAlias` and `TypeGuard` from `typing_extensions`.
+- On Python 3.10+, the stdlib spellings are equivalent, but the boundary rule
+  stays the same.
 - `object` appears only at a narrowing-helper input or decoder boundary.
 - The precise repo-owned alias `UserId` is recovered before normal business use.
 - The justification names the boundary or narrowing role instead of using convenience wording.
 
 ### Avoid
 ```py
-from typing import TypeAlias
+from typing_extensions import TypeAlias
 
 UserId: TypeAlias = int
 
