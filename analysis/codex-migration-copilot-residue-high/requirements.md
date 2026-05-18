@@ -64,6 +64,16 @@ Reclassification triggers are frozen to the following repo-visible conditions:
 - the branch-local files cannot describe a bounded redesign objective from the
   current repo-visible evidence set alone
 
+Reclassification effect:
+
+- A branch-local `reclassify` verdict is advisory and routing-authoritative for
+  this branch only.
+- It does not edit or silently override upstream first-wave inclusion records in
+  `docs/migration/codex-skills-spec-worktree.md`.
+- Any parent-artifact correction for the spec-worktree document must be handled
+  later by a planner-owned follow-up on the base branch
+  `feat/andrew/codex-skills-spec-worktree`.
+
 ## Non-goals
 
 - branch-local modification of `.github/skills/git-post-merge-workflow/`

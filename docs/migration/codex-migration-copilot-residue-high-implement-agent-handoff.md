@@ -78,6 +78,13 @@ The report must clearly state:
 - blocker or residue note when applicable
 - follow-up branch or topic if required
 
+If the verdict is `reclassify`, the report must also state:
+
+- upstream `docs/migration/codex-skills-spec-worktree.md` remains unchanged in
+  this branch
+- parent-artifact correction is deferred to a planner-owned follow-up on
+  `feat/andrew/codex-skills-spec-worktree`
+
 ## Branch-specific rules
 
 - execution mode is report-first and classification-only
@@ -87,6 +94,9 @@ The report must clearly state:
   - `redesign`
   - `defer`
   - `reclassify`
+- a `reclassify` verdict is advisory for upstream spec artifacts and does not
+  by itself remove the skill from the first-wave list in
+  `docs/migration/codex-skills-spec-worktree.md`
 - if the redesign path becomes non-credible, stop and report for reclassification
 - if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
 - do not treat topic-plan approval as authorization for publish, merge, or

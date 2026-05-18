@@ -35,6 +35,9 @@
   modification.
 - Each skill must end with a branch-local `redesign`, `defer`, or `reclassify`
   verdict plus explicit reasons.
+- A branch-local `reclassify` verdict is advisory for upstream spec artifacts
+  and does not modify `docs/migration/codex-skills-spec-worktree.md` in this
+  branch.
 - This topic is review-ready-only with no stable-library release action.
 
 ## Boundaries / Exclusions
@@ -44,6 +47,7 @@
 - Do not force Copilot-specific skills into migration if evidence says
   reference-only or no-migrate.
 - Do not edit `.github/skills/git-post-merge-workflow/` from this branch.
+- Do not edit `docs/migration/codex-skills-spec-worktree.md` from this branch.
 
 ## Status / Allowed Transitions
 
@@ -113,6 +117,10 @@ Artifact path notes:
 - Copilot-specific-only skills are not forced through redesign.
 - Blocker interactions are visible in the report.
 - The report states whether redesign remains credible or must be reclassified.
+- If the verdict is `reclassify`, the report states that upstream
+  `docs/migration/codex-skills-spec-worktree.md` remains unchanged in this
+  branch and requires a planner-owned follow-up correction on
+  `feat/andrew/codex-skills-spec-worktree`.
 - The report does not use an undefined generic `moved / not moved` field.
 - The report explicitly states that migration action in this branch is `none`.
 - No branch-local candidate-skill modification is performed.
