@@ -40,6 +40,22 @@ skills/                          # intended canonical skill source
   mirror layer, not source of truth.
 - external installer repositories or tools own fetch / install / sync / deploy.
 
+## Current Migration Snapshot
+
+- `feat/andrew/codex-skills-spec-worktree` now carries the spec-worktree
+  validation surface for `.codex/skills/` as a projection-only adapter layout.
+- Five branch-local migration topics were merged back into this worktree branch
+  as planning/reporting artifacts:
+  - `codex-migration-direct-move`
+  - `codex-migration-copilot-residue-low`
+  - `codex-migration-copilot-residue-medium`
+  - `codex-migration-copilot-residue-high`
+  - `codex-migration-copilot-specific`
+- These merged topics do not declare repo-wide active-path cutover. They record
+  candidate classification, bounded remediation, and follow-up routing only.
+- The spec-worktree branch remains a transition-planning surface, not a formal
+  release branch.
+
 ## Repository rules
 Every stable skill should:
 - solve one job
@@ -178,6 +194,8 @@ Process documentation and workflow guidance for repository operations:
 | `COPILOT-CLI-WORKFLOW.md` | practical Copilot CLI operating guide for workflow-gated prompting, reduced repeated context, and when to use `/pr`, `/review`, `/fleet`, and `/tasks` with the repo agent |
 | `REFERENCE-INTAKE-PROCESS.md` | lightweight 5-layer process for evaluating, triaging, and adopting ideas from external Agent Skills repositories |
 | `OTHER-PROJECT-EXAMPLES.md` | changelog of external ideas adopted into this repository's stable library via the reference intake workflow |
+| `docs/migration/codex-skills-spec-worktree.md` | branch-local spec-worktree validation contract for `.codex/skills/` projection experiments |
+| `docs/migration/plan-review-protocol.md` | repeatable planner/reviewer protocol for migration-branch `plan.md` review |
 
 ## Current skills
 | Skill | Role |
