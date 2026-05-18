@@ -7,8 +7,8 @@ Requirements baseline: `analysis/codex-migration-copilot-residue-low/requirement
 ## Candidate: `.github/skills/git-commit-convention/`
 
 - verdict: `low`
-- migration status: `not moved`
-- branch action: `no branch-local skill edit`
+- migration status: `not moved in this branch`
+- branch action: `reviewed only; no remediation applied`
 - why:
   - The skill is already migratable in its current path for this branch topic.
   - No workflow or contract redesign signal was found in the current skill content.
@@ -22,8 +22,8 @@ Requirements baseline: `analysis/codex-migration-copilot-residue-low/requirement
 ## Candidate: `.github/skills/git-branch-naming/`
 
 - verdict: `low`
-- migration status: `not moved`
-- branch action: `bounded remediation applied`
+- migration status: `not moved in this branch`
+- branch action: `low-residue remediation applied to wording and local path cleanup`
 - why:
   - The skill is migratable without contract redesign.
   - The residue found in this branch was limited to wording and local reference cleanup.
@@ -38,6 +38,8 @@ Requirements baseline: `analysis/codex-migration-copilot-residue-low/requirement
 
 - branch-local verdict: `inside approved contract`
 - moved skills: `none`
+- common-base sync result:
+  - `docs/migration/implement-agent-prompt-pack.md` was aligned to the current base branch during sync and is not part of the branch-local topic outcome.
 - changed paths:
   - `.github/skills/git-branch-naming/SKILL.md`
   - `.github/skills/git-branch-naming/references/naming-patterns.md`
