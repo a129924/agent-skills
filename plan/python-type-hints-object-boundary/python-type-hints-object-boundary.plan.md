@@ -26,7 +26,6 @@ typing policy rather than runtime model selection.
   - preserve the active skill path under `.github/skills/`
 
 - **Out of scope**:
-  - any change to `README.md`, `VERSION`, or release notes
   - any change to `.github/copilot-instructions.md`
   - any new test harness, checklist file, or skill-path migration
   - choosing runtime models such as `Enum`, `dataclass`, `ABC`, or `Protocol`
@@ -35,7 +34,12 @@ typing policy rather than runtime model selection.
 ## Locked Decisions
 
 - Topic slug is `python-type-hints-object-boundary`.
-- This is a **review-ready-only topic with no stable-library surfaces**.
+- `python-type-hints-strict` is an **existing stable skill** listed in `README.md`
+  under Current skills; this topic updates it with a new hard `object`-boundary rule.
+- **Stable-library SemVer impact**: adding a new constraint rule to an existing stable
+  skill is a backward-compatible capability addition → **MINOR bump** (e.g. `0.57.0`).
+- `README.md` and `VERSION` must be updated post-merge as part of the standard
+  release step; they are deferred, not excluded.
 - Base branch is `dev`.
 - Execution branch is `feat/andrew/python-type-hints-object-boundary`.
 - Managed worktree path is
@@ -112,10 +116,10 @@ Routing notes:
 
 Artifact path notes:
 
-- This topic does **not** modify `README.md`, `VERSION`, or
-  `.github/copilot-instructions.md`.
-- `Stable library metadata` is intentionally absent because this topic does not
-  perform stable-library publish work.
+- `README.md` and `VERSION` are **deferred** to the post-merge release step, not
+  permanently excluded; a MINOR bump is required before or at merge into the
+  stable branch.
+- `.github/copilot-instructions.md` remains out of scope.
 - The listed paths are an executable contract.
 - If later work proposes any repo-visible change outside these paths, stop and
   repair the topic plan before execution continues.
@@ -171,7 +175,7 @@ Artifact path notes:
 - [ ] `python-model-selection` redirect is preserved
 - [ ] no files outside the declared artifact paths are modified
 - [ ] reviewer handoff remains exactly one JSON object
-- [ ] non-stable intent is preserved; no `README.md` / `VERSION` drift appears
+- [ ] `README.md` and `VERSION` are scheduled for MINOR bump in post-merge release step
 
 ## Reviewer Handoff
 
@@ -189,11 +193,11 @@ Artifact path notes:
 
 ## Post-merge / release actions
 
-- If this topic is later implemented and merged, local sync follows the normal
-  post-merge workflow.
-- No repository release action is required for this topic.
-- Any future stable-library publish decision for this skill belongs in a
-  separate publish-focused topic.
+- After merge, bump `VERSION` to the next MINOR version (e.g. `0.57.0`) and
+  update `README.md` if the skill description requires amendment.
+- Local sync follows the normal post-merge workflow.
+- The `README.md` description for `python-type-hints-strict` should note the
+  `object`-boundary rule if it changes the advertised capability summary.
 
 ## Open Questions / Unresolved Items
 

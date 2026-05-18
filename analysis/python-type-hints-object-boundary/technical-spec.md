@@ -150,9 +150,12 @@ file permits a broader use of `object` than another, reviewer should return
 | Reference rules | `.github/skills/python-type-hints-strict/reference.md` | Add object-specific boundary rules, preference order, and justification requirement |
 | Example scenarios | `.github/skills/python-type-hints-strict/examples.md` | Add allowed-boundary and invalid-weakening scenarios |
 
-**Explicit no-change paths:** `README.md`, `VERSION`,
-`.github/copilot-instructions.md`, and any new test harness are outside this
-topic unless a later publish topic chooses otherwise.
+**Stable-library SemVer note:** `python-type-hints-strict` is already listed under
+Current skills in `README.md`. Adding a new hard constraint rule is a
+backward-compatible capability addition; the repo `VERSION` must receive a **MINOR
+bump** and `README.md` must be updated at the post-merge release step.
+`README.md`, `VERSION`, and `.github/copilot-instructions.md` are therefore
+**deferred** (not permanently excluded) from this topic's immediate artifact set.
 
 ---
 
@@ -163,7 +166,7 @@ topic unless a later publish topic chooses otherwise.
 | Existing skill path remains `.github/skills/` | ✅ FIT | Matches current active workflow path during transition |
 | Single responsibility | ✅ FIT | Topic tightens strict-typing policy only |
 | Required local files remain the same | ✅ FIT | `SKILL.md`, `reference.md`, `examples.md`; no new companion file required |
-| Stable-library surfaces touched now | ✅ NO | No `README.md`/`VERSION` change planned in this topic |
+| Stable-library surfaces touched now | ⚠️ FIT (DEFERRED) | `python-type-hints-strict` is already stable; `README.md` / `VERSION` require MINOR bump post-merge |
 | Creator/reviewer role separation preserved | ✅ FIT | Plan stops before implementation approval; later execution still uses creator and reviewer separately |
 | Analysis-layer compatibility | ✅ FIT | Both analysis artifacts exist, so downstream plan can run in strict mode |
 
@@ -193,7 +196,8 @@ No architecture waiver is required.
 
 - Reviewer must check semantic alignment across three files, not only local line
   edits
-- No migration, release, or stable-library burden is introduced in this topic
+- `README.md` / `VERSION` MINOR bump is required post-merge as part of the
+  standard release step; no migration burden within the topic itself
 
 ---
 
@@ -205,8 +209,8 @@ these conditions appear during implementation:
 1. A new requirement tries to make `python-type-hints-strict` choose concrete
    runtime model forms (`Enum`, `dataclass`, `ABC`, `Protocol`) instead of only
    typing policy
-2. A proposed implementation requires `README.md` or `VERSION` changes even
-   though this topic is declared non-stable
+2. A proposed implementation requires `README.md` or `VERSION` changes beyond the
+   expected MINOR bump deferred to the post-merge release step
 3. The allowed `object` boundary list grows beyond untrusted-boundary /
    narrowing-helper entry points without a new frozen requirement baseline
 
@@ -222,5 +226,6 @@ The downstream topic plan must:
 
 - operate in **strict mode** because both analysis artifacts exist
 - map its implementation steps 100% to the three target skill files named above
-- declare explicit non-stable intent
+- declare stable-library SemVer intent (MINOR bump post-merge) and identify
+  `README.md` and `VERSION` as deferred release artifacts
 - stop after repo-visible planning until a human resumes creator execution
