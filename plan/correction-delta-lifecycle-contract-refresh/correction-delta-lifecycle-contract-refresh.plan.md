@@ -70,6 +70,9 @@
   handoff only when feedback controls routing or multi-round rework.
 - Round limits remain optional topic policy. This topic must not turn a
   three-round sample cap into a repository-wide universal default.
+- Because the current planning run uses a capped reviewer <-> planner loop, keep
+  a repo-visible review-log at
+  `plan/correction-delta-lifecycle-contract-refresh/correction-delta-lifecycle-contract-refresh.review-log.md`.
 - Do not create a new standalone Agent Skill in this topic. Keep a future
   extraction boundary explicit instead.
 - The current analysis artifacts under
@@ -121,6 +124,8 @@ Routing notes:
 - In the current planning run, reviewer <-> planner iteration is capped at three
   rounds. If round three still returns `needs-rework`, stop and hand off to human
   check instead of continuing the loop.
+- The repo-visible routing handoff artifact for that capped loop is
+  `plan/correction-delta-lifecycle-contract-refresh/correction-delta-lifecycle-contract-refresh.review-log.md`.
 - Use the standard Phase 4.5 planner-alignment rule for later implementation
   execution after human approval.
 
@@ -129,6 +134,7 @@ Routing notes:
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/correction-delta-lifecycle-contract-refresh/correction-delta-lifecycle-contract-refresh.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Planning review log | `plan/correction-delta-lifecycle-contract-refresh/correction-delta-lifecycle-contract-refresh.review-log.md` | Reviewer -> Planning actor | Repo-visible feedback trail for the capped reviewer <-> planner loop and later routing-controlling plan-review feedback on this topic |
 | Analysis requirements input | `analysis/correction-delta-workflow-internalization/requirements.md` | Planning actor -> Creator -> Reviewer | Frozen business baseline and non-internalizable-boundary guardrail for this topic |
 | Analysis technical spec input | `analysis/correction-delta-workflow-internalization/technical-spec.md` | Planning actor -> Creator -> Reviewer | Execution-facing analysis source of truth for this topic in strict mode |
 | Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Slim repo-level correction lifecycle / routing contract |
@@ -148,6 +154,8 @@ Artifact path notes:
 - `README.md`: no change in this topic.
 - `VERSION`: no change in this topic.
 - `.github/copilot-instructions.md`: no change in this topic.
+- The exact review-log path above is required because the topic declares a
+  capped reviewer <-> planner loop that can control routing.
 - Treat the listed paths as an executable contract. If later work drifts into
   prompts, stable-library files, parser/tooling code, or unrelated skill folders,
   stop and repair the plan first.
@@ -203,6 +211,8 @@ Artifact path notes:
   when routing control or multi-round feedback is absent.
 - `plan-reviewer` checks can fail plans that generalize a three-round sample cap
   into a global invariant.
+- The topic plan lists an exact repo-visible review-log artifact because the
+  current planning run declares a capped reviewer <-> planner loop.
 - `.github/agents/python-implementation-workflow.agent.md` remains aligned with
   repo workflow wording and does not become the sole owner of the correction
   lifecycle contract.
