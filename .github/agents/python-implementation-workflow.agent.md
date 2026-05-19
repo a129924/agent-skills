@@ -25,6 +25,11 @@ user-invocable: true
 
 ## Implementation Drift / Human Correction Policy
 
+此段是 `plan/agent-handoff-workflow.md` correction lifecycle contract 的
+Python implementation consumer。Repo-level lifecycle / routing semantics 以
+repo workflow contract 為準；本 agent 只負責在 Python 實作流程中套用，不
+擴張成唯一規範來源。
+
 1. `correction-triggering drift` 指會改變下列任一項的問題：
    - source-of-truth semantics
    - public contract meaning
@@ -35,7 +40,9 @@ user-invocable: true
 4. Human 可以提出方向疑慮，但不得只靠聊天訊息直接覆寫 repo-visible source of truth。
 5. Workflow agent 只能做 provisional severity 與 provisional routing；Planner 必須確認 final severity。
 6. Implementer 只負責修補，不得自行重定義 correctness criteria、acceptance criteria 或省略 required correction artifacts。
-7. Severity policy：
+7. Topic plan 若使用 correction artifacts，必須在 `Artifact Paths` 以 exact, bounded, role-labeled path 明列；review-log 只在 reviewer feedback 會控制 routing 或 multi-round rework 時才需要 repo-visible artifact。
+8. Detailed correction artifact schema、長篇範例、與未來是否抽出獨立 skill 的判準，應留在 plan/reference/example surfaces，不放在本 agent 當唯一規則來源。
+9. Severity policy：
    - `low`：note only；不需要 correction artifact
    - `medium`：需要 `plan/<topic>/<topic>.correction-plan.md`；若修補是 multi-step，再加 `plan/<topic>/<topic>.correction-step.md`
    - `high`：必須同時有兩個 correction artifacts，且目前 implementation 一律視為 suspect code
