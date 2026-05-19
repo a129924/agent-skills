@@ -136,6 +136,29 @@ inside a skill folder unless the repository spec gives them a fixed role.
   - `MINOR`: new stable skills or backward-compatible capabilities
   - `PATCH`: non-breaking fixes and wording corrections
 
+## Correction / delta lifecycle contract refresh — complete
+
+As of version `0.58.0`, the repository now standardizes correction / delta
+lifecycle handling as a repo-level workflow capability instead of leaving the
+rules split across ad hoc plan wording.
+
+This release refreshes:
+
+- `plan/agent-handoff-workflow.md` so the workflow body keeps only correction
+  lifecycle / routing contract
+- `plan-creator` guidance so correction topics must use exact artifact paths,
+  explicit parent-sync closure, and clear creator / reviewer ownership
+- `plan-reviewer` guidance so review can reject workflow-body schema bloat,
+  unconditional review-log rules, vague evidence paths, and repository-wide
+  round-cap drift
+- `.github/agents/python-implementation-workflow.agent.md` so it stays a
+  consumer of the repo-level contract rather than the sole owner of the rule
+
+This release does **not** introduce a new standalone correction skill.
+Detailed correction artifact schema and examples now belong in reference /
+example surfaces, while future standalone extraction remains a separate topic if
+repeated instability or cross-workflow reuse later justifies it.
+
 ## Skill schema v2 migration — complete
 
 As of version `0.54.0`, all **50 stable skills** in this library are fully
