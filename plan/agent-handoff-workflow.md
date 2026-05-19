@@ -90,6 +90,7 @@ in different contexts.
 | Topic handoff plan | `plan/<topic>/<topic>.plan.md` | Repo-visible execution contract for one topic |
 | Parent topic artifacts | `plan/<topic>/<topic>.spec.md`, `plan/<topic>/<topic>.step.md`, or other topic-owned parent artifacts when explicitly listed | Current-truth execution details for the topic |
 | Correction artifacts | `plan/<topic>/<topic>.correction-plan.md` and `plan/<topic>/<topic>.correction-step.md` when explicitly listed | Historical-truth correction trail for planner-confirmed drift |
+| Review log / routing handoff | `plan/<topic>/<topic>.review-log.md` or another exact repo-visible path when explicitly listed | Reviewer feedback trail when feedback controls routing or multi-round rework |
 | Skill draft | `.github/skills/<skill-name>/` | Creator output under repo policy |
 | Stable-library summary | `README.md` | Human-facing stable skill list |
 | Repo version baseline | `VERSION` | Canonical SemVer version for the repository |
@@ -113,7 +114,11 @@ Additional contract rules:
 - If a listed artifact path is invalid, contradicts repo policy, or drifts from
   the intended output location, fix the topic plan before continuing execution.
 - If a topic uses correction artifacts, each one must be listed explicitly in
-  `Artifact paths`; they are never implied by chat history or workflow state.
+  `Artifact paths` with an exact repo-visible path, owner, and role beside the
+  parent artifacts they affect; they are never implied by chat history or
+  workflow state.
+- If reviewer feedback controls routing or multi-round rework, the topic must
+  also list an exact repo-visible `review-log` or equivalent handoff artifact.
 - Even when correction artifacts exist, parent artifacts remain the current
   truth and the correction files remain historical truth.
 - When stable-library or release work applies, the topic plan must declare the
@@ -135,22 +140,33 @@ Additional contract rules:
   - public contract meaning
   - architecture boundary
   - phase routing
-- Severity-gated correction artifact rules:
-  - low severity -> note only; no correction artifact required
-  - medium severity -> `*.correction-plan.md`; add `*.correction-step.md` when
-    the repair is multi-step
-  - high severity -> both correction artifacts are required and the current
-    implementation is treated as suspect code
-- Every applicable correction artifact must include a parent sync note stating:
-  - which parent plan section is added or corrected
-  - whether acceptance criteria changed
-  - whether phase routing changed
-  - whether existing tasks changed
-- Planner owns correction closure:
-  - required reviews must pass before closure
-  - parent sync must complete before closure
-  - correction artifacts may be marked `resolved` or `superseded`
-  - direct deletion is forbidden
+
+### Severity classification
+| Severity | Meaning | Required artifacts |
+| --- | --- | --- |
+| `low` | Local repair stays inside existing current truth | note only; no correction artifact required |
+| `medium` | Planner-confirmed drift needs a repo-visible correction contract | `*.correction-plan.md`; add `*.correction-step.md` when the repair is multi-step |
+| `high` | Planner-confirmed drift invalidates confidence in the current implementation | both correction artifacts are required and the current implementation is treated as suspect code |
+
+### Routing states
+| State | Meaning | Routing owner | Required artifacts |
+| --- | --- | --- | --- |
+| `IMPLEMENT_CONTINUE` | Ordinary `needs-rework` stays in the current execution loop | Implementer / executor | existing parent artifacts; optional note |
+| `IMPLEMENT_PATCH` | Planner confirmed `low` severity and allowed a bounded patch inside current truth | Implementer / executor | repo-visible note; no correction artifact |
+| `PLANNER_CLARIFY` | Drift was detected but final severity / route is not yet frozen | Planner | repo-visible deviation or equivalent routing note |
+| `PLANNER_REPLAN` | Planner confirmed `medium` or `high` severity and froze the correction route | Planner -> Implementer | severity-appropriate correction artifacts |
+
+### Closure and retention rules
+- Applicable correction artifacts must be listed explicitly in `Artifact paths`
+  beside the parent artifacts they affect.
+- If reviewer feedback controls routing or multi-round rework, keep a
+  repo-visible `review-log` or equivalent handoff artifact; do not rely on
+  hidden chat history.
+- Parent artifacts become the execution-facing current truth again only after
+  backfill is complete; parent sync is required before correction closure.
+- Required downstream reviews must pass before correction closure is accepted.
+- Correction artifacts remain historical truth after closure; they may be marked
+  `resolved` or `superseded`, but direct deletion is forbidden.
 - Open correction work keeps the topic inside its normal execution loop; it does
   not create a new generic human STOP POINT.
 - STOP POINT 1 and STOP POINT 2 semantics remain unchanged.
