@@ -21,9 +21,11 @@ Use this as the default starting point for a `review-ready` skill.
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
-- Treat `.github/skills/<skill-name>/` as the current active authoring target during transition.
-- Do not interpret this template as promotion or cutover of the current active
-  workflow path.
+- Use this template within the current `.github/skills/` authoring workflow
+  during transition. Treat `.github/skills/` as the current active authoring
+  target until a separate path-transition topic changes that contract.
+- Do not interpret this template as promotion or cutover to the target
+  architecture.
 
 ## `SKILL.md` skeleton
 
