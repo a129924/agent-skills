@@ -22,7 +22,7 @@ use_when:
   - the current branch is clearly misnamed and the user needs a safe migration path
 do_not_use_when:
   - the main task is drafting commit messages or deciding release/tagging policy
-  - the branch is a release or hotfix branch whose lifecycle should be governed by the repository's release or hotfix workflow
+  - the branch is a release or hotfix branch whose lifecycle should be governed by `git-release-management`
   - the user only wants generic Git tutorials unrelated to branch naming
 ---
 
@@ -38,7 +38,7 @@ Use this skill when:
 
 Do not use this skill when:
 - the main task is drafting commit messages or deciding release/tagging policy
-- the branch is a release or hotfix branch whose lifecycle should be governed by the repository's release or hotfix workflow
+- the branch is a release or hotfix branch whose lifecycle should be governed by `git-release-management`
 - the user only wants generic Git tutorials unrelated to branch naming
 
 # Inputs
@@ -50,7 +50,7 @@ Do not use this skill when:
 - the expected commit scope or dominant module
 
 # Process
-1. Decide whether the branch is a normal development branch or a release/hotfix case. Hand release/hotfix timing decisions to the repository's release or hotfix workflow.
+1. Decide whether the branch is a normal development branch or a release/hotfix case. Hand release/hotfix timing decisions to `git-release-management`.
 2. Choose a semantic branch type that aligns with the same type system used by `git-commit-convention`.
 3. Build the preferred development branch as `<type>/<username>/<short-description>`.
 4. Keep `short-description` short, semantic, and lowercase; prefer about 2-4 words in kebab-case that match the dominant scope or business goal.
@@ -70,7 +70,7 @@ Do not use this skill when:
 - split advice when one task name tries to cover multiple semantic boundaries
 
 # Validation
-1. **Scope gate** — confirm the request is about naming or repairing a development branch. Release or hotfix lifecycle decisions are BLOCKED and should be handed to the repository's release or hotfix workflow.
+1. **Scope gate** — confirm the request is about naming or repairing a development branch. Release or hotfix lifecycle decisions are BLOCKED and should be handed to `git-release-management`.
 2. **Naming inputs check** — confirm branch type, namespace token, and a truthful short description are known. If the repository does not use personal usernames, require the approved replacement token instead of guessing.
 3. **Current-state check** — determine whether the user needs a fresh branch, an in-place rename, or a branch move from the wrong starting point. Existing work on the current branch changes the recommended command path.
 4. **Conflict check** — if the preferred branch name already exists, verify whether it represents the same task lineage before recommending reuse.
@@ -86,7 +86,7 @@ BLOCKED: the request is actually about release or hotfix branch policy, or the b
 
 # Boundaries
 - Do not draft commit bodies, PR gates, release tags, or version policy.
-- Do not manage release/hotfix approval timing; hand that to the repository's release or hotfix workflow.
+- Do not manage release/hotfix approval timing; hand that to `git-release-management`.
 - Do not silently accept a vague or misleading branch name when a clearer semantic name is available.
 - Do not auto-run branch creation or rename commands.
 

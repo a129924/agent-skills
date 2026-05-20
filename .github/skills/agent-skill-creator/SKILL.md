@@ -51,7 +51,7 @@ Do not use this skill when:
    - higher-risk: gatekeeping, release, tool-driven, or high-impact guidance needs stronger misuse prevention
 4. Propose `complexity` in YAML frontmatter. Propose applicable `risk_profile` tags for medium and high complexity skills.
 5. If a topic plan locks a creator/reviewer-first rollout, keep the work inside creator, reviewer, and the minimum supporting policy/template files. Defer downstream regular skills to later topics instead of broadening the current one.
-6. Create `.github/skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case.
+6. Create `.github/skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case. During transition, `.github/skills/` remains the current active authoring target and workflow path.
 7. Keep the skill focused on one job.
 8. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 9. Add `reference.md` or `examples.md`.

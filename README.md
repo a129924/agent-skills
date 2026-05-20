@@ -42,10 +42,10 @@ skills/                          # intended canonical skill source
 
 ## Current Migration Snapshot
 
-- `feat/andrew/codex-skills-spec-worktree` now carries the spec-worktree
-  validation surface for `.codex/skills/` as a projection-only adapter layout.
-- Five branch-local migration topics were merged back into this worktree branch
-  as planning/reporting artifacts:
+- This repository now contains the spec-worktree validation surface for
+  `.codex/skills/` as a projection-only adapter layout.
+- Five branch-local migration topics were merged into the repository as
+  planning/reporting artifacts:
   - `codex-migration-direct-move`
   - `codex-migration-copilot-residue-low`
   - `codex-migration-copilot-residue-medium`
@@ -53,8 +53,8 @@ skills/                          # intended canonical skill source
   - `codex-migration-copilot-specific`
 - These merged topics do not declare repo-wide active-path cutover. They record
   candidate classification, bounded remediation, and follow-up routing only.
-- The spec-worktree branch remains a transition-planning surface, not a formal
-  release branch.
+- These artifacts record a transition-planning lane and should not be read as a
+  formal release declaration or active-path cutover.
 
 ## Repository rules
 Every stable skill should:

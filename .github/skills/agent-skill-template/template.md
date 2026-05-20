@@ -22,7 +22,8 @@ Use this as the default starting point for a `review-ready` skill.
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
 - Use this template within the current `.github/skills/` authoring workflow
-  during transition.
+  during transition. Treat `.github/skills/` as the current active authoring
+  target until a separate path-transition topic changes that contract.
 - Do not interpret this template as promotion or cutover to the target
   architecture.
 
