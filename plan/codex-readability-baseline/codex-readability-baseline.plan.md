@@ -48,9 +48,10 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `creator-in-progress`
-- **Execution model**: planning + inventory evidence only; completion point is
-  the frozen baseline report
+- **Current**: `review-ready`
+- **Execution model**: planning + inventory evidence only; the branch is now at
+  review-ready with a frozen baseline report, and formal completion remains
+  `approved` after reviewer acceptance
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -67,6 +68,7 @@ Routing notes:
 
 - Branch target: `feat/andrew/codex-readability-baseline`
 - Base branch: `dev`
+- Current handoff point: `review-ready`
 - Completion point for branch-local work: `approved`
 - This topic should merge back into `dev` after the baseline is accepted.
 
