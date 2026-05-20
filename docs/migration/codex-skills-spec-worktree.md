@@ -78,6 +78,30 @@ Required rules:
 - validation artifacts in `.codex/skills/` must not be mistaken for active-path
   cutover evidence
 
+### Traceability requirements
+
+Source traceability is machine-checkable, not just human-readable. Each
+projected skill copy must satisfy all of the following:
+
+1. **Upstream path declared**: the mapping from projected skill name to upstream
+   source path must appear in `.codex/skills/README.md` (or an equivalent
+   index file in the same directory). A projected skill with no declared
+   upstream path is a contract violation.
+2. **Source commit recorded**: `.codex/skills/provenance.md` must contain one
+   entry per projected skill with at minimum `skill_name`, `upstream_path`,
+   and `source_commit` (the commit hash from which the copy was taken).
+3. **No silent edits**: if a projected file has been modified after copying
+   (diff against upstream at the recorded `source_commit` is non-empty), that
+   skill is considered drifted and must be re-copied or explicitly documented
+   as a divergence with a stated reason.
+4. **Update procedure**: to refresh a projection, copy from the upstream
+   source at the desired commit, then update `provenance.md` with the new
+   `source_commit`. Do not edit the projected file in place.
+
+These rules allow a reviewer or automation to check — by diffing the
+projected files against their upstream sources at the recorded commit — whether
+the projection is still faithful to its declared origin.
+
 ## Validation Goals
 
 The first-wave validation is successful only if all of the following are true:

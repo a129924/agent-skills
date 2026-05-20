@@ -29,10 +29,11 @@ Requirements baseline: `analysis/codex-migration-copilot-residue-low/requirement
   - The residue found in this branch was limited to wording and local reference cleanup.
   - Cleanup stayed inside the approved boundary: wording only, no workflow rewrite.
 - blocker or residue note:
-  - Replaced repeated handoff text that pointed to non-present `git-release-management` with a generic repository release or hotfix workflow reference.
-  - This keeps the skill truthful without introducing a new workflow contract or widening scope.
+  - The branch-local wording change replaced references to `git-release-management` with a generic phrase.
+  - Post-merge correction on `feat/andrew/codex-skills-spec-worktree` restored explicit references to `git-release-management`, which already exists at `.github/skills/git-release-management/`.
+  - The current state of `SKILL.md` and `references/naming-patterns.md` correctly references `git-release-management` by name.
 - follow-up:
-  - If the repository later introduces a dedicated release-branch skill or workflow artifact, that linkage can be added in a separate topic.
+  - No further action required; `git-release-management` is present and correctly referenced in the current skill files.
 
 ## Implementation result
 
