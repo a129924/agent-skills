@@ -13,17 +13,17 @@ Current implementation note:
 
 | skill_name | upstream_path | projection_mode | source_commit |
 | --- | --- | --- | --- |
-| `business-intent-alignment` | `skills/business-intent-alignment/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `plan-creator` | `skills/plan-creator/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `plan-reviewer` | `skills/plan-reviewer/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `agent-skill-creator` | `.github/skills/agent-skill-creator/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `agent-skill-reviewer` | `.github/skills/agent-skill-reviewer/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `agent-skill-template` | `.github/skills/agent-skill-template/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `git-commit-convention` | `.github/skills/git-commit-convention/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `git-branch-naming` | `.github/skills/git-branch-naming/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `git-post-merge-workflow` | `.github/skills/git-post-merge-workflow/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
-| `worktree-manager` | `.github/skills/worktree-manager/` | `symlink` | `0ac01d4688717252651239600eafb4494572e48a` |
+| `business-intent-alignment` | `skills/business-intent-alignment/` | `symlink` | `2bf4698` |
+| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `symlink` | `2bf4698` |
+| `plan-creator` | `skills/plan-creator/` | `symlink` | `2bf4698` |
+| `plan-reviewer` | `skills/plan-reviewer/` | `symlink` | `2bf4698` |
+| `agent-skill-creator` | `.github/skills/agent-skill-creator/` | `symlink` | `2bf4698` |
+| `agent-skill-reviewer` | `.github/skills/agent-skill-reviewer/` | `symlink` | `2bf4698` |
+| `agent-skill-template` | `.github/skills/agent-skill-template/` | `symlink` | `2bf4698` |
+| `git-commit-convention` | `.github/skills/git-commit-convention/` | `symlink` | `2bf4698` |
+| `git-branch-naming` | `.github/skills/git-branch-naming/` | `symlink` | `2bf4698` |
+| `git-post-merge-workflow` | `.github/skills/git-post-merge-workflow/` | `symlink` | `2bf4698` |
+| `worktree-manager` | `.github/skills/worktree-manager/` | `symlink` | `2bf4698` |
 
 ## Revalidation rule
 
