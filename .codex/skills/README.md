@@ -5,10 +5,10 @@ spec worktree topic.
 
 It is intentionally not the repository's canonical source of truth.
 
-> **Read-only projection**: the skill files in this directory are manually
-> copied snapshots from their upstream sources. Do not edit projected skill
-> content here as if it were canonical. If a change is needed, make it in the
-> upstream source and re-copy the relevant files.
+> **Read-only projection**: the skill entries in this directory are symlink
+> projections to upstream sources in `skills/` or `.github/skills/`. Do not
+> edit projected skill content here as if it were canonical. If a change is
+> needed, make it in the upstream source and then revalidate the projection.
 
 ## Source Rule
 
@@ -34,20 +34,25 @@ It is intentionally not the repository's canonical source of truth.
 ## How to update a projected skill
 
 1. Make the change in the upstream source listed in the table above.
-2. Copy the updated files into the corresponding `.codex/skills/<skill-name>/` folder.
-3. Record the upstream path and commit hash used for the copy in `.codex/skills/provenance.md`.
-4. Do not modify the projected copy independently — divergence from upstream is a contract violation.
+2. Verify that `.codex/skills/<skill-name>` still points to the correct
+   upstream path.
+3. Update `.codex/skills/provenance.md` with the upstream path and the commit
+   hash at which that projection was last revalidated.
+4. Do not modify the projected path independently — divergence from upstream is
+   a contract violation.
 
 ## Provenance requirement
 
-Each projected skill must be traceable to exactly one upstream source commit.
-Maintain `.codex/skills/provenance.md` with at least:
+Each projected skill must be traceable to exactly one upstream source path and
+one last-validated source commit. Maintain `.codex/skills/provenance.md` with
+at least:
 - `skill_name`
 - `upstream_path` (canonical source path in this repo)
-- `source_commit` (commit hash from which the copy was taken)
+- `projection_mode` (`symlink` for the current first-wave implementation)
+- `source_commit` (commit hash at which the projection was last validated)
 
 If provenance cannot be established for a projected skill, treat it as stale
-and re-copy from the current upstream source before use.
+and revalidate it against the current upstream source before use.
 
 ## Boundary
 
