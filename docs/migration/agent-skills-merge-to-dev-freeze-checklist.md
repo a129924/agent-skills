@@ -154,3 +154,58 @@ The current worktree branch carries these merge-relevant artifact groups:
 - this merge is for single-line convergence, not runtime/tooling completion
 - merge acceptance does not by itself authorize immediate deletion of
   `.github/skills/`; that remains follow-up work
+
+## Prepared Merge Flow
+
+### Final pre-merge verification
+
+Run from the main repository checkout on `dev`:
+
+```bash
+git status --short
+git worktree list
+git diff --stat dev...feat/andrew/codex-skills-spec-worktree
+git log --oneline --no-merges dev..feat/andrew/codex-skills-spec-worktree
+```
+
+Expected interpretation:
+
+- `git status --short` is clean before merge starts
+- only `dev` and the spec-worktree remain active in `git worktree list`
+- the diff scope matches the artifact groups listed in `Observed Diff Scope`
+- merge purpose is branch convergence, not runtime/tooling completion
+
+### Merge execution
+
+Use a non-fast-forward merge so the convergence event stays explicit in history:
+
+```bash
+git checkout dev
+git merge --no-ff feat/andrew/codex-skills-spec-worktree
+```
+
+### Shared-file attention points
+
+The current dry-run inspection shows no new hard blocker. The only shared file
+that clearly changed on both sides is `README.md`, and the current merge-tree
+inspection shows additive snapshot content rather than conflict markers.
+
+Review these files carefully during the actual merge:
+
+- `README.md`
+- `VERSION`
+- `.github/skills/agent-skill-creator/SKILL.md`
+- `.github/skills/agent-skill-template/template.md`
+- `.github/skills/git-branch-naming/SKILL.md`
+- `.github/skills/git-branch-naming/references/naming-patterns.md`
+
+### Immediate post-merge follow-up
+
+After the merge completes:
+
+1. confirm `feat/andrew/codex-skills-spec-worktree` is no longer treated as a
+   second mainline
+2. open the freeze / takeover governance topic immediately
+3. forbid new same-name dual-surface evolution between `skills/` and
+   `.github/skills/`
+4. keep `mlops-async` as a month-end transition exception only
