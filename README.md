@@ -55,6 +55,9 @@ skills/                          # intended canonical skill source
   candidate classification, bounded remediation, and follow-up routing only.
 - These artifacts record a transition-planning lane and should not be read as a
   formal release declaration or active-path cutover.
+- As of version `0.59.0`, PR #84 merged the codex skills spec-worktree lane
+  back into `dev`, so this snapshot now lives on the main repository branch
+  rather than on a separate long-lived worktree branch.
 
 ## Repository rules
 Every stable skill should:
