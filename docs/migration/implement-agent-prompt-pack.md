@@ -1,9 +1,15 @@
 # Migration Implement Agent Prompt Pack
 
+> Historical evidence only: this pack records the branch-local handoff contract
+> that was used during the `codex-skills-spec-worktree` migration lane. The
+> referenced branch worktrees were retired after the migration branches merged
+> back into `feat/andrew/codex-skills-spec-worktree`, so this document is not a
+> current executable handoff contract on `dev`.
+
 ## Purpose
 
-This document is the reusable implement-agent prompt pack for the migration
-branches that are based on `feat/andrew/codex-skills-spec-worktree`.
+This document is historical evidence from the migration lane, not a current
+executable handoff contract on `dev`.
 
 It follows the repository's workflow style from `.github/agents/*.agent.md`:
 
@@ -20,12 +26,15 @@ It does not replace:
 - branch-local `analysis/<topic>/requirements.md`
 - branch-local `plan/<topic>/<topic>.plan.md`
 
-## How to use this pack
+## Historical usage during the migration lane
 
 1. Start from the unified parent prompt below.
 2. Append exactly one branch-specific appendix from this document.
 3. Send the combined prompt to the Implement Agent.
 4. Keep work inside the branch-local topic contract.
+
+If these handoffs need to be reused in the future, rewrite them against live
+branches and current paths instead of reviving the retired worktree roots below.
 
 ## Unified Parent Prompt
 
@@ -39,13 +48,16 @@ You are not the Plan Reviewer.
 You must not widen the branch scope.
 You must not reclassify other branches unless the branch-local contract explicitly tells you to stop and reroute.
 
-## Worktree binding
+## Historical worktree binding
 
-The branch-specific appendix will declare one required worktree path.
+The branch-specific appendix may declare the worktree path that was required at
+the time of the migration branch execution.
 
-- Treat that required worktree path as the only valid execution root for the handoff.
-- If the current workspace path does not match it, stop and report path mismatch instead of continuing.
-- Resolve all repo-relative paths from that required worktree root only.
+- Treat that required worktree path as historical evidence for how the handoff
+  was originally executed.
+- Do not assume those worktree roots still exist on `dev`.
+- If this pack is ever revived, first replace retired worktree paths with live
+  branch or repo-root instructions.
 
 ## Required reading order
 
@@ -84,7 +96,8 @@ and handoff package.
 
 Stop and report instead of continuing when:
 
-- the current cwd/worktree root does not match the required worktree path
+- a retired historical worktree path has not been replaced with a live branch
+  or repo-root instruction before reuse
 - the candidate skill set no longer matches the branch-local plan
 - implementation would require editing an unlisted path
 - runtime/tooling blocker repair becomes necessary in a non-blocker branch
@@ -108,7 +121,7 @@ Return:
 Branch:
 `feat/andrew/codex-migration-direct-move`
 
-Required worktree path:
+Historical worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-direct-move`
 
 Current plan-review status:
@@ -140,7 +153,7 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-residue-low`
 
-Required worktree path:
+Historical worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-low`
 
 Current plan-review status:
@@ -169,7 +182,7 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-residue-medium`
 
-Required worktree path:
+Historical worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-medium`
 
 Current plan-review status:
@@ -201,7 +214,7 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-residue-high`
 
-Required worktree path:
+Historical worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-residue-high`
 
 Current plan-review status:
@@ -229,7 +242,7 @@ Branch-specific rule:
 Branch:
 `feat/andrew/codex-migration-copilot-specific`
 
-Required worktree path:
+Historical worktree path:
 `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-copilot-specific`
 
 Current plan-review status:

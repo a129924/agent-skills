@@ -1,22 +1,26 @@
 # codex-migration-copilot-residue-high Implement Agent Handoff
 
+> Historical evidence only: this handoff records the branch-local execution
+> contract used during the migration lane. The branch worktree named below was
+> retired after merge-back and is not a current `dev` execution requirement.
+
 ## Branch
 
 - `feat/andrew/codex-migration-copilot-residue-high`
 
-## Required worktree
+## Historical worktree
 
 - Branch: `feat/andrew/codex-migration-copilot-residue-high`
-- Suggested worktree setup (if not already present):
+- Historical setup evidence:
   ```
   git worktree add <your-worktrees-dir>/agent-20260516-codex-migration-copilot-residue-high feat/andrew/codex-migration-copilot-residue-high
   ```
 
 ## Worktree rules
 
-- Confirm the current workspace is on branch `feat/andrew/codex-migration-copilot-residue-high` before continuing.
-- If the current branch does not match, stop and report a branch mismatch instead of continuing.
-- Resolve all repo-relative paths from the repo root of the checked-out worktree.
+- Treat the branch/worktree note below as historical evidence for the original branch-local execution setup.
+- Do not assume this branch-local worktree still exists on `dev`.
+- If this handoff is ever reused, replace the retired setup instructions with live branch or repo-root guidance first.
 
 ## Current plan-review status
 
@@ -102,7 +106,9 @@ If the verdict is `reclassify`, the report must also state:
   by itself remove the skill from the first-wave list in
   `docs/migration/codex-skills-spec-worktree.md`
 - if the redesign path becomes non-credible, stop and report for reclassification
-- if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
+- treat the historical branch/worktree note above as branch-local evidence only
+- do not assume the retired worktree setup still applies on `dev`
+- if this handoff is reused, replace the retired setup instructions with a live branch or repo-root instruction before execution
 - do not treat topic-plan approval as authorization for publish, merge, or
   candidate-skill modification
 

@@ -1,18 +1,22 @@
 # codex-migration-direct-move Implement Agent Handoff
 
+> Historical evidence only: this handoff records the branch-local execution
+> contract used during the migration lane. The branch worktree named below was
+> retired after merge-back and is not a current `dev` execution requirement.
+
 ## Branch
 
 - `feat/andrew/codex-migration-direct-move`
 
-## Required worktree path
+## Historical worktree path
 
 - `/Users/andrew/code/python/agent-skills.worktrees/agent-20260516-codex-migration-direct-move`
 
 ## Worktree rules
 
-- Treat the required worktree path above as the only valid execution root for this handoff.
-- If the current workspace path does not match it, stop and report path mismatch instead of continuing.
-- Resolve all repo-relative paths from this worktree root only.
+- Treat the worktree path above as historical evidence for the original branch-local execution root.
+- Do not assume this path still exists on `dev`.
+- If this handoff is ever reused, replace the retired worktree path with a live branch or repo-root instruction first.
 
 ## Current plan-review status
 
@@ -64,7 +68,9 @@
 - produce `already satisfied`, `no move required`, or `needs follow-up` verdicts
 - no confirmed blocker may be implemented here
 - if any additional candidate appears, stop and report instead of absorbing it
-- if the current cwd/worktree root does not match the required worktree path, stop and report path mismatch
+- treat the historical worktree path above as branch-local evidence only
+- do not assume that path still exists on `dev`
+- if this handoff is reused, replace the retired worktree path with a live branch or repo-root instruction before execution
 
 ## Required final return
 
