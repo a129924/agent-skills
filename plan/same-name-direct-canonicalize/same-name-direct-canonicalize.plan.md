@@ -39,15 +39,14 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: planning + decision capture only
+- **Current**: `review-ready`
+- **Execution model**: planning and decision capture are complete; the topic is
+  waiting for reviewer/planner final checks before publish/PR handling
 - **Allowed transitions**:
-  - `planned` -> `creator-in-progress`
-  - `creator-in-progress` -> `review-ready`
   - `review-ready` -> `reviewer-in-progress`
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
-  - `needs-rework` -> `creator-in-progress`
+  - `needs-rework` -> `review-ready`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
   - `publish-in-progress` -> `merged`
