@@ -70,6 +70,11 @@ skills/                          # intended canonical skill source
   exist under `skills/` as target-architecture copies while `.github/skills/`
   remains the transition-era compatibility surface and `.codex/skills`
   projection stays deferred.
+- As of version `0.62.0`, PR #87 and PR #88 merged the same-name follow-up
+  topics back into `dev`, so the business-intent pair is now explicitly
+  canonicalized to `skills/`, while the planning-spine pair now has a
+  remediation-ready divergence breakdown that points to the next topic:
+  `planning-spine-bounded-remediation`.
 
 ## Repository rules
 Every stable skill should:
