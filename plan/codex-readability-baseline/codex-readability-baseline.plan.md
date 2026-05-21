@@ -59,8 +59,11 @@
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
   - `needs-rework` -> `creator-in-progress`
+  - `approved` -> `creator-in-progress`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
+  - `publish-in-progress` -> `merged`
+  - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
 
@@ -81,6 +84,12 @@ Routing notes:
 | Baseline report | `docs/migration/codex-readability-baseline.md` | Planning actor | First-wave move/readability baseline and pass backlog |
 | Projection rule | `.codex/skills/README.md` | Existing repo artifact | Read-only source-rule evidence |
 | Projection provenance | `.codex/skills/provenance.md` | Existing repo artifact | First-wave mapping and validation evidence |
+| Runway checklist | `docs/migration/migration-runway-checklist.md` | Existing repo artifact | Supporting evidence for promoted-skill status, tracked dependencies, and blocker routing used in candidate classification |
+| Platform coupling inventory | `docs/migration/platform-coupling-inventory.md` | Existing repo artifact | Supporting evidence for workflow / artifact / blocker coupling used in candidate classification |
+| Direct-move report | `docs/migration/codex-migration-direct-move-report.md` | Existing repo artifact | Supporting evidence for first-wave promoted planning-skill verification outcomes |
+| Low-residue report | `docs/migration/codex-migration-copilot-residue-low-report.md` | Existing repo artifact | Supporting evidence for low-residue candidate follow-up decisions |
+| Medium-residue report | `docs/migration/codex-migration-copilot-residue-medium-report.md` | Existing repo artifact | Supporting evidence for medium-residue candidate follow-up decisions |
+| High-residue report | `docs/migration/codex-migration-copilot-residue-high-report.md` | Existing repo artifact | Supporting evidence for redesign-routed candidate follow-up decisions |
 
 Artifact path notes:
 
