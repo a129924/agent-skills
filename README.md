@@ -65,6 +65,11 @@ skills/                          # intended canonical skill source
   into `dev`, so the first-wave Codex readability inventory now also lives on
   the main repository branch rather than on a separate short-lived worktree
   branch.
+- As of version `0.61.0`, PR #86 merged the first low-risk move topic back
+  into `dev`, so `git-commit-convention` and `git-branch-naming` now also
+  exist under `skills/` as target-architecture copies while `.github/skills/`
+  remains the transition-era compatibility surface and `.codex/skills`
+  projection stays deferred.
 
 ## Repository rules
 Every stable skill should:
