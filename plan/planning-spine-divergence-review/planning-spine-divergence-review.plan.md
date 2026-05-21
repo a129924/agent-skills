@@ -41,15 +41,15 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: planning + divergence decomposition only
+- **Current**: `review-ready`
+- **Execution model**: planning + divergence decomposition complete; awaiting
+  reviewer/planner publish check
 - **Allowed transitions**:
-  - `planned` -> `creator-in-progress`
-  - `creator-in-progress` -> `review-ready`
   - `review-ready` -> `reviewer-in-progress`
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
   - `needs-rework` -> `creator-in-progress`
+  - `creator-in-progress` -> `review-ready`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
   - `publish-in-progress` -> `merged`

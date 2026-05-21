@@ -30,9 +30,11 @@
   changes downstream plan authoring or review behavior.
 - The current `skills/` and `.github/skills/` versions disagree on contract
   source, blocked behavior, and reference guidance rather than only on prose.
-- `.codex/skills` currently reads from `skills/`, but projection state alone is
-  not enough to settle overwrite authority for planning-spine workflow
-  contracts.
+- This topic relies on previously established repo evidence for `.codex/skills`
+  routing and does not independently prove current projection authority.
+- Even if existing repo evidence points at `skills/`-backed readability,
+  projection state alone is not enough to settle overwrite authority for
+  planning-spine workflow contracts.
 
 ## Routing conclusion
 
