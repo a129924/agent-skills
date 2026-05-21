@@ -51,6 +51,9 @@ skills/                          # intended canonical skill source
   - `codex-migration-copilot-residue-medium`
   - `codex-migration-copilot-residue-high`
   - `codex-migration-copilot-specific`
+- The repository now also contains the `codex-readability-baseline` topic as a
+  repo-visible first-wave inventory artifact for `move_status`,
+  `codex_readability`, same-name pass backlog, and follow-up routing.
 - These merged topics do not declare repo-wide active-path cutover. They record
   candidate classification, bounded remediation, and follow-up routing only.
 - These artifacts record a transition-planning lane and should not be read as a
@@ -58,6 +61,10 @@ skills/                          # intended canonical skill source
 - As of version `0.59.0`, PR #84 merged the codex skills spec-worktree lane
   back into `dev`, so this snapshot now lives on the main repository branch
   rather than on a separate long-lived worktree branch.
+- As of version `0.60.0`, PR #85 merged the codex readability baseline back
+  into `dev`, so the first-wave Codex readability inventory now also lives on
+  the main repository branch rather than on a separate short-lived worktree
+  branch.
 
 ## Repository rules
 Every stable skill should:
