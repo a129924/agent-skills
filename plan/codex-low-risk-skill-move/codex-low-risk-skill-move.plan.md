@@ -55,7 +55,7 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge -> release path; this topic implements branch-local move work first and
   defers README / VERSION / tag handling to the explicit post-merge release
