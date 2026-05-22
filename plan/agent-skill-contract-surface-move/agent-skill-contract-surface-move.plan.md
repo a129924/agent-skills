@@ -64,8 +64,8 @@
 
 - **Current**: `planned`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
-  merge -> release path; this topic implements branch-local move work first and
-  defers shared metadata / release handling to later topics
+  merge path; this topic implements branch-local move work first and does not
+  execute a repository release action
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -79,8 +79,7 @@
   - `publish-in-progress` -> `merged`
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
-  - `merged` -> `released`
-  - `released` -> terminal
+  - `merged` -> terminal
 
 Routing notes:
 
@@ -111,22 +110,11 @@ Routing notes:
 Artifact path notes:
 
 - This topic does not modify `.github/skills/*` compatibility sources.
-- This topic does not modify `.codex/*`, `README.md`, `VERSION`, `AGENTS.md`,
-  `docs/repo-positioning.md`, or checklist-wide migration trackers.
+- This topic does not modify `.codex/*`, `README.md`, `VERSION`,
+  `.github/copilot-instructions.md`, `AGENTS.md`, `docs/repo-positioning.md`,
+  or checklist-wide migration trackers.
 - If execution requires editing any other path, stop and repair this plan
   before continuing.
-
-## Stable library metadata
-
-- `README row`: no README row change in this topic
-- `VERSION bump`: deferred
-- `timing`: `release`
-- `rationale`: this topic creates new `skills/` target-architecture folders,
-  but release-visible metadata should change only after merge and explicit
-  human-approved release handling
-- `release-note expectations`: if merged, later release work should mention that
-  the three contract-surface skills now exist under `skills/` while
-  `.github/skills/` remains the transition-era compatibility surface
 
 ## Implementation Steps
 
@@ -170,6 +158,14 @@ Artifact path notes:
 
 ## Post-merge / release actions
 
-- No automatic release action happens inside this topic branch before merge.
+- No repository release action is part of this topic.
+- `merged` is terminal for this topic.
 - Shared metadata updates, projection switching, and repo-wide path governance
   changes require separate later topics.
+
+## Open Questions / Unresolved Items
+
+- None at topic-bootstrap time.
+- If later implementation reveals that moving any of the three contract surfaces
+  requires shared governance, projection, or runtime/tooling edits, stop and
+  re-plan instead of widening this topic silently.
