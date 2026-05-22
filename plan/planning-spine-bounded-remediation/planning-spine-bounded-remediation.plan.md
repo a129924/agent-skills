@@ -71,6 +71,7 @@
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
   - `needs-rework` -> `creator-in-progress`
+  - `creator-in-progress` -> `review-ready`
   - `approved` -> `creator-in-progress`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
