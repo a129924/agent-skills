@@ -75,11 +75,11 @@ skills/                          # intended canonical skill source
   canonicalized to `skills/`, while the planning-spine pair now has a
   remediation-ready divergence breakdown that points to the next topic:
   `planning-spine-bounded-remediation`.
-- As of version `0.63.0`, PR #89 merged the bounded remediation planning topic
+- As of version `0.64.0`, PR #89 merged the bounded remediation planning topic
   back into `dev`, so the planning-spine pair now has a partial execution
   contract that isolates three policy-lock units from five support/reference
   units that can be remediated safely in a later execution topic.
-- As of version `0.63.0`, PR #90 also merged the workflow recovery alignment
+- As of version `0.64.0`, PR #90 also merged the workflow recovery alignment
   follow-up, adding repo-visible workflow policy and workflow documents that
   tighten PR-comment correction, topic bootstrap, migration implementation, and
   release-cleanup routing.
