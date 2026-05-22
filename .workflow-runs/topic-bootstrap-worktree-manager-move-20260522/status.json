@@ -5,9 +5,14 @@
   "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-worktree-manager-move",
   "current_state": "FINISHED",
   "result": "accepted",
-  "rounds": 1,
+  "rounds": 2,
   "blocking_reason": "",
   "human_feedback_required": false,
-  "last_completed_step": "commit plan artifacts by topic",
-  "next_step": "start creator work inside the bootstrapped topic worktree"
+  "last_completed_step": "finish",
+  "next_step": "creator work may begin in a later workflow after this bootstrapped topic plan is resumed",
+  "worktree_routing_result_path": ".workflow-runs/topic-bootstrap-worktree-manager-move-20260522/worktree-routing-audit.txt",
+  "plan_review_result_path": ".workflow-runs/topic-bootstrap-worktree-manager-move-20260522/plan-review.json",
+  "planner_final_review_path": ".workflow-runs/topic-bootstrap-worktree-manager-move-20260522/planner-final-review.md",
+  "independent_worktree_agent_id": "019e4eff-3517-7280-9caf-cb5fc9515f57",
+  "independent_plan_reviewer_agent_id": "019e4eff-6539-7601-be42-c0bda3160ef6"
 }
