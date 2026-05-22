@@ -79,6 +79,20 @@ Each workflow run must define a machine-readable status contract at
 Workflow-specific files may add fields, but must not remove or rename the
 required common fields.
 
+### `status.json` Field Naming Conventions
+
+- JSON field names use `snake_case` (e.g., `current_state`,
+  `human_feedback_required`).
+- `current_state` values use `SCREAMING_SNAKE_CASE` to match workflow state
+  identifiers (e.g., `HUMAN_FEEDBACK_REQUIRED`, `FINISHED`).
+- `result` values use lowercase with hyphens as needed (e.g., `moved`,
+  `remediated`, `human-feedback-required`). Valid common values include
+  `accepted`, `blocked`, `deferred`, and `human-feedback-required`.
+  Workflow-specific values are allowed in addition to these.
+- `human_feedback_required` is a boolean (`true` / `false`). Set it to `true`
+  when `current_state` is `HUMAN_FEEDBACK_REQUIRED` or when any declared stop
+  condition is triggered.
+
 ## Stop Conditions
 Stop with `human-feedback-required` if:
 

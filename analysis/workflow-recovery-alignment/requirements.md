@@ -27,10 +27,10 @@ is a repo-visible recovery topic that:
 The recovery baseline used these existing repository artifacts:
 
 - `plan/agent-handoff-workflow.md`
-- `skills/plan-creator/SKILL.md`
-- `skills/plan-creator/checklist.md`
-- `skills/plan-reviewer/SKILL.md`
-- `skills/plan-reviewer/checklist.md`
+- `.github/skills/plan-creator/SKILL.md`
+- `.github/skills/plan-creator/checklist.md`
+- `.github/skills/plan-reviewer/SKILL.md`
+- `.github/skills/plan-reviewer/checklist.md`
 - `.github/skills/worktree-manager/SKILL.md`
 - `.github/skills/git-branch-naming/SKILL.md`
 - `docs/process/policies/migration-workflow-common-policy.md`

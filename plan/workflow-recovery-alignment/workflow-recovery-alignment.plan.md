@@ -94,7 +94,7 @@ Routing notes:
 | --- | --- | --- | --- |
 | Requirements baseline | `analysis/workflow-recovery-alignment/requirements.md` | Planning actor | Repo-visible recovery intent and bounded requirements baseline |
 | Topic plan | `plan/workflow-recovery-alignment/workflow-recovery-alignment.plan.md` | Planning actor | Repo-visible execution contract for this recovery topic |
-| Review log | `plan/workflow-recovery-alignment/workflow-recovery-alignment.review-log.md` | Main Agent / Reviewer | Repo-visible trail for independent review verdicts and bounded reroute notes |
+| Review log | `plan/workflow-recovery-alignment/workflow-recovery-alignment.review-log.md` | Main Agent (maintains file); Reviewer (provides verdict) | Repo-visible trail for independent review verdicts and bounded reroute notes |
 | Common policy | `docs/process/policies/migration-workflow-common-policy.md` | Creator / correction role | Optional bounded policy patch for role execution model |
 | Topic bootstrap workflow | `docs/process/workflows/topic-bootstrap.workflow.md` | Creator / correction role | Workflow patch target for existing-valid-worktree reuse recording |
 | Migration implementation workflow | `docs/process/workflows/migration-implementation.workflow.md` | Creator / correction role | Workflow patch target for overlay gate states and routing |
