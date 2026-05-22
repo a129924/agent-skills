@@ -1,0 +1,13 @@
+{
+  "workflow": "topic-bootstrap",
+  "topic": "agent-skill-contract-surface-move",
+  "target_branch": "feat/andrew/agent-skill-contract-surface-move",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-agent-skill-contract-surface-move",
+  "current_state": "FINISHED",
+  "result": "accepted",
+  "rounds": 1,
+  "blocking_reason": "",
+  "human_feedback_required": false,
+  "last_completed_step": "commit plan artifacts by topic",
+  "next_step": "start creator work inside the bootstrapped topic worktree"
+}
