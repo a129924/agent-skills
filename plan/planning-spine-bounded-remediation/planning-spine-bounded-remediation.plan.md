@@ -37,6 +37,8 @@
 - The topic is classified as `partially executable`.
 - The bounded execution subset is limited to support-material drift that can be
   aligned without settling unresolved workflow-authority questions.
+- The bounded execution subset does not claim overall planning-spine contract
+  alignment while any `SKILL.md`-owned authority drift remains blocked.
 - The blocked subset is limited to units that still require human policy lock on
   fallback source, review-basis authority, or blocked reviewer behavior.
 - Readability from `skills/` is supporting evidence only; it is not sufficient
@@ -58,10 +60,13 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
-- **Execution model**: planning artifacts are drafted and now waiting for the
-  reviewer/planner approval loop before publish / PR work begins
+- **Current**: `pr-open`
+- **Execution model**: follow the canonical creator -> reviewer -> publish ->
+  merge path; this planning-only topic has already reached the open-PR phase and
+  now waits for human review before merge
 - **Allowed transitions**:
+  - `planned` -> `creator-in-progress`
+  - `creator-in-progress` -> `review-ready`
   - `review-ready` -> `reviewer-in-progress`
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
@@ -118,6 +123,52 @@ Artifact path notes:
    - the reason it remains out of execution scope
 5. Keep the later bounded execution subset limited to the ready units below.
 
+### Locked remediation unit contract
+
+| Skill | Difference area | Status | Temporary implementation source | Target resolution | Exact editable files if ready | Exact untouched files | Validation | Missing policy/evidence if blocked |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `plan-creator` | `fallback-contract-source` | `explicitly-blocked` | none | none | none | `skills/plan-creator/SKILL.md`, `.github/skills/plan-creator/SKILL.md`, `skills/plan-creator/references/required-section-meaning.md`, `.github/skills/plan-creator/references/required-section-meaning.md` | none | Missing human policy lock on whether fallback section authority is local-skill-owned or repo-governance-owned. Current evidence shows two incompatible fallback contracts, and choosing one would settle workflow authority rather than support-material drift only. |
+| `plan-creator` | `reference-body-expansion` | `implementation-ready` | `.github/skills/plan-creator/reference.md` | `adopt .github/skills/` | `skills/plan-creator/reference.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/checklist.md`, `skills/plan-creator/examples.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `diff -u skills/plan-creator/reference.md .github/skills/plan-creator/reference.md` is empty after remediation; the updated `skills/` reference still points only to files that exist locally. | none |
+| `plan-creator` | `examples-drift` | `implementation-ready` | `.github/skills/plan-creator/examples.md` | `adopt .github/skills/` | `skills/plan-creator/examples.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/checklist.md`, `skills/plan-creator/reference.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `diff -u skills/plan-creator/examples.md .github/skills/plan-creator/examples.md` is empty after remediation; added examples stay within current workflow semantics and do not require new files outside the local surface. | none |
+| `plan-creator` | `template-support-and-auxiliary-references` | `implementation-ready` | `.github/skills/plan-creator/` support files | `adopt .github/skills/` | `skills/plan-creator/checklist.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/reference.md`, `skills/plan-creator/examples.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md` | Each edited support file matches the `.github/skills/` peer exactly, and no untouched local reference path becomes dangling. | none |
+| `plan-reviewer` | `review-basis-path` | `explicitly-blocked` | none | none | none | `skills/plan-reviewer/SKILL.md`, `.github/skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/reference.md`, `.github/skills/plan-reviewer/reference.md`, `skills/plan-reviewer/checklist.md`, `.github/skills/plan-reviewer/checklist.md` | none | Missing human policy lock on which plan-creator surface (`skills/` or `.github/skills/`) is the current authoritative review basis for planner review. This is workflow authority, not support-only drift. |
+| `plan-reviewer` | `blocked-behavior-for-missing-sources-or-plan` | `explicitly-blocked` | none | none | none | `skills/plan-reviewer/SKILL.md`, `.github/skills/plan-reviewer/SKILL.md` | none | Missing human policy lock on whether reviewer failure for missing sources/plan must return machine-consumable `needs-rework` JSON or must stop without a verdict. This decision affects orchestration and downstream automation behavior. |
+| `plan-reviewer` | `reference-review-rules` | `implementation-ready` | `.github/skills/plan-reviewer/reference.md` | `adopt .github/skills/` | `skills/plan-reviewer/reference.md` | `skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/checklist.md`, `skills/plan-reviewer/examples.md` | `diff -u skills/plan-reviewer/reference.md .github/skills/plan-reviewer/reference.md` is empty after remediation; the updated `skills/` reference distinguishes projection readability from overwrite authority and keeps output JSON rules intact. | none |
+| `plan-reviewer` | `examples-and-checklist-drift` | `implementation-ready` | `.github/skills/plan-reviewer/` support files | `adopt .github/skills/` | `skills/plan-reviewer/checklist.md`, `skills/plan-reviewer/examples.md` | `skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/reference.md` | `diff -u` is empty for both edited files after remediation; checklist rules and examples align with the updated reference-review guidance without changing reviewer runtime behavior in `SKILL.md`. | none |
+
+### Bounded execution subset
+
+The later Implement Agent may execute only these ready units:
+
+- `plan-creator/reference-body-expansion`
+- `plan-creator/examples-drift`
+- `plan-creator/template-support-and-auxiliary-references`
+- `plan-reviewer/reference-review-rules`
+- `plan-reviewer/examples-and-checklist-drift`
+
+This ready subset aligns support/reference surfaces only. It does not claim
+that the full `plan-creator` or `plan-reviewer` planning-spine contract is
+aligned while the blocked `SKILL.md`-owned authority units remain unresolved.
+
+Execution of that later topic must stay within these exact editable files only:
+
+- `skills/plan-creator/reference.md`
+- `skills/plan-creator/examples.md`
+- `skills/plan-creator/checklist.md`
+- `skills/plan-creator/references/artifact-path-rule.md`
+- `skills/plan-creator/references/role-boundary-rule.md`
+- `skills/plan-creator/templates/topic-plan-template.md`
+- `skills/plan-reviewer/reference.md`
+- `skills/plan-reviewer/checklist.md`
+- `skills/plan-reviewer/examples.md`
+
+The later Implement Agent must not execute these units unless a new human
+policy lock is added first:
+
+- `plan-creator/fallback-contract-source`
+- `plan-reviewer/review-basis-path`
+- `plan-reviewer/blocked-behavior-for-missing-sources-or-plan`
+
 ## Validation / Acceptance Checks
 
 - The topic remains planning-only and does not authorize remediation edits here.
@@ -153,55 +204,17 @@ Artifact path notes:
 
 - Which fallback contract source should ultimately govern `plan-creator` when
   the topic-plan template is absent:
-  - local `references/required-section-meaning.md`
-  - repo-level `folder-contract.md`
+  - local `skills/plan-creator/references/required-section-meaning.md`
+  - repo-level fallback referenced by
+    `.github/skills/plan-creator/SKILL.md` as `folder-contract.md`, which does
+    not currently exist as a repo-visible file in this checkout
 - Which planning surface should remain the review-basis authority for
   `plan-reviewer`:
-  - `skills/plan-creator/...`
-  - `.github/skills/plan-creator/...`
+  - `skills/plan-creator/reference.md`,
+    `skills/plan-creator/checklist.md`, and
+    `skills/plan-creator/templates/topic-plan-template.md`
+  - `.github/skills/plan-creator/reference.md`,
+    `.github/skills/plan-creator/checklist.md`, and
+    `.github/skills/plan-creator/templates/topic-plan-template.md`
 - Should missing-plan / missing-source review failure stay machine-consumable as
   `needs-rework`, or stay as a hard stop with no verdict object
-
-## Remediation Unit Contract
-
-| Skill | Difference area | Status | Temporary implementation source | Target resolution | Exact editable files if ready | Exact untouched files | Validation | Missing policy/evidence if blocked |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `plan-creator` | `fallback-contract-source` | `explicitly-blocked` | none | none | none | `skills/plan-creator/SKILL.md`, `.github/skills/plan-creator/SKILL.md`, `skills/plan-creator/references/required-section-meaning.md`, `.github/skills/plan-creator/references/required-section-meaning.md` | none | Missing human policy lock on whether fallback section authority is local-skill-owned or repo-governance-owned. Current evidence shows two incompatible fallback contracts, and choosing one would settle workflow authority rather than support-material drift only. |
-| `plan-creator` | `reference-body-expansion` | `implementation-ready` | `.github/skills/plan-creator/reference.md` | `adopt .github/skills/` | `skills/plan-creator/reference.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/checklist.md`, `skills/plan-creator/examples.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `diff -u skills/plan-creator/reference.md .github/skills/plan-creator/reference.md` is empty after remediation; the updated `skills/` reference still points only to files that exist locally. | none |
-| `plan-creator` | `examples-drift` | `implementation-ready` | `.github/skills/plan-creator/examples.md` | `adopt .github/skills/` | `skills/plan-creator/examples.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/checklist.md`, `skills/plan-creator/reference.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `diff -u skills/plan-creator/examples.md .github/skills/plan-creator/examples.md` is empty after remediation; added examples stay within current workflow semantics and do not require new files outside the local surface. | none |
-| `plan-creator` | `template-support-and-auxiliary-references` | `implementation-ready` | `.github/skills/plan-creator/` support files | `adopt .github/skills/` | `skills/plan-creator/checklist.md`, `skills/plan-creator/references/artifact-path-rule.md`, `skills/plan-creator/references/role-boundary-rule.md`, `skills/plan-creator/templates/topic-plan-template.md` | `skills/plan-creator/SKILL.md`, `skills/plan-creator/reference.md`, `skills/plan-creator/examples.md`, `skills/plan-creator/references/required-section-meaning.md`, `skills/plan-creator/references/stable-library-rule.md`, `skills/plan-creator/references/stop-and-ask-triggers.md`, `skills/plan-creator/references/template-usage-rule.md` | Each edited support file matches the `.github/skills/` peer exactly, and no untouched local reference path becomes dangling. | none |
-| `plan-reviewer` | `review-basis-path` | `explicitly-blocked` | none | none | none | `skills/plan-reviewer/SKILL.md`, `.github/skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/reference.md`, `.github/skills/plan-reviewer/reference.md`, `skills/plan-reviewer/checklist.md`, `.github/skills/plan-reviewer/checklist.md` | none | Missing human policy lock on which plan-creator surface (`skills/` or `.github/skills/`) is the current authoritative review basis for planner review. This is workflow authority, not support-only drift. |
-| `plan-reviewer` | `blocked-behavior-for-missing-sources-or-plan` | `explicitly-blocked` | none | none | none | `skills/plan-reviewer/SKILL.md`, `.github/skills/plan-reviewer/SKILL.md` | none | Missing human policy lock on whether reviewer failure for missing sources/plan must return machine-consumable `needs-rework` JSON or must stop without a verdict. This decision affects orchestration and downstream automation behavior. |
-| `plan-reviewer` | `reference-review-rules` | `implementation-ready` | `.github/skills/plan-reviewer/reference.md` | `adopt .github/skills/` | `skills/plan-reviewer/reference.md` | `skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/checklist.md`, `skills/plan-reviewer/examples.md` | `diff -u skills/plan-reviewer/reference.md .github/skills/plan-reviewer/reference.md` is empty after remediation; the updated `skills/` reference distinguishes projection readability from overwrite authority and keeps output JSON rules intact. | none |
-| `plan-reviewer` | `examples-and-checklist-drift` | `implementation-ready` | `.github/skills/plan-reviewer/` support files | `adopt .github/skills/` | `skills/plan-reviewer/checklist.md`, `skills/plan-reviewer/examples.md` | `skills/plan-reviewer/SKILL.md`, `skills/plan-reviewer/reference.md` | `diff -u` is empty for both edited files after remediation; checklist rules and examples align with the updated reference-review guidance without changing reviewer runtime behavior in `SKILL.md`. | none |
-
-## Bounded Execution Subset That May Proceed Now
-
-The later Implement Agent may execute only these ready units:
-
-- `plan-creator/reference-body-expansion`
-- `plan-creator/examples-drift`
-- `plan-creator/template-support-and-auxiliary-references`
-- `plan-reviewer/reference-review-rules`
-- `plan-reviewer/examples-and-checklist-drift`
-
-Execution of that later topic must stay within these exact editable files only:
-
-- `skills/plan-creator/reference.md`
-- `skills/plan-creator/examples.md`
-- `skills/plan-creator/checklist.md`
-- `skills/plan-creator/references/artifact-path-rule.md`
-- `skills/plan-creator/references/role-boundary-rule.md`
-- `skills/plan-creator/templates/topic-plan-template.md`
-- `skills/plan-reviewer/reference.md`
-- `skills/plan-reviewer/checklist.md`
-- `skills/plan-reviewer/examples.md`
-
-## Blocked Units That Remain Out of Execution Scope
-
-The later Implement Agent must not execute these units in the bounded
-remediation topic unless a new human policy lock is added first:
-
-- `plan-creator/fallback-contract-source`
-- `plan-reviewer/review-basis-path`
-- `plan-reviewer/blocked-behavior-for-missing-sources-or-plan`

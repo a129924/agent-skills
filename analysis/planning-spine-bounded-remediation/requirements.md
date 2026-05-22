@@ -87,9 +87,9 @@ If the topic is `partially executable`, the plan must explicitly identify:
 | ID | Requirement | Acceptance signal |
 | --- | --- | --- |
 | R1 | All eight remediation units are classified exactly once | No unit is missing, duplicated, or given mixed status |
-| R2 | Every `implementation-ready` unit has locked file-level execution data | Each ready unit has source, target resolution, exact editable files, exact untouched files, and validation |
-| R3 | Every blocked unit names the missing decision or evidence | Each blocked unit has a concrete policy/evidence gap instead of vague caution |
-| R4 | The plan leaves no hidden decision to the Implement Agent | The bounded execution subset is explicit and blocked units are out of scope |
+| R2 | Every `implementation-ready` unit has locked file-level execution data for a partial support-material subset only | Each ready unit has source, target resolution, exact editable files, exact untouched files, and validation, and none of the ready units requires resolving `SKILL.md`-owned authority drift |
+| R3 | Every blocked unit names the missing decision or evidence and carries the implicated `SKILL.md` file set when authority drift is involved | Each blocked unit has a concrete policy/evidence gap instead of vague caution, and blocked workflow-authority units explicitly surface the relevant `skills/.../SKILL.md` and `.github/skills/.../SKILL.md` implications |
+| R4 | The plan leaves no hidden decision to the Implement Agent | The bounded execution subset is explicit, blocked units are out of scope, and the plan does not imply whole-skill planning-spine alignment while `SKILL.md`-owned authority drift remains blocked |
 | R5 | The topic remains planning-only | No skill surface, `.codex/skills`, README, VERSION, or tag action is authorized here |
 
 ## Expected classification baseline
@@ -105,11 +105,18 @@ Expected `implementation-ready` candidates:
 - `plan-reviewer/reference-review-rules`
 - `plan-reviewer/examples-and-checklist-drift`
 
+These ready candidates are limited to support/reference surfaces only. They do
+not resolve or override any `SKILL.md`-owned workflow-authority drift.
+
 Expected `explicitly-blocked` candidates:
 
 - `plan-creator/fallback-contract-source`
 - `plan-reviewer/review-basis-path`
 - `plan-reviewer/blocked-behavior-for-missing-sources-or-plan`
+
+These blocked candidates must carry the corresponding `SKILL.md` implications
+forward so a later Implement Agent cannot treat the remaining authority drift
+as already aligned.
 
 These expectations are planning hypotheses only. The plan must still verify
 them against the direct file inspection results.
@@ -119,7 +126,8 @@ them against the direct file inspection results.
 ### In scope
 
 - planning-only remediation classification for the two planning-spine skills
-- file-level bounded execution contract for the units that are safe now
+- file-level bounded execution contract for the support/reference units that are
+  safe now
 - explicit isolation of the units that still need policy lock
 
 ### Out of scope
@@ -128,6 +136,8 @@ them against the direct file inspection results.
 - any remediation edit to `.github/skills/plan-creator/`
 - any remediation edit to `skills/plan-reviewer/`
 - any remediation edit to `.github/skills/plan-reviewer/`
+- any attempt to treat `SKILL.md`-owned authority drift as part of the ready
+  execution subset
 - any `.codex/skills` mutation
 - any business same-name topic
 - any README, VERSION, tag, release, or governance rewrite
