@@ -1,0 +1,15 @@
+{
+  "workflow": "workflow-recovery-alignment",
+  "run_id": "workflow-recovery-alignment-20260522",
+  "topic": "workflow-recovery-alignment",
+  "branch": "fix/andrew/workflow-recovery-alignment",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-workflow-recovery-alignment",
+  "current_state": "READY_PR_OPENED",
+  "result": "finished",
+  "human_feedback_required": false,
+  "last_completed_step": "open_ready_pr",
+  "next_step": null,
+  "migration_status": "remediated",
+  "pr_url": "https://github.com/a129924/agent-skills/pull/90"
+}
