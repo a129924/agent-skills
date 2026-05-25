@@ -1,0 +1,18 @@
+{
+  "workflow": "topic-bootstrap",
+  "topic": "agent-skill-contract-surface-move",
+  "target_branch": "feat/andrew/agent-skill-contract-surface-move",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-agent-skill-contract-surface-move",
+  "current_state": "FINISHED",
+  "result": "accepted",
+  "rounds": 2,
+  "blocking_reason": "",
+  "human_feedback_required": false,
+  "last_completed_step": "finish",
+  "next_step": "creator work may begin in a later workflow after this bootstrapped topic plan is resumed",
+  "worktree_routing_result_path": ".workflow-runs/topic-bootstrap-agent-skill-contract-surface-move-20260522/worktree-routing-audit.txt",
+  "plan_review_result_path": ".workflow-runs/topic-bootstrap-agent-skill-contract-surface-move-20260522/plan-review.json",
+  "planner_final_review_path": ".workflow-runs/topic-bootstrap-agent-skill-contract-surface-move-20260522/planner-final-review.md",
+  "independent_worktree_agent_id": "019e4eff-2004-7e82-bc7b-bbe874b16a85",
+  "independent_plan_reviewer_agent_id": "019e4eff-516e-7e20-936d-7f1232509b36"
+}
