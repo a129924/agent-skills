@@ -1,0 +1,16 @@
+{
+  "workflow": "migration-publish-handoff",
+  "run_id": "migration-publish-handoff-worktree-manager-move-20260522",
+  "source_workflow_run": "migration-implementation-worktree-manager-move-20260522",
+  "topic": "worktree-manager-move",
+  "branch": "feat/andrew/worktree-manager-move",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-worktree-manager-move",
+  "current_state": "STOP_POINT_1_PENDING",
+  "result": "awaiting-human-approval",
+  "blocking_reason": null,
+  "human_feedback_required": true,
+  "last_completed_step": "enter_stop_point_1",
+  "next_step": "await explicit human approval for topic-local commit/push/Ready PR",
+  "stop_point_1_approved": false
+}

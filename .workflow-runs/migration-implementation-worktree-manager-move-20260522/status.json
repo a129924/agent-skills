@@ -1,0 +1,20 @@
+{
+  "workflow": "migration-implementation",
+  "run_id": "migration-implementation-worktree-manager-move-20260522",
+  "topic": "worktree-manager-move",
+  "branch": "feat/andrew/worktree-manager-move",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260522-worktree-manager-move",
+  "current_state": "MIGRATION_STATUS_CONFIRMED",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "confirm_migration_status",
+  "next_step": null,
+  "migration_status": "copied",
+  "overlay_bound": false,
+  "overlay_result": "skipped-not-bound",
+  "implementer_agent_id": "019e4f0d-60e7-79d3-83a0-066dfd281784",
+  "reviewer_agent_id": "019e4f0f-5313-7873-9b9c-78a0292f0927"
+}
