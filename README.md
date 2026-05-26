@@ -83,6 +83,15 @@ skills/                          # intended canonical skill source
   follow-up, adding repo-visible workflow policy and workflow documents that
   tighten PR-comment correction, topic bootstrap, migration implementation, and
   release-cleanup routing.
+- As of version `0.65.0`, PR #91 merged the agent-skill contract-surface move
+  back into `dev`, so the creator/reviewer/template surfaces now also exist
+  under `skills/` as target-architecture copies while `.github/skills/`
+  remains the transition-era compatibility surface and the publish handoff
+  workflow is explicitly split from implementation.
+- As of version `0.65.0`, PR #92 also merged the `worktree-manager` move back
+  into `dev`, so the helper skill now also exists under `skills/` as a
+  target-architecture copy while `.github/skills/worktree-manager/` remains the
+  transition-era compatibility surface.
 
 ## Repository rules
 Every stable skill should:
