@@ -272,7 +272,7 @@ Process documentation and workflow guidance for repository operations:
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
 | `plan-creator` | creates repo-visible topic plans with canonical workflow transitions, analysis-layer routing, exact artifact paths, and stable-library timing contracts |
 | `plan-reviewer` | independently reviews repo-visible topic plans against workflow contracts and returns fixed-schema JSON verdicts before execution |
-| `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md` with minimal token cost and explicit blocking when incomplete |
+| `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md`, including implementation-only gate checks, with minimal token cost and explicit blocking when incomplete |
 | `python-implementation-workflow` | orchestrates the end-to-end Python implementation workflow with active gates across plan review, TDD assessment, implementation, implementation review, code review, and medium/high-severity drift correction handling |
 | `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
 | `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
