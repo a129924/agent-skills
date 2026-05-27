@@ -6,7 +6,7 @@ risk_profile:
   - external_tooling
 inputs:
   - topic name that maps to plan/<topic>/<topic>.step.md
-  - operation: read_all, read_not_run, read_success, or check_all_succeeded
+  - "operation: read_all, read_not_run, read_success, check_all_succeeded, or check_impl_steps_succeeded"
 outputs:
   - Python CLI stdout with matching step lines or success/blocked summary
   - exit code 0 or 1 that the caller can use as a workflow gate
@@ -42,7 +42,7 @@ Do not use this skill when:
 # Inputs
 
 - `<topic>`: required topic name; resolves to `plan/<topic>/<topic>.step.md`
-- `<operation>`: one of `read_all`, `read_not_run`, `read_success`, `check_all_succeeded`
+- `<operation>`: one of `read_all`, `read_not_run`, `read_success`, `check_all_succeeded`, or `check_impl_steps_succeeded`
 - current working directory at repository root so the Python CLI and fallback paths resolve correctly
 
 # Process
@@ -59,6 +59,7 @@ Do not use this skill when:
 4. Preserve the command contract by honoring exit codes:
    - `read_all`, `read_not_run`, `read_success` return exit code `0` on successful reads
    - `check_all_succeeded` returns exit code `0` only when nothing is pending
+   - `check_impl_steps_succeeded` returns exit code `0` only when `## Implementation Steps` contains no pending items
    - missing `.step.md` returns exit code `1` and is blocking
 5. If Python CLI execution is unavailable, use the grep fallback from `reference.md`, and explicitly note that grep cannot reproduce the lowercase `[x]` warning by itself.
 6. Never modify `.step.md`, normalize checkbox casing, or continue past a blocking `check_all_succeeded` result.
@@ -89,14 +90,16 @@ Wrong follow-up: continuing anyway or rewriting the file inside this skill.
 - `read_not_run`: pending lines on stdout, including lowercase `[x]`; exit code `0`
 - `read_success`: completed `[X]` lines on stdout; exit code `0`
 - `check_all_succeeded`: success summary with exit code `0`, or blocked summary plus pending lines with exit code `1`
+- `check_impl_steps_succeeded`: implementation-only success summary with exit code `0`, or blocked summary plus pending implementation lines with exit code `1`
 - errors: `Error: File not found: plan/<topic>/<topic>.step.md` on stderr with exit code `1`
 
 # Validation
 
 ## Required Checks
-- run only one of the four supported operations
+ - run only one of the five supported operations
 - keep the command path as `python skills/plan-step-tracker/scripts/step_tracker.py <operation> <topic>`
 - treat exit code `1` from `check_all_succeeded` or missing files as blocking
+- treat exit code `1` from `check_impl_steps_succeeded` as an implementation-only blocking signal
 - treat lowercase `[x]` as pending, not done
 - keep the workflow read-only
 
@@ -128,6 +131,7 @@ Wrong follow-up: continuing anyway or rewriting the file inside this skill.
 
 - verify exit code `0` from `check_all_succeeded` before continuing a gated workflow
 - verify exit code `1` blocks continuation when any pending step or missing file is reported
+- verify `check_impl_steps_succeeded` inspects only `## Implementation Steps` and ignores pending items outside that section
 - verify lowercase `[x]` remains pending and produces a warning when the Python CLI is used
 - verify fallback grep guidance is presented as an approximation, not as a replacement for the CLI warning behavior
 

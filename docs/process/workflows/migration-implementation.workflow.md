@@ -1,8 +1,10 @@
 # Migration Implementation Workflow
 
 ## Purpose
-Execute an approved migration topic and drive it to commit, push, and Ready PR
-without expanding the approved scope.
+Execute an approved migration topic through implementation, review, overlay
+gates, and migration-status confirmation without expanding the approved scope.
+Stop at `MIGRATION_STATUS_CONFIRMED` and hand later publish actions to the
+publish workflow.
 
 ## Preconditions
 - Must follow:

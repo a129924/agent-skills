@@ -27,11 +27,18 @@ Supported operations:
 | `read_not_run` | prints pending lines, including `[x]` | `0` |
 | `read_success` | prints completed `[X]` lines | `0` |
 | `check_all_succeeded` | prints success summary if all done; otherwise blocked summary plus pending lines | `0` when complete, `1` when pending |
+| `check_impl_steps_succeeded` | prints success summary when `## Implementation Steps` is complete; otherwise blocked summary plus pending implementation lines | `0` when implementation steps are complete, `1` when pending |
 
 Error contract:
 
 - Missing file prints `Error: File not found: plan/<topic>/<topic>.step.md` to stderr and returns exit code `1`.
 - Lowercase `[x]` prints `Warning: Found lowercase [x] at line N; treating as pending` to stderr.
+
+## Implementation-only scope rule
+
+- `check_impl_steps_succeeded` inspects only checkbox lines under the `## Implementation Steps` section.
+- Pending items outside `## Implementation Steps` do not block `check_impl_steps_succeeded`.
+- If the file has no `## Implementation Steps` checkbox lines, `check_impl_steps_succeeded` treats that section as complete and returns success.
 
 ## Grep fallback guidance
 
@@ -71,7 +78,22 @@ else
 fi
 ```
 
+Implementation-only fallback example:
+
+```bash
+IMPL_PENDING=$(sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep -c '^\- \[[ x]\]')
+if [ "$IMPL_PENDING" -eq 0 ]; then
+  echo 'SUCCESS: All implementation steps complete'
+  exit 0
+else
+  echo "BLOCKED: $IMPL_PENDING implementation steps pending"
+  sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep '^\- \[[ x]\]'
+  exit 1
+fi
+```
+
 Fallback limitation:
 
 - grep can approximate pending detection for `[x]`, but it does not emit the Python CLI warning automatically
 - when using grep fallback, call out lowercase `[x]` manually if present
+- section-scoped fallback commands are only an approximation of the Python CLI; prefer the CLI when exact implementation-step semantics matter
