@@ -14,11 +14,15 @@ publish workflow.
 - Migration topic, risk level, approved plan, and target branch are already
   provided.
 - Worktree is already prepared for the topic.
+- Any conditionally required topic progression artifact already exists before
+  implementation starts.
 
 ## Inputs
 - migration topic
 - risk level
 - approved topic plan
+- required topic progression artifact when the topic contract makes `step.md`
+  mandatory
 - target branch
 - prepared worktree
 
@@ -44,12 +48,14 @@ publish workflow.
 
 ## Step Sequence
 1. Load the approved topic plan.
-2. Implementer executes the migration.
-3. Reviewer reviews the migrated output.
-4. Run repository-specific overlay gates when an overlay is bound.
-5. Confirm migration status.
-6. Stop and hand off to publish workflow.
-7. Finish.
+2. Verify that any required `plan/<topic>/<topic>.step.md` exists before
+   workflow progression continues.
+3. Implementer executes the migration.
+4. Reviewer reviews the migrated output.
+5. Run repository-specific overlay gates when an overlay is bound.
+6. Confirm migration status.
+7. Stop and hand off to publish workflow.
+8. Finish.
 
 ## Stop Rules
 Stop with `human-feedback-required` if:
@@ -57,6 +63,7 @@ Stop with `human-feedback-required` if:
 - approved plan is missing
 - target branch is missing
 - worktree is not prepared
+- required `step.md` is missing for a topic that cannot progress without it
 - implementation modifies out-of-scope files
 - reviewer finds blocking behavior drift after allowed rounds
 - required overlay gate fails after allowed rounds
@@ -65,6 +72,9 @@ Stop with `human-feedback-required` if:
 
 ## Role Responsibility Boundaries
 - Implementer performs the migration under the approved plan.
+- A required `step.md` remains the repo-visible progression truth during this
+  workflow; implementation must not advance past its gate by chat-only
+  inference.
 - Reviewer judges whether the implemented result stays within contract, and
   reviewer approval must remain independent of Main Agent orchestration.
 - Main Agent stops this workflow at `MIGRATION_STATUS_CONFIRMED` and hands off
@@ -87,6 +97,7 @@ Stop with `human-feedback-required` if:
 
 ## Acceptance Criteria
 - Implementation stayed within the approved topic scope.
+- Any required `step.md` existed before implementation progression advanced.
 - Reviewer pass completed within the allowed loop cap.
 - Overlay-bound validation, when required, passed or was explicitly routed to a
   terminal blocking or defer state.
