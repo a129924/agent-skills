@@ -1,8 +1,10 @@
 # Migration Implementation Workflow
 
 ## Purpose
-Execute an approved migration topic and drive it to commit, push, and Ready PR
-without expanding the approved scope.
+Execute an approved migration topic through implementation, review, overlay
+gates, and migration-status confirmation without expanding the approved scope.
+Stop at `MIGRATION_STATUS_CONFIRMED` and hand later publish actions to the
+publish workflow.
 
 ## Preconditions
 - Must follow:
@@ -25,9 +27,7 @@ without expanding the approved scope.
 - review result captured
 - repository-specific overlay gate result recorded when an overlay is bound
 - migration status recorded
-- topic commit created
-- branch pushed
-- Ready PR opened
+- topic is ready for publish handoff
 
 ## States
 - `READY_TO_IMPLEMENT`
@@ -39,9 +39,6 @@ without expanding the approved scope.
 - `OVERLAY_GATES_BLOCKED`
 - `OVERLAY_GATES_DEFERRED`
 - `MIGRATION_STATUS_CONFIRMED`
-- `COMMITTED`
-- `PUSHED`
-- `READY_PR_OPENED`
 - `FINISHED`
 - `HUMAN_FEEDBACK_REQUIRED`
 
@@ -51,10 +48,8 @@ without expanding the approved scope.
 3. Reviewer reviews the migrated output.
 4. Run repository-specific overlay gates when an overlay is bound.
 5. Confirm migration status.
-6. Commit by topic.
-7. Push the branch.
-8. Open a Ready PR.
-9. Finish.
+6. Stop and hand off to publish workflow.
+7. Finish.
 
 ## Stop Rules
 Stop with `human-feedback-required` if:
@@ -67,13 +62,13 @@ Stop with `human-feedback-required` if:
 - required overlay gate fails after allowed rounds
 - required overlay gate cannot produce a clear pass, block, or defer result
 - migration status cannot be classified clearly
-- PR cannot be opened
 
 ## Role Responsibility Boundaries
 - Implementer performs the migration under the approved plan.
 - Reviewer judges whether the implemented result stays within contract, and
   reviewer approval must remain independent of Main Agent orchestration.
-- Main Agent manages commit, push, and PR progression.
+- Main Agent stops this workflow at `MIGRATION_STATUS_CONFIRMED` and hands off
+  any later commit, push, or PR progression to the publish workflow.
 - Repository-specific overlays may require stricter readability or semantic
   parity gates, but those gates do not belong in this generic workflow body.
 
@@ -102,12 +97,12 @@ Stop with `human-feedback-required` if:
   - `deferred`
   - `blocked`
   - `skipped`
-- Commit was by topic.
-- Branch was pushed and a Ready PR was opened.
+- Topic reached `MIGRATION_STATUS_CONFIRMED` and is ready for publish handoff.
 
 ## What Not To Do
 - Do not select a migration topic.
 - Do not infer a missing approved plan.
 - Do not expand the topic into redesign.
+- Do not commit, push, or open a Ready PR from this workflow body.
 - Do not hardcode repository-specific overlay gates into the common workflow
   contract.
