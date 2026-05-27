@@ -9,14 +9,16 @@ depending on chat memory or prematurely editing shared workflow governance.
 ## Scope
 
 - In scope for this phase:
-  - create the topic worktree planning artifacts
+  - use the committed planning baseline as the only writable topic spine
+  - inventory migration candidates at `topic / candidate` granularity
   - freeze the migration sequencing view and gap classes
   - freeze the dependency boundary on the workflow baseline topic
-  - freeze the rule that this worktree stays planning-only until explicit human permission
+  - verify the actual execution flow before the second topic commit
 - Out of scope for this phase:
   - skill folder migration or copying
   - workflow governance edits
   - implementation of any candidate move topic
+  - publish / PR / merge progression for this topic
 
 ## Locked Decisions
 
@@ -54,7 +56,7 @@ depending on chat memory or prematurely editing shared workflow governance.
 
 ## Status / Allowed Transitions
 
-- Current status: `planned`
+- Current status: `approved`
 - Allowed transitions:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -67,7 +69,9 @@ depending on chat memory or prematurely editing shared workflow governance.
   - `pr-open` -> `merged`
   - `merged` -> `released`
 - Phase note:
-  - this worktree stops after planning artifacts are materialized and before any migration planning deepens into move execution
+  - first topic commit already materialized the planning baseline as commit `26a4b16`
+  - sequencing, flow verification, and independent reviewer approval are complete
+  - publish / PR / merge progression remains intentionally unstarted in this topic state
 
 ## Artifact Paths
 
@@ -76,6 +80,7 @@ depending on chat memory or prematurely editing shared workflow governance.
 | Requirements baseline | `analysis/agent-skill-migration-sequencing/requirements.md` | Planning actor | Frozen business baseline for migration sequencing |
 | Topic plan | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.plan.md` | Planning actor | Repo-visible execution contract |
 | Topic step tracker | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.step.md` | Planning actor | Workflow progression checklist for this topic |
+| Sequencing result | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.sequencing.md` | Implementer subAgent | Repo-visible candidate ordering, exclusions, and flow-verification result |
 | Workflow baseline dependency | `analysis/workflow-artifact-standardization/requirements.md` | Upstream topic | Read-only upstream dependency once available |
 | Workflow governance surface | `plan/agent-handoff-workflow.md` | Shared governance | Read-only evidence in this phase |
 | Workflow governance surface | `docs/process/workflows/topic-bootstrap.workflow.md` | Shared governance | Read-only evidence in this phase |
@@ -85,22 +90,34 @@ depending on chat memory or prematurely editing shared workflow governance.
 
 ## Implementation Steps
 
-1. Materialize the worktree-local planning artifacts for this topic.
-2. Stop and wait for explicit human permission before candidate sequencing deepens.
-3. After permission, inventory migration candidates at `topic / candidate` granularity.
-4. Classify each candidate into:
+1. Keep the first topic commit (`26a4b16`) as the fixed planning baseline for this topic.
+2. Inventory migration candidates from existing repo-visible planning and migration artifacts only.
+3. Classify each candidate into:
    - `can_start_now`
    - `after-workflow-baseline`
    - `shared-governance-blocked`
-5. Record applicable gap classes for each candidate.
-6. Produce a bounded next-wave sequence without modifying shared governance files or moving skill folders.
+4. Record applicable gap classes for each candidate, using only:
+   - `bootstrap-artifact-gap`
+   - `step-gap`
+   - `summary-gap`
+   - `close-semantics-gap`
+   - `shared-governance-gap`
+   - `sequencing-gap`
+5. Materialize `agent-skill-migration-sequencing.sequencing.md` with:
+   - next-wave queue rows
+   - excluded existing topic/results
+   - explicit evidence basis
+   - flow-verification results
+6. Update `agent-skill-migration-sequencing.step.md` so creator and reviewer work are complete and the topic stops at `approved` before publish.
+7. Leave the second topic commit for the Main Agent after approved review state is recorded; do not publish, move skills, or enter PR flow here.
 
 ## Validation / Acceptance Checks
 
-- The three planning artifacts exist in the topic worktree.
-- `requirements.md` freezes the candidate-view and gap-class decisions clearly enough for later sequencing work.
-- `plan.md` keeps migration execution and shared-governance edits blocked until human permission.
-- `step.md` expresses the wait-for-permission stop point and the later sequencing progression path.
+- The three planning-baseline artifacts remain committed in `26a4b16`.
+- `agent-skill-migration-sequencing.sequencing.md` contains only `topic / candidate` rows and does not mix in completed results as queue items.
+- Candidates depending on workflow-baseline semantics are explicitly labeled `after-workflow-baseline`.
+- Candidates needing repo-wide workflow / governance alignment remain `shared-governance-blocked`.
+- `step.md` shows creator completion, flow verification completion, first topic commit completed, and second topic commit still pending Main Agent handling.
 - No skill folder or shared governance file is modified during this phase.
 
 ## Reviewer Handoff
@@ -118,12 +135,11 @@ depending on chat memory or prematurely editing shared workflow governance.
 
 ## Post-merge / Release Actions
 
-- No release action is declared in this planning-only phase.
-- After merge, run normal post-merge sync only if this topic later reaches merge.
-- Any later migration execution still requires a separate explicit human resume.
+- No release action is declared in this sequencing-only phase.
+- The second topic commit is the last planned action for this phase and is owned by the Main Agent, not this Implementer subAgent.
+- Any later migration execution still requires a separate explicit human resume and a separate topic contract.
 
 ## Open Questions / Unresolved Items
 
-- The exact first candidate set to classify after permission is intentionally left for the next phase.
-- Whether migration planning will need additional repo-visible inventory artifacts beyond this planning spine remains unresolved in this phase.
-
+- None for the creator-stage sequencing result.
+- Candidate execution remains intentionally deferred to later topics.
