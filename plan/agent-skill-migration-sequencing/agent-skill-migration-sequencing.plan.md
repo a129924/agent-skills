@@ -64,7 +64,7 @@ depending on chat memory or prematurely editing shared workflow governance.
 
 ## Status / Allowed Transitions
 
-- Current status: `approved`
+- Current status: `publish-in-progress`
 - Allowed transitions:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -79,8 +79,9 @@ depending on chat memory or prematurely editing shared workflow governance.
 - Phase note:
 - first topic commit already materialized the planning baseline as commit `26a4b16`
 - sequencing, flow verification, and independent reviewer approval are complete
-- planner alignment and topic-local publish handoff are the only allowed next
-  actions from `approved`
+- planner alignment and topic-local publish handoff are complete
+- the topic is now stopped at topic-local `STOP POINT 1` within
+  `publish-in-progress`
 - commit / push / PR progression remains intentionally unstarted until a later
   explicit human approval passes topic-local `STOP POINT 1`
 
