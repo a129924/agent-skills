@@ -26,9 +26,11 @@ topic to begin execution safely.
 - existing valid worktree reuse decision recorded when no new worktree is
   created
 - first planning artifact set written or validated:
-  - `analysis/<topic>/requirements.md`
   - `plan/<topic>/<topic>.plan.md`
-  - `plan/<topic>/<topic>.step.md`
+  - `analysis/<topic>/requirements.md` when required by the topic contract or
+    approved input model
+  - `plan/<topic>/<topic>.step.md` when required by the topic contract or
+    approved input model
 - plan review result captured
 - planner final review completed
 - plan artifacts committed by topic
@@ -52,9 +54,12 @@ topic to begin execution safely.
    context is already valid.
 3. Write or validate the first planning artifact set following the repository
    topic-plan contract basis. The first batch must include:
-   - `analysis/<topic>/requirements.md`
    - `plan/<topic>/<topic>.plan.md`
-   - `plan/<topic>/<topic>.step.md`
+   It must also include:
+   - `analysis/<topic>/requirements.md` when required by the topic contract or
+     approved input model
+   - `plan/<topic>/<topic>.step.md` when required by the topic contract or
+     approved input model
    If intent, scope, or boundary ambiguity remains, stop for clarification. If
    those inputs are already frozen, no separate boundary-alignment step is
    required.
@@ -73,7 +78,8 @@ Stop with `human-feedback-required` if:
 - required worktree creation fails
 - approved plan input model is incomplete
 - plan scope is unclear
-- any required first-batch planning artifact is missing
+- `plan/<topic>/<topic>.plan.md` is missing
+- any conditionally required first-batch planning artifact is missing
 - reviewer says the plan is not implementation-ready after allowed rounds
 - planner final review finds scope drift
 
@@ -108,8 +114,9 @@ Stop with `human-feedback-required` if:
 - Existing valid worktree reuse was explicitly recorded when no new worktree
   creation was required.
 - Topic plan exists or was explicitly validated as acceptable input.
-- The first planning batch contains at least `requirements.md`, `plan.md`, and
-  `step.md` at the repo-visible topic paths.
+- The first planning batch contains `plan.md` at the repo-visible topic path.
+- Any `requirements.md` or `step.md` required by the topic contract or approved
+  input model is present at the repo-visible topic path.
 - Plan review completed within the allowed loop cap.
 - Planner final review completed without unresolved scope drift.
 - Plan artifacts were committed by topic.

@@ -102,10 +102,10 @@ patch set plus the planning spine that authorized it.
   - `reviewer-in-progress` -> `approved`
   - `reviewer-in-progress` -> `needs-rework`
   - `needs-rework` -> `creator-in-progress`
-- `approved` -> `publish-in-progress`
-- `publish-in-progress` -> `pr-open`
-- `pr-open` -> `merged`
-- `merged` -> `released`
+  - `approved` -> `publish-in-progress`
+  - `publish-in-progress` -> `pr-open`
+  - `pr-open` -> `merged`
+  - `merged` -> `released`
 - Phase note:
   - planning artifacts are materialized
   - bounded creator-stage shared-contract implementation is complete

@@ -57,8 +57,8 @@ in different contexts.
   boundary.
 - Parent artifacts for a topic remain the current truth:
   - the locked topic plan
-  - any topic-owned parent artifacts such as `*.spec.md` / `*.step.md` that are
-    explicitly listed in `Artifact paths`
+  - any topic-owned parent artifacts such as `*.spec.md` that are explicitly
+    listed in `Artifact paths`
 - When `plan/<topic>/<topic>.step.md` is present, it is a workflow progression
   artifact:
   - it reflects current stage readiness and stage-local next work

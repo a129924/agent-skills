@@ -1,6 +1,6 @@
 # Requirements: workflow-artifact-standardization
 
-**Status**: FROZEN — planning baseline ready; shared-contract edits blocked pending explicit human permission
+**Status**: FROZEN — planning baseline ready; shared-contract edits completed after explicit human permission
 **Topic**: `workflow-artifact-standardization`
 **Date**: 2026-05-27
 
@@ -198,4 +198,3 @@ This topic is ready to move past planning when:
 2. the baseline above is frozen in repo-visible form
 3. later implementation work is clearly blocked pending explicit human permission
 4. the migration topic can consume this baseline as an upstream dependency without assuming it is already implemented
-
