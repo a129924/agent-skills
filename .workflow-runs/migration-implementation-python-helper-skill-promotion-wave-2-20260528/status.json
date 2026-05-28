@@ -1,0 +1,18 @@
+{
+  "workflow": "migration-implementation",
+  "topic": "python-helper-skill-promotion-wave-2",
+  "branch": "feat/andrew/python-helper-skill-promotion-wave-2",
+  "target_branch": "dev",
+  "worktree": "/private/tmp/python-helper-skill-promotion-wave-2",
+  "current_state": "MIGRATION_STATUS_CONFIRMED",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": "",
+  "human_feedback_required": false,
+  "last_completed_step": "confirm_migration_status",
+  "next_step": "migration-publish-handoff workflow may begin after explicit resume into the prepared worktree",
+  "migration_status": "copied",
+  "overlay_bound": false,
+  "overlay_result": "skipped-not-bound",
+  "implementer_agent_id": "codex-gpt-5"
+}

@@ -1,0 +1,18 @@
+{
+  "workflow": "migration-publish-handoff",
+  "run_id": "migration-publish-handoff-python-helper-skill-promotion-wave-2-20260528",
+  "source_workflow_run": "migration-implementation-python-helper-skill-promotion-wave-2-20260528",
+  "topic": "python-helper-skill-promotion-wave-2",
+  "branch": "feat/andrew/python-helper-skill-promotion-wave-2",
+  "target_branch": "dev",
+  "worktree": "/private/tmp/python-helper-skill-promotion-wave-2",
+  "current_state": "READY_PR_OPENED",
+  "result": "completed",
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "open_ready_pr",
+  "next_step": "monitor PR and enter pr-comment-correction only if actionable comments appear",
+  "stop_point_1_approved": true,
+  "pr_number": 97,
+  "pr_url": "https://github.com/a129924/agent-skills/pull/97"
+}
