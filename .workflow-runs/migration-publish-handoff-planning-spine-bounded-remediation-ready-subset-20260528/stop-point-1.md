@@ -13,6 +13,10 @@ Topic-local commit, push, and Ready PR creation are authorized.
 
 ## Next Step
 
-Perform the authorized topic-local commit, push the branch, and open the Ready
-PR. After PR creation, stay in `pr-open` and do not enter
+Completed:
+- topic-local commit created
+- branch pushed to `origin`
+- Ready PR opened: `#96`
+
+Remain in `pr-open` and do not enter
 `pr-comment-correction.workflow.md` unless actual actionable PR comments appear.
