@@ -7,13 +7,15 @@ Use this file to keep repo-visible topic-plan review aligned with the repository
 Review topic plans against all four contract sources together:
 
 1. `plan/agent-handoff-workflow.md`
-2. `skills/plan-creator/reference.md`
-3. `skills/plan-creator/checklist.md`
-4. `skills/plan-creator/templates/topic-plan-template.md`
+2. `.github/skills/plan-creator/reference.md`
+3. `.github/skills/plan-creator/checklist.md`
+4. `.github/skills/plan-creator/templates/topic-plan-template.md`
 
-Do not treat any one source as sufficient by itself. The workflow defines the
-canonical execution contract, while `plan-creator` materials define the expected
-plan shape and the common failure signals.
+Do not treat any one source as sufficient by itself. The workflow defines the canonical execution contract, while `plan-creator` materials define the expected plan shape and the common failure signals.
+
+When a topic uses correction / delta artifacts, also verify that the plan keeps the workflow body slim, lists exact parent/correction paths, makes parent-sync closure explicit, keeps review-log usage conditional on routing-controlling feedback, and leaves the minimum correction artifact contract in reference / examples instead of the workflow body.
+
+If the topic is a correction-lifecycle contract refresh, verify that it refreshes existing workflow / plan surfaces now and does not create a standalone correction skill unless a separate topic explicitly justifies extraction because repeated instability or cross-workflow reuse has been demonstrated.
 
 ## What counts as blocking
 
@@ -27,14 +29,19 @@ Treat these as blocking issues:
 - wrong post-merge or release timing
 - mixed role ownership
 - placeholders where the workflow needs an explicit contract
+- vague correction evidence paths such as `merged implementation`
+- missing parent-sync closure logic when correction artifacts are used
+- reviewer-owned logging or verdict work inside creator `Implementation Steps`
+- workflow-body bloat that turns the plan into a field-by-field correction schema
+- unconditional review-log requirements when routing control or multi-round rework is absent
+- turning a sample round cap into a repository-wide invariant
+- a correction-lifecycle refresh topic that quietly broadens into standalone-skill creation without separate justification
 
-Do not raise blocking issues for tone, phrasing, or layout preferences that do
-not change contract meaning.
+Do not raise blocking issues for tone, phrasing, or layout preferences that do not change contract meaning.
 
 ## Workflow position
 
-`plan-reviewer` runs after a repo-visible topic plan exists and before later
-execution begins under `plan/agent-handoff-workflow.md`.
+`plan-reviewer` runs after a repo-visible topic plan exists and before later execution begins under `plan/agent-handoff-workflow.md`.
 
 Typical operating sequence:
 
@@ -43,9 +50,7 @@ Typical operating sequence:
 3. required fixes are applied
 4. only then does branch preparation or later execution continue
 
-This skill is a planning-contract gate. It does not replace the existing
-implementation-review step in Phase 4, and it does not create a new numbered
-phase by itself.
+This skill is a planning-contract gate. It does not replace the existing implementation-review step in Phase 4, and it does not create a new numbered phase by itself.
 
 ## Output rule
 
@@ -58,5 +63,4 @@ Return exactly one JSON object with:
   - `DISCUSS`
   - `SKIP`
 
-Keep all reasoning inside structured fields. Do not append prose before or
-after the JSON object.
+Keep all reasoning inside structured fields. Do not append prose before or after the JSON object.

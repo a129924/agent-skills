@@ -1,0 +1,22 @@
+Role: worktree-routing record
+Requested operation: current-context reuse after topic-branch preparation
+Topic: `planning-spine-bounded-remediation/ready-subset`
+
+Result:
+- Branch `feat/andrew/planning-spine-bounded-remediation-ready-subset` was created successfully.
+- The run reuses `/Users/andrew/code/python/agent-skills` as the active workspace.
+- No repo-external managed worktree was created in this run.
+
+Reasoning:
+- The topic requires repo-visible edits in the shared workspace for this execution.
+- The workspace was clean before implementation began.
+- The ready-subset scope is file-bounded and the branch is dedicated to this topic.
+
+Evidence at routing time:
+- Path: `/Users/andrew/code/python/agent-skills`
+- Branch: `feat/andrew/planning-spine-bounded-remediation-ready-subset`
+- Status before file edits: clean
+
+Coordination warning:
+- This run touches planning-spine files that may also exist on `.github/skills/...` as read-only sources.
+- Do not widen into shared governance, active-path cutover, or blocked `SKILL.md` authority units from this workspace.

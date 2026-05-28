@@ -1,7 +1,6 @@
 # Plan creator examples
 
-Use these examples after `SKILL.md` has already narrowed the task to repository
-topic-plan authoring.
+Use these examples after `SKILL.md` has already narrowed the task to repository topic-plan authoring.
 
 ## Normal path
 
@@ -12,10 +11,12 @@ topic-plan authoring.
 - stop at `review-ready`
 
 ## Artifact Paths
-- `plan/cache-key-auditor/cache-key-auditor.plan.md`
-- `.github/skills/cache-key-auditor/SKILL.md`
-- `.github/skills/cache-key-auditor/reference.md`
-- `.github/skills/cache-key-auditor/examples.md`
+| Artifact | Path | Owner | Role |
+| --- | --- | --- | --- |
+| Topic plan | `plan/cache-key-auditor/cache-key-auditor.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Skill contract | `.github/skills/cache-key-auditor/SKILL.md` | Creator | Main skill instructions under topic scope |
+| Skill reference | `.github/skills/cache-key-auditor/reference.md` | Creator | Local supporting guidance for the drafted skill |
+| Skill examples | `.github/skills/cache-key-auditor/examples.md` | Creator | Usage examples for the drafted skill |
 
 Artifact path notes:
 - This topic does **not** modify `README.md`, `VERSION`, or release notes.
@@ -39,6 +40,53 @@ Artifact path notes:
 
 - Good because stable-library impact is declared instead of implied.
 
+### Correction-lifecycle contract topic
+```md
+## Scope
+- **In scope**:
+  - refresh `plan/agent-handoff-workflow.md`
+  - refresh `.github/skills/plan-reviewer/checklist.md`
+
+## Locked Decisions
+- The workflow body stays slim and keeps only correction lifecycle / routing rules.
+- Detailed correction artifact content belongs in reference / examples, not the workflow body.
+- This topic refreshes existing workflow surfaces only; it does **not** create a standalone correction skill now.
+- A later standalone correction skill is only a future option if repeated authoring / review instability or cross-workflow reuse justifies extraction in a separate topic.
+
+## Artifact Paths
+| Artifact | Path | Owner | Role |
+| --- | --- | --- | --- |
+| Topic plan | `plan/correction-refresh/correction-refresh.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Slim lifecycle / routing contract |
+| Reviewer checklist | `.github/skills/plan-reviewer/checklist.md` | Creator | Review gate for correction-lifecycle contract topics |
+
+Artifact path notes:
+- This topic does **not** modify `README.md`, `VERSION`, or `.github/copilot-instructions.md`.
+- No `review-log` artifact is listed because this authoring topic does not use reviewer feedback to control routing or multi-round rework.
+
+## Implementation Steps
+1. Refresh the workflow body so it keeps only correction lifecycle / routing rules.
+2. Put field-level correction artifact guidance in reference / examples instead of the workflow body.
+
+## Reference expectation
+- Minimum `*.correction-plan.md` contract:
+  - `Trigger / Evidence`
+  - `Scope`
+  - `What stays current`
+  - `What changes`
+  - `Acceptance delta`
+  - `Affected artifacts`
+  - `Parent sync note`
+  - `Retention / closure intent`
+- Minimum `*.correction-step.md` contract:
+  - use only when the repair or backfill is multi-step
+  - ordered repair / backfill steps
+  - downstream review checkpoints
+  - closure check that parent sync is complete before resolution
+```
+
+- Good because the workflow body stays slim, the field-level correction contract has a repo-visible home outside the workflow body, the artifact paths are exact and role-labeled, the conditional `review-log` rule is explicit, and future skill extraction stays deferred.
+
 ### Workflow-spec topic
 ```md
 ## Scope
@@ -47,9 +95,11 @@ Artifact path notes:
   - update `.github/guides/MAIN-AGENT-WORKFLOW.md` only if direct contradictions appear
 
 ## Artifact Paths
-- `plan/workflow-spec-refresh/workflow-spec-refresh.plan.md`
-- `plan/agent-handoff-workflow.md`
-- `.github/guides/MAIN-AGENT-WORKFLOW.md`
+| Artifact | Path | Owner | Role |
+| --- | --- | --- | --- |
+| Topic plan | `plan/workflow-spec-refresh/workflow-spec-refresh.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Repo-level workflow wording being refreshed |
+| Main-agent guide | `.github/guides/MAIN-AGENT-WORKFLOW.md` | Creator | Coupled execution guide updated only if contradictions appear |
 ```
 
 - Good because the topic stays process-focused and bounds the coupled files.
@@ -61,8 +111,10 @@ Artifact path notes:
   - clarify one misleading sentence in `.github/skills/foo/SKILL.md`
 
 ## Artifact Paths
-- `plan/foo-wording-fix/foo-wording-fix.plan.md`
-- `.github/skills/foo/SKILL.md`
+| Artifact | Path | Owner | Role |
+| --- | --- | --- | --- |
+| Topic plan | `plan/foo-wording-fix/foo-wording-fix.plan.md` | Planning actor | Repo-visible execution contract for this topic |
+| Skill contract | `.github/skills/foo/SKILL.md` | Creator | Single wording fix target |
 ```
 
 - Good because the plan stays small instead of pretending the topic is broader.
@@ -86,6 +138,53 @@ Artifact path notes:
 ```
 
 - Bad because no one can reliably validate drift against vague path labels.
+
+### Vague correction evidence path
+```md
+## Artifact Paths
+| Artifact | Path | Owner | Role |
+| Correction evidence | `merged implementation` | Creator | prove accepted drift |
+```
+
+- Bad because `merged implementation` is not an exact repo-visible path.
+
+### Reviewer work inside creator steps
+```md
+## Implementation Steps
+1. Refresh the correction workflow text.
+2. Write `plan/topic/topic.review-log.md` with the reviewer verdict after approval.
+```
+
+- Bad because reviewer feedback logging is not creator-owned implementation work.
+
+### Workflow-body bloat
+```md
+## Scope
+- Add a field-by-field `correction-plan` schema directly inside `plan/agent-handoff-workflow.md`.
+```
+
+- Bad because the workflow body should carry lifecycle / routing contract only; detailed schema belongs in reference or examples.
+
+### Premature standalone correction skill
+```md
+## Scope
+- refresh `plan/agent-handoff-workflow.md`
+- create `.github/skills/correction-delta-lifecycle/`
+
+## Locked Decisions
+- Extract a standalone correction skill now so future topics must use it immediately.
+```
+
+- Bad because this topic is a contract refresh for existing workflow surfaces; standalone extraction belongs in a later, separately planned topic only if repeated instability or cross-workflow reuse justifies it.
+
+### Unconditional review-log and global round cap
+```md
+## Routing notes
+- Every review must create `plan/<topic>/<topic>.review-log.md`.
+- Creator / reviewer loops stop after exactly three rounds in all topics.
+```
+
+- Bad because review logs are conditional and round caps are topic policy, not repository-wide law.
 
 ### Wrong reviewer handoff format
 ```md
@@ -115,9 +214,7 @@ Artifact path notes:
   - `approved` -> `merged`
 ```
 
-- Bad because it skips required workflow phases, invents an impossible direct
-  approval path, and does not preserve the canonical creator -> reviewer ->
-  publish sequence required by the repository contract.
+- Bad because it skips required workflow phases, invents an impossible direct approval path, and does not preserve the canonical creator -> reviewer -> publish sequence required by the repository contract.
 
 ### Role-boundary confusion
 ```md

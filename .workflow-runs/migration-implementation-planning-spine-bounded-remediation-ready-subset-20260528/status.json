@@ -1,0 +1,22 @@
+{
+  "workflow": "migration-implementation",
+  "run_id": "migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528",
+  "topic": "planning-spine-bounded-remediation/ready-subset",
+  "branch": "feat/andrew/planning-spine-bounded-remediation-ready-subset",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills",
+  "current_state": "MIGRATION_STATUS_CONFIRMED",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "confirm_migration_status",
+  "next_step": "migration publish handoff may begin",
+  "migration_status": "remediated",
+  "overlay_bound": true,
+  "overlay_result": "passed",
+  "review_result_path": ".workflow-runs/migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528/review-result.json",
+  "review_evidence_path": ".workflow-runs/migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528/review-evidence.md",
+  "overlay_gate_path": ".workflow-runs/migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528/overlay-gate.md",
+  "migration_status_path": ".workflow-runs/migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528/migration-status.md"
+}

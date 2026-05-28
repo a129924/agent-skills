@@ -1,0 +1,16 @@
+{
+  "workflow": "migration-publish-handoff",
+  "run_id": "migration-publish-handoff-planning-spine-bounded-remediation-ready-subset-20260528",
+  "source_workflow_run": "migration-implementation-planning-spine-bounded-remediation-ready-subset-20260528",
+  "topic": "planning-spine-bounded-remediation/ready-subset",
+  "branch": "feat/andrew/planning-spine-bounded-remediation-ready-subset",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills",
+  "current_state": "PUBLISH_IN_PROGRESS",
+  "result": "approved-to-publish",
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "approve_stop_point_1",
+  "next_step": "commit topic-local publish set, push branch, and open Ready PR",
+  "stop_point_1_approved": true
+}
