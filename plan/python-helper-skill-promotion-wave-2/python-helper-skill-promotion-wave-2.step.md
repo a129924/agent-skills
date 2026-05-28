@@ -1,6 +1,6 @@
 ---
 topic: python-helper-skill-promotion-wave-2
-status: planned
+status: pr-open
 created: 2026-05-28
 ---
 
@@ -10,10 +10,10 @@ created: 2026-05-28
 
 - [X] plan
 - [X] branch-ready
-- [ ] creator
-- [ ] review
-- [ ] publish
-- [ ] pr-open
+- [X] creator
+- [X] review
+- [X] publish
+- [X] pr-open
 - [ ] merged
 - [ ] released
 
@@ -34,32 +34,32 @@ created: 2026-05-28
 - [X] Record the worktree-routing audit at `.workflow-runs/topic-bootstrap-python-helper-skill-promotion-wave-2-20260528/worktree-routing-audit.txt`
 
 ### creator
-- [ ] Re-read the frozen requirements and topic plan before changing promotion
+- [X] Re-read the frozen requirements and topic plan before changing promotion
   targets
-- [ ] Create exactly 18 `skills/<skill-name>/` target folders from the matching
+- [X] Create exactly 18 `skills/<skill-name>/` target folders from the matching
   `.github/skills/<skill-name>/` source folders by folder-level direct copy
-- [ ] Preserve all in-scope `.github/skills/<skill-name>/` folders without
+- [X] Preserve all in-scope `.github/skills/<skill-name>/` folders without
   edits
-- [ ] Materialize `docs/migration/python-helper-skill-promotion-wave-2.md`
-- [ ] Verify no out-of-scope governance, stable-library, contract-surface, or
+- [X] Materialize `docs/migration/python-helper-skill-promotion-wave-2.md`
+- [X] Verify no out-of-scope governance, stable-library, contract-surface, or
   blocker paths were edited
 
 ### review
-- [ ] Run independent review on the selective-promotion patch set after creator
+- [X] Run independent review on the selective-promotion patch set after creator
   work exists
-- [ ] Record whether any path drift, source-authority drift, or extra-scope
+- [X] Record whether any path drift, source-authority drift, or extra-scope
   promotion occurred
 
 ### publish
-- [ ] Apply required review corrections if the independent reviewer returns
+- [X] Apply required review corrections if the independent reviewer returns
   `needs-rework`
-- [ ] Complete planner final review after reviewer acceptance
-- [ ] Pass the commit gate only after review and planner-alignment are both
+- [X] Complete planner final review after reviewer acceptance
+- [X] Pass the commit gate only after review and planner-alignment are both
   complete
-- [ ] Commit plan and promotion artifacts by topic in one bounded commit
+- [X] Commit plan and promotion artifacts by topic in one bounded commit
 
 ### pr-open
-- [ ] Open and manage the PR after publish progression is explicitly authorized
+- [X] Open and manage the PR after publish progression is explicitly authorized
 
 ### merged
 - [ ] Complete merge and any later post-merge resume path if this topic reaches
@@ -75,12 +75,15 @@ created: 2026-05-28
   branch confirmation, routing audit, and three planning artifacts now exist.
 - This step artifact is intentionally usable for later creator, reviewer, and
   publish handoff; it is not a placeholder.
+- `creator`, `review`, `publish`, and `pr-open` are now complete for this run,
+  matching the local publish-handoff status at `READY_PR_OPENED` for PR `#97`.
 - `.github/skills/` remains the current active authored/reviewed workflow path
   during transition; creator must treat it as preserved promotion input, not as
   a dual canonical-source declaration.
 - The 18-skill promotion set is locked. Any additional skill, contract-surface
   lane, runtime/tooling lane, or governance edit requires re-planning.
-- This bootstrap round stops before commit. Independent plan review, planner
-  final review, and the commit gate all remain pending.
+- Topic-local commit, push, and Ready PR progression already occurred for this
+  run; only later PR comment handling, merge, or release-state changes remain
+  outside this artifact update.
 - A future topic-close summary artifact may still be required if this topic
   later closes with handoff or required follow-up.
