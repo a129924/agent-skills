@@ -1,6 +1,6 @@
 ---
 topic: agent-skill-migration-sequencing
-status: approved
+status: publish-in-progress
 created: 2026-05-27
 ---
 
@@ -12,7 +12,7 @@ created: 2026-05-27
 - [X] branch-ready
 - [X] creator
 - [X] review
-- [ ] publish
+- [X] publish
 - [ ] pr-open
 - [ ] merged
 - [ ] released
@@ -43,7 +43,13 @@ created: 2026-05-27
 - [X] Topic is review-passed and waiting for Main Agent planner alignment before any publish progression
 
 ### publish
-- [ ] Apply any required review corrections and pass planner-alignment before publish progression
+- [X] Revise the topic contract so topic-local publish handoff is explicitly in scope
+- [X] Materialize `agent-skill-migration-sequencing.publish-alignment.md`
+- [X] Materialize `agent-skill-migration-sequencing.publish-readiness.md`
+- [X] Materialize `agent-skill-migration-sequencing.stop-point-1.md`
+- [X] Reviewer subAgent approved the topic-local publish artifacts
+- [X] Pass planner alignment and enter `publish-in-progress`
+- [X] Stop at topic-local `STOP POINT 1` with commit / push / PR still unauthorized
 
 ### pr-open
 - [ ] Open and manage the PR after publish progression is authorized
@@ -62,7 +68,9 @@ created: 2026-05-27
 - Creator work is complete and reviewer approval is now recorded.
 - Flow verification is complete for the sequencing artifact and confirmed that no skill folder move or shared-governance edit occurred.
 - Reviewer subAgent completed independent review with `no findings`.
-- Publish remains not started; the topic is waiting for Main Agent planner alignment and second-topic-commit handling only.
-- The second topic commit is intentionally still pending Main Agent integration after reviewer alignment; this subAgent must not commit.
+- Topic-local publish handoff is now in scope under `plan/agent-handoff-workflow.md`; migration workflow files remain reference-only because this topic has no repo-visible `migration-implementation` run.
+- Publish artifacts are complete and independently reviewed; the topic has advanced to `publish-in-progress`.
+- Topic-local `STOP POINT 1` is now pending and commit / push / PR remain unauthorized until a later explicit human approval.
+- The later single-topic commit is intentionally still pending explicit human authorization; no commit, push, or PR is allowed in this state.
 - `plan` and `branch-ready` are complete because the worktree, branch, and three planning artifacts already exist and are already committed.
 - If later sequencing work ends with topic-close handoff or `required follow-up`, a topic-close `summary artifact` will be required before close.

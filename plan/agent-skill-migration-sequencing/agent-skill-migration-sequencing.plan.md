@@ -14,11 +14,13 @@ depending on chat memory or prematurely editing shared workflow governance.
   - freeze the migration sequencing view and gap classes
   - freeze the dependency boundary on the workflow baseline topic
   - verify the actual execution flow before the second topic commit
+  - revise the topic contract so topic-local publish handoff becomes in scope
+  - materialize topic-local publish handoff artifacts through `STOP POINT 1`
 - Out of scope for this phase:
   - skill folder migration or copying
   - workflow governance edits
   - implementation of any candidate move topic
-  - publish / PR / merge progression for this topic
+  - commit, push, or PR progression for this topic
 
 ## Locked Decisions
 
@@ -42,6 +44,12 @@ depending on chat memory or prematurely editing shared workflow governance.
   - `sequencing-gap`
 - This worktree may use shared workflow files as read-only evidence only.
 - No skill-move execution is authorized until explicit human permission.
+- Topic-local publish handoff is governed by `plan/agent-handoff-workflow.md`.
+- `docs/process/workflows/migration-implementation.workflow.md` and
+  `docs/process/workflows/migration-publish-handoff.workflow.md` are reference
+  shapes only for this topic, not executable workflow contracts.
+- Because no repo-visible `migration-implementation` run exists for this topic,
+  publish handoff must remain topic-local and stop at `STOP POINT 1`.
 
 ## Boundaries / Exclusions
 
@@ -69,9 +77,12 @@ depending on chat memory or prematurely editing shared workflow governance.
   - `pr-open` -> `merged`
   - `merged` -> `released`
 - Phase note:
-  - first topic commit already materialized the planning baseline as commit `26a4b16`
-  - sequencing, flow verification, and independent reviewer approval are complete
-  - publish / PR / merge progression remains intentionally unstarted in this topic state
+- first topic commit already materialized the planning baseline as commit `26a4b16`
+- sequencing, flow verification, and independent reviewer approval are complete
+- planner alignment and topic-local publish handoff are the only allowed next
+  actions from `approved`
+- commit / push / PR progression remains intentionally unstarted until a later
+  explicit human approval passes topic-local `STOP POINT 1`
 
 ## Artifact Paths
 
@@ -81,6 +92,9 @@ depending on chat memory or prematurely editing shared workflow governance.
 | Topic plan | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.plan.md` | Planning actor | Repo-visible execution contract |
 | Topic step tracker | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.step.md` | Planning actor | Workflow progression checklist for this topic |
 | Sequencing result | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.sequencing.md` | Implementer subAgent | Repo-visible candidate ordering, exclusions, and flow-verification result |
+| Publish alignment record | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.publish-alignment.md` | Main Agent | Topic-local planner/publish alignment and workflow-basis record |
+| Publish readiness record | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.publish-readiness.md` | Implementer subAgent | Frozen topic-local publish-ready artifact set for the later single-topic commit |
+| STOP POINT 1 record | `plan/agent-skill-migration-sequencing/agent-skill-migration-sequencing.stop-point-1.md` | Main Agent | Explicit topic-local authorization gate that keeps commit / push / PR blocked |
 | Workflow baseline dependency | `analysis/workflow-artifact-standardization/requirements.md` | Upstream topic | Read-only upstream dependency once available |
 | Workflow governance surface | `plan/agent-handoff-workflow.md` | Shared governance | Read-only evidence in this phase |
 | Workflow governance surface | `docs/process/workflows/topic-bootstrap.workflow.md` | Shared governance | Read-only evidence in this phase |
@@ -109,7 +123,19 @@ depending on chat memory or prematurely editing shared workflow governance.
    - explicit evidence basis
    - flow-verification results
 6. Update `agent-skill-migration-sequencing.step.md` so creator and reviewer work are complete and the topic stops at `approved` before publish.
-7. Leave the second topic commit for the Main Agent after approved review state is recorded; do not publish, move skills, or enter PR flow here.
+7. Revise this topic plan so topic-local publish handoff through `STOP POINT 1`
+   is explicitly in scope and the new publish artifacts are part of the
+   contract.
+8. Materialize these topic-local publish artifacts:
+   - `agent-skill-migration-sequencing.publish-alignment.md`
+   - `agent-skill-migration-sequencing.publish-readiness.md`
+   - `agent-skill-migration-sequencing.stop-point-1.md`
+9. Run independent reviewer confirmation on the publish artifacts and update
+   `agent-skill-migration-sequencing.step.md` to `publish-in-progress` only
+   after reviewer approval is recorded.
+10. Leave the later single-topic commit, push, and PR work for a future explicit
+    human approval after `STOP POINT 1`; do not publish, move skills, or enter
+    PR flow here.
 
 ## Validation / Acceptance Checks
 
@@ -117,7 +143,18 @@ depending on chat memory or prematurely editing shared workflow governance.
 - `agent-skill-migration-sequencing.sequencing.md` contains only `topic / candidate` rows and does not mix in completed results as queue items.
 - Candidates depending on workflow-baseline semantics are explicitly labeled `after-workflow-baseline`.
 - Candidates needing repo-wide workflow / governance alignment remain `shared-governance-blocked`.
-- `step.md` shows creator completion, flow verification completion, first topic commit completed, and second topic commit still pending Main Agent handling.
+- the topic plan no longer leaves publish handoff out of scope
+- `Artifact Paths` lists the three topic-local publish artifacts explicitly
+- `agent-skill-migration-sequencing.publish-alignment.md` explains why
+  topic-local publish is valid despite no repo-visible `migration-implementation`
+  run
+- `agent-skill-migration-sequencing.publish-readiness.md` freezes the exact
+  topic-local artifact set and excludes non-topic surfaces
+- `agent-skill-migration-sequencing.stop-point-1.md` states that commit / push /
+  PR remain unauthorized
+- `step.md` shows creator completion, flow verification completion, reviewer
+  approval of publish artifacts, and `publish-in-progress` with `STOP POINT 1`
+  still pending
 - No skill folder or shared governance file is modified during this phase.
 
 ## Reviewer Handoff
@@ -136,8 +173,13 @@ depending on chat memory or prematurely editing shared workflow governance.
 ## Post-merge / Release Actions
 
 - No release action is declared in this sequencing-only phase.
-- The second topic commit is the last planned action for this phase and is owned by the Main Agent, not this Implementer subAgent.
-- Any later migration execution still requires a separate explicit human resume and a separate topic contract.
+- The next bounded end state for this topic is `publish-in-progress` with
+  topic-local `STOP POINT 1` pending.
+- Any later commit, push, or PR action requires a separate explicit human
+  approval message that authorizes topic-local commit / push / PR for
+  `agent-skill-migration-sequencing`.
+- Any later migration execution still requires a separate explicit human resume
+  and a separate topic contract.
 
 ## Open Questions / Unresolved Items
 
