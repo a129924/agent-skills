@@ -92,6 +92,15 @@ skills/                          # intended canonical skill source
   into `dev`, so the helper skill now also exists under `skills/` as a
   target-architecture copy while `.github/skills/worktree-manager/` remains the
   transition-era compatibility surface.
+- As of version `0.66.0`, PR #94 merged the workflow artifact standardization
+  topic back into `dev`, so the repository now contains repo-visible
+  `requirements.md`, `plan.md`, and `step.md` baselines for workflow artifacts
+  without changing the active skill-path transition boundary.
+- As of version `0.67.0`, PR #95 merged the `agent-skill-migration-sequencing`
+  topic back into `dev`, so the repository now contains a repo-visible
+  next-wave migration sequencing baseline and topic-local publish handoff
+  artifacts without authorizing active-path cutover, skill moves, or shared
+  workflow edits.
 
 ## Repository rules
 Every stable skill should:
