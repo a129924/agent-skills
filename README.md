@@ -101,6 +101,11 @@ skills/                          # intended canonical skill source
   next-wave migration sequencing baseline and topic-local publish handoff
   artifacts without authorizing active-path cutover, skill moves, or shared
   workflow edits.
+- As of version `0.68.0`, PR #96 merged the planning-spine ready-subset
+  remediation back into `dev`, so the support/reference alignment for
+  `plan-creator` and `plan-reviewer` now lives under `skills/` while the
+  blocked workflow-authority units remain unresolved and the publish handoff
+  stops at topic-local `STOP POINT 1`.
 
 ## Repository rules
 Every stable skill should:
