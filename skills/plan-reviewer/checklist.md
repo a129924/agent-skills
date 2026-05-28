@@ -1,14 +1,13 @@
 # Plan Reviewer Checklist
 
-Use this checklist when reviewing a repo-visible topic plan before later
-execution begins.
+Use this checklist when reviewing a repo-visible topic plan before later execution begins.
 
 - [ ] The plan path is `plan/<topic>/<topic>.plan.md`.
 - [ ] The review uses all four contract sources:
   - [ ] `plan/agent-handoff-workflow.md`
-  - [ ] `skills/plan-creator/reference.md`
-  - [ ] `skills/plan-creator/checklist.md`
-  - [ ] `skills/plan-creator/templates/topic-plan-template.md`
+  - [ ] `.github/skills/plan-creator/reference.md`
+  - [ ] `.github/skills/plan-creator/checklist.md`
+  - [ ] `.github/skills/plan-creator/templates/topic-plan-template.md`
 - [ ] All workflow-required plan sections are present, using the canonical section list from `plan/agent-handoff-workflow.md` (case-insensitive title matching is acceptable):
   - [ ] `Goal / outcome`
   - [ ] `Scope`
@@ -24,6 +23,15 @@ execution begins.
 - [ ] `Status / Allowed Transitions` uses canonical workflow transitions only.
 - [ ] The current status matches the actual topic state.
 - [ ] `Artifact Paths` are exact, bounded, repo-visible, and role-labeled.
+- [ ] If correction artifacts are used, each parent artifact, correction artifact, and any routing-controlling review-log / equivalent handoff artifact is listed explicitly.
+- [ ] Correction topics keep parent artifacts as current truth after backfill and correction artifacts as historical truth.
+- [ ] When correction artifacts are used, the minimum correction artifact contract lives in reference / examples, not as a workflow-body schema dump.
+- [ ] `Implementation Steps` remain creator-owned; reviewer verdict logging, reviewer acceptance tasks, and main-agent routing work are not mixed into them.
+- [ ] Correction guidance in the workflow body stays slim; detailed correction artifact schema or long samples are not embedded as workflow-body bloat.
+- [ ] Parent-sync closure requirements are explicit when correction artifacts are used.
+- [ ] `review-log` requirements are conditional and not universalized.
+- [ ] Any round cap is clearly topic-specific policy, not a repository-wide invariant.
+- [ ] Correction-lifecycle refresh topics do not broaden into a standalone correction skill unless a separately scoped topic explicitly justifies extraction via repeated instability or cross-workflow reuse.
 - [ ] Stable-library intent is explicit:
   - [ ] clearly absent for non-stable topics, or
   - [ ] declared with `Stable library metadata` when stable surfaces are involved.
