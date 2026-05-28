@@ -1,0 +1,25 @@
+Role: independent worktree-routing audit
+Workflow: `topic-bootstrap`
+Topic: `python-helper-skill-promotion-wave-2`
+Audit date: `2026-05-28`
+
+Decision:
+- Existing prepared worktree reuse is safe.
+- No lifecycle mutation is required in this drafting round because the current
+  context is already the intended topic worktree.
+
+Evidence:
+- Worktree path: `/private/tmp/python-helper-skill-promotion-wave-2`
+- Branch: `feat/andrew/python-helper-skill-promotion-wave-2`
+- HEAD: `2e3725d8f2059adc96d8797cd745fd6fe957aba0`
+- `git status --short --branch` shows `## feat/andrew/python-helper-skill-promotion-wave-2`
+- The worktree already exists before this planning round, which satisfies the
+  fixed workflow input that bootstrap worktree creation was completed earlier.
+
+Routing result:
+1. Step 1 target branch confirmation is satisfied by the current branch.
+2. Step 2 worktree routing is satisfied by valid worktree reuse.
+3. Step 3 planning artifact drafting may proceed in-place.
+
+Blocking status:
+- No blocking issue is currently visible at the worktree-routing layer.
