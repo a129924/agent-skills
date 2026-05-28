@@ -57,8 +57,17 @@ in different contexts.
   boundary.
 - Parent artifacts for a topic remain the current truth:
   - the locked topic plan
-  - any topic-owned parent artifacts such as `*.spec.md` / `*.step.md` that are
-    explicitly listed in `Artifact paths`
+  - any topic-owned parent artifacts such as `*.spec.md` that are explicitly
+    listed in `Artifact paths`
+- When `plan/<topic>/<topic>.step.md` is present, it is a workflow progression
+  artifact:
+  - it reflects current stage readiness and stage-local next work
+  - it does not define topic-close or follow-up handoff truth
+- When a required topic-close `summary artifact` is present, it is the current
+  truth for close and handoff semantics:
+  - it determines whether the topic is fully closed or explicitly closed with
+    follow-up
+  - it is not replaced by `step.md`, status labels, or hidden chat context
 - Correction artifacts are historical truth only:
   - they explain why current truth changed
   - they do not replace the parent contract
@@ -88,7 +97,9 @@ in different contexts.
 | --- | --- | --- |
 | Repo workflow spec | `plan/agent-handoff-workflow.md` | Shared process contract |
 | Topic handoff plan | `plan/<topic>/<topic>.plan.md` | Repo-visible execution contract for one topic |
-| Parent topic artifacts | `plan/<topic>/<topic>.spec.md`, `plan/<topic>/<topic>.step.md`, or other topic-owned parent artifacts when explicitly listed | Current-truth execution details for the topic |
+| Topic progression artifact | `plan/<topic>/<topic>.step.md` when required, or another exact repo-visible progression artifact when explicitly listed | Current-truth workflow progression status for the topic |
+| Topic close summary artifact | `plan/<topic>/<topic>.summary.md` or another exact repo-visible close artifact when explicitly listed | Current-truth close outcome and handoff semantics for the topic |
+| Parent topic artifacts | `plan/<topic>/<topic>.spec.md` or other topic-owned parent artifacts when explicitly listed | Current-truth execution details for the topic besides progression and close summary artifacts |
 | Correction artifacts | `plan/<topic>/<topic>.correction-plan.md` and `plan/<topic>/<topic>.correction-step.md` when explicitly listed | Historical-truth correction trail for planner-confirmed drift |
 | Review log / routing handoff | `plan/<topic>/<topic>.review-log.md` or another exact repo-visible path when explicitly listed | Reviewer feedback trail when feedback controls routing or multi-round rework |
 | Skill draft | `.github/skills/<skill-name>/` | Creator output under repo policy |
@@ -132,6 +143,40 @@ Additional contract rules:
 - If execution reaches Phase 2 or later without a valid topic plan, stop and
   repair the plan instead of improvising downstream git, review, or release
   decisions.
+
+### Conditional workflow artifacts
+- `plan/<topic>/<topic>.step.md` is conditionally required when either of these
+  is true:
+  - the topic requires two or more workflow-role handoffs
+  - the topic has `required follow-up`
+- Missing required `step.md` blocks workflow progression; do not advance to the
+  next workflow role until the artifact exists and is usable as progression
+  truth.
+- When repo-level `step.md` exists, it must at minimum contain:
+  - `Workflow Stages`
+  - `Actionable Steps`
+  - `Handoff / Gate Notes`
+- `step.md` is a progression artifact only; it does not decide topic-close
+  meaning.
+- A topic-close `summary artifact` is conditionally required when either of
+  these is true:
+  - the topic closes with a handoff to another agent or human
+  - the topic has `required follow-up`
+- Missing required `summary artifact` blocks topic close, even if merge, sync,
+  or release work is otherwise complete.
+- When a required repo-level `summary artifact` exists, it must at minimum
+  contain:
+  - `current state`
+  - `completed`
+  - `not completed`
+  - `required follow-up`
+  - `next handoff`
+- The `next handoff` section of a required `summary artifact` must include:
+  - `next actor`
+  - `next step`
+- `required follow-up` allows explicit close with follow-up.
+- The required `summary artifact` is the source of truth for close and handoff
+  semantics; `step.md` only reflects progression status.
 
 ## Correction layer semantics
 - Ordinary `needs-rework` stays separate from correction-triggering drift.
@@ -188,6 +233,11 @@ Additional contract rules:
 Notes:
 - `merged` is terminal for changes that do not require a release action.
 - `released` is required when a merge also performs a repository release step.
+- Topic close is not complete until any required `summary artifact` exists and
+  matches the final handoff outcome.
+- If `required follow-up` remains at close time, the topic may reach terminal
+  status only as an explicit close with follow-up; it must not be represented
+  as fully done.
 - Reviewer comments on an open PR may send the work back to `needs-rework`.
 - `approved` means reviewer acceptance passed, but planner contract alignment may
   still route the topic back to `creator-in-progress` before publish.
@@ -228,8 +278,8 @@ patterns and recovery logic.
 | 5. Stable library handling | Planner alignment passed and topic may affect stable-library surfaces | Stable library metadata; approved draft; current README / VERSION baseline | Stable-library timing decision is resolved: stage now, defer to release, or skip | Main Agent |
 | 6. Commit, push, and PR | Pre-commit validation passed and Stop Point 1 is approved | Staged changes; execution branch; commit scope; PR target branch | Commits are created, pushed, and PR opens with status `pr-open` | Main Agent |
 | 7-8. PR loop + bounded observation | PR is open and checks or comments may require action | PR reviews / review state; review comments; issue comments; check results; direct-apply rules; reviewer re-entry rule | Either new patch commit, reroute to reviewer, or a bounded clean-window report that is eligible for human merge-readiness confirmation | Main Agent |
-| 9. Post-merge local sync | Human explicitly resumes after merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state; human resume signal | Local repo is synchronized and topic reaches `merged` | Main Agent |
-| 10. Release | Topic plan declares a release action and post-merge execution was explicitly resumed | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged` | Main Agent |
+| 9. Post-merge local sync | Human explicitly resumes after merge is confirmed on GitHub | Merged PR reference; current local worktree; preserved local state; human resume signal | Local repo is synchronized and topic reaches `merged`, but topic close still waits on any required `summary artifact` | Main Agent |
+| 10. Release | Topic plan declares a release action and post-merge execution was explicitly resumed | Release timing instructions; stable library metadata when deferred; release readiness state | Tag and release actions complete, or topic stays terminal at `merged`; topic close still waits on any required `summary artifact` | Main Agent |
 
 ### 1. Plan the topic
 1. Planning actor captures the topic in `plan/<topic>/<topic>.plan.md`.
@@ -771,6 +821,8 @@ Required guardrails and sequence:
 4. If local state still needs preservation, capture it safely before cleanup or
    sync steps proceed.
 5. Only then run the normal post-merge cleanup / sync actions.
+6. Do not treat local sync completion as topic close when a required
+   `summary artifact` is still missing.
 
 ### 10. Release (if applicable)
 
@@ -798,8 +850,17 @@ If topic plan specified a release action:
 5. Create annotated tag with semantic version.
 6. Push tag to remote.
 7. Move topic to `released`.
+8. If topic-close handoff or `required follow-up` applies, create or validate
+   the required `summary artifact` before treating the topic as closed.
 
 If no release action: topic is terminal at `merged`.
+
+Close semantics:
+- A required `summary artifact` may be created after Phase 9 for non-release
+  topics or after Phase 10 for release topics, but topic close is incomplete
+  until that artifact exists.
+- If the final artifact declares `required follow-up`, the close result is
+  explicitly close with follow-up rather than fully done.
 
 ## Topic plan template
 
@@ -819,6 +880,12 @@ Every skill topic plan must include these fixed sections (11 required):
 
 When correction artifacts apply to a topic, list them explicitly under
 **Artifact paths** beside the parent artifacts they are correcting.
+
+If the topic requires two or more workflow-role handoffs or declares
+`required follow-up`, also list the exact `step.md` path under
+**Artifact paths**. If the topic will close with a handoff or with
+`required follow-up`, list the exact repo-visible `summary artifact` path there
+as well.
 
 ### New: Stable library metadata (if applicable)
 

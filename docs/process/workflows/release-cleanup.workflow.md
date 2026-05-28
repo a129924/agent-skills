@@ -2,7 +2,8 @@
 
 ## Purpose
 Perform post-merge cleanup and release follow-up actions only after explicit
-human merge confirmation and safety checks.
+human merge confirmation and safety checks, then finish any required topic-close
+semantics without pretending merge or release alone closed the topic.
 
 ## Preconditions
 - Must follow:
@@ -29,6 +30,10 @@ human merge confirmation and safety checks.
 - version updated from post-merge target branch when required
 - related docs updated when required
 - tag created and pushed when required
+- required topic-close `summary artifact` written or validated when the topic
+  contract requires it
+- final close outcome recorded as fully closed or explicit close with
+  follow-up
 
 ## States
 - `WAIT_HUMAN_MERGE`
@@ -56,7 +61,9 @@ human merge confirmation and safety checks.
 7. Update related docs when required.
 8. Create the tag when required.
 9. Push the tag when required.
-10. Finish.
+10. Create or validate the required topic-close `summary artifact` when the
+    topic closes with a handoff or has `required follow-up`.
+11. Finish.
 
 ## Destructive Operation Guard
 - No cleanup unless human merge confirmation is present.
@@ -78,6 +85,9 @@ Stop with `human-feedback-required` if:
 - remote branch deletion target is ambiguous
 - version base is not the post-merge target branch
 - tag name already exists
+- required topic-close `summary artifact` is missing
+- `required follow-up` exists but the close state is not explicitly recorded as
+  close with follow-up
 
 ## Role Responsibility Boundaries
 - Main Agent performs cleanup and release follow-up only after human merge
@@ -85,6 +95,8 @@ Stop with `human-feedback-required` if:
 - Human operator remains the authority for merge confirmation and destructive
   safety overrides.
 - This workflow must not infer merge completion from local branch state alone.
+- Topic close truth comes from the required `summary artifact` when one is
+  required; cleanup completion alone is not enough.
 
 ## Required `status.json` Fields
 - `workflow`: `release-cleanup`
@@ -109,9 +121,15 @@ Stop with `human-feedback-required` if:
 - Tag name did not pre-exist before creation.
 - Optional version, docs, and tag actions were either completed when required
   or explicitly recorded as skipped.
+- If topic-close handoff or `required follow-up` applied, the required
+  `summary artifact` existed before the topic was treated as closed.
+- Topics with `required follow-up` closed only through an explicit close with
+  follow-up record.
 
 ## What Not To Do
 - Do not run cleanup before explicit human merge confirmation.
 - Do not infer safety for destructive operations.
 - Do not use the topic branch as the version base.
 - Do not continue after a destructive operation guard fails.
+- Do not treat merge, cleanup, or release completion alone as topic close when
+  a required `summary artifact` is still missing.
