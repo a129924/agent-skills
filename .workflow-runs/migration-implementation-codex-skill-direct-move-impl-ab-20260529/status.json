@@ -1,0 +1,22 @@
+{
+  "workflow": "migration-implementation",
+  "run_id": "migration-implementation-codex-skill-direct-move-impl-ab-20260529",
+  "topic": "codex-skill-direct-move-impl-ab",
+  "branch": "feat/andrew/codex-skill-direct-move-impl-ab",
+  "target_branch": "feat/andrew/codex-skill-direct-move-impl-ab",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260529-codex-skill-direct-move-impl-ab",
+  "current_state": "MIGRATION_STATUS_CONFIRMED",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "confirm_migration_status",
+  "next_step": "migration publish handoff may begin",
+  "migration_status": "copied",
+  "overlay_bound": true,
+  "overlay_result": "passed",
+  "review_result_path": ".workflow-runs/migration-implementation-codex-skill-direct-move-impl-ab-20260529/review-result.json",
+  "review_evidence_path": ".workflow-runs/migration-implementation-codex-skill-direct-move-impl-ab-20260529/review-evidence.md",
+  "overlay_gate_path": ".workflow-runs/migration-implementation-codex-skill-direct-move-impl-ab-20260529/overlay-gate.md",
+  "migration_status_path": ".workflow-runs/migration-implementation-codex-skill-direct-move-impl-ab-20260529/migration-status.md"
+}
