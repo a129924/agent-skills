@@ -1,0 +1,17 @@
+{
+  "workflow": "migration-publish-handoff",
+  "source_workflow_run": "migration-implementation-codex-skill-direct-move-impl-ab-20260529",
+  "topic": "codex-skill-direct-move-impl-ab",
+  "branch": "feat/andrew/codex-skill-direct-move-impl-ab",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260529-codex-skill-direct-move-impl-ab",
+  "current_state": "FINISHED",
+  "result": "accepted",
+  "blocking_reason": "",
+  "human_feedback_required": false,
+  "last_completed_step": "ready_pr_opened",
+  "next_step": "Wait for human review and merge of the Ready PR into dev.",
+  "stop_point_1_approved": true,
+  "publish_alignment_path": ".workflow-runs/migration-publish-handoff-codex-skill-direct-move-impl-ab-20260529/publish-alignment.md",
+  "publish_ready_artifacts_path": ".workflow-runs/migration-publish-handoff-codex-skill-direct-move-impl-ab-20260529/publish-ready-artifacts.md"
+}
