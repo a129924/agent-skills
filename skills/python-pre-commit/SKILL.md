@@ -71,3 +71,5 @@ Before proceeding, confirm:
 - Do not silently overwrite an existing config.
 - Do not treat CI policy or secrets scanning as this skill's primary scope.
 
+# Local references
+- `examples.md`: canonical uv pre-commit policy examples for new setup, merge cases, and manual-stage decisions

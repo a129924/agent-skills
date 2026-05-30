@@ -77,3 +77,5 @@ Before proceeding, confirm:
 - Do not choose between `Enum`, `dataclass`, `ABC`, or `Protocol`.
 - Do not widen into service/application architecture, framework-specific layering, or plugin systems.
 
+# Local references
+- `examples.md`: positive and negative theme-isolation, `core`, and facade/client composition scenarios

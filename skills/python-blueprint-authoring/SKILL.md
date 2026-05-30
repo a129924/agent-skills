@@ -79,3 +79,5 @@ Before proceeding, confirm:
 - Do not execute the blueprint, copy skills, or create project files as part of this skill.
 - Do not treat retrofit-shaped repositories as greenfield just to keep moving.
 
+# Local references
+- `examples.md`: greenfield-only blueprint examples covering fit checks, structure expectations, and non-fit reroutes

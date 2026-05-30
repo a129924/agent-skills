@@ -71,3 +71,5 @@ Before proceeding, confirm:
 - Do not pretend vague requirements are test-ready.
 - Do not treat a trivial D1 outcome as a failure; it is a valid narrow-fit result.
 
+# Local references
+- `examples.md`: test-first mapping examples for trivial and non-trivial D1 outcomes, red-test coverage, and late-arrival reroutes

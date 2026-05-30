@@ -90,3 +90,5 @@ Before proceeding, confirm:
 - Do not promise file-level certainty when the current codebase evidence does not support it.
 - Do not start coding, scaffolding, or reviewing implementation quality.
 
+# Local references
+- `examples.md`: bounded Python planning examples showing thin SDD/TDD fields, async-status handling, and stop-and-ask cases

@@ -68,3 +68,5 @@ Before proceeding, confirm:
 - Do not widen into unrelated tool configuration such as `coverage` or `mypy`.
 - Do not make a script/template wrapper the main contract of this skill.
 
+# Local references
+- `examples.md`: append-only `pyproject.toml` examples showing missing-section adds, skip behavior, and out-of-scope update cases

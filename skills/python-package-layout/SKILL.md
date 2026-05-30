@@ -76,3 +76,5 @@ Before proceeding, confirm:
 - Do not define exception hierarchy or translation rules.
 - Do not turn this into a scaffold or retrofit workflow.
 
+# Local references
+- `examples.md`: positive and negative package-layout scenarios for library-only, CLI-enabled, and flat-root repair cases
