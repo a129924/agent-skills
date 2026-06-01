@@ -1,0 +1,16 @@
+{
+  "workflow": "migration-publish-handoff",
+  "run_id": "migration-publish-handoff-python-plan-review-20260601",
+  "source_workflow_run": "migration-implementation-python-plan-review-20260601",
+  "topic": "python-plan-review",
+  "branch": "feat/andrew/python-plan-review",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review",
+  "current_state": "PUBLISH_IN_PROGRESS",
+  "result": "approved-for-publish",
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "approve_stop_point_1",
+  "next_step": "commit publish-handoff artifacts, push branch, and open Ready PR",
+  "stop_point_1_approved": true
+}

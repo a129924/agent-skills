@@ -7,7 +7,7 @@
 | Planning baseline | completed | `requirements.md`, `plan.md`, and this `step.md` exist |
 | Topic bootstrap | completed | Managed worktree created, review artifacts recorded, and topic bootstrap commit prepared |
 | Migration implementation | completed | Canonical `skills/python-plan-review/` created and parity-aligned with `.github/skills/python-plan-review/` |
-| Publish handoff | pending | Allowed now that `MIGRATION_STATUS_CONFIRMED` is reached |
+| Publish handoff | completed | Topic-local publish handoff passed `STOP POINT 1`; commit/push/Ready PR are authorized |
 | Merge / cleanup | pending | Separate later workflow phases |
 
 ## Actionable Steps
@@ -23,13 +23,18 @@
 - [x] Create canonical `skills/python-plan-review/` from the current `.github/skills/python-plan-review/` source.
 - [x] Record `migration-implementation` review, overlay, and migration-status artifacts.
 - [x] Reach `MIGRATION_STATUS_CONFIRMED` for the topic.
-- [ ] Hand off to `migration-publish-handoff`.
+- [x] Create a single-topic `migration-publish-handoff` run for `python-plan-review`.
+- [x] Record planner alignment and publish-readiness artifacts for the topic.
+- [x] Enter topic-local `STOP POINT 1`.
+- [x] Receive explicit human approval for topic-local commit / push / Ready PR.
+- [ ] Commit publish-handoff artifacts, push branch, and open Ready PR.
 
 ## Handoff / Gate Notes
 
 - Current workflow state after bootstrap completion: `FINISHED`
-- Next workflow step: create a single-topic publish-handoff run for
-  `python-plan-review`
+- Next workflow step: commit the publish-handoff artifacts, push
+  `feat/andrew/python-plan-review`, and open a Ready PR to `dev`
 - STOP POINT 1 does not apply during topic bootstrap.
+- STOP POINT 1 has been explicitly approved for this topic.
 - The implementation write set is locked to `skills/python-plan-review/` plus
   topic-owned workflow artifacts unless the plan is explicitly repaired first.
