@@ -1,0 +1,19 @@
+{
+  "workflow": "migration-implementation",
+  "run_id": "migration-implementation-python-plan-review-20260601",
+  "topic": "python-plan-review",
+  "branch": "feat/andrew/python-plan-review",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review",
+  "current_state": "MIGRATION_STATUS_CONFIRMED",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "confirm_migration_status",
+  "next_step": "hand off to migration-publish-handoff for single-topic publish alignment",
+  "migration_status": "copied",
+  "overlay_bound": true,
+  "overlay_result": "passed",
+  "overlay_gate_path": ".workflow-runs/migration-implementation-python-plan-review-20260601/overlay-gate.md"
+}

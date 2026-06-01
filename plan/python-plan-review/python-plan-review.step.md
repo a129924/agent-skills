@@ -6,8 +6,8 @@
 | --- | --- | --- |
 | Planning baseline | completed | `requirements.md`, `plan.md`, and this `step.md` exist |
 | Topic bootstrap | completed | Managed worktree created, review artifacts recorded, and topic bootstrap commit prepared |
-| Migration implementation | pending | Validate canonical parity and repair only if needed |
-| Publish handoff | pending | Allowed only after `MIGRATION_STATUS_CONFIRMED` |
+| Migration implementation | completed | Canonical `skills/python-plan-review/` created and parity-aligned with `.github/skills/python-plan-review/` |
+| Publish handoff | pending | Allowed now that `MIGRATION_STATUS_CONFIRMED` is reached |
 | Merge / cleanup | pending | Separate later workflow phases |
 
 ## Actionable Steps
@@ -20,13 +20,16 @@
 - [x] Write `plan/python-plan-review/python-plan-review.step.md`.
 - [x] Record bootstrap workflow status and review artifacts under `.workflow-runs/topic-bootstrap-python-plan-review-20260601/`.
 - [x] Commit the topic bootstrap artifacts on `feat/andrew/python-plan-review`.
-- [ ] Hand off to `migration-implementation` for canonical parity validation.
+- [x] Create canonical `skills/python-plan-review/` from the current `.github/skills/python-plan-review/` source.
+- [x] Record `migration-implementation` review, overlay, and migration-status artifacts.
+- [x] Reach `MIGRATION_STATUS_CONFIRMED` for the topic.
+- [ ] Hand off to `migration-publish-handoff`.
 
 ## Handoff / Gate Notes
 
 - Current workflow state after bootstrap completion: `FINISHED`
-- Next workflow step: start `migration-implementation` using the approved
-  topic plan and bounded write set
+- Next workflow step: create a single-topic publish-handoff run for
+  `python-plan-review`
 - STOP POINT 1 does not apply during topic bootstrap.
 - The implementation write set is locked to `skills/python-plan-review/` plus
   topic-owned workflow artifacts unless the plan is explicitly repaired first.
