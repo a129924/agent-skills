@@ -1,0 +1,18 @@
+{
+  "workflow": "topic-bootstrap",
+  "topic": "python-plan-review",
+  "target_branch": "feat/andrew/python-plan-review",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review",
+  "current_state": "FINISHED",
+  "result": "accepted",
+  "rounds": 1,
+  "blocking_reason": "",
+  "human_feedback_required": false,
+  "last_completed_step": "finish",
+  "next_step": "migration implementation may begin using the approved plan input",
+  "worktree_routing_result_path": ".workflow-runs/topic-bootstrap-python-plan-review-20260601/worktree-routing-audit.txt",
+  "plan_review_result_path": ".workflow-runs/topic-bootstrap-python-plan-review-20260601/plan-review.json",
+  "planner_final_review_path": ".workflow-runs/topic-bootstrap-python-plan-review-20260601/planner-final-review.md",
+  "topic_progression_artifact_path": "plan/python-plan-review/python-plan-review.step.md",
+  "approved_plan_input_path": "plan/python-plan-review/python-plan-review.plan.md"
+}

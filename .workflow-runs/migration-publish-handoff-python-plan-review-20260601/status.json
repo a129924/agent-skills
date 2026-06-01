@@ -1,0 +1,18 @@
+{
+  "workflow": "migration-publish-handoff",
+  "run_id": "migration-publish-handoff-python-plan-review-20260601",
+  "source_workflow_run": "migration-implementation-python-plan-review-20260601",
+  "topic": "python-plan-review",
+  "branch": "feat/andrew/python-plan-review",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review",
+  "current_state": "READY_PR_OPENED",
+  "result": "completed",
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "open_ready_pr",
+  "next_step": "monitor PR #99 and enter pr-comment-correction only if actionable review feedback appears",
+  "stop_point_1_approved": true,
+  "pr_number": 99,
+  "pr_url": "https://github.com/a129924/agent-skills/pull/99"
+}

@@ -1,0 +1,15 @@
+{
+  "workflow": "pr-comment-correction",
+  "topic": "python-plan-review",
+  "target_branch": "dev",
+  "worktree": "/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review",
+  "current_state": "WAIT_HUMAN_MERGE",
+  "result": "completed",
+  "rounds": 1,
+  "blocking_reason": null,
+  "human_feedback_required": false,
+  "last_completed_step": "push",
+  "next_step": "wait for human merge of PR #99; re-enter correction only if new actionable comments appear",
+  "pr_number": 99,
+  "pr_url": "https://github.com/a129924/agent-skills/pull/99"
+}
