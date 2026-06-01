@@ -8,7 +8,7 @@
 | Topic bootstrap | completed | Managed worktree created, review artifacts recorded, and topic bootstrap commit prepared |
 | Migration implementation | completed | Canonical `skills/python-plan-review/` created and parity-aligned with `.github/skills/python-plan-review/` |
 | Publish handoff | completed | Topic-local publish handoff passed `STOP POINT 1`; commit/push/Ready PR are authorized |
-| Merge / cleanup | pending | Separate later workflow phases |
+| Merge / cleanup | pending | PR comment correction applied; waiting for human merge of PR `#99` |
 
 ## Actionable Steps
 
@@ -28,6 +28,10 @@
 - [x] Enter topic-local `STOP POINT 1`.
 - [x] Receive explicit human approval for topic-local commit / push / Ready PR.
 - [x] Commit publish-handoff artifacts, push branch, and open Ready PR.
+- [x] Triage actionable PR comments for PR `#99`.
+- [x] Apply bounded correction by removing out-of-scope `skills/python-blueprint-review/**` residue from this topic branch.
+- [x] Record reviewer re-check and planner final review for the correction run.
+- [ ] Wait for human merge of PR `#99`.
 
 ## Handoff / Gate Notes
 
