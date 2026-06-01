@@ -27,13 +27,13 @@
 - [x] Record planner alignment and publish-readiness artifacts for the topic.
 - [x] Enter topic-local `STOP POINT 1`.
 - [x] Receive explicit human approval for topic-local commit / push / Ready PR.
-- [ ] Commit publish-handoff artifacts, push branch, and open Ready PR.
+- [x] Commit publish-handoff artifacts, push branch, and open Ready PR.
 
 ## Handoff / Gate Notes
 
 - Current workflow state after bootstrap completion: `FINISHED`
-- Next workflow step: commit the publish-handoff artifacts, push
-  `feat/andrew/python-plan-review`, and open a Ready PR to `dev`
+- Next workflow step: monitor PR `#99` and enter PR comment correction only if
+  actionable review feedback appears
 - STOP POINT 1 does not apply during topic bootstrap.
 - STOP POINT 1 has been explicitly approved for this topic.
 - The implementation write set is locked to `skills/python-plan-review/` plus
