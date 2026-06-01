@@ -1,0 +1,18 @@
+Agent role: independent worktree-routing audit
+
+1. Topic: `python-plan-review`
+2. Risk level: `high`
+3. Target branch baseline: `dev`
+4. Routing decision: create a new managed worktree
+5. Managed worktree path:
+   `/Users/andrew/code/python/agent-skills.worktrees/agent-20260601-python-plan-review`
+6. Topic branch: `feat/andrew/python-plan-review`
+7. Lifecycle result: worktree creation succeeded before planning artifact
+   authoring began.
+8. Shared-file coordination warning:
+   topic planning artifacts live in repo-visible `analysis/`, `plan/`, and
+   `.workflow-runs/`; later parallel work on the same topic must not mutate
+   those paths from another worktree at the same time.
+9. Next safe action:
+   continue bootstrap artifact authoring and review inside the new managed
+   worktree only.
