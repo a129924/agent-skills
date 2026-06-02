@@ -11,8 +11,8 @@ created: 2026-06-02
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] review
-- [ ] final-gate
+- [X] review
+- [X] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -34,20 +34,24 @@ created: 2026-06-02
 - [X] Encode editable scope and forbidden scope in the topic plan
 
 ### review
-- [ ] Reviewer has not run yet
-- [ ] No reviewer verdict artifact exists yet
+- [X] Reviewer subAgent `Lovelace` ran round-1 independent plan review
+- [X] Reviewer round 1 returned `needs-rework`
+- [X] Reviewer findings were materialized at `plan/skills-canonical-positioning/skills-canonical-positioning.review-log.md`
+- [X] Reviewer subAgent `Kepler` ran round-2 re-review
+- [X] Reviewer round 2 returned `approved`
 
 ### final-gate
-- [ ] Final gate has not run yet
-- [ ] No gate verdict exists yet
+- [X] Final gate subAgent `James` ran independent final gate
+- [X] Final gate verdict: `approved`
+- [X] Final gate result: `GO for human check`
+- [X] Remaining risks were recorded from the final gate output
 
 ### human-check
 - [ ] Human review remains pending
 
 ## Handoff / Gate Notes
 
-- This topic is currently at the end of plan creation and has **not** entered
-  review or final gate.
+- This topic has completed review and final gate, and is now waiting for human check.
 - The only editable repo files authorized by the topic plan are:
   - `AGENTS.md`
   - `docs/repo-positioning.md`
@@ -56,4 +60,7 @@ created: 2026-06-02
 - Forbidden scope includes `.github/skills/**`, `.codex/skills/**`, `skills/**`,
   `.github/guides/MAIN-AGENT-WORKFLOW.md`, any `agent-skill-*`, and all
   runtime/tooling/install/sync/projection automation surfaces.
-- No implementation work should begin until review and final gate complete.
+- Final gate remaining risks:
+  - the latest plan / step / review-log updates are not yet reflected in a new topic commit
+  - contradictory wording under `.github/skills/**`, `.codex/skills/**`, and `skills/**` remains intentionally unresolved for this topic
+- No implementation work should begin until human check completes.

@@ -133,6 +133,7 @@ Routing notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/skills-canonical-positioning/skills-canonical-positioning.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Topic progression artifact | `plan/skills-canonical-positioning/skills-canonical-positioning.step.md` | Planning actor | Current-truth workflow progression status for this topic |
+| Review routing log | `plan/skills-canonical-positioning/skills-canonical-positioning.review-log.md` | Reviewer / Planning actor | Repo-visible routing log for reviewer findings and any re-review-driven next step |
 | Requirements baseline | `analysis/skills-canonical-positioning/requirements.md` | Planning actor | Frozen business baseline for scope and authority rules |
 | Technical baseline | `analysis/skills-canonical-positioning/technical-spec.md` | Planning actor | Frozen technical translation and forbidden-scope rules |
 | Governance source | `AGENTS.md` | Creator | Canonical governance wording to correct |
@@ -143,16 +144,18 @@ Routing notes:
 Artifact path notes:
 
 - This topic modifies `README.md`.
+- This topic modifies `.github/copilot-instructions.md`.
 - This topic does **not** modify `VERSION`.
 - This topic does **not** modify `.github/skills/**`, `.codex/skills/**`,
   `skills/**`, or `.github/guides/MAIN-AGENT-WORKFLOW.md`.
+- Reviewer findings and any re-review routing for this topic must be recorded in
+  `plan/skills-canonical-positioning/skills-canonical-positioning.review-log.md`
+  rather than relying on hidden chat history.
 - Treat the listed editable paths as an executable contract.
 - If later work drifts outside these paths, stop and repair the plan rather
   than staging extra files.
 
 ## Implementation Steps
-
-### Creator Phase
 
 1. Read the locked analysis artifacts before changing any repo file.
 2. Update `AGENTS.md` so `skills/` is described as current canonical truth and
@@ -164,32 +167,6 @@ Artifact path notes:
 5. Update `README.md` so its summary and historical notes no longer imply that
    Copilot-era surfaces define current truth.
 6. Do not edit any file outside the four locked editable paths.
-
-### Reviewer Phase
-
-1. Verify all file changes stay inside the four editable paths.
-2. Verify `skills/` is described consistently as current canonical truth in all
-   four files.
-3. Verify `.github/copilot-instructions.md` is bounded to compatibility
-   guidance and does not read as repo-wide authority.
-4. Verify `README.md` historical notes remain historical and do not override the
-   current authority model.
-5. Verify no forbidden path was modified or implied to be modified.
-
-### Main Agent publish flow
-
-1. After reviewer approval and Phase 4.5 alignment, move the topic to
-   `publish-in-progress`.
-2. Stage only:
-   - `AGENTS.md`
-   - `docs/repo-positioning.md`
-   - `.github/copilot-instructions.md`
-   - `README.md`
-   - topic-local planning artifacts if the workflow requires them in the same
-     commit
-3. Do not stage any forbidden-scope path.
-4. Commit, push, and open the PR against `dev`.
-5. No release action follows merge.
 
 ## Validation / Acceptance Checks
 
