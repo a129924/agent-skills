@@ -66,7 +66,6 @@ This skill meets all required criteria for the stable library.
 
 - **Status**: Ready for promotion to stable library
 - **Reviewer**: Agent Skill Reviewer
-- **Date**: [Current Date]
+- **Date**: 2026-06-02
 
 ---
-
