@@ -106,6 +106,12 @@ skills/                          # intended canonical skill source
   `plan-creator` and `plan-reviewer` now lives under `skills/` while the
   blocked workflow-authority units remain unresolved and the publish handoff
   stops at topic-local `STOP POINT 1`.
+- As of version `0.69.0`, PR #100 merged the
+  `python-canonicalization-sequencing` topic back into `dev`, so multiple
+  existing transition-era skills now also exist under `skills/` as canonical
+  copies with repo-visible analysis, plan, and migration-report artifacts,
+  while `.github/skills/` remains the transition compatibility and active
+  workflow surface and no active-path cutover is declared by this release.
 
 ## Repository rules
 Every stable skill should:
