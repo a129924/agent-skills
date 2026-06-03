@@ -1,6 +1,6 @@
 ---
 topic: observer-dispatcher-canonical-baseline
-status: publish-in-progress
+status: pr-open
 created: 2026-06-03
 approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispatcher-canonical-baseline.plan.md
 ---
@@ -115,8 +115,8 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 ## PR Comment Workflow Stages
 
 - [X] commit-by-topic
-- [ ] push
-- [ ] pr-open
+- [X] push
+- [X] pr-open
 - [ ] wait-human-merge-or-feedback
 
 ## PR Comment Steps
@@ -124,14 +124,16 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 ### commit-by-topic
 - [X] Commit the bounded Feature 1 implementation diff and updated topic-local
   `*.step.md`
-- [X] Commit hash: `682115a`
+- [X] Commit hash: `85a5826`
 
 ### push
-- [ ] Push branch `feat/andrew/observer-dispatcher-canonical-baseline` to
+- [X] Push branch `feat/andrew/observer-dispatcher-canonical-baseline` to
   `origin`
 
 ### pr-open
-- [ ] Open a Ready PR against `dev`
+- [X] Open a Ready PR against `dev`
+- [X] Ready PR: `#102`
+- [X] PR URL: `https://github.com/a129924/agent-skills/pull/102`
 
 ### wait-human-merge-or-feedback
 - [ ] Stop and wait for human merge or explicit human feedback on PR comments
@@ -155,6 +157,7 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
   `GO_for_human_check`.
 - Human reviewed the implementation and authorized the `pr-comment` workflow to
   begin.
-- The topic-local implementation commit for `pr-comment` is `682115a`.
-- Do not skip `push`, `pr-open`, or `wait-human-merge-or-feedback` while this
-  workflow is in progress.
+- The topic-local implementation commit for `pr-comment` is `85a5826`.
+- Branch `feat/andrew/observer-dispatcher-canonical-baseline` has been pushed to
+  `origin` and Ready PR `#102` is open against `dev`.
+- The workflow is now stopped at `wait-human-merge-or-feedback`.
