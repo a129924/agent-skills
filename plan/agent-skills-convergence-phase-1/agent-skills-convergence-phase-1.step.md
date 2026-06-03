@@ -42,7 +42,7 @@ created: 2026-06-03
 - [X] Run independent plan review against the topic plan and workflow contract
 - [X] Reviewer round 1 returned `SOFT_FAIL` with required plan corrections
 - [X] Record reviewer findings in `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md`
-- [ ] Complete plan rework and reroute the updated artifacts for review
+- [X] Complete plan rework and reroute the updated artifacts for review in commit `a00d8ab`
 
 ### final-gate
 - [ ] Run final gate after reviewer feedback is addressed
@@ -70,6 +70,8 @@ created: 2026-06-03
 - Draft planning artifacts were committed on 2026-06-03 as `98638e8`.
 - Independent plan review returned `SOFT_FAIL` and now controls rework routing
   through `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md`.
+- Review-driven planning fixes were committed on 2026-06-03 as `a00d8ab`, and
+  the topic is ready for re-review.
 - Explorer evidence found no exact prior topic that already produces the full
   Phase 1 9-file report bundle.
 - Supporting migration evidence remains limited to exact read-only artifacts:
