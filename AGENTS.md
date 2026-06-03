@@ -13,12 +13,11 @@ For the full repository role and migration boundary, see
 
 ## Skill source model
 
-- `skills/` is the intended canonical skill source and target architecture, not
-  the current active workflow path.
-- `.github/skills/` remains the current Copilot active authored and reviewed
-  workflow path during transition.
-- `.<platform>/skills/` is a future adapter or projection layout, not source of
-  truth.
+- `skills/` is the current canonical skill source and repository truth.
+- `.github/skills/` is a GitHub/Copilot compatibility surface, not a
+  repo-wide authority owner or source of truth.
+- `.<platform>/skills/` is a compatibility or projection layout for
+  platform-specific consumption, not source of truth.
 
 ## Topic boundary
 
