@@ -171,8 +171,8 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 ### commit-by-topic
 - [X] Commit only the bounded PR comment-fix diff and updated topic-local
   `*.step.md`
-- [X] Commit hash: `0426eaa`
-- [ ] Push the updated comment-fix commit to
+- [X] Commit hash: `178e8f5`
+- [X] Push the updated comment-fix commit to
   `feat/andrew/observer-dispatcher-canonical-baseline`
 
 ### wait-human-check
@@ -205,5 +205,7 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
   recheck instead of forcing contract-changing edits.
 - Independent Implementer applied the bounded direct-fix subset inside the
   topic worktree after an initial workspace mismatch was corrected.
-- The workflow is now in `pr-comment-review-pr-comments-and-fix` at
-  `commit-by-topic`.
+- The bounded PR comment-fix commit was amended to `178e8f5` before push.
+- Branch `feat/andrew/observer-dispatcher-canonical-baseline` now includes the
+  PR comment-fix update at `178e8f5`.
+- The workflow is now stopped at `wait-human-check`.
