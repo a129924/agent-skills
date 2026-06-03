@@ -1,6 +1,6 @@
 ---
 topic: skills-canonical-positioning
-status: publish-in-progress
+status: pr-open
 created: 2026-06-02
 ---
 
@@ -108,24 +108,24 @@ created: 2026-06-02
 
 ## PR Comment Workflow Stages
 
-- [ ] commit-by-topic
-- [ ] push
-- [ ] pr-open
-- [ ] wait-human-merge-or-feedback
+- [X] commit-by-topic
+- [X] push
+- [X] pr-open
+- [X] wait-human-merge-or-feedback
 
 ## PR Comment Steps
 
 ### commit-by-topic
-- [ ] Commit implementation diff and updated step truth for this topic
+- [X] Commit implementation diff and updated step truth for this topic as `da8d64a`
 
 ### push
-- [ ] Push branch `feat/andrew/skills-canonical-positioning` to `origin`
+- [X] Push branch `feat/andrew/skills-canonical-positioning` to `origin`
 
 ### pr-open
-- [ ] Open a ready PR against `dev`
+- [X] Open ready PR #101 against `dev`
 
 ### wait-human-merge-or-feedback
-- [ ] Wait for human merge or human feedback on PR comments
+- [X] Workflow is now stopped at waiting for human merge or human feedback on PR comments
 
 ### pr-open
 - [ ] No PR is open for this implementation run
@@ -153,8 +153,14 @@ created: 2026-06-02
   implementation human check`.
 - Human approved implementation on 2026-06-03 and authorized the `pr-comment`
   workflow to proceed.
-- The next required action is `pr-comment` step 1: commit by topic.
-- No push or PR-open event has occurred yet for this implementation run.
+- `pr-comment` step 1 committed the implementation diff as `da8d64a` on
+  2026-06-03.
+- The branch was pushed to `origin/feat/andrew/skills-canonical-positioning`
+  on 2026-06-03.
+- Ready PR #101 is open against `dev`:
+  `https://github.com/a129924/agent-skills/pull/101`
+- The workflow is now stopped at the PR-open handoff, waiting for human merge
+  or human feedback on PR comments.
 - The only editable repo files authorized by the topic plan remain:
   - `AGENTS.md`
   - `docs/repo-positioning.md`
