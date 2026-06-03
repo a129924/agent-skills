@@ -1,6 +1,6 @@
 ---
 topic: observer-dispatcher-canonical-baseline
-status: release-in-progress
+status: released
 created: 2026-06-03
 approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispatcher-canonical-baseline.plan.md
 ---
@@ -184,10 +184,10 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - [X] remove-branch
 - [X] update-version
 - [X] update-readme
-- [ ] commit-release
-- [ ] update-git-tag
-- [ ] hit-git-tag
-- [ ] remove-worktree
+- [X] commit-release
+- [X] update-git-tag
+- [X] hit-git-tag
+- [X] remove-worktree
 
 ## Release Steps
 
@@ -211,19 +211,19 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
   release surface
 
 ### commit-release
-- [ ] Commit the release update on `dev`
-- [ ] Record the release commit hash
+- [X] Commit the release update on `dev`
+- [X] Release commit hash: `a41ea2e`
 
 ### update-git-tag
-- [ ] Create lightweight tag `v0.70.0`
-- [ ] Verify the tag does not already exist before creation
+- [X] Verify tag `v0.70.0` does not already exist before creation
+- [X] Create lightweight tag `v0.70.0`
 
 ### hit-git-tag
-- [ ] Push `dev`
-- [ ] Push tag `v0.70.0`
+- [X] Push `dev`
+- [X] Push tag `v0.70.0`
 
 ### remove-worktree
-- [ ] Remove managed worktree
+- [X] Remove managed worktree
   `/Users/andrew/code/python/agent-skills.worktrees/agent-20260603-observer-dispatcher-canonical-baseline`
 
 ## Handoff / Gate Notes
@@ -261,4 +261,9 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
   began.
 - The remote topic branch and the local merged feature branch were removed
   before version and tagging work started.
-- The workflow is now in `release` at `commit-release`.
+- Release commit `a41ea2e` bumped `VERSION` to `0.70.0` and updated `README.md`
+  after PR `#102` merged.
+- Lightweight tag `v0.70.0` was created and pushed after the release commit.
+- The managed topic worktree was removed after the release commit and tag were
+  pushed.
+- The workflow is now complete.
