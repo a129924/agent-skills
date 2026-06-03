@@ -1,10 +1,13 @@
 # agent-skills
 
-This repository uses `skills/` as the current canonical skill source.
+This repository uses `skills/` as the primary canonical skill source for
+reusable skill behavior.
 
-`.github/skills/...`, `.codex/skills/...`, and other `.<platform>/...` layouts
-may still exist as compatibility or projection surfaces for specific tools or
-platforms.
+It also uses `agents/` as the canonical source for repo-defined workflow agent
+artifacts.
+
+`.github/**`, `.codex/**`, and other `.<platform>/**` layouts may still exist
+as compatibility or projection surfaces for specific tools or platforms.
 
 See [docs/repo-positioning.md](docs/repo-positioning.md) for the full current
 state, target architecture, and migration boundary.
@@ -24,21 +27,34 @@ Current repository layout:
 AGENTS.md
 docs/
 skills/                           # current canonical skill source
+agents/                           # canonical repo-defined workflow agent artifacts
 .github/
-└── skills/                      # GitHub/Copilot compatibility surface
+├── skills/                      # GitHub/Copilot compatibility surface
+└── agents/                      # GitHub/Copilot compatibility surface
 ```
 
 ## Positioning Summary
 
 - `AGENTS.md` is the governance canonical source.
-- `skills/` is the current canonical skill source.
+- `skills/` is the primary canonical skill source for reusable skill behavior.
+- `agents/` is the canonical source for repo-defined workflow agent artifacts.
 - `docs/repo-positioning.md` defines repository positioning and migration
   boundary.
 - `.github/copilot-instructions.md` is GitHub/Copilot compatibility guidance
   that defers to canonical governance.
-- `.<platform>/skills/...` is a compatibility / projection layer, not source of
-  truth.
-- external installer repositories or tools own fetch / install / sync / deploy.
+- `.github/**`, `.codex/**`, and other `.<platform>/**` paths are compatibility
+  / projection layers, not source of truth.
+- the repository does not own runtime loading / execution, registry behavior,
+  or fetch / install / sync / deploy orchestration.
+
+## Observer / Dispatcher Baseline
+
+- `agents/observer-dispatcher.agent.md` is a bounded routing-only workflow
+  agent artifact.
+- It does not make the repository a runtime orchestration system.
+- It does not encode existing human-operated workflows.
+- When workflow-derived state is needed, only a topic-local artifact such as
+  `plan/<topic>/<topic>.step.md` may be used as bounded evidence.
 
 ## Historical Migration Snapshot
 
@@ -51,8 +67,8 @@ skills/                           # current canonical skill source
 - As of version `0.69.1`, PR #101 merged the
   `skills-canonical-positioning` topic into `dev`, so `AGENTS.md`,
   `docs/repo-positioning.md`, `.github/copilot-instructions.md`, and
-  `README.md` now align on `skills/` as the current canonical truth while
-  platform-specific paths remain compatibility/projection surfaces.
+  `README.md` aligned on `skills/` as canonical skill truth while
+  platform-specific paths remained compatibility/projection surfaces.
 - Some of those topics also materialized or aligned specific skills under
   `skills/`; those historical merges do not make `.github/skills/...` or other
   platform paths canonical.
@@ -77,10 +93,11 @@ Each skill folder uses:
 
 ## Canonical ownership
 - `AGENTS.md` is the governance canonical source
-- `skills/` is the current canonical skill source
+- `skills/` is the primary canonical skill source for reusable skill behavior
+- `agents/` is the canonical source for repo-defined workflow agent artifacts
 - `.github/copilot-instructions.md` is GitHub/Copilot compatibility guidance
-- `.github/skills/...` and other `.<platform>/...` paths are compatibility /
-  projection surfaces
+- `.github/**`, `.codex/**`, and other `.<platform>/...` paths are
+  compatibility / projection surfaces
 - `README.md` is the human summary
 
 ## Responsibility matrix
@@ -233,10 +250,12 @@ Process documentation and workflow guidance for repository operations:
 | `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines at `analysis/<topic>/requirements.md` through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
 | `business-to-technical-translation` | translates frozen business baselines into technical specs with feasibility checks, architecture-compliance analysis, cost-of-realization warnings, and rollback-to-alignment triggers |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with stale-fact and overwrite-choice hard stops |
+| `context-package-builder` | builds one minimal handoff package for a real subAgent dispatch, keeping only frozen truth, bounded evidence, and explicit unknowns while excluding whole-chat history, registry hints, and workflow reconstruction |
 | `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
 | `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
 | `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
 | `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
+| `handoff-routing-policy` | routes the next allowed role after one explicit subAgent result using the frozen verdict set, or stops when bounded routing cannot continue |
 | `plan-creator` | creates repo-visible topic plans with canonical workflow transitions, analysis-layer routing, exact artifact paths, and stable-library timing contracts |
 | `plan-reviewer` | independently reviews repo-visible topic plans against workflow contracts and returns fixed-schema JSON verdicts before execution |
 | `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md`, including implementation-only gate checks, with minimal token cost and explicit blocking when incomplete |
@@ -277,6 +296,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
 | `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
 | `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
+| `subagent-dispatch-policy` | chooses the next allowed role for one bounded task slice, or stops, without turning file paths, registries, or runtime semantics into dispatch targets |
 | `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |
 
 ## Notes
@@ -285,3 +305,5 @@ Process documentation and workflow guidance for repository operations:
   boundary.
 - For skill-path authority questions, treat `skills/` as canonical truth and
   `.github/skills/...` as a compatibility entrypoint only.
+- For workflow-agent authority questions, treat `agents/` as canonical truth
+  and `.github/agents/...` as a compatibility entrypoint only.
