@@ -191,7 +191,7 @@ The plan and later implementation must map 100% to those analysis artifacts.
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
+- **Current**: `approved`
 - **Execution model**: planning + report implementation topic with independent
   review and final gate before human check
 - **Allowed transitions**:
