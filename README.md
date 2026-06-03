@@ -48,6 +48,11 @@ skills/                           # current canonical skill source
 - Versions `0.59.0` through `0.69.0` merged several migration-planning and
   bounded-remediation topics back into `dev`, making those artifacts part of
   the main repository history.
+- As of version `0.69.1`, PR #101 merged the
+  `skills-canonical-positioning` topic into `dev`, so `AGENTS.md`,
+  `docs/repo-positioning.md`, `.github/copilot-instructions.md`, and
+  `README.md` now align on `skills/` as the current canonical truth while
+  platform-specific paths remain compatibility/projection surfaces.
 - Some of those topics also materialized or aligned specific skills under
   `skills/`; those historical merges do not make `.github/skills/...` or other
   platform paths canonical.
