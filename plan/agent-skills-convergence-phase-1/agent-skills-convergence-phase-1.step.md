@@ -1,6 +1,6 @@
 ---
 topic: agent-skills-convergence-phase-1
-status: approved
+status: creator-in-progress
 created: 2026-06-03
 ---
 
@@ -14,7 +14,8 @@ created: 2026-06-03
 - [X] draft-plan-commit-by-topic
 - [X] review
 - [X] final-gate
-- [ ] human-check
+- [X] human-check
+- [ ] implementation
 
 ## Actionable Steps
 
@@ -49,7 +50,17 @@ created: 2026-06-03
 - [X] Confirm planning artifacts are ready for human check
 
 ### human-check
-- [ ] Stop and wait for human approval before Phase 1 report implementation begins
+- [X] Human approved the planning artifacts before Phase 1 report implementation
+- [X] Confirm the 9 Phase 1 report files must not be created before `human-check` completion
+
+### implementation
+- [ ] Create the 9 Phase 1 report files only under `docs/agent-skills-convergence/phase-1/`
+- [ ] Run final implementation validation commands:
+  - `git status --short`
+  - `git diff --name-only`
+  - `git diff --name-only -- skills .github/skills .codex/skills`
+- [ ] Confirm implementation changes are limited to `docs/agent-skills-convergence/phase-1/`
+- [ ] Confirm no paths are returned for `skills`, `.github/skills`, or `.codex/skills`
 
 ## Handoff / Gate Notes
 
@@ -74,6 +85,8 @@ created: 2026-06-03
   the topic is ready for re-review.
 - Planning final gate confirmed the current planning artifacts are ready for
   human check.
+- Human approved the planning artifacts with minor non-blocking refinements and
+  authorized Phase 1 report implementation.
 - Explorer evidence found no exact prior topic that already produces the full
   Phase 1 9-file report bundle.
 - Supporting migration evidence remains limited to exact read-only artifacts:
@@ -89,3 +102,7 @@ created: 2026-06-03
   - `docs/repo-positioning.md` for repository positioning
 - This topic does not authorize any skill-content convergence, projection
   creation, or runtime adaptation.
+- Final implementation validation must include:
+  - `git status --short`
+  - `git diff --name-only`
+  - `git diff --name-only -- skills .github/skills .codex/skills`

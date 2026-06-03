@@ -2,8 +2,8 @@
 
 ## current state
 
-- planning artifacts are approved for human check
-- Phase 1 report implementation has not started
+- planning artifacts were human-approved for implementation
+- Phase 1 report implementation is authorized and may begin
 
 ## completed
 
@@ -15,21 +15,24 @@
 - round-1 plan review and review-log capture
 - review-driven planning fixes
 - planning final gate
+- human approval of the planning artifacts
 
 ## not completed
 
-- human approval of the planning artifacts
 - Phase 1 report implementation under `docs/agent-skills-convergence/phase-1/`
 - implementation review / final gate for the 9-file report bundle
 - any Phase 2 or Phase 3 work
 
 ## required follow-up
 
-- human must review the planning artifacts before Phase 1 report implementation begins
-- if human requests plan changes, reopen planning rework before any report files are created
-- if human approves, proceed to create the 9 Phase 1 files only within `docs/agent-skills-convergence/phase-1/`
+- create the 9 Phase 1 files only within `docs/agent-skills-convergence/phase-1/`
+- run final implementation validation:
+  - `git status --short`
+  - `git diff --name-only`
+  - `git diff --name-only -- skills .github/skills .codex/skills`
+- confirm no implementation change touched `skills/`, `.github/skills/`, or `.codex/skills`
 
 ## next handoff
 
-- `next actor`: human reviewer
-- `next step`: review the planning artifacts and either approve Phase 1 report implementation or request further planning corrections
+- `next actor`: implementer
+- `next step`: create the 9 Phase 1 report files under `docs/agent-skills-convergence/phase-1/` and stop again for review/final gate

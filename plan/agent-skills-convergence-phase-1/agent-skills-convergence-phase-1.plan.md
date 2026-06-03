@@ -217,6 +217,10 @@ Routing notes:
   `/Users/andrew/code/python/agent-skills.worktrees/agent-20260603-agent-skills-convergence-phase-1`
 - Human review is required after the planning final gate and again after Phase 1
   report implementation reaches its own final gate.
+- The 9 Phase 1 report files must not be created until `human-check` is
+  complete.
+- Phase 1 report implementation may begin only after explicit human approval is
+  recorded in repo-visible artifacts.
 
 ## Artifact Paths
 
@@ -292,6 +296,14 @@ Artifact path notes:
 - uncertain cases are marked `human_review_required`
 - `.codex/skills/README.md` and `.codex/skills/provenance.md` are treated as
   evidence, not as writable or canonical skill content
+- final implementation validation commands are run and inspected:
+  - `git status --short`
+  - `git diff --name-only`
+  - `git diff --name-only -- skills .github/skills .codex/skills`
+- expected final validation result:
+  - implementation changes are limited to
+    `docs/agent-skills-convergence/phase-1/`
+  - no paths are returned for `skills`, `.github/skills`, or `.codex/skills`
 
 ## Reviewer Handoff
 
