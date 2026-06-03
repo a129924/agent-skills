@@ -13,7 +13,7 @@ Python package.
 - Review skills with `agent-skill-reviewer` before treating them as stable.
 
 ## Canonical policy owner
-This file is the GitHub/Copilot-specific always-on guidance mirror for this
+This file is GitHub/Copilot-specific compatibility guidance for this
 repository.
 
 Governance and repository positioning authority live in `AGENTS.md` and
@@ -23,8 +23,8 @@ Ownership model:
 - `AGENTS.md` owns governance rules
 - `docs/repo-positioning.md` owns current state, target architecture, and
   migration boundary
-- `.github/copilot-instructions.md` mirrors that guidance as GitHub/Copilot
-  always-on instructions
+- `.github/copilot-instructions.md` provides GitHub/Copilot compatibility
+  guidance and does not own repo-wide truth
 - `README.md` summarizes it for humans
 - `agent-skill-template` mirrors it in reusable form
 - `agent-skill-creator` applies it during drafting
@@ -34,16 +34,17 @@ Ownership model:
 - Focus on GitHub Agent Skills only.
 - For governance and positioning questions, follow `AGENTS.md` and
   `docs/repo-positioning.md`.
-- During the current transition workflow, store project skills under
-  `.github/skills/<skill-name>/`.
-- Treat `.github/skills/` as the current active authored/reviewed workflow path
-  during transition unless a separate migration topic changes that state.
-- Treat `skills/` as target architecture only in the current runway; do not
-  describe it as the current active workflow path.
+- Treat `skills/` as the current canonical skill source.
+- Treat `.github/skills/...` and other platform-specific skill paths as
+  GitHub/Copilot compatibility entrypoints or projection surfaces, not
+  repo-wide authority.
 - Keep every skill as self-contained and copy-friendly as possible.
 - Prefer small, single-purpose skills over broad helper bundles.
 - Treat `.github/copilot-instructions.md` as GitHub/Copilot always-on guidance
-  and `.github/skills/*/SKILL.md` as task-specific instructions.
+  that defers to canonical repo governance.
+- When a GitHub/Copilot task references `.github/skills/*/SKILL.md`, treat that
+  path as a task-specific compatibility entrypoint rather than the canonical
+  source-of-truth location.
 
 ## Positioning boundary
 - This runway freezes repository positioning only.
@@ -179,6 +180,9 @@ A skill is only complete when it is:
 ## Subagent Role Enforcement
 When working through the skill lifecycle (creator → reviewer → stable library),
 use independent `/fleet` subagents instead of self-performing these roles:
+- GitHub/Copilot compatibility flows may still reference `.github/skills/...`
+  invocation paths. Those paths are compatibility entrypoints, not repo-wide
+  authority signals.
 - **Never self-perform creator work** — always use `/fleet @.github/skills/agent-skill-creator/`
   to draft new skills or modifications, even if you're technically capable
 - **Never self-perform reviewer work** — always use `/fleet @.github/skills/agent-skill-reviewer/`
@@ -196,8 +200,8 @@ After manual merge handoff (STOP POINT 2), route post-merge cleanup and local
 sync through `git-post-merge-workflow`.
 
 Use `.github/skills/git-post-merge-workflow/references/stop-point-2-checklist.md`
-as the portable resume checklist for merge confirmation, local sync entry
-conditions, and branch cleanup checks.
+as the GitHub/Copilot compatibility path for the portable resume checklist for
+merge confirmation, local sync entry conditions, and branch cleanup checks.
 
 ## Topic Planning with Analysis Layer
 The repository now supports an optional **analysis layer** before plan creation,

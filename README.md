@@ -1,9 +1,10 @@
 # agent-skills
 
-This repository is moving toward `skills/` as the canonical skill source.
+This repository uses `skills/` as the current canonical skill source.
 
-During transition, `.github/skills/` remains the current Copilot active
-authored and reviewed workflow path.
+`.github/skills/...`, `.codex/skills/...`, and other `.<platform>/...` layouts
+may still exist as compatibility or projection surfaces for specific tools or
+platforms.
 
 See [docs/repo-positioning.md](docs/repo-positioning.md) for the full current
 state, target architecture, and migration boundary.
@@ -19,99 +20,40 @@ It is optimized for three equal jobs:
 
 ## Layout
 ```text
-Current workflow layout:
+Current repository layout:
 AGENTS.md
 docs/
+skills/                           # current canonical skill source
 .github/
-└── skills/                      # current Copilot active workflow path
-
-Target architecture after separate migration:
-skills/                          # intended canonical skill source
-└── ...
+└── skills/                      # GitHub/Copilot compatibility surface
 ```
 
 ## Positioning Summary
 
 - `AGENTS.md` is the governance canonical source.
-- `skills/` is the intended canonical skill source / target architecture.
-- `.github/skills/` remains the current Copilot active authored/reviewed
-  workflow path during transition.
-- `.<platform>/skills/...` is the future projection / adapter / compatibility
-  mirror layer, not source of truth.
+- `skills/` is the current canonical skill source.
+- `docs/repo-positioning.md` defines repository positioning and migration
+  boundary.
+- `.github/copilot-instructions.md` is GitHub/Copilot compatibility guidance
+  that defers to canonical governance.
+- `.<platform>/skills/...` is a compatibility / projection layer, not source of
+  truth.
 - external installer repositories or tools own fetch / install / sync / deploy.
 
-## Current Migration Snapshot
+## Historical Migration Snapshot
 
-- This repository now contains the spec-worktree validation surface for
-  `.codex/skills/` as a projection-only adapter layout.
-- Five branch-local migration topics were merged into the repository as
-  planning/reporting artifacts:
-  - `codex-migration-direct-move`
-  - `codex-migration-copilot-residue-low`
-  - `codex-migration-copilot-residue-medium`
-  - `codex-migration-copilot-residue-high`
-  - `codex-migration-copilot-specific`
-- The repository now also contains the `codex-readability-baseline` topic as a
-  repo-visible first-wave inventory artifact for `move_status`,
-  `codex_readability`, same-name pass backlog, and follow-up routing.
-- These merged topics do not declare repo-wide active-path cutover. They record
-  candidate classification, bounded remediation, and follow-up routing only.
-- These artifacts record a transition-planning lane and should not be read as a
-  formal release declaration or active-path cutover.
-- As of version `0.59.0`, PR #84 merged the codex skills spec-worktree lane
-  back into `dev`, so this snapshot now lives on the main repository branch
-  rather than on a separate long-lived worktree branch.
-- As of version `0.60.0`, PR #85 merged the codex readability baseline back
-  into `dev`, so the first-wave Codex readability inventory now also lives on
-  the main repository branch rather than on a separate short-lived worktree
-  branch.
-- As of version `0.61.0`, PR #86 merged the first low-risk move topic back
-  into `dev`, so `git-commit-convention` and `git-branch-naming` now also
-  exist under `skills/` as target-architecture copies while `.github/skills/`
-  remains the transition-era compatibility surface and `.codex/skills`
-  projection stays deferred.
-- As of version `0.62.0`, PR #87 and PR #88 merged the same-name follow-up
-  topics back into `dev`, so the business-intent pair is now explicitly
-  canonicalized to `skills/`, while the planning-spine pair now has a
-  remediation-ready divergence breakdown that points to the next topic:
-  `planning-spine-bounded-remediation`.
-- As of version `0.64.0`, PR #89 merged the bounded remediation planning topic
-  back into `dev`, so the planning-spine pair now has a partial execution
-  contract that isolates three policy-lock units from five support/reference
-  units that can be remediated safely in a later execution topic.
-- As of version `0.64.0`, PR #90 also merged the workflow recovery alignment
-  follow-up, adding repo-visible workflow policy and workflow documents that
-  tighten PR-comment correction, topic bootstrap, migration implementation, and
-  release-cleanup routing.
-- As of version `0.65.0`, PR #91 merged the agent-skill contract-surface move
-  back into `dev`, so the creator/reviewer/template surfaces now also exist
-  under `skills/` as target-architecture copies while `.github/skills/`
-  remains the transition-era compatibility surface and the publish handoff
-  workflow is explicitly split from implementation.
-- As of version `0.65.0`, PR #92 also merged the `worktree-manager` move back
-  into `dev`, so the helper skill now also exists under `skills/` as a
-  target-architecture copy while `.github/skills/worktree-manager/` remains the
-  transition-era compatibility surface.
-- As of version `0.66.0`, PR #94 merged the workflow artifact standardization
-  topic back into `dev`, so the repository now contains repo-visible
-  `requirements.md`, `plan.md`, and `step.md` baselines for workflow artifacts
-  without changing the active skill-path transition boundary.
-- As of version `0.67.0`, PR #95 merged the `agent-skill-migration-sequencing`
-  topic back into `dev`, so the repository now contains a repo-visible
-  next-wave migration sequencing baseline and topic-local publish handoff
-  artifacts without authorizing active-path cutover, skill moves, or shared
-  workflow edits.
-- As of version `0.68.0`, PR #96 merged the planning-spine ready-subset
-  remediation back into `dev`, so the support/reference alignment for
-  `plan-creator` and `plan-reviewer` now lives under `skills/` while the
-  blocked workflow-authority units remain unresolved and the publish handoff
-  stops at topic-local `STOP POINT 1`.
-- As of version `0.69.0`, PR #100 merged the
-  `python-canonicalization-sequencing` topic back into `dev`, so multiple
-  existing transition-era skills now also exist under `skills/` as canonical
-  copies with repo-visible analysis, plan, and migration-report artifacts,
-  while `.github/skills/` remains the transition compatibility and active
-  workflow surface and no active-path cutover is declared by this release.
+- This repository contains repo-visible migration artifacts for Codex and
+  Copilot compatibility/projection work, including `.codex/skills/`
+  projection experiments and multiple topic-local plan/report trails.
+- Versions `0.59.0` through `0.69.0` merged several migration-planning and
+  bounded-remediation topics back into `dev`, making those artifacts part of
+  the main repository history.
+- Some of those topics also materialized or aligned specific skills under
+  `skills/`; those historical merges do not make `.github/skills/...` or other
+  platform paths canonical.
+- Read those migration artifacts as historical background only. Current
+  repository truth is defined by `AGENTS.md` and
+  `docs/repo-positioning.md`.
 
 ## Repository rules
 Every stable skill should:
@@ -130,13 +72,11 @@ Each skill folder uses:
 
 ## Canonical ownership
 - `AGENTS.md` is the governance canonical source
-- `skills/` is the intended canonical skill source / target architecture
-- `.github/skills/` remains the current Copilot active workflow path during
-  transition
+- `skills/` is the current canonical skill source
+- `.github/copilot-instructions.md` is GitHub/Copilot compatibility guidance
+- `.github/skills/...` and other `.<platform>/...` paths are compatibility /
+  projection surfaces
 - `README.md` is the human summary
-- `agent-skill-template` mirrors the structure
-- `agent-skill-creator` applies the structure
-- `agent-skill-reviewer` enforces the structure
 
 ## Responsibility matrix
 | Item | Responsibility |
@@ -188,9 +128,8 @@ inside a skill folder unless the repository spec gives them a fixed role.
 
 ## Workflow
 1. Start from `agent-skill-creator` or `agent-skill-template`.
-2. Draft the new skill in `.github/skills/<skill-name>/`.
-3. Keep examples, checklists, and helper files inside the same folder and state
-   each local file or folder role clearly.
+2. Keep examples, checklists, and helper files with the skill they belong to,
+   and state each local file or folder role clearly.
 4. Stop creator work at `review-ready`.
 5. Send the draft to `agent-skill-reviewer` through a human or external
    workflow.
@@ -200,6 +139,9 @@ inside a skill folder unless the repository spec gives them a fixed role.
    defaults such as `git add -A` or `git add .` are not allowed.
 9. At manual merge handoff, stop completely and resume only after a new explicit
    human message.
+10. If a platform-specific workflow references `.github/skills/...` or another
+    `.<platform>/...` path, treat that path as compatibility or projection
+    context rather than repo-wide authority.
 
 ## Versioning
 - The root `VERSION` file is the canonical version baseline for this repository.
@@ -336,4 +278,5 @@ Process documentation and workflow guidance for repository operations:
 - Use `AGENTS.md` for governance guidance.
 - Use `docs/repo-positioning.md` for repository positioning and migration
   boundary.
-- Use `.github/skills/<skill-name>/SKILL.md` for task-specific instructions.
+- For skill-path authority questions, treat `skills/` as canonical truth and
+  `.github/skills/...` as a compatibility entrypoint only.
