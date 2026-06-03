@@ -6,7 +6,7 @@ created: 2026-06-03
 
 # Agent Skills Convergence Phase 1 Steps
 
-## Planning Workflow Stages
+## Workflow Stages
 
 - [X] worktree
 - [X] analysis
@@ -16,7 +16,7 @@ created: 2026-06-03
 - [ ] final-gate
 - [ ] human-check
 
-## Planning Steps
+## Actionable Steps
 
 ### worktree
 - [X] Create managed worktree at `/Users/andrew/code/python/agent-skills.worktrees/agent-20260603-agent-skills-convergence-phase-1`
@@ -39,8 +39,10 @@ created: 2026-06-03
 - [X] Record the planning commit hash in this step artifact once the commit exists: `98638e8`
 
 ### review
-- [ ] Run independent plan review against the topic plan and workflow contract
-- [ ] Record reviewer findings in `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md` if rework is required
+- [X] Run independent plan review against the topic plan and workflow contract
+- [X] Reviewer round 1 returned `SOFT_FAIL` with required plan corrections
+- [X] Record reviewer findings in `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md`
+- [ ] Complete plan rework and reroute the updated artifacts for review
 
 ### final-gate
 - [ ] Run final gate after reviewer feedback is addressed
@@ -56,14 +58,28 @@ created: 2026-06-03
   - Implementer: Phase 1 report materialization only under `docs/agent-skills-convergence/phase-1/`
   - Reviewer: report and plan quality gate
   - Planner / final gate: readiness decision before human check
+- Required subAgent response fields are frozen in the topic plan and include:
+  - `task_scope`
+  - `files_read`
+  - `files_modified`
+  - `findings`
+  - `unresolved_items`
+  - `status`
 - Reviewer routing starts only after the topic's draft planning artifacts are
   committed by topic.
 - Draft planning artifacts were committed on 2026-06-03 as `98638e8`.
+- Independent plan review returned `SOFT_FAIL` and now controls rework routing
+  through `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md`.
 - Explorer evidence found no exact prior topic that already produces the full
   Phase 1 9-file report bundle.
-- Supporting `docs/migration/*.md` evidence is useful context, but it remains
-  historical or adjacent evidence rather than a substitute for this topic's own
-  report bundle.
+- Supporting migration evidence remains limited to exact read-only artifacts:
+  - `docs/migration/platform-coupling-inventory.md`
+  - `docs/migration/planning-spine-divergence-review.md`
+  - `docs/migration/codex-readability-baseline.md`
+  - `docs/migration/codex-migration-direct-move-report.md`
+  - `docs/migration/migration-runway-checklist.md`
+- Those artifacts remain historical or adjacent evidence rather than a
+  substitute for this topic's own report bundle.
 - Current authority remains:
   - `AGENTS.md` for governance
   - `docs/repo-positioning.md` for repository positioning

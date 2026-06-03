@@ -85,7 +85,80 @@ This topic must not:
 - infer canonical status from path alone
 - classify Copilot-only from location alone
 
-### 5. Analysis-layer priority is fixed
+### 5. SubAgent output contract is fixed
+
+All subAgents in this topic must return evidence, not unsupported conclusions.
+
+Every subAgent response must include these general fields:
+
+- `subagent_name`
+- `task_scope`
+- `inputs_received`
+- `files_read`
+- `files_modified`
+- `findings`
+- `risks`
+- `unresolved_items`
+- `status`
+
+Allowed `status` values:
+
+- `NOT_STARTED`
+- `IN_PROGRESS`
+- `COMPLETE`
+- `INCOMPLETE`
+- `BLOCKED`
+
+Role-specific required fields:
+
+- Explorer:
+  - `inventory_summary`
+  - `compared_surfaces`
+  - `evidence_by_skill`
+  - `alias_candidates`
+  - `uncertain_classifications`
+  - `recommended_followup_targets`
+- Implementer:
+  - `report_files_touched`
+  - `sections_completed`
+  - `evidence_sources_used`
+  - `assumption_free_gaps`
+  - `scope_violations_detected`
+- Reviewer:
+  - `review_scope`
+  - `files_reviewed`
+  - `findings_critical`
+  - `findings_major`
+  - `findings_minor`
+  - `missing_evidence`
+  - `required_fixes`
+  - `pass_blockers`
+- Plan Reviewer:
+  - `reviewed_artifacts`
+  - `verdict`
+  - `contract_gaps`
+  - `artifact_gaps`
+  - `decision_gaps`
+  - `required_plan_changes`
+- Plan Creator / Revision:
+  - `updated_artifacts`
+  - `review_items_addressed`
+  - `review_items_not_addressed`
+  - `reasons_not_addressed`
+  - `remaining_blockers`
+- Planner / Final Gate:
+  - `files_checked`
+  - `acceptance_criteria_result`
+  - `consistency_result`
+  - `residual_risks`
+  - `blockers`
+  - `final_verdict`
+  - `human_handoff_notes`
+
+If evidence is insufficient, the relevant item must be marked
+`human_review_required`.
+
+### 6. Analysis-layer priority is fixed
 
 This topic uses strict-mode analysis inputs:
 
@@ -96,7 +169,7 @@ This topic uses strict-mode analysis inputs:
 
 The plan and later implementation must map 100% to those analysis artifacts.
 
-### 6. Stable-library and release intent are absent
+### 7. Stable-library and release intent are absent
 
 - This topic is not a stable-library publish topic.
 - `VERSION` stays unchanged.
@@ -118,7 +191,7 @@ The plan and later implementation must map 100% to those analysis artifacts.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `review-ready`
 - **Execution model**: planning + report implementation topic with independent
   review and final gate before human check
 - **Allowed transitions**:
@@ -152,6 +225,7 @@ Routing notes:
 | Topic plan | `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Topic progression artifact | `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.step.md` | Planning actor / Main Agent | Current-truth workflow progression status for this topic |
 | Review routing log | `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.review-log.md` | Reviewer / Planning actor | Repo-visible routing log when reviewer findings control rework or re-review |
+| Topic close summary artifact | `plan/agent-skills-convergence-phase-1/agent-skills-convergence-phase-1.summary.md` | Main Agent | Current-truth close outcome and human handoff semantics for planning close and later topic close when required |
 | Requirements baseline | `analysis/agent-skills-convergence-phase-1/requirements.md` | Planning actor | Frozen business baseline for Phase 1 scope and stop rules |
 | Technical baseline | `analysis/agent-skills-convergence-phase-1/technical-spec.md` | Planning actor | Frozen technical translation and implementation boundary |
 | Phase 1 report root | `docs/agent-skills-convergence/phase-1/` | Implementer | Bounded write root for the 9 required Phase 1 files |
@@ -168,7 +242,11 @@ Routing notes:
 | Positioning contract | `docs/repo-positioning.md` | Existing repo artifact | Current authority model for compatibility/projection surfaces |
 | Codex projection rule | `.codex/skills/README.md` | Existing repo artifact | Read-only evidence for `.codex/skills` surface role |
 | Codex provenance | `.codex/skills/provenance.md` | Existing repo artifact | Read-only projection mapping and validation evidence |
-| Supporting migration evidence | `docs/migration/*.md` | Existing repo artifacts | Historical and classification support evidence only; not write targets in this topic |
+| Supporting migration evidence | `docs/migration/platform-coupling-inventory.md` | Existing repo artifact | Historical runtime/tooling and dependency evidence only; not a write target |
+| Supporting migration evidence | `docs/migration/planning-spine-divergence-review.md` | Existing repo artifact | Historical same-name drift evidence only; not a write target |
+| Supporting migration evidence | `docs/migration/codex-readability-baseline.md` | Existing repo artifact | Historical `.codex/skills` readability evidence only; not a write target |
+| Supporting migration evidence | `docs/migration/codex-migration-direct-move-report.md` | Existing repo artifact | Historical direct-move verification evidence only; not a write target |
+| Supporting migration evidence | `docs/migration/migration-runway-checklist.md` | Existing repo artifact | Historical runway and blocker evidence only; not a write target |
 
 Artifact path notes:
 
@@ -176,8 +254,10 @@ Artifact path notes:
   `docs/agent-skills-convergence/phase-1/`.
 - `skills/**`, `.github/skills/**`, and `.codex/skills/**` are explicitly
   read-only.
-- `docs/migration/*.md` may be read as supporting evidence but must not be
-  modified by this topic.
+- The close summary artifact becomes required before topic close whenever the
+  topic reaches a human handoff or required follow-up state.
+- Listed migration evidence artifacts may be read as supporting evidence but
+  must not be modified by this topic.
 
 ## Implementation Steps
 
@@ -190,17 +270,12 @@ Artifact path notes:
 4. Author the topic plan and step artifact with exact write scope, stop rules,
    and subAgent contracts.
 5. Commit the draft planning artifacts for this topic before review routing.
-6. Run independent plan review against this topic plan.
-7. If plan review returns `needs-rework`, revise only planning artifacts and
-   record the findings in the review log.
-8. Run planning final gate and stop for human review before Phase 1 report
-   implementation begins.
-9. After human approval, materialize the 9 Phase 1 files under
+6. After human approval, materialize the 9 Phase 1 files under
    `docs/agent-skills-convergence/phase-1/` only.
-10. Gather evidence for skill inventory, drift, Copilot-only classification,
+7. Gather evidence for skill inventory, drift, Copilot-only classification,
    runtime dependency classification, and later-phase inputs.
-11. Run independent review and final gate on the Phase 1 report set.
-12. Stop for human review before any Phase 2 or Phase 3 work begins.
+8. Revise report content only when reviewer findings are supported by evidence
+   and remain inside the locked write scope.
 
 ## Validation / Acceptance Checks
 
