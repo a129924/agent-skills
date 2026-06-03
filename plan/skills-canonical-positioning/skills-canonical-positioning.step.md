@@ -60,7 +60,7 @@ created: 2026-06-02
 - [X] review-round-3
 - [X] final-gate
 - [X] human-check
-- [ ] pr-open
+- [X] pr-open
 
 ## Implementation Steps
 
@@ -126,9 +126,6 @@ created: 2026-06-02
 
 ### wait-human-merge-or-feedback
 - [X] Workflow is now stopped at waiting for human merge or human feedback on PR comments
-
-### pr-open
-- [ ] No PR is open for this implementation run
 
 ## Handoff / Gate Notes
 

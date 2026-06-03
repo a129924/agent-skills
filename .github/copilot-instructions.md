@@ -199,9 +199,10 @@ use independent `/fleet` subagents instead of self-performing these roles:
 After manual merge handoff (STOP POINT 2), route post-merge cleanup and local
 sync through `git-post-merge-workflow`.
 
-Use `.github/skills/git-post-merge-workflow/references/stop-point-2-checklist.md`
-as the GitHub/Copilot compatibility path for the portable resume checklist for
-merge confirmation, local sync entry conditions, and branch cleanup checks.
+`.github/skills/git-post-merge-workflow/references/stop-point-2-checklist.md`
+is the GitHub/Copilot compatibility entrypoint for STOP POINT 2 resume routing.
+It points to the portable resume checklist for merge confirmation, local sync
+entry conditions, and branch cleanup checks.
 
 ## Topic Planning with Analysis Layer
 The repository now supports an optional **analysis layer** before plan creation,

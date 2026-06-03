@@ -130,18 +130,18 @@ inside a skill folder unless the repository spec gives them a fixed role.
 1. Start from `agent-skill-creator` or `agent-skill-template`.
 2. Keep examples, checklists, and helper files with the skill they belong to,
    and state each local file or folder role clearly.
-4. Stop creator work at `review-ready`.
-5. Send the draft to `agent-skill-reviewer` through a human or external
+3. Stop creator work at `review-ready`.
+4. Send the draft to `agent-skill-reviewer` through a human or external
    workflow.
-6. Promote the skill to the stable library only after it returns `approved`.
-7. Prepare and verify the semantic execution branch before creator work starts.
-8. In publish flow, stage only the topic's allowed file set; broad staging
+5. Promote the skill to the stable library only after it returns `approved`.
+6. Prepare and verify the semantic execution branch before creator work starts.
+7. In publish flow, stage only the topic's allowed file set; broad staging
    defaults such as `git add -A` or `git add .` are not allowed.
-9. At manual merge handoff, stop completely and resume only after a new explicit
+8. At manual merge handoff, stop completely and resume only after a new explicit
    human message.
-10. If a platform-specific workflow references `.github/skills/...` or another
-    `.<platform>/...` path, treat that path as compatibility or projection
-    context rather than repo-wide authority.
+9. If a platform-specific workflow references `.github/skills/...` or another
+   `.<platform>/...` path, treat that path as compatibility or projection
+   context rather than repo-wide authority.
 
 ## Versioning
 - The root `VERSION` file is the canonical version baseline for this repository.
