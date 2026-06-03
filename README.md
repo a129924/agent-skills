@@ -64,6 +64,12 @@ agents/                           # canonical repo-defined workflow agent artifa
 - Versions `0.59.0` through `0.69.0` merged several migration-planning and
   bounded-remediation topics back into `dev`, making those artifacts part of
   the main repository history.
+- As of version `0.70.0`, PR #102 merged the
+  `observer-dispatcher-canonical-baseline` topic into `dev`, adding the
+  bounded `agents/observer-dispatcher.agent.md` contract and three supporting
+  skills under `skills/` while keeping `.github/**`, `.codex/**`, and other
+  platform-specific paths as compatibility/projection surfaces rather than
+  canonical authority.
 - As of version `0.69.1`, PR #101 merged the
   `skills-canonical-positioning` topic into `dev`, so `AGENTS.md`,
   `docs/repo-positioning.md`, `.github/copilot-instructions.md`, and

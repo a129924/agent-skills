@@ -1,6 +1,6 @@
 ---
 topic: observer-dispatcher-canonical-baseline
-status: pr-open
+status: release-in-progress
 created: 2026-06-03
 approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispatcher-canonical-baseline.plan.md
 ---
@@ -144,7 +144,7 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - [X] planner-review
 - [X] implementer-fix
 - [X] commit-by-topic
-- [ ] wait-human-check
+- [X] wait-human-check
 
 ## PR Comment Review / Fix Steps
 
@@ -176,7 +176,55 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
   `feat/andrew/observer-dispatcher-canonical-baseline`
 
 ### wait-human-check
-- [ ] Stop and wait for human check on the updated PR `#102` branch state
+- [X] Stop and wait for human check on the updated PR `#102` branch state
+
+## Release Workflow Stages
+
+- [X] check-pr-merged
+- [X] remove-branch
+- [X] update-version
+- [X] update-readme
+- [ ] commit-release
+- [ ] update-git-tag
+- [ ] hit-git-tag
+- [ ] remove-worktree
+
+## Release Steps
+
+### check-pr-merged
+- [X] Confirm PR `#102` is in merged state
+- [X] Merge commit: `0dfbc7698f411fa865a97fa59d1f1c658008e237`
+
+### remove-branch
+- [X] Delete remote branch `feat/andrew/observer-dispatcher-canonical-baseline`
+- [X] Detach the topic worktree so the merged local branch can be removed safely
+- [X] Delete local branch `feat/andrew/observer-dispatcher-canonical-baseline`
+
+### update-version
+- [X] Bump root `VERSION` from `0.69.1` to `0.70.0`
+- [X] Treat the Observer / Dispatcher baseline as a `MINOR` release because it
+  adds new stable skills and a backward-compatible bounded workflow capability
+
+### update-readme
+- [X] Record the `0.70.0` release in the historical migration snapshot
+- [X] Keep the README versioning contract aligned with the new stable-skill
+  release surface
+
+### commit-release
+- [ ] Commit the release update on `dev`
+- [ ] Record the release commit hash
+
+### update-git-tag
+- [ ] Create lightweight tag `v0.70.0`
+- [ ] Verify the tag does not already exist before creation
+
+### hit-git-tag
+- [ ] Push `dev`
+- [ ] Push tag `v0.70.0`
+
+### remove-worktree
+- [ ] Remove managed worktree
+  `/Users/andrew/code/python/agent-skills.worktrees/agent-20260603-observer-dispatcher-canonical-baseline`
 
 ## Handoff / Gate Notes
 
@@ -208,4 +256,9 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - The bounded PR comment-fix commit was amended to `178e8f5` before push.
 - Branch `feat/andrew/observer-dispatcher-canonical-baseline` now includes the
   PR comment-fix update at `178e8f5`.
-- The workflow is now stopped at `wait-human-check`.
+- Human merged PR `#102` into `dev`.
+- `dev` was fast-forward synced to the merge commit before release handling
+  began.
+- The remote topic branch and the local merged feature branch were removed
+  before version and tagging work started.
+- The workflow is now in `release` at `commit-release`.
