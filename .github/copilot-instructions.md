@@ -23,6 +23,7 @@ Ownership model:
 - `AGENTS.md` owns governance rules
 - `docs/repo-positioning.md` owns current state, target architecture, and
   migration boundary
+- `agents/` is the canonical source for repo-defined workflow agent artifacts
 - `.github/copilot-instructions.md` provides GitHub/Copilot compatibility
   guidance and does not own repo-wide truth
 - `README.md` summarizes it for humans
@@ -34,8 +35,11 @@ Ownership model:
 - Focus on GitHub Agent Skills only.
 - For governance and positioning questions, follow `AGENTS.md` and
   `docs/repo-positioning.md`.
-- Treat `skills/` as the current canonical skill source.
-- Treat `.github/skills/...` and other platform-specific skill paths as
+- Treat `skills/` as the primary canonical skill source for reusable skill
+  behavior.
+- Treat `agents/` as the canonical source for repo-defined workflow agent
+  artifacts.
+- Treat `.github/**`, `.codex/**`, and other platform-specific paths as
   GitHub/Copilot compatibility entrypoints or projection surfaces, not
   repo-wide authority.
 - Keep every skill as self-contained and copy-friendly as possible.
@@ -45,12 +49,26 @@ Ownership model:
 - When a GitHub/Copilot task references `.github/skills/*/SKILL.md`, treat that
   path as a task-specific compatibility entrypoint rather than the canonical
   source-of-truth location.
+- When a GitHub/Copilot task references `.github/agents/*`, treat that path as
+  a compatibility surface rather than the canonical workflow-agent source.
+- Do not infer runtime dispatch, agent registry behavior, or workflow-to-agent
+  binding from the presence of repo-visible agent artifacts.
 
 ## Positioning boundary
 - This runway freezes repository positioning only.
 - Do not treat positioning updates as authorization to perform skill-path
   migration, platform directory cutover, or creator/reviewer/template contract
   changes.
+
+## Observer / Dispatcher boundary
+- `agents/observer-dispatcher.agent.md` is a bounded, routing-only workflow
+  agent artifact.
+- The Observer / Dispatcher is not a substitute for Planner, Implementer,
+  Reviewer, or Correction Planner work.
+- Existing human-operated workflows remain outside this baseline.
+- If workflow-derived state is needed, use only a topic-local progression
+  artifact such as `plan/<topic>/<topic>.step.md`; do not reconstruct the full
+  workflow from chat memory or platform metadata.
 
 ## Required skill shape
 Each stable skill directory should contain:
@@ -194,6 +212,9 @@ use independent `/fleet` subagents instead of self-performing these roles:
 - Loading a skill, paraphrasing what reviewer or creator would do, or claiming a
   role was delegated is not enough. The creator and reviewer must each exist as
   visible `/fleet` subagents before work continues.
+- This compatibility guidance does not by itself declare runtime support for a
+  generic Observer / Dispatcher; repo-visible agent artifacts remain policy
+  surfaces unless a later topic adds bounded execution support.
 
 ## STOP POINT 2 Resume Routing
 After manual merge handoff (STOP POINT 2), route post-merge cleanup and local
