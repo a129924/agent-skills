@@ -68,6 +68,51 @@ Do not use this skill when:
 - `reason`: short factual reason
 - `stop_condition`: `none` or exact blocker
 
+# Validation
+
+## Required Checks
+
+- `PASS`: the result came from real dispatch, the Observer is in `ROUTING`, the
+  verdict is exactly one frozen allowed value, and the skill returns exactly
+  one allowed `next_role` or `stop` consistent with the stated verdict.
+- `BLOCKED`: stop when the verdict is unknown, unstructured, or unsupported;
+  when the evidence owner for `MISSING_EVIDENCE` is unknown; or when proceeding
+  would require invented workflow state, registry behavior, runtime semantics,
+  or a broader routing model than this skill allows.
+
+## Quality Checks (best effort)
+
+- `SOFT FAIL`: mark status as `INCOMPLETE` when the allowed verdict is clear
+  enough to route or stop, but the bounded evidence summary or blocker detail is
+  incomplete.
+- Under `SOFT FAIL`, keep the routing decision within the frozen verdict set,
+  state the missing evidence explicitly, and avoid inventing additional workflow
+  state.
+
+# Failure Handling
+
+## Missing Context
+
+- If the verdict is valid but supporting evidence is partial, return the bounded
+  best-effort route or `stop` with the limitation stated explicitly.
+- If missing context could reasonably change the next allowed role, mark the
+  result `BLOCKED` and stop.
+
+## Ambiguous Requirement
+
+- If the returned result does not contain one frozen verdict value, do not infer
+  or normalize it into the allowed set.
+- If `MISSING_EVIDENCE` lacks a known bounded owner, stop instead of inventing
+  one.
+
+## Execution Limitation
+
+- If the request depends on hidden workflow state, file-path ownership, registry
+  identifiers, launcher-specific targets, or runtime orchestration details,
+  return `stop` or `BLOCKED` with the limitation stated explicitly.
+- Do not fabricate broader workflow progression beyond the single returned
+  subAgent result.
+
 # Boundaries
 
 - Do not choose the initial dispatch role.

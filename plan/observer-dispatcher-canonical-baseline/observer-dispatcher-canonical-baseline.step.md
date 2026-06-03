@@ -117,7 +117,7 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - [X] commit-by-topic
 - [X] push
 - [X] pr-open
-- [ ] wait-human-merge-or-feedback
+- [X] wait-human-merge-or-feedback
 
 ## PR Comment Steps
 
@@ -136,7 +136,47 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - [X] PR URL: `https://github.com/a129924/agent-skills/pull/102`
 
 ### wait-human-merge-or-feedback
-- [ ] Stop and wait for human merge or explicit human feedback on PR comments
+- [X] Stop and wait for human merge or explicit human feedback on PR comments
+
+## PR Comment Review / Fix Workflow Stages
+
+- [X] fetch-pr-comments
+- [X] planner-review
+- [X] implementer-fix
+- [X] commit-by-topic
+- [ ] wait-human-check
+
+## PR Comment Review / Fix Steps
+
+### fetch-pr-comments
+- [X] Fetch thread-aware review data for PR `#102`, including unresolved review
+  threads and review state
+- [X] Triage unresolved review threads into `ADDRESS-DIRECT`,
+  `REVIEWER-RECHECK`, and `SKIP`
+
+### planner-review
+- [X] Run an independent Planner triage pass on the unresolved review threads
+- [X] Preserve contract-risk and prior-human-guidance conflicts for reviewer
+  recheck instead of forcing them into bounded fixes
+
+### implementer-fix
+- [X] Run an independent Implementer on the `ADDRESS-DIRECT` thread subset
+- [X] Keep the implementer write set bounded to:
+  - `skills/subagent-dispatch-policy/SKILL.md`
+  - `skills/handoff-routing-policy/SKILL.md`
+  - `.github/copilot-instructions.md`
+- [X] Correct an initial workspace mismatch before applying the bounded
+  worktree edits
+
+### commit-by-topic
+- [X] Commit only the bounded PR comment-fix diff and updated topic-local
+  `*.step.md`
+- [X] Commit hash: `0426eaa`
+- [ ] Push the updated comment-fix commit to
+  `feat/andrew/observer-dispatcher-canonical-baseline`
+
+### wait-human-check
+- [ ] Stop and wait for human check on the updated PR `#102` branch state
 
 ## Handoff / Gate Notes
 
@@ -160,4 +200,10 @@ approved_plan_input: plan/observer-dispatcher-canonical-baseline/observer-dispat
 - The topic-local implementation commit for `pr-comment` is `85a5826`.
 - Branch `feat/andrew/observer-dispatcher-canonical-baseline` has been pushed to
   `origin` and Ready PR `#102` is open against `dev`.
-- The workflow is now stopped at `wait-human-merge-or-feedback`.
+- Human provided PR comment feedback on Ready PR `#102`.
+- Independent Planner triage preserved several unresolved threads for reviewer
+  recheck instead of forcing contract-changing edits.
+- Independent Implementer applied the bounded direct-fix subset inside the
+  topic worktree after an initial workspace mismatch was corrected.
+- The workflow is now in `pr-comment-review-pr-comments-and-fix` at
+  `commit-by-topic`.

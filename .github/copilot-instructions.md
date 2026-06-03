@@ -32,7 +32,7 @@ Ownership model:
 - `agent-skill-reviewer` enforces it during review
 
 ## Always-on rules
-- Focus on GitHub Agent Skills only.
+- Focus on GitHub Agent Skills and bounded repo-defined workflow-agent artifacts only.
 - For governance and positioning questions, follow `AGENTS.md` and
   `docs/repo-positioning.md`.
 - Treat `skills/` as the primary canonical skill source for reusable skill

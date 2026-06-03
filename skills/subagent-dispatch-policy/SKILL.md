@@ -71,6 +71,52 @@ Do not use this skill when:
 - `reason`: short factual reason
 - `stop_condition`: `none` or exact blocker
 
+# Validation
+
+## Required Checks
+
+- `PASS`: the input is one bounded task slice, the Observer is in `INTAKE` or
+  `ROUTING`, real dispatch conditions are established, and the result is
+  exactly one allowed `next_role` or `stop`.
+- `BLOCKED`: stop when the available evidence cannot distinguish between more
+  than one allowed next role, when real dispatch cannot be established, or when
+  proceeding would require workflow binding, registry behavior, runtime
+  semantics, or concrete role-agent files.
+
+## Quality Checks (best effort)
+
+- `SOFT FAIL`: mark status as `INCOMPLETE` when the bounded slice is clear
+  enough to return `stop`, but the factual reason or blocker evidence is thin,
+  incomplete, or not crisply cited.
+- Under `SOFT FAIL`, still return the best bounded decision, list the missing
+  evidence explicitly, and avoid expanding the routing scope.
+
+# Failure Handling
+
+## Missing Context
+
+- If required dispatch evidence is missing but `stop` is still clearly the only
+  safe output, return incomplete output with `next_role: stop` and name the
+  missing inputs in `stop_condition`.
+- If missing context could reasonably change which allowed role should receive
+  the handoff, mark the result `BLOCKED` and stop instead of guessing.
+
+## Ambiguous Requirement
+
+- If the request blurs dispatch selection with context-building, verdict
+  routing, workflow reconstruction, or runtime binding, stop and state that the
+  request is outside this skill's boundary.
+- Do not guess between allowed roles when more than one reasonable
+  interpretation remains.
+
+## Execution Limitation
+
+- If the environment exposes only path-based targets, registry hints, or
+  launcher-specific names, return `stop` or `BLOCKED` with the limitation stated
+  explicitly.
+- Do not fabricate hidden role support, concrete agent ownership, or runtime
+  dispatch capability.
+
 # Boundaries
 
 - Do not build the context package.
