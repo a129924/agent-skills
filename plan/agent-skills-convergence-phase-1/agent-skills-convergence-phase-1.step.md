@@ -11,7 +11,7 @@ created: 2026-06-03
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] draft-plan-commit-by-topic
+- [X] draft-plan-commit-by-topic
 - [ ] review
 - [ ] final-gate
 - [ ] human-check
@@ -35,8 +35,8 @@ created: 2026-06-03
 - [X] Encode the 9-file Phase 1 report contract, stop rules, and subAgent evidence requirements in the topic plan
 
 ### draft-plan-commit-by-topic
-- [ ] Commit the draft planning artifacts for this topic before reviewer routing
-- [ ] Record the planning commit hash in this step artifact once the commit exists
+- [X] Commit the draft planning artifacts for this topic before reviewer routing
+- [X] Record the planning commit hash in this step artifact once the commit exists: `98638e8`
 
 ### review
 - [ ] Run independent plan review against the topic plan and workflow contract
@@ -58,6 +58,7 @@ created: 2026-06-03
   - Planner / final gate: readiness decision before human check
 - Reviewer routing starts only after the topic's draft planning artifacts are
   committed by topic.
+- Draft planning artifacts were committed on 2026-06-03 as `98638e8`.
 - Explorer evidence found no exact prior topic that already produces the full
   Phase 1 9-file report bundle.
 - Supporting `docs/migration/*.md` evidence is useful context, but it remains
