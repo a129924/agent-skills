@@ -1,6 +1,6 @@
 ---
 topic: plan-contract-authority-alignment
-status: human-review-ready
+status: approved
 created: 2026-06-04
 ---
 
@@ -14,7 +14,7 @@ created: 2026-06-04
 - [X] draft-plan-commit-by-topic
 - [X] review
 - [X] final-gate
-- [ ] human-check
+- [X] human-check
 
 ## Actionable Steps
 
@@ -50,8 +50,8 @@ created: 2026-06-04
 - [X] Confirm planning artifacts are ready for human check
 
 ### human-check
-- [ ] Wait for explicit human review before any creator implementation under this topic
-- [ ] Confirm no convergence, projection, or runtime work begins before human approval
+- [X] Wait for explicit human review before any creator implementation under this topic
+- [X] Confirm no convergence, projection, or runtime work begins before human approval
 
 ## Handoff / Gate Notes
 
@@ -80,3 +80,4 @@ created: 2026-06-04
 - Final gate first pass requested only current-truth sync for `step.md` and
   `summary.md`.
 - Focused final-gate rerun returned `READY_FOR_HUMAN_REVIEW`.
+- Human review approved the planning artifacts on 2026-06-04.

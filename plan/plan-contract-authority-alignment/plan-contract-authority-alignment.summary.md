@@ -6,7 +6,8 @@
 - draft planning artifacts are committed by topic
 - independent review is complete
 - final gate is complete
-- the topic is ready for human review
+- human review is complete
+- creator implementation may begin within the approved topic scope
 
 ## completed
 
@@ -19,17 +20,17 @@
 - independent plan review
 - review-driven planning fixes
 - planning final gate
+- human review approval
 
 ## not completed
 
-- human review / approval
-- any creator implementation for this topic
+- creator implementation for this topic
 
 ## required follow-up
 
-- stop for human review before any creator implementation
+- begin bounded creator implementation within the approved governance-only scope
 
 ## next handoff
 
-- `next actor`: human
-- `next step`: review the planning artifacts and approve or redirect before any creator implementation for this topic
+- `next actor`: creator
+- `next step`: implement `plan/topic-plan-contract.md` and the bounded `plan/agent-handoff-workflow.md` alignment defined by the topic plan
