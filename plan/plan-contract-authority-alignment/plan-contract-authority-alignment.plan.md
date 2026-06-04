@@ -165,14 +165,21 @@ Routing notes:
 | Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Repo-level workflow-phase contract updated only to align with the shared topic-plan contract |
 | Governance canonical source | `AGENTS.md` | Existing repo artifact | Read-only governance authority source for this topic |
 | Positioning contract | `docs/repo-positioning.md` | Existing repo artifact | Read-only positioning evidence confirming canonical and projection roles |
-| Planning skill evidence | `skills/plan-creator/**` | Existing repo artifact | Read-only evidence for current plan-authoring coupling and downstream consumer impact |
-| Planning skill evidence | `skills/plan-reviewer/**` | Existing repo artifact | Read-only evidence for current review-basis coupling and downstream consumer impact |
+| Planning skill evidence | `skills/plan-creator/SKILL.md` | Existing repo artifact | Read-only evidence for current plan-authoring authority expectations |
+| Planning skill evidence | `skills/plan-creator/reference.md` | Existing repo artifact | Read-only evidence for current plan-authoring review basis and fallback wording |
+| Planning skill evidence | `skills/plan-creator/checklist.md` | Existing repo artifact | Read-only evidence for current plan-authoring contract checks |
+| Planning skill evidence | `skills/plan-creator/templates/topic-plan-template.md` | Existing repo artifact | Read-only evidence for the current topic-plan template contract surface |
+| Planning skill evidence | `skills/plan-reviewer/SKILL.md` | Existing repo artifact | Read-only evidence for current plan-review routing and review-basis expectations |
+| Planning skill evidence | `skills/plan-reviewer/reference.md` | Existing repo artifact | Read-only evidence for current cross-skill review-basis dependency wording |
+| Planning skill evidence | `skills/plan-reviewer/checklist.md` | Existing repo artifact | Read-only evidence for current reviewer contract checks |
 
 Artifact path notes:
 
 - This topic does **not** modify `README.md`.
 - This topic does **not** modify `VERSION`.
 - This topic does **not** modify `.github/copilot-instructions.md`.
+- The listed `skills/plan-creator/*` and `skills/plan-reviewer/*` paths are
+  read-only evidence only and are not writable scope.
 - This topic does **not** modify `skills/**`, `.github/skills/**`,
   `.codex/skills/**`, `.github/agents/**`, or `.codex/agents/**`.
 - If later work requires editing any path outside this table, stop and repair

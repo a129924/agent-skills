@@ -11,7 +11,7 @@ created: 2026-06-04
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] draft-plan-commit-by-topic
+- [X] draft-plan-commit-by-topic
 - [ ] review
 - [ ] final-gate
 - [ ] human-check
