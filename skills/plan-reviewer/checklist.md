@@ -3,12 +3,12 @@
 Use this checklist when reviewing a repo-visible topic plan before later execution begins.
 
 - [ ] The plan path is `plan/<topic>/<topic>.plan.md`.
-- [ ] The review uses all four contract sources:
+- [ ] The review uses the shared contract sources:
   - [ ] `plan/agent-handoff-workflow.md`
-  - [ ] `.github/skills/plan-creator/reference.md`
-  - [ ] `.github/skills/plan-creator/checklist.md`
-  - [ ] `.github/skills/plan-creator/templates/topic-plan-template.md`
-- [ ] All workflow-required plan sections are present, using the canonical section list from `plan/agent-handoff-workflow.md` (case-insensitive title matching is acceptable):
+  - [ ] `plan/topic-plan-contract.md`
+  - [ ] local `reference.md`
+  - [ ] local `checklist.md`
+- [ ] All workflow-required plan sections are present, using the canonical section list from `plan/topic-plan-contract.md` (case-insensitive title matching is acceptable):
   - [ ] `Goal / outcome`
   - [ ] `Scope`
   - [ ] `Locked decisions`

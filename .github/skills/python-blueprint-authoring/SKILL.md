@@ -76,7 +76,7 @@ Do not use this skill when:
    - Summarize the repository purpose and baseline goals.
    - Do not hide missing structural decisions behind general prose.
 6. Write `## Required Skills` with exact current-library names and explicit roles.
-   - Keep each listed skill locatable as `.github/skills/<skill-name>/` in the active library.
+   - Keep each listed skill locatable as `skills/<skill-name>/` in the active library.
    - Preserve an optional marker only as `(Optional)` after the exact skill name when truly needed.
 7. Write `## Toolchain Expectation` and `## Structural Invariants` with concrete, executor-usable detail.
    - Name real tools, versions, package names, paths, and entrypoints.
@@ -150,7 +150,7 @@ Do not use this skill when:
 
 # Red Flags
 - the request mixes “create the first baseline” with “preserve and migrate these existing files”
-- a named required skill does not exist in `.github/skills/`
+- a named required skill does not exist in `skills/`
 - `Structural Invariants` contain only style words such as “clean”, “modern”, or “sensible”
 - acceptance prose appears before the `yaml [sensing-assertions]` block
 - the request tries to make `python-blueprint-authoring` choose execution-time behavior or modify the executor schema

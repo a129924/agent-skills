@@ -18,9 +18,7 @@ do_not_use_when:
 inputs:
   - "the target `plan/<topic>/<topic>.plan.md`"
   - "the current workflow contract from `plan/agent-handoff-workflow.md`"
-  - "`skills/plan-creator/reference.md`"
-  - "`skills/plan-creator/checklist.md`"
-  - "`skills/plan-creator/templates/topic-plan-template.md`"
+  - "the shared topic-plan contract from `plan/topic-plan-contract.md`"
   - "any contextual Copilot feedback, if it exists"
 outputs:
   - "exactly one machine-consumable JSON object with no trailing prose"
@@ -48,14 +46,12 @@ Do not use this skill when:
 # Inputs
 - the target `plan/<topic>/<topic>.plan.md`
 - the current workflow contract from `plan/agent-handoff-workflow.md`
-- `skills/plan-creator/reference.md`
-- `skills/plan-creator/checklist.md`
-- `skills/plan-creator/templates/topic-plan-template.md`
+- the shared topic-plan contract from `plan/topic-plan-contract.md`
 - any contextual Copilot feedback, if it exists
 
 # Process
 1. Confirm the task is topic-plan review, not plan authoring, skill review, publish routing, or workflow-spec editing.
-2. Read the target topic plan plus all four contract sources before judging the plan.
+2. Read the target topic plan plus the shared contract sources before judging the plan.
 3. Verify the topic plan path, required sections, canonical status model, artifact-path exactness, stable-library intent, reviewer handoff JSON shape, post-merge timing, and role boundaries.
 4. Treat placeholders such as `TBD`, `later`, or `follow normal process` as contract failures when the workflow requires explicit decisions.
 5. Treat missing sections, invalid transitions, vague artifact paths, undeclared stable intent, wrong timing, non-JSON reviewer handoff, and role-boundary confusion as blocking issues.
@@ -80,7 +76,7 @@ Do not use this skill when:
 - `copilot_feedback_triage.SKIP`: explicitly inapplicable feedback items; each item contains `comment` and `why`
 
 # Verification
-- confirm the review basis explicitly includes all four contract sources
+- confirm the review basis explicitly includes `plan/agent-handoff-workflow.md` and `plan/topic-plan-contract.md`
 - confirm required sections are present and named correctly
 - confirm transitions stay canonical and execution timing is coherent
 - confirm `Artifact Paths` are exact, bounded, and repo-visible
@@ -110,7 +106,7 @@ Do not use this skill when:
 # Validation
 
 ## Required Checks
-- PASS: all four contract sources are readable before review begins
+- PASS: the shared contract sources are readable before review begins
 - PASS: the target plan file exists at the expected path
 - BLOCKED: the plan file cannot be read or does not exist — return `needs-rework` in the fixed JSON schema with the missing file recorded as a blocking issue
 
@@ -129,7 +125,7 @@ Do not use this skill when:
 # Failure Handling
 
 ## Missing Context
-- BLOCKED — if any of the four contract sources cannot be read, still return the fixed JSON verdict schema with `verdict: "needs-rework"` and a `blocking_issues` entry for each missing source
+- BLOCKED — if `plan/agent-handoff-workflow.md` or `plan/topic-plan-contract.md` cannot be read, stop before issuing any verdict
 - BLOCKED — if the target plan path cannot be resolved, still return the fixed JSON verdict schema with `verdict: "needs-rework"` and a `blocking_issues` entry describing the unresolved path; do not guess or infer a path
 
 ## Ambiguous Requirement
@@ -153,5 +149,6 @@ Omit this section when the review is performed as a standalone action.
 
 # Local references
 - `reference.md`: stable review basis, severity rules, and workflow-position guidance for topic-plan review
+- `plan/topic-plan-contract.md`: shared repo-level authority for required topic-plan sections, fallback behavior, and contract-level blocking semantics
 - `examples.md`: approved and needs-rework plan-review scenarios, including stable and non-stable cases
 - `checklist.md`: repeatable contract checks for this higher-risk planning gate

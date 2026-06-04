@@ -58,8 +58,8 @@ in different contexts.
 ## Source of truth
 - `AGENTS.md` is the governance canonical source.
 - This file is the authoritative repo-level workflow contract.
-- `plan/topic-plan-contract.md` is the authoritative repo-level topic-plan
-  contract surface.
+- `plan/topic-plan-contract.md` is the shared repo-level topic-plan contract
+  surface for required sections, fallback behavior, and contract review basis.
 - Repo-visible topic plans are the authoritative execution contract for a
   single topic within those repo-level constraints.
 - Skill-local instructions are authoritative only within their own skill
@@ -105,7 +105,7 @@ in different contexts.
 | Artifact | Path | Purpose |
 | --- | --- | --- |
 | Repo workflow spec | `plan/agent-handoff-workflow.md` | Shared process contract |
-| Shared topic-plan contract | `plan/topic-plan-contract.md` | Repo-level topic-plan contract authority surface |
+| Shared topic-plan contract | `plan/topic-plan-contract.md` | Repo-level topic-plan authority for required sections, fallback behavior, and contract review basis |
 | Topic handoff plan | `plan/<topic>/<topic>.plan.md` | Repo-visible execution contract for one topic |
 | Topic progression artifact | `plan/<topic>/<topic>.step.md` when required, or another exact repo-visible progression artifact when explicitly listed | Current-truth workflow progression status for the topic |
 | Topic close summary artifact | `plan/<topic>/<topic>.summary.md` or another exact repo-visible close artifact when explicitly listed | Current-truth close outcome and handoff semantics for the topic |
@@ -122,6 +122,9 @@ required section names, reviewer handoff shape, and topic-plan authority
 ordering.
 
 Every topic handoff plan must satisfy that shared contract.
+
+The required section meanings, fallback behavior, and contract-level review
+basis are shared in `plan/topic-plan-contract.md`.
 
 Additional contract rules:
 - `Artifact paths` is an executable contract, not an informational appendix.

@@ -4,14 +4,13 @@ Use this file to keep repo-visible topic-plan review aligned with the repository
 
 ## Review basis
 
-Review topic plans against all four contract sources together:
+Review topic plans against the shared contract sources together:
 
 1. `plan/agent-handoff-workflow.md`
-2. `.github/skills/plan-creator/reference.md`
-3. `.github/skills/plan-creator/checklist.md`
-4. `.github/skills/plan-creator/templates/topic-plan-template.md`
+2. `plan/topic-plan-contract.md`
+3. this skill's local `reference.md`, `checklist.md`, and `examples.md`
 
-Do not treat any one source as sufficient by itself. The workflow defines the canonical execution contract, while `plan-creator` materials define the expected plan shape and the common failure signals.
+Do not treat any one source as sufficient by itself. The workflow defines the canonical execution contract, `plan/topic-plan-contract.md` defines the canonical topic-plan section and fallback contract, and this skill's local materials define review heuristics and common failure signals.
 
 When a topic uses correction / delta artifacts, also verify that the plan keeps the workflow body slim, lists exact parent/correction paths, makes parent-sync closure explicit, keeps review-log usage conditional on routing-controlling feedback, and leaves the minimum correction artifact contract in reference / examples instead of the workflow body.
 

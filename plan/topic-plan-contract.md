@@ -5,6 +5,9 @@
 Define the shared repo-level contract for topic-plan authority in this
 repository.
 
+This file is the shared repo-local authority for topic-plan structure,
+review basis, fallback behavior, and contract-level blocking semantics.
+
 This document governs topic-plan contract semantics. It does not replace:
 
 - `AGENTS.md` as the governance canonical source
@@ -17,8 +20,8 @@ This document governs topic-plan contract semantics. It does not replace:
   contract semantics.
 - This document defines the required section contract for
   `plan/<topic>/<topic>.plan.md`.
-- This document defines repo-level reviewer handoff expectations for topic
-  plans.
+- This document defines repo-level reviewer handoff expectations and fallback
+  review basis for topic plans.
 - This document does not define workflow phases, stop points, release routing,
   or PR-loop behavior.
 - This document does not authorize convergence, projection, runtime
@@ -55,7 +58,7 @@ Interpretation rules:
 
 ## Required Topic-Plan Sections
 
-Every `plan/<topic>/<topic>.plan.md` must include these sections:
+Every repo-visible topic plan must include these sections:
 
 1. `Goal / Outcome`
 2. `Scope`
@@ -79,13 +82,41 @@ Section rules:
 - Topics that do not affect stable-library surfaces must state that intent
   explicitly instead of leaving it implicit.
 
+## Shared Review Basis
+
+Both planning skills must evaluate topic plans against this shared basis:
+
+1. `plan/agent-handoff-workflow.md`
+2. `plan/topic-plan-contract.md`
+3. the local skill's own examples, checklist, template, and references
+
+Local skill files may add implementation guidance or review heuristics, but
+they must not redefine required sections, role ownership, fallback authority,
+or blocking semantics away from this file.
+
+## Artifact Path Rules
+
+`Artifact Paths` is an executable contract and must use exact repo-visible
+paths with owner and role.
+
+Each listed artifact must include:
+
+- exact repo-visible path
+- owner
+- role
+
+Do not use vague labels such as `docs`, `skill folder`, `maybe version files`,
+or other non-executable path descriptions.
+
+If execution needs files outside the listed paths, repair the topic plan before
+continuing.
+
+If a topic uses correction artifacts, each parent artifact, correction
+artifact, and any routing-controlling `review-log` or equivalent handoff path
+must be listed explicitly.
+
 ## Topic-Plan Contract Rules
 
-- `Artifact Paths` is an executable contract and must use exact repo-visible
-  paths with owner and role.
-- If a topic uses correction artifacts, each parent artifact, correction
-  artifact, and any routing-controlling `review-log` or equivalent handoff
-  path must be listed explicitly.
 - `Implementation Steps` stay creator-owned; reviewer verdict logging,
   reviewer acceptance work, and Main Agent routing work do not belong there.
 - `Reviewer Handoff` must be one machine-consumable JSON object.
@@ -118,6 +149,49 @@ Rules:
   present.
 - No prose may wrap or trail the final JSON reviewer verdict.
 
+## Stable-Library Contract
+
+If the topic affects stable-library surfaces, the plan must state:
+
+- whether `README.md` changes
+- whether `VERSION` changes
+- when those changes occur
+- whether post-merge release or tagging work exists
+
+Do not defer these decisions with placeholders such as `TBD`, `later`, or
+`follow normal process`.
+
+## Fallback Rules
+
+If the local topic-plan template is absent:
+
+- `plan-creator` must fall back to the required section list in this file
+- `plan-reviewer` must review against the required section list in this file
+
+Neither skill may invent a new topic-plan shape when the template is absent.
+
+## Blocking Semantics
+
+Treat these as contract-breaking issues:
+
+- missing required sections
+- non-canonical or invalid status transitions
+- vague or drifting `Artifact Paths`
+- undeclared or mixed stable-library intent
+- non-JSON reviewer handoff
+- wrong post-merge or release timing
+- mixed role ownership
+- placeholders where explicit contract is required
+
+`plan-creator` must stop and ask when required planning inputs are missing or
+would require guessing.
+
+`plan-reviewer` must return `needs-rework` when any contract-breaking issue is
+found in an otherwise reviewable plan.
+
+If the plan file or required shared contract sources cannot be read, stop and
+record that the review could not proceed on valid contract grounds.
+
 ## Boundaries
 
 - This document does not rewrite `skills/plan-creator/**` or
@@ -130,3 +204,10 @@ Rules:
 - Convergence, projection, runtime adaptation, `python-blueprint-review`
   absorption, and generic `copilot-instructions-init` convergence remain
   deferred to later bounded topics.
+
+## Authority Boundaries
+
+- Keep this contract repo-local.
+- Do not externalize it to `~/.` or cross-repo shared storage in this topic.
+- Do not let compatibility surfaces redefine this contract.
+- Do not infer authority from `.github/skills/` or `.codex/skills/` presence.

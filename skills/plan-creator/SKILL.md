@@ -24,6 +24,7 @@ inputs:
   - optional analysis-layer artifacts at `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md`
   - any explicit human `override` instruction if chat-time guidance should outrank analysis artifacts
   - the current workflow contract from `plan/agent-handoff-workflow.md`
+  - the shared topic-plan contract from `plan/topic-plan-contract.md`
 outputs:
   - a repo-visible `plan/<topic>/<topic>.plan.md`
   - explicit scope, boundaries, locked decisions, and analysis-layer routing for the topic
@@ -58,10 +59,11 @@ Do not use this skill when:
 - optional analysis-layer artifacts at `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md`
 - any explicit human `override` instruction if chat-time guidance should outrank analysis artifacts
 - the current workflow contract from `plan/agent-handoff-workflow.md`
+- the shared topic-plan contract from `plan/topic-plan-contract.md`
 
 # Process
 1. Confirm the task is really topic-plan authoring, not creator drafting, review, publish, or release execution.
-2. Read the current workflow contract, then start from `templates/topic-plan-template.md` instead of drafting the plan from scratch.
+2. Read the current workflow contract and the shared topic-plan contract, then start from `templates/topic-plan-template.md` instead of drafting the plan from scratch.
 3. Inspect `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md` if either exists before deciding the plan scope.
 4. Route analysis-layer priority before drafting:
    - if both files exist, enter strict mode: treat `analysis/<topic>/technical-spec.md` as the execution-facing source of truth, use `analysis/<topic>/requirements.md` as the business-intent guardrail, and map the output plan 100% to the technical spec instead of inventing alternative work from chat context
@@ -95,11 +97,12 @@ Do not use this skill when:
 ## Required Checks
 - PASS: topic name, outcome, scope, and artifact paths are all provided
 - PASS: the workflow contract at `plan/agent-handoff-workflow.md` is readable
+- PASS: the shared topic-plan contract at `plan/topic-plan-contract.md` is readable
 - SOFT FAIL: analysis-layer artifacts are missing or incomplete — emit an explicit semantic warning naming what is absent and continue with incomplete-layer routing
 - BLOCKED: scope, artifact paths, or stable-library timing cannot be determined without guessing — stop and ask before drafting
 
 ## Quality Checks
-- all required topic-plan sections are present in canonical order (see `references/required-section-meaning.md`)
+- all required topic-plan sections are present in canonical order and match `plan/topic-plan-contract.md`
 - current status and allowed transitions are explicit and canonical
 - `Artifact Paths` are exact, bounded, and role-labeled (see `references/artifact-path-rule.md`)
 - reviewer handoff is a single machine-consumable JSON object
@@ -138,13 +141,13 @@ Do not use this skill when:
 - Do not let absent analysis files fail silently; warn explicitly.
 - Do not let casual chat instructions override analysis artifacts without an explicit human `override`.
 - Do not generate a generic project-management plan for another repository.
-- `references/required-section-meaning.md` is the local fallback section contract when the topic-plan template is absent.
+- `plan/topic-plan-contract.md` is the shared repo-level fallback contract when the topic-plan template is absent.
 
 # Failure Handling
 
 ## Missing Context
 - BLOCKED — if the topic name, outcome, or scope is absent, stop and ask before drafting
-- BLOCKED — if the workflow contract at `plan/agent-handoff-workflow.md` cannot be read, stop before drafting
+- BLOCKED — if the workflow contract at `plan/agent-handoff-workflow.md` or the shared topic-plan contract at `plan/topic-plan-contract.md` cannot be read, stop before drafting
 
 ## Ambiguous Requirement
 - if stable-library timing is unclear, stop and ask rather than guessing; do not fill with `TBD` or `later`
@@ -152,7 +155,7 @@ Do not use this skill when:
 - if analysis artifacts conflict with chat-time instructions and no explicit human `override` is present, stop and require the human to choose before continuing
 
 ## Execution Limitation
-- if the topic-plan template is absent, fall back to the section contract in `references/required-section-meaning.md` rather than inventing a new shape
+- if the topic-plan template is absent, fall back to the required section list in `plan/topic-plan-contract.md` rather than inventing a new shape
 - if a human `override` instruction is ambiguous about which analysis file it overrides, ask for clarification before discarding analysis content
 
 # Workflow State Contract
@@ -166,6 +169,7 @@ Omit this section when the plan is authored outside a multi-agent handoff flow.
 
 # Local references
 - `reference.md`: overview of stable authoring rules with pointers to each topic in `references/`
+- `plan/topic-plan-contract.md`: shared repo-level authority for required topic-plan sections, fallback behavior, and contract-level blocking semantics
 - `references/required-section-meaning.md`: what each mandatory topic-plan section means and must contain
 - `references/stable-library-rule.md`: when and how to declare stable-library intent, metadata, release timing, and VERSION/README decisions
 - `references/artifact-path-rule.md`: how to declare exact, role-labeled, executable artifact paths
