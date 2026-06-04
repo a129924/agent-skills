@@ -7,16 +7,16 @@ Use these examples after `SKILL.md` has already narrowed the task to repository 
 ### Non-stable skill topic
 ```md
 # Example topic intent
-- create `.github/skills/cache-key-auditor/`
+- create `skills/cache-key-auditor/`
 - stop at `review-ready`
 
 ## Artifact Paths
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/cache-key-auditor/cache-key-auditor.plan.md` | Planning actor | Repo-visible execution contract for this topic |
-| Skill contract | `.github/skills/cache-key-auditor/SKILL.md` | Creator | Main skill instructions under topic scope |
-| Skill reference | `.github/skills/cache-key-auditor/reference.md` | Creator | Local supporting guidance for the drafted skill |
-| Skill examples | `.github/skills/cache-key-auditor/examples.md` | Creator | Usage examples for the drafted skill |
+| Skill contract | `skills/cache-key-auditor/SKILL.md` | Creator | Main skill instructions under topic scope |
+| Skill reference | `skills/cache-key-auditor/reference.md` | Creator | Local supporting guidance for the drafted skill |
+| Skill examples | `skills/cache-key-auditor/examples.md` | Creator | Usage examples for the drafted skill |
 
 Artifact path notes:
 - This topic does **not** modify `README.md`, `VERSION`, or release notes.
@@ -45,7 +45,7 @@ Artifact path notes:
 ## Scope
 - **In scope**:
   - refresh `plan/agent-handoff-workflow.md`
-  - refresh `.github/skills/plan-reviewer/checklist.md`
+  - refresh `skills/plan-reviewer/checklist.md`
 
 ## Locked Decisions
 - The workflow body stays slim and keeps only correction lifecycle / routing rules.
@@ -58,7 +58,7 @@ Artifact path notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/correction-refresh/correction-refresh.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Slim lifecycle / routing contract |
-| Reviewer checklist | `.github/skills/plan-reviewer/checklist.md` | Creator | Review gate for correction-lifecycle contract topics |
+| Reviewer checklist | `skills/plan-reviewer/checklist.md` | Creator | Review gate for correction-lifecycle contract topics |
 
 Artifact path notes:
 - This topic does **not** modify `README.md`, `VERSION`, or `.github/copilot-instructions.md`.
@@ -108,13 +108,13 @@ Artifact path notes:
 ```md
 ## Scope
 - **In scope**:
-  - clarify one misleading sentence in `.github/skills/foo/SKILL.md`
+  - clarify one misleading sentence in `skills/foo/SKILL.md`
 
 ## Artifact Paths
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/foo-wording-fix/foo-wording-fix.plan.md` | Planning actor | Repo-visible execution contract for this topic |
-| Skill contract | `.github/skills/foo/SKILL.md` | Creator | Single wording fix target |
+| Skill contract | `skills/foo/SKILL.md` | Creator | Single wording fix target |
 ```
 
 - Good because the plan stays small instead of pretending the topic is broader.
@@ -169,7 +169,7 @@ Artifact path notes:
 ```md
 ## Scope
 - refresh `plan/agent-handoff-workflow.md`
-- create `.github/skills/correction-delta-lifecycle/`
+- create `skills/correction-delta-lifecycle/`
 
 ## Locked Decisions
 - Extract a standalone correction skill now so future topics must use it immediately.

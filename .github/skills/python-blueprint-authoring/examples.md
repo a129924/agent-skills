@@ -78,7 +78,7 @@ Detailed examples for `python-blueprint-authoring`.
 
 **Correct behavior**
 - stop authoring before producing a review-ready blueprint
-- report that `.github/skills/python-linting-baseline/` is not present in the active library
+- report that `skills/python-linting-baseline/` is not present in the active library
 - ask the human to choose an existing exact skill name or install/add the missing skill first
 - do not silently rewrite the line to a “close enough” skill such as `python-testing-pytest`
 
