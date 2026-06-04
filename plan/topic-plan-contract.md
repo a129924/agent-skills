@@ -28,12 +28,12 @@ Every repo-visible topic plan must include these sections exactly:
 7. `Implementation Steps`
 8. `Validation / Acceptance Checks`
 9. `Reviewer Handoff`
-10. `Post-Merge / Release Actions`
+10. `Post-merge / release actions`
 11. `Open Questions / Unresolved Items`
 
 If stable-library or release behavior applies, the plan must also include:
 
-- `Stable Library Metadata`
+- `Stable library metadata`
 
 If stable-library or release behavior does not apply, the plan must make that
 absence explicit rather than leaving it implied.
