@@ -64,6 +64,12 @@ agents/                           # canonical repo-defined workflow agent artifa
 - Versions `0.59.0` through `0.69.0` merged several migration-planning and
   bounded-remediation topics back into `dev`, making those artifacts part of
   the main repository history.
+- As of version `0.71.0`, PR #103 and PR #104 merged the
+  `agent-skills-convergence-phase-1` reporting bundle and the
+  `plan-contract-authority-alignment` governance alignment into `dev`,
+  adding the phase-1 / phase-3 convergence evidence set under `docs/` and
+  `plan/` while establishing `plan/topic-plan-contract.md` as the shared
+  repo-level topic-plan contract surface.
 - As of version `0.70.0`, PR #102 merged the
   `observer-dispatcher-canonical-baseline` topic into `dev`, adding the
   bounded `agents/observer-dispatcher.agent.md` contract and three supporting
