@@ -38,8 +38,8 @@ created: 2026-06-04
 - [X] Encode exact upstream evidence paths, authority ordering, and deferred-work boundaries in the topic plan
 
 ### draft-plan-commit-by-topic
-- [ ] Commit the draft planning artifacts for this topic before reviewer routing
-- [ ] Record the planning commit hash in this step artifact once the commit exists
+- [X] Commit the draft planning artifacts for this topic before reviewer routing
+- [X] Record the planning commit hash in this step artifact once the commit exists: `e461b90`
 
 ### review
 - [ ] Run independent plan review against the topic plan and workflow contract
@@ -72,3 +72,4 @@ created: 2026-06-04
   - generic convergence for `copilot-instructions-init`
 - Reviewer routing starts only after the topic's draft planning artifacts are
   committed by topic.
+- Draft planning artifacts were committed on 2026-06-04 as `e461b90`.

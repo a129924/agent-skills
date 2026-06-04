@@ -3,7 +3,8 @@
 ## current state
 
 - worktree bootstrap, analysis freeze, and initial topic-plan authoring are complete
-- the topic is waiting for draft-plan commit, independent review, and final gate
+- draft planning artifacts are committed by topic
+- the topic is waiting for independent review and final gate
 
 ## completed
 
@@ -16,7 +17,6 @@
 
 ## not completed
 
-- draft-plan commit by topic
 - independent plan review
 - planning final gate
 - human review / approval
@@ -24,7 +24,6 @@
 
 ## required follow-up
 
-- commit the draft planning artifacts for this topic
 - route the topic plan through independent review
 - run final gate after review findings are addressed
 - stop for human review before any creator implementation
@@ -32,4 +31,4 @@
 ## next handoff
 
 - `next actor`: main-agent
-- `next step`: commit the draft planning artifacts and begin independent plan review
+- `next step`: begin independent plan review for the committed planning artifacts
