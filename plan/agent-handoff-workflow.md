@@ -9,16 +9,22 @@ in different contexts.
 - This document defines the shared process for repo-visible handoff artifacts.
 - It is platform-agnostic at the process level.
 - It applies to both VS Code and CLI usage.
+- It does not replace the shared topic-plan contract in
+  `plan/topic-plan-contract.md`.
 - It does not replace task-specific skill instructions inside
   `.github/skills/<skill-name>/`.
 
 ## Workflow layering
 - This document defines the repo-level phase semantics, ownership, stop points,
   and handoff rules.
+- `plan/topic-plan-contract.md` defines repo-level topic-plan contract
+  semantics, required plan sections, and reviewer handoff shape.
 - Topic plans define execution contract for one topic within those repo-level
-  semantics.
+  governance and workflow constraints.
 - Skill-local instructions may define task-specific execution detail, but they
-  must not contradict repo-level stop points, ownership, or status transitions.
+  are consumer guidance only for topic-plan contract questions and must not
+  contradict repo-level stop points, ownership, status transitions, or the
+  shared topic-plan contract.
 - Hidden chat context must never override repo-visible workflow artifacts.
 
 ## Core principles
@@ -50,13 +56,14 @@ in different contexts.
   markers.
 
 ## Source of truth
-- Repo-visible topic plans are the authoritative execution contract for a single
-  topic.
+- `AGENTS.md` is the governance canonical source.
 - This file is the authoritative repo-level workflow contract.
-- `plan/topic-plan-contract.md` is the shared repo-level topic-plan section,
-  fallback, and review-basis contract.
+- `plan/topic-plan-contract.md` is the shared repo-level topic-plan contract
+  surface for required sections, fallback behavior, and contract review basis.
+- Repo-visible topic plans are the authoritative execution contract for a
+  single topic within those repo-level constraints.
 - Skill-local instructions are authoritative only within their own skill
-  boundary.
+  boundary and do not own repo-level topic-plan contract authority.
 - Parent artifacts for a topic remain the current truth:
   - the locked topic plan
   - any topic-owned parent artifacts such as `*.spec.md` that are explicitly
@@ -98,7 +105,7 @@ in different contexts.
 | Artifact | Path | Purpose |
 | --- | --- | --- |
 | Repo workflow spec | `plan/agent-handoff-workflow.md` | Shared process contract |
-| Shared topic-plan contract | `plan/topic-plan-contract.md` | Repo-level authority for required topic-plan sections, fallback behavior, and contract review basis |
+| Shared topic-plan contract | `plan/topic-plan-contract.md` | Repo-level topic-plan authority for required sections, fallback behavior, and contract review basis |
 | Topic handoff plan | `plan/<topic>/<topic>.plan.md` | Repo-visible execution contract for one topic |
 | Topic progression artifact | `plan/<topic>/<topic>.step.md` when required, or another exact repo-visible progression artifact when explicitly listed | Current-truth workflow progression status for the topic |
 | Topic close summary artifact | `plan/<topic>/<topic>.summary.md` or another exact repo-visible close artifact when explicitly listed | Current-truth close outcome and handoff semantics for the topic |
@@ -110,18 +117,11 @@ in different contexts.
 | Repo version baseline | `VERSION` | Canonical SemVer version for the repository |
 
 ## Topic plan contract
-Every topic handoff plan must include these fixed sections:
-- `Goal / outcome`
-- `Scope`
-- `Locked decisions`
-- `Boundaries / exclusions`
-- `Status / allowed transitions`
-- `Artifact paths`
-- `Implementation steps`
-- `Validation / acceptance checks`
-- `Reviewer handoff`
-- `Post-merge / release actions`
-- `Open questions / unresolved items`
+`plan/topic-plan-contract.md` owns the repo-level topic-plan contract for
+required section names, reviewer handoff shape, and topic-plan authority
+ordering.
+
+Every topic handoff plan must satisfy that shared contract.
 
 The required section meanings, fallback behavior, and contract-level review
 basis are shared in `plan/topic-plan-contract.md`.

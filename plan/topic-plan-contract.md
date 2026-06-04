@@ -1,23 +1,64 @@
 # Topic Plan Contract
 
-`contract_version`: `1.0`
+## Purpose
+
+Define the shared repo-level contract for topic-plan authority in this
+repository.
 
 This file is the shared repo-local authority for topic-plan structure,
 review basis, fallback behavior, and contract-level blocking semantics.
 
-It complements `plan/agent-handoff-workflow.md`:
+This document governs topic-plan contract semantics. It does not replace:
 
-- `plan/agent-handoff-workflow.md` defines repo-level workflow states,
-  ownership, stop points, and artifact semantics.
-- this file defines the canonical topic-plan section contract and the contract
-  rules that both `plan-creator` and `plan-reviewer` must apply.
+- `AGENTS.md` as the governance canonical source
+- `plan/agent-handoff-workflow.md` as the repo-level workflow-phase contract
+- `plan/<topic>/<topic>.plan.md` as the topic-specific execution contract
 
-Neither `plan-creator` nor `plan-reviewer` may treat the other skill as a
-required contract source.
+## Scope
 
-## Required Sections
+- This document defines the repo-level authority ordering for topic-plan
+  contract semantics.
+- This document defines the required section contract for
+  `plan/<topic>/<topic>.plan.md`.
+- This document defines repo-level reviewer handoff expectations and fallback
+  review basis for topic plans.
+- This document does not define workflow phases, stop points, release routing,
+  or PR-loop behavior.
+- This document does not authorize convergence, projection, runtime
+  adaptation, or skill-surface migration work.
 
-Every repo-visible topic plan must include these sections exactly:
+## Contract Version
+
+- `contract_version`: `1.0`
+- Versioning is human-facing and repo-local.
+- Future strict verification may add `contract_hash`, but `contract_version`
+  remains the primary contract-language field for this repository topic-plan
+  surface.
+
+## Authority Ordering
+
+When topic-plan authority questions arise, use this order:
+
+1. `AGENTS.md`
+2. `plan/agent-handoff-workflow.md`
+3. `plan/topic-plan-contract.md`
+4. `plan/<topic>/<topic>.plan.md`
+5. `skills/plan-creator/**` and `skills/plan-reviewer/**`
+
+Interpretation rules:
+
+- `AGENTS.md` governs repo-level governance and source-of-truth boundaries.
+- `plan/agent-handoff-workflow.md` governs repo-level workflow phases, stop
+  points, roles, and status transitions.
+- This document governs repo-level topic-plan contract semantics.
+- Each topic plan governs one topic's bounded execution contract inside the
+  repo-level governance and workflow constraints above.
+- `skills/plan-creator/**` and `skills/plan-reviewer/**` are consumer guidance
+  and evidence surfaces only; they do not own repo-level contract authority.
+
+## Required Topic-Plan Sections
+
+Every repo-visible topic plan must include these sections:
 
 1. `Goal / Outcome`
 2. `Scope`
@@ -31,12 +72,15 @@ Every repo-visible topic plan must include these sections exactly:
 10. `Post-merge / release actions`
 11. `Open Questions / Unresolved Items`
 
-If stable-library or release behavior applies, the plan must also include:
+Section rules:
 
-- `Stable library metadata`
-
-If stable-library or release behavior does not apply, the plan must make that
-absence explicit rather than leaving it implied.
+- Section names must stay canonical.
+- A topic plan may add bounded topic-specific sections only when they do not
+  contradict the required section set above.
+- Topics that affect stable-library surfaces must add `Stable library metadata`
+  and define timing explicitly.
+- Topics that do not affect stable-library surfaces must state that intent
+  explicitly instead of leaving it implicit.
 
 ## Shared Review Basis
 
@@ -52,7 +96,8 @@ or blocking semantics away from this file.
 
 ## Artifact Path Rules
 
-`Artifact Paths` is an executable contract.
+`Artifact Paths` is an executable contract and must use exact repo-visible
+paths with owner and role.
 
 Each listed artifact must include:
 
@@ -66,17 +111,43 @@ or other non-executable path descriptions.
 If execution needs files outside the listed paths, repair the topic plan before
 continuing.
 
+If a topic uses correction artifacts, each parent artifact, correction
+artifact, and any routing-controlling `review-log` or equivalent handoff path
+must be listed explicitly.
+
+## Topic-Plan Contract Rules
+
+- `Implementation Steps` stay creator-owned; reviewer verdict logging,
+  reviewer acceptance work, and Main Agent routing work do not belong there.
+- `Reviewer Handoff` must be one machine-consumable JSON object.
+- `Post-merge / release actions` must match the topic's actual stable-library
+  and release timing.
+- Unsafe placeholders such as `TBD`, `later`, or `follow normal process` are
+  contract failures when explicit workflow decisions are required.
+
 ## Reviewer Handoff Contract
 
-`Reviewer Handoff` must be a single machine-consumable JSON object.
+The repo-level reviewer handoff contract for topic-plan review is:
 
-At minimum it must support:
+```json
+{
+  "verdict": "approved|needs-rework",
+  "blocking_issues": [],
+  "copilot_feedback_triage": {
+    "ADDRESS": [],
+    "DISCUSS": [],
+    "SKIP": []
+  }
+}
+```
 
-- reviewer decision routing
-- blocking issues
-- follow-up ownership
+Rules:
 
-Do not replace the JSON object with prose notes, tables, or mixed formats.
+- The delivered reviewer handoff must be exactly one JSON object.
+- `blocking_issues` is reserved for true contract-breaking problems.
+- `copilot_feedback_triage` may be empty, but its three arrays must still be
+  present.
+- No prose may wrap or trail the final JSON reviewer verdict.
 
 ## Stable-Library Contract
 
@@ -120,6 +191,19 @@ found in an otherwise reviewable plan.
 
 If the plan file or required shared contract sources cannot be read, stop and
 record that the review could not proceed on valid contract grounds.
+
+## Boundaries
+
+- This document does not rewrite `skills/plan-creator/**` or
+  `skills/plan-reviewer/**`.
+- This document does not authorize edits under `skills/**`,
+  `.github/skills/**`, `.codex/skills/**`, `.github/agents/**`, or
+  `.codex/agents/**`.
+- This document does not treat accepted Phase 1 planning inputs as approved
+  implementation spec.
+- Convergence, projection, runtime adaptation, `python-blueprint-review`
+  absorption, and generic `copilot-instructions-init` convergence remain
+  deferred to later bounded topics.
 
 ## Authority Boundaries
 
