@@ -63,3 +63,77 @@
   scope defined by the topic plan.
 - No approval was given for convergence, projection, runtime adaptation, or any
   skill-surface modification.
+
+## Implementation Review Round 1
+
+- **Reviewer**: `focused reviewer`
+- **Date**: `2026-06-04`
+- **Verdict**: `NEEDS_REWORK`
+- **Scope**: focused implementation review of the approved repo-level contract
+  alignment surfaces only
+
+## Blocking Findings
+
+1. `M1`: `plan/topic-plan-contract.md` introduced an unauthorized repo-level
+   `Analysis-Layer Routing` section. Repo-level topic-plan contract authority
+   may reference frozen analysis artifacts through the topic plan, but it must
+   not promote topic-local analysis routing into a shared repo-level contract
+   section.
+
+## Required Fixes
+
+- Remove the unauthorized repo-level `Analysis-Layer Routing` section from
+  `plan/topic-plan-contract.md`.
+- Keep implementation bounded to `plan/topic-plan-contract.md` and the already
+  approved alignment edits in `plan/agent-handoff-workflow.md`.
+- Return the updated repo-visible truth for a focused blocker re-check after
+  the removal.
+
+## Notes
+
+- This focused implementation review is separate from the earlier planning
+  review rounds above.
+- No additional blocker beyond `M1` was recorded.
+
+## Focused Implementation Re-check
+
+- **Reviewer**: `focused reviewer`
+- **Date**: `2026-06-04`
+- **Verdict**: `PASS`
+- **Scope**: focused blocker re-check for implementation review `M1`
+
+## Resolved Findings
+
+1. Creator removed the unauthorized repo-level `Analysis-Layer Routing`
+   section from `plan/topic-plan-contract.md`.
+2. Focused implementation re-check returned effectively
+   `pass_blockers: none`.
+
+## Notes
+
+- This re-check resolved `M1` and did not reopen the earlier planning-review
+  findings.
+- Current repo-visible next step is a final-gate rerun against the updated
+  truth artifacts.
+
+## Post-Implementation Final-Gate Rerun
+
+- **Reviewer**: `Final-Gate-Truth-Sync`
+- **Date**: `2026-06-04`
+- **Verdict**: `PASS`
+- **Scope**: post-implementation final-gate rerun of the updated repo-visible
+  truth artifacts only
+
+## Resolved Findings
+
+1. Post-implementation final-gate rerun found no remaining blockers after
+   focused implementation re-check resolved `M1`.
+2. Updated repo-visible truth remains bounded to the approved contract-alignment
+   surfaces and is effectively ready for the next human review gate.
+
+## Notes
+
+- Immediate operational next step after this truth sync is commit-by-topic for
+  the updated plan artifacts.
+- This rerun record does not claim merge, publish, or post-implementation human
+  review completion.
