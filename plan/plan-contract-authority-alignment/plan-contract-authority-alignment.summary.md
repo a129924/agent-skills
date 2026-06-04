@@ -22,7 +22,6 @@
 
 ## not completed
 
-- planning final gate
 - human review / approval
 - any creator implementation for this topic
 
@@ -32,5 +31,5 @@
 
 ## next handoff
 
-- `next actor`: main-agent
-- `next step`: stop for human review before any creator implementation for this topic
+- `next actor`: human
+- `next step`: review the planning artifacts and approve or redirect before any creator implementation for this topic
