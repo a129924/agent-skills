@@ -53,6 +53,13 @@ created: 2026-06-04
 - [X] Wait for explicit human review before any creator implementation under this topic
 - [X] Confirm no convergence, projection, or runtime work begins before human approval
 
+## Implementation Steps
+
+- [X] Apply the approved repo-level contract alignment implementation in `plan/topic-plan-contract.md`
+- [X] Apply the bounded companion alignment update in `plan/agent-handoff-workflow.md`
+- [X] Remove the unauthorized repo-level `Analysis-Layer Routing` section after focused implementation review blocker `M1`
+- [X] Re-run focused implementation review and post-implementation final gate on the updated repo-visible implementation truth
+
 ## Handoff / Gate Notes
 
 - This topic bootstraps a new governance-only planning topic and does not
