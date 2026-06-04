@@ -5,6 +5,13 @@ spec worktree topic.
 
 It is intentionally not the repository's canonical source of truth.
 
+It is also intentionally partial:
+
+- only the explicitly listed first-wave entries are projected here
+- absence from this directory does not imply a skill is non-canonical
+- presence here does not imply symmetric authority with `skills/` or
+  `.github/skills/`
+
 > **Read-only projection**: the skill entries in this directory are symlink
 > projections to upstream sources in `skills/` or `.github/skills/`. Do not
 > edit projected skill content here as if it were canonical. If a change is
@@ -14,6 +21,8 @@ It is intentionally not the repository's canonical source of truth.
 
 - prefer `skills/<skill-name>/` when that skill already exists there
 - otherwise project from `.github/skills/<skill-name>/`
+- do not infer completeness, cutover readiness, or authority parity from the
+  current first-wave mapping table
 
 ## First-Wave Mapping
 
@@ -57,6 +66,8 @@ and revalidate it against the current upstream source before use.
 ## Boundary
 
 - do not treat this directory as cutover evidence
+- do not treat this directory as a third authority tree
+- do not reason about canonical-scope completeness from this partial allowlist
 - do not edit projected skill content here as if it were canonical
 - if a projected skill points to the wrong upstream source, fix the mapping
   rather than editing around the mismatch

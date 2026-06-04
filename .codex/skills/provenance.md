@@ -8,6 +8,8 @@ Current implementation note:
 - projected entries point directly at upstream source paths in this repository
 - `source_commit` records the commit at which the symlink target and mapping
   were last validated, not a copied snapshot commit
+- this table is a partial allowlist only; it does not claim canonical
+  completeness or authority symmetry
 
 ## First-wave provenance
 
@@ -35,3 +37,6 @@ When an upstream source changes:
 
 If the symlink target or source mapping cannot be verified, treat the
 projection as stale and do not use it as validation evidence.
+
+Do not rewrite `source_commit` to describe uncommitted working-tree edits.
+Revalidate and update the row after the relevant upstream change is committed.
