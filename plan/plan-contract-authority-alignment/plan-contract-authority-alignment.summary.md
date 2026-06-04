@@ -5,7 +5,8 @@
 - worktree bootstrap, analysis freeze, and initial topic-plan authoring are complete
 - draft planning artifacts are committed by topic
 - independent review is complete
-- the topic is waiting for final-gate rerun and then human review
+- final gate is complete
+- the topic is ready for human review
 
 ## completed
 
@@ -17,6 +18,7 @@
 - topic summary artifact creation
 - independent plan review
 - review-driven planning fixes
+- planning final gate
 
 ## not completed
 
@@ -26,10 +28,9 @@
 
 ## required follow-up
 
-- rerun final gate after current-truth artifact sync
 - stop for human review before any creator implementation
 
 ## next handoff
 
 - `next actor`: main-agent
-- `next step`: rerun final gate on the synced planning artifacts, then stop for human review
+- `next step`: stop for human review before any creator implementation for this topic

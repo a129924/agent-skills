@@ -1,6 +1,6 @@
 ---
 topic: plan-contract-authority-alignment
-status: final-gate-pending
+status: human-review-ready
 created: 2026-06-04
 ---
 
@@ -13,7 +13,7 @@ created: 2026-06-04
 - [X] plan
 - [X] draft-plan-commit-by-topic
 - [X] review
-- [ ] final-gate
+- [X] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -46,8 +46,8 @@ created: 2026-06-04
 - [X] Record reviewer findings in `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.review-log.md`
 
 ### final-gate
-- [ ] Run final gate after reviewer feedback is addressed
-- [ ] Confirm planning artifacts are ready for human check
+- [X] Run final gate after reviewer feedback is addressed
+- [X] Confirm planning artifacts are ready for human check
 
 ### human-check
 - [ ] Wait for explicit human review before any creator implementation under this topic
@@ -77,5 +77,6 @@ created: 2026-06-04
   progression-truth alignment.
 - Review-driven fixes were committed on 2026-06-04 as `b81a7f2`.
 - Focused re-review passed with no blocking findings.
-- Final gate has been run once and requested only current-truth sync for
-  `step.md` and `summary.md`; rerun is pending.
+- Final gate first pass requested only current-truth sync for `step.md` and
+  `summary.md`.
+- Focused final-gate rerun returned `READY_FOR_HUMAN_REVIEW`.
