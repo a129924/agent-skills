@@ -1,6 +1,6 @@
 ---
 topic: plan-contract-authority-alignment
-status: planned
+status: final-gate-pending
 created: 2026-06-04
 ---
 
@@ -12,7 +12,7 @@ created: 2026-06-04
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
+- [X] review
 - [ ] final-gate
 - [ ] human-check
 
@@ -42,8 +42,8 @@ created: 2026-06-04
 - [X] Record the planning commit hash in this step artifact once the commit exists: `e461b90`
 
 ### review
-- [ ] Run independent plan review against the topic plan and workflow contract
-- [ ] Record reviewer findings in `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.review-log.md`
+- [X] Run independent plan review against the topic plan and workflow contract
+- [X] Record reviewer findings in `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.review-log.md`
 
 ### final-gate
 - [ ] Run final gate after reviewer feedback is addressed
@@ -73,3 +73,9 @@ created: 2026-06-04
 - Reviewer routing starts only after the topic's draft planning artifacts are
   committed by topic.
 - Draft planning artifacts were committed on 2026-06-04 as `e461b90`.
+- Round 1 review returned `NEEDS_REWORK` for artifact-path exactness and
+  progression-truth alignment.
+- Review-driven fixes were committed on 2026-06-04 as `b81a7f2`.
+- Focused re-review passed with no blocking findings.
+- Final gate has been run once and requested only current-truth sync for
+  `step.md` and `summary.md`; rerun is pending.

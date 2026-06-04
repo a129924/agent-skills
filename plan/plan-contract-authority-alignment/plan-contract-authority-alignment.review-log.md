@@ -30,3 +30,22 @@
   accepted.
 - Reviewer did not request any widening into convergence, projection, runtime,
   or skill-local implementation work.
+
+## Round 2
+
+- **Reviewer**: `Parfit`
+- **Date**: 2026-06-04
+- **Verdict**: `PASS`
+- **Scope**: focused re-review of Round 1 blockers
+
+## Resolved Findings
+
+1. `Artifact Paths` now use exact repo-visible planning-skill evidence paths
+   and clearly mark them as read-only evidence rather than writable scope.
+2. `plan-contract-authority-alignment.step.md` now aligns the
+   `draft-plan-commit-by-topic` workflow stage with the recorded planning
+   commit completion.
+
+## Notes
+
+- Focused re-review reported no blocking findings.
