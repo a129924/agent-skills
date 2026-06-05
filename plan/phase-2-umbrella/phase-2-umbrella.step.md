@@ -12,7 +12,7 @@ created: 2026-06-05
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
+- [X] review
 - [ ] final-gate
 - [ ] human-check
 
@@ -41,8 +41,8 @@ created: 2026-06-05
 - [X] Record the draft planning commit in this step artifact once it exists: `46688da`
 
 ### review
-- [ ] Route the umbrella planning baseline for independent review after draft-plan-commit-by-topic completes
-- [ ] Confirm the plan does not widen into implementation or shared-contract edits as part of the formal review stage
+- [X] Route the umbrella planning baseline for independent review after draft-plan-commit-by-topic completes
+- [X] Confirm the plan does not widen into implementation or shared-contract edits as part of the formal review stage
 
 ### final-gate
 - [ ] Confirm the umbrella baseline stays within the declared write set
@@ -78,12 +78,9 @@ created: 2026-06-05
 - `plan/<topic>/<topic>.summary.md` remains topic close outcome / handoff truth.
 - `docs/status.md` is optional cross-topic overview only.
 - Draft planning artifacts were committed by topic as `46688da`.
-- Any earlier reviewer or final-gate result for this umbrella baseline is
-  preflight evidence only and does not replace formal workflow stage
-  completion.
-- Next formal workflow step is `review`.
-- `review`, `final-gate`, and `human-check` remain pending until they run in
-  the formal workflow order after draft plan commit by topic.
+- Formal review has passed on the committed umbrella baseline.
+- Next formal workflow step is `final-gate`.
+- `final-gate` and `human-check` remain pending in the formal workflow order.
 - No direct implementation work is authorized or next under this topic.
 - If any later umbrella work would require files outside the declared write set
   or any shared-contract-file edit, stop and route to `human_review_required`.
