@@ -14,7 +14,7 @@ created: 2026-06-05
 - [X] draft-plan-commit-by-topic
 - [X] review
 - [X] final-gate
-- [ ] human-check
+- [X] human-check
 
 ## Actionable Steps
 
@@ -49,7 +49,7 @@ created: 2026-06-05
 - [X] Confirm later slices remain separate topics rather than inherited execution approval
 
 ### human-check
-- [ ] Obtain explicit human approval before treating umbrella baseline as the planning parent for later slices
+- [X] Obtain explicit human approval before treating umbrella baseline as the planning parent for later slices
 
 ## Handoff / Gate Notes
 
@@ -81,8 +81,11 @@ created: 2026-06-05
 - Formal review has passed on the committed umbrella baseline.
 - Formal final gate passed on the committed umbrella baseline with
   `READY_FOR_HUMAN_REVIEW`.
-- Next formal workflow step is `human-check`.
-- `human-check` remains pending in the formal workflow order.
+- Umbrella `human-check` has completed on the committed umbrella baseline.
+- This approved umbrella baseline may now serve as the planning parent for
+  later slice topics.
+- Next step is to open the first child topic
+  `phase-2-safe-canonical-batch`.
 - No direct implementation work is authorized or next under this topic.
 - If any later umbrella work would require files outside the declared write set
   or any shared-contract-file edit, stop and route to `human_review_required`.
