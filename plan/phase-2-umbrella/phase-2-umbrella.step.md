@@ -11,7 +11,7 @@ created: 2026-06-05
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] draft-plan-commit-by-topic
+- [X] draft-plan-commit-by-topic
 - [ ] review
 - [ ] final-gate
 - [ ] human-check
@@ -37,8 +37,8 @@ created: 2026-06-05
 - [X] Record that slice PR order is strictly serialized
 
 ### draft-plan-commit-by-topic
-- [ ] Commit the umbrella planning artifacts by topic before formal review routing
-- [ ] Record the draft planning commit in this step artifact once it exists
+- [X] Commit the umbrella planning artifacts by topic before formal review routing
+- [X] Record the draft planning commit in this step artifact once it exists: `46688da`
 
 ### review
 - [ ] Route the umbrella planning baseline for independent review after draft-plan-commit-by-topic completes
@@ -77,10 +77,11 @@ created: 2026-06-05
 - `plan/<topic>/<topic>.step.md` remains topic progression truth.
 - `plan/<topic>/<topic>.summary.md` remains topic close outcome / handoff truth.
 - `docs/status.md` is optional cross-topic overview only.
-- Next formal workflow step is `draft-plan-commit-by-topic`.
+- Draft planning artifacts were committed by topic as `46688da`.
 - Any earlier reviewer or final-gate result for this umbrella baseline is
   preflight evidence only and does not replace formal workflow stage
   completion.
+- Next formal workflow step is `review`.
 - `review`, `final-gate`, and `human-check` remain pending until they run in
   the formal workflow order after draft plan commit by topic.
 - No direct implementation work is authorized or next under this topic.
