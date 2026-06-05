@@ -94,6 +94,20 @@ Local skill files may add implementation guidance or review heuristics, but
 they must not redefine required sections, role ownership, fallback authority,
 or blocking semantics away from this file.
 
+## Execution-Start Input Model
+
+For topic execution:
+
+- `plan/<topic>/<topic>.plan.md` is the unconditional execution-start
+  contract.
+- `plan/<topic>/<topic>.step.md`,
+  `plan/<topic>/<topic>.review-log.md`, and
+  `plan/<topic>/<topic>.summary.md` are topic-local truth artifacts, not
+  unconditional startup prerequisites.
+- When present, they must be read according to their role semantics.
+- When absent, execution may still begin unless the topic plan or repo-level
+  workflow contract makes them conditionally required for the current stage.
+
 ## Artifact Path Rules
 
 `Artifact Paths` is an executable contract and must use exact repo-visible
@@ -122,6 +136,9 @@ must be listed explicitly.
 - `Reviewer Handoff` must be one machine-consumable JSON object.
 - `Post-merge / release actions` must match the topic's actual stable-library
   and release timing.
+- If a topic declares analysis artifacts as frozen prerequisites, execution may
+  read and validate them only. Execution must not silently reopen or
+  regenerate them without a separately approved scope change.
 - Unsafe placeholders such as `TBD`, `later`, or `follow normal process` are
   contract failures when explicit workflow decisions are required.
 
@@ -181,6 +198,14 @@ Treat these as contract-breaking issues:
 - non-JSON reviewer handoff
 - wrong post-merge or release timing
 - mixed role ownership
+- missing, contradictory, or insufficient frozen analysis prerequisites when a
+  topic declares them as required execution inputs
+- execution-meaning conflicts among `plan.md`, `step.md`, `review-log.md`, and
+  `summary.md`
+- conflicts between a required repo-level contract file and a topic-local truth
+  artifact
+- simulated role separation where one actor claims planner, reviewer,
+  implementer, and final-gate completion without real separation
 - placeholders where explicit contract is required
 
 `plan-creator` must stop and ask when required planning inputs are missing or
@@ -191,6 +216,10 @@ found in an otherwise reviewable plan.
 
 If the plan file or required shared contract sources cannot be read, stop and
 record that the review could not proceed on valid contract grounds.
+
+Execution must stop and surface the issue when a contract-breaking conflict or
+fake-separation condition is encountered. The executor must not silently choose
+the more convenient artifact or role interpretation.
 
 ## Boundaries
 

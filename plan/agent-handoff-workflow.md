@@ -32,6 +32,9 @@ in different contexts.
   session context.
 - Creator and reviewer are separate roles and should not rely on one shared
   conversation state.
+- If real role separation cannot be established for a required handoff, stop
+  and surface the execution limitation instead of simulating independent
+  planner, reviewer, implementer, or final-gate completion.
 - Topic execution should start from `plan/<topic>/<topic>.plan.md`.
 - Stable-library updates happen only after reviewer approval.
 - Topic plans that trigger stable-library or release work must declare when those
@@ -81,6 +84,9 @@ in different contexts.
   - they explain why current truth changed
   - they do not replace the parent contract
 - Hidden chat context must never override repo-visible workflow artifacts.
+- If repo-level contracts and topic-local truth artifacts conflict in a way
+  that changes execution meaning, stop and surface the conflict rather than
+  silently choosing whichever artifact is more convenient.
 
 ## Roles
 | Role | Primary responsibility | Must not do |
@@ -89,6 +95,13 @@ in different contexts.
 | Creator | Draft or revise the implementation from the topic plan until it is `review-ready` | Approve its own output |
 | Reviewer | Evaluate the latest creator output and return `approved` or `needs-rework` | Author the final implementation directly |
 | Main Agent (publisher / release actor) | Handle commit, push, PR, review-comment triage, merge follow-up, and release/version actions, while stopping for explicit human confirmations where the workflow requires them | Change planning intent retroactively without updating the plan |
+
+Role-separation execution rule:
+- A valid multi-role workflow requires a real separated role surface, bounded
+  handoff payload, bounded result payload, and distinct task owner.
+- If those conditions cannot be established for the required stage, stop and
+  report the execution limitation instead of treating one actor as if multiple
+  independent gates had already been satisfied.
 
 ### Correction routing roles
 - Human operator may raise a direction concern or point at drift, but chat alone
