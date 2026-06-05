@@ -11,7 +11,7 @@ created: 2026-06-05
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] draft-plan-commit-by-topic
+- [X] draft-plan-commit-by-topic
 - [ ] review
 - [ ] final-gate
 - [ ] human-check
@@ -38,8 +38,8 @@ created: 2026-06-05
 - [X] Record that guessed later implementation write scope is `human_review_required`
 
 ### draft-plan-commit-by-topic
-- [ ] Commit the safe-batch planning artifacts by topic before formal review routing
-- [ ] Record the draft planning commit in this step artifact once it exists
+- [X] Commit the safe-batch planning artifacts by topic before formal review routing
+- [X] Record the draft planning commit in this step artifact once it exists: `4a5160d`
 
 ### review
 - [ ] Route the first-slice planning baseline for independent review
@@ -78,7 +78,8 @@ created: 2026-06-05
 - Projection materialization, runtime adaptation, and copilot-only work remain
   out of scope.
 - `docs/status.md` remains optional only.
-- Next formal workflow step is `draft-plan-commit-by-topic`.
+- Draft planning artifacts were committed by topic as `4a5160d`.
+- Next formal workflow step is `review`.
 - Formal `review` and formal `final-gate` have not yet occurred for this
   committed topic-local workflow.
 - No implementation work is authorized under this topic at the current
