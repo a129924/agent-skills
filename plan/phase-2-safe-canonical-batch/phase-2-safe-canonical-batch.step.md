@@ -13,7 +13,7 @@ created: 2026-06-05
 - [X] plan
 - [X] draft-plan-commit-by-topic
 - [X] review
-- [ ] final-gate
+- [X] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -46,8 +46,8 @@ created: 2026-06-05
 - [X] Confirm the plan does not widen into implementation, later slices, or shared-contract edits
 
 ### final-gate
-- [ ] Confirm the planning baseline stays within the declared write set
-- [ ] Confirm the topic still records planning-only status for the current workflow stage
+- [X] Confirm the planning baseline stays within the declared write set
+- [X] Confirm the topic still records planning-only status for the current workflow stage
 
 ### human-check
 - [ ] Obtain explicit human approval before using this plan as the execution parent for later creator work
@@ -80,8 +80,10 @@ created: 2026-06-05
 - `docs/status.md` remains optional only.
 - Draft planning artifacts were committed by topic as `4a5160d`.
 - Formal review has passed on the committed safe-batch baseline.
-- Next formal workflow step is `final-gate`.
-- `final-gate` and `human-check` remain pending in the formal workflow order.
+- Formal final gate passed on the committed safe-batch baseline with
+  `READY_FOR_HUMAN_REVIEW`.
+- Next formal workflow step is `human-check`.
+- `human-check` remains pending in the formal workflow order.
 - No implementation work is authorized under this topic at the current
   planning stage.
 - If later implementation write scope would require guessing beyond current
