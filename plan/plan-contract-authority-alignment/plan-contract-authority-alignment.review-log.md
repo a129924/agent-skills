@@ -137,3 +137,49 @@
   the updated plan artifacts.
 - This rerun record does not claim merge, publish, or post-implementation human
   review completion.
+
+## Resumed Contract Repair Review
+
+- **Reviewer**: `Maxwell`
+- **Date**: `2026-06-05`
+- **Verdict**: `APPROVED`
+- **Scope**: focused contract-level review of bounded governance-only repairs
+  to execution-closure semantics
+
+## Resolved Findings
+
+1. `plan-contract-authority-alignment.plan.md` now treats
+   `analysis/plan-contract-authority-alignment/*` as frozen read-only
+   prerequisites for this execution stage rather than as writable outputs.
+2. `plan/topic-plan-contract.md` now distinguishes unconditional execution
+   inputs from existing-if-present topic-local truth artifacts.
+3. `plan/agent-handoff-workflow.md` and `plan/topic-plan-contract.md` now
+   state that execution must stop if real role separation or execution-meaning
+   truth consistency cannot be established.
+
+## Notes
+
+- Review found no scope drift into convergence, projection, runtime, or skill
+  surface edits.
+- Review approved the resumed contract repair without blocking findings.
+
+## Resumed Contract Repair Final Gate
+
+- **Reviewer**: `Pascal`
+- **Date**: `2026-06-05`
+- **Verdict**: `READY_FOR_HUMAN_REVIEW`
+- **Scope**: final-gate check for the resumed governance-only contract repair
+
+## Resolved Findings
+
+1. Required repo-level governance / contract files remain present.
+2. Authority order remains explicit.
+3. Analysis remains frozen read-only.
+4. No skill surfaces were modified.
+5. No convergence, projection, or runtime work was started.
+
+## Notes
+
+- The resumed repair remains within the approved governance-only topic scope.
+- Current repo-visible next step is the human review gate for this resumed
+  repair.

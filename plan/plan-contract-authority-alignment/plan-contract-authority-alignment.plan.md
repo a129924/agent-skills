@@ -22,9 +22,12 @@ When this topic is complete:
 ## Scope
 
 - **In scope**:
-  - create `analysis/plan-contract-authority-alignment/upstream-decision-basis.md`
-  - create `analysis/plan-contract-authority-alignment/requirements.md`
-  - create `analysis/plan-contract-authority-alignment/technical-spec.md`
+  - read and validate frozen
+    `analysis/plan-contract-authority-alignment/upstream-decision-basis.md`
+  - read and validate frozen
+    `analysis/plan-contract-authority-alignment/requirements.md`
+  - read and validate frozen
+    `analysis/plan-contract-authority-alignment/technical-spec.md`
   - create `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.plan.md`
   - create `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.step.md`
   - create `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.review-log.md`
@@ -67,6 +70,14 @@ When this topic is complete:
 
 These artifacts outrank chat-time convenience instructions unless a human
 explicitly says `override`.
+
+For this execution stage, they are frozen read-only prerequisites:
+
+- execution may read, validate, and compare them
+- execution may not reopen, regenerate, or silently revise them
+- if any of them is missing, contradictory, or insufficient for bounded
+  execution, stop and route to `human_review_required` / plan repair instead of
+  improvising
 
 ### 3. Authority ordering is fixed
 
@@ -178,6 +189,8 @@ Artifact path notes:
 - This topic does **not** modify `README.md`.
 - This topic does **not** modify `VERSION`.
 - This topic does **not** modify `.github/copilot-instructions.md`.
+- The analysis artifacts listed above are frozen read-only prerequisites at
+  this execution stage, not writable outputs.
 - The listed `skills/plan-creator/*` and `skills/plan-reviewer/*` paths are
   read-only evidence only and are not writable scope.
 - This topic does **not** modify `skills/**`, `.github/skills/**`,
@@ -189,24 +202,27 @@ Artifact path notes:
 
 1. Read the frozen analysis artifacts and upstream evidence manifest before
    changing any repo-level planning contract file.
-2. Create `plan/topic-plan-contract.md` so it defines:
+2. Stop and route to `human_review_required` / plan repair if the frozen
+   analysis prerequisites are missing, contradictory, or insufficient for
+   bounded execution.
+3. Create `plan/topic-plan-contract.md` so it defines:
    - repo-level topic-plan required sections
    - source-of-truth ordering for topic-plan contract authority
    - reviewer handoff contract expectations at repo level
    - human-facing `contract_version`
    - clear statement that skill-local planning guidance is consumer guidance,
      not the authority owner
-3. Update `plan/agent-handoff-workflow.md` only as needed to:
+4. Update `plan/agent-handoff-workflow.md` only as needed to:
    - reference `plan/topic-plan-contract.md`
    - distinguish workflow-phase semantics from topic-plan contract semantics
    - remove ambiguity that would otherwise leave `plan-creator` or
      `plan-reviewer` as implicit owners of repo-level planning contract
-4. Record explicit deferred follow-up boundaries for:
+5. Record explicit deferred follow-up boundaries for:
    - `python-blueprint-review` absorption into `skills/`
    - later canonical convergence topics
    - later projection and runtime topics
    - platform-specific handling for `copilot-instructions-init`
-5. Stop and route back to plan repair if execution would require:
+6. Stop and route back to plan repair if execution would require:
    - editing `skills/plan-creator/**`
    - editing `skills/plan-reviewer/**`
    - editing any skill or agent path
@@ -223,10 +239,14 @@ Artifact path notes:
 - `contract_version` is present as a human-facing contract field
 - accepted Phase 1 evidence paths are preserved through
   `analysis/plan-contract-authority-alignment/upstream-decision-basis.md`
+- analysis artifacts remain frozen read-only prerequisites for this execution
+  stage
 - no path outside `Artifact Paths` is modified
 - no accepted Phase 1 planning input is treated as approved implementation spec
 - no convergence, projection, runtime, or skill-move work appears in current
   writable scope
+- any execution-meaning conflict among `plan.md`, `step.md`, `review-log.md`,
+  and `summary.md` is surfaced instead of silently resolved
 - reviewer handoff remains one JSON object
 
 ## Reviewer Handoff

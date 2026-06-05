@@ -17,6 +17,12 @@
 - updated truth is effectively ready for the next human review gate
 - immediate operational next step is commit-by-topic for this truth sync
 - no merge, publish, or post-implementation human review is recorded yet
+- on 2026-06-05, an explicit human resume authorized a bounded contract repair
+  to close execution-semantics gaps without widening scope
+- resumed repair review approved the bounded changes with no blockers
+- resumed repair final gate returned `READY_FOR_HUMAN_REVIEW`
+- current repo-visible next step is the human review gate for the resumed
+  governance-only repair
 
 ## completed
 
@@ -35,20 +41,21 @@
 - focused implementation blocker fix for `M1`
 - focused implementation re-check with no remaining blockers
 - post-implementation final-gate rerun with no remaining blockers
+- resumed contract repair for frozen-analysis / truth-semantics alignment
+- resumed repair review with `APPROVED`
+- resumed repair final gate with `READY_FOR_HUMAN_REVIEW`
 
 ## not completed
 
-- commit-by-topic for this post-implementation truth sync
-- next human review gate for the updated implementation truth
+- human review gate for the resumed governance-only repair
 
 ## required follow-up
 
-- commit the synced truth artifacts by topic
-- route the updated truth to the next human review gate
+- route the resumed repair to human review
 - keep scope bounded to the approved repo-level contract alignment surfaces
 
 ## next handoff
 
-- `next actor`: commit-by-topic
-- `next step`: commit the synced truth artifacts by topic, then route the
-  updated implementation truth to the next human review gate
+- `next actor`: human reviewer
+- `next step`: review the resumed governance-only contract repair and decide
+  whether to approve continued execution under the existing bounded topic

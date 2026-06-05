@@ -107,3 +107,18 @@ created: 2026-06-04
   the updated planning artifacts.
 - This sync does not record merge, publish, or post-implementation human review
   completion.
+- On 2026-06-05, an explicit human resume authorized a bounded contract repair
+  to close execution-semantics gaps without widening scope.
+- The resumed repair updated the bounded repo-visible contract and current-truth
+  artifacts:
+  - `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.plan.md`
+  - `plan/topic-plan-contract.md`
+  - `plan/agent-handoff-workflow.md`
+  - `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.review-log.md`
+  - `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.step.md`
+  - `plan/plan-contract-authority-alignment/plan-contract-authority-alignment.summary.md`
+- Independent resumed repair review returned `APPROVED` with no blocking
+  findings.
+- Resumed repair final gate returned `READY_FOR_HUMAN_REVIEW`.
+- Current operational next step is the human review gate for the resumed
+  governance-only repair.
