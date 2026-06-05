@@ -12,7 +12,7 @@ created: 2026-06-05
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
+- [X] review
 - [ ] final-gate
 - [ ] human-check
 
@@ -42,8 +42,8 @@ created: 2026-06-05
 - [X] Record the draft planning commit in this step artifact once it exists: `4a5160d`
 
 ### review
-- [ ] Route the first-slice planning baseline for independent review
-- [ ] Confirm the plan does not widen into implementation, later slices, or shared-contract edits
+- [X] Route the first-slice planning baseline for independent review
+- [X] Confirm the plan does not widen into implementation, later slices, or shared-contract edits
 
 ### final-gate
 - [ ] Confirm the planning baseline stays within the declared write set
@@ -79,9 +79,9 @@ created: 2026-06-05
   out of scope.
 - `docs/status.md` remains optional only.
 - Draft planning artifacts were committed by topic as `4a5160d`.
-- Next formal workflow step is `review`.
-- Formal `review` and formal `final-gate` have not yet occurred for this
-  committed topic-local workflow.
+- Formal review has passed on the committed safe-batch baseline.
+- Next formal workflow step is `final-gate`.
+- `final-gate` and `human-check` remain pending in the formal workflow order.
 - No implementation work is authorized under this topic at the current
   planning stage.
 - If later implementation write scope would require guessing beyond current
