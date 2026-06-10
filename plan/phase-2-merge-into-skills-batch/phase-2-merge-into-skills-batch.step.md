@@ -12,7 +12,7 @@ created: 2026-06-10
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
+- [X] review
 - [ ] final-gate
 - [ ] human-check
 
@@ -42,8 +42,8 @@ created: 2026-06-10
 - [X] Record the draft planning commit in this step artifact once it exists: `87509b1`
 
 ### review
-- [ ] Route the current bounded execution truth for independent review
-- [ ] Confirm the topic remains bounded to canonical `skills/` edits and does not widen into projection work, runtime adaptation, or shared-contract edits
+- [X] Route the current bounded execution truth for independent review
+- [X] Confirm the topic remains bounded to canonical `skills/` edits and does not widen into projection work, runtime adaptation, or shared-contract edits
 
 ### final-gate
 - [ ] Confirm the committed execution truth stays within canonical `skills/` only and the declared write set
@@ -92,11 +92,12 @@ created: 2026-06-10
   slice.
 - Remaining compatibility-surface differences do not block progress when
   canonical `skills/` content is already correct.
-- Next formal workflow step is `review`.
-- Formal review, final-gate, and human-check have not yet been rerun on the
-  updated execution truth.
+- Focused re-review has passed; no critical or major findings remain.
+- Next formal workflow step is `final-gate`.
+- `final-gate` and `human-check` remain pending on the updated execution
+  truth.
 - No additional execution beyond this bounded canonical convergence slice is
-  authorized before formal review.
+  authorized before final-gate review completes.
 - If exact later merge policy cannot be derived honestly from evidence, route
   that item to `human_review_required`.
 - If exact later write scope cannot be derived honestly from evidence, route
