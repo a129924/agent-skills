@@ -1,6 +1,6 @@
 ---
 topic: phase-2-safe-canonical-batch
-status: approved
+status: merged
 created: 2026-06-05
 ---
 
@@ -151,6 +151,7 @@ created: 2026-06-05
   fast-forward sync from `origin/feat/andrew/phase-2-umbrella`.
 - Remote branch `feat/andrew/phase-2-safe-canonical-batch` was deleted as part
   of the merge operation.
+- This topic is now merged and terminal under the current closeout model.
 - No further topic-local implementation, publish, or review work remains for
   `phase-2-safe-canonical-batch`.
 - Current repo evidence shows byte-equivalent parity across all nine frozen

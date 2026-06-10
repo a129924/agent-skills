@@ -1,6 +1,6 @@
 ---
 topic: phase-2-umbrella
-status: review-ready
+status: approved
 created: 2026-06-05
 ---
 
@@ -89,7 +89,8 @@ created: 2026-06-05
   - `phase-2-merge-into-skills-batch` via PR `#107`
   - `phase-2-planning-spine-exceptions` via PR `#108`
 - Phase 2 umbrella truth is now in close-out mode.
-- Next step is `close-out review`.
+- Close-out final verification passed with no new contract-breaking blocker.
+- Next step is `human-check`.
 - No new child-slice implementation work is authorized or next under this topic.
 - If any later umbrella work would require files outside the declared write set
   or any shared-contract-file edit, stop and route to `human_review_required`.

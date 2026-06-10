@@ -125,11 +125,12 @@ contract file, stop and route to `human_review_required`.
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
+- **Current**: `approved`
 - **Execution model**: umbrella coordination baseline is complete; all three
   serialized Phase 2 child slices have merged back into the umbrella branch;
-  the current topic state is ready for close-out review before publish / merge
-  beyond the umbrella line
+  close-out review and final verification are complete; the current topic state
+  is ready for the remaining human-check gate before publish / merge beyond
+  the umbrella line
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -157,6 +158,8 @@ Routing notes:
   required by this umbrella baseline.
 - Any attempt to reopen Phase 2 slice execution from umbrella scope, or to run
   new slice work in parallel under this topic, is plan drift.
+- Close-out final verification found no new contract-breaking blocker across
+  umbrella truth and the merged child-slice evidence.
 
 ## Artifact Paths
 

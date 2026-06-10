@@ -140,9 +140,10 @@ The safe canonical batch skill list is frozen to:
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: planning baseline first, later bounded creator
-  implementation only after normal review and human gates
+- **Current**: `merged`
+- **Execution model**: the planning baseline and bounded execution bootstrap for
+  this slice are complete, PR `#106` has merged into the umbrella parent
+  branch, and this topic is now terminal under the current closeout model
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -159,11 +160,12 @@ The safe canonical batch skill list is frozen to:
 
 Routing notes:
 
-- In the current turn, only planning artifacts are produced.
-- Later creator implementation must begin from this topic plan, not from chat
+- Planning artifacts were the only outputs in the original planning turn.
+- Later bounded creator work did begin from this topic plan rather than chat
   summary alone.
-- Any attempt to start implementation from current planning evidence alone
-  without resolving exact write scope where needed is plan drift.
+- PR `#106` merged this topic into `feat/andrew/phase-2-umbrella` on
+  2026-06-10.
+- This topic is now merged and terminal under the current closeout model.
 
 ## Artifact Paths
 
