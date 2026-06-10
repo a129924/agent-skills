@@ -22,8 +22,8 @@ created: 2026-06-05
 - [X] target-branch-confirmed
 - [X] publish-in-progress
 - [X] pr-open
-- [ ] merged
-- [ ] worktree-closeout
+- [X] merged
+- [X] worktree-closeout
 
 ## Actionable Steps
 
@@ -88,11 +88,11 @@ created: 2026-06-05
   `feat/andrew/phase-2-umbrella`
 
 ### merged
-- [ ] Merge the Ready PR into `feat/andrew/phase-2-umbrella`
+- [X] Merge the Ready PR into `feat/andrew/phase-2-umbrella`
 
 ### worktree-closeout
-- [ ] Confirm the merge result is reflected in local repo state
-- [ ] Finish the topic-local branch / worktree closeout steps without widening scope
+- [X] Confirm the merge result is reflected in local repo state
+- [X] Finish the topic-local branch / worktree closeout steps without widening scope
 
 ## Handoff / Gate Notes
 
@@ -145,6 +145,14 @@ created: 2026-06-05
 - Ready PR `#106` is open from `feat/andrew/phase-2-safe-canonical-batch`
   into `feat/andrew/phase-2-umbrella`:
   `https://github.com/a129924/agent-skills/pull/106`
+- PR `#106` merged into `feat/andrew/phase-2-umbrella` on 2026-06-10 with
+  merge commit `fcc904a098d54af2e3e1c082c5b2bc6ecdd37f40`.
+- The merged result is now reflected in the dedicated umbrella worktree by
+  fast-forward sync from `origin/feat/andrew/phase-2-umbrella`.
+- Remote branch `feat/andrew/phase-2-safe-canonical-batch` was deleted as part
+  of the merge operation.
+- No further topic-local implementation, publish, or review work remains for
+  `phase-2-safe-canonical-batch`.
 - Current repo evidence shows byte-equivalent parity across all nine frozen
   safe skills between `skills/` and `.github/skills/`.
 - No skill-surface implementation was opened by this bootstrap run.
