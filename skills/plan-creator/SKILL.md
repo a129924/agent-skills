@@ -122,7 +122,7 @@ Do not use this skill when:
 - the plan mixes review-ready-only work with undeclared stable-library publish intent
 - the plan says `TBD`, `later`, or `follow normal process` where the workflow needs an explicit contract
 - artifact paths are broad labels instead of concrete repo-visible paths
-- creator, reviewer, and main-agent ownership are blended together
+- creator, reviewer, and Main Agent ownership are blended together
 - reviewer handoff is written as Markdown notes instead of JSON
 - existing analysis artifacts are ignored because chat context points somewhere else
 
@@ -173,7 +173,7 @@ Omit this section when the plan is authored outside a multi-agent handoff flow.
 - `references/required-section-meaning.md`: what each mandatory topic-plan section means and must contain
 - `references/stable-library-rule.md`: when and how to declare stable-library intent, metadata, release timing, and VERSION/README decisions
 - `references/artifact-path-rule.md`: how to declare exact, role-labeled, executable artifact paths
-- `references/role-boundary-rule.md`: how to keep planning actor, creator, reviewer, and main-agent roles distinct
+- `references/role-boundary-rule.md`: how to keep planning actor, creator, reviewer, and Main Agent roles distinct
 - `references/stop-and-ask-triggers.md`: conditions that require stopping and asking before drafting or continuing
 - `references/template-usage-rule.md`: how to use and complete the topic-plan template without leaving scaffolding
 - `examples.md`: detailed good and bad topic-plan scenarios, including stable and non-stable cases
