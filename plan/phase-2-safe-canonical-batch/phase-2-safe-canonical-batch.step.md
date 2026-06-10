@@ -21,7 +21,7 @@ created: 2026-06-05
 - [X] self-check
 - [X] target-branch-confirmed
 - [X] publish-in-progress
-- [ ] pr-open
+- [X] pr-open
 - [ ] merged
 - [ ] worktree-closeout
 
@@ -79,12 +79,12 @@ created: 2026-06-05
 
 ### publish-in-progress
 - [X] Prepare the minimal closeout diff for this topic only
-- [ ] Commit the topic-local closeout truth updates
-- [ ] Push `feat/andrew/phase-2-safe-canonical-batch`
-- [ ] Ensure target branch `feat/andrew/phase-2-umbrella` is available for PR base
+- [X] Commit the topic-local closeout truth updates
+- [X] Push `feat/andrew/phase-2-safe-canonical-batch`
+- [X] Ensure target branch `feat/andrew/phase-2-umbrella` is available for PR base
 
 ### pr-open
-- [ ] Open a Ready PR from `feat/andrew/phase-2-safe-canonical-batch` into
+- [X] Open a Ready PR from `feat/andrew/phase-2-safe-canonical-batch` into
   `feat/andrew/phase-2-umbrella`
 
 ### merged
@@ -137,6 +137,14 @@ created: 2026-06-05
 - The explicit publish / merge target branch for this topic is
   `feat/andrew/phase-2-umbrella`, matching the approved umbrella parent branch
   recorded in the planning baseline and the current local branch ancestry.
+- Minimal closeout truth updates were committed on 2026-06-10 as `77fd6ee`.
+- Both `feat/andrew/phase-2-umbrella` and
+  `feat/andrew/phase-2-safe-canonical-batch` were pushed to `origin` on
+  2026-06-10 so the topic could use the explicit umbrella parent branch as the
+  PR base.
+- Ready PR `#106` is open from `feat/andrew/phase-2-safe-canonical-batch`
+  into `feat/andrew/phase-2-umbrella`:
+  `https://github.com/a129924/agent-skills/pull/106`
 - Current repo evidence shows byte-equivalent parity across all nine frozen
   safe skills between `skills/` and `.github/skills/`.
 - No skill-surface implementation was opened by this bootstrap run.
