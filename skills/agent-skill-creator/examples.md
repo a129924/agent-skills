@@ -106,10 +106,10 @@ Why this split passes:
 
 Goal:
 - draft a skill whose future consumers include planning-spine skills that still
-  reference `.github/skills/`
+  reference a platform-specific `.<platform>/skills/` surface
 
 Result:
 - author the draft under `skills/<skill-name>/`
 - note the downstream planning-spine implication in the handoff
-- do not edit `.github/skills/business-intent-alignment/` or
-  `.github/skills/business-to-technical-translation/` in the same phase
+- do not edit any `.<platform>/skills/<skill-name>/` compatibility or
+  projection surface in the same phase
