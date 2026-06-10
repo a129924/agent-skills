@@ -8,18 +8,18 @@ Use this checklist when reviewing a repo-visible topic plan before later executi
   - [ ] `plan/topic-plan-contract.md`
   - [ ] local `reference.md`
   - [ ] local `checklist.md`
-- [ ] All workflow-required plan sections are present, using the canonical section list from `plan/topic-plan-contract.md` (case-insensitive title matching is acceptable):
-  - [ ] `Goal / outcome`
+- [ ] All workflow-required plan sections are present, using the canonical section list from `plan/topic-plan-contract.md`:
+  - [ ] `Goal / Outcome`
   - [ ] `Scope`
-  - [ ] `Locked decisions`
-  - [ ] `Boundaries / exclusions`
-  - [ ] `Status / allowed transitions`
-  - [ ] `Artifact paths`
-  - [ ] `Implementation steps`
-  - [ ] `Validation / acceptance checks`
-  - [ ] `Reviewer handoff`
+  - [ ] `Locked Decisions`
+  - [ ] `Boundaries / Exclusions`
+  - [ ] `Status / Allowed Transitions`
+  - [ ] `Artifact Paths`
+  - [ ] `Implementation Steps`
+  - [ ] `Validation / Acceptance Checks`
+  - [ ] `Reviewer Handoff`
   - [ ] `Post-merge / release actions`
-  - [ ] `Open questions / unresolved items`
+  - [ ] `Open Questions / Unresolved Items`
 - [ ] `Status / Allowed Transitions` uses canonical workflow transitions only.
 - [ ] The current status matches the actual topic state.
 - [ ] `Artifact Paths` are exact, bounded, repo-visible, and role-labeled.
