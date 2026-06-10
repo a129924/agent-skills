@@ -102,4 +102,4 @@ created: 2026-06-10
   as `human_review_required` until later evidence proves it is wording-only.
 - Focused execution review passed with no new contract-breaking blocker.
 - Final verification passed with `READY_FOR_HUMAN_REVIEW`.
-- Next workflow step is `human-check`.
+- Topic-local workflow is complete; any remaining PR-level handling is outside this step artifact.

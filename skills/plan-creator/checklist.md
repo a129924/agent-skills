@@ -1,6 +1,6 @@
 # Plan Creator Checklist
 
-Use this checklist when drafting or sanity-checking a topic plan before handing it to reviewer or Main Agent execution.
+Use this checklist when drafting or sanity-checking a topic plan before handing it to a reviewer or the Main Agent for execution.
 
 - [ ] The topic plan is repo-visible at `plan/<topic>/<topic>.plan.md`.
 - [ ] `Goal / Outcome`, `Scope`, `Locked Decisions`, and `Boundaries / Exclusions` are explicit.
