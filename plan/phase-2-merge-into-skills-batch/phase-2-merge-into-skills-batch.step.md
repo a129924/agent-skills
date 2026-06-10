@@ -12,8 +12,8 @@ created: 2026-06-10
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [X] review
-- [X] final-gate
+- [ ] review
+- [ ] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -27,7 +27,7 @@ created: 2026-06-10
 - [X] Read umbrella baseline artifacts and confirm this topic is a child slice under the approved coordination baseline
 - [X] Read Phase 1 merge-batch candidate, semantic-drift, and runtime-dependency evidence
 - [X] Freeze the exact ten-candidate merge-batch set
-- [X] Freeze current turn as planning only
+- [X] Freeze the initial planning baseline before bounded canonical convergence begins
 
 ### plan
 - [X] Create `analysis/phase-2-merge-into-skills-batch/requirements.md`
@@ -42,19 +42,20 @@ created: 2026-06-10
 - [X] Record the draft planning commit in this step artifact once it exists: `87509b1`
 
 ### review
-- [X] Route the merge-batch planning baseline for independent review
-- [X] Confirm the plan does not widen into merge implementation, projection work, runtime adaptation, or shared-contract edits
+- [ ] Route the current bounded execution truth for independent review
+- [ ] Confirm the topic remains bounded to canonical `skills/` edits and does not widen into projection work, runtime adaptation, or shared-contract edits
 
 ### final-gate
-- [X] Confirm the planning baseline stays within the declared write set
-- [X] Confirm the topic still records planning-only status for the current workflow stage
+- [ ] Confirm the committed execution truth stays within canonical `skills/` only and the declared write set
+- [ ] Confirm compatibility-surface differences do not block progress when canonical `skills/` content is already correct
 
 ### human-check
 - [ ] Obtain explicit human approval before using this plan as the execution parent for later creator merge work
 
 ## Handoff / Gate Notes
 
-- This topic is a planning-only topic for the merge-required batch.
+- The planning baseline for this topic was completed and used as the execution
+  parent for the current bounded canonical convergence slice.
 - The exact candidate set is frozen to:
   - `agent-skill-creator`
   - `agent-skill-template`
@@ -75,13 +76,27 @@ created: 2026-06-10
   out of scope.
 - `docs/status.md` remains optional only.
 - Draft planning artifacts were committed by topic as `87509b1`.
-- Formal review has passed on the committed merge-batch baseline.
-- Formal final gate has passed on the committed merge-batch baseline with
-  verdict `READY_FOR_HUMAN_REVIEW`.
-- Next formal workflow step is `human-check`.
-- `human-check` remains pending in the formal workflow order.
-- No implementation work is authorized under this topic at the current
-  planning stage.
+- Canonical edits were completed only for:
+  - `agent-skill-template` at commit `0528a54`
+  - `agent-skill-creator` at commit `0f841da`
+- The following candidates were checked and required no canonical edit:
+  - `python-pyproject-toolconfig`
+  - `python-blueprint-authoring`
+  - `python-library-architecture`
+  - `python-package-layout`
+  - `python-plan-authoring`
+  - `python-pre-commit`
+  - `python-tdd-test-authoring`
+  - `python-blueprint-review`
+- No `.github/**` or `.codex/**` files were modified in this bounded execution
+  slice.
+- Remaining compatibility-surface differences do not block progress when
+  canonical `skills/` content is already correct.
+- Next formal workflow step is `review`.
+- Formal review, final-gate, and human-check have not yet been rerun on the
+  updated execution truth.
+- No additional execution beyond this bounded canonical convergence slice is
+  authorized before formal review.
 - If exact later merge policy cannot be derived honestly from evidence, route
   that item to `human_review_required`.
 - If exact later write scope cannot be derived honestly from evidence, route
