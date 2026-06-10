@@ -1,6 +1,6 @@
 ---
 topic: phase-2-planning-spine-exceptions
-status: review-ready
+status: approved
 created: 2026-06-10
 ---
 
@@ -12,8 +12,8 @@ created: 2026-06-10
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
-- [ ] final-gate
+- [X] review
+- [X] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -41,12 +41,12 @@ created: 2026-06-10
 - [X] Record the draft planning commit in this step artifact once it exists: `08e71e1`
 
 ### review
-- [ ] Route the topic plan and requirement baseline for formal review
-- [ ] Confirm no planning artifact widens into `.github/**`, `.codex/**`, unrelated skills, or shared-contract rewrites
+- [X] Route the topic plan and requirement baseline for formal review
+- [X] Confirm no planning artifact widens into `.github/**`, `.codex/**`, unrelated skills, or shared-contract rewrites
 
 ### final-gate
-- [ ] Confirm the committed planning baseline stays within the declared write set
-- [ ] Confirm the topic preserves unresolved high-risk items as `human_review_required`
+- [X] Confirm the committed planning baseline stays within the declared write set
+- [X] Confirm the topic preserves unresolved high-risk items as `human_review_required`
 
 ### human-check
 - [ ] Obtain explicit human approval before using this plan as the execution parent for later canonical convergence
@@ -66,7 +66,16 @@ created: 2026-06-10
   questions remain `human_review_required` until later evidence proves a change
   is wording-only.
 - Draft planning artifacts were committed by topic as `08e71e1`.
+- Formal review passed with no contract-breaking blocker in the committed
+  planning baseline.
+- Final-gate verification passed with `READY_FOR_HUMAN_REVIEW`.
+- Review and final-gate confirmed that only these topic-local planning
+  artifacts were modified:
+  - `analysis/phase-2-planning-spine-exceptions/requirements.md`
+  - `analysis/phase-2-planning-spine-exceptions/technical-spec.md`
+  - `plan/phase-2-planning-spine-exceptions/phase-2-planning-spine-exceptions.plan.md`
+  - `plan/phase-2-planning-spine-exceptions/phase-2-planning-spine-exceptions.step.md`
 - No projection materialization, runtime adaptation, copilot-only convergence,
   or unrelated skill convergence is in scope.
 - No `review-log.md` or `summary.md` is created under current scope.
-- Next workflow step is formal review of the committed planning baseline.
+- Next workflow step is `human-check`.

@@ -118,9 +118,10 @@ enough evidence to prove they are wording-only:
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
-- **Execution model**: planning baseline authoring is complete; later execution
-  is not yet authorized; next workflow stage is formal review of the topic plan
+- **Current**: `approved`
+- **Execution model**: planning baseline authoring, formal review, and
+  final-gate verification are complete; later execution is not yet authorized
+  and human-check remains pending
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -140,6 +141,10 @@ Routing notes:
 - This topic currently covers planning artifacts only.
 - Later execution must still obtain explicit human approval after review and
   final-gate completion.
+- Formal review found no contract-breaking blocker in the committed planning
+  baseline.
+- Final-gate verification found no write-set drift outside the four topic-local
+  planning artifacts.
 - Any attempt to widen beyond the two frozen canonical skill surfaces is plan
   drift.
 
@@ -255,4 +260,3 @@ Artifact path notes:
   reference notes are wording-only versus behavior-bearing?
 - `human_review_required`: Is any later execution allowed to touch templates or
   references beyond the minimum needed to restore canonical authority wording?
-
