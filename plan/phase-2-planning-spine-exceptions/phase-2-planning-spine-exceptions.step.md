@@ -38,7 +38,7 @@ created: 2026-06-10
 
 ### draft-plan-commit-by-topic
 - [X] Commit the planning-spine exception artifacts by topic before formal review routing
-- [X] Record the draft planning commit in this step artifact once it exists: `TO_BE_FILLED_AFTER_COMMIT`
+- [X] Record the draft planning commit in this step artifact once it exists: `08e71e1`
 
 ### review
 - [ ] Route the topic plan and requirement baseline for formal review
@@ -65,6 +65,7 @@ created: 2026-06-10
 - High-risk authority, workflow, handoff, fallback, and blocked-behavior
   questions remain `human_review_required` until later evidence proves a change
   is wording-only.
+- Draft planning artifacts were committed by topic as `08e71e1`.
 - No projection materialization, runtime adaptation, copilot-only convergence,
   or unrelated skill convergence is in scope.
 - No `review-log.md` or `summary.md` is created under current scope.
