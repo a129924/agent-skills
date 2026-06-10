@@ -12,7 +12,7 @@ created: 2026-06-10
 - [X] analysis
 - [X] plan
 - [X] draft-plan-commit-by-topic
-- [ ] review
+- [X] review
 - [ ] final-gate
 - [ ] human-check
 
@@ -42,8 +42,8 @@ created: 2026-06-10
 - [X] Record the draft planning commit in this step artifact once it exists: `87509b1`
 
 ### review
-- [ ] Route the merge-batch planning baseline for independent review
-- [ ] Confirm the plan does not widen into merge implementation, projection work, runtime adaptation, or shared-contract edits
+- [X] Route the merge-batch planning baseline for independent review
+- [X] Confirm the plan does not widen into merge implementation, projection work, runtime adaptation, or shared-contract edits
 
 ### final-gate
 - [ ] Confirm the planning baseline stays within the declared write set
@@ -75,9 +75,9 @@ created: 2026-06-10
   out of scope.
 - `docs/status.md` remains optional only.
 - Draft planning artifacts were committed by topic as `87509b1`.
-- Next formal workflow step is `review`.
-- Formal `review` and formal `final-gate` have not yet occurred for this
-  topic-local workflow.
+- Formal review has passed on the committed merge-batch baseline.
+- Next formal workflow step is `final-gate`.
+- `final-gate` and `human-check` remain pending in the formal workflow order.
 - No implementation work is authorized under this topic at the current
   planning stage.
 - If exact later merge policy cannot be derived honestly from evidence, route
