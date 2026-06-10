@@ -1,6 +1,6 @@
 ---
 topic: phase-2-planning-spine-exceptions
-status: review-ready
+status: approved
 created: 2026-06-10
 ---
 
@@ -100,4 +100,6 @@ created: 2026-06-10
 - No `.github/**` or `.codex/**` files were modified in bounded execution.
 - Remaining candidate work under `skills/plan-reviewer/examples.md` is treated
   as `human_review_required` until later evidence proves it is wording-only.
-- Next workflow step is `execution review`.
+- Focused execution review passed with no new contract-breaking blocker.
+- Final verification passed with `READY_FOR_HUMAN_REVIEW`.
+- Next workflow step is `human-check`.

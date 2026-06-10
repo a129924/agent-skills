@@ -118,11 +118,11 @@ enough evidence to prove they are wording-only:
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
+- **Current**: `approved`
 - **Execution model**: planning baseline approval is complete; bounded
   canonical convergence has been executed under `skills/plan-creator/**` and
-  `skills/plan-reviewer/**`; the current topic state is ready for review of the
-  completed convergence slice
+  `skills/plan-reviewer/**`; execution review and final verification have
+  passed and the current topic state is pending human check
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -145,6 +145,8 @@ Routing notes:
   convergence under `skills/plan-creator/**` and `skills/plan-reviewer/**`.
 - Execution remains bounded to canonical `skills/` only; `.github/**` and
   `.codex/**` remain read-only compatibility surfaces.
+- Execution review and final verification found no new contract-breaking
+  blocker in the committed bounded convergence truth.
 - Any attempt to widen beyond the two frozen canonical skill surfaces is plan
   drift.
 
