@@ -23,10 +23,10 @@ skills/<skill-name>/
 - Add stronger validation guidance only when the skill's risk warrants it.
 - Use this template as the canonical authoring-target shape for
   `skills/<skill-name>/` during transition work.
-- Treat `.github/skills/` as a possible current active authored/reviewed
-  workflow path until a separate path-transition topic changes that contract.
-- Do not interpret this template as promotion or cutover of the active workflow
-  path.
+- Treat any `.<platform>/skills/` path as a compatibility or projection surface
+  rather than a canonical authoring target.
+- Do not interpret this template as projection promotion, cutover, or runtime
+  path design.
 
 ## `SKILL.md` skeleton
 
