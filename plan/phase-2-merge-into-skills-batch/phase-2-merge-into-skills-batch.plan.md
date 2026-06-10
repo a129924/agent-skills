@@ -144,7 +144,7 @@ The merge-batch candidate set is frozen to:
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`
+- **Current**: `approved`
 - **Execution model**: bounded canonical convergence under `skills/` is
   complete for this slice; normal review, final gate, and human-check remain
   pending on repo-visible execution truth

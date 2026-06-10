@@ -1,6 +1,6 @@
 ---
 topic: phase-2-merge-into-skills-batch
-status: review-ready
+status: approved
 created: 2026-06-10
 ---
 
@@ -13,7 +13,7 @@ created: 2026-06-10
 - [X] plan
 - [X] draft-plan-commit-by-topic
 - [X] review
-- [ ] final-gate
+- [X] final-gate
 - [ ] human-check
 
 ## Actionable Steps
@@ -46,8 +46,8 @@ created: 2026-06-10
 - [X] Confirm the topic remains bounded to canonical `skills/` edits and does not widen into projection work, runtime adaptation, or shared-contract edits
 
 ### final-gate
-- [ ] Confirm the committed execution truth stays within canonical `skills/` only and the declared write set
-- [ ] Confirm compatibility-surface differences do not block progress when canonical `skills/` content is already correct
+- [X] Confirm the committed execution truth stays within canonical `skills/` only and the declared write set
+- [X] Confirm compatibility-surface differences do not block progress when canonical `skills/` content is already correct
 
 ### human-check
 - [ ] Obtain explicit human approval before using this plan as the execution parent for later creator merge work
@@ -93,11 +93,11 @@ created: 2026-06-10
 - Remaining compatibility-surface differences do not block progress when
   canonical `skills/` content is already correct.
 - Focused re-review has passed; no critical or major findings remain.
-- Next formal workflow step is `final-gate`.
-- `final-gate` and `human-check` remain pending on the updated execution
-  truth.
+- Formal final verification passed with `READY_FOR_HUMAN_REVIEW`.
+- Next formal workflow step is `human-check`.
+- `human-check` remains pending on the updated execution truth.
 - No additional execution beyond this bounded canonical convergence slice is
-  authorized before final-gate review completes.
+  authorized before human-check completes.
 - If exact later merge policy cannot be derived honestly from evidence, route
   that item to `human_review_required`.
 - If exact later write scope cannot be derived honestly from evidence, route
