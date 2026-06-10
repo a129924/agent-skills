@@ -49,14 +49,16 @@ When this topic is complete:
 
 ## Locked Decisions
 
-### 1. Current workflow stage is execution-complete and pending human check
+### 1. Current workflow stage is merged and terminal
 
 - This topic is no longer planning-only.
 - Bounded canonical convergence under `skills/` has completed for the current
   execution slice.
 - Formal review and final verification are complete on the committed execution
   truth.
-- Human-check is the next workflow step on the committed execution truth.
+- Human-check completed before merge.
+- PR `#107` merged this topic into `feat/andrew/phase-2-umbrella` at merge
+  commit `a07c015`.
 
 ### 2. Parent umbrella baseline is fixed
 
@@ -147,10 +149,9 @@ The merge-batch candidate set is frozen to:
 
 ## Status / Allowed Transitions
 
-- **Current**: `approved`
-- **Execution model**: bounded canonical convergence under `skills/` is
-  complete for this slice; human-check remains pending on repo-visible
-  execution truth
+- **Current**: `merged`
+- **Execution model**: bounded canonical convergence under `skills/` completed
+  for this slice and the topic is now merged into the umbrella parent branch
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -171,6 +172,7 @@ Routing notes:
   the completed bounded canonical convergence slice.
 - Further execution under this topic must still begin from this topic plan, not
   from a chat summary or from raw Phase 1 reports alone.
+- This topic branch no longer carries active execution after merge.
 - Any attempt to widen beyond canonical `skills/` edits or beyond the frozen
   candidate set is plan drift.
 

@@ -1,6 +1,6 @@
 ---
 topic: phase-2-merge-into-skills-batch
-status: approved
+status: merged
 created: 2026-06-10
 ---
 
@@ -14,7 +14,7 @@ created: 2026-06-10
 - [X] draft-plan-commit-by-topic
 - [X] review
 - [X] final-gate
-- [ ] human-check
+- [X] human-check
 
 ## Actionable Steps
 
@@ -50,7 +50,7 @@ created: 2026-06-10
 - [X] Confirm compatibility-surface differences do not block progress when canonical `skills/` content is already correct
 
 ### human-check
-- [ ] Obtain explicit human approval before using this plan as the execution parent for later creator merge work
+- [X] Obtain explicit human approval before using this plan as the execution parent for later creator merge work
 
 ## Handoff / Gate Notes
 
@@ -94,10 +94,11 @@ created: 2026-06-10
   canonical `skills/` content is already correct.
 - Focused re-review has passed; no critical or major findings remain.
 - Formal final verification passed with `READY_FOR_HUMAN_REVIEW`.
-- Next formal workflow step is `human-check`.
-- `human-check` remains pending on the updated execution truth.
-- No additional execution beyond this bounded canonical convergence slice is
-  authorized before human-check completes.
+- Human approval completed on the committed execution truth.
+- PR `#107` merged this topic into `feat/andrew/phase-2-umbrella` at merge
+  commit `a07c015`.
+- This topic is now merged and terminal under the current execution policy.
+- No additional execution remains authorized under this topic branch.
 - If exact later merge policy cannot be derived honestly from evidence, route
   that item to `human_review_required`.
 - If exact later write scope cannot be derived honestly from evidence, route
