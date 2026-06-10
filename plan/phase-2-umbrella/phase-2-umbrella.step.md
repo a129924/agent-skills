@@ -1,6 +1,6 @@
 ---
 topic: phase-2-umbrella
-status: planned
+status: review-ready
 created: 2026-06-05
 ---
 
@@ -84,8 +84,12 @@ created: 2026-06-05
 - Umbrella `human-check` has completed on the committed umbrella baseline.
 - This approved umbrella baseline may now serve as the planning parent for
   later slice topics.
-- Next step is to open the first child topic
-  `phase-2-safe-canonical-batch`.
-- No direct implementation work is authorized or next under this topic.
+- The serialized child slices are now complete and merged back into umbrella:
+  - `phase-2-safe-canonical-batch` via PR `#106`
+  - `phase-2-merge-into-skills-batch` via PR `#107`
+  - `phase-2-planning-spine-exceptions` via PR `#108`
+- Phase 2 umbrella truth is now in close-out mode.
+- Next step is `close-out review`.
+- No new child-slice implementation work is authorized or next under this topic.
 - If any later umbrella work would require files outside the declared write set
   or any shared-contract-file edit, stop and route to `human_review_required`.

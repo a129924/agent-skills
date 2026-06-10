@@ -125,9 +125,11 @@ contract file, stop and route to `human_review_required`.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: planning baseline only, followed by later slice plan
-  authoring and separate execution topics
+- **Current**: `review-ready`
+- **Execution model**: umbrella coordination baseline is complete; all three
+  serialized Phase 2 child slices have merged back into the umbrella branch;
+  the current topic state is ready for close-out review before publish / merge
+  beyond the umbrella line
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -144,10 +146,17 @@ contract file, stop and route to `human_review_required`.
 
 Routing notes:
 
-- This umbrella topic covers planning artifacts only.
-- Later slices must begin again from their own `plan/<topic>/<topic>.plan.md`.
-- Any attempt to skip later slice planning or run slice PRs in parallel is plan
-  drift.
+- This umbrella topic remains a coordination layer rather than a direct skill
+  execution surface.
+- The following serialized child slices are now complete and merged into this
+  umbrella branch:
+  - `phase-2-safe-canonical-batch` via PR `#106`
+  - `phase-2-merge-into-skills-batch` via PR `#107`
+  - `phase-2-planning-spine-exceptions` via PR `#108`
+- Later slices did begin from their own `plan/<topic>/<topic>.plan.md` as
+  required by this umbrella baseline.
+- Any attempt to reopen Phase 2 slice execution from umbrella scope, or to run
+  new slice work in parallel under this topic, is plan drift.
 
 ## Artifact Paths
 
