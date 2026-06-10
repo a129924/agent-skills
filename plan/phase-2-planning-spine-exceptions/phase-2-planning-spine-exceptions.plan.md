@@ -118,10 +118,11 @@ enough evidence to prove they are wording-only:
 
 ## Status / Allowed Transitions
 
-- **Current**: `approved`
-- **Execution model**: planning baseline authoring, formal review, and
-  final-gate verification are complete; later execution is not yet authorized
-  and human-check remains pending
+- **Current**: `review-ready`
+- **Execution model**: planning baseline approval is complete; bounded
+  canonical convergence has been executed under `skills/plan-creator/**` and
+  `skills/plan-reviewer/**`; the current topic state is ready for review of the
+  completed convergence slice
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -138,13 +139,12 @@ enough evidence to prove they are wording-only:
 
 Routing notes:
 
-- This topic currently covers planning artifacts only.
-- Later execution must still obtain explicit human approval after review and
-  final-gate completion.
-- Formal review found no contract-breaking blocker in the committed planning
-  baseline.
-- Final-gate verification found no write-set drift outside the four topic-local
-  planning artifacts.
+- The planning baseline under this topic was approved and used as the execution
+  parent for the completed bounded convergence work.
+- The current review target is the completed canonical wording and path
+  convergence under `skills/plan-creator/**` and `skills/plan-reviewer/**`.
+- Execution remains bounded to canonical `skills/` only; `.github/**` and
+  `.codex/**` remain read-only compatibility surfaces.
 - Any attempt to widen beyond the two frozen canonical skill surfaces is plan
   drift.
 
@@ -192,18 +192,28 @@ Artifact path notes:
    - `skills/plan-reviewer/**`
 3. Preserve the rule that `skills/` is canonical while `.github/**` and
    `.codex/**` remain read-only compatibility surfaces.
-4. Record what later bounded execution may safely do inside `skills/`:
+4. Perform bounded canonical convergence only under those two canonical skill
+   surfaces, including:
    - path-neutralization away from platform-specific roots
-   - wording cleanup that restores repo-level authority ordering
-   - removal of cross-skill required-authority coupling
-5. Record explicit `human_review_required` items for any change that may alter:
+   - wording cleanup that restores canonical terminology
+   - removal of unnecessary platform-bound phrasing where hard behavior stays
+     unchanged
+5. Record the completed low-risk convergence slices:
+   - `skills/plan-reviewer/checklist.md`
+   - `skills/plan-reviewer/reference.md`
+   - `skills/plan-reviewer/SKILL.md`
+   - `skills/plan-creator/checklist.md`
+   - `skills/plan-creator/reference.md`
+   - `skills/plan-creator/SKILL.md`
+   - `skills/plan-creator/examples.md`
+6. Record explicit `human_review_required` items for any change that may alter:
    - fallback behavior
    - blocked behavior
    - reviewer handoff semantics
    - workflow or close semantics
-6. Preserve explicit exclusions for projection materialization, runtime
+7. Preserve explicit exclusions for projection materialization, runtime
    adaptation, copilot-only work, and unrelated skill convergence.
-7. Stop and route to `human_review_required` if later topic-local work would
+8. Stop and route to `human_review_required` if later topic-local work would
    require:
    - any file outside the declared write set
    - any `.github/**` or `.codex/**` edit
@@ -227,7 +237,11 @@ Artifact path notes:
 - the topic plan explicitly records non-stable intent
 - the topic plan explicitly preserves `human_review_required` items rather than
   guessing
-- no file outside the declared planning write set is modified
+- completed canonical convergence remains bounded to:
+  - `skills/plan-creator/**`
+  - `skills/plan-reviewer/**`
+- no `.github/**` or `.codex/**` file is modified
+- no unrelated skill surface is modified
 
 ## Reviewer Handoff
 
@@ -256,7 +270,9 @@ Artifact path notes:
   canonicalized without changing failure behavior?
 - `human_review_required`: Does `plan-reviewer` blocked behavior when shared
   sources are unreadable already conflict with repo-level contract semantics?
-- `human_review_required`: Which skill-local examples, checklist entries, or
-  reference notes are wording-only versus behavior-bearing?
+- `human_review_required`: Does `skills/plan-reviewer/examples.md` contain any
+  remaining safe wording-only cleanup, or is the rest example-contract-bearing?
+- `human_review_required`: Which remaining skill-local examples or references
+  are wording-only versus behavior-bearing?
 - `human_review_required`: Is any later execution allowed to touch templates or
   references beyond the minimum needed to restore canonical authority wording?

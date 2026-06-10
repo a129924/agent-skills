@@ -1,6 +1,6 @@
 ---
 topic: phase-2-planning-spine-exceptions
-status: approved
+status: review-ready
 created: 2026-06-10
 ---
 
@@ -14,7 +14,7 @@ created: 2026-06-10
 - [X] draft-plan-commit-by-topic
 - [X] review
 - [X] final-gate
-- [ ] human-check
+- [X] human-check
 
 ## Actionable Steps
 
@@ -49,7 +49,12 @@ created: 2026-06-10
 - [X] Confirm the topic preserves unresolved high-risk items as `human_review_required`
 
 ### human-check
-- [ ] Obtain explicit human approval before using this plan as the execution parent for later canonical convergence
+- [X] Obtain explicit human approval before using this plan as the execution parent for later canonical convergence
+
+### bounded-execution
+- [X] Complete low-risk canonical wording and path convergence only under `skills/plan-creator/**` and `skills/plan-reviewer/**`
+- [X] Keep `.github/**` and `.codex/**` read-only during execution
+- [X] Stop before `skills/plan-reviewer/examples.md` because remaining candidate edits appear contract-bearing and require human review
 
 ## Handoff / Gate Notes
 
@@ -78,4 +83,15 @@ created: 2026-06-10
 - No projection materialization, runtime adaptation, copilot-only convergence,
   or unrelated skill convergence is in scope.
 - No `review-log.md` or `summary.md` is created under current scope.
-- Next workflow step is `human-check`.
+- Human approval completed and execution proceeded under the approved bounded
+  topic scope.
+- Completed bounded convergence commits:
+  - `7c0d09b` `refactor(phase-2-planning-spine-exceptions): canonicalize plan-reviewer wording`
+  - `43806f2` `refactor(phase-2-planning-spine-exceptions): canonicalize plan-creator wording`
+  - `1c8c144` `refactor(phase-2-planning-spine-exceptions): simplify workflow-spec example`
+  - `a2e1e18` `refactor(phase-2-planning-spine-exceptions): canonicalize plan-creator wording`
+  - `c5bb8d6` `refactor(phase-2-planning-spine-exceptions): simplify plan-reviewer wording`
+- No `.github/**` or `.codex/**` files were modified in bounded execution.
+- Remaining candidate work under `skills/plan-reviewer/examples.md` is treated
+  as `human_review_required` until later evidence proves it is wording-only.
+- Next workflow step is `review`.
