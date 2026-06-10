@@ -8,6 +8,11 @@ created: 2026-06-10
 
 ## Workflow Stages
 
+- These stage checkboxes record the approved planning-baseline workflow for this
+  topic.
+- The current execution truth for the bounded convergence slice is tracked in
+  `status`, `bounded-execution`, and `Handoff / Gate Notes` below.
+
 - [X] worktree
 - [X] analysis
 - [X] plan
@@ -66,7 +71,8 @@ created: 2026-06-10
 - The bounded skill set is frozen exactly to:
   - `skills/plan-creator/**`
   - `skills/plan-reviewer/**`
-- Later execution under this topic is not yet authorized.
+- Planning-baseline approval completed before bounded execution began under this
+  topic.
 - High-risk authority, workflow, handoff, fallback, and blocked-behavior
   questions remain `human_review_required` until later evidence proves a change
   is wording-only.
@@ -94,4 +100,4 @@ created: 2026-06-10
 - No `.github/**` or `.codex/**` files were modified in bounded execution.
 - Remaining candidate work under `skills/plan-reviewer/examples.md` is treated
   as `human_review_required` until later evidence proves it is wording-only.
-- Next workflow step is `review`.
+- Next workflow step is `execution review`.
