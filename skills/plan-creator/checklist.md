@@ -1,6 +1,6 @@
-# Plan creator checklist
+# Plan Creator Checklist
 
-Use this checklist when drafting or sanity-checking a topic plan before handing it to reviewer or main-agent execution.
+Use this checklist when drafting or sanity-checking a topic plan before handing it to a reviewer or the Main Agent for execution.
 
 - [ ] The topic plan is repo-visible at `plan/<topic>/<topic>.plan.md`.
 - [ ] `Goal / Outcome`, `Scope`, `Locked Decisions`, and `Boundaries / Exclusions` are explicit.
@@ -20,5 +20,5 @@ Use this checklist when drafting or sanity-checking a topic plan before handing 
   - [ ] declared with timing when stable-library surfaces are involved
 - [ ] `Reviewer Handoff` is a single JSON object contract.
 - [ ] `Post-merge / release actions` match the actual topic scope and timing.
-- [ ] Planning actor, creator, reviewer, and main-agent roles are not mixed.
+- [ ] Planning actor, creator, reviewer, and Main Agent roles are not mixed.
 - [ ] No placeholder wording remains where workflow needs a real contract.

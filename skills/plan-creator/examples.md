@@ -99,10 +99,14 @@ Artifact path notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/workflow-spec-refresh/workflow-spec-refresh.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Repo workflow contract | `plan/agent-handoff-workflow.md` | Creator | Repo-level workflow wording being refreshed |
-| Main-agent guide | `.github/guides/MAIN-AGENT-WORKFLOW.md` | Creator | Coupled execution guide updated only if contradictions appear |
+
+Artifact path notes:
+- This topic treats `plan/agent-handoff-workflow.md` as the primary workflow contract surface.
+- Update `.github/guides/MAIN-AGENT-WORKFLOW.md` only if direct contradictions are discovered.
+- If the guide becomes an execution surface, add it explicitly to topic scope and artifact paths.
 ```
 
-- Good because the topic stays process-focused and bounds the coupled files.
+- Good because the topic stays process-focused, keeps the repo workflow contract primary, and treats the guide as conditional follow-up context instead of a default artifact surface.
 
 ### Small wording-only topic
 ```md
