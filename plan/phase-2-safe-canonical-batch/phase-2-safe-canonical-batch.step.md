@@ -142,8 +142,8 @@ created: 2026-06-05
   `feat/andrew/phase-2-safe-canonical-batch` were pushed to `origin` on
   2026-06-10 so the topic could use the explicit umbrella parent branch as the
   PR base.
-- Ready PR `#106` is open from `feat/andrew/phase-2-safe-canonical-batch`
-  into `feat/andrew/phase-2-umbrella`:
+- Ready PR `#106` was opened from `feat/andrew/phase-2-safe-canonical-batch`
+  into `feat/andrew/phase-2-umbrella` before merge:
   `https://github.com/a129924/agent-skills/pull/106`
 - PR `#106` merged into `feat/andrew/phase-2-umbrella` on 2026-06-10 with
   merge commit `fcc904a098d54af2e3e1c082c5b2bc6ecdd37f40`.
