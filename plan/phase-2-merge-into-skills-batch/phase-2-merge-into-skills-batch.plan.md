@@ -15,7 +15,8 @@ When this topic is complete:
   truthfully for the frozen candidates,
 - compatibility-surface differences do not block progress when `skills/` is
   already canonical,
-- and the topic is ready for normal review on the committed execution truth.
+- and the topic is ready for the remaining human-check gate on the committed
+  execution truth.
 
 ## Scope
 
@@ -48,12 +49,14 @@ When this topic is complete:
 
 ## Locked Decisions
 
-### 1. Current workflow stage is execution-complete and pending review
+### 1. Current workflow stage is execution-complete and pending human check
 
 - This topic is no longer planning-only.
 - Bounded canonical convergence under `skills/` has completed for the current
   execution slice.
-- Formal review is the next workflow step on the committed execution truth.
+- Formal review and final verification are complete on the committed execution
+  truth.
+- Human-check is the next workflow step on the committed execution truth.
 
 ### 2. Parent umbrella baseline is fixed
 
@@ -146,8 +149,8 @@ The merge-batch candidate set is frozen to:
 
 - **Current**: `approved`
 - **Execution model**: bounded canonical convergence under `skills/` is
-  complete for this slice; normal review, final gate, and human-check remain
-  pending on repo-visible execution truth
+  complete for this slice; human-check remains pending on repo-visible
+  execution truth
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -185,6 +188,8 @@ Routing notes:
 | Shared topic-plan contract | `plan/topic-plan-contract.md` | Existing repo artifact | Read-only topic-plan structure and blocking-semantics authority |
 | Umbrella parent plan | `plan/phase-2-umbrella/phase-2-umbrella.plan.md` | Existing repo artifact | Read-only parent coordination baseline for slice ordering and boundaries |
 | Umbrella parent progression artifact | `plan/phase-2-umbrella/phase-2-umbrella.step.md` | Existing repo artifact | Read-only evidence that umbrella approval exists and this slice may be planned |
+| Canonical skill surface | `skills/agent-skill-template/` | Existing repo artifact | Canonical skill folder edited in bounded convergence commit `0528a54` |
+| Canonical skill surface | `skills/agent-skill-creator/` | Existing repo artifact | Canonical skill folder edited in bounded convergence commit `0f841da` |
 | Merge-batch candidates evidence | `docs/agent-skills-convergence/phase-1/06-convergence-candidates.md` | Existing repo artifact | Read-only evidence that this exact batch is merge-required |
 | Phase 2 inputs evidence | `docs/agent-skills-convergence/phase-1/07-phase-2-inputs.md` | Existing repo artifact | Read-only evidence that these candidates belong to the merge batch |
 | Semantic drift evidence | `docs/agent-skills-convergence/phase-1/04-semantic-drift-report.md` | Existing repo artifact | Read-only evidence for semantic / behavior-changing drift that blocks blind collapse |
@@ -242,6 +247,7 @@ Artifact path notes:
 - the plan records the eight `no canonical edit needed` determinations
 - the plan states compatibility-surface differences do not block progress when
   canonical `skills/` is already correct
+- the plan lists the two canonical skill surfaces that were actually edited
 - the plan states semantic / alias / behavior drift must not be collapsed by
   assumption when canonical content actually needs change
 - the plan excludes planning-spine exceptions, projection materialization,
@@ -273,7 +279,6 @@ Artifact path notes:
 
 ## Open Questions / Unresolved Items
 
-- Formal review, final gate, and human-check have not yet been rerun on the
-  updated execution truth.
+- Human-check has not yet been completed on the updated execution truth.
 - Whether later workflow conditions require a `review-log.md` or `summary.md`
   artifact remains unresolved and is not widened in this topic-local repair.

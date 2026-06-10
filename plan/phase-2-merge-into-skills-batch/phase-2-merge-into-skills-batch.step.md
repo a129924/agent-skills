@@ -68,7 +68,7 @@ created: 2026-06-10
   - `python-tdd-test-authoring`
   - `python-blueprint-review`
 - `skills/` remains the canonical convergence target.
-- `.github/skills/` and `.codex/skills/` remain non-authority surfaces.
+- `.github/**` and `.codex/**` remain read-only compatibility surfaces.
 - `.codex/skills/` remains a partial projection surface only.
 - Semantic drift / merge policy discussion is expected in later execution and
   must not be silently collapsed away.
