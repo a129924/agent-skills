@@ -1,6 +1,6 @@
 ---
 topic: phase-2-planning-spine-exceptions
-status: approved
+status: merged
 created: 2026-06-10
 ---
 
@@ -102,4 +102,7 @@ created: 2026-06-10
   as `human_review_required` until later evidence proves it is wording-only.
 - Focused execution review passed with no new contract-breaking blocker.
 - Final verification passed with `READY_FOR_HUMAN_REVIEW`.
-- Topic-local workflow is complete; any remaining PR-level handling is outside this step artifact.
+- PR `#108` merged this topic into `feat/andrew/phase-2-umbrella` at merge
+  commit `8305177`.
+- This topic is now merged and terminal under the current execution policy.
+- No additional execution remains authorized under this topic branch.

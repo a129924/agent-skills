@@ -118,11 +118,9 @@ enough evidence to prove they are wording-only:
 
 ## Status / Allowed Transitions
 
-- **Current**: `approved`
-- **Execution model**: planning baseline approval is complete; bounded
-  canonical convergence has been executed under `skills/plan-creator/**` and
-  `skills/plan-reviewer/**`; execution review and final verification have
-  passed and the current topic state is pending human check
+- **Current**: `merged`
+- **Execution model**: bounded canonical convergence under `skills/` completed
+  for this slice and the topic is now merged into the umbrella parent branch
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -141,12 +139,17 @@ Routing notes:
 
 - The planning baseline under this topic was approved and used as the execution
   parent for the completed bounded convergence work.
-- The current review target is the completed canonical wording and path
-  convergence under `skills/plan-creator/**` and `skills/plan-reviewer/**`.
+- The completed convergence target was canonical wording and path convergence
+  under `skills/plan-creator/**` and `skills/plan-reviewer/**`.
 - Execution remains bounded to canonical `skills/` only; `.github/**` and
   `.codex/**` remain read-only compatibility surfaces.
 - Execution review and final verification found no new contract-breaking
   blocker in the committed bounded convergence truth.
+- Human approval completed on the committed bounded convergence truth.
+- PR `#108` merged this topic into `feat/andrew/phase-2-umbrella` at merge
+  commit `8305177`.
+- This topic is now merged and terminal under the current execution policy.
+- No additional execution remains authorized under this topic branch.
 - Any attempt to widen beyond the two frozen canonical skill surfaces is plan
   drift.
 
