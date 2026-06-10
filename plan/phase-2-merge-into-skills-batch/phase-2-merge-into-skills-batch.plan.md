@@ -196,9 +196,8 @@ Artifact path notes:
 
 - This topic does not create `plan/phase-2-merge-into-skills-batch/phase-2-merge-into-skills-batch.review-log.md`.
 - This topic does not create `plan/phase-2-merge-into-skills-batch/phase-2-merge-into-skills-batch.summary.md`.
-- If planning-stage review later determines either artifact is required for
-  this topic, treat that as `human_review_required` rather than widening scope
-  silently.
+- If later review determines either artifact is required for this topic, treat
+  that as `human_review_required` rather than widening scope silently.
 
 ## Implementation Steps
 

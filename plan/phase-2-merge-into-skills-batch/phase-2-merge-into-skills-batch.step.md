@@ -1,6 +1,6 @@
 ---
 topic: phase-2-merge-into-skills-batch
-status: planned
+status: review-ready
 created: 2026-06-10
 ---
 
@@ -101,6 +101,5 @@ created: 2026-06-10
   that item to `human_review_required`.
 - If exact later write scope cannot be derived honestly from evidence, route
   that item to `human_review_required`.
-- If planning-stage review later requires `review-log.md` or `summary.md` for
-  this topic, do not create them under current scope; route to
-  `human_review_required`.
+- If later review requires `review-log.md` or `summary.md` for this topic, do
+  not create them under current scope; route to `human_review_required`.
