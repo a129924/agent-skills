@@ -11,7 +11,7 @@ created: 2026-06-10
 - [X] worktree
 - [X] analysis
 - [X] plan
-- [ ] draft-plan-commit-by-topic
+- [X] draft-plan-commit-by-topic
 - [ ] review
 - [ ] final-gate
 - [ ] human-check
@@ -38,8 +38,8 @@ created: 2026-06-10
 - [X] Record that exact later merge policy and exact later write scope are `human_review_required` where evidence is insufficient
 
 ### draft-plan-commit-by-topic
-- [ ] Commit the merge-batch planning artifacts by topic before formal review routing
-- [ ] Record the draft planning commit in this step artifact once it exists
+- [X] Commit the merge-batch planning artifacts by topic before formal review routing
+- [X] Record the draft planning commit in this step artifact once it exists: `87509b1`
 
 ### review
 - [ ] Route the merge-batch planning baseline for independent review
@@ -74,7 +74,8 @@ created: 2026-06-10
 - Projection materialization, runtime adaptation, and copilot-only work remain
   out of scope.
 - `docs/status.md` remains optional only.
-- Next formal workflow step is `draft-plan-commit-by-topic`.
+- Draft planning artifacts were committed by topic as `87509b1`.
+- Next formal workflow step is `review`.
 - Formal `review` and formal `final-gate` have not yet occurred for this
   topic-local workflow.
 - No implementation work is authorized under this topic at the current
