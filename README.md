@@ -64,6 +64,11 @@ agents/                           # canonical repo-defined workflow agent artifa
 - Versions `0.59.0` through `0.69.0` merged several migration-planning and
   bounded-remediation topics back into `dev`, making those artifacts part of
   the main repository history.
+- As of version `0.72.0`, PR #106, PR #107, and PR #108 completed the three
+  serialized Phase 2 child slices under the approved umbrella baseline, and
+  PR #109 merged the `phase-2-umbrella` close-out into `dev`, adding the full
+  Phase 2 analysis / plan evidence set while landing the bounded canonical
+  convergence and platform-path wording cleanup in canonical `skills/`.
 - As of version `0.71.0`, PR #103 and PR #104 merged the
   `agent-skills-convergence-phase-1` reporting bundle and the
   `plan-contract-authority-alignment` governance alignment into `dev`,
