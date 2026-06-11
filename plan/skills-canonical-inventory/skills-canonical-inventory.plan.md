@@ -46,6 +46,8 @@ When this topic is complete:
     `artifacts/skills-inventory.jsonl`
   - safe publish / explicit failure behavior in
     `scripts/build_skills_inventory.py`
+  - bounded test coverage for the inventory builder at
+    `tests/test_build_skills_inventory.py`
 
 ### Out of scope
 
@@ -66,6 +68,7 @@ When this topic is complete:
 - after human check and implementation start, creator may modify only:
   - `scripts/build_skills_inventory.py`
   - `artifacts/skills-inventory.jsonl`
+  - `tests/test_build_skills_inventory.py`
 
 ### Read-only
 
@@ -87,21 +90,26 @@ When this topic is complete:
 - The only later implementation targets are:
   - `scripts/build_skills_inventory.py`
   - `artifacts/skills-inventory.jsonl`
+  - `tests/test_build_skills_inventory.py`
 - One in-scope inventory unit equals one directory under top-level `skills/`
   that contains `SKILL.md`.
 - The minimum record contract stays bounded to the technical baseline:
   one canonical skill-root path field and one `tree_hash` field per line.
 - The `tree_hash` contract is already frozen and must not be redefined in this
   topic.
+- The exact `tree_hash` byte stream for this topic is locked to skill-root-
+  relative POSIX paths in lexicographic order, hashed as:
+  `relative_path + NUL + file_bytes + NUL` for each included file.
 - `skills/**` is an input surface for discovery and hashing, not an editable
   surface in this topic.
 - `plan/skills-canonical-inventory/skills-canonical-inventory.review-log.md`
   is not created yet. If reviewer feedback later controls routing or creates a
   multi-round rework loop, execution must stop and amend the plan before
   continuing without silently relying on chat history.
-- Any need for tests, helper modules, docs, projection updates, or additional
-  implementation paths is plan drift and requires replanning before creator
-  work continues.
+- Any need for helper modules, docs, projection updates, or additional
+  implementation paths beyond the locked script, artifact, and single bounded
+  test file is plan drift and requires replanning before creator work
+  continues.
 
 ## Boundaries / Exclusions
 
@@ -133,7 +141,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `creator-in-progress`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path, with no release action for this topic
 - **Allowed transitions**:
@@ -162,9 +170,9 @@ Routing notes:
   `plan-creator fix and update and feedback` ->
   `planner final gate` ->
   `wait human check`
-- The current plan artifact satisfies the `create-agent-plan` stage only; the
-  remaining planning gates stay pending in
-  `plan/skills-canonical-inventory/skills-canonical-inventory.step.md`.
+- The planning workflow above is complete in repo-visible truth; human check
+  has passed and creator implementation may proceed within the locked write
+  set.
 - This topic does not declare `merged` -> `released`.
 
 ## Artifact Paths
@@ -178,6 +186,7 @@ Routing notes:
 | Topic planning checklist | `plan/skills-canonical-inventory/skills-canonical-inventory.checklist.md` | Planning actor | Topic-specific review and final-gate checklist for planning artifacts |
 | Inventory builder script | `scripts/build_skills_inventory.py` | Creator | Canonical-scope inventory builder defined by the technical baseline |
 | Inventory artifact | `artifacts/skills-inventory.jsonl` | Creator | Deterministic JSONL output for canonical skill inventory |
+| Inventory builder tests | `tests/test_build_skills_inventory.py` | Creator | Bounded verification for canonical discovery, stable output, hash sensitivity, and junk exclusion |
 
 Artifact path notes:
 
@@ -201,7 +210,10 @@ Artifact path notes:
    sorting before downstream work begins.
 2. Implement deterministic `tree_hash` calculation for each discovered skill
    root using the already-frozen skill-root-relative SHA-256 stream and junk
-   exclusions contract without redefining that contract in this topic.
+   exclusions contract without redefining that contract in this topic. Use
+   skill-root-relative POSIX paths in lexicographic order and hash the exact
+   byte stream `relative_path + NUL + file_bytes + NUL` for each included
+   file.
 3. Implement deterministic UTF-8 JSONL emission at
    `artifacts/skills-inventory.jsonl` with one complete JSON object per skill
    root in stable record order and with the minimum record contract required by
@@ -209,9 +221,15 @@ Artifact path notes:
 4. Implement safe publish behavior by writing to a temporary file in the target
    directory, validating line count and parseability, then atomically replacing
    `artifacts/skills-inventory.jsonl` only after validation succeeds.
-5. Stop and route back to planning if creator work requires any file outside
-   `scripts/build_skills_inventory.py` and `artifacts/skills-inventory.jsonl`
-   or would widen scope beyond canonical `skills/` inventory.
+5. Implement bounded tests at `tests/test_build_skills_inventory.py` covering
+   canonical top-level `skills/` discovery, deterministic byte-stable output,
+   `tree_hash` change on included-file changes, and `tree_hash` stability when
+   only excluded junk files change.
+6. Stop and route back to planning if creator work requires any file outside
+   `scripts/build_skills_inventory.py`,
+   `artifacts/skills-inventory.jsonl`, and
+   `tests/test_build_skills_inventory.py`, or would widen scope beyond
+   canonical `skills/` inventory.
 
 ## Validation / Acceptance Checks
 
@@ -233,7 +251,9 @@ Artifact path notes:
   `.<platform>/skills/` root.
 - Hash contract check:
   recomputation of each `tree_hash` under the frozen contract exactly matches
-  the emitted value.
+  the emitted value, using skill-root-relative POSIX paths in lexicographic
+  order and the exact byte stream
+  `relative_path + NUL + file_bytes + NUL`.
 - Format check:
   every JSONL line parses as one JSON object and includes the minimum required
   record fields.
