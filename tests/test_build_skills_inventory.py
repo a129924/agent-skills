@@ -7,6 +7,8 @@ import os
 import sys
 from pathlib import Path
 
+import pytest
+
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 
@@ -54,6 +56,25 @@ def test_discover_skill_roots_only_accepts_top_level_skills_with_skill_md(
         "skills/alpha",
         "skills/beta",
     ]
+
+
+def test_discover_skill_roots_excludes_symlinked_skill_directories(
+    tmp_path: Path,
+) -> None:
+    repo_root = _create_base_repo(tmp_path)
+    _write(repo_root / "skills" / "alpha" / "SKILL.md", "# alpha\n")
+    real_skill_root = repo_root / "external-skill"
+    _write(real_skill_root / "SKILL.md", "# external\n")
+
+    symlink_path = repo_root / "skills" / "linked-skill"
+    try:
+        os.symlink(real_skill_root, symlink_path, target_is_directory=True)
+    except (NotImplementedError, OSError) as exc:
+        pytest.skip(f"symlink creation unsupported in this environment: {exc}")
+
+    roots = discover_skill_roots(repo_root)
+
+    assert [root.relative_to(repo_root).as_posix() for root in roots] == ["skills/alpha"]
 
 
 def test_write_inventory_emits_only_canonical_records_as_valid_jsonl(
@@ -155,7 +176,10 @@ def test_tree_hash_ignores_symlinked_files(tmp_path: Path) -> None:
 
     external_target = repo_root / "outside.txt"
     _write(external_target, "outside\n")
-    os.symlink(external_target, repo_root / "skills" / "alpha" / "linked.txt")
+    try:
+        os.symlink(external_target, repo_root / "skills" / "alpha" / "linked.txt")
+    except (NotImplementedError, OSError) as exc:
+        pytest.skip(f"symlink creation unsupported in this environment: {exc}")
     after = {record.canonical_path: record.tree_hash for record in build_records(repo_root)}
 
     assert before == after

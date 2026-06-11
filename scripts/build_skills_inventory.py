@@ -54,6 +54,8 @@ def discover_skill_roots(repo_root: Path) -> list[Path]:
 
     roots: list[Path] = []
     for candidate in sorted(skills_root.iterdir(), key=lambda path: path.name):
+        if candidate.is_symlink():
+            continue
         if not candidate.is_dir():
             continue
         if (candidate / "SKILL.md").is_file():
