@@ -1,6 +1,6 @@
 ---
 topic: platform-projection-adapter
-status: planned
+status: publish-in-progress
 created: 2026-06-11
 ---
 
@@ -9,12 +9,12 @@ created: 2026-06-11
 ## Workflow Stages
 
 - [X] planned
-- [ ] creator-in-progress
-- [ ] review-ready
-- [ ] reviewer-in-progress
-- [ ] approved
+- [X] creator-in-progress
+- [X] review-ready
+- [X] reviewer-in-progress
+- [X] approved
 - [ ] needs-rework
-- [ ] publish-in-progress
+- [X] publish-in-progress
 - [ ] pr-open
 - [ ] merged
 
@@ -32,30 +32,30 @@ created: 2026-06-11
 
 ### creator-in-progress
 
-- [ ] Create `skills/platform-projection-adapter/SKILL.md`
-- [ ] Create `skills/platform-projection-adapter/examples.md`
-- [ ] Create `skills/platform-projection-adapter/reference.md`
-- [ ] Create `skills/platform-projection-adapter/scripts/platform_projection_adapter.py`
-- [ ] Create `skills/platform-projection-adapter/tests/test_platform_projection_adapter.py`
-- [ ] Make `--platform-root` required and fail fast when omitted
-- [ ] Make dry-run / apply / force behavior match the frozen analysis artifacts
-- [ ] Make every run summary report mode, target root, source count, action
+- [X] Create `skills/platform-projection-adapter/SKILL.md`
+- [X] Create `skills/platform-projection-adapter/examples.md`
+- [X] Create `skills/platform-projection-adapter/reference.md`
+- [X] Create `skills/platform-projection-adapter/scripts/platform_projection_adapter.py`
+- [X] Create `skills/platform-projection-adapter/tests/test_platform_projection_adapter.py`
+- [X] Make `--platform-root` required and fail fast when omitted
+- [X] Make dry-run / apply / force behavior match the frozen analysis artifacts
+- [X] Make every run summary report mode, target root, source count, action
   counts, and conflicts
-- [ ] Make unreadable or undecodable source input fail fast
-- [ ] Make failed or partial apply report failure truthfully and preserve
+- [X] Make unreadable or undecodable source input fail fast
+- [X] Make failed or partial apply report failure truthfully and preserve
   accurate rerun behavior for the next dry-run
-- [ ] Run `uv run --with pytest pytest skills/platform-projection-adapter/tests/ -v`
-- [ ] Keep existing `skills/`, `.github/**`, `.codex/**`, `README.md`, and
+- [X] Run `uv run --with pytest pytest skills/platform-projection-adapter/tests/ -v`
+- [X] Keep existing `skills/`, `.github/**`, `.codex/**`, `README.md`, and
   `VERSION` untouched
 
 ### review-ready
 
-- [ ] Hand off the completed creator draft only after the fixed pytest command
+- [X] Hand off the completed creator draft only after the fixed pytest command
   passes and the write set still matches the plan
 
 ### reviewer-in-progress
 
-- [ ] Perform independent review against
+- [X] Perform independent review against
   `plan/platform-projection-adapter/platform-projection-adapter.plan.md`,
   `plan/agent-handoff-workflow.md`, and `plan/topic-plan-contract.md`
 - [ ] Record reviewer-controlled routing in
@@ -64,12 +64,12 @@ created: 2026-06-11
 
 ### approved
 
-- [ ] Accept the creator draft with the canonical JSON reviewer verdict before
+- [X] Accept the creator draft with the canonical JSON reviewer verdict before
   publish work begins
 
 ### needs-rework
 
-- [ ] Route blocking reviewer findings back to `creator-in-progress` without
+- [X] Route blocking reviewer findings back to `creator-in-progress` without
   widening topic scope or reopening frozen analysis artifacts
 
 ### publish-in-progress
@@ -103,9 +103,26 @@ created: 2026-06-11
   action.
 - Reviewer work ends at `approved` or `needs-rework`; publish work begins only
   after `approved`.
+- Planner final gate confirmed reviewer findings are blocking and routed this
+  topic to bounded `needs-rework`.
+- Bounded rework scope is limited to:
+  - `skills/platform-projection-adapter/scripts/platform_projection_adapter.py`
+  - `skills/platform-projection-adapter/tests/test_platform_projection_adapter.py`
+  - `plan/platform-projection-adapter/platform-projection-adapter.step.md`
+- Frozen analysis stays unchanged; no write-set expansion is allowed.
+- Bounded rework findings resolved in creator:
+  - added a source/target overlap guard for canonical `skills/` safety
+  - added a fail-fast overlap rejection test
+  - added unreadable-source fail-fast coverage beyond undecodable UTF-8
 - After `merged`, STOP POINT 2 blocks any implicit continuation; Main Agent may
   enter Phase 9 post-merge local sync only after merge is confirmed and a human
   explicitly resumes execution.
-- Next actor: Creator.
-- Next gate: produce the five planned files under
-  `skills/platform-projection-adapter/` and pass the fixed pytest command.
+- Human authorized bounded creator rework under the existing plan.
+- Fixed pytest command passed for this bounded rework.
+- Planner final gate confirmed the bounded rework resolved the prior blocking
+  findings and may advance to `approved`.
+- Human authorized the separate publish flow after `approved`.
+- Next actor: Main Agent.
+- Current gate: `publish-in-progress`.
+- Next gate: commit the bounded topic, push the branch, and open a ready PR
+  against `dev`.

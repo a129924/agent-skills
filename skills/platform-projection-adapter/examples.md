@@ -1,0 +1,53 @@
+# Examples
+
+## Dry-run first
+
+Use dry-run to inspect the whole-library plan without writing anything:
+
+```bash
+uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root .codex
+```
+
+Expected interpretation:
+
+- `result: SAFE_TO_APPLY` means no differing managed target files block apply.
+- `result: BLOCKED` means the summary found an issue such as differing managed
+  target files that would require `--force`.
+
+## Apply after explicit authorization
+
+Only add `--apply` when the caller explicitly authorizes writes:
+
+```bash
+uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root .codex \
+  --apply
+```
+
+Use this when dry-run already showed the projection is safe or when the target
+surface is known to be empty.
+
+## Force only for differing managed files
+
+When a managed target file already exists with different content, add `--force`
+only after explicit overwrite approval:
+
+```bash
+uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root .codex \
+  --apply \
+  --force
+```
+
+This does not authorize deletion of extra target files and does not change the
+whole-library source scope.
+
+## Incorrect patterns
+
+- Running without `--platform-root` and expecting the CLI to guess `.codex`
+- Treating dry-run as permission to write
+- Writing a second projection procedure in the skill text or in ad-hoc shell
+  commands
+- Using `--force` to justify deleting target extras or changing canonical
+  `skills/`

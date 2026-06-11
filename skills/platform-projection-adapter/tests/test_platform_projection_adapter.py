@@ -1,0 +1,329 @@
+from __future__ import annotations
+
+import importlib.util
+import io
+import sys
+from pathlib import Path
+
+import pytest
+
+
+SCRIPT_PATH = (
+    Path(__file__).resolve().parents[1]
+    / "scripts"
+    / "platform_projection_adapter.py"
+)
+
+
+@pytest.fixture
+def adapter_module():
+    spec = importlib.util.spec_from_file_location(
+        "platform_projection_adapter",
+        SCRIPT_PATH,
+    )
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def run_adapter(adapter_module, repo_root: Path, *args: str, write_file=None):
+    stdout = io.StringIO()
+    stderr = io.StringIO()
+    kwargs = {
+        "repo_root": repo_root,
+        "stdout": stdout,
+        "stderr": stderr,
+    }
+    if write_file is not None:
+        kwargs["write_file"] = write_file
+    exit_code = adapter_module.run(list(args), **kwargs)
+    return exit_code, stdout.getvalue(), stderr.getvalue()
+
+
+def write_text(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def make_repo(tmp_path: Path) -> Path:
+    repo_root = tmp_path / "repo"
+    skills_root = repo_root / "skills"
+    write_text(
+        skills_root / "alpha" / "SKILL.md",
+        "Alpha uses .<platform>/skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n",
+    )
+    write_text(
+        skills_root / "alpha" / "reference.md",
+        "Provenance lives at .<platform>/skills-provenance.json.\n",
+    )
+    write_text(
+        skills_root / "nested" / "guides" / "note.md",
+        "Nested file.\n",
+    )
+    return repo_root
+
+
+def test_platform_root_is_required(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    exit_code, stdout, stderr = run_adapter(adapter_module, repo_root)
+
+    assert exit_code == 2
+    assert stdout == ""
+    assert "--platform-root" in stderr
+
+
+def test_dry_run_reports_summary_without_writing(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 0
+    assert stderr == ""
+    assert "mode: dry-run" in stdout
+    assert f"platform_root: {target_root.as_posix()}" in stdout
+    assert "source_count: 3" in stdout
+    assert "create: 3" in stdout
+    assert "update: 0" in stdout
+    assert "noop: 0" in stdout
+    assert "conflicts: 0" in stdout
+    assert "result: SAFE_TO_APPLY" in stdout
+    assert not (target_root / "skills").exists()
+
+
+@pytest.mark.parametrize(
+    ("platform_root", "expected_fragment"),
+    [
+        pytest.param("repo-root", "source=", id="equal-to-canonical"),
+        pytest.param("nested-under-skills", "target=", id="target-inside-canonical"),
+    ],
+)
+def test_platform_root_overlap_fails_fast(
+    adapter_module,
+    tmp_path: Path,
+    platform_root: str,
+    expected_fragment: str,
+):
+    repo_root = make_repo(tmp_path)
+    if platform_root == "repo-root":
+        overlap_root = repo_root
+    else:
+        overlap_root = repo_root / "skills" / "projection-root"
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(overlap_root),
+    )
+
+    assert exit_code == 1
+    assert "Platform root would overlap canonical skills/" in stderr
+    assert "result: BLOCKED" in stdout
+    assert "Platform root would overlap canonical skills/" in stdout
+    assert expected_fragment in stdout
+
+
+def test_apply_creates_targets_and_rewrites_placeholders(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+        "--apply",
+    )
+
+    assert exit_code == 0
+    assert stderr == ""
+    assert "mode: apply" in stdout
+    assert "result: APPLIED" in stdout
+
+    projected_skill = target_root / "skills" / "alpha" / "SKILL.md"
+    assert projected_skill.exists()
+    assert (
+        projected_skill.read_text(encoding="utf-8")
+        == f"Alpha uses {target_root.as_posix()}/skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n"
+    )
+    assert (
+        (target_root / "skills" / "alpha" / "reference.md").read_text(encoding="utf-8")
+        == f"Provenance lives at {target_root.as_posix()}/skills-provenance.json.\n"
+    )
+    assert (target_root / "skills" / "nested" / "guides" / "note.md").exists()
+
+
+def test_apply_blocks_on_differing_target_without_force(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+    target_file = target_root / "skills" / "alpha" / "SKILL.md"
+    write_text(target_file, "manual change\n")
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+        "--apply",
+    )
+
+    assert exit_code == 1
+    assert stderr == ""
+    assert "update: 1" in stdout
+    assert "conflicts: 1" in stdout
+    assert "result: BLOCKED" in stdout
+    assert "--force" in stdout
+    assert target_file.read_text(encoding="utf-8") == "manual change\n"
+
+
+def test_apply_force_overwrites_differing_targets(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+    target_file = target_root / "skills" / "alpha" / "SKILL.md"
+    write_text(target_file, "manual change\n")
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+        "--apply",
+        "--force",
+    )
+
+    assert exit_code == 0
+    assert stderr == ""
+    assert "update: 1" in stdout
+    assert "conflicts: 1" in stdout
+    assert "result: APPLIED" in stdout
+    assert (
+        target_file.read_text(encoding="utf-8")
+        == f"Alpha uses {target_root.as_posix()}/skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n"
+    )
+
+
+def test_rerun_after_success_becomes_noop(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+
+    apply_code, _, _ = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+        "--apply",
+    )
+    dry_run_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert apply_code == 0
+    assert dry_run_code == 0
+    assert stderr == ""
+    assert "create: 0" in stdout
+    assert "update: 0" in stdout
+    assert "noop: 3" in stdout
+    assert "conflicts: 0" in stdout
+    assert "result: SAFE_TO_APPLY" in stdout
+
+
+def test_invalid_utf8_source_fails_fast(adapter_module, tmp_path: Path):
+    repo_root = tmp_path / "repo"
+    source_root = repo_root / "skills"
+    (source_root / "broken").mkdir(parents=True, exist_ok=True)
+    (source_root / "broken" / "SKILL.md").write_bytes(b"\xff\xfe\xfd")
+    target_root = tmp_path / ".codex"
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 1
+    assert "Failed to decode UTF-8 source file" in stderr
+    assert "result: BLOCKED" in stdout
+    assert "Failed to decode UTF-8 source file" in stdout
+    assert not target_root.exists()
+
+
+def test_unreadable_source_fails_fast(adapter_module, tmp_path: Path, monkeypatch):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+    broken_source = repo_root / "skills" / "alpha" / "reference.md"
+    original_read_text = adapter_module.Path.read_text
+
+    def fake_read_text(path_self, *args, **kwargs):
+        if path_self == broken_source:
+            raise PermissionError("permission denied")
+        return original_read_text(path_self, *args, **kwargs)
+
+    monkeypatch.setattr(adapter_module.Path, "read_text", fake_read_text)
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 1
+    assert "Failed to read source file" in stderr
+    assert "source_count: 3" in stdout
+    assert "result: BLOCKED" in stdout
+    assert "Failed to read source file" in stdout
+    assert not target_root.exists()
+
+
+def test_partial_apply_reports_failure_and_rerun_recomputes(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+    original_write = adapter_module.write_rendered_file
+    call_count = {"value": 0}
+
+    def flaky_write(target_path: Path, rendered_content: str) -> None:
+        call_count["value"] += 1
+        if call_count["value"] == 2:
+            raise OSError("simulated write failure")
+        original_write(target_path, rendered_content)
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+        "--apply",
+        write_file=flaky_write,
+    )
+
+    assert exit_code == 1
+    assert "result: BLOCKED" in stdout
+    assert "Failed to write target file" in stdout
+    assert "simulated write failure" in stderr
+
+    dry_run_code, dry_run_stdout, dry_run_stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert dry_run_code == 0
+    assert dry_run_stderr == ""
+    assert "create: 2" in dry_run_stdout
+    assert "update: 0" in dry_run_stdout
+    assert "noop: 1" in dry_run_stdout
+    assert "conflicts: 0" in dry_run_stdout
+    assert "result: SAFE_TO_APPLY" in dry_run_stdout
