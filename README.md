@@ -58,6 +58,13 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of version `0.74.0`, PR #111 merged the
+  `skills-canonical-inventory` topic into `dev`, adding the bounded canonical
+  `skills/` inventory builder at `scripts/build_skills_inventory.py`, the
+  deterministic `artifacts/skills-inventory.jsonl` snapshot, bounded pytest
+  coverage for the inventory contract, and the topic-local analysis / plan
+  evidence set while keeping scope limited to top-level canonical `skills/`
+  only.
 - As of version `0.73.0`, PR #110 merged the
   `codex-skills-canonical-retarget` topic into `dev`, replacing the first-wave
   `.codex/skills/` top-level symlink surface with 11 `.codex`-local
