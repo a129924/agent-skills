@@ -110,7 +110,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path, with no release action
 - **Allowed transitions**:
@@ -133,6 +133,7 @@ Routing notes:
 - Plan review has already approved this topic contract.
 - Implementation review has accepted the staged 11-item materialized `.codex`
   surface and the current topic truth artifacts.
+- The ready PR is now open against `dev`.
 - If later review feedback returns `needs-rework`, corrections must stay inside
   this topic's plan/step/review-log artifacts or the frozen `.codex/skills/**`
   implementation write set only.

@@ -1,6 +1,6 @@
 ---
 topic: codex-skills-canonical-retarget
-status: publish-in-progress
+status: pr-open
 created: 2026-06-11
 ---
 
@@ -16,8 +16,8 @@ created: 2026-06-11
 - [X] branch-ready
 - [X] implementation
 - [X] implementation-review
-- [ ] publish
-- [ ] pr-open
+- [X] publish
+- [X] pr-open
 - [ ] merged
 
 ## Actionable Steps
@@ -107,12 +107,12 @@ created: 2026-06-11
 
 ### publish
 
-- [ ] Enter canonical publish routing only after implementation review returns
+- [X] Enter canonical publish routing after implementation review returned
       `approved`
 
 ### pr-open
 
-- [ ] Open and manage the PR only after publish progression is authorized
+- [X] Open and manage the ready PR after publish progression was authorized
 
 ### merged
 
@@ -154,6 +154,8 @@ created: 2026-06-11
 - Round 2 bounded implementation review returned `approved` after the topic
   truth was repaired to the 11-entry materialized-copy contract and the staged
   branch content reflected the directory replacements.
-- Current stop condition: local publish routing may proceed under the explicit
-  human commit approval already granted for this topic; push / PR work remain
-  blocked until separately authorized.
+- Branch `feat/andrew/codex-skills-canonical-retarget` was pushed to `origin`
+  and a ready PR is open at
+  `https://github.com/a129924/agent-skills/pull/110` targeting `dev`.
+- Current stop condition: PR review / comment triage is now the active loop;
+  merge remains pending.
