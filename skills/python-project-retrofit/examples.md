@@ -52,7 +52,7 @@ backup_required: false
 3. use the lightweight `LOW` confirmation path
 4. add only the missing governed surfaces
 5. generate the Sensing Delta Report
-6. hand off to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
+6. hand off to `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
 
 ---
 
@@ -185,7 +185,7 @@ Migration Direction: replace root entrypoint with package entrypoint after reloc
 - once retrofit work and the Sensing Delta Report are complete, run:
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md
 ```
 
 - if the command cannot run, stop and explain the missing prerequisite

@@ -28,6 +28,9 @@ outputs:
 Invoke `.github/skills/sense-env-scaffold/scripts/sense_env.py` to produce a structured, machine-readable manifest of
 the repository environment, or to evaluate sensing assertions defined in a contract
 document.
+The canonical source lives under `skills/sense-env-scaffold/...`; any
+`.<platform>/skills/sense-env-scaffold/...` path is a platform projection of that
+canonical source.
 
 # Trigger / When to use
 Use this skill when:
@@ -84,6 +87,10 @@ Do not use this skill when:
 # Boundaries
 - Do not modify `.github/skills/sense-env-scaffold/scripts/sense_env.py` or its local
   runtime package as part of invoking this skill; treat them as fixed prototype tooling.
+- If related documentation elsewhere uses `.<platform>` as an abstract compatibility
+  label, do not copy it into runnable CLI paths; this scaffold's executable defaults
+  remain `.github/env-manifest.json` and `.github/env-manifest.snapshot.json` unless
+  `--output` overrides them.
 - Do not interpret exit `20` as a fatal environment error; it means assertions failed
   and the `gaps` section describes what is missing.
 - Do not promote a snapshot unless the run exited `0`; the script enforces this but

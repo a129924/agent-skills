@@ -45,7 +45,8 @@ Do not raise blocking issues for tone, phrasing, or layout preferences that do n
 Typical operating sequence:
 
 1. `plan-creator` authors `plan/<topic>/<topic>.plan.md`
-2. Main Agent routes the plan to an independent reviewer, typically via `/fleet`
+2. Main Agent routes the plan to an independent reviewer through a separate
+   reviewer path
 3. required fixes are applied
 4. only then does branch preparation or later execution continue
 

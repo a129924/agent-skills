@@ -3,7 +3,9 @@
 This document defines the canonical authoring-target folder contract for
 transition work.
 
-For this contract, `skills/` is the canonical authoring target for transition work, while `.github/skills/` may remain the current active authored/reviewed path until later cutover; `.<platform>/skills/` is a future projection or adapter layout, not source of truth.
+For this contract, `skills/` is the canonical authoring target for transition
+work. Any `.<platform>/skills/` path is a compatibility or projection surface,
+not the source of truth.
 
 ## Required core
 - `SKILL.md`: the executable instruction contract for the skill
@@ -79,11 +81,12 @@ For this contract, `skills/` is the canonical authoring target for transition wo
 
 - scaffold new or materially transitioned skill content under
   `skills/<skill-name>/`
-- do not treat this contract as authorization to promote `skills/` to the
-  current active workflow path
+- do not treat this contract as authorization to rewrite compatibility,
+  projection, or platform-consumption surfaces
 - do not rewrite runtime/tooling, installer, or projection surfaces here
-- if downstream planning-spine skills still assume `.github/skills/`, record a
-  follow-up implication instead of editing those skills in this phase
+- if downstream planning-spine skills still assume a `.<platform>/skills/`
+  surface, record a follow-up implication instead of editing those skills in
+  this phase
 
 ## YAML Metadata Policy
 

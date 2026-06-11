@@ -89,7 +89,7 @@ Do not use this skill when:
 
      No matches → all Implementation Steps are complete → continue to step 2.
      One or more matches → pending Implementation Steps remain. Lowercase `[x]` is pending, not done.
-   - Optional helper path: a repository may also reference `python .github/skills/plan-step-tracker/scripts/step_tracker.py ...`, but only when that path is narrowed to the same `## Implementation Steps` semantics as the portable check above. It is never a hard dependency for this skill.
+   - Optional helper path: a repository may also reference `python .<platform>/skills/plan-step-tracker/scripts/step_tracker.py ...`, but only when that path is narrowed to the same `## Implementation Steps` semantics as the portable check above. It is never a hard dependency for this skill.
    - If pending Implementation Steps are found, emit the BLOCKED refusal output below and stop immediately. Do not build the traceability matrix, and do not produce a YAML verdict block.
 
 2. **Build the traceability matrix.**

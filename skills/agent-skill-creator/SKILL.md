@@ -51,7 +51,7 @@ Do not use this skill when:
    - higher-risk: gatekeeping, release, tool-driven, or high-impact guidance needs stronger misuse prevention
 4. Propose `complexity` in YAML frontmatter. Propose applicable `risk_profile` tags for medium and high complexity skills.
 5. If a topic plan locks a creator/reviewer-first rollout, keep the work inside creator, reviewer, and the minimum supporting policy/template files. Defer downstream regular skills to later topics instead of broadening the current one.
-6. Create `skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case. During transition, `.github/skills/` may remain the current active authored/reviewed workflow path, but this creator contract uses `skills/` as the canonical authoring target.
+6. Create `skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case. This creator contract uses `skills/` as the canonical authoring target; any `.<platform>/skills/` path is a compatibility or projection surface, not the source of truth, and should be mentioned only when context or prompt explicitly injects that surface into scope.
 7. Keep the skill focused on one job.
 8. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 9. Add `reference.md` or `examples.md`.
@@ -127,7 +127,10 @@ Omit this section when the skill is created outside a multi-agent handoff flow.
 - Do not rely on hidden context outside the skill folder.
 - Do not expand a creator/reviewer-first topic into downstream regular-skill rollout; defer those changes to a later topic plan.
 - Do not add heavyweight validation to a lightweight skill unless the risk truly warrants it.
-- Do not treat `.github/skills/` projection, promotion, or runtime/tooling follow-up as part of this drafting step.
+- Do not assume any concrete `.<platform>/skills/` surface unless context or
+  prompt explicitly puts that compatibility/projection path in scope.
+- Do not treat any `.<platform>/skills/` compatibility/projection, promotion,
+  or runtime/tooling follow-up as part of this drafting step.
 - Do not claim `approved` or `stable`.
 - Do not approve your own output.
 

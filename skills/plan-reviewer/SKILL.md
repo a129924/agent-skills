@@ -9,7 +9,7 @@ use_when:
   - "a repo-visible `plan/<topic>/<topic>.plan.md` already exists"
   - "the plan needs an independent review before branch preparation or creator implementation begins"
   - "an existing topic plan was revised and needs contract re-review"
-  - "Main Agent is routing plan review through `/fleet` or an equivalent independent reviewer path"
+  - "Main Agent is routing plan review through a separate independent reviewer path"
 do_not_use_when:
   - "the main task is to author or revise the topic plan itself"
   - "the task is to review a skill folder or implementation draft"
@@ -19,7 +19,7 @@ inputs:
   - "the target `plan/<topic>/<topic>.plan.md`"
   - "the current workflow contract from `plan/agent-handoff-workflow.md`"
   - "the shared topic-plan contract from `plan/topic-plan-contract.md`"
-  - "any contextual Copilot feedback, if it exists"
+  - "any contextual review feedback, including Copilot feedback, if it exists"
 outputs:
   - "exactly one machine-consumable JSON object with no trailing prose"
   - "verdict set to approved or needs-rework"
@@ -35,7 +35,7 @@ Use this skill when:
 - a repo-visible `plan/<topic>/<topic>.plan.md` already exists
 - the plan needs an independent review before branch preparation or creator implementation begins
 - an existing topic plan was revised and needs contract re-review
-- Main Agent is routing plan review through `/fleet` or an equivalent independent reviewer path
+- Main Agent is routing plan review through a separate independent reviewer path
 
 Do not use this skill when:
 - the main task is to author or revise the topic plan itself
@@ -47,7 +47,7 @@ Do not use this skill when:
 - the target `plan/<topic>/<topic>.plan.md`
 - the current workflow contract from `plan/agent-handoff-workflow.md`
 - the shared topic-plan contract from `plan/topic-plan-contract.md`
-- any contextual Copilot feedback, if it exists
+- any contextual review feedback, including Copilot feedback, if it exists
 
 # Process
 1. Confirm the task is topic-plan review, not plan authoring, skill review, publish routing, or workflow-spec editing.

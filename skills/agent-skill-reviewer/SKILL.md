@@ -49,9 +49,10 @@ Do not use this skill when:
    - canonical-source review: confirm the draft lives under
      `skills/<skill-name>/` as the canonical authoring target and does not
      claim that `skills/` is already the current active workflow path
-   - mirror/projection review: if a `.github/skills/` surface is explicitly in
-     scope, confirm it is treated as a transition mirror/projection surface and
-     not as the canonical source of truth
+   - mirror/projection review: only if a `.<platform>/skills/` surface is
+     explicitly in scope or injected by context/prompt, confirm it is treated
+     as a transition mirror/projection surface and not as the canonical source
+     of truth
 8. Assess whether the skill's validation weight matches its risk, branching, external-tool usage, and downstream impact.
 9. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
 10. If `reference.md` is too broad, require it to be split into `references/`.
@@ -63,7 +64,7 @@ Do not use this skill when:
 16. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
 17. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
 18. For transition topics that touch creator / reviewer / template contracts
-    only, treat planning-spine `.github/skills/*` assumptions as downstream
+    only, treat downstream planning-spine `.<platform>/skills/*` assumptions as
     follow-up implications unless the inventory already gives explicit blocker
     evidence.
 19. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
@@ -128,6 +129,8 @@ Omit this section when the review is performed as a standalone action.
 - Do not fail a creator/reviewer/template transition solely because downstream
   planning-spine skills still need later follow-up, unless explicit blocker
   evidence already exists in inventory.
+- Do not assume any concrete `.<platform>/skills/` projection path unless
+  context or prompt explicitly puts that surface in scope.
 - Do not author the final implementation directly.
 
 # Local references
