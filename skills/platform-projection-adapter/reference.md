@@ -39,6 +39,8 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 - Placeholder text that starts with `.<platform>/` is rewritten in target
   content to `<platform-root>/`.
 - Canonical wording that already refers to `skills/...` remains unchanged.
+- When the skill text describes a projection surface abstractly, prefer
+  `.<platform>/...` wording over naming one concrete platform path.
 
 ## Summary Fields
 

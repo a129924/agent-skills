@@ -6,7 +6,7 @@ Use dry-run to inspect the whole-library plan without writing anything:
 
 ```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
-  --platform-root .codex
+  --platform-root <path>
 ```
 
 Expected interpretation:
@@ -21,7 +21,7 @@ Only add `--apply` when the caller explicitly authorizes writes:
 
 ```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
-  --platform-root .codex \
+  --platform-root <path> \
   --apply
 ```
 
@@ -35,7 +35,7 @@ only after explicit overwrite approval:
 
 ```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
-  --platform-root .codex \
+  --platform-root <path> \
   --apply \
   --force
 ```
@@ -45,7 +45,7 @@ whole-library source scope.
 
 ## Incorrect patterns
 
-- Running without `--platform-root` and expecting the CLI to guess `.codex`
+- Running without `--platform-root` and expecting the CLI to guess a concrete `.<platform>` surface
 - Treating dry-run as permission to write
 - Writing a second projection procedure in the skill text or in ad-hoc shell
   commands

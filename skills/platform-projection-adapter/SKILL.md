@@ -15,13 +15,13 @@ outputs:
   - a CLI summary with mode, target root, source count, action counts, and conflicts
   - a platform-root projection under `<platform-root>/skills/` when apply is explicitly authorized
 use_when:
-  - the task is to project the whole canonical `skills/` library into a concrete platform surface such as `.codex`
+  - the task is to project the whole canonical `skills/` library into a concrete platform projection surface such as `.<platform>/skills/`
   - the caller needs a safe dry-run before any platform projection write
   - the caller needs to re-run projection and verify whether force is required
 do_not_use_when:
   - the task is to edit canonical `skills/` content directly
   - the task is to project only one skill subset instead of the whole library
-  - the task requires repo-visible edits under `.github/**`, `.codex/**`, `README.md`, or `VERSION`
+  - the task requires repo-visible edits under `.github/**`, `.<platform>/**`, `README.md`, or `VERSION`
 ---
 
 # Purpose
@@ -54,7 +54,7 @@ Do not use this skill when:
 7. If the CLI reports `BLOCKED`, surface the reason and stop instead of improvising a second write path.
 
 # Examples
-- Positive: Run a dry-run against `.codex`, report the summary, then wait for explicit human authorization before adding `--apply`.
+- Positive: Run a dry-run against a caller-specified platform root, report the summary, then wait for explicit human authorization before adding `--apply`.
 - Negative: Re-implement projection rules in `SKILL.md`, guess a platform root without `--platform-root`, or overwrite target files without explicit `--force`.
 
 # Outputs
