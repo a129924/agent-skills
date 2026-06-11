@@ -1,13 +1,15 @@
 # Sense-Env CLI Contract
 
-Defines the complete CLI surface of `.github/skills/sense-env-scaffold/scripts/sense_env.py` v1.
+Defines the complete CLI surface of `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` v1.
+The canonical source lives under `skills/sense-env-scaffold/...`; any
+`.<platform>/skills/sense-env-scaffold/...` path is a platform projection.
 
 ---
 
 ## Synopsis
 
 ```
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py [OPTIONS]
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py [OPTIONS]
 ```
 
 Must be invoked from within the repository (any subdirectory). The script
@@ -21,7 +23,7 @@ resolves the repository root upward from the current working directory.
 |---|---|---|---|---|
 | `--mode` | string | yes | — | Run mode: `discovery` or `acceptance` |
 | `--contract-file` | path | no | implicit lookup | Path to contract document containing `yaml [sensing-assertions]` block |
-| `--output` | path | no | `<repo_root>/.github/env-manifest.json` | Output path for the live manifest |
+| `--output` | path | no | `<repo_root>/.<platform>/env-manifest.json` | Output path for the live manifest |
 | `--snapshot` | boolean flag | no | off | When present, also write a filtered snapshot to the fixed snapshot path |
 
 ### `--mode`
@@ -109,11 +111,11 @@ The fenced block must contain a top-level sequence of assertion records.
 
 ```yaml
 - kind: path_exists
-  target: .github/skills/sense-env-scaffold/scripts/sense_env.py
+  target: .<platform>/skills/sense-env-scaffold/scripts/sense_env.py
   expected: "true"
 
 - kind: path_type
-  target: .github
+  target: .<platform>
   expected: directory
 
 - kind: command_available
@@ -153,14 +155,14 @@ record them. Add new kinds by extending the script in a separate planning topic.
 
 | Path | Description |
 |---|---|
-| `<repo_root>/.github/env-manifest.json` | Default live manifest path |
-| `<repo_root>/.github/env-manifest.snapshot.json` | Fixed snapshot path (v1, not overridable) |
+| `<repo_root>/.<platform>/env-manifest.json` | Default live manifest path |
+| `<repo_root>/.<platform>/env-manifest.snapshot.json` | Fixed snapshot path (v1, not overridable) |
 
 When `--output` is provided, it overrides the live manifest path only. The snapshot
 path is always fixed.
 
-`.github/` is created automatically if it does not exist and the write target is
-under `<repo_root>/.github/`.
+`.<platform>/` is created automatically if it does not exist and the write target is
+under `<repo_root>/.<platform>/`.
 
 ---
 
@@ -184,15 +186,15 @@ is emitted to stderr as a fallback.
 ### Discovery (default output path)
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery
-# Writes: .github/env-manifest.json
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery
+# Writes: .<platform>/env-manifest.json
 # Exit:   0 (always, unless I/O fails)
 ```
 
 ### Discovery with custom output path
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --output /tmp/my-manifest.json
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --output /tmp/my-manifest.json
 # Writes: /tmp/my-manifest.json
 # Exit:   0
 ```
@@ -200,16 +202,16 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery 
 ### Discovery with snapshot export
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --snapshot
-# Writes: .github/env-manifest.json
-# Writes: .github/env-manifest.snapshot.json  (only when exit is 0)
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery --snapshot
+# Writes: .<platform>/env-manifest.json
+# Writes: .<platform>/env-manifest.snapshot.json  (only when exit is 0)
 # Exit:   0
 ```
 
 ### Acceptance with explicit contract file
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file plan/my-blueprint.md
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file plan/my-blueprint.md
 # Loads assertions from plan/my-blueprint.md
 # Exit:   0 (all assertions pass) / 20 (any FAIL) / 30 (contract error)
 ```
@@ -217,7 +219,7 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 ### Acceptance with implicit contract lookup
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 # Looks for: retrofit-plan.md, then blueprint.md in repo root
 # Exit:   0 / 20 / 30
 ```
@@ -225,7 +227,7 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 ### Acceptance with snapshot export
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md --snapshot
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md --snapshot
 # Snapshot is written only when exit would be 0
 ```
 
@@ -238,7 +240,7 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 | `--mode acceptance` with no contract file anywhere | `30` |
 | Contract file found but no `yaml [sensing-assertions]` block | `30` |
 | Fenced block present but content is outside the narrow supported subset | `30` |
-| `.github/` parent-dir creation fails | `10` |
+| `.<platform>/` parent-dir creation fails | `10` |
 | Manifest file write fails | `10` |
 | Snapshot write fails after live manifest write succeeds | `10` (live manifest kept) |
 | Required assertion fails | `20` |

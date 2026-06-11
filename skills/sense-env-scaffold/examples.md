@@ -10,12 +10,12 @@ for `sense-env-scaffold`.
 **When to use:** before beginning implementation work; no contract needed.
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery
 ```
 
 Expected outcome:
 - Exit `0`
-- `.github/env-manifest.json` written with all five top-level keys
+- `.<platform>/env-manifest.json` written with all five top-level keys
 - Optional tools that are missing produce `null` values, not errors
 
 Resulting manifest shape:
@@ -38,20 +38,20 @@ Resulting manifest shape:
 machine-local data (absolute paths, usernames).
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode discovery --snapshot
 ```
 
 Expected outcome:
 - Exit `0`
-- `.github/env-manifest.json` written (full, live)
-- `.github/env-manifest.snapshot.json` written (filtered, secret-free)
+- `.<platform>/env-manifest.json` written (full, live)
+- `.<platform>/env-manifest.snapshot.json` written (filtered, secret-free)
 
 Anti-pattern:
 
 ```bash
 # Wrong: snapshot flag on a run that will exit non-zero
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode acceptance --snapshot
 # Snapshot is NOT written when exit is 20 or 30.
 # Do not assume the snapshot file was created after a failed acceptance run.
@@ -64,7 +64,7 @@ python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
 **When to use:** evaluate a specific blueprint or plan file's sensing assertions.
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode acceptance --contract-file plan/my-blueprint.md
 ```
 
@@ -96,7 +96,7 @@ Expected outcomes by exit code:
 **When to use:** the project uses the default contract file name convention.
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode acceptance
 ```
 
@@ -108,7 +108,7 @@ Anti-pattern:
 
 ```bash
 # Wrong: running acceptance with no contract and expecting exit 0
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance
 # If neither retrofit-plan.md nor blueprint.md exists, exit is 30.
 # Do not assume discovery-style tolerance applies to acceptance mode.
 ```
@@ -190,7 +190,7 @@ Anti-pattern:
 **When to use:** CI or tooling writes manifests to a non-default path.
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py \
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py \
   --mode discovery --output /tmp/ci-manifest.json
 ```
 

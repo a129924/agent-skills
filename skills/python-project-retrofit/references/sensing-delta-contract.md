@@ -112,7 +112,7 @@ A good Delta Report lets a reviewer answer these questions quickly:
 
 Record the Delta Report reference alongside provenance so the retrofit has both:
 
-- a governance record in `.github/skills-provenance.json`
+- a governance record in `.<platform>/skills-provenance.json`
 - a runtime artifact reference describing the before/after surgery
 
 ## Acceptance relationship
@@ -121,7 +121,7 @@ The Delta Report summarizes the retrofit. It does not replace acceptance.
 After the report exists, hand off to:
 
 ```bash
-python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md
+python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md
 ```
 
 If acceptance fails, keep the Delta Report; it still documents what changed.

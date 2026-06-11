@@ -13,12 +13,12 @@ inputs:
   - current Git working-tree state before any move, deletion, or overwrite
   - parsed yaml [migration-strategy] fields: risk_level, destructive_actions, and backup_required
   - explicit human decisions for Gate 1 and Gate 2, plus any HIGH-risk destructive authorization when a clean or backed-up path is ready
-  - provenance destination at .github/skills-provenance.json
+  - provenance destination at `.<platform>/skills-provenance.json`
 outputs:
   - existing Python project restructured to the approved Retrofit V2 target
   - explicit human gate outcomes for shadow files, implicit configs, and destructive paths
   - Sensing Delta Report JSON artifact with before/after facts and MOVED / CREATED / MODIFIED / DELETED operations
-  - provenance recorded in .github/skills-provenance.json
+  - provenance recorded in `.<platform>/skills-provenance.json`
   - acceptance handoff result or a concrete blocking error
 use_when:
   - an existing Python repository already has an approved Retrofit V2 retrofit-plan.md
@@ -40,7 +40,7 @@ Use this skill when:
 - an existing Python repository already has an approved Retrofit V2 `retrofit-plan.md`
 - the task is to execute retrofit work rather than author the retrofit contract
 - the workflow must detect shadow files, mine implicit configuration remnants, enforce risk alignment, and emit a Sensing Delta Report before acceptance
-- the retrofit must hand off immediately to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
+- the retrofit must hand off immediately to `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`
 
 Do not use this skill when:
 - the repository is greenfield or baseline-only; use `python-project-init-greenfield`
@@ -55,7 +55,7 @@ Do not use this skill when:
 - current Git working-tree state before any move, deletion, or overwrite
 - the parsed `yaml [migration-strategy]` fields: `risk_level`, `destructive_actions`, and `backup_required`
 - explicit human decisions for Gate 1 and Gate 2, plus any HIGH-risk destructive authorization when a clean or backed-up path is ready
-- the provenance destination at `.github/skills-provenance.json`
+- the provenance destination at `.<platform>/skills-provenance.json`
 
 # Process
 1. Confirm retrofit fit and parse the Retrofit V2 contract first.
@@ -109,23 +109,24 @@ Do not use this skill when:
     - Emit JSON with a top-level `delta_summary` object.
     - Include `timestamp`, `pre_retrofit_state`, `post_retrofit_state`, `changes`, `new_files`, `deleted_files`, and `modified_files`.
     - For every change record include `fact_key`, `before`, `after`, and `operation`, where `operation` is one of `MOVED`, `CREATED`, `MODIFIED`, or `DELETED`.
-12. Record provenance in `.github/skills-provenance.json`.
+12. Record provenance in `.<platform>/skills-provenance.json`.
     - Record the retrofit date, creator, and Delta Report reference.
     - Keep provenance repo-visible and governance-oriented.
 13. Close the loop with acceptance.
-    - Hand off to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`.
+    - Treat `skills/...` as canonical source and `.<platform>/skills/...` as the platform projection surface used for the runnable entrypoint.
+    - Hand off to `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`.
     - If acceptance cannot run, report the blocking reason instead of claiming success.
 14. Clean up scratch artifacts created during the retrofit flow while preserving `retrofit-plan.md`, the Delta Report artifact, and provenance.
 
 # Examples
-- Positive: Read a Retrofit V2 `retrofit-plan.md`, block a mislabeled `LOW` plan if the workspace reveals destructive moves, otherwise run Gate 1 and Gate 2, require HIGH-risk destructive preview and authorization when needed, emit the Sensing Delta Report, then hand off to `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`.
+- Positive: Read a Retrofit V2 `retrofit-plan.md`, block a mislabeled `LOW` plan if the workspace reveals destructive moves, otherwise run Gate 1 and Gate 2, require HIGH-risk destructive preview and authorization when needed, emit the Sensing Delta Report, then hand off to `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file retrofit-plan.md`.
 - Negative: Accept old Retrofit headings, treat `Migration Direction` as permission to skip human choices, or continue with destructive work after a `LOW` risk mismatch or dirty Git state.
 
 # Outputs
 - an existing Python project restructured to the approved Retrofit V2 target
 - explicit human gate outcomes for shadow files, implicit configs, and destructive paths
 - a Sensing Delta Report JSON artifact with before/after facts and `MOVED` / `CREATED` / `MODIFIED` / `DELETED` operations
-- provenance recorded in `.github/skills-provenance.json`
+- provenance recorded in `.<platform>/skills-provenance.json`
 - an acceptance handoff result or a concrete blocking error
 
 # Verification
@@ -173,7 +174,7 @@ Do not use this skill when:
 - All three gates produced explicit human-confirmed outcomes before execution proceeded
 - The Sensing Delta Report includes all required fields: `delta_summary`, `timestamp`, `pre_retrofit_state`, `post_retrofit_state`, `changes`, `new_files`, `deleted_files`, `modified_files`
 - Every change record includes `fact_key`, `before`, `after`, and a valid `operation` value
-- Provenance is recorded in `.github/skills-provenance.json`
+- Provenance is recorded in `.<platform>/skills-provenance.json`
 - Acceptance handoff used the exact `sense_env.py --mode acceptance --contract-file retrofit-plan.md` invocation
 
 ## On Soft Fail

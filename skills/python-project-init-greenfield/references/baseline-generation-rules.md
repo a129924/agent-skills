@@ -9,10 +9,11 @@ The default greenfield layout is:
 
 ```text
 .
-├── .github/
-│   ├── copilot-instructions.md
+├── .<platform>/
 │   ├── skills-provenance.json
 │   └── skills/
+├── .github/
+│   └── copilot-instructions.md
 ├── .gitignore
 ├── .env.example
 ├── .pre-commit-config.yaml
@@ -59,7 +60,7 @@ Expected traits:
 
 - `main() -> None`
 - at least one explicit import such as `logging` or `sys`
-- a short comment that the baseline is governed by installed `.github/skills`
+- a short comment that the baseline is governed by installed `.<platform>/skills`
 - no speculative domain logic
 
 ## `pyproject.toml` expectations
@@ -91,7 +92,7 @@ Include at least:
 - project title and short summary
 - `## Governance` section listing installed skills and versions
 - uv quick-start notes
-- acceptance note pointing to the canonical `sense-env-scaffold` CLI path
+- acceptance note pointing to the canonical `sense-env-scaffold` CLI projection path
 
 ## Placeholder-only surfaces
 
@@ -105,7 +106,7 @@ repo-specific policy that is not supported by the installed skills.
 
 The placeholder `.github/copilot-instructions.md` should explicitly:
 
-- tell Copilot to consult installed skills under `.github/skills/`
+- tell Copilot to consult installed skills under `.<platform>/skills/`
 - prefer the canonical `sense-env-scaffold` acceptance command before deeper repo-specific assumptions
 - avoid inventing business-domain policy that the repository has not declared yet
 
@@ -122,7 +123,7 @@ Do not create fake placeholder skill folders just to satisfy the blueprint.
 
 ## Provenance recording
 
-Record installed-skill provenance in `.github/skills-provenance.json`.
+Record installed-skill provenance in `.<platform>/skills-provenance.json`.
 
 Capture at least:
 
@@ -154,7 +155,7 @@ Greenfield init is not complete until it closes the loop with acceptance.
 
 Expected handoff:
 
-1. ensure `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py` is locally available
+1. ensure `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py` is locally available
 2. run acceptance against `blueprint.md`
 3. read the resulting success or gap output
 4. stop on acceptance gaps instead of inventing unapproved fixes

@@ -54,9 +54,9 @@ Detailed examples for `python-project-init-greenfield`.
 - create `src/`, `tests/`, and `scripts/`
 - create `src/weather_service/main.py` with typed starter boilerplate
 - generate uv-aligned `pyproject.toml` with pytest / ruff / pyright config
-- copy the three listed skills into `.github/skills/`
-- write governance provenance into `.github/skills-provenance.json`
-- run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
+- copy the three listed skills into `.<platform>/skills/`
+- write governance provenance into `.<platform>/skills-provenance.json`
+- run `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 
 **Expected result**
 - the repository is baseline-ready without invented business logic
@@ -118,7 +118,7 @@ an optional preview tool.
 If the target already contains:
 
 ```text
-.github/skills/python-testing-pytest/
+.<platform>/skills/python-testing-pytest/
 ```
 
 but its contents materially differ from the source library copy, the skill must stop.
@@ -164,7 +164,7 @@ If the blueprint lists:
 but the active source library does not contain:
 
 ```text
-.github/skills/custom-governance-skill/SKILL.md
+.<platform>/skills/custom-governance-skill/SKILL.md
 ```
 
 the skill must stop with a concrete error.
@@ -183,7 +183,7 @@ canonical CLI path available locally, the skill must not claim completion.
 
 **Correct behavior**
 - ensure `sense-env-scaffold` was copied or an equivalent local install already exists
-- run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
+- run `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance --contract-file blueprint.md`
 - if acceptance cannot run, stop and explain why the handoff is incomplete
 
 ---

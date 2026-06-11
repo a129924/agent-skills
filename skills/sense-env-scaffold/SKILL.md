@@ -12,22 +12,25 @@ do_not_use_when:
   - "the task only needs a single shell command such as `python --version` or `git status`"
   - "you need deep static analysis, linting, or architecture commentary"
   - "you need to install dependencies, create virtual environments, or start services"
-  - "the repository does not have `.github/skills/sense-env-scaffold/scripts/sense_env.py` present"
+  - "the repository does not have `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` present"
 inputs:
   - "the run mode: `discovery` (fact collection) or `acceptance` (contract assertion)"
   - "optionally, a contract file path containing a `yaml [sensing-assertions]` fenced block"
   - "optionally, a custom output path for the live manifest"
   - "whether a snapshot export is required (`--snapshot` flag)"
 outputs:
-  - "`.github/env-manifest.json` live manifest with five top-level modules: meta, fingerprint, facts, assertions, gaps"
-  - "`.github/env-manifest.snapshot.json` filtered secret-free snapshot when `--snapshot` is used and the run exits `0`"
+  - "`.<platform>/env-manifest.json` live manifest with five top-level modules: meta, fingerprint, facts, assertions, gaps"
+  - "`.<platform>/env-manifest.snapshot.json` filtered secret-free snapshot when `--snapshot` is used and the run exits `0`"
   - "non-zero exit code and a JSON manifest describing the failure when errors occur"
 ---
 
 # Purpose
-Invoke `.github/skills/sense-env-scaffold/scripts/sense_env.py` to produce a structured, machine-readable manifest of
+Invoke `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` to produce a structured, machine-readable manifest of
 the repository environment, or to evaluate sensing assertions defined in a contract
 document.
+The canonical source lives under `skills/sense-env-scaffold/...`; any
+`.<platform>/skills/sense-env-scaffold/...` path is a platform projection of that
+canonical source.
 
 # Trigger / When to use
 Use this skill when:
@@ -42,7 +45,7 @@ Do not use this skill when:
 - the task only needs a single shell command such as `python --version` or `git status`
 - you need deep static analysis, linting, or architecture commentary
 - you need to install dependencies, create virtual environments, or start services
-- the repository does not have `.github/skills/sense-env-scaffold/scripts/sense_env.py` present
+- the repository does not have `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` present
 
 # Inputs
 - the run mode: `discovery` (fact collection) or `acceptance` (contract assertion)
@@ -51,7 +54,7 @@ Do not use this skill when:
 - whether a snapshot export is required (`--snapshot` flag)
 
 # Process
-1. Confirm `.github/skills/sense-env-scaffold/scripts/sense_env.py` is present in the skill folder.
+1. Confirm `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` is present in the skill folder.
 2. Choose the mode:
    - `discovery` for a harmless fact-collection run; no contract required
    - `acceptance` to evaluate assertions from a contract file
@@ -67,22 +70,22 @@ Do not use this skill when:
 7. Interpret the manifest structure using `references/env-manifest-schema.md`.
 
 # Examples
-- **Positive**: Run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery` to collect environment
-  facts before a retrofit; read the resulting `.github/env-manifest.json` to understand
+- **Positive**: Run `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode discovery` to collect environment
+  facts before a retrofit; read the resulting `.<platform>/env-manifest.json` to understand
   what is present.
-- **Negative**: Run `python3 .github/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance` without a contract
+- **Negative**: Run `python3 .<platform>/skills/sense-env-scaffold/scripts/sense_env.py --mode acceptance` without a contract
   file and expect it to succeed — acceptance mode always requires a readable contract
   with a `yaml [sensing-assertions]` block; exit `30` is returned when none is found.
 
 # Outputs
-- `.github/env-manifest.json` — live manifest with five top-level modules:
+- `.<platform>/env-manifest.json` — live manifest with five top-level modules:
   `meta`, `fingerprint`, `facts`, `assertions`, `gaps`
-- `.github/env-manifest.snapshot.json` — filtered, secret-free snapshot (when
+- `.<platform>/env-manifest.snapshot.json` — filtered, secret-free snapshot (when
   `--snapshot` is used and the run exits `0`)
 - non-zero exit code and a JSON manifest describing the failure when errors occur
 
 # Boundaries
-- Do not modify `.github/skills/sense-env-scaffold/scripts/sense_env.py` or its local
+- Do not modify `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` or its local
   runtime package as part of invoking this skill; treat them as fixed prototype tooling.
 - Do not interpret exit `20` as a fatal environment error; it means assertions failed
   and the `gaps` section describes what is missing.
@@ -95,7 +98,7 @@ Do not use this skill when:
 # Validation
 
 ## Required Checks
-- PASS: `.github/skills/sense-env-scaffold/scripts/sense_env.py` is present before any invocation
+- PASS: `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py` is present before any invocation
 - PASS for discovery mode: no contract file required; proceed directly
 - BLOCKED for acceptance mode: contract file must exist and contain a `yaml [sensing-assertions]` block; if absent, exit `30` is expected — do not retry without a valid contract
 

@@ -1,7 +1,9 @@
 # Env Manifest Schema
 
-Defines the structure of `.github/env-manifest.json` and
-`.github/env-manifest.snapshot.json` produced by `.github/skills/sense-env-scaffold/scripts/sense_env.py`.
+Defines the structure of `.<platform>/env-manifest.json` and
+`.<platform>/env-manifest.snapshot.json` produced by `.<platform>/skills/sense-env-scaffold/scripts/sense_env.py`.
+The canonical source lives under `skills/sense-env-scaffold/...`; the
+`.<platform>/...` surfaces are platform projections.
 
 ## Purpose
 
@@ -91,11 +93,11 @@ beyond what is listed here.
   "workspace_clean": false,
   "key_paths": {
     "README.md": true,
-    ".github/": true,
+    ".<platform>/": true,
     "pyproject.toml": false,
     "tests/": false,
     "scripts/": true,
-    ".github/copilot-instructions.md": true
+    ".<platform>/copilot-instructions.md": true
   }
 }
 ```
@@ -123,7 +125,7 @@ Each assertion record:
 {
   "id": "path_exists/0",
   "kind": "path_exists",
-  "target": ".github/skills/sense-env-scaffold/scripts/sense_env.py",
+  "target": ".<platform>/skills/sense-env-scaffold/scripts/sense_env.py",
   "state": "PASS",
   "expected": true,
   "observed": true,
@@ -225,11 +227,11 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
     "workspace_clean": false,
     "key_paths": {
       "README.md": true,
-      ".github/": true,
+      ".<platform>/": true,
       "pyproject.toml": false,
       "tests/": false,
       "scripts/": true,
-      ".github/copilot-instructions.md": true
+      ".<platform>/copilot-instructions.md": true
     }
   },
   "assertions": [],
@@ -261,11 +263,11 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
     "workspace_clean": false,
     "key_paths": {
       "README.md": true,
-      ".github/": true,
+      ".<platform>/": true,
       "pyproject.toml": false,
       "tests/": false,
       "scripts/": true,
-      ".github/copilot-instructions.md": true
+      ".<platform>/copilot-instructions.md": true
     }
   },
   "assertions": [
@@ -306,7 +308,7 @@ Gap `kind` mirrors the assertion `kind` (e.g., `"path_exists"`, `"path_type"`, `
 ## Snapshot filtering and promotion
 
 When `--snapshot` is used, the script writes a second file:
-`.github/env-manifest.snapshot.json`
+`.<platform>/env-manifest.snapshot.json`
 
 Snapshot shaping rules in v1 (applied before writing):
 

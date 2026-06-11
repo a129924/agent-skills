@@ -38,11 +38,11 @@ from .models import (
 
 KEY_PATHS = (
     "README.md",
-    ".github/",
+    ".<platform>/",
     "pyproject.toml",
     "tests/",
     "scripts/",
-    ".github/copilot-instructions.md",
+    ".<platform>/copilot-instructions.md",
 )
 
 SECRET_PATTERNS = re.compile(
@@ -53,10 +53,6 @@ SECRET_PATTERNS = re.compile(
 
 class UnsupportedAssertionKindError(ValueError):
     """Raised when an assertion kind is outside the v1 supported subset."""
-
-
-class MalformedAssertionError(ValueError):
-    """Raised when a parsed assertion is missing required contract fields."""
 
 
 def find_repo_root(start: Path) -> Path:
@@ -74,7 +70,7 @@ def find_repo_root(start: Path) -> Path:
 
 def resolve_output_path(output: str | None, repo_root: Path) -> Path:
     if output is None:
-        return repo_root / ".github" / "env-manifest.json"
+        return repo_root / ".<platform>" / "env-manifest.json"
 
     output_path = Path(output)
     if not output_path.is_absolute():
@@ -83,7 +79,7 @@ def resolve_output_path(output: str | None, repo_root: Path) -> Path:
 
 
 def _snapshot_output_path(repo_root: Path) -> Path:
-    return repo_root / ".github" / "env-manifest.snapshot.json"
+    return repo_root / ".<platform>" / "env-manifest.snapshot.json"
 
 
 def make_meta(mode: RunMode) -> Meta:
@@ -222,13 +218,6 @@ def _parse_assertion_kind(raw_kind: str) -> AssertionKind:
         ) from exc
 
 
-def _require_assertion_field(record: RawAssertion, field_name: str) -> str:
-    value = record.get(field_name)
-    if not isinstance(value, str) or value == "":
-        raise MalformedAssertionError(f"missing required assertion field: {field_name}")
-    return value
-
-
 def evaluate_assertion(
     record: RawAssertion, repo_root: Path
 ) -> tuple[AssertionRecord, GapRecord | None]:
@@ -239,15 +228,11 @@ def evaluate_assertion(
     Raises UnsupportedAssertionKindError for any kind outside the v1 subset.
     """
     kind = _parse_assertion_kind(record.get("kind", ""))
-    target = _require_assertion_field(record, "target")
-    expected_raw = _require_assertion_field(record, "expected")
+    target = record.get("target", "")
+    expected_raw = record.get("expected", "")
 
     match kind:
         case AssertionKind.PATH_EXISTS:
-            if Path(target).is_absolute():
-                raise MalformedAssertionError(
-                    "path_exists targets must be repo-relative"
-                )
             expected = expected_raw.lower() in ("true", "yes", "1")
             is_observed = (repo_root / target).exists()
             state = (
@@ -570,16 +555,6 @@ def run_acceptance(
 
             if assertion_record.state is AssertionState.FAIL:
                 any_fail = True
-    except MalformedAssertionError as exc:
-        manifest = _contract_failure_manifest(
-            repo_root=repo_root,
-            kind=ContractGapKind.CONTRACT_MALFORMED,
-            target="<assertion>",
-            detail=str(exc),
-            assertions=assertion_results,
-        )
-        _try_emit(manifest, output_path)
-        return ExitCode.CONTRACT_ERROR
     except UnsupportedAssertionKindError as exc:
         manifest = _contract_failure_manifest(
             repo_root=repo_root,
