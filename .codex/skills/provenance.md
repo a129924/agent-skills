@@ -4,39 +4,46 @@ This file records the first-wave `.codex/skills` projection provenance.
 
 Current implementation note:
 
-- projection mode is `symlink`
-- projected entries point directly at upstream source paths in this repository
-- `source_commit` records the commit at which the symlink target and mapping
-  were last validated, not a copied snapshot commit
+- the first-wave surface now uses `materialized-copy` entries only
+- materialized-copy entries are copied from canonical `skills/<skill-name>/`
+  source folders into `.codex/skills/<skill-name>/`
+- for materialized-copy entries, `.codex/skills/...` path concretization may be
+  applied inside the copied files without modifying canonical source content
+- `source_commit` records the commit at which the upstream source was last
+  validated, not a copied snapshot commit
 - this table is a partial allowlist only; it does not claim canonical
   completeness or authority symmetry
 
 ## First-wave provenance
 
-| skill_name | upstream_path | projection_mode | source_commit |
-| --- | --- | --- | --- |
-| `business-intent-alignment` | `skills/business-intent-alignment/` | `symlink` | `2bf4698` |
-| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `symlink` | `2bf4698` |
-| `plan-creator` | `skills/plan-creator/` | `symlink` | `2bf4698` |
-| `plan-reviewer` | `skills/plan-reviewer/` | `symlink` | `2bf4698` |
-| `agent-skill-creator` | `.github/skills/agent-skill-creator/` | `symlink` | `2bf4698` |
-| `agent-skill-reviewer` | `.github/skills/agent-skill-reviewer/` | `symlink` | `2bf4698` |
-| `agent-skill-template` | `.github/skills/agent-skill-template/` | `symlink` | `2bf4698` |
-| `git-commit-convention` | `.github/skills/git-commit-convention/` | `symlink` | `2bf4698` |
-| `git-branch-naming` | `.github/skills/git-branch-naming/` | `symlink` | `2bf4698` |
-| `git-post-merge-workflow` | `.github/skills/git-post-merge-workflow/` | `symlink` | `2bf4698` |
-| `worktree-manager` | `.github/skills/worktree-manager/` | `symlink` | `2bf4698` |
+| skill_name | upstream_path | materialization_mode | source_commit | validation_basis |
+| --- | --- | --- | --- | --- |
+| `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `plan-creator` | `skills/plan-creator/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` | `a4e6fe9` | `copied from canonical source and .codex/skills/... literals concretized where present` |
+| `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` | `a4e6fe9` | `copied from canonical source and .codex/skills/... literals concretized where present` |
+| `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` | `0528a54` | `copied from canonical source and .codex/skills/... literals concretized where present` |
+| `git-commit-convention` | `skills/git-commit-convention/` | `materialized-copy` | `21cb5e5` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `git-branch-naming` | `skills/git-branch-naming/` | `materialized-copy` | `21cb5e5` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `git-post-merge-workflow` | `skills/git-post-merge-workflow/` | `materialized-copy` | `ff12a87` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` | `00b6efd` | `copied from canonical source; no .<platform>/skills/... residue remains` |
 
 ## Revalidation rule
 
 When an upstream source changes:
 
-1. verify the symlink still points to the intended upstream path
-2. confirm the mapping in `.codex/skills/README.md` is still correct
-3. update the affected row in this file with the new validation commit
+1. verify the entry's `materialization_mode`
+2. rematerialize the `.codex` surface from canonical
+   `skills/<skill-name>/` content and reapply required `.codex/skills/...`
+   concretization inside copied files
+3. confirm the mapping in `.codex/skills/README.md` is still correct
+4. update the affected row in this file with the new validation commit and
+   validation basis
 
-If the symlink target or source mapping cannot be verified, treat the
-projection as stale and do not use it as validation evidence.
+If the source mapping cannot be verified, treat the materialized surface as
+stale and do not use it as validation evidence.
 
 Do not rewrite `source_commit` to describe uncommitted working-tree edits.
 Revalidate and update the row after the relevant upstream change is committed.

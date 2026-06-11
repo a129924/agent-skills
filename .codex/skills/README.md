@@ -12,53 +12,60 @@ It is also intentionally partial:
 - presence here does not imply symmetric authority with `skills/` or
   `.github/skills/`
 
-> **Read-only projection**: the skill entries in this directory are symlink
-> projections to upstream sources in `skills/` or `.github/skills/`. Do not
-> edit projected skill content here as if it were canonical. If a change is
-> needed, make it in the upstream source and then revalidate the projection.
+> **Read-only projection**: the first-wave skill entries in this directory are
+> `.codex`-local materialized copies sourced from canonical skill folders in
+> this repository. Do not edit skill content here as if it were canonical. If a
+> change is needed, make it in the upstream source and then rematerialize this
+> surface.
 
 ## Source Rule
 
-- prefer `skills/<skill-name>/` when that skill already exists there
-- otherwise project from `.github/skills/<skill-name>/`
+- use `skills/<skill-name>/` as the canonical upstream source for every
+  first-wave entry listed below
+- rematerialize `.codex/skills/<skill-name>/` from `skills/<skill-name>/`
+  whenever the upstream canonical source changes
+- apply `.codex/skills/...` concretization only inside this materialized
+  surface when copied content still contains `.<platform>/skills/...`
 - do not infer completeness, cutover readiness, or authority parity from the
   current first-wave mapping table
 
 ## First-Wave Mapping
 
-| Projected skill | Upstream source |
-| --- | --- |
-| `business-intent-alignment` | `skills/business-intent-alignment/` |
-| `business-to-technical-translation` | `skills/business-to-technical-translation/` |
-| `plan-creator` | `skills/plan-creator/` |
-| `plan-reviewer` | `skills/plan-reviewer/` |
-| `agent-skill-creator` | `.github/skills/agent-skill-creator/` |
-| `agent-skill-reviewer` | `.github/skills/agent-skill-reviewer/` |
-| `agent-skill-template` | `.github/skills/agent-skill-template/` |
-| `git-commit-convention` | `.github/skills/git-commit-convention/` |
-| `git-branch-naming` | `.github/skills/git-branch-naming/` |
-| `git-post-merge-workflow` | `.github/skills/git-post-merge-workflow/` |
-| `worktree-manager` | `.github/skills/worktree-manager/` |
+| Projected skill | Upstream source | Surface mode |
+| --- | --- | --- |
+| `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` |
+| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` |
+| `plan-creator` | `skills/plan-creator/` | `materialized-copy` |
+| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` |
+| `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` |
+| `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` |
+| `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` |
+| `git-commit-convention` | `skills/git-commit-convention/` | `materialized-copy` |
+| `git-branch-naming` | `skills/git-branch-naming/` | `materialized-copy` |
+| `git-post-merge-workflow` | `skills/git-post-merge-workflow/` | `materialized-copy` |
+| `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` |
 
 ## How to update a projected skill
 
 1. Make the change in the upstream source listed in the table above.
-2. Verify that `.codex/skills/<skill-name>` still points to the correct
-   upstream path.
-3. Update `.codex/skills/provenance.md` with the upstream path and the commit
-   hash at which that projection was last revalidated.
+2. Rematerialize the `.codex/skills/<skill-name>`
+   directory from the canonical `skills/<skill-name>/` source and reapply any
+   required `.codex/skills/...` path concretization inside the copied files.
+3. Update `.codex/skills/provenance.md` with the upstream path, surface mode,
+   source commit, and validation basis.
 4. Do not modify the projected path independently — divergence from upstream is
    a contract violation.
 
 ## Provenance requirement
 
-Each projected skill must be traceable to exactly one upstream source path and
-one last-validated source commit. Maintain `.codex/skills/provenance.md` with
-at least:
+Each projected skill must be traceable to exactly one upstream source path,
+one materialization mode, and one last-validated source commit. Maintain
+`.codex/skills/provenance.md` with at least:
 - `skill_name`
 - `upstream_path` (canonical source path in this repo)
-- `projection_mode` (`symlink` for the current first-wave implementation)
-- `source_commit` (commit hash at which the projection was last validated)
+- `materialization_mode` (`materialized-copy` for the current first-wave surface)
+- `source_commit` (commit hash at which the upstream source was last validated)
+- `validation_basis` (what was checked or rematerialized)
 
 If provenance cannot be established for a projected skill, treat it as stale
 and revalidate it against the current upstream source before use.
