@@ -93,8 +93,11 @@ A skill is `approved` only if all of these are true:
   `skills/<skill-name>/` as canonical authoring target
 - for canonical-source review in those topics, the draft does not claim that
   `skills/` is already the active authored/reviewed workflow path today
-- for mirror/projection review in those topics, `.github/skills/` is treated as
-  a transition mirror/projection surface and not as the canonical source of truth
+- for mirror/projection review in those topics, `.<platform>/skills/` is
+  treated as an injected or explicitly in-scope compatibility/projection
+  surface and not as the canonical source of truth
+- reviewer does not assume any concrete `.<platform>/skills/` projection path
+  unless context or prompt explicitly puts that surface in scope
 - downstream planning-spine implications are recorded as follow-up rather than
   treated as blockers unless inventory evidence explicitly classifies them as blockers
 

@@ -17,15 +17,18 @@ Typical verdict:
 
 A transition-scope review where:
 - canonical authoring intent points to `skills/<skill-name>/`
-- a `.github/skills/...` artifact is reviewed only because the topic keeps it as
-  the current transition mirror / projection surface
-- the reviewed text does not claim `.github/skills/` is the canonical source
+- a `.<platform>/skills/...` artifact is reviewed only because context or
+  prompt explicitly injects that transition mirror / projection surface
+- the reviewed text does not claim `.<platform>/skills/` is the canonical
+  source
 
 Typical verdict:
 - approved
 
 Typical reasons:
 - reviewer distinguishes canonical source from mirror/projection semantics
+- reviewer does not assume a concrete platform surface unless it was explicitly
+  put in scope
 - transition wording preserves the current active path without collapsing source
   of truth
 
@@ -88,13 +91,14 @@ Typical reasons:
 
 ## Needs-rework example: mirror review collapses source of truth
 
-A transition-scope review where a `.github/skills/...` artifact says it is both
-the current mirror and the canonical source of truth for new authoring work.
+A transition-scope review where a `.<platform>/skills/...` artifact says it is
+both the current mirror and the canonical source of truth for new authoring
+work.
 
 Typical verdict:
 - needs-rework
 
 Typical reasons:
 - canonical source and mirror/projection roles are conflated
-- the review would silently re-promote `.github/skills/` as the only source of
-  truth
+- the review would silently re-promote `.<platform>/skills/` as the only source
+  of truth

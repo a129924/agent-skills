@@ -5,7 +5,8 @@ transition work.
 
 For this contract, `skills/` is the canonical authoring target for transition
 work. Any `.<platform>/skills/` path is a compatibility or projection surface,
-not the source of truth.
+not the source of truth. Mention a projection path only when context or prompt
+explicitly injects it into scope.
 
 ## Required core
 - `SKILL.md`: the executable instruction contract for the skill
@@ -80,6 +81,8 @@ not the source of truth.
 ## Transition boundary
 
 - author new or materially transitioned skill content under `skills/<skill-name>/`
+- do not assume any concrete `.<platform>/skills/` path unless context or
+  prompt explicitly puts that compatibility/projection surface in scope
 - do not treat this contract as authorization to rewrite compatibility,
   projection, or platform-consumption surfaces
 - do not rewrite runtime/tooling, installer, or projection surfaces here

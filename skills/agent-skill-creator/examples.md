@@ -106,10 +106,16 @@ Why this split passes:
 
 Goal:
 - draft a skill whose future consumers include planning-spine skills that still
-  reference a platform-specific `.<platform>/skills/` surface
+  reference a `.<platform>/skills/` compatibility surface that context or
+  prompt explicitly places in scope
 
 Result:
 - author the draft under `skills/<skill-name>/`
 - note the downstream planning-spine implication in the handoff
 - do not edit any `.<platform>/skills/<skill-name>/` compatibility or
   projection surface in the same phase
+
+Why this passes:
+- creator keeps `skills/<skill-name>/` as the only canonical authoring target
+- projection handling happens only because the surrounding context injected it
+- creator does not assume a concrete platform surface on its own

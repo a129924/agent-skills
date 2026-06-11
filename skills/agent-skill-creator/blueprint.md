@@ -159,6 +159,9 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
 - Treat `skills/<skill-name>/` as the canonical authoring target for transition
   work; do not treat any `.<platform>/skills/` compatibility/projection surface
   or promotion as part of this blueprint.
+- Only mention a `.<platform>/skills/` path when context or prompt explicitly
+  injects that compatibility/projection surface; do not assume a concrete
+  platform by default.
 - If responsibility, trigger, or boundaries are ambiguous, ask before drafting.
 - Classify validation weight before drafting: lightweight, medium-complexity, or higher-risk.
 - Propose `complexity` in YAML frontmatter for every new skill.
