@@ -58,6 +58,13 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of version `0.73.0`, PR #110 merged the
+  `codex-skills-canonical-retarget` topic into `dev`, replacing the first-wave
+  `.codex/skills/` top-level symlink surface with 11 `.codex`-local
+  materialized compatibility entries sourced from canonical `skills/`
+  directories, while updating `.codex/skills/README.md`,
+  `.codex/skills/provenance.md`, and the topic review trail without modifying
+  `skills/**` or `.github/skills/**`.
 - This repository contains repo-visible migration artifacts for Codex and
   Copilot compatibility/projection work, including `.codex/skills/`
   projection experiments and multiple topic-local plan/report trails.
