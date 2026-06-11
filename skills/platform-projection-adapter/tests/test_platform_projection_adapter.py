@@ -98,6 +98,29 @@ def test_dry_run_reports_summary_without_writing(adapter_module, tmp_path: Path)
     assert not (target_root / "skills").exists()
 
 
+def test_dry_run_ignores_runtime_cache_junk(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    pycache_root = repo_root / "skills" / "alpha" / "__pycache__"
+    pycache_root.mkdir(parents=True, exist_ok=True)
+    (pycache_root / "ignored.cpython-311.pyc").write_bytes(b"\xff\xfe\xfd")
+    (repo_root / "skills" / "alpha" / "ignored.pyo").write_bytes(b"\xff\xfe\xfd")
+    target_root = tmp_path / ".codex"
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 0
+    assert stderr == ""
+    assert "source_count: 3" in stdout
+    assert "__pycache__" not in stdout
+    assert "ignored.pyo" not in stdout
+    assert "result: SAFE_TO_APPLY" in stdout
+
+
 @pytest.mark.parametrize(
     ("platform_root", "expected_fragment"),
     [
@@ -159,6 +182,17 @@ def test_apply_creates_targets_and_rewrites_placeholders(adapter_module, tmp_pat
         == f"Provenance lives at {target_root.as_posix()}/skills-provenance.json.\n"
     )
     assert (target_root / "skills" / "nested" / "guides" / "note.md").exists()
+
+
+def test_root_platform_projection_preserves_single_slash(adapter_module, tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    source_path = repo_root / "skills" / "alpha" / "SKILL.md"
+
+    assert adapter_module.normalize_platform_root("/") == "/"
+    assert (
+        adapter_module.render_source(source_path, "/")
+        == "Alpha uses /skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n"
+    )
 
 
 def test_apply_blocks_on_differing_target_without_force(adapter_module, tmp_path: Path):
@@ -285,6 +319,57 @@ def test_unreadable_source_fails_fast(adapter_module, tmp_path: Path, monkeypatc
     assert "result: BLOCKED" in stdout
     assert "Failed to read source file" in stdout
     assert not target_root.exists()
+
+
+@pytest.mark.parametrize(
+    ("symlink_target_kind", "force_apply"),
+    [
+        pytest.param("skills-root", False, id="symlinked-skills-root"),
+        pytest.param("leaf-file", True, id="symlinked-leaf-file"),
+    ],
+)
+def test_apply_refuses_symlinked_target_paths(
+    adapter_module,
+    tmp_path: Path,
+    symlink_target_kind: str,
+    force_apply: bool,
+):
+    repo_root = make_repo(tmp_path)
+    target_root = tmp_path / ".codex"
+    outside_root = tmp_path / "outside"
+    outside_root.mkdir(parents=True, exist_ok=True)
+
+    if symlink_target_kind == "skills-root":
+        target_root.mkdir(parents=True, exist_ok=True)
+        (target_root / "skills").symlink_to(outside_root, target_is_directory=True)
+        args = [
+            "--platform-root",
+            str(target_root),
+            "--apply",
+        ]
+    else:
+        target_file = target_root / "skills" / "alpha" / "SKILL.md"
+        target_file.parent.mkdir(parents=True, exist_ok=True)
+        outside_file = outside_root / "SKILL.md"
+        outside_file.write_text("manual change\n", encoding="utf-8")
+        target_file.symlink_to(outside_file)
+        args = [
+            "--platform-root",
+            str(target_root),
+            "--apply",
+            "--force",
+        ]
+
+    exit_code, stdout, stderr = run_adapter(
+        adapter_module,
+        repo_root,
+        *args,
+    )
+
+    assert exit_code == 1
+    assert "Refusing to write through symlinked target path" in stderr
+    assert "result: BLOCKED" in stdout
+    assert "Refusing to write through symlinked target path" in stdout
 
 
 def test_partial_apply_reports_failure_and_rerun_recomputes(adapter_module, tmp_path: Path):

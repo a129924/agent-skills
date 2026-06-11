@@ -12,6 +12,8 @@ from typing import Callable, Sequence, TextIO
 
 
 PLACEHOLDER_PREFIX = ".<platform>/"
+IGNORED_SOURCE_DIR_NAMES = {"__pycache__"}
+IGNORED_SOURCE_SUFFIXES = {".pyc", ".pyo"}
 
 
 class ProjectionError(Exception):
@@ -95,7 +97,10 @@ def repo_root_from_script() -> Path:
 
 
 def normalize_platform_root(raw_platform_root: str) -> str:
-    normalized = Path(raw_platform_root).as_posix().rstrip("/")
+    normalized = Path(raw_platform_root).as_posix()
+    if normalized == "/":
+        return normalized
+    normalized = normalized.rstrip("/")
     return normalized or "."
 
 
@@ -124,7 +129,11 @@ def discover_source_files(source_root: Path) -> list[Path]:
     if not source_root.is_dir():
         raise ProjectionError(f"Canonical source root does not exist: {source_root}")
     return sorted(
-        path for path in source_root.rglob("*") if path.is_file()
+        path
+        for path in source_root.rglob("*")
+        if path.is_file()
+        and not any(part in IGNORED_SOURCE_DIR_NAMES for part in path.parts)
+        and path.suffix not in IGNORED_SOURCE_SUFFIXES
     )
 
 
@@ -137,7 +146,8 @@ def render_source(source_path: Path, platform_root_text: str) -> str:
         ) from exc
     except OSError as exc:
         raise ProjectionError(f"Failed to read source file: {source_path}") from exc
-    return content.replace(PLACEHOLDER_PREFIX, f"{platform_root_text}/")
+    platform_prefix = "/" if platform_root_text == "/" else f"{platform_root_text}/"
+    return content.replace(PLACEHOLDER_PREFIX, platform_prefix)
 
 
 def build_plan(source_root: Path, platform_root: Path, platform_root_text: str) -> ProjectionPlan:
@@ -191,6 +201,30 @@ def write_rendered_file(target_path: Path, rendered_content: str) -> None:
     target_path.write_text(rendered_content, encoding="utf-8")
 
 
+def validate_target_path_for_write(
+    target_skills_root: Path,
+    target_path: Path,
+) -> None:
+    current_path = target_skills_root
+    relative_path = target_path.relative_to(target_skills_root)
+
+    for part in relative_path.parts[:-1]:
+        if current_path.is_symlink():
+            raise ProjectionError(
+                f"Refusing to write through symlinked target path: {current_path}"
+            )
+        current_path = current_path / part
+
+    if current_path.is_symlink():
+        raise ProjectionError(
+            f"Refusing to write through symlinked target path: {current_path}"
+        )
+    if target_path.is_symlink():
+        raise ProjectionError(
+            f"Refusing to write through symlinked target path: {target_path}"
+        )
+
+
 def render_summary(
     *,
     mode: str,
@@ -238,6 +272,7 @@ def execute_projection(
     platform_root = Path(args.platform_root)
     platform_root_text = normalize_platform_root(args.platform_root)
     source_root = repo_root / "skills"
+    target_skills_root = platform_root / "skills"
 
     try:
         validate_non_overlapping_roots(source_root, platform_root)
@@ -292,7 +327,21 @@ def execute_projection(
         if entry.action == "noop":
             continue
         try:
+            validate_target_path_for_write(target_skills_root, entry.target_path)
             write_file(entry.target_path, entry.rendered_content)
+        except ProjectionError as exc:
+            message = str(exc)
+            stderr.write(f"{message}\n")
+            stdout.write(
+                render_summary(
+                    mode=mode,
+                    platform_root_text=platform_root_text,
+                    plan=plan,
+                    result="BLOCKED",
+                    error=message,
+                )
+            )
+            return 1
         except OSError as exc:
             message = f"Failed to write target file: {entry.target_path}"
             stderr.write(f"{message}: {exc}\n")
@@ -313,7 +362,7 @@ def execute_projection(
             platform_root_text=platform_root_text,
             plan=plan,
             result="APPLIED",
-        )                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+        )
     )
     return 0
 
