@@ -5,7 +5,7 @@
 - **Status**: frozen for technical translation
 - **Topic**: `phase-2-merge-into-skills-batch`
 - **Date**: 2026-06-10
-- **Scope**: bounded canonical convergence slice under `skills/`, now pending human check
+- **Scope**: bounded canonical convergence slice under `skills/`, now merged and terminal
 
 ## Problem Statement
 
@@ -54,7 +54,7 @@ The baseline uses the following repo-visible evidence:
 | Planning actor | Authored the merge-batch topic plan and truth artifacts | Can show the frozen candidates, bounded execution policy, and non-goals without collapsing semantics by assumption |
 | Reviewer | Reviews the execution truth | Can verify that only canonical `skills/` changed, that drift was handled explicitly, and that compatibility-surface deltas do not block progress |
 | Creator | Executed bounded canonical convergence only where canonical `skills/` required change | Can show exactly which candidates changed and which required no canonical edit |
-| Human operator | Performs the remaining human-check gate | Can see the bounded execution result and confirm no broader policy or surface expansion was introduced |
+| Human operator | Confirms merged close-out truth after completed human-check | Can see the bounded execution result, that human-check completed before merge, and that no broader policy or surface expansion was introduced |
 
 ## Frozen Requirements
 

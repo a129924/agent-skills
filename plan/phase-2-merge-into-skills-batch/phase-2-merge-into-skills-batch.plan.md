@@ -15,8 +15,7 @@ When this topic is complete:
   truthfully for the frozen candidates,
 - compatibility-surface differences do not block progress when `skills/` is
   already canonical,
-- and the topic is ready for the remaining human-check gate on the committed
-  execution truth.
+- and the topic is merged and terminal on the committed execution truth.
 
 ## Scope
 
@@ -281,6 +280,5 @@ Artifact path notes:
 
 ## Open Questions / Unresolved Items
 
-- Human-check has not yet been completed on the updated execution truth.
 - Whether later workflow conditions require a `review-log.md` or `summary.md`
   artifact remains unresolved and is not widened in this topic-local repair.

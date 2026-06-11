@@ -1,6 +1,6 @@
 # Technical Specification: phase-2-merge-into-skills-batch
 
-**Status**: frozen - execution truth aligned and pending human check
+**Status**: frozen - execution truth aligned, merged, and terminal
 **Topic**: `phase-2-merge-into-skills-batch`
 **Source baseline**: `analysis/phase-2-merge-into-skills-batch/requirements.md`
 
@@ -75,7 +75,7 @@ That plan should define:
 - the two completed canonical edit commits,
 - the eight `no canonical edit needed` determinations,
 - exact out-of-scope boundaries,
-- and the remaining human-check gate on repo-visible truth.
+- and the merged terminal close-out truth on repo-visible artifacts.
 
 ### Workstream C - Maintain progression truth
 
@@ -87,7 +87,7 @@ That artifact should:
 
 - mark analysis and plan authoring complete for this slice,
 - record review and final-gate as complete,
-- record human-check as remaining,
+- record human-check as complete,
 - and state that no broader execution beyond the bounded canonical convergence
   slice is authorized yet.
 
@@ -170,7 +170,7 @@ compatibility-surface differences still require canonical edits when canonical
 
 None for bounded canonical convergence truth sync. Current evidence is
 sufficient to record the completed canonical edits, no-edit-needed
-determinations, and remaining human-check gate.
+determinations, and merged terminal close-out truth.
 
 ### Rollback triggers
 
@@ -195,5 +195,5 @@ current evidence cannot support directly, stop and request
 
 ## Recommended Next Step
 
-Route the current repo-visible execution truth to the remaining human-check
-gate.
+No further topic-local workflow step remains; treat the current repo-visible
+execution truth as merged close-out state.

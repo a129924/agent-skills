@@ -45,7 +45,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help=(
             "Output path for the live manifest JSON. "
-            "Defaults to <repo_root>/.<platform>/env-manifest.json."
+            "Defaults to <repo_root>/.github/env-manifest.json."
         ),
     )
     parser.add_argument(
@@ -54,7 +54,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=False,
         help=(
             "Also write a filtered snapshot to "
-            "<repo_root>/.<platform>/env-manifest.snapshot.json "
+            "<repo_root>/.github/env-manifest.snapshot.json "
             "(only when the run exits 0)."
         ),
     )

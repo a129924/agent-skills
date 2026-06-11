@@ -90,7 +90,8 @@ created: 2026-06-05
   - `phase-2-planning-spine-exceptions` via PR `#108`
 - Phase 2 umbrella truth is now in close-out mode.
 - Close-out final verification passed with no new contract-breaking blocker.
-- Next step is `human-check`.
+- Topic-local workflow is complete; any remaining PR-level close-out handling
+  is outside this step artifact.
 - No new child-slice implementation work is authorized or next under this topic.
 - If any later umbrella work would require files outside the declared write set
   or any shared-contract-file edit, stop and route to `human_review_required`.
