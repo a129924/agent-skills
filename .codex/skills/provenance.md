@@ -20,8 +20,8 @@ Current implementation note:
 | --- | --- | --- | --- | --- |
 | `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
 | `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
-| `plan-creator` | `skills/plan-creator/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
-| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` | `2bf4698` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `plan-creator` | `skills/plan-creator/` | `materialized-copy` | `6056442` | `copied from canonical source; no .<platform>/skills/... residue remains` |
+| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` | `c5bb8d6` | `copied from canonical source; no .<platform>/skills/... residue remains` |
 | `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` | `a4e6fe9` | `copied from canonical source and .codex/skills/... literals concretized where present` |
 | `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` | `a4e6fe9` | `copied from canonical source and .codex/skills/... literals concretized where present` |
 | `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` | `0528a54` | `copied from canonical source and .codex/skills/... literals concretized where present` |

@@ -31,7 +31,7 @@ It is also intentionally partial:
 
 ## First-Wave Mapping
 
-| Projected skill | Upstream source | Surface mode |
+| Skill entry | Upstream source | Surface mode |
 | --- | --- | --- |
 | `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` |
 | `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` |
@@ -45,7 +45,7 @@ It is also intentionally partial:
 | `git-post-merge-workflow` | `skills/git-post-merge-workflow/` | `materialized-copy` |
 | `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` |
 
-## How to update a projected skill
+## How to rematerialize a skill entry
 
 1. Make the change in the upstream source listed in the table above.
 2. Rematerialize the `.codex/skills/<skill-name>`
