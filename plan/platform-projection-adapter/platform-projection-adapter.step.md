@@ -1,6 +1,6 @@
 ---
 topic: platform-projection-adapter
-status: publish-in-progress
+status: pr-open
 created: 2026-06-11
 ---
 
@@ -15,7 +15,7 @@ created: 2026-06-11
 - [X] approved
 - [ ] needs-rework
 - [X] publish-in-progress
-- [ ] pr-open
+- [X] pr-open
 - [ ] merged
 
 ## Actionable Steps
@@ -74,14 +74,15 @@ created: 2026-06-11
 
 ### publish-in-progress
 
-- [ ] Publish only the exact planned repo-visible artifacts; no stable-library
+- [X] Publish only the exact planned repo-visible artifacts; no stable-library
   updates
-- [ ] Respect STOP POINT 1 before commit / push / PR creation
-- [ ] Keep reviewer work separate from commit, push, PR, and merge routing
+- [X] Respect STOP POINT 1 before commit / push / PR creation
+- [X] Keep reviewer work separate from commit, push, PR, and merge routing
 
 ### pr-open
 
-- [ ] Triage PR feedback through the normal `needs-rework` or `merged` routes
+- [X] Open ready PR `#112` against `dev`
+- [ ] Wait for human merge or human PR feedback comments
 
 ### merged
 
@@ -126,3 +127,9 @@ created: 2026-06-11
 - Current gate: `publish-in-progress`.
 - Next gate: commit the bounded topic, push the branch, and open a ready PR
   against `dev`.
+- Topic commit created: `2bf735d`
+- Branch pushed: `origin/feat/andrew/platform-projection-adapter`
+- Ready PR opened: `#112`
+- Next actor: Human.
+- Current gate: `pr-open`.
+- Next gate: wait for human merge or human PR feedback comments.
