@@ -2,17 +2,17 @@
 
 ## CLI Contract
 
-Run the local CLI from the repository root:
+Run the local CLI from the active projected skill surface:
 
 ```bash
-uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path>
 ```
 
 Add `--apply` only for explicit writes:
 
 ```bash
-uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path> \
   --apply
 ```
@@ -20,7 +20,7 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 Add `--force` only when differing managed target files may be overwritten:
 
 ```bash
-uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path> \
   --apply \
   --force
@@ -29,6 +29,8 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 ## Behavior Notes
 
 - Source of truth is always the canonical `skills/` library under the repo root.
+- The projected script must remain runnable from `.<platform>/skills/...` without
+  requiring callers to swap back to `skills/...`.
 - Target paths always land under `<platform-root>/skills/` while preserving the
   canonical relative path.
 - Dry-run is the default and performs no writes.
@@ -41,6 +43,9 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 - Canonical wording that already refers to `skills/...` remains unchanged.
 - When the skill text describes a projection surface abstractly, prefer
   `.<platform>/...` wording over naming one concrete platform path.
+- The script locates the repository root by walking upward until it finds
+  `AGENTS.md` and the canonical `skills/` directory, so both canonical and
+  projected script paths stay valid runtime entrypoints.
 
 ## Summary Fields
 

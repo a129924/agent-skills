@@ -92,8 +92,15 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return args
 
 
-def repo_root_from_script() -> Path:
-    return Path(__file__).resolve().parents[3]
+def repo_root_from_script(script_path: Path | None = None) -> Path:
+    resolved_script_path = resolve_for_overlap_check(script_path or Path(__file__))
+    for candidate in resolved_script_path.parents:
+        if (candidate / "AGENTS.md").is_file() and (candidate / "skills").is_dir():
+            return candidate
+    raise ProjectionError(
+        "Failed to locate repository root from script path: "
+        f"{resolved_script_path}"
+    )
 
 
 def normalize_platform_root(raw_platform_root: str) -> str:
@@ -383,7 +390,25 @@ def run(
     except SystemExit as exc:
         return int(exc.code)
 
-    resolved_repo_root = repo_root or repo_root_from_script()
+    if repo_root is None:
+        try:
+            resolved_repo_root = repo_root_from_script()
+        except ProjectionError as exc:
+            mode = "apply" if args.apply else "dry-run"
+            platform_root_text = normalize_platform_root(args.platform_root)
+            stderr.write(str(exc) + "\n")
+            stdout.write(
+                render_summary(
+                    mode=mode,
+                    platform_root_text=platform_root_text,
+                    plan=ProjectionPlan(source_count_total=0, entries=tuple()),
+                    result="BLOCKED",
+                    error=str(exc),
+                )
+            )
+            return 1
+    else:
+        resolved_repo_root = repo_root
     return execute_projection(
         args,
         repo_root=resolved_repo_root,
