@@ -58,6 +58,14 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of version `0.75.0`, PR #112 merged the
+  `platform-projection-adapter` topic into `dev`, adding the canonical
+  projection skill and CLI under `skills/platform-projection-adapter/` with
+  explicit dry-run / apply / force gates, source/target overlap and symlink
+  protections, generated-cache filtering, projected `.codex/skills/...`
+  standalone entrypoint support, and bounded pytest coverage for both
+  canonical and projected execution paths without committing any projection
+  outputs.
 - As of version `0.74.0`, PR #111 merged the
   `skills-canonical-inventory` topic into `dev`, adding the bounded canonical
   `skills/` inventory builder at `scripts/build_skills_inventory.py`, the
