@@ -58,6 +58,13 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of branch-local version `0.73.0-platform-projection-adapter.1`, stacked
+  PR #113 merged into the open `platform-projection-adapter` integration
+  branch behind PR #112, making `skills/platform-projection-adapter` runnable
+  from both canonical `skills/...` and projected `.<platform>/skills/...`
+  entrypoints while preserving canonical bootstrap guidance and adding
+  repository-root auto-discovery failure coverage without committing any
+  projection outputs.
 - As of version `0.73.0`, PR #110 merged the
   `codex-skills-canonical-retarget` topic into `dev`, replacing the first-wave
   `.codex/skills/` top-level symlink surface with 11 `.codex`-local
