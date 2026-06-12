@@ -45,8 +45,10 @@ Do not use this skill when:
 
 # Process
 1. Confirm the request is still within the bounded topic: whole-library projection from canonical `skills/`, explicit `--platform-root`, and no canonical-source rewrites.
-2. Default to dry-run and invoke the projected local script path:
+2. Default to dry-run and invoke the local script from the projected skill surface when it already exists:
    `uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py --platform-root <path>`
+   If this is the first projection run or the projected entrypoint does not exist yet, use the canonical bootstrap command instead:
+   `uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py --platform-root <path>`
 3. Read the CLI summary and report `mode`, `platform_root`, `source_count`, `create`, `update`, `noop`, and `conflicts`.
 4. Add `--apply` only when the caller explicitly authorizes writes.
 5. Add `--force` only when the caller explicitly authorizes overwriting differing managed target files.

@@ -5,6 +5,7 @@
 Use dry-run to inspect the whole-library plan without writing anything:
 
 ```bash
+# First projection run can use the canonical skills/... entrypoint instead.
 uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path>
 ```
@@ -20,6 +21,7 @@ Expected interpretation:
 Only add `--apply` when the caller explicitly authorizes writes:
 
 ```bash
+# First projection run can use the canonical skills/... entrypoint instead.
 uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path> \
   --apply
@@ -34,6 +36,7 @@ When a managed target file already exists with different content, add `--force`
 only after explicit overwrite approval:
 
 ```bash
+# First projection run can use the canonical skills/... entrypoint instead.
 uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path> \
   --apply \
