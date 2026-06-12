@@ -2,7 +2,14 @@
 
 ## CLI Contract
 
-Run the local CLI from the repository root:
+Run the local CLI from the active projected skill surface:
+
+```bash
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root <path>
+```
+
+If the projected entrypoint does not exist yet, run the same CLI from the canonical skill path:
 
 ```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
@@ -12,12 +19,29 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 Add `--apply` only for explicit writes:
 
 ```bash
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root <path> \
+  --apply
+```
+
+If the projected entrypoint is not present yet, use the canonical path with the same flags:
+
+```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
   --platform-root <path> \
   --apply
 ```
 
 Add `--force` only when differing managed target files may be overwritten:
+
+```bash
+uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
+  --platform-root <path> \
+  --apply \
+  --force
+```
+
+If the projected entrypoint is not present yet, use the canonical path with the same flags:
 
 ```bash
 uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py \
@@ -29,6 +53,11 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 ## Behavior Notes
 
 - Source of truth is always the canonical `skills/` library under the repo root.
+- The projected script must remain runnable from `.<platform>/skills/...` without
+  requiring callers to swap back to `skills/...`.
+- When the projected entrypoint does not exist yet, the canonical
+  `skills/platform-projection-adapter/scripts/platform_projection_adapter.py`
+  path is the bootstrap fallback for the first projection run.
 - Target paths always land under `<platform-root>/skills/` while preserving the
   canonical relative path.
 - Dry-run is the default and performs no writes.
@@ -41,6 +70,9 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 - Canonical wording that already refers to `skills/...` remains unchanged.
 - When the skill text describes a projection surface abstractly, prefer
   `.<platform>/...` wording over naming one concrete platform path.
+- The script locates the repository root by walking upward until it finds
+  `AGENTS.md` and the canonical `skills/` directory, so both canonical and
+  projected script paths stay valid runtime entrypoints.
 
 ## Summary Fields
 

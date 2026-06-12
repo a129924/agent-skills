@@ -15,12 +15,8 @@ SCRIPT_PATH = (
 )
 
 
-@pytest.fixture
-def adapter_module():
-    spec = importlib.util.spec_from_file_location(
-        "platform_projection_adapter",
-        SCRIPT_PATH,
-    )
+def load_adapter_module(script_path: Path, module_name: str):
+    spec = importlib.util.spec_from_file_location(module_name, script_path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader is not None
     sys.modules[spec.name] = module
@@ -28,14 +24,17 @@ def adapter_module():
     return module
 
 
-def run_adapter(adapter_module, repo_root: Path, *args: str, write_file=None):
+@pytest.fixture
+def adapter_module():
+    return load_adapter_module(SCRIPT_PATH, "platform_projection_adapter")
+
+
+def run_adapter(adapter_module, repo_root: Path | None, *args: str, write_file=None):
     stdout = io.StringIO()
     stderr = io.StringIO()
-    kwargs = {
-        "repo_root": repo_root,
-        "stdout": stdout,
-        "stderr": stderr,
-    }
+    kwargs = {"stdout": stdout, "stderr": stderr}
+    if repo_root is not None:
+        kwargs["repo_root"] = repo_root
     if write_file is not None:
         kwargs["write_file"] = write_file
     exit_code = adapter_module.run(list(args), **kwargs)
@@ -50,6 +49,7 @@ def write_text(path: Path, content: str) -> None:
 def make_repo(tmp_path: Path) -> Path:
     repo_root = tmp_path / "repo"
     skills_root = repo_root / "skills"
+    write_text(repo_root / "AGENTS.md", "# test repo\n")
     write_text(
         skills_root / "alpha" / "SKILL.md",
         "Alpha uses .<platform>/skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n",
@@ -193,6 +193,63 @@ def test_root_platform_projection_preserves_single_slash(adapter_module, tmp_pat
         adapter_module.render_source(source_path, "/")
         == "Alpha uses /skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n"
     )
+
+
+def test_projected_codex_copy_runs_as_standalone_entrypoint(tmp_path: Path):
+    repo_root = make_repo(tmp_path)
+    projected_script = (
+        repo_root
+        / ".codex"
+        / "skills"
+        / "platform-projection-adapter"
+        / "scripts"
+        / "platform_projection_adapter.py"
+    )
+    write_text(projected_script, SCRIPT_PATH.read_text(encoding="utf-8"))
+    projected_module = load_adapter_module(
+        projected_script,
+        "platform_projection_adapter_projected",
+    )
+    target_root = tmp_path / ".codex-target"
+
+    exit_code, stdout, stderr = run_adapter(
+        projected_module,
+        None,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 0
+    assert stderr == ""
+    assert "mode: dry-run" in stdout
+    assert "source_count: 3" in stdout
+    assert "result: SAFE_TO_APPLY" in stdout
+    assert not (target_root / "skills").exists()
+
+def test_repo_root_autodiscovery_failure_blocks_when_markers_are_missing(tmp_path: Path):
+    detached_root = tmp_path / "detached"
+    detached_script = (
+        detached_root / "scripts" / "platform_projection_adapter.py"
+    )
+    write_text(detached_script, SCRIPT_PATH.read_text(encoding="utf-8"))
+    detached_module = load_adapter_module(
+        detached_script,
+        "platform_projection_adapter_detached",
+    )
+    target_root = tmp_path / ".codex-target"
+
+    exit_code, stdout, stderr = run_adapter(
+        detached_module,
+        None,
+        "--platform-root",
+        str(target_root),
+    )
+
+    assert exit_code == 1
+    assert "Failed to locate repository root from script path" in stderr
+    assert "result: BLOCKED" in stdout
+    assert "Failed to locate repository root from script path" in stdout
+    assert not (target_root / "skills").exists()
 
 
 def test_apply_blocks_on_differing_target_without_force(adapter_module, tmp_path: Path):

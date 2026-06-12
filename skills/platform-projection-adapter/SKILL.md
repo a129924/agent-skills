@@ -45,7 +45,9 @@ Do not use this skill when:
 
 # Process
 1. Confirm the request is still within the bounded topic: whole-library projection from canonical `skills/`, explicit `--platform-root`, and no canonical-source rewrites.
-2. Default to dry-run and invoke:
+2. Default to dry-run and invoke the local script from the projected skill surface when it already exists:
+   `uv run .<platform>/skills/platform-projection-adapter/scripts/platform_projection_adapter.py --platform-root <path>`
+   If this is the first projection run or the projected entrypoint does not exist yet, use the canonical bootstrap command instead:
    `uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py --platform-root <path>`
 3. Read the CLI summary and report `mode`, `platform_root`, `source_count`, `create`, `update`, `noop`, and `conflicts`.
 4. Add `--apply` only when the caller explicitly authorizes writes.
@@ -121,4 +123,4 @@ Omit this section if the skill is not being used in a multi-agent handoff.
 # Local references
 - `reference.md`: CLI contract, summary fields, and bounded behavior notes
 - `examples.md`: dry-run, apply, force, and blocked usage patterns
-- `scripts/platform_projection_adapter.py`: the sole projection core used by this skill
+- `scripts/platform_projection_adapter.py`: the sole projection core used by this skill; it must remain runnable from both `skills/...` and `.<platform>/skills/...`
