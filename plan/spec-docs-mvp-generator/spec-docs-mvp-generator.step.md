@@ -12,11 +12,8 @@ current_plan_input: plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md
 - [X] create worktree
 - [X] `.github/prompts/create-analysis.prompt.md`
 - [X] `.github/prompts/create-agent-plan.prompt.md`
-- [ ] draft plan commit by topic
-- [ ] `(subAgent) .codex/skills/plan-reviewer review the plan and requirement doc and then feedback`
-- [ ] `(subAgent) skills/plan-creator fix and update and feedback`
-- [ ] `(subAgent) planner final gate`
-- [ ] wait human check
+- [X] `(subAgent) skills/plan-reviewer review the plan and return reviewer handoff`
+- [X] `(subAgent) skills/plan-creator fix and update and feedback`
 
 ## Actionable Steps
 
@@ -55,114 +52,78 @@ current_plan_input: plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md
 - [X] Keep the planning batch bounded to planning artifacts only, with no
   reviewer, commit, or implementation work claimed
 
-### draft plan commit by topic
+### `(subAgent) skills/plan-reviewer review the plan and return reviewer handoff`
 
-- [ ] Prepare one planning-only commit for:
+- [X] Run independent plan review against:
   - `analysis/spec-docs-mvp-generator/requirements.md`
   - `analysis/spec-docs-mvp-generator/technical-spec.md`
   - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md`
   - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md`
-- [ ] Confirm the commit scope does not include implementation files under
-  `skills/spec-docs-mvp-generator/`
-- [ ] Do not enter implementation before the planning-artifact commit exists
-
-### `(subAgent) .codex/skills/plan-reviewer review the plan and requirement doc and then feedback`
-
-- [ ] Run independent plan review against:
-  - `analysis/spec-docs-mvp-generator/requirements.md`
-  - `analysis/spec-docs-mvp-generator/technical-spec.md`
-  - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md`
-  - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md`
-- [ ] Verify the plan does not reopen canonical/path/projection/runtime
+- [X] Verify the plan does not reopen canonical/path/projection/runtime
   decisions and does not expand into a full architecture docs suite
-- [ ] Verify the exact implementation write set matches the technical baseline
+- [X] Verify the exact implementation write set matches the technical baseline
   and excludes extra scripts, tests, release files, and projection surfaces
-- [ ] Return reviewer feedback without entering implementation
-- [ ] If reviewer feedback begins to control routing or creates a multi-round
-  rework loop, stop and amend the topic plan to add an exact
-  `review-log.md` path before continuing
+- [X] Return reviewer feedback without entering implementation
+- [X] Reviewer feedback already controlled routing once for this topic, so the
+  exact handoff path
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`
+  is now part of the topic contract
+- [X] Materialize the reviewer verdict history at
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`
+  before the next re-review handoff continues
 
 ### `(subAgent) skills/plan-creator fix and update and feedback`
 
-- [ ] If review returns `needs-rework`, repair only the planning artifacts
+- [X] If review returns `needs-rework`, repair only the planning artifacts
   needed to satisfy the contract:
   - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md`
   - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md`
-- [ ] Keep all fixes aligned to
+- [X] Keep all fixes aligned to
   `analysis/spec-docs-mvp-generator/technical-spec.md`
   and `analysis/spec-docs-mvp-generator/requirements.md`
-- [ ] Do not widen scope into implementation, projection work, runtime
+- [X] Repair the planning contract coverage for skill package and template work:
+  - keep the exact implementation paths for `SKILL.md`, `reference.md`,
+    `examples.md`, `templates/spec-template.md`, and
+    `templates/data-ownership-map-template.md`
+  - keep the step breakdown explicit for creating the skill package and both
+    template files only
+- [X] Repair the planning contract coverage for input contract and refusal rules:
+  - keep required `spec-name`, optional background inputs, and stop-and-ask
+    behavior when `spec-name` is missing
+  - keep explicit refusal / reroute coverage for out-of-scope outputs and
+    projection/runtime requests
+- [X] Repair the planning contract coverage for safe rerun / merge rules:
+  - keep first-creation, missing-section backfill, and missing-header backfill
+    behavior explicit
+  - keep non-destructive merge rules explicit: preserve existing content, avoid
+    duplicate fixed headings, and forbid whole-file overwrite
+- [X] Repair the planning contract coverage for examples and reviewer validation:
+  - keep the four required example classes explicit in planning artifacts
+  - keep reviewer-checkable validation points aligned to the technical spec
+- [X] Do not widen scope into implementation, projection work, runtime
   behavior, or a larger docs suite during plan repair
-- [ ] Re-submit the repaired planning artifacts for reviewer confirmation
-
-### `(subAgent) planner final gate`
-
-- [ ] Run final gate only after approved review state is reflected in repo-
-  visible truth
-- [ ] Confirm the accepted plan still maps 100% to
-  `analysis/spec-docs-mvp-generator/technical-spec.md`
-- [ ] Confirm the implementation write set remains exactly:
-  - `skills/spec-docs-mvp-generator/SKILL.md`
-  - `skills/spec-docs-mvp-generator/reference.md`
-  - `skills/spec-docs-mvp-generator/examples.md`
-  - `skills/spec-docs-mvp-generator/templates/spec-template.md`
-  - `skills/spec-docs-mvp-generator/templates/data-ownership-map-template.md`
-- [ ] Confirm non-stable intent remains explicit and no release action was
-  introduced
-- [ ] Final gate verdict must be repo-visible before the topic can move to
-  human check
-
-### wait human check
-
-- [ ] Stop and wait for explicit human check after planner final gate passes
-- [ ] Do not enter implementation before human check authorizes it
-- [ ] After authorization, hand off to creator with the locked plan and keep
-  `step.md` as the current progression artifact
-
-### future creator execution after human check
-
-- [ ] Create the canonical skill package skeleton at
-  `skills/spec-docs-mvp-generator/` and add the two template files:
-  - `skills/spec-docs-mvp-generator/templates/spec-template.md`
-  - `skills/spec-docs-mvp-generator/templates/data-ownership-map-template.md`
-- [ ] Define the skill input contract and refusal rules in
-  `skills/spec-docs-mvp-generator/SKILL.md`:
-  - require `spec-name`
-  - allow only optional bounded background inputs
-  - target only `docs/01-specs/<spec-name>.md` and
-    `docs/02-spec-relations/data-ownership-map.md`
-  - refuse architecture principles, multi-spec maps, interfaces, flows, state
-    machines, ADRs, implementation notes, and projection/runtime work
-- [ ] Define safe rerun / merge semantics in
-  `skills/spec-docs-mvp-generator/reference.md`:
-  - create missing files from templates
-  - preserve existing user-authored content
-  - backfill only missing fixed sections or table header
-  - avoid duplicate fixed headings
-  - avoid destructive whole-file rewrite
-  - stay local-only with no network dependency
-- [ ] Add example coverage and reviewer verification points in
-  `skills/spec-docs-mvp-generator/examples.md`:
-  - new spec generation
-  - existing spec missing-section backfill
-  - existing ownership-map missing-header backfill
-  - out-of-scope refusal / reroute
-- [ ] Update this `step.md` from repo-visible facts as creator execution
-  progresses, without marking any of the above complete before they actually
-  happen
+- [X] Re-submit the repaired planning artifacts for reviewer confirmation
 
 ## Handoff / Gate Notes
 
-- Current progression truth stops after
-  `.github/prompts/create-agent-plan.prompt.md`.
+- Current progression truth now includes the repaired `step.md`, the
+  materialized `review-log.md`, and the latest approved re-review verdict.
 - `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md` now exists as
   the required workflow progression artifact from requirement `R8`.
-- The next allowed role is `Plan-Reviewer`.
-- No reviewer verdict, plan-repair loop, planner final gate, human check,
-  commit, or implementation progress has happened yet in repo-visible truth.
-- The unchecked `future creator execution after human check` items are required
-  workflow-ready implementation categories from the technical baseline; they
-  are planning guidance only until human authorization exists.
+- One `needs-rework` plan-review verdict has already happened, so reviewer
+  routing is now active for this topic.
+- The exact repo-visible handoff path for that re-review loop is
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`.
+- The review-log handoff path has now been materialized at
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`, and
+  the latest repo-visible reviewer verdict is `approved`.
+- The next allowed role is `Planner final gate`.
+- The next remaining repo-visible gap is executing the planner final gate
+  against the now contract-aligned `plan.md`, `step.md`, and `review-log.md`.
+- No publish, merge, or implementation progress has happened yet in repo-visible
+  truth.
+- This progression artifact does not define a separate draft-plan-commit gate
+  and does not treat `.codex/**` as workflow authority.
 - The frozen analysis artifacts remain prerequisites and must not be reopened
   unless a separate scope change is explicitly approved.
 - This `*.step.md` is the workflow progression artifact only; it must be

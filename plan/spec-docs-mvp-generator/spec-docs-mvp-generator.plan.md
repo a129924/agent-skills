@@ -105,10 +105,11 @@ When this topic is complete:
   not use destructive whole-file rewrite.
 - Local-only generation is mandatory: no network fetch, external service,
   runtime orchestration, or extra platform-install dependency may be introduced.
-- `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md` is not
-  created at this stage. If reviewer feedback later controls routing or creates
-  a multi-round rework loop, execution must stop and repair the plan before
-  continuing.
+- Reviewer feedback has already controlled routing once for this planning run.
+  The repo-visible handoff path for further plan-review verdict history and
+  re-review routing is
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`.
+  This slice declares that exact path but does not materialize the file.
 - This planning batch produces only `plan.md` and `step.md`. It does not enter
   plan review, commit, implementation, or any other workflow role.
 
@@ -143,8 +144,10 @@ When this topic is complete:
   stop and require replanning
 - if the frozen analysis layer appears to conflict with later convenience
   instructions and no human `override` exists, stop and surface the conflict
-- if reviewer-routing state becomes active and no repo-visible review log has
-  been added, stop instead of simulating that handoff in hidden context
+- if later plan-review or implementation-routing feedback must be persisted and
+  the declared `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`
+  has not been materialized yet, stop instead of simulating that handoff in
+  hidden context
 
 ## Status / Allowed Transitions
 
@@ -171,9 +174,12 @@ Routing notes:
 - The current workflow phase stops after
   `.github/prompts/create-agent-plan.prompt.md`.
 - The next allowed role for this topic is `Plan-Reviewer`.
-- No draft plan commit, plan review, plan-repair loop, planner final gate,
-  human check, or creator implementation has happened yet in repo-visible
-  truth.
+- One `needs-rework` plan-review verdict has already occurred for this planning
+  run, so reviewer-routing state is active for this topic.
+- The exact repo-visible handoff path for that bounded re-review loop is
+  `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`.
+- No publish, merge, or creator implementation progress has happened yet in
+  repo-visible truth.
 - This topic does not declare `merged` -> `released`.
 
 ## Artifact Paths
@@ -186,6 +192,7 @@ Routing notes:
 | Repo positioning source | `docs/repo-positioning.md` | Planning actor / Creator | Read-only repository positioning guardrail for canonical-source and migration boundaries |
 | Topic plan | `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md` | Planning actor | Repo-visible execution contract for this topic |
 | Topic progression artifact | `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md` | Planning actor / Creator / Main Agent | Current-truth workflow progression artifact for this topic |
+| Review routing log | `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md` | Reviewer / Planning actor | Repo-visible verdict history and routing handoff for plan-review feedback that already entered the rework loop |
 | Skill contract | `skills/spec-docs-mvp-generator/SKILL.md` | Creator | Canonical skill entrypoint defining required inputs, exact downstream targets, and refusal boundaries |
 | Reference contract | `skills/spec-docs-mvp-generator/reference.md` | Creator | Deterministic local-only creation, merge, and rerun rules for the skill |
 | Example surface | `skills/spec-docs-mvp-generator/examples.md` | Creator | Positive and refusal examples that make v1 scope and rerun behavior reviewable |
@@ -205,9 +212,10 @@ Artifact path notes:
   `docs/02-spec-relations/data-ownership-map.md` are part of the skill
   contract only; they are not repo-local implementation artifacts for this
   topic and must not be created during this planning batch.
-- `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md` is
-  intentionally absent at this stage because reviewer-routing state is not yet
-  active.
+- The exact review-log path above is required because reviewer feedback has
+  already controlled routing for this planning topic.
+- This slice declares that repo-visible path only; it does not materialize an
+  empty `review-log.md` file.
 - Treat the listed paths as an executable contract. Any need to touch another
   path is a plan-alignment failure, not a harmless implementation detail.
 
@@ -236,9 +244,9 @@ Artifact path notes:
    backfill, existing ownership-map missing-header backfill, and refusal for an
    out-of-scope request such as architecture principles or multi-spec output.
 6. Update `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.step.md` from
-   repo-visible facts only as the topic moves through creator, reviewer,
-   publish, and merge states, without using the step artifact to bypass locked
-   scope or simulate reviewer approval.
+   repo-visible creator-work facts only so the planning artifact stays aligned
+   with the locked implementation scope and the next reviewer handoff, without
+   using `step.md` to simulate reviewer, publish, or merge progression.
 7. Stop and route back to planning if implementation requires any additional
    file path, any projection/runtime change, any full architecture docs-suite
    expansion, or any destructive whole-file rewrite behavior not frozen by the
