@@ -13,6 +13,7 @@
 {"canonical_path":"skills/plan-creator","tree_hash":"bb6a830865c9999c327696061224aa24ff20dd2ae0e960b975dccabc74865a2d"}
 {"canonical_path":"skills/plan-reviewer","tree_hash":"e40785646c25ba21c0bc08acc94070eff620912c15582358a9a7437877c5fa41"}
 {"canonical_path":"skills/plan-step-tracker","tree_hash":"bf358d3fd4e03a25baa09b9957a73bdbcbd0160e061c2c1e1ef8b0807eabbcda"}
+{"canonical_path":"skills/platform-projection-adapter","tree_hash":"25e6c1865a040837e3a0004b13afb87ed69e9765c9e8a1d34f5702cabf0104bd"}
 {"canonical_path":"skills/python-api-signature","tree_hash":"30e5e7c0dbeacfca1cc248a416cffb66143d3c3ea64739bac717c873d7594d05"}
 {"canonical_path":"skills/python-async-await","tree_hash":"191df34697a0b63442348b3914db7df523d94f55a3dcfdeef90312b4fbbc4a93"}
 {"canonical_path":"skills/python-async-planning","tree_hash":"22ab3995af8b0cf98a7843275bcf090b4ea8270d95a409cf0c73e67a3f2fed78"}
