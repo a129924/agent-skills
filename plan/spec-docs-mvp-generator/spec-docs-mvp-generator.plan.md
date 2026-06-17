@@ -151,7 +151,7 @@ When this topic is complete:
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical creator -> reviewer -> publish ->
   merge path, with no release action for this topic
 - **Allowed transitions**:
@@ -171,15 +171,15 @@ When this topic is complete:
 
 Routing notes:
 
-- The current workflow phase stops after
-  `.github/prompts/create-agent-plan.prompt.md`.
-- The next allowed role for this topic is `Plan-Reviewer`.
+- The current workflow phase has progressed through the bounded publish / PR
+  slice and is now waiting on human merge or human feedback on the open PR.
+- The next allowed role for this topic is `wait human Merge or human feedback pr-comments`.
 - One `needs-rework` plan-review verdict has already occurred for this planning
   run, so reviewer-routing state is active for this topic.
 - The exact repo-visible handoff path for that bounded re-review loop is
   `plan/spec-docs-mvp-generator/spec-docs-mvp-generator.review-log.md`.
-- No publish, merge, or creator implementation progress has happened yet in
-  repo-visible truth.
+- Creator implementation is complete in repo-visible truth, and the bounded
+  publish / PR slice has already opened the current Ready PR.
 - This topic does not declare `merged` -> `released`.
 
 ## Artifact Paths
