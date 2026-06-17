@@ -1,6 +1,6 @@
 ---
 topic: spec-docs-mvp-generator
-status: approved
+status: pr-open
 created: 2026-06-16
 current_plan_input: plan/spec-docs-mvp-generator/spec-docs-mvp-generator.plan.md
 ---

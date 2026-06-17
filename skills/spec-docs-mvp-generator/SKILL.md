@@ -54,6 +54,11 @@ Do not use this skill when:
 Required input:
 
 - `spec-name`
+  The value must be a filename-safe slug for one spec file, not a path. Block
+  before any write if it contains `/`, `\`, `..`, a leading `.`, an absolute
+  path marker, or any other path-like segment. Only continue after resolving
+  the candidate output path and confirming its normalized location remains
+  inside `docs/01-specs/`.
 
 Optional input:
 
@@ -70,13 +75,19 @@ sections.
 
 # Process
 1. Validate that one explicit `spec-name` is present before any write.
-2. Use `templates/spec-template.md` and
+2. Validate that `spec-name` is a filename-safe slug, not a path-like value.
+   Reject traversal, absolute-path, separator-containing, or dot-segment
+   inputs before any write.
+3. Resolve the candidate spec output path from `spec-name`, normalize it, and
+   confirm the resolved path stays contained within `docs/01-specs/` before
+   writing.
+4. Use `templates/spec-template.md` and
    `templates/data-ownership-map-template.md` as the canonical starter
    skeletons.
-3. Target only these two files:
+5. Target only these two files:
    - `docs/01-specs/<spec-name>.md`
    - `docs/02-spec-relations/data-ownership-map.md`
-4. When `docs/01-specs/<spec-name>.md` does not exist, create it from the spec
+6. When `docs/01-specs/<spec-name>.md` does not exist, create it from the spec
    template with the fixed section order:
    - `Summary`
    - `Problem`
@@ -87,20 +98,20 @@ sections.
    - `Data Ownership Notes`
    - `Acceptance Signals`
    - `Open Questions`
-5. When `docs/02-spec-relations/data-ownership-map.md` does not exist, create
+7. When `docs/02-spec-relations/data-ownership-map.md` does not exist, create
    it from the ownership-map template with the fixed section order:
    - `Purpose`
    - `Ownership Table`
    - `Shared or Derived Data`
    - `Boundary Notes`
    - `Open Questions`
-6. If a target file already exists, preserve existing authored content and
+8. If a target file already exists, preserve existing authored content and
    backfill only missing fixed sections or the missing ownership-table header.
-7. Keep reruns idempotent by avoiding duplicate same-name fixed sections and by
+9. Keep reruns idempotent by avoiding duplicate same-name fixed sections and by
    never clearing or rewriting the whole file just to normalize layout.
-8. Refuse or reroute any request that would widen the write set, add excluded
+10. Refuse or reroute any request that would widen the write set, add excluded
    artifact families, or require destructive rewrite.
-9. Stay local-only. Do not depend on network access, external services,
+11. Stay local-only. Do not depend on network access, external services,
    runtime orchestration, or projection sync.
 
 # Platform Path Policy
@@ -149,6 +160,10 @@ non-empty sections listed in
 
 ## Required Checks
 - confirm one explicit `spec-name` is present before writing anything
+- confirm `spec-name` is a filename-safe slug and reject any path-like,
+  traversal, or absolute-path value before writing anything
+- confirm the normalized resolved output path for `docs/01-specs/<spec-name>.md`
+  remains contained within `docs/01-specs/`
 - confirm the run targets only the two allowed output paths
 - confirm `docs/01-specs/<spec-name>.md` contains the fixed nine required
   non-empty sections
@@ -170,6 +185,9 @@ non-empty sections listed in
   generated documents.
 - Blocked: if `spec-name` is missing, stop and ask for it before writing any
   file.
+- Blocked: if `spec-name` is path-like, contains traversal, or resolves
+  outside `docs/01-specs/`, stop before writing any file and report the exact
+  invalid input.
 - Blocked: if the request would widen the two-file contract or requires a
   destructive whole-file rewrite, stop and report the exact blocker instead of
   improvising.
@@ -179,6 +197,9 @@ non-empty sections listed in
 ## Missing Context
 - If `spec-name` is missing, ask for one explicit `spec-name` and do not guess
   the filename.
+- If `spec-name` is path-like, traversal-shaped, absolute, or fails normalized
+  containment inside `docs/01-specs/`, block instead of sanitizing or
+  rewriting it.
 - If optional context is missing, continue with starter prompts rather than
   leaving blank sections.
 
