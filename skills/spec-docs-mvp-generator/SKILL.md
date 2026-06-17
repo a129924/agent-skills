@@ -121,7 +121,7 @@ sections.
 - Any adapter or installer must resolve the placeholder to a concrete platform
   path before execution begins.
 - For Codex projection mapping, `.<platform>/skills/<skill-name>/` resolves to
-  `.agents/skills/<skill-name>/`.
+  `.codex/skills/<skill-name>/`.
 - Do not treat `skills/`, `.agents/skills/`, `.github/skills/`, or
   `.claude/skills/` as fixed runtime paths in skill instructions unless the
   instruction is explicitly describing a mapping rule.
