@@ -1,12 +1,18 @@
 # Skill folder contract
 
-This document defines the canonical authoring-target folder contract for
-transition work.
+This document defines the folder contract for canonical source authoring,
+output-facing projection wording, and bootstrap fallback.
 
-For this contract, `skills/` is the canonical authoring target for transition
-work. Any `.<platform>/skills/` path is a compatibility or projection surface,
-not the source of truth. Mention a projection path only when context or prompt
-explicitly injects it into scope.
+## Path-role taxonomy
+
+- canonical source / authoring-only: `skills/<skill-name>/`
+- output-facing / runnable / copy-pasteable: `.<platform>/skills/<skill-name>/`
+- bootstrap fallback: `skills/<skill-name>/` only when the projected entrypoint
+  does not yet exist and the text labels it as fallback
+
+Do not hardcode `.codex/...`, `.github/...`, or another concrete platform root
+as the default. If a concrete platform root is required to keep the contract
+truthful, roll back to alignment wording instead of choosing a platform here.
 
 ## Required core
 - `SKILL.md`: the executable instruction contract for the skill
@@ -80,7 +86,13 @@ explicitly injects it into scope.
 
 ## Transition boundary
 
-- author new or materially transitioned skill content under `skills/<skill-name>/`
+- author new or materially transitioned canonical source content under
+  `skills/<skill-name>/`
+- use `.<platform>/skills/<skill-name>/` as the default output-facing,
+  runnable, or copy-pasteable path
+- use `skills/<skill-name>/` as a projected path only when the projected
+  entrypoint does not yet exist and the text explicitly labels it as a
+  bootstrap fallback
 - do not assume any concrete `.<platform>/skills/` path unless context or
   prompt explicitly puts that compatibility/projection surface in scope
 - do not treat this contract as authorization to rewrite compatibility,

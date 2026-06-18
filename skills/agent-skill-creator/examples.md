@@ -14,13 +14,15 @@ Goal:
 
 Result:
 ```text
-skills/release-note-shortener/
+.<platform>/skills/release-note-shortener/
 ├── SKILL.md
 ├── examples.md
 └── checklist.md
 ```
 
 Why this passes the creator bar:
+- canonical source is still authored under `skills/release-note-shortener/`
+- the first copy-pasteable path is the projected `.<platform>/...` form
 - one trigger family
 - one primary output
 - brief positive and negative examples can live in `SKILL.md`
@@ -35,7 +37,7 @@ Goal:
 
 Result:
 ```text
-skills/safe-refactor/
+.<platform>/skills/safe-refactor/
 ├── SKILL.md
 ├── examples.md
 ├── checklist.md
@@ -54,7 +56,7 @@ Goal:
 
 Result:
 ```text
-skills/release-gate-checker/
+.<platform>/skills/release-gate-checker/
 ├── SKILL.md
 ├── examples.md
 └── checklist.md
@@ -72,7 +74,7 @@ Goal:
 
 Result:
 ```text
-skills/simple-naming-rule/
+.<platform>/skills/simple-naming-rule/
 ├── SKILL.md
 └── reference.md
 ```
@@ -89,7 +91,7 @@ Goal:
 
 Result:
 ```text
-skills/policy-auditor/
+.<platform>/skills/policy-auditor/
 ├── SKILL.md
 ├── reference.md
 └── references/
@@ -102,20 +104,22 @@ Why this split passes:
 - each split file has one clear role
 - `Local references` can name each file and explain its job
 
-## Example 7: planning-spine implication is follow-up, not blocker
+## Example 7: bootstrap fallback is explicit, not the default
 
 Goal:
-- draft a skill whose future consumers include planning-spine skills that still
-  reference a `.<platform>/skills/` compatibility surface that context or
-  prompt explicitly places in scope
+- draft a skill before any projected entrypoint exists yet
 
 Result:
-- author the draft under `skills/<skill-name>/`
-- note the downstream planning-spine implication in the handoff
+- author the canonical source under `skills/<skill-name>/`
+- show `.<platform>/skills/<skill-name>/` as the normal output-facing path
+- if you must mention the source path operationally, label
+  `skills/<skill-name>/` as a bootstrap fallback because the projected
+  entrypoint does not yet exist
 - do not edit any `.<platform>/skills/<skill-name>/` compatibility or
   projection surface in the same phase
 
 Why this passes:
-- creator keeps `skills/<skill-name>/` as the only canonical authoring target
-- projection handling happens only because the surrounding context injected it
+- creator keeps `skills/<skill-name>/` limited to canonical source and
+  explicitly labeled fallback
+- the default copy-pasteable path still points to `.<platform>/...`
 - creator does not assume a concrete platform surface on its own
