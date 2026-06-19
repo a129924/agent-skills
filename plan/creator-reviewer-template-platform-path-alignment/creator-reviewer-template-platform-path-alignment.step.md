@@ -2,7 +2,7 @@
 topic: creator-reviewer-template-platform-path-alignment
 status: "pr-open"
 created: 2026-06-17
-updated: 2026-06-18
+updated: 2026-06-19
 ---
 
 # Creator Reviewer Template Platform Path Alignment Steps
@@ -110,6 +110,10 @@ updated: 2026-06-18
   - `skills/agent-skill-template/folder-contract.md`
   - `skills/agent-skill-template/reference.md`
   - `plan/creator-reviewer-template-platform-path-alignment/creator-reviewer-template-platform-path-alignment.step.md`
+- Current reviewer-recheck follow-up is limited to truth alignment only:
+  - `plan/creator-reviewer-template-platform-path-alignment/creator-reviewer-template-platform-path-alignment.plan.md`
+  - `plan/creator-reviewer-template-platform-path-alignment/creator-reviewer-template-platform-path-alignment.step.md`
+  - PR #115 body metadata
 - Current next legal role: `human`.
 - Current gate: `pr-open`.
 
@@ -143,4 +147,5 @@ updated: 2026-06-18
 
 - [X] Stop after PR creation and wait for human merge or explicit human
   feedback in PR comments
-- [X] Do not address PR comments in this bounded publish slice
+- [X] Do not address PR comments outside the explicitly authorized
+  truth-alignment follow-up for current-status and PR-body wording sync

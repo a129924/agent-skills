@@ -91,7 +91,7 @@ Frozen prerequisite traceability:
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `pr-open`
 - **Execution model**: follow the canonical
   `creator-in-progress -> review-ready -> reviewer-in-progress -> approved -> publish-in-progress -> pr-open -> merged`
   path with no release action
