@@ -58,6 +58,16 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of version `0.76.1`, PR #115 merged the
+  `creator-reviewer-template-platform-path-alignment` topic into `dev`,
+  aligning the stable `agent-skill-creator`, `agent-skill-reviewer`, and
+  `agent-skill-template` skill families around canonical-source,
+  output-facing `.<platform>/...`, and explicit bootstrap-fallback path
+  roles while adding the bounded analysis / plan artifacts for that topic.
+- As of version `0.76.0`, PR #114 merged the
+  `spec-docs-mvp-generator` topic into `dev`, adding the stable skill
+  `skills/spec-docs-mvp-generator/` and the bounded analysis / plan artifacts
+  for the `spec-docs-mvp-generator` topic.
 - As of version `0.75.0`, PR #112 merged the
   `platform-projection-adapter` topic into `dev`, adding the canonical
   projection skill and CLI under `skills/platform-projection-adapter/` with
