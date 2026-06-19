@@ -51,26 +51,31 @@ Do not use this skill when:
    - higher-risk: gatekeeping, release, tool-driven, or high-impact guidance needs stronger misuse prevention
 4. Propose `complexity` in YAML frontmatter. Propose applicable `risk_profile` tags for medium and high complexity skills.
 5. If a topic plan locks a creator/reviewer-first rollout, keep the work inside creator, reviewer, and the minimum supporting policy/template files. Defer downstream regular skills to later topics instead of broadening the current one.
-6. Create `skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case. This creator contract uses `skills/` as the canonical authoring target; any `.<platform>/skills/` path is a compatibility or projection surface, not the source of truth, and should be mentioned only when context or prompt explicitly injects that surface into scope.
-7. Keep the skill focused on one job.
-8. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
-9. Add `reference.md` or `examples.md`.
-10. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
-11. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
-12. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
-13. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
-14. When the skill is higher-risk or easy to misuse, add stronger validation signals in `SKILL.md` or local files, such as explicit verification guidance, red flags, rationalizations, or a checklist.
-15. Do not force heavyweight validation onto a simple low-risk skill just because another skill needed it.
-16. If you add optional files or subfolders, declare each role in `Local references`.
-17. If downstream planning-spine skills or future transition consumers would be affected by later path migration, record that as a follow-up implication instead of editing those surfaces in this phase.
-18. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
+6. Author the canonical source under `skills/<skill-name>/`, where `<skill-name>` must use lowercase kebab-case.
+7. When you show a runnable, copy-pasteable, or output-facing location, default to `.<platform>/skills/<skill-name>/` rather than `skills/<skill-name>/`.
+8. If the projected entrypoint does not yet exist, you may mention `skills/<skill-name>/` only as an explicitly labeled bootstrap fallback.
+9. If the task cannot stay truthful without hardcoding `.codex/...`, `.github/...`, or another concrete platform root, roll back to alignment wording instead of inventing a default platform.
+10. Keep the skill focused on one job.
+11. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
+12. Add `reference.md` or `examples.md`.
+13. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
+14. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
+15. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
+16. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+17. When the skill is higher-risk or easy to misuse, add stronger validation signals in `SKILL.md` or local files, such as explicit verification guidance, red flags, rationalizations, or a checklist.
+18. Do not force heavyweight validation onto a simple low-risk skill just because another skill needed it.
+19. If you add optional files or subfolders, declare each role in `Local references`.
+20. If downstream planning-spine skills or future transition consumers would be affected by later path migration, record that as a follow-up implication instead of editing those surfaces in this phase.
+21. When the draft is `review-ready`, tell the user: `This skill is review-ready. Please hand it to agent-skill-reviewer for review.`
 
 # Examples
 - Positive: Draft `release-note-shortener` with a clear trigger, brief positive and negative examples in `SKILL.md`, and stronger verification guidance only if the skill can materially affect release output.
 - Negative: Draft a skill when the responsibility is still vague, mixes creation, review, and publishing, or forces release-grade validation onto a simple naming rule.
 
 # Outputs
-- a new `skills/<skill-name>/` folder, using lowercase kebab-case
+- a canonical source folder at `skills/<skill-name>/`, using lowercase kebab-case
+- a default output-facing path written as `.<platform>/skills/<skill-name>/`
+- an explicitly labeled bootstrap fallback only when the projected entrypoint does not yet exist
 - `SKILL.md` with concise positive and negative examples
 - `examples.md` for high-complexity skills, or `reference.md` for local detail
 - `references/` when local reference detail must be split by topic
@@ -127,8 +132,12 @@ Omit this section when the skill is created outside a multi-agent handoff flow.
 - Do not rely on hidden context outside the skill folder.
 - Do not expand a creator/reviewer-first topic into downstream regular-skill rollout; defer those changes to a later topic plan.
 - Do not add heavyweight validation to a lightweight skill unless the risk truly warrants it.
+- Do not use `skills/<skill-name>/` as the default runnable or copy-pasteable path.
 - Do not assume any concrete `.<platform>/skills/` surface unless context or
   prompt explicitly puts that compatibility/projection path in scope.
+- Do not mention `skills/<skill-name>/` as a projected path unless it is
+  explicitly labeled as a bootstrap fallback because the projected entrypoint
+  does not yet exist.
 - Do not treat any `.<platform>/skills/` compatibility/projection, promotion,
   or runtime/tooling follow-up as part of this drafting step.
 - Do not claim `approved` or `stable`.

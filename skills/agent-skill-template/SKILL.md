@@ -15,7 +15,7 @@ do_not_use_when:
 
 # Purpose
 Provide the reference shape for a `review-ready` skill at the canonical
-authoring target.
+authoring target while keeping output-facing path wording aligned.
 
 # Trigger / When to use
 Use this skill when:
@@ -38,7 +38,9 @@ Do not use this skill when:
 1. Read `template.md` and `folder-contract.md`.
 2. Classify the expected validation weight and `complexity` before copying the skeleton: lightweight (low), medium-complexity (medium), or higher-risk (high).
 3. Identify applicable `risk_profile` tags for medium and high complexity skills.
-4. Copy the folder shape and section layout for `skills/<skill-name>/`.
+4. Copy the folder shape and section layout for
+   `.<platform>/skills/<skill-name>/`, while authoring the canonical source
+   under `skills/<skill-name>/`.
 5. Replace placeholders with one clear responsibility.
 6. Add concise positive and negative examples to `SKILL.md`.
 7. Add `reference.md` or `examples.md`.
@@ -48,18 +50,24 @@ Do not use this skill when:
 11. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
 12. Add stronger validation signals only when the skill's risk, branching, tooling, or downstream impact justifies them.
 13. If you add optional files or folders, declare each role in `Local references`.
-14. If downstream planning-spine skills or other consumers still assume a
+14. If the projected entrypoint does not yet exist, mention
+    `skills/<skill-name>/` only as an explicitly labeled bootstrap fallback.
+15. If truthful guidance would require hardcoding `.codex/...`, `.github/...`,
+    or another concrete platform root, roll back to alignment wording instead
+    of choosing a default platform.
+16. If downstream planning-spine skills or other consumers still assume a
     platform-specific `.<platform>/skills/` surface, record that as a
     follow-up implication instead of editing those surfaces in this phase.
-15. Stop at `review-ready`.
-16. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
+17. Stop at `review-ready`.
+18. Let a human or external workflow pass the draft to `agent-skill-reviewer`.
 
 # Examples
 - Positive: Use this template to draft a focused skill with concise positive and negative examples in `SKILL.md`, then add stronger verification guidance only when the topic is higher-risk.
 - Negative: Use this template as if it could approve a finished skill or as if every simple skill needed the same heavyweight validation as a release gate.
 
 # Outputs
-- a copyable skill folder shape
+- a copyable projected skill folder shape at `.<platform>/skills/<skill-name>/`
+- canonical source guidance for `skills/<skill-name>/`
 - a `SKILL.md` skeleton
 - a minimal companion file set
 - a `review-ready` draft target
@@ -69,8 +77,12 @@ Do not use this skill when:
 - Do not remove the explicit trigger section.
 - Do not depend on repository-global reference files when a local file will do.
 - Do not force heavyweight validation onto a lightweight skill without a clear risk-based reason.
+- Do not use `skills/<skill-name>/` as the default runnable or copy-pasteable
+  path.
 - Do not treat any `.<platform>/skills/` compatibility/projection, promotion,
   or runtime/tooling cutover as part of this template.
+- Do not hardcode `.codex/...`, `.github/...`, or another concrete platform
+  root unless context explicitly injects it.
 - Do not claim `approved` or `stable`.
 
 # Local references
