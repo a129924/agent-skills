@@ -11,14 +11,14 @@ created: 2026-07-16
 
 | Current status | Allowed next transitions | Next actor |
 | --- | --- | --- |
-| pr-open | needs-rework, merged | Main Agent (publisher / release actor) |
+| `BLOCKED` | None — the selected source plan does not uniquely declare the current status, allowed transition and next actor required for this generated tracker. | None — do not synthesize an actor from GitHub PR, review, branch, chat or completion context. |
 
 ## Actionable Steps
 
 ### Main Agent — Fixed Head
 
-- [ ] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
-- [ ] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
+- [ ] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
+- [ ] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
 
 ### Contextual Actions
 
@@ -34,6 +34,7 @@ created: 2026-07-16
 - [X] 6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering; keep detailed rules in the owning SKILL, template, profile references and examples.
 - [X] 7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, remote-retention unknown safety default, release substitutions and Python tracker split.
 - [X] 8. Create `skills/step-creator/checklist.md` covering paths, eligibility, atomic create-only and temporary-file cleanup, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, remote-retention safety default, tail, release substitution, trackers, projections and handoff.
+- [ ] 9. After all eight canonical `skills/step-creator/**` artifacts are complete, run the existing local `scripts/build_skills_inventory.py` to update only `artifacts/skills-inventory.jsonl`; confirm it inventories top-level canonical `skills/` only and includes `skills/step-creator/` exactly once, without changing the builder or tests.
 
 ## Main Agent Actionable Steps — Fixed Tail
 
@@ -48,12 +49,12 @@ created: 2026-07-16
 - [ ] **Actor:** Main Agent — **Action:** Require a new explicit human resume before post-merge work.
 - [ ] **Actor:** Main Agent — **Action:** Verify the pull request is merged.
 - [ ] **Actor:** Main Agent — **Action:** Fast-forward-only sync the target/default branch.
-- [ ] **Actor:** Main Agent — **Action:** remote-retained — preserve the remote branch by the unknown-retention safety default and record required human/policy follow-up before any deletion.
+- [ ] remote-retained — preserve the remote branch; retention is required or unknown, and human/policy follow-up is required before deletion
 - [X] Determine release requirement — release not required
 - [X] release-not-applicable — source plan declares terminal at merged
-- [ ] **Actor:** Main Agent — **Action:** Inspect the selected managed topic worktree and prove clean/release evidence — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
-- [ ] **Actor:** Main Agent — **Action:** Obtain exact destructive approval to remove the selected managed topic worktree — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
-- [ ] **Actor:** Main Agent — **Action:** Remove the selected managed topic worktree and verify removal — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
+- [ ] **Actor:** Main Agent — **Action:** Inspect the selected managed topic worktree and prove clean/release evidence — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
+- [ ] **Actor:** Main Agent — **Action:** Obtain exact destructive approval to remove the selected managed topic worktree — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
+- [ ] **Actor:** Main Agent — **Action:** Remove the selected managed topic worktree and verify removal — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
 - [ ] **Actor:** Main Agent — **Action:** Delete the local topic branch after verified managed worktree removal.
 - [ ] **Actor:** Main Agent — **Action:** Perform final verification and record close-semantics evidence without equating merged with closed.
 
@@ -63,8 +64,9 @@ created: 2026-07-16
 - Source plan: plan/step-creator/step-creator.plan.md
 - Shared lifecycle shell: skills/step-creator/templates/shared-lifecycle-shell.md
 - Managed worktree intent: topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator; primary-worktree=false
-- Progression truth inputs: plan/step-creator/step-creator.plan.md; plan/step-creator/step-creator.step.md
-- Completion evidence inputs: commit `aa74b5b` proves creation of the eight `skills/step-creator/**` artifacts represented by Implementation Steps 1–8; lifecycle, PR workflow and pending PR-comment corrections remain unproved/pending unless an exact plan decision sentinel applies.
+- Workflow-state source: `plan/step-creator/step-creator.plan.md` only. It does not uniquely declare the current status, allowed transition and next actor required for this tracker; generated progression is therefore BLOCKED.
+- Progression truth inputs: `plan/step-creator/step-creator.plan.md` only for status, transition and next actor; `plan/step-creator/step-creator.step.md` is never a source-state substitute.
+- Completion evidence inputs: commit `aa74b5b69f0b5c4cdb8b37cd8b61f897240edcd4` adds exactly the eight artifacts mapped one-to-one to Implementation Steps 1–8: (1) `skills/step-creator/SKILL.md`; (2) `skills/step-creator/templates/shared-lifecycle-shell.md`; (3) `skills/step-creator/references/base-plan-profile.md`; (4) `skills/step-creator/references/agent-skill-plan-profile.md`; (5) `skills/step-creator/references/python-plan-authoring-adapter.md`; (6) `skills/step-creator/reference.md`; (7) `skills/step-creator/examples.md`; (8) `skills/step-creator/checklist.md`. `artifacts/skills-inventory.jsonl` has no committed completion evidence for Step 9 yet and remains pending until the existing local builder regenerates, validates, and commits it. This evidence, GitHub PR/review/branch metadata and chat context do not synthesize workflow status, transition or next actor.
 - Marker semantics: `[X]` exact one-to-one evidence; `[ ]` pending/planned/unproved; lowercase source `[x]` is pending and warns.
 - Tracker semantics: `check_all_succeeded` covers rendered head/contextual/Implementation/tail checkboxes; `check_impl_steps_succeeded` covers only Implementation Steps.
 - Owner-only updates: only the action owner may update after exact evidence; step-creator never updates an existing output.

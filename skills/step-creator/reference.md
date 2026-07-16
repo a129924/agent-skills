@@ -24,10 +24,10 @@ contracts live in the selected profile reference.
   references. Python eligibility is canonical intent plus the 13-section
   `python-plan-authoring` contract only; its fixed contextual action is adapter
   behavior, not a new Python source-plan requirement.
-- Freeze exactly one selector tuple: topic, governed topic-branch selector, and
-  managed-worktree path intent. Repeat it in fixed head, cleanup slots, and
-  Handoff Notes with `primary-worktree=false`. A planned tuple is not evidence
-  that the selected worktree exists.
+- Freeze exactly one complete selector tuple: topic, governed topic-branch
+  selector, managed-worktree path intent, and `primary-worktree=false`. Repeat
+  every member in each fixed-head row, cleanup slot, and Handoff Note. A
+  planned tuple is not evidence that the selected worktree exists.
 
 ## Evidence and tracker
 
@@ -44,11 +44,13 @@ contracts live in the selected profile reference.
 - Completion-evidence inputs name exact paths and/or exact command, PR, merge,
   release, tag, or worktree identifiers. Progression truth names the source plan
   and each source-declared progression/review/summary artifact actually used.
-- Initial generation does not require a worktree. `create-worktree` is `[X]`
-  only when exact inventory proves the selected managed worktree and selected
-  attached branch; a primary worktree never qualifies. After fixed-head
-  completion, absent, conflicting, primary, dirty, detached, locked, or unknown
-  selected-worktree state is `BLOCKED` for later update/cleanup execution.
+- Initial generation does not require a worktree and always leaves cleanup rows
+  pending, even when cleanup identity, clean/release, approval, or removal truth
+  is not yet available. `create-worktree` is `[X]` only when exact inventory
+  proves the selected managed worktree and selected attached branch; a primary
+  worktree never qualifies. Only after an existing tracker enters its
+  update/cleanup execution do absent, conflicting, primary, dirty, detached,
+  locked, or unknown selected-worktree states become `BLOCKED`.
 - The tracker evaluates lines beginning with that checkbox syntax. Base/Agent
   `check_all_succeeded` covers head, contextual actions, Implementation Steps,
   and tail; Python additionally covers six Workflow Stages. Every profile's
@@ -75,6 +77,7 @@ contracts live in the selected profile reference.
   an empty inventory uses `tag-only`, while multiple sources must agree and be
   synchronized. Slot 16 renders the README action or `README-not-required`.
   Release commit and push precede tag approval, tag creation, and tag push.
-- Initial cleanup slots are pending. Exact destructive approval precedes
-  worktree removal; verified removal precedes local branch deletion; merged or
-  released never proves final closure.
+- Initial cleanup slots are pending and are not a creation-time blocker. During
+  later update/cleanup execution, exact destructive approval precedes worktree
+  removal; verified removal precedes local branch deletion; merged or released
+  never proves final closure.

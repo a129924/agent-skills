@@ -72,10 +72,11 @@ Do not use this skill when:
    lifecycle truth; never require Base/Agent status, actor, or action fields.
    Any profile-required missing, duplicate, contradictory, nested-only, or
    incompatible input is `BLOCKED`.
-4. Freeze one selector tuple: topic, governed topic-branch selector, and
-   managed-worktree path intent. Carry that same tuple into fixed head, tail
-   cleanup actions, and Handoff / Gate Notes. A planned tuple is not evidence
-   that a worktree exists. Competing tuples are `BLOCKED`.
+4. Freeze one complete selector tuple: topic, governed topic-branch selector,
+   managed-worktree path intent, and `primary-worktree=false`. Carry every
+   member unchanged into each fixed-head row, tail cleanup action, and Handoff
+   / Gate Note. A planned tuple is not evidence that a worktree exists.
+   Competing tuples are `BLOCKED`.
 5. Render the selected frozen output wire. Render the fixed head, then the
    contextual middle, then a one-to-one verbatim Implementation Step mirror,
    then the fixed tail from `templates/shared-lifecycle-shell.md`. Base/Agent
@@ -94,9 +95,11 @@ Do not use this skill when:
    `remote-retained` safety default, with required human/policy follow-up before
    any later deletion; unknown retention alone is not `BLOCKED`. Contradictory
    explicit retention truth is `BLOCKED`. Unknown or contradictory release,
-   version, README, tag, or cleanup truth remains `BLOCKED`, rather than an
-   invented action. Slot 13 always resolves release, and omitted release slots
-   must not leave phantom checkboxes.
+   version, README, tag, or cleanup truth remains `BLOCKED` only when an
+   existing tracker is being updated for that lifecycle or cleanup action,
+   rather than an invented action. Initial creation keeps all cleanup rows
+   pending without requiring cleanup truth. Slot 13 always resolves release,
+   and omitted release slots must not leave phantom checkboxes.
 8. Validate section order, profile-specific wire, source fidelity, marker form,
    selector repetition, rendered tracker scope, and exact destination path.
    Only after all preflight and rendered-content validation pass, create a

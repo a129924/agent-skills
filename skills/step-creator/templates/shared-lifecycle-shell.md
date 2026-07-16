@@ -14,8 +14,10 @@ Freeze and repeat one selector tuple:
 topic=<topic>; branch=<governed topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
 ```
 
-It is a planned selector, not a claim that the worktree exists. Initial
-generation may render the worktree actions pending.
+Every selector-bearing row renders this complete tuple, including
+`primary-worktree=false`; no row may abbreviate or omit one member. It is a
+planned selector, not a claim that the worktree exists. Initial generation may
+render the worktree actions pending.
 
 ## Fixed head
 
@@ -24,8 +26,8 @@ heading. This shell contributes only the two rendered rows below, so composing
 the profile wire with this shell never produces a duplicate heading.
 
 ```markdown
-- <resolved-checkbox> **Actor:** Main Agent — **Action:** create-worktree — **Selector:** <selector tuple without primary-worktree>
-- <resolved-checkbox> **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** <same selector tuple without primary-worktree>
+- <resolved-checkbox> **Actor:** Main Agent — **Action:** create-worktree — **Selector:** <complete selector tuple>
+- <resolved-checkbox> **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** <complete selector tuple>
 ```
 
 `create-worktree` is complete only when exact inventory proves the selected
@@ -51,9 +53,9 @@ Render after `## Implementation Steps` under
 <slot-12 remote resolution>
 <slot-13 release resolution>
 <release branch: slots 14–21 or one release-not-applicable sentinel>
-- <resolved-checkbox> **Actor:** Main Agent — **Action:** Inspect the selected managed topic worktree and prove clean/release evidence — **Selector:** <selector tuple without primary-worktree>
-- <resolved-checkbox> **Actor:** Main Agent — **Action:** Obtain exact destructive approval to remove the selected managed topic worktree — **Selector:** <selector tuple without primary-worktree>
-- <resolved-checkbox> **Actor:** Main Agent — **Action:** Remove the selected managed topic worktree and verify removal — **Selector:** <selector tuple without primary-worktree>
+- <resolved-checkbox> **Actor:** Main Agent — **Action:** Inspect the selected managed topic worktree and prove clean/release evidence — **Selector:** <complete selector tuple>
+- <resolved-checkbox> **Actor:** Main Agent — **Action:** Obtain exact destructive approval to remove the selected managed topic worktree — **Selector:** <complete selector tuple>
+- <resolved-checkbox> **Actor:** Main Agent — **Action:** Remove the selected managed topic worktree and verify removal — **Selector:** <complete selector tuple>
 - <resolved-checkbox> **Actor:** Main Agent — **Action:** Delete the local topic branch after verified managed worktree removal.
 - <resolved-checkbox> **Actor:** Main Agent — **Action:** Perform final verification and record close-semantics evidence without equating merged with closed.
 ```

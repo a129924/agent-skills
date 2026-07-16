@@ -68,5 +68,7 @@ created: YYYY-MM-DD
 The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
 shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
 of every `<resolved-checkbox>` placeholder; no other marker is literal output.
+Every selector-bearing shared-shell row must carry the complete frozen tuple,
+including `primary-worktree=false`, exactly as Handoff / Gate Notes does.
 Preserve contextual source wording and order. Follow the shared reference for
 exact collective dedup and one-to-one mapping.

@@ -34,9 +34,11 @@
 
 ## Lifecycle and conditionals
 
-- [ ] One selector tuple repeats in fixed head, tail slots 22–24, and Handoff.
-- [ ] Initial no-worktree generation stays valid with pending lifecycle actions;
-  a primary worktree is never accepted as managed evidence.
+- [ ] The complete selector tuple, including `primary-worktree=false`, repeats
+  unchanged in every fixed-head row, tail slots 22–24, and Handoff.
+- [ ] Initial no-worktree generation stays valid with pending lifecycle and
+  cleanup actions; missing cleanup truth is not a creation-time `BLOCKED`. A
+  primary worktree is never accepted as managed evidence during later updates.
 - [ ] Fixed order preserves STOP POINT 1 before commit/push/PR and STOP POINT 2
   before human merge follow-up.
 - [ ] Slot 12 has exactly one remote outcome and exact source-plan or
@@ -49,8 +51,10 @@
   exact sentinel; it never leaves a pending release-resolution checkbox.
 - [ ] Release branch preserves version inventory, synchronization/tag-only,
   README outcome, release commit/push, approval, tag, and push order.
-- [ ] Cleanup actions retain identity, clean/release evidence, destructive
-  approval, removal-before-local-deletion, and final close evidence.
+- [ ] Only later update/cleanup execution blocks on missing or conflicting
+  cleanup identity, clean/release evidence, destructive approval, or removal
+  evidence; initial cleanup rows remain pending. Cleanup retains
+  removal-before-local-deletion and final close evidence.
 
 ## Output and handoff
 

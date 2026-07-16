@@ -65,8 +65,10 @@ temporary file and preserve the final path without a partial artifact.
 A source `[x]` becomes `[ ]` in generated output and produces a warning. A
 commit message or planned worktree path is not completion proof. Initial
 generation with no topic worktree keeps fixed head and cleanup slots pending;
-an update claiming `[X] create-worktree` must show exact managed worktree plus
-attached branch evidence. A primary worktree, conflict, or ambiguity blocks.
+missing cleanup identity, clean/release, approval, or removal evidence does not
+block that initial create. Only a later update/cleanup attempt claiming or
+executing those rows must show exact managed worktree plus attached branch
+evidence; a primary worktree, conflict, or ambiguity then blocks.
 
 ## Conditional tail examples
 

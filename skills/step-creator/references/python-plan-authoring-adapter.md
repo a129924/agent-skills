@@ -83,6 +83,8 @@ created: YYYY-MM-DD
 The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
 shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
 of every `<resolved-checkbox>` placeholder; no other marker is literal output.
+Every selector-bearing shared-shell row must carry the complete frozen tuple,
+including `primary-worktree=false`, exactly as Handoff / Gate Notes does.
 Exact stage evidence controls each actual marker. Pending stage blocks whole-file
 success even if all Implementation Steps are done; it does not block the
 implementation-only query. The contextual line is fixed profile-owned adapter

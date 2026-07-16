@@ -19,10 +19,11 @@
 
 - 新增 canonical skill `skills/step-creator/` 及三個 caller-explicit profiles。
 - 新增一個非 authority 的 shared lifecycle shell，為三個 profiles 提供固定 head、固定 tail 與條件 sentinel/substitute。
-- Base/Agent profiles 產生固定 frontmatter、workflow table、fixed head、由 exact source actor/action 抽取的 contextual actions、Implementation Steps、fixed tail 與 handoff fields。
+- Base/Agent profiles 產生固定 frontmatter、workflow table、fixed head、由唯一 source plan 的 exact status/transition/actor/action 抽取的 contextual actions、Implementation Steps、fixed tail 與 handoff fields；GitHub PR、review、branch 或 chat context 不是 workflow-state 輸入。
 - Python profile 保留 canonical Python step template 的 exact frontmatter、executor note、六階段名稱與順序；它是 adapter，於 fixed head 與 Implementation Steps 間固定產生 profile-owned collective contextual action，並不要求或新增 Base/Agent status/actor/action source-plan contract，再接入共用 fixed head/tail。
 - 實作 profile eligibility preflight、evidence-based `[X]` / `[ ]`、exact one-to-one Implementation Step mapping、collective contextual-action dedup、existing-output BLOCKED 與 whole-file/rendered-section tracker semantics。
 - 固定同一 managed topic worktree selector、attached topic branch selector 與 path intent，貫穿 planned fixed head 到 execution-time fixed tail cleanup；初始 generation 不要求 worktree 已存在。
+- 以既有 canonical inventory builder 更新 generated `artifacts/skills-inventory.jsonl`；它只可從 top-level canonical `skills/` 生成，且必須納入本次新增的 canonical `skills/step-creator/`，不讀取或列入任何 projection surface。
 - 提供 reference、examples、checklist 與 topic planning artifacts。
 
 ## Out-Of-Scope
@@ -66,6 +67,11 @@
 | `skills/agent-skill-creator/folder-contract.md` | agent-skill-creator | Canonical Agent Skill folder/file contract |
 | `skills/agent-skill-reviewer/SKILL.md` | agent-skill-reviewer | Independent Agent Skill review behavior |
 | `skills/agent-skill-reviewer/review-checklist.md` | agent-skill-reviewer | Agent Skill review-ready checklist |
+| `analysis/skills-canonical-inventory/requirements.md` | Frozen inventory baseline | Canonical-scope boundary evidence for the generated inventory |
+| `analysis/skills-canonical-inventory/technical-spec.md` | Frozen inventory technical baseline | Deterministic, local-only generated-artifact intent evidence |
+| `plan/skills-canonical-inventory/skills-canonical-inventory.plan.md` | Inventory topic plan | Existing inventory artifact ownership and acceptance evidence |
+| `scripts/build_skills_inventory.py` | Canonical inventory builder | Sole generator; actual repository implementation is authoritative for record fields, JSONL format and ordering |
+| `tests/test_build_skills_inventory.py` | Inventory builder tests | Existing validation evidence for canonical discovery, format, determinism and exclusions |
 | `README.md` | Stable-library documentation | Read-only evidence that this topic declares no README update |
 | `VERSION` | Repository release baseline | Read-only current version-source evidence; not a cross-repo hardcode |
 
@@ -83,6 +89,7 @@
 | `skills/step-creator/references/base-plan-profile.md` | step-creator Creator | Exact Base eligibility, output wire and source mapping |
 | `skills/step-creator/references/agent-skill-plan-profile.md` | step-creator Creator | Exact Agent Skill eligibility, output wire and contextual mapping |
 | `skills/step-creator/references/python-plan-authoring-adapter.md` | step-creator Creator | Exact Python eligibility/scaffold adapter and shared-shell insertion contract |
+| `artifacts/skills-inventory.jsonl` | step-creator Creator via canonical inventory builder | Generated canonical-skill snapshot; update only by running the existing builder after the complete canonical `skills/step-creator/` set exists |
 
 ## Deleted
 
@@ -104,6 +111,8 @@ None.
 12. Base/Agent frontmatter contains exactly `topic`, `step_profile`, `source_plan`, `created` in frozen order.
 13. Base/Agent output section order exactly matches the frozen wire.
 14. Base/Agent `Workflow Stages` table contains `Current status`, `Allowed next transitions`, `Next actor`, with exact source fidelity.
+14a. Base/Agent only uses the one selected source plan to extract `Current status`, `Allowed next transitions` and `Next actor`; GitHub PR/review/branch metadata, chat context and completion evidence cannot synthesize or repair any of these fields.
+14b. Missing, multiple, ambiguous or contradictory source-plan status, transition or next-actor declarations render `BLOCKED` without an actionable workflow-state row or a write.
 15. Every source Implementation Step maps one-to-one, verbatim and in order to one rendered checkbox; no extra dynamic Implementation Step is invented.
 16. Base/Agent contextual actions retain `**Actor:** … — **Action:** …` form, source wording, order and evidence marker.
 17. Base/Agent only: exact duplicate actions explicitly collective/shared are deduplicated; non-identical actions and all Implementation Steps remain separate.
@@ -138,8 +147,11 @@ None.
 46. Python output retains exact three-key frontmatter, exact executor note, all six canonical stages in order, and the fixed profile-owned contextual action before Implementation Steps.
 47. Python contextual action renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is adapter behavior, not source actor/action extraction or a new Python source-plan contract.
 48. All writes stay inside the exact `Written` set; no upstream authority or platform projection is modified.
-49. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
+49. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, source-status origin/uniqueness, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
 50. Atomic creation uses a temporary file in the destination `.step.md` directory only after preflight passes; it fully validates before no-overwrite atomic rename/replace to the final path. A validation failure, interruption, promotion failure or newly present final destination cleans up the temporary file and leaves any existing final artifact unchanged, with no partial final destination.
+51. After the complete canonical `skills/step-creator/` set exists, running the existing local canonical inventory builder updates `artifacts/skills-inventory.jsonl` with exactly one record for `skills/step-creator/` and one record for every other discovered top-level canonical skill root; no agent or projection path is present.
+52. The generated inventory parses and validates through the existing builder implementation; its field set, JSONL encoding and record order match the builder's actual serializer/validator discovered in this repository, rather than a schema invented by this topic.
+53. A second run against unchanged canonical `skills/` is byte-identical; the artifact is generated locally only, and neither the builder nor its tests are modified by this topic.
 
 ## Goal / Outcome
 
@@ -158,6 +170,7 @@ This canonical scope binds `## In-Scope` and `## Out-Of-Scope` exactly. Only the
 - Output creation is atomic and create-only. Existing output returns `BLOCKED: output already exists`; do not overwrite, merge, normalize, repair, truncate or partially write. After all preflight and render validation pass, create a temporary file only in the final `.step.md` directory, fully validate its content, then promote it through an atomic no-overwrite rename/replace to the final destination. Recheck that the final destination is absent before promotion; if it exists, validation fails, promotion fails or execution is interrupted, clean up the temporary file and leave any existing final artifact unchanged. Never produce a partial final destination or use an unconditional overwrite operation.
 - Missing/unreadable source, invalid topic/path, unsupported caller profile, profile-ineligible source, unresolved release branch, unmappable progress or contradictory evidence returns BLOCKED before write.
 - Absence of a managed topic worktree during normal initial generation is not a blocker; fixed head and tail worktree actions render pending with exact selectors/path intent.
+- `artifacts/skills-inventory.jsonl` is a generated artifact, not a second skill authority: after the complete canonical `skills/step-creator/` Written set exists, its owner runs only the existing repository-local `scripts/build_skills_inventory.py`. The builder's discovered current behavior is the sole authority for canonical root discovery, record fields, JSONL format and stable ordering; this topic must not hand-author records, infer a schema, modify the builder/tests, or inventory `agents/`, `.github/skills/`, `.codex/skills/` or other projection surfaces.
 
 Base eligibility is exact:
 
@@ -167,8 +180,9 @@ Base eligibility is exact:
 - Source declares explicit allowed transition(s) from that current status, each matching `plan/agent-handoff-workflow.md`.
 - Source declares one exact next actor and one exact stage-local next action consistent with status/transition.
 - Source has one exact top-level `## Implementation Steps` section with executable items.
+- The selected source plan is the sole input for status, transition, next actor and stage-local action. GitHub PR/review/branch metadata, chat context, completion evidence and any derived progression artifact must not supply, select, repair or synthesize those fields.
 - Extraction preserves status, transition, actor and action wording; step-creator does not repair, choose, reinterpret or synthesize them.
-- Missing, multiple, ambiguous, contradictory or mismatched data; absent/duplicate/nested-only Implementation Steps; or Agent/Python specialized intent makes Base BLOCKED.
+- Missing, multiple, ambiguous, contradictory or mismatched data; absent/duplicate/nested-only Implementation Steps; or Agent/Python specialized intent makes Base BLOCKED before write.
 
 Agent eligibility is exact:
 
@@ -177,7 +191,7 @@ Agent eligibility is exact:
 - Creator output paths are exact canonical repo-visible paths under `skills/<skill-name>/...`; projection-only paths are ineligible.
 - Source separates Creator from independent Reviewer and hands off at `review-ready`, never creator-asserted `approved`.
 - Generic/multiple skills, projection-only output, ambiguous ownership, creator/reviewer collapse, review-ready/approved mismatch or caller/source incompatibility makes Agent BLOCKED.
-- Status, transition, actor, action, paths, responsibility and handoff wording are extracted faithfully.
+- Status, transition, actor, action, paths, responsibility and handoff wording are extracted faithfully. The selected source plan remains the sole status/transition/actor/action input; external PR/review/branch/chat context cannot fill a missing or non-unique field.
 
 Python eligibility is exact:
 
@@ -225,8 +239,8 @@ created: YYYY-MM-DD
 
 ### Main Agent — Fixed Head
 
-- [M] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>
-- [M] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** same topic, branch and managed-path intent
+- [M] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
+- [M] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
 
 ### Contextual Actions
 
@@ -239,7 +253,7 @@ created: YYYY-MM-DD
 
 ## Main Agent Actionable Steps — Fixed Tail
 
-<rendered fixed-tail actions and conditional sentinel/substitute in locked order; slots 22–24 repeat the same selector/path intent>
+<rendered fixed-tail actions and conditional sentinel/substitute in locked order; slots 22–24 repeat the complete selector tuple including primary-worktree=false>
 
 ## Handoff / Gate Notes
 
@@ -247,7 +261,8 @@ created: YYYY-MM-DD
 - Source plan: plan/<topic>/<topic>.plan.md
 - Shared lifecycle shell: skills/step-creator/templates/shared-lifecycle-shell.md
 - Managed worktree intent: topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
-- Progression truth inputs: <exact repo-visible source plan and any source-declared progression/review/summary paths used>
+- Workflow-state source: <the one selected source plan; exact path>
+- Progression truth inputs: <exact repo-visible source plan and only source-declared paths used for non-state evidence>
 - Completion evidence inputs: <exact repo-visible artifact paths and/or exact command, PR, merge, release, tag or worktree evidence used for markers>
 - Marker semantics: `[X]` exact one-to-one evidence; `[ ]` pending/planned/unproved; lowercase source `[x]` is pending and warns.
 - Tracker semantics: `check_all_succeeded` covers rendered head/contextual/Implementation/tail checkboxes; `check_impl_steps_succeeded` covers only Implementation Steps.
@@ -255,9 +270,10 @@ created: YYYY-MM-DD
 ```
 
 - Topic selector is exact `<topic>`. Branch selector and managed-path intent are exact governed selector inputs carried from an explicit source value when present, otherwise from fixed `git-branch-naming`/`worktree-manager` shell contract; they are planned selectors, not a false existence claim.
-- Same selector tuple repeats at head, tail 22–24 and Handoff; competing tuples BLOCK generation.
+- Same complete selector tuple, including `primary-worktree=false`, repeats in every head row, tail 22–24 and Handoff; competing tuples BLOCK generation.
 - Mirror every top-level Implementation Step exactly once, verbatim and ordered. Context/reviewer/Main Agent/release/human actions stay outside.
 - Contextual actions preserve source order and exact Actor/Action wording.
+- The Workflow Stages values are copied only from unique explicit declarations in the selected source plan. If any status, transition or next-actor value is absent, non-unique, ambiguous or contradictory, render `BLOCKED` and do not use PR/review/branch/chat context as a substitute.
 - Collective dedup only for explicitly collective/shared exact Actor+Action duplicates; preserve first and all source headings in progression note. No near-duplicate normalization or Implementation dedup.
 - Progression/completion inputs contain exact paths/identifiers, never hidden memory/chat/vague process.
 
@@ -291,8 +307,8 @@ created: YYYY-MM-DD
 
 ### Main Agent — Fixed Head
 
-- [M] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>
-- [M] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** same topic, branch and managed-path intent
+- [M] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
+- [M] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=<topic>; branch=<exact topic-branch selector>; managed-path-intent=<worktree-manager path intent>; primary-worktree=false
 
 ### Contextual Actions
 
@@ -305,7 +321,7 @@ created: YYYY-MM-DD
 
 ## Main Agent Actionable Steps — Fixed Tail
 
-<rendered fixed-tail actions and conditional sentinel/substitute in locked order; slots 22–24 repeat the same selector/path intent>
+<rendered fixed-tail actions and conditional sentinel/substitute in locked order; slots 22–24 repeat the complete selector tuple including primary-worktree=false>
 
 ## Handoff / Gate Notes
 
@@ -366,7 +382,7 @@ created: YYYY-MM-DD
 
 - Normal actions use `- [M] **Actor:** Main Agent — **Action:** <action>` and worktree entries carry selector; completed conditional lines retain frozen form.
 - STOP1 precedes commit/push/PR; STOP2 precedes merge follow-up and stops; release commit/push precede tag approval; approval precedes tag create/push; slots22/23 precede removal; verified removal precedes local deletion; merged/released is not closed.
-- Initial slots22–24 are planned `[ ]` even without worktree. After head completion, cleanup requires same identity/evidence; absence, conflict/ambiguity, primary target, dirty state, missing approval or failed removal BLOCKS. Tail stays pending until own evidence.
+- Initial slots22–24 are planned `[ ]` even without worktree, and missing cleanup identity/evidence is not a creation-time blocker. Only after an existing tracker enters update/cleanup execution do absence, conflict/ambiguity, primary target, dirty state, missing approval, or failed removal BLOCK. Tail stays pending until its own evidence.
 
 ### Conditional substitution and tracker contract
 
@@ -434,16 +450,17 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering. Keep detailed rules in `SKILL.md`, the shared template, the profile references and examples.
 7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, remote-retention unknown safety default, release substitutions and Python tracker split.
 8. Create `skills/step-creator/checklist.md` covering paths, eligibility, atomic create-only and temporary-file cleanup, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, remote-retention safety default, tail, release substitution, trackers, projections and handoff.
+9. After all eight canonical `skills/step-creator/**` artifacts are complete, run the existing local `scripts/build_skills_inventory.py` to update only `artifacts/skills-inventory.jsonl`; confirm it inventories top-level canonical `skills/` only and includes `skills/step-creator/` exactly once, without changing the builder or tests.
 
 ## Validation / Acceptance Checks
 
 - Verify exact Written only; ReadOnly unchanged; no projection write.
-- Validate all 50 TestCases with checklist and bounded fixtures/examples.
+- Validate all 53 TestCases with checklist and bounded fixtures/examples.
 - Base fixtures cover eligibility and status/transition/actor/action/section blockers.
 - Agent fixtures cover one responsibility, canonical outputs, separation, review-ready and mismatch blockers.
 - Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name, current-status, next-actor or stage-local-action field and must pass. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block.
 - Assert exact Python frontmatter/executor/six stages/order, the fixed profile-owned contextual action before Implementation, and tracker split.
-- Assert Base/Agent contextual preservation/dedup; assert Python does not extract contextual status/actor/action from source.
+- Assert Base/Agent contextual preservation/dedup and that status/transition/next-actor values are taken only from one selected source plan; missing, non-unique or contradictory declarations BLOCK before write even when PR/review/branch/chat context suggests a state. Assert Python does not extract contextual status/actor/action from source.
 - Initial no-worktree fixture succeeds with consistent selector and pending head/tail; evidence fixture permits X; conflict fixture blocks.
 - Cleanup execution fixtures block absent/ambiguous/wrong/primary/dirty/missing-approval/failure after head completion; tail pending until evidence; deletion waits.
 - Assert tail release: slot12 renders delete only with explicit permission, and unknown retention renders the `remote-retained` safety default plus recorded human/policy follow-up without BLOCKED; no-release renders completed slot13 `Determine release requirement — release not required` plus the sentinel replacing14–21; release renders the required range, tag-only15, README16, and no no-worktree sentinel.
@@ -451,6 +468,8 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 - Run tracker interface: Base/Agent all counts head/context/Implementation/tail; Python adds stages; impl only Implementation. Pending Python stage + complete Implementation => all false, impl true.
 - Assert no phantom pending, lowercase input warning, unmappable block and evidence-only X.
 - Assert existing destination is unchanged and no temporary file is created on a preflight BLOCKED path. Assert successful creation uses a temporary file in the final destination directory, fully validates before no-overwrite atomic promotion, and cleans it up on validation failure, interruption, promotion failure or a newly present final destination without partial final output or overwriting an existing final artifact.
+- After all canonical `skills/step-creator/**` artifacts exist, run the existing local inventory builder and validate `artifacts/skills-inventory.jsonl` through its actual parser/validator: every record is discovered from top-level canonical `skills/` only, `skills/step-creator/` appears exactly once, no projection/agent path appears, and a second unchanged run is byte-identical. Treat the builder's checked-in serializer, validator and tests as the authority for fields, format and sorting; do not add a topic-local schema.
+- Verify generated-artifact ownership: only `artifacts/skills-inventory.jsonl` is updated by this inventory action; `scripts/build_skills_inventory.py` and `tests/test_build_skills_inventory.py` remain ReadOnly and unchanged.
 - Independent Agent Skill review and Plan-Reviewer approval required; no self-approval.
 
 ## Reviewer Handoff
@@ -469,7 +488,7 @@ Independent Plan-Reviewer returns exactly one object, no prose:
 }
 ```
 
-Scope/contract/workflow drift, unlisted path, hidden-context dependency, caller/source incompatibility, extraction mismatch, false evidence, worktree phase confusion, wrong tracker scope, unresolved release execution branch or ownership mixing is blocking. Absence of a literal Python profile marker is explicitly not blocking.
+Scope/contract/workflow drift, unlisted path, hidden-context dependency, caller/source incompatibility, source-status synthesis from PR/review/branch/chat context, missing/non-unique source status/transition/next actor, extraction mismatch, false evidence, worktree phase confusion, wrong tracker scope, unresolved release execution branch or ownership mixing is blocking. Absence of a literal Python profile marker is explicitly not blocking.
 
 ## Post-merge / release actions
 

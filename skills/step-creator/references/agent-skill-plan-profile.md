@@ -72,3 +72,5 @@ one-to-one Implementation mapping and only exact collective contextual dedup.
 The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
 shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
 of every `<resolved-checkbox>` placeholder; no other marker is literal output.
+Every selector-bearing shared-shell row must carry the complete frozen tuple,
+including `primary-worktree=false`, exactly as Handoff / Gate Notes does.
