@@ -31,7 +31,7 @@ created: 2026-07-16
 - [ ] 3. Create `skills/step-creator/references/base-plan-profile.md` with Base eligibility, wire, extraction fidelity, contextual dedup and mapping.
 - [ ] 4. Create `skills/step-creator/references/agent-skill-plan-profile.md` with single-skill eligibility, canonical paths/ownership/handoff and wire/context mapping.
 - [ ] 5. Create `skills/step-creator/references/python-plan-authoring-adapter.md` with caller-selected routing, Python-intent plus canonical-contract eligibility without source profile marker, exact scaffold/six stages, Contextual Actions, tracker distinction and shell insertion.
-- [ ] 6. Create `skills/step-creator/reference.md` consolidating profile validation, extraction, evidence phases, markers, trackers, release branches, managed identity, owner updates and blockers.
+- [ ] 6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering; keep detailed rules in the owning SKILL, template, profile references and examples.
 - [ ] 7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, release substitutions and Python tracker split.
 - [ ] 8. Create `skills/step-creator/checklist.md` covering paths, eligibility, create-only, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, tail, release substitution, trackers, projections and handoff.
 
@@ -49,7 +49,7 @@ created: 2026-07-16
 - [ ] **Actor:** Main Agent — **Action:** Verify the pull request is merged.
 - [ ] **Actor:** Main Agent — **Action:** Fast-forward-only sync the target/default branch.
 - [ ] **Actor:** Main Agent — **Action:** Resolve remote topic branch deletion or retention.
-- [ ] **Actor:** Main Agent — **Action:** Resolve whether release work is required from the source plan.
+- [X] Determine release requirement — release not required
 - [X] release-not-applicable — source plan declares terminal at merged
 - [ ] **Actor:** Main Agent — **Action:** Inspect the selected managed topic worktree and prove clean/release evidence — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator
 - [ ] **Actor:** Main Agent — **Action:** Obtain exact destructive approval to remove the selected managed topic worktree — **Selector:** topic=step-creator; branch=feat/andrew/step-creator; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260715-step-creator

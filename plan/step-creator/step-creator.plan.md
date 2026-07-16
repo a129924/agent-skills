@@ -19,8 +19,8 @@
 
 - 新增 canonical skill `skills/step-creator/` 及三個 caller-explicit profiles。
 - 新增一個非 authority 的 shared lifecycle shell，為三個 profiles 提供固定 head、固定 tail 與條件 sentinel/substitute。
-- Base/Agent profiles 產生固定 frontmatter、workflow table、fixed head、contextual actions、Implementation Steps、fixed tail 與 handoff fields。
-- Python profile 保留 canonical Python step template 的 exact frontmatter、executor note、六階段名稱與順序，加入相同 contextual actions contract，再接入共用 fixed head/tail。
+- Base/Agent profiles 產生固定 frontmatter、workflow table、fixed head、由 exact source actor/action 抽取的 contextual actions、Implementation Steps、fixed tail 與 handoff fields。
+- Python profile 保留 canonical Python step template 的 exact frontmatter、executor note、六階段名稱與順序；它是 adapter，於 fixed head 與 Implementation Steps 間固定產生 profile-owned collective contextual action，並不要求或新增 Base/Agent status/actor/action source-plan contract，再接入共用 fixed head/tail。
 - 實作 profile eligibility preflight、evidence-based `[X]` / `[ ]`、exact one-to-one Implementation Step mapping、collective contextual-action dedup、existing-output BLOCKED 與 whole-file/rendered-section tracker semantics。
 - 固定同一 managed topic worktree selector、attached topic branch selector 與 path intent，貫穿 planned fixed head 到 execution-time fixed tail cleanup；初始 generation 不要求 worktree 已存在。
 - 提供 reference、examples、checklist 與 topic planning artifacts。
@@ -76,7 +76,7 @@
 | `plan/step-creator/step-creator.plan.md` | Planning actor | Current topic execution contract |
 | `plan/step-creator/step-creator.step.md` | Planning actor | Topic progression artifact derived from this plan |
 | `skills/step-creator/SKILL.md` | step-creator Creator | Public trigger, profile eligibility, inputs, blocking behavior, routing and generation procedure |
-| `skills/step-creator/reference.md` | step-creator Creator | Marker, mapping, ownership, evidence, tracker and conditional-rendering rules |
+| `skills/step-creator/reference.md` | step-creator Creator | 只包含三個共用主題：generation/eligibility、evidence/tracker、lifecycle rendering；詳細規則由 SKILL、template、profile references 與 examples 擁有 |
 | `skills/step-creator/examples.md` | step-creator Creator | Positive and blocking examples for profiles, eligibility and conditional branches |
 | `skills/step-creator/checklist.md` | step-creator Creator | Preflight and output validation checklist |
 | `skills/step-creator/templates/shared-lifecycle-shell.md` | step-creator Creator | Non-authoritative fixed head/tail and sentinel/substitute rendering template |
@@ -100,13 +100,13 @@ None.
 8. Base missing/ambiguous/mismatched status, transition, actor, action, Implementation Steps or specialized-profile claim returns BLOCKED.
 9. Agent eligibility accepts only Base shared progression inputs plus one explicit bounded Agent Skill responsibility, canonical exact `skills/<skill-name>/...` outputs, creator/reviewer separation and review-ready-not-approved handoff.
 10. Agent generic/multiple-skill intent, projection-only path, ownership ambiguity, approved-as-creator handoff or profile mismatch returns BLOCKED.
-11. Python eligibility rejects non-Python intent, an incomplete or ambiguous canonical 13-section/async/test/validation contract, existing output or caller/source incompatibility; absence of a literal `python-implementation-plan` string in source is not a blocker.
+11. Python eligibility rejects non-Python intent, an incomplete or ambiguous canonical 13-section/async/test/validation contract, existing output or caller/source incompatibility; it does not require a literal `python-implementation-plan` string or Base/Agent status/actor/action fields in source.
 12. Base/Agent frontmatter contains exactly `topic`, `step_profile`, `source_plan`, `created` in frozen order.
 13. Base/Agent output section order exactly matches the frozen wire.
 14. Base/Agent `Workflow Stages` table contains `Current status`, `Allowed next transitions`, `Next actor`, with exact source fidelity.
 15. Every source Implementation Step maps one-to-one, verbatim and in order to one rendered checkbox; no extra dynamic Implementation Step is invented.
-16. Contextual actions retain `**Actor:** … — **Action:** …` form, source wording, order and evidence marker.
-17. Only exact duplicate actions explicitly collective/shared are deduplicated; non-identical actions and all Implementation Steps remain separate.
+16. Base/Agent contextual actions retain `**Actor:** … — **Action:** …` form, source wording, order and evidence marker.
+17. Base/Agent only: exact duplicate actions explicitly collective/shared are deduplicated; non-identical actions and all Implementation Steps remain separate.
 18. Exact repo-visible one-to-one completion evidence renders `[X]`; pending or merely planned work renders `[ ]`.
 19. Read-only source `[x]` never counts as completion; generated marker is `[ ]` and a warning is emitted.
 20. Partial/progress evidence that cannot map one-to-one returns BLOCKED.
@@ -118,8 +118,8 @@ None.
 26. STOP POINT 2 renders as human-merge handoff and requires a complete stop before merge follow-up.
 27. Human merge and new explicit resume are evidence/handoff actions, never creator-owned Implementation Steps.
 28. Slot 12 renders exactly one of remote delete action or `remote-retained`, never both.
-29. Slot 13 always resolves whether release is required.
-30. No-release exact evidence replaces slots 14–21 with the single exact `release-not-applicable` sentinel and creates no omitted pending checkboxes.
+29. Slot 13 always renders the release-resolution checkbox; no-release exact evidence renders `[X] Determine release requirement — release not required`.
+30. With that no-release resolution, slots 14–21 are replaced by the single exact `release-not-applicable` sentinel and create no omitted or pending release-resolution checkbox.
 31. Unknown release applicability returns BLOCKED rather than choosing a branch.
 32. Release-required rendering keeps slots 14–21 in order and requires release commit/push before tag approval/tag creation/tag push.
 33. Empty authoritative version inventory in a release-required branch substitutes exact `[X] tag-only — no authoritative version source discovered` at slot 15.
@@ -135,8 +135,8 @@ None.
 43. A pending Python Workflow Stage makes `check_all_succeeded` false while all-complete Python Implementation Steps still make `check_impl_steps_succeeded` true.
 44. Replaced/omitted release slots create no phantom pending checkbox.
 45. `merged` or `released` never implies topic-close; final verification records close-semantics evidence separately.
-46. Python output retains exact three-key frontmatter, exact executor note, all six canonical stages in order and a contextual-actions section before Implementation Steps.
-47. Python contextual actions use identical preservation, actor/action, order, evidence and collective-dedup semantics as Base/Agent.
+46. Python output retains exact three-key frontmatter, exact executor note, all six canonical stages in order, and the fixed profile-owned contextual action before Implementation Steps.
+47. Python contextual action renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is adapter behavior, not source actor/action extraction or a new Python source-plan contract.
 48. All writes stay inside the exact `Written` set; no upstream authority or platform projection is modified.
 49. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
 
@@ -182,7 +182,7 @@ Python eligibility is exact:
 
 - Caller, not the source, explicitly selects `python-implementation-plan`.
 - Source does not need and must not be required to contain a literal `python-implementation-plan` marker or profile-name claim.
-- Source must explicitly describe bounded Python implementation work and satisfy the canonical `python-plan-authoring` 13-section contract, including its async-planning status/trigger-or-exemption requirements, triggered async subsections when applicable, one exact top-level `## Implementation Steps`, five-category Test Plan and explicit Validation Commands/config reference.
+- Source must explicitly describe bounded Python implementation work and satisfy the canonical `python-plan-authoring` 13-section contract, including its async-planning status/trigger-or-exemption requirements, triggered async subsections when applicable, one exact top-level `## Implementation Steps`, five-category Test Plan and explicit Validation Commands/config reference. It does not need Base/Agent current-status, next-actor or stage-local-action fields.
 - Python generation is BLOCKED only for non-Python intent, an incomplete/ambiguous/contradictory canonical Python contract, existing output, or incompatibility between caller-selected Python profile and source intent/shape.
 - `python-plan-authoring` remains authority; adapter validation does not redefine it.
 
@@ -262,7 +262,7 @@ created: YYYY-MM-DD
 
 ### Exact Python output wire
 
-Python preserves canonical scaffold and adds identical contextual behavior:
+Python preserves canonical scaffold and adds a fixed adapter-owned collective contextual action:
 
 ```markdown
 ---
@@ -295,7 +295,7 @@ created: YYYY-MM-DD
 
 ### Contextual Actions
 
-- [M] **Actor:** <source actor> — **Action:** <preserved contextual/stage-local action>
+- [M] **Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.
 
 ## Implementation Steps
 
@@ -321,7 +321,7 @@ created: YYYY-MM-DD
 
 - Six stages remain exactly `plan-authoring`, `plan-review`, `tdd-test-authoring`, `implementation`, `implementation-review`, `code-review` in order.
 - Stage `[X]` requires exact completion evidence, otherwise `[ ]`.
-- Contextual Actions uses identical wording/order, Actor/Action, evidence and exact collective-dedup as Base/Agent.
+- Contextual Actions is fixed profile-owned adapter behavior: it renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker. It does not extract or validate source status, actor or action, and does not add a Python source-plan contract.
 - Python Implementation Steps mirror one-to-one, verbatim and ordered; existing output remains BLOCKED.
 - Pending stage blocks all-gate even when all Implementation Steps are `[X]`, but not implementation-only gate.
 - Same planned selector tuple/fidelity rules apply; initial lack of resolved worktree evidence is valid and renders lifecycle actions `[ ]`.
@@ -333,7 +333,7 @@ created: YYYY-MM-DD
 - At generation time it freezes one exact selector tuple: topic, governed topic-branch selector and managed worktree path intent. This does not assert an existing worktree.
 - Fixed head renders create/reuse selected managed topic worktree, then prepare/attach selected branch. Without current evidence both are `[ ]`; generation continues.
 - `create-worktree` becomes `[X]` only when exact inventory proves selected managed worktree and selected attached branch. Claimed-X conflict or selector ambiguity during update/execution BLOCKS.
-- Dynamic middle remains source/Creator/Implementer owned; fixed head/tail Main Agent-owned; human merge/resume handoff/evidence only.
+- Base/Agent dynamic middle remains source/Creator/Implementer owned and source-extracted; Python uses the fixed profile-owned collective contextual action. Fixed head/tail remain Main Agent-owned; human merge/resume remain handoff/evidence only.
 - Tail logical slots:
 
 1. validation and bounded staging
@@ -371,9 +371,11 @@ created: YYYY-MM-DD
 
 - Slot12 renders remote delete action or exactly:
   `- [X] remote-retained — source plan or retention policy requires keeping the remote branch`
-- Slot13 always resolves release. Exact no-release evidence replaces slots14–21 with:
+- Slot13 always renders release resolution. Exact no-release evidence renders:
+  `- [X] Determine release requirement — release not required`
+  and replaces slots14–21 with:
   `- [X] release-not-applicable — source plan declares terminal at merged`
-  Replaced slots are absent. Unknown/contradictory applicability BLOCKS.
+  Replaced slots are absent; no pending release-resolution checkbox remains. Unknown/contradictory applicability BLOCKS.
 - Release slot14 inventories version sources dynamically; VERSION is current evidence only. Empty inventory substitutes slot15:
   `- [X] tag-only — no authoritative version source discovered`
   One source updates; multiple synchronize. Tag/version/dirty conflict blocks progression.
@@ -427,7 +429,7 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 3. Create `skills/step-creator/references/base-plan-profile.md` with Base eligibility, wire, extraction fidelity, contextual dedup and mapping.
 4. Create `skills/step-creator/references/agent-skill-plan-profile.md` with single-skill eligibility, canonical paths/ownership/handoff and wire/context mapping.
 5. Create `skills/step-creator/references/python-plan-authoring-adapter.md` with caller-selected routing, Python-intent plus canonical-contract eligibility without source profile marker, exact scaffold/six stages, Contextual Actions, tracker distinction and shell insertion.
-6. Create `skills/step-creator/reference.md` consolidating profile validation, extraction, evidence phases, markers, trackers, release branches, managed identity, owner updates and blockers.
+6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering. Keep detailed rules in `SKILL.md`, the shared template, the profile references and examples.
 7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, release substitutions and Python tracker split.
 8. Create `skills/step-creator/checklist.md` covering paths, eligibility, create-only, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, tail, release substitution, trackers, projections and handoff.
 
@@ -437,12 +439,13 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 - Validate all 49 TestCases with checklist and bounded fixtures/examples.
 - Base fixtures cover eligibility and status/transition/actor/action/section blockers.
 - Agent fixtures cover one responsibility, canonical outputs, separation, review-ready and mismatch blockers.
-- Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name string and must pass. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block.
-- Assert exact Python frontmatter/executor/six stages/order, Contextual before Implementation and tracker split.
-- Assert contextual preservation/dedup all profiles.
+- Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name, current-status, next-actor or stage-local-action field and must pass. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block.
+- Assert exact Python frontmatter/executor/six stages/order, the fixed profile-owned contextual action before Implementation, and tracker split.
+- Assert Base/Agent contextual preservation/dedup; assert Python does not extract contextual status/actor/action from source.
 - Initial no-worktree fixture succeeds with consistent selector and pending head/tail; evidence fixture permits X; conflict fixture blocks.
 - Cleanup execution fixtures block absent/ambiguous/wrong/primary/dirty/missing-approval/failure after head completion; tail pending until evidence; deletion waits.
-- Assert tail release: slot12 exclusive, slot13 present, no-release replaces14–21, release renders, tag-only15, README16, no no-worktree.
+- Assert tail release: slot12 exclusive; no-release renders completed slot13 `Determine release requirement — release not required` plus the sentinel replacing14–21; release renders the required range, tag-only15, README16, and no no-worktree sentinel.
+- Assert `reference.md` contains only the three shared topics; detailed profile/template/example rules remain in their owning artifacts.
 - Run tracker interface: Base/Agent all counts head/context/Implementation/tail; Python adds stages; impl only Implementation. Pending Python stage + complete Implementation => all false, impl true.
 - Assert no phantom pending, lowercase input warning, unmappable block and evidence-only X.
 - Assert existing destination unchanged/no temp on BLOCKED.
