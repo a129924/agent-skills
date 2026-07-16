@@ -95,7 +95,7 @@ None.
 3. Caller explicitly selects `python-implementation-plan`; a source that describes Python implementation work and satisfies the canonical Python plan contract generates the frozen Python wire even if the source contains no literal profile-name marker.
 4. Missing, unknown, ambiguous or inferred caller profile returns BLOCKED without writing.
 5. Missing/unreadable source plan returns BLOCKED without writing.
-6. Existing output returns BLOCKED without overwrite, merge, normalization, repair or partial write.
+6. Existing final output returns BLOCKED without overwrite, merge, normalization, repair, partial final write or temporary-file creation.
 7. Base eligibility accepts only a canonical topic plan with all required sections, no Agent/Python specialized claim, one current status, explicit allowed transitions, exact next actor/action and exact top-level Implementation Steps.
 8. Base missing/ambiguous/mismatched status, transition, actor, action, Implementation Steps or specialized-profile claim returns BLOCKED.
 9. Agent eligibility accepts only Base shared progression inputs plus one explicit bounded Agent Skill responsibility, canonical exact `skills/<skill-name>/...` outputs, creator/reviewer separation and review-ready-not-approved handoff.
@@ -117,7 +117,7 @@ None.
 25. STOP POINT 1 renders before commit, push and PR creation.
 26. STOP POINT 2 renders as human-merge handoff and requires a complete stop before merge follow-up.
 27. Human merge and new explicit resume are evidence/handoff actions, never creator-owned Implementation Steps.
-28. Slot 12 renders exactly one of remote delete action or `remote-retained`, never both.
+28. Slot 12 renders exactly one of remote delete action or `remote-retained`, never both. Render delete only when source plan or retention policy explicitly permits deletion; render `remote-retained` when retention is explicitly required or when the retention policy/source truth is unknown, and record human/policy follow-up before any later deletion. Contradictory explicit retention truth remains BLOCKED.
 29. Slot 13 always renders the release-resolution checkbox; no-release exact evidence renders `[X] Determine release requirement — release not required`.
 30. With that no-release resolution, slots 14–21 are replaced by the single exact `release-not-applicable` sentinel and create no omitted or pending release-resolution checkbox.
 31. Unknown release applicability returns BLOCKED rather than choosing a branch.
@@ -139,6 +139,7 @@ None.
 47. Python contextual action renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is adapter behavior, not source actor/action extraction or a new Python source-plan contract.
 48. All writes stay inside the exact `Written` set; no upstream authority or platform projection is modified.
 49. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
+50. Atomic creation uses a temporary file in the destination `.step.md` directory only after preflight passes; it fully validates before no-overwrite atomic rename/replace to the final path. A validation failure, interruption, promotion failure or newly present final destination cleans up the temporary file and leaves any existing final artifact unchanged, with no partial final destination.
 
 ## Goal / Outcome
 
@@ -154,7 +155,7 @@ This canonical scope binds `## In-Scope` and `## Out-Of-Scope` exactly. Only the
 
 - Input source is exactly `plan/<topic>/<topic>.plan.md`; output is exactly `plan/<topic>/<topic>.step.md`.
 - Caller explicitly passes exactly one profile: `base-plan`, `agent-skill-plan`, or `python-implementation-plan`. Content sniffing, fallback selection and inference are forbidden.
-- Output creation is atomic and create-only. Existing output returns `BLOCKED: output already exists`; do not overwrite, merge, normalize, repair, truncate or partially write.
+- Output creation is atomic and create-only. Existing output returns `BLOCKED: output already exists`; do not overwrite, merge, normalize, repair, truncate or partially write. After all preflight and render validation pass, create a temporary file only in the final `.step.md` directory, fully validate its content, then promote it through an atomic no-overwrite rename/replace to the final destination. Recheck that the final destination is absent before promotion; if it exists, validation fails, promotion fails or execution is interrupted, clean up the temporary file and leave any existing final artifact unchanged. Never produce a partial final destination or use an unconditional overwrite operation.
 - Missing/unreadable source, invalid topic/path, unsupported caller profile, profile-ineligible source, unresolved release branch, unmappable progress or contradictory evidence returns BLOCKED before write.
 - Absence of a managed topic worktree during normal initial generation is not a blocker; fixed head and tail worktree actions render pending with exact selectors/path intent.
 
@@ -369,8 +370,9 @@ created: YYYY-MM-DD
 
 ### Conditional substitution and tracker contract
 
-- Slot12 renders remote delete action or exactly:
-  `- [X] remote-retained — source plan or retention policy requires keeping the remote branch`
+- Slot12 renders exactly one outcome. Render the remote delete action only when source plan or retention policy explicitly permits deletion. Otherwise, when source plan/policy explicitly requires retention or retention policy/source truth is unknown, render exactly:
+  `- [M] remote-retained — preserve the remote branch; retention is required or unknown, and human/policy follow-up is required before deletion`
+  Record the follow-up. `[M]` follows the evidence-marker contract, so a planned bootstrap remains `[ ]` and completed retention evidence may be `[X]`. Do not use BLOCKED for unknown retention alone. Contradictory explicit retention truth remains BLOCKED.
 - Slot13 always renders release resolution. Exact no-release evidence renders:
   `- [X] Determine release requirement — release not required`
   and replaces slots14–21 with:
@@ -424,19 +426,19 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 
 ## Implementation Steps
 
-1. Create `skills/step-creator/SKILL.md` with explicit caller profiles, per-profile eligibility/fidelity preflight, create-only behavior, evidence phases, marker/tracker rules, shared-shell routing and blockers.
-2. Create `skills/step-creator/templates/shared-lifecycle-shell.md` with selector/path intent, pending initial worktree lifecycle, evidence updates, 26-slot tail, three sentinels/tag-only, release ranges and tracker scope.
+1. Create `skills/step-creator/SKILL.md` with explicit caller profiles, per-profile eligibility/fidelity preflight, same-directory temporary-file atomic create-only behavior and cleanup, evidence phases, marker/tracker rules, shared-shell routing and blockers.
+2. Create `skills/step-creator/templates/shared-lifecycle-shell.md` with selector/path intent, pending initial worktree lifecycle, evidence updates, 26-slot tail, remote-retention safety default, three sentinels/tag-only, release ranges and tracker scope.
 3. Create `skills/step-creator/references/base-plan-profile.md` with Base eligibility, wire, extraction fidelity, contextual dedup and mapping.
 4. Create `skills/step-creator/references/agent-skill-plan-profile.md` with single-skill eligibility, canonical paths/ownership/handoff and wire/context mapping.
 5. Create `skills/step-creator/references/python-plan-authoring-adapter.md` with caller-selected routing, Python-intent plus canonical-contract eligibility without source profile marker, exact scaffold/six stages, Contextual Actions, tracker distinction and shell insertion.
 6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering. Keep detailed rules in `SKILL.md`, the shared template, the profile references and examples.
-7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, release substitutions and Python tracker split.
-8. Create `skills/step-creator/checklist.md` covering paths, eligibility, create-only, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, tail, release substitution, trackers, projections and handoff.
+7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, remote-retention unknown safety default, release substitutions and Python tracker split.
+8. Create `skills/step-creator/checklist.md` covering paths, eligibility, atomic create-only and temporary-file cleanup, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, remote-retention safety default, tail, release substitution, trackers, projections and handoff.
 
 ## Validation / Acceptance Checks
 
 - Verify exact Written only; ReadOnly unchanged; no projection write.
-- Validate all 49 TestCases with checklist and bounded fixtures/examples.
+- Validate all 50 TestCases with checklist and bounded fixtures/examples.
 - Base fixtures cover eligibility and status/transition/actor/action/section blockers.
 - Agent fixtures cover one responsibility, canonical outputs, separation, review-ready and mismatch blockers.
 - Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name, current-status, next-actor or stage-local-action field and must pass. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block.
@@ -444,11 +446,11 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 - Assert Base/Agent contextual preservation/dedup; assert Python does not extract contextual status/actor/action from source.
 - Initial no-worktree fixture succeeds with consistent selector and pending head/tail; evidence fixture permits X; conflict fixture blocks.
 - Cleanup execution fixtures block absent/ambiguous/wrong/primary/dirty/missing-approval/failure after head completion; tail pending until evidence; deletion waits.
-- Assert tail release: slot12 exclusive; no-release renders completed slot13 `Determine release requirement — release not required` plus the sentinel replacing14–21; release renders the required range, tag-only15, README16, and no no-worktree sentinel.
+- Assert tail release: slot12 renders delete only with explicit permission, and unknown retention renders the `remote-retained` safety default plus recorded human/policy follow-up without BLOCKED; no-release renders completed slot13 `Determine release requirement — release not required` plus the sentinel replacing14–21; release renders the required range, tag-only15, README16, and no no-worktree sentinel.
 - Assert `reference.md` contains only the three shared topics; detailed profile/template/example rules remain in their owning artifacts.
 - Run tracker interface: Base/Agent all counts head/context/Implementation/tail; Python adds stages; impl only Implementation. Pending Python stage + complete Implementation => all false, impl true.
 - Assert no phantom pending, lowercase input warning, unmappable block and evidence-only X.
-- Assert existing destination unchanged/no temp on BLOCKED.
+- Assert existing destination is unchanged and no temporary file is created on a preflight BLOCKED path. Assert successful creation uses a temporary file in the final destination directory, fully validates before no-overwrite atomic promotion, and cleans it up on validation failure, interruption, promotion failure or a newly present final destination without partial final output or overwriting an existing final artifact.
 - Independent Agent Skill review and Plan-Reviewer approval required; no self-approval.
 
 ## Reviewer Handoff
@@ -473,7 +475,7 @@ Scope/contract/workflow drift, unlisted path, hidden-context dependency, caller/
 
 - Topic non-stable/no-README/no-VERSION.
 - Initial generation may precede worktree. Before Creator execution, fixed head establishes selected managed worktree/branch with evidence.
-- After merge/new resume, Main Agent verifies, FF-syncs, resolves remote, then same selected worktree for clean evidence, approval, removal, local branch deletion and final close evidence.
+- After merge/new resume, Main Agent verifies and FF-syncs. It deletes the remote branch only with explicit permission; required or unknown retention renders `remote-retained`, records human/policy follow-up and preserves the remote branch. It then uses the same selected worktree for clean evidence, approval, removal, local branch deletion and final close evidence.
 - Primary preserved. Cleanup-time absent/ambiguous/conflicting identity, dirty state, missing approval or failure blocks, without invalidating initial generation.
 - No release/tag. release-not-applicable needs terminal-at-merged evidence.
 - Merged terminal for release, not proof of close.

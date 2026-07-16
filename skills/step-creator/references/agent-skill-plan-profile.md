@@ -43,11 +43,11 @@ created: YYYY-MM-DD
 
 ### Contextual Actions
 
-- [X or space] **Actor:** <source actor> — **Action:** <preserved stage-local action>
+- <resolved-checkbox> **Actor:** <source actor> — **Action:** <preserved stage-local action>
 
 ## Implementation Steps
 
-- [X or space] 1. <source Implementation Step 1, verbatim>
+- <resolved-checkbox> 1. <source Implementation Step 1, verbatim>
 
 ## Main Agent Actionable Steps — Fixed Tail
 
@@ -69,3 +69,6 @@ created: YYYY-MM-DD
 The plan's Creator actions remain contextual; independent review, publishing,
 human handoff, and lifecycle work remain outside Implementation Steps. Preserve
 one-to-one Implementation mapping and only exact collective contextual dedup.
+The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
+shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
+of every `<resolved-checkbox>` placeholder; no other marker is literal output.

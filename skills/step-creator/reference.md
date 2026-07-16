@@ -10,10 +10,16 @@ contracts live in the selected profile reference.
   create-only `plan/<topic>/<topic>.step.md`.
 - The caller supplies exactly one supported profile. Never infer, fall back,
   content-sniff, repair a source, or update an existing output.
-- Validate the complete source and all required branch truth before atomic
-  creation. Invalid paths, unreadable source, existing output, incompatible
-  profile, contradictory truth, or an unresolved material branch is `BLOCKED`
-  with no write.
+- Validate the complete source and all required branch truth before creation.
+  Invalid paths, unreadable source, existing output, incompatible profile,
+  contradictory truth, or an unresolved material branch is `BLOCKED` with no
+  write. Only after preflight and full rendered-content validation pass may a
+  same-directory temporary file be created. Validate that temporary file,
+  recheck destination absence, then atomically rename/promote it without
+  overwrite.
+  On validation failure, interruption, promotion failure, or a destination race,
+  remove the temporary file, preserve the final file if present, and never leave
+  a partial final destination.
 - Base/Agent source extraction and frozen wires are owned by their profile
   references. Python eligibility is canonical intent plus the 13-section
   `python-plan-authoring` contract only; its fixed contextual action is adapter
@@ -26,9 +32,13 @@ contracts live in the selected profile reference.
 ## Evidence and tracker
 
 - `[X]` requires exact one-to-one repo-visible evidence for its rendered
-  action. `[ ]` means planned, pending, or unproved; generated output contains
-  no `[M]`.
+  action. `[ ]` means planned, pending, or unproved. Generated artifacts may
+  output only those two checkbox markers; textual placeholders in templates are
+  never output markers.
 - A source `[x]` is pending input, renders `[ ]`, and produces a warning.
+  The tracker recognizes the one-character checkbox syntax matched by
+  `^- \[(.)\](.*)`; every non-standard marker, including lowercase `[x]`, is
+  treated as pending and warned.
   Partial evidence, a broad commit/status claim, unrelated artifact existence,
   or evidence that cannot map one-to-one is `BLOCKED`.
 - Completion-evidence inputs name exact paths and/or exact command, PR, merge,
@@ -39,7 +49,7 @@ contracts live in the selected profile reference.
   attached branch; a primary worktree never qualifies. After fixed-head
   completion, absent, conflicting, primary, dirty, detached, locked, or unknown
   selected-worktree state is `BLOCKED` for later update/cleanup execution.
-- The tracker parses only top-level `- [.]` checkbox lines. Base/Agent
+- The tracker evaluates lines beginning with that checkbox syntax. Base/Agent
   `check_all_succeeded` covers head, contextual actions, Implementation Steps,
   and tail; Python additionally covers six Workflow Stages. Every profile's
   `check_impl_steps_succeeded` covers only `## Implementation Steps`.
@@ -50,11 +60,13 @@ contracts live in the selected profile reference.
   head/tail renderer. Fixed lifecycle work belongs to Main Agent; source-owned
   contextual work and human merge/resume evidence remain outside Implementation
   Steps. This creator never updates output after generation.
-- Slot 12 renders exactly one remote outcome. Render `remote-retained` only
-  when exact source-plan or retention-policy evidence requires retaining the
-  remote topic branch. When exact evidence instead permits deletion, render the
-  delete action. Unknown or contradictory retention truth is `BLOCKED`; never
-  use `remote-retained` as a speculative fallback.
+- Slot 12 renders exactly one remote outcome. Render the remote-delete action
+  only when source-plan or retention-policy truth explicitly permits deletion.
+  Render the `remote-retained` safety default when retention is explicitly
+  required or when its source/policy truth is unknown; the unknown form must
+  record required human/policy follow-up before any later deletion. Do not emit
+  a generic resolve action and do not `BLOCK` on unknown retention alone.
+  Contradictory explicit retention truth is `BLOCKED`.
 - Slot 13 always resolves release. When source truth is terminal at merged,
   render exactly `[X] Determine release requirement — release not required`,
   then replace slots 14–21 with the one `release-not-applicable` sentinel. Do

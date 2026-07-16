@@ -5,6 +5,11 @@
 - [ ] Caller supplied one path-safe topic and exactly one supported profile.
 - [ ] Source is exactly `plan/<topic>/<topic>.plan.md` and readable.
 - [ ] Destination is exactly `plan/<topic>/<topic>.step.md` and absent.
+- [ ] No temporary file exists before a preflight BLOCKED result. After all
+  preflight and rendered-content validation pass, any temporary file is in the
+  final `.step.md` directory; it is fully validated, atomically renamed/promoted
+  without overwrite only while destination remains absent, and removed on validation
+  failure, interruption, promotion failure, or a destination race.
 - [ ] Selected profile reference was used; no inference/fallback occurred.
 - [ ] Base/Agent eligibility has unique compatible status, transition, next
   actor/action, top-level Implementation Steps, selector tuple, and required
@@ -24,7 +29,8 @@
 - [ ] Every top-level source Implementation Step maps once, verbatim, and in
   order; no lifecycle/reviewer/human action appears there.
 - [ ] Every generated marker is `[X]` or `[ ]`; source `[x]` is pending and
-  warned; every `[X]` has exact one-to-one repo-visible evidence.
+  warned; every other non-standard marker is also pending/warned by the
+  tracker; every `[X]` has exact one-to-one repo-visible evidence.
 
 ## Lifecycle and conditionals
 
@@ -34,9 +40,10 @@
 - [ ] Fixed order preserves STOP POINT 1 before commit/push/PR and STOP POINT 2
   before human merge follow-up.
 - [ ] Slot 12 has exactly one remote outcome and exact source-plan or
-  retention-policy evidence: render `remote-retained` only when that evidence
-  requires retention; render delete only when it permits deletion; unknown or
-  contradictory retention truth is `BLOCKED`. Slot 13 is always rendered.
+  retention-policy evidence: render delete only when it explicitly permits
+  deletion; render `remote-retained` when retention is required or unknown,
+  recording human/policy follow-up before later deletion; only contradictory
+  explicit retention truth is `BLOCKED`. Slot 13 is always rendered.
 - [ ] Exact no-release truth renders slot 13 as `[X] Determine release
   requirement — release not required`, then replaces slots 14–21 with only the
   exact sentinel; it never leaves a pending release-resolution checkbox.

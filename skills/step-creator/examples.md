@@ -43,6 +43,12 @@ BLOCKED: output already exists at plan/cache-policy/cache-policy.step.md
 
 Do not patch, normalize `[x]`, merge, overwrite, or create a second output.
 
+After preflight and complete render validation succeed, write the candidate only
+to a temporary file beside the final `.step.md`, validate it, recheck that the
+final path is still absent, and atomically rename/promote without overwrite. If
+validation, promotion, or the process fails—or the final path appears—remove the
+temporary file and preserve the final path without a partial artifact.
+
 ## Invalid profile and extraction blockers
 
 - Profile omitted or `auto`: `BLOCKED`; request one supported caller value.
@@ -67,9 +73,10 @@ attached branch evidence. A primary worktree, conflict, or ambiguity blocks.
 - When retention policy requires a remote branch, render only
   `remote-retained`; never additionally render remote delete.
 - When neither the source plan nor retention policy states whether to retain the
-  remote topic branch, return `BLOCKED`; do not render `remote-retained` as a
-  safe-looking default. If the two authorities conflict, also return `BLOCKED`
-  and report both exact evidence sources.
+  remote topic branch, render pending `remote-retained` and record required
+  human/policy follow-up before any deletion; do not render a generic resolve
+  action or return `BLOCKED` for unknown retention alone. If the two authorities
+  explicitly conflict, return `BLOCKED` and report both exact evidence sources.
 - When source truth declares terminal at merged, slot 13 is exactly `[X]
   Determine release requirement — release not required`; replace slots 14–21
   with the sole `release-not-applicable` sentinel. Do not also render a pending

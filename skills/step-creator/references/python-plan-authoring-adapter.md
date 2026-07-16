@@ -42,12 +42,12 @@ created: YYYY-MM-DD
 
 ## Workflow Stages
 
-- [X or space] plan-authoring
-- [X or space] plan-review
-- [X or space] tdd-test-authoring
-- [X or space] implementation
-- [X or space] implementation-review
-- [X or space] code-review
+- <resolved-checkbox> plan-authoring
+- <resolved-checkbox> plan-review
+- <resolved-checkbox> tdd-test-authoring
+- <resolved-checkbox> implementation
+- <resolved-checkbox> implementation-review
+- <resolved-checkbox> code-review
 
 ## Actionable Steps
 
@@ -57,11 +57,11 @@ created: YYYY-MM-DD
 
 ### Contextual Actions
 
-- [X or space] **Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.
+- <resolved-checkbox> **Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.
 
 ## Implementation Steps
 
-- [X or space] 1. <source Implementation Step 1, verbatim>
+- <resolved-checkbox> 1. <source Implementation Step 1, verbatim>
 
 ## Main Agent Actionable Steps — Fixed Tail
 
@@ -80,9 +80,11 @@ created: YYYY-MM-DD
 - Owner-only updates: only the action owner may update after exact evidence; step-creator never updates an existing output.
 ```
 
-`[X or space]` is illustrative only. Exact stage evidence controls each actual
-marker. Pending stage blocks whole-file success even if all Implementation Steps
-are done; it does not block the implementation-only query. The contextual line
-is fixed profile-owned adapter behavior: it has its own evidence marker, is not
-extracted from source actor/action text, and does not use Base/Agent collective
-dedup rules.
+The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
+shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
+of every `<resolved-checkbox>` placeholder; no other marker is literal output.
+Exact stage evidence controls each actual marker. Pending stage blocks whole-file
+success even if all Implementation Steps are done; it does not block the
+implementation-only query. The contextual line is fixed profile-owned adapter
+behavior: it has its own evidence marker, is not extracted from source
+actor/action text, and does not use Base/Agent collective dedup rules.

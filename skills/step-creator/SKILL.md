@@ -82,19 +82,29 @@ Do not use this skill when:
    contextual actions are source-faithful; Python renders the fixed
    adapter-owned action `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` Do not place reviewer, human, release, Main
    Agent, or lifecycle actions inside Implementation Steps.
-6. Resolve markers from evidence as specified in `reference.md`. `[X]` requires
-   exact one-to-one repo-visible completion evidence; planned or unproved work
-   is `[ ]`. A lowercase source `[x]` is pending, emits a warning, and is never
-   copied as completion. Literal `[M]` never appears in a generated artifact.
-7. Resolve the conditional lifecycle branch. Slot 12 renders `remote-retained`
-   only when exact source-plan or retention-policy evidence requires retaining
-   the remote topic branch; otherwise render its policy-permitted delete action.
-   Unknown or contradictory remote-retention, release, version, README, tag, or
-   cleanup truth is `BLOCKED`, rather than an invented action. Slot 13 always
-   resolves release, and omitted release slots must not leave phantom checkboxes.
+6. Resolve markers from evidence as specified in `reference.md`. A generated
+   checkbox is always exactly `[X]` or `[ ]`: `[X]` requires exact one-to-one
+   repo-visible completion evidence, while planned or unproved work is `[ ]`.
+   Never emit a template placeholder as a marker. The tracker parses the
+   one-character checkbox form matched by `^- \[(.)\](.*)`; lowercase `[x]`
+   and every other non-standard marker are treated as pending and warned.
+7. Resolve the conditional lifecycle branch. Slot 12 renders the delete action
+   only when source-plan or retention-policy truth explicitly permits deletion.
+   Explicit retention *or unknown retention truth* renders the
+   `remote-retained` safety default, with required human/policy follow-up before
+   any later deletion; unknown retention alone is not `BLOCKED`. Contradictory
+   explicit retention truth is `BLOCKED`. Unknown or contradictory release,
+   version, README, tag, or cleanup truth remains `BLOCKED`, rather than an
+   invented action. Slot 13 always resolves release, and omitted release slots
+   must not leave phantom checkboxes.
 8. Validate section order, profile-specific wire, source fidelity, marker form,
    selector repetition, rendered tracker scope, and exact destination path.
-   Create the destination atomically only after all checks pass.
+   Only after all preflight and rendered-content validation pass, create a
+   temporary file in the final `.step.md` directory, validate the complete
+   temporary content, recheck that the final destination is absent, and perform
+   atomic no-overwrite rename/promotion. On validation failure, interruption,
+   promotion failure, or a destination race, clean up the temporary file,
+   preserve any final artifact, and never leave a partial final file.
 9. Stop at `review-ready`. Report the generated path, profile, evidence inputs,
    warnings, and a reviewer handoff. Never self-approve or update an existing
    artifact.
