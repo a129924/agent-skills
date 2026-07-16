@@ -31,7 +31,9 @@ test categories, Validation Commands, and top-level Implementation Steps. It
 does not contain the text `python-implementation-plan`, a status, a next actor,
 or a stage-local action. This is eligible: retain the exact Python frontmatter,
 executor note, six workflow stages, fixed adapter-owned Creator contextual
-action `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.`, one-to-one Implementation mapping, and shared shell.
+action `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.`, one-to-one Implementation mapping, and shared shell. Render
+`- [X] plan-authoring` exactly as the canonical Python step template wires it;
+the other five stages remain `[ ]` until exact completion evidence exists.
 
 ## Existing output blocks
 
@@ -58,7 +60,8 @@ temporary file and preserve the final path without a partial artifact.
 - Agent source naming two skills or only `.github/skills/...` outputs:
   `BLOCKED`.
 - Python source with non-Python intent or incomplete Decisions/Test/Validation
-  contract: `BLOCKED`.
+  contract: `BLOCKED`; do not create output or render the fixed Python
+  `plan-authoring` marker.
 
 ## Marker and worktree evidence
 
@@ -86,13 +89,17 @@ evidence; a primary worktree, conflict, or ambiguity then blocks.
 - When release is required and no authoritative version source exists, slot 15
   is `tag-only`; when README is not needed, slot 16 is
   `README-not-required`. Multiple disagreeing version sources block.
-- Missing release applicability, tag approval, destructive removal approval, or
-  selected-worktree identity is not a harmless pending branch when rendering a
-  claimed completion: block rather than invent evidence.
+- Missing or contradictory release applicability always blocks output before a
+  release branch is selected. Missing tag approval, destructive removal
+  approval, or selected-worktree identity is not a harmless pending branch when
+  rendering a claimed completion: block rather than invent evidence. The
+  initial-create exception applies only to cleanup rows, not release selection.
 
 ## Tracker split
 
-For a Python output, all six Workflow Stages may include one pending stage while
-every Implementation Step is `[X]`. `check_all_succeeded` is false;
+For an eligible Python output, `plan-authoring` is the fixed `[X]` stage from
+the canonical template, while the other five Workflow Stages may include one
+pending stage even when every Implementation Step is `[X]`.
+`check_all_succeeded` is false;
 `check_impl_steps_succeeded` is true. For Base/Agent, whole-file scope includes
 rendered head, contextual, Implementation, and tail checkboxes.

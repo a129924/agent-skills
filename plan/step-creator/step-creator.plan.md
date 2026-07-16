@@ -144,14 +144,15 @@ None.
 43. A pending Python Workflow Stage makes `check_all_succeeded` false while all-complete Python Implementation Steps still make `check_impl_steps_succeeded` true.
 44. Replaced/omitted release slots create no phantom pending checkbox.
 45. `merged` or `released` never implies topic-close; final verification records close-semantics evidence separately.
-46. Python output retains exact three-key frontmatter, exact executor note, all six canonical stages in order, and the fixed profile-owned contextual action before Implementation Steps.
-47. Python contextual action renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is adapter behavior, not source actor/action extraction or a new Python source-plan contract.
-48. All writes stay inside the exact `Written` set; no upstream authority or platform projection is modified.
-49. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, source-status origin/uniqueness, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
-50. Atomic creation uses a temporary file in the destination `.step.md` directory only after preflight passes; it fully validates before no-overwrite atomic rename/replace to the final path. A validation failure, interruption, promotion failure or newly present final destination cleans up the temporary file and leaves any existing final artifact unchanged, with no partial final destination.
-51. After the complete canonical `skills/step-creator/` set exists, running the existing local canonical inventory builder updates `artifacts/skills-inventory.jsonl` with exactly one record for `skills/step-creator/` and one record for every other discovered top-level canonical skill root; no agent or projection path is present.
-52. The generated inventory parses and validates through the existing builder implementation; its field set, JSONL encoding and record order match the builder's actual serializer/validator discovered in this repository, rather than a schema invented by this topic.
-53. A second run against unchanged canonical `skills/` is byte-identical; the artifact is generated locally only, and neither the builder nor its tests are modified by this topic.
+46. Python output retains exact three-key frontmatter, exact executor note, all six canonical stages in order, and the fixed profile-owned contextual action before Implementation Steps. A Python source that passes the canonical 13-section eligibility preflight renders the template-defined fixed `- [X] plan-authoring` stage from `skills/python-plan-authoring/templates/step-template.md`; this is not inferred execution completion evidence.
+47. The other five Python stages use `[X]` only with exact completion evidence and otherwise render `[ ]`. An ineligible, incomplete or ambiguous Python source is BLOCKED before output and must never receive the fixed `plan-authoring` `[X]`.
+48. Python contextual action renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is adapter behavior, not source actor/action extraction or a new Python source-plan contract.
+49. All writes stay inside the exact `Written` set; no upstream authority or platform projection is modified.
+50. Validation detects section-order, path-set, owner, eligibility, caller profile, source intent, source-status origin/uniqueness, worktree selector/evidence phase, slot-order, sentinel/substitute, marker, tracker-scope or evidence-field drift.
+51. Atomic creation uses a temporary file in the destination `.step.md` directory only after preflight passes; it fully validates before no-overwrite atomic rename/replace to the final path. A validation failure, interruption, promotion failure or newly present final destination cleans up the temporary file and leaves any existing final artifact unchanged, with no partial final destination.
+52. After the complete canonical `skills/step-creator/` set exists, running the existing local canonical inventory builder updates `artifacts/skills-inventory.jsonl` with exactly one record for `skills/step-creator/` and one record for every other discovered top-level canonical skill root; no agent or projection path is present.
+53. The generated inventory parses and validates through the existing builder implementation; its field set, JSONL encoding and record order match the builder's actual serializer/validator discovered in this repository, rather than a schema invented by this topic.
+54. A second run against unchanged canonical `skills/` is byte-identical; the artifact is generated locally only, and neither the builder nor its tests are modified by this topic.
 
 ## Goal / Outcome
 
@@ -214,6 +215,7 @@ The skill owns generation only. Later marker updates are actor-owner actions bac
 - Python `check_all_succeeded` covers those regions plus all six Workflow Stages.
 - All profiles' `check_impl_steps_succeeded` covers exactly entries inside `## Implementation Steps`.
 - Release replacement contributes only the checkbox rendered; omitted/replaced slots create no pending work.
+- For an eligible Python source only, `plan-authoring` is a canonical-template-defined fixed rendered `[X]` stage. Its marker comes from the canonical `python-plan-authoring/templates/step-template.md` stage wire after the 13-section preflight succeeds, not from execution completion evidence; the remaining five Python stage markers continue to require exact evidence.
 
 ### Exact Base/Agent output wire
 
@@ -296,7 +298,7 @@ created: YYYY-MM-DD
 
 ## Workflow Stages
 
-- [M] plan-authoring
+- [X] plan-authoring
 - [M] plan-review
 - [M] tdd-test-authoring
 - [M] implementation
@@ -337,7 +339,8 @@ created: YYYY-MM-DD
 ```
 
 - Six stages remain exactly `plan-authoring`, `plan-review`, `tdd-test-authoring`, `implementation`, `implementation-review`, `code-review` in order.
-- Stage `[X]` requires exact completion evidence, otherwise `[ ]`.
+- After a source passes the canonical Python 13-section eligibility preflight, `plan-authoring` renders fixed `[X]` exactly as wired by `skills/python-plan-authoring/templates/step-template.md`. This template-defined marker is not execution completion evidence and does not add a source-status or execution-evidence requirement.
+- `plan-review`, `tdd-test-authoring`, `implementation`, `implementation-review` and `code-review` render `[X]` only with exact completion evidence and otherwise `[ ]`. An ineligible, incomplete or ambiguous Python source is BLOCKED before rendering, so it cannot receive the fixed `plan-authoring` `[X]`.
 - Contextual Actions is fixed profile-owned adapter behavior: it renders exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker. It does not extract or validate source status, actor or action, and does not add a Python source-plan contract.
 - Python Implementation Steps mirror one-to-one, verbatim and ordered; existing output remains BLOCKED.
 - Pending stage blocks all-gate even when all Implementation Steps are `[X]`, but not implementation-only gate.
@@ -446,27 +449,27 @@ Exact executable paths are union of ReadOnly, Written, Deleted with listed owner
 2. Create `skills/step-creator/templates/shared-lifecycle-shell.md` with selector/path intent, pending initial worktree lifecycle, evidence updates, 26-slot tail, remote-retention safety default, three sentinels/tag-only, release ranges and tracker scope.
 3. Create `skills/step-creator/references/base-plan-profile.md` with Base eligibility, wire, extraction fidelity, contextual dedup and mapping.
 4. Create `skills/step-creator/references/agent-skill-plan-profile.md` with single-skill eligibility, canonical paths/ownership/handoff and wire/context mapping.
-5. Create `skills/step-creator/references/python-plan-authoring-adapter.md` with caller-selected routing, Python-intent plus canonical-contract eligibility without source profile marker, exact scaffold/six stages, Contextual Actions, tracker distinction and shell insertion.
+5. Create `skills/step-creator/references/python-plan-authoring-adapter.md` with caller-selected routing, Python-intent plus canonical-contract eligibility without source profile marker, exact scaffold/six stages including canonical-template-defined fixed `[X] plan-authoring` only after eligibility, Contextual Actions, tracker distinction and shell insertion.
 6. Create `skills/step-creator/reference.md` with exactly three coherent shared topics: generation/eligibility, evidence/tracker, and lifecycle rendering. Keep detailed rules in `SKILL.md`, the shared template, the profile references and examples.
-7. Create `skills/step-creator/examples.md` with valid profiles including Python source without literal profile marker; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, remote-retention unknown safety default, release substitutions and Python tracker split.
-8. Create `skills/step-creator/checklist.md` covering paths, eligibility, atomic create-only and temporary-file cleanup, wires, Python source-intent/canonical-contract test, contextual mapping, worktree phases, remote-retention safety default, tail, release substitution, trackers, projections and handoff.
+7. Create `skills/step-creator/examples.md` with valid profiles including an eligible Python source without literal profile marker and its fixed template-defined `[X] plan-authoring`; blockers for non-Python/incomplete/ambiguous Python source, invalid caller profile, existing output, extraction mismatch, lowercase x, unmappable progress, unknown release, claimed-X conflict, cleanup ambiguity; valid pending generation, remote-retention unknown safety default, release substitutions and Python tracker split.
+8. Create `skills/step-creator/checklist.md` covering paths, eligibility, atomic create-only and temporary-file cleanup, wires, Python source-intent/canonical-contract test plus eligible-only fixed `[X] plan-authoring` wire, contextual mapping, worktree phases, remote-retention safety default, tail, release substitution, trackers, projections and handoff.
 9. After all eight canonical `skills/step-creator/**` artifacts are complete, run the existing local `scripts/build_skills_inventory.py` to update only `artifacts/skills-inventory.jsonl`; confirm it inventories top-level canonical `skills/` only and includes `skills/step-creator/` exactly once, without changing the builder or tests.
 
 ## Validation / Acceptance Checks
 
 - Verify exact Written only; ReadOnly unchanged; no projection write.
-- Validate all 53 TestCases with checklist and bounded fixtures/examples.
+- Validate all 54 TestCases with checklist and bounded fixtures/examples.
 - Base fixtures cover eligibility and status/transition/actor/action/section blockers.
 - Agent fixtures cover one responsibility, canonical outputs, separation, review-ready and mismatch blockers.
-- Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name, current-status, next-actor or stage-local-action field and must pass. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block.
-- Assert exact Python frontmatter/executor/six stages/order, the fixed profile-owned contextual action before Implementation, and tracker split.
+- Python fixtures: caller explicitly selects Python; source clearly describes Python implementation and satisfies exact 13-section, async decision/subsections as applicable, five test categories and validation contract; one valid source contains no literal profile-name, current-status, next-actor or stage-local-action field and must pass. That eligible fixture renders fixed `[X] plan-authoring` from the canonical `python-plan-authoring/templates/step-template.md` wire while its other five stages remain `[ ]` absent completion evidence. Non-Python, incomplete/ambiguous contract, existing output and true caller/source incompatibility must block without an output or fixed stage marker.
+- Assert exact Python frontmatter/executor/six stages/order, eligible-only template-defined `[X] plan-authoring`, evidence-governed remaining stages, the fixed profile-owned contextual action before Implementation, and tracker split.
 - Assert Base/Agent contextual preservation/dedup and that status/transition/next-actor values are taken only from one selected source plan; missing, non-unique or contradictory declarations BLOCK before write even when PR/review/branch/chat context suggests a state. Assert Python does not extract contextual status/actor/action from source.
 - Initial no-worktree fixture succeeds with consistent selector and pending head/tail; evidence fixture permits X; conflict fixture blocks.
 - Cleanup execution fixtures block absent/ambiguous/wrong/primary/dirty/missing-approval/failure after head completion; tail pending until evidence; deletion waits.
 - Assert tail release: slot12 renders delete only with explicit permission, and unknown retention renders the `remote-retained` safety default plus recorded human/policy follow-up without BLOCKED; no-release renders completed slot13 `Determine release requirement — release not required` plus the sentinel replacing14–21; release renders the required range, tag-only15, README16, and no no-worktree sentinel.
 - Assert `reference.md` contains only the three shared topics; detailed profile/template/example rules remain in their owning artifacts.
-- Run tracker interface: Base/Agent all counts head/context/Implementation/tail; Python adds stages; impl only Implementation. Pending Python stage + complete Implementation => all false, impl true.
-- Assert no phantom pending, lowercase input warning, unmappable block and evidence-only X.
+- Run tracker interface: Base/Agent all counts head/context/Implementation/tail; Python adds stages including fixed eligible `plan-authoring`; impl only Implementation. A pending non-fixed Python stage + complete Implementation => all false, impl true.
+- Assert no phantom pending, lowercase input warning, unmappable block, evidence-only `[X]` except the eligible Python template-defined `plan-authoring` stage, and no fixed stage marker for a BLOCKED Python preflight.
 - Assert existing destination is unchanged and no temporary file is created on a preflight BLOCKED path. Assert successful creation uses a temporary file in the final destination directory, fully validates before no-overwrite atomic promotion, and cleans it up on validation failure, interruption, promotion failure or a newly present final destination without partial final output or overwriting an existing final artifact.
 - After all canonical `skills/step-creator/**` artifacts exist, run the existing local inventory builder and validate `artifacts/skills-inventory.jsonl` through its actual parser/validator: every record is discovered from top-level canonical `skills/` only, `skills/step-creator/` appears exactly once, no projection/agent path appears, and a second unchanged run is byte-identical. Treat the builder's checked-in serializer, validator and tests as the authority for fields, format and sorting; do not add a topic-local schema.
 - Verify generated-artifact ownership: only `artifacts/skills-inventory.jsonl` is updated by this inventory action; `scripts/build_skills_inventory.py` and `tests/test_build_skills_inventory.py` remain ReadOnly and unchanged.

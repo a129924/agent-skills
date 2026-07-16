@@ -1,10 +1,13 @@
 # Shared lifecycle shell
 
 This is the sole non-authoritative fixed lifecycle renderer for all profiles.
-Resolve `<resolved-checkbox>` to `[X]` only with exact evidence; otherwise
-resolve it to `[ ]`. It is a textual template placeholder, never a generated
-marker. Generated artifacts may output only `[X]` or `[ ]`; the tracker treats
-lowercase `[x]` and every other non-standard marker as pending and warns.
+Resolve this shell's `<resolved-checkbox>` values to `[X]` only with exact
+evidence; otherwise resolve them to `[ ]`. It is a textual template placeholder,
+never a generated marker. The Python profile's fixed `[X] plan-authoring` stage
+is owned by its canonical profile wire after Python eligibility succeeds, not by
+this lifecycle shell. Generated artifacts may output only `[X]` or `[ ]`; the
+tracker treats lowercase `[x]` and every other non-standard marker as pending
+and warns.
 
 ## Selector inputs
 
@@ -118,9 +121,11 @@ Then omit slots 14–21 and render only:
 - [X] release-not-applicable — source plan declares terminal at merged
 ```
 
-No unknown branch may be rendered as completed. STOP POINT 1 precedes commit,
-push, and PR; STOP POINT 2 stops before merge follow-up; release push precedes
-tag approval; worktree removal precedes local branch deletion.
+Unknown or contradictory release applicability is `BLOCKED` before output; do
+not render either release branch. This is not an initial-create cleanup
+exception. STOP POINT 1 precedes commit, push, and PR; STOP POINT 2 stops
+before merge follow-up; release push precedes tag approval; worktree removal
+precedes local branch deletion.
 
 For slot 12, unknown retention is a safety-default rendering, not a generic
 "resolve" action or a `BLOCKED` fallback: render the `remote-retained` row as

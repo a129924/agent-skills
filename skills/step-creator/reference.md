@@ -32,9 +32,14 @@ contracts live in the selected profile reference.
 ## Evidence and tracker
 
 - `[X]` requires exact one-to-one repo-visible evidence for its rendered
-  action. `[ ]` means planned, pending, or unproved. Generated artifacts may
-  output only those two checkbox markers; textual placeholders in templates are
-  never output markers.
+  action. `[ ]` means planned, pending, or unproved. The only exception is the
+  Python profile wire: after an eligible source passes the canonical 13-section
+  preflight, it renders the fixed `[X] plan-authoring` stage prescribed by
+  `skills/python-plan-authoring/templates/step-template.md`. That marker is a
+  template wire, not execution-completion evidence; the other five Python
+  stages still require exact evidence. Generated artifacts may output only
+  those two checkbox markers; textual placeholders in templates are never
+  output markers.
 - A source `[x]` is pending input, renders `[ ]`, and produces a warning.
   The tracker recognizes the one-character checkbox syntax matched by
   `^- \[(.)\](.*)`; every non-standard marker, including lowercase `[x]`, is
@@ -72,7 +77,9 @@ contracts live in the selected profile reference.
 - Slot 13 always resolves release. When source truth is terminal at merged,
   render exactly `[X] Determine release requirement — release not required`,
   then replace slots 14–21 with the one `release-not-applicable` sentinel. Do
-  not leave a pending slot 13 in that branch.
+  not leave a pending slot 13 in that branch. Unknown or contradictory release
+  applicability is always `BLOCKED` before output; the initial-create cleanup
+  exception does not apply to release selection.
 - In the release-required branch, inventory actual authoritative version sources;
   an empty inventory uses `tag-only`, while multiple sources must agree and be
   synchronized. Slot 16 renders the README action or `README-not-required`.

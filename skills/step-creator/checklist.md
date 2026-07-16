@@ -30,7 +30,12 @@
   order; no lifecycle/reviewer/human action appears there.
 - [ ] Every generated marker is `[X]` or `[ ]`; source `[x]` is pending and
   warned; every other non-standard marker is also pending/warned by the
-  tracker; every `[X]` has exact one-to-one repo-visible evidence.
+  tracker; every `[X]` has exact one-to-one repo-visible evidence except an
+  eligible Python source's fixed template-defined `[X] plan-authoring` stage.
+- [ ] A Python source receives fixed `[X] plan-authoring` only after its
+  canonical 13-section eligibility preflight succeeds; its other five stages
+  remain evidence-only, and every ineligible, incomplete, or ambiguous Python
+  source is `BLOCKED` without rendered output or this marker.
 
 ## Lifecycle and conditionals
 
@@ -49,6 +54,9 @@
 - [ ] Exact no-release truth renders slot 13 as `[X] Determine release
   requirement — release not required`, then replaces slots 14–21 with only the
   exact sentinel; it never leaves a pending release-resolution checkbox.
+- [ ] Unknown or contradictory release applicability is `BLOCKED` before
+  output; do not apply the initial-create cleanup exception to release
+  selection.
 - [ ] Release branch preserves version inventory, synchronization/tag-only,
   README outcome, release commit/push, approval, tag, and push order.
 - [ ] Only later update/cleanup execution blocks on missing or conflicting

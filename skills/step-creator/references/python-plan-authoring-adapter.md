@@ -42,7 +42,7 @@ created: YYYY-MM-DD
 
 ## Workflow Stages
 
-- <resolved-checkbox> plan-authoring
+- [X] plan-authoring
 - <resolved-checkbox> plan-review
 - <resolved-checkbox> tdd-test-authoring
 - <resolved-checkbox> implementation
@@ -75,14 +75,22 @@ created: YYYY-MM-DD
 - Managed worktree intent: topic=<topic>; branch=<selector>; managed-path-intent=<intent>; primary-worktree=false
 - Progression truth inputs: <exact paths>
 - Completion evidence inputs: <exact paths/identifiers>
-- Marker semantics: `[X]` exact one-to-one evidence; `[ ]` pending/planned/unproved; lowercase source `[x]` is pending and warns.
+- Marker semantics: `[X]` exact one-to-one evidence except the eligible
+  canonical-template-defined fixed `plan-authoring` stage; `[ ]`
+  pending/planned/unproved; lowercase source `[x]` is pending and warns.
 - Tracker semantics: `check_all_succeeded` covers six stages plus rendered head/contextual/Implementation/tail; `check_impl_steps_succeeded` covers only Implementation Steps.
 - Owner-only updates: only the action owner may update after exact evidence; step-creator never updates an existing output.
 ```
 
 The frozen profile wire owns the `### Main Agent — Fixed Head` heading; the
-shared shell supplies its two rows only. Render actual `[X]` or `[ ]` in place
-of every `<resolved-checkbox>` placeholder; no other marker is literal output.
+shared shell supplies its two rows only. After the canonical 13-section
+eligibility preflight succeeds, render the literal `[X] plan-authoring` stage
+exactly as wired by `skills/python-plan-authoring/templates/step-template.md`.
+It is a fixed template marker, not execution-completion evidence. Render actual
+`[X]` or `[ ]` from exact evidence in place of every remaining
+`<resolved-checkbox>` placeholder; no other marker is literal output. An
+ineligible, incomplete, or ambiguous Python source is `BLOCKED` before any
+output, including the fixed stage marker.
 Every selector-bearing shared-shell row must carry the complete frozen tuple,
 including `primary-worktree=false`, exactly as Handoff / Gate Notes does.
 Exact stage evidence controls each actual marker. Pending stage blocks whole-file

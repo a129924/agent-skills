@@ -84,8 +84,13 @@ Do not use this skill when:
    adapter-owned action `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` Do not place reviewer, human, release, Main
    Agent, or lifecycle actions inside Implementation Steps.
 6. Resolve markers from evidence as specified in `reference.md`. A generated
-   checkbox is always exactly `[X]` or `[ ]`: `[X]` requires exact one-to-one
-   repo-visible completion evidence, while planned or unproved work is `[ ]`.
+   checkbox is always exactly `[X]` or `[ ]`: `[X]` normally requires exact
+   one-to-one repo-visible completion evidence, while planned or unproved work
+   is `[ ]`. The sole profile-wire exception is an eligible canonical Python
+   source: after its 13-section preflight succeeds, render the fixed
+   `[X] plan-authoring` stage from
+   `skills/python-plan-authoring/templates/step-template.md`. That stage is not
+   execution-completion evidence; all other Python stages remain evidence-only.
    Never emit a template placeholder as a marker. The tracker parses the
    one-character checkbox form matched by `^- \[(.)\](.*)`; lowercase `[x]`
    and every other non-standard marker are treated as pending and warned.
@@ -94,12 +99,14 @@ Do not use this skill when:
    Explicit retention *or unknown retention truth* renders the
    `remote-retained` safety default, with required human/policy follow-up before
    any later deletion; unknown retention alone is not `BLOCKED`. Contradictory
-   explicit retention truth is `BLOCKED`. Unknown or contradictory release,
-   version, README, tag, or cleanup truth remains `BLOCKED` only when an
-   existing tracker is being updated for that lifecycle or cleanup action,
-   rather than an invented action. Initial creation keeps all cleanup rows
-   pending without requiring cleanup truth. Slot 13 always resolves release,
-   and omitted release slots must not leave phantom checkboxes.
+   explicit retention truth is `BLOCKED`. Unknown or contradictory release
+   applicability is always `BLOCKED`; do not choose a required-release or
+   no-release branch. Unknown or contradictory version, README, or tag truth
+   is `BLOCKED` when it is required to render the selected release branch.
+   The initial-creation exception applies only to cleanup: initial creation
+   keeps cleanup rows pending without requiring cleanup truth. Slot 13 always
+   resolves release, and omitted release slots must not leave phantom
+   checkboxes.
 8. Validate section order, profile-specific wire, source fidelity, marker form,
    selector repetition, rendered tracker scope, and exact destination path.
    Only after all preflight and rendered-content validation pass, create a
@@ -144,7 +151,8 @@ Do not use this skill when:
   path.
 - Selected profile eligibility and frozen wire pass without inference or repair.
 - Every rendered checkbox is uppercase `[X]` or `[ ]`; only exact evidence may
-  produce `[X]`.
+  produce `[X]`, except the eligible Python profile's template-defined fixed
+  `[X] plan-authoring` stage after its canonical preflight succeeds.
 - Source Implementation Steps are top-level, verbatim, one-to-one, and ordered.
 - The shared shell supplies the only fixed head/tail; conditional substitutions
   obey the slot contract and tracker scope remains truthful.
