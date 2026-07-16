@@ -1,0 +1,58 @@
+# step-creator checklist
+
+## Preflight
+
+- [ ] Caller supplied one path-safe topic and exactly one supported profile.
+- [ ] Source is exactly `plan/<topic>/<topic>.plan.md` and readable.
+- [ ] Destination is exactly `plan/<topic>/<topic>.step.md` and absent.
+- [ ] Selected profile reference was used; no inference/fallback occurred.
+- [ ] Base/Agent eligibility has unique compatible status, transition, next
+  actor/action, top-level Implementation Steps, selector tuple, and required
+  conditional truth; Python has canonical intent/13-section eligibility without
+  requiring Base/Agent status/actor/action fields.
+
+## Fidelity and markers
+
+- [ ] Base/Agent frontmatter has exactly topic, step_profile, source_plan,
+  created in that order; Python has exactly topic, phase, created.
+- [ ] Base/Agent table and Python executor note/six stages use frozen order.
+- [ ] Base/Agent contextual actions preserve exact Actor/Action wording and
+  order; Python renders only its fixed adapter-owned Creator action.
+- [ ] Python's contextual action is exactly `**Actor:** Creator — **Action:** Complete source ## Implementation Steps in order.` with its evidence marker; it is not source actor/action extraction.
+- [ ] Only Base/Agent explicit collective/shared exact duplicates were
+  deduplicated; Python does not source-extract or deduplicate its fixed action.
+- [ ] Every top-level source Implementation Step maps once, verbatim, and in
+  order; no lifecycle/reviewer/human action appears there.
+- [ ] Every generated marker is `[X]` or `[ ]`; source `[x]` is pending and
+  warned; every `[X]` has exact one-to-one repo-visible evidence.
+
+## Lifecycle and conditionals
+
+- [ ] One selector tuple repeats in fixed head, tail slots 22–24, and Handoff.
+- [ ] Initial no-worktree generation stays valid with pending lifecycle actions;
+  a primary worktree is never accepted as managed evidence.
+- [ ] Fixed order preserves STOP POINT 1 before commit/push/PR and STOP POINT 2
+  before human merge follow-up.
+- [ ] Slot 12 has exactly one remote outcome and exact source-plan or
+  retention-policy evidence: render `remote-retained` only when that evidence
+  requires retention; render delete only when it permits deletion; unknown or
+  contradictory retention truth is `BLOCKED`. Slot 13 is always rendered.
+- [ ] Exact no-release truth renders slot 13 as `[X] Determine release
+  requirement — release not required`, then replaces slots 14–21 with only the
+  exact sentinel; it never leaves a pending release-resolution checkbox.
+- [ ] Release branch preserves version inventory, synchronization/tag-only,
+  README outcome, release commit/push, approval, tag, and push order.
+- [ ] Cleanup actions retain identity, clean/release evidence, destructive
+  approval, removal-before-local-deletion, and final close evidence.
+
+## Output and handoff
+
+- [ ] Handoff notes include profile, source, shared shell, selector, progression
+  truth, completion evidence, marker/tracker semantics, and owner-only updates.
+- [ ] Base/Agent all-gate is head/context/Implementation/tail; Python adds six
+  stages; implementation-only scope is only `## Implementation Steps`.
+- [ ] Replaced slots leave no phantom pending checkboxes.
+- [ ] Only the new destination is written; source, existing skills, README,
+  VERSION, ReadOnly authorities, and projections have no diff.
+- [ ] Result is `review-ready`, not self-approved; send to independent
+  `agent-skill-reviewer`.
