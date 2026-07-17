@@ -26,19 +26,20 @@
     `plan/step-creator-release/step-creator-release.step.md`,
     `plan/step-creator-release/step-creator-release.summary.md`, and
     `plan/step-creator-release/step-creator-release.review-log.md`;
-  - run two separately managed, non-`dev` lineages: a planning-artifact Ready
-    PR followed by a release-diff Ready PR;
-  - after the first verified merge, STOP POINT 2 resume, FF-only default sync,
+  - run two separately managed, non-default-branch lineages: a
+    planning-artifact Ready PR followed by a release-diff Ready PR;
+  - after the first verified merge, STOP POINT 2 resume, FF-only
+    `resolved-default-base` sync,
     and a distinct new explicit destructive approval, clean up the first
     managed worktree, then create a second managed release-diff
-    worktree/branch from the FF-synced default branch;
+    worktree/branch from the FF-synced `resolved-default-base`;
   - in the second worktree only, dynamically inventory version sources, update
     the discovered authoritative sources to `0.77.0`, make the two locked
     README additions, independently review, commit/push the release diff, and
     open the second Ready PR;
-  - after the second verified merge and default-branch FF-only sync, run the
-    full normal release gate, then create and push annotated `v0.77.0` only
-    after explicit tag approval;
+  - after the second verified merge and `resolved-default-base` FF-only sync,
+    run the full normal release gate, then create and push annotated `v0.77.0`
+    only after explicit tag approval;
   - perform bounded cleanup for each managed worktree only after its applicable
     destructive approval.
 
@@ -66,36 +67,49 @@
   publication contained the first two artifacts; the latter two are an
   authorized planning-only PR-comment follow-up. README, VERSION, and tag
   actions are deferred until after that PR is merged, STOP POINT 2 is
-  explicitly resumed, merge state is verified, the default branch is FF-only
-  synchronized, and a second managed release-diff worktree exists.
+  explicitly resumed, merge state is verified, `resolved-default-base` is
+  FF-only synchronized, and a second managed release-diff worktree exists.
 - **Lineage 1 selector** is fixed to
   `topic=step-creator-release; branch=release/andrew/step-creator-0.77.0;
   managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release;
   primary-worktree=false`. It starts from the existing managed worktree and
   contains only the planning artifacts.
 - **Lineage 2 construction** is fixed: after Lineage 1 is merged, explicitly
-  resumed, verified, and the dynamically detected default branch has been
-  FF-only synchronized, create a *new* managed worktree from that exact synced
-  default-branch HEAD. Its selector is
+  resumed, verified, and `resolved-default-base` has been FF-only
+  synchronized, create a *new* managed worktree from that exact synced base
+  HEAD. Its selector is
   `topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff;
   managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release-diff;
   primary-worktree=false`. The second branch must not be created from an
-  unmerged branch, and neither README nor VERSION may be written in `dev` or
-  any primary worktree.
+  unmerged branch, and neither README nor VERSION may be written in the
+  resolved default branch or any primary worktree.
 - Each `managed-path-intent` is derived from the current repository root using
   the canonical selector form
   `../<repo-name>.worktrees/agent-YYYYMMDD-<worktree-name>`: `<repo-name>`
   must equal that root's basename, and `<worktree-name>` must equal the
   lineage-specific selector above. This preserves the distinct Lineage 1 and
   Lineage 2 managed identities without hard-coding a user or absolute path.
-- After Lineage 1 merged state, explicit resume, and FF-only default sync are
-  verified, a distinct new explicit human destructive approval is required
+- After Lineage 1 merged state, explicit resume, and FF-only
+  `resolved-default-base` sync are verified, a distinct new explicit human
+  destructive approval is required
   before removing that managed worktree and then its local branch. Its remote
   deletion remains a separately explicit decision. Lineage 2 cleanup remains a
   separate later destructive approval boundary.
 - The exact intended release value is `0.77.0`; the exact eventual Git tag is
-  the annotated tag `v0.77.0`. The tag is a post-merge external action, not a
-  repository file.
+  the annotated tag `v0.77.0`. The locked bump direction is **MINOR** from
+  current `0.76.1` to `0.77.0`; this direction is part of the release contract,
+  not an inference from the target number. The tag is a post-merge external
+  action, not a repository file.
+- **Resolved default base rule:** dynamically resolve the repository default
+  branch from the configured remote before either Ready PR is opened, record it
+  as `resolved-default-base`, and use that same value as the target/base for
+  both Lineage 1 and Lineage 2 Ready PRs, both FF-only synchronizations, and
+  the merged-history/tag gates. Current verified planning evidence is
+  `origin/HEAD -> origin/dev`, so `resolved-default-base=dev` for this
+  repository at this revision; that value is evidence only, never a
+  cross-repository literal. If a later required re-resolution disagrees with
+  the recorded value, execution is `BLOCKED` pending plan repair rather than
+  silently switching PR targets, FF sync, or tag ancestry.
 - Current planning evidence finds only root `VERSION`, with current value
   `0.76.1`, as the sole authoritative version source. This is a current fact,
   not a cross-repository hardcode: post-merge execution must rediscover
@@ -131,9 +145,9 @@
 - Remote tag uniqueness for `v0.77.0` must be checked again after the planning
   PR merge, after the release-diff PR merge, and immediately before tag
   creation. The tag is created only after the version/README release commit is
-  merged into the default branch, the full gate is PASS, and a distinct human
-  tag approval exists. `git tag` and tag push are separate actions; the tag
-  must target the merged default-branch release commit, never an unmerged
+  merged into `resolved-default-base`, the full gate is PASS, and a distinct
+  human tag approval exists. `git tag` and tag push are separate actions; the
+  tag must target the merged resolved-base release commit, never an unmerged
   release-diff branch commit.
 - Worktree removal and local/remote branch deletion are destructive actions.
   They require separate explicit approval; remove the worktree before deleting
@@ -143,7 +157,7 @@
 
 - Plan-Creator owns only the four Lineage 1 planning and planning-review
   handoff artifacts. It does not edit README, VERSION, tags, GitHub state, or
-  release branches.
+  release branches. It does not choose or substitute the resolved default base.
 - Plan-Reviewer independently reviews the planning artifacts. Release
   Implementer updates only the exact post-merge allowed files; an independent
   Reviewer evaluates that release diff and must not approve its own output.
@@ -157,22 +171,25 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: The baseline plan and step are committed and pushed in Ready PR
-  #117, which is `OPEN` and not merged. A local four-artifact planning-only
-  revision for current PR comments is `reviewer-in-progress`; its next actor is
-  an independent Plan-Reviewer and its only immediate outcomes are `approved`
-  or `needs-rework`. On `approved`, an explicit human authorization and a
-  bounded follow-up commit/push of only the four planning/handoff artifacts are
-  required before returning to the Lineage 1 human merge gate. Neither the
-  baseline PR nor the local revision authorizes README or VERSION writes, a
-  release lifecycle `planned`, or a Lineage 2 `publish-in-progress`
-  transition.
+- **Current**: The initial two-artifact plan/step package was independently
+  reviewed, then committed and pushed in Ready PR #117, which is `OPEN` and not
+  merged. That completed initial-review evidence applies only to the initial
+  two-artifact package; it cannot approve a later revision. The current local
+  four-artifact planning-only revision for PR #117 comments, including review
+  `4720020883`, is separately `reviewer-in-progress`; its next actor is an
+  independent Plan-Reviewer and its only immediate outcomes are `approved` or
+  `needs-rework`. On this revision's `approved`, an explicit human
+  authorization and a bounded follow-up commit/push of only the four
+  planning/handoff artifacts are required before returning to the Lineage 1
+  human merge gate. Neither the baseline PR nor the local revision authorizes
+  README or VERSION writes, a release lifecycle `planned`, or a Lineage 2
+  `publish-in-progress` transition.
 - **Execution model**: Lineage 1 committed planning-artifact Ready PR + local
   planning-only revision review -> `approved` -> explicit human authorization
   and bounded follow-up publication -> human merge -> STOP POINT 2
-  resume/merge verification/default FF-only sync/new explicit destructive
+  resume/merge verification/`resolved-default-base` FF-only sync/new explicit destructive
   approval/Lineage 1 cleanup -> new Lineage 2 managed release-diff worktree
-  from synced default HEAD ->
+  from synced `resolved-default-base` HEAD ->
   actual canonical release lifecycle (`planned` -> `creator-in-progress` ->
   `review-ready` -> `reviewer-in-progress` -> `approved` ->
   `publish-in-progress` -> `pr-open` -> `merged` -> `released`) with the
@@ -191,7 +208,8 @@
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged` for the Lineage 2 release-diff Ready PR only
   - `merged` -> `released` only after a second STOP POINT 2, new explicit
-    human resume, second merge verification, default FF-only sync, full normal
+    human resume, second merge verification, `resolved-default-base` FF-only
+    sync, full normal
     gate PASS, explicit tag approval, and successful annotated tag creation
     and separate tag push verification
   - `released` -> terminal
@@ -202,14 +220,15 @@ Routing notes:
   a release-topic `pr-open` or `merged` transition. It does not authorize
   README/VERSION edits before its human merge and STOP POINT 2 resume. The
   release-diff is the second Ready PR and the only PR represented by the
-  release lifecycle; it is never a default-branch direct write.
+  release lifecycle; it is never a resolved-default-base direct write.
 - After either independent review, any scope, source-discovery, documentation,
   or contract failure routes to `needs-rework`. After the second merge, any
   failed CI/test/type/lint/docs/version/cleanliness/tag-uniqueness gate blocks
   tag creation; it does not reopen or silently change the merged release diff.
 - STOP POINT 1 blocks pre-execution Lineage 1 planning publication. STOP POINT
   2 is terminal after each human merge: Lineage 1 requires explicit resume,
-  verified FF-only sync, and a distinct new destructive approval before its
+  verified `resolved-default-base` FF-only sync, and a distinct new destructive
+  approval before its
   cleanup or Lineage 2 creation, while the actual release lifecycle begins as
   `planned` only after new Lineage 2 worktree creation. Lineage 2 requires a
   new explicit resume before second merge verification, default sync, release
@@ -250,17 +269,17 @@ Artifact path notes:
   the Current skills table row immediately after `sense-env-scaffold` and
   before `subagent-dispatch-policy`. No date placeholder, alternate wording,
   table reflow, or other README change is allowed.
-- `VERSION bump`: current discovered `0.76.1` -> locked `0.77.0`; revalidate
-  the current source inventory and values after merge before writing. Any
-  discovered authoritative sources are synchronized to `0.77.0` only after
-  this plan lists their exact paths.
+- `VERSION bump`: **MINOR**, from current discovered `0.76.1` to locked
+  `0.77.0`; revalidate the current source inventory and values after merge
+  before writing. Any discovered authoritative sources are synchronized to
+  `0.77.0` only after this plan lists their exact paths.
 - `timing`: Lineage 1 planning artifacts are already committed/pushed in
   pre-execution Ready PR #117 and await its human merge. README and VERSION are
   bounded Lineage 2 release-diff implementation work: after Lineage 1 merged
-  evidence, STOP POINT 2 resume, FF-only default sync, cleanup approval, and
+  evidence, STOP POINT 2 resume, `resolved-default-base` FF-only sync, cleanup approval, and
   Lineage 2 worktree creation, they proceed through
   `creator-in-progress` -> independent approval -> `publish-in-progress` ->
-  Ready PR -> human merge. They are never a direct default-branch write or a
+  Ready PR -> human merge. They are never a direct resolved-base write or a
   second-merge-only `release` write. The annotated tag remains post-second-
   merge, after full PASS, remote uniqueness recheck, and explicit human tag
   approval.
@@ -286,18 +305,24 @@ Artifact path notes:
 ## Validation / Acceptance Checks
 
 - Ready PR #117 is `OPEN` and not merged. Its initial committed publication
-  contains the plan and step; the current authorized local PR-comment repair
-  adds only the exact summary and review-log paths and updates the parent plan
-  and step, so its final intended Lineage 1 file set is exactly the four
-  planning/handoff artifacts in **Artifact Paths**. The current revision is
-  `reviewer-in-progress`; independent `approved`, then explicit human
-  authorization and a bounded follow-up commit/push, are required before it
-  returns to Lineage 1's human merge gate. It does not enter the Lineage 2
-  release lifecycle or route README/VERSION to `publish-in-progress`.
+  contains the plan and step and has its own completed independent planning
+  review evidence. The current authorized local PR-comment repair adds only
+  the exact summary and review-log paths and updates the parent plan and step,
+  so its final intended Lineage 1 file set is exactly the four planning/handoff
+  artifacts in **Artifact Paths**. This current revision is separately
+  `reviewer-in-progress`; the initial two-artifact done marker cannot satisfy
+  this revision's review. An independent current-revision `approved`, then
+  explicit human authorization and a bounded follow-up commit/push, are
+  required before it returns to the Lineage 1 human merge gate. It does not
+  enter the Lineage 2 release lifecycle or route README/VERSION to
+  `publish-in-progress`.
 - Lineage 1 and Lineage 2 each have distinct branch/worktree selectors, Ready
-  PRs, human merge evidence, and default-branch FF-only synchronization. No
-  README/VERSION edit happens in `dev`, the primary worktree, or Lineage 1.
-- Lineage 2 is created only from the exact synced default-branch HEAD after
+  PRs, human merge evidence, and `resolved-default-base` FF-only
+  synchronization. Both Ready PRs target that same dynamically resolved base,
+  and the tag's merged-history gate checks that same base. No README/VERSION
+  edit happens in the resolved default branch, the primary worktree, or
+  Lineage 1.
+- Lineage 2 is created only from the exact synced `resolved-default-base` HEAD after
   Lineage 1's verified merge and explicit STOP POINT 2 resume. Its release-diff
   changes only `README.md` and version paths that are listed and confirmed
   authoritative.
@@ -307,19 +332,19 @@ Artifact path notes:
   before its valid `approved` -> `publish-in-progress` release-diff
   commit/push/Ready PR.
 - Version-source discovery is rerun in Lineage 2 after its creation from synced
-  default. Current `VERSION=0.76.1` is confirmed or a plan repair blocks
+  `resolved-default-base`. Current `VERSION=0.76.1` is confirmed or a plan repair blocks
   changes; every listed/discovered authority is exactly `0.77.0` before the
   Lineage 2 Ready PR is opened.
 - README has no restructuring: it contains exactly the locked historical entry
   and the `step-creator` Current skills row at the locked table location with
   accurate description.
 - After the second human merge, a second STOP POINT 2 and new explicit human
-  resume are required before merged-state verification and default-branch
-  FF-only sync. Only then are full normal release signals independently
+  resume are required before merged-state verification and
+  `resolved-default-base` FF-only sync. Only then are full normal release signals independently
   evidenced as PASS; absent pytest/test/type/lint/CI evidence is not substituted
   by a warning or intuition.
 - `v0.77.0` is absent from remote immediately before tag creation, the
-  README/VERSION release commit is visible on merged default-branch history,
+  README/VERSION release commit is visible on merged `resolved-default-base` history,
   the tag is annotated against that merged commit, and tag creation and tag
   push are separate verified actions. Their successful verification immediately
   transitions the topic to `released`; later cleanup is independent.
@@ -346,10 +371,13 @@ Artifact path notes:
    planning/handoff artifacts and neither `README.md` nor `VERSION`.
 4. A first PR that is only approved or closed is rejected at STOP POINT 2. Only
    verifiable merged state plus a new explicit human resume permits default
-   branch detection and FF-only synchronization; a distinct new explicit human
-   destructive approval is then required before Lineage 1 cleanup.
-5. Lineage 2 creation fails if it uses `dev`, a primary worktree, an unmerged
-   source branch, a non-FF-synced default, or a selector/path different from
+   base detection and FF-only synchronization. The resolved base must match the
+   recorded `resolved-default-base` and be the target for both Ready PRs and
+   the later tag ancestry check; a mismatch is `BLOCKED`. A distinct new
+   explicit human destructive approval is then required before Lineage 1
+   cleanup.
+5. Lineage 2 creation fails if it uses the resolved default branch, a primary worktree, an unmerged
+   source branch, a non-FF-synced `resolved-default-base`, or a selector/path different from
    the locked construction. Only after successful creation does the actual
    release lifecycle begin at `planned`; its README/VERSION diff remains
    uncommitted until independent Reviewer approval and its own Ready PR
@@ -365,15 +393,15 @@ Artifact path notes:
    restructure or wording change fails scope validation.
 8. A second PR that is only approved or closed cannot advance to tagging. Even
    after its verified human merge, a second STOP POINT 2 and new explicit human
-   resume are required before its merged-state verification and FF-only default
-   sync. Thereafter, missing or failing CI, base tests, strict typing, lint,
+   resume are required before its merged-state verification and FF-only
+   `resolved-default-base` sync. Thereafter, missing or failing CI, base tests, strict typing, lint,
    documentation sync, reviewer approval, version synchronization, clean
    workspace, or remote tag uniqueness blocks the normal gate; absent pytest is
    not a substitute for passing tests.
 9. A pre-existing local or remote `v0.77.0`, a dirty workspace, or a release
-   commit absent from merged default history blocks tag creation. With every
+   commit absent from merged `resolved-default-base` history blocks tag creation. With every
    gate PASS and separate tag approval, the annotated tag targets the merged
-   default release commit; tag creation and tag push are individually evidenced,
+   resolved-base release commit; tag creation and tag push are individually evidenced,
    then the topic transitions to `released` before any cleanup gate.
 10. Without the applicable destructive approval, each lineage's worktree/branch
     deletion is blocked. With it, cleanup verifies clean worktree, removes it
@@ -399,21 +427,25 @@ Artifact path notes:
 
 - **Lineage 1 completion**: do not continue because the planning PR is merely
   closed. Verify its merge, require a new explicit human STOP POINT 2 resume,
-  detect default branch/remote, and FF-only sync it. Then require a distinct
+  resolve and verify `resolved-default-base`/remote, and FF-only sync that same
+  base. Then require a distinct
   new explicit human destructive approval before removing Lineage 1 worktree
   and then its local branch. Keep its remote branch unless separately
   authorized for deletion.
-- **Lineage 2 creation and publication**: from that exact synced default HEAD,
+- **Lineage 2 creation and publication**: from that exact synced
+  `resolved-default-base` HEAD,
   create the locked second managed worktree/branch. Only there may the Release
   Implementer discover sources and modify bounded README/VERSION. After
   independent review and bounded release-diff commit/push, open the second
-  Ready PR. No direct default-branch write is allowed.
+  Ready PR against `resolved-default-base`. No direct resolved-base write is
+  allowed.
 - **Lineage 2 merge and release**: after second human merge handoff, STOP at a
   second STOP POINT 2. Require a *new* explicit human resume and verified
-  second merged state before detecting and FF-only syncing default again; only
+  second merged state before verifying and FF-only syncing
+  `resolved-default-base` again; only
   then enforce every normal release gate. No release action is skipped, waived,
   or inferred. The `v0.77.0` tag is created only after full PASS and separate
-  human tag approval; it is annotated at the merged default-branch release
+  human tag approval; it is annotated at the merged `resolved-default-base` release
   commit and pushed in a distinct action. Successful tag creation and push
   immediately transition the topic to `released`.
 - **Lineage 2 cleanup**: after tag verification, wait for its destructive
