@@ -67,6 +67,7 @@ Current implementation note:
 | `python-testing-pytest` | `skills/python-testing-pytest/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
 | `python-type-hints-strict` | `skills/python-type-hints-strict/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
 | `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
+| `step-creator` | `skills/step-creator/` | `materialized-copy` | `2379e45` | `byte-identical materialization from canonical source; no .<platform>/ placeholders to concretize` |
 | `subagent-dispatch-policy` | `skills/subagent-dispatch-policy/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
 | `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
 
