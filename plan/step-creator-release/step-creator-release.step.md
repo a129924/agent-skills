@@ -16,8 +16,8 @@ created: 2026-07-17
 
 ### Main Agent — Fixed Head (Lineage 1: Planning Artifacts)
 
-- [X] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator-release; branch=release/andrew/step-creator-0.77.0; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release; primary-worktree=false
-- [X] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator-release; branch=release/andrew/step-creator-0.77.0; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release; primary-worktree=false
+- [X] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator-release; branch=release/andrew/step-creator-0.77.0; managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release (derived from current repository root; `<repo-name>` is that root basename); primary-worktree=false
+- [X] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator-release; branch=release/andrew/step-creator-0.77.0; managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release (derived from current repository root; `<repo-name>` is that root basename); primary-worktree=false
 
 ### Planning Review and Lineage 1 Ready-PR Gate
 
@@ -37,8 +37,8 @@ created: 2026-07-17
 
 ### Main Agent — Fixed Head (Lineage 2: Release Diff)
 
-- [ ] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release-diff; primary-worktree=false; source=exact synced default-branch HEAD
-- [ ] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff; managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release-diff; primary-worktree=false; source=exact synced default-branch HEAD
+- [ ] **Actor:** Main Agent — **Action:** create-worktree — **Selector:** topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff; managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release-diff (derived from current repository root; `<repo-name>` is that root basename); primary-worktree=false; source=exact synced default-branch HEAD
+- [ ] **Actor:** Main Agent — **Action:** prepare-topic-branch — **Selector:** topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff; managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release-diff (derived from current repository root; `<repo-name>` is that root basename); primary-worktree=false; source=exact synced default-branch HEAD
 - [ ] **Actor:** Main Agent — **Action:** Start the actual Lineage 2 release lifecycle at `planned`, then route canonically to `creator-in-progress`.
 
 ### Lineage 2 Release-diff Implementation and Ready-PR Gate
@@ -55,13 +55,13 @@ created: 2026-07-17
 - [ ] **Actor:** Main Agent — **Action:** Verify the second PR is `MERGED` (not merely closed), then detect default branch/remote again and FF-only sync default; prove the README/VERSION release commit is visible on merged default-branch history.
 - [ ] **Actor:** Main Agent — **Action:** Record PASS for independent reviewer approval, CI, base tests, strict type checks, lint, documentation synchronization, version synchronization, clean workspace, and remote tag uniqueness. Any absent or failing signal—including missing pytest—is BLOCKED.
 - [ ] **Actor:** Main Agent — **Action:** Recheck local and remote `v0.77.0` uniqueness immediately before tagging and obtain a distinct explicit human approval to create the tag.
-- [ ] **Actor:** Main Agent — **Action:** Create annotated `v0.77.0` at the merged default-branch release commit, push the tag in a separate action, and verify the remote tag target.
+- [ ] **Actor:** Main Agent — **Action:** Create annotated `v0.77.0` at the merged default-branch release commit, push the tag in a separate action, verify the remote tag target, and immediately record the lifecycle transition to `released`.
 
 ### Lineage 2 Cleanup Gate
 
 - [ ] **Actor:** Main Agent — **Action:** Obtain a new destructive approval, verify the selected Lineage 2 worktree clean, remove it, then delete the local branch.
 - [ ] **Actor:** Main Agent — **Action:** Delete the Lineage 2 remote branch only with separate explicit approval; preserve all stashes.
-- [ ] **Actor:** Main Agent — **Action:** Verify final repository state and record `released` closure.
+- [ ] **Actor:** Main Agent — **Action:** Verify final repository state and record cleanup completion without altering the already-recorded `released` lifecycle state.
 
 ## Implementation Steps
 
@@ -98,7 +98,9 @@ created: 2026-07-17
   a passing test signal.
 - The tag may be created only after full PASS, a separate explicit tag approval,
   and proof that the Lineage 2 release commit is in merged default history. Git
-  tag and tag push are distinct actions.
+  tag and tag push are distinct actions. After both succeed and the remote tag
+  target is verified, record `released` immediately; Lineage 2 cleanup remains
+  an independent later destructive gate.
 - Worktree removal is destructive. Lineage 1 needs a distinct new destructive
   approval after merged/resume/sync evidence; Lineage 2 needs its own
   destructive approval. Each worktree is removed before its local branch;

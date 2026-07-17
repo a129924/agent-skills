@@ -61,7 +61,7 @@
   synchronized, and a second managed release-diff worktree exists.
 - **Lineage 1 selector** is fixed to
   `topic=step-creator-release; branch=release/andrew/step-creator-0.77.0;
-  managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release;
+  managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release;
   primary-worktree=false`. It starts from the existing managed worktree and
   contains only the planning artifacts.
 - **Lineage 2 construction** is fixed: after Lineage 1 is merged, explicitly
@@ -69,10 +69,16 @@
   FF-only synchronized, create a *new* managed worktree from that exact synced
   default-branch HEAD. Its selector is
   `topic=step-creator-release-diff; branch=release/andrew/step-creator-0.77.0-release-diff;
-  managed-path-intent=/Users/andrew/code/python/agent-skills.worktrees/agent-20260717-step-creator-release-diff;
+  managed-path-intent=../<repo-name>.worktrees/agent-20260717-step-creator-release-diff;
   primary-worktree=false`. The second branch must not be created from an
   unmerged branch, and neither README nor VERSION may be written in `dev` or
   any primary worktree.
+- Each `managed-path-intent` is derived from the current repository root using
+  the canonical selector form
+  `../<repo-name>.worktrees/agent-YYYYMMDD-<worktree-name>`: `<repo-name>`
+  must equal that root's basename, and `<worktree-name>` must equal the
+  lineage-specific selector above. This preserves the distinct Lineage 1 and
+  Lineage 2 managed identities without hard-coding a user or absolute path.
 - After Lineage 1 merged state, explicit resume, and FF-only default sync are
   verified, a distinct new explicit human destructive approval is required
   before removing that managed worktree and then its local branch. Its remote
@@ -95,8 +101,8 @@
      `## Historical Migration Snapshot`:
 
      ```md
-     - As of version `0.77.0`, PR #116 merged the `step-creator` topic into `dev`,
-       adding the stable `skills/step-creator/` skill, which creates one
+     - As of version `0.77.0`, PR #116 was merged to `dev`, adding the stable
+       `skills/step-creator/` skill, which creates one
        caller-selected `base-plan`, `agent-skill-plan`, or
        `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible
        plan with fixed worktree, PR, release, and cleanup gates.
@@ -173,10 +179,10 @@
   - `publish-in-progress` -> `pr-open` for the Lineage 2 release-diff Ready PR
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged` for the Lineage 2 release-diff Ready PR only
-  - `merged` -> `released` only after a second STOP POINT 2,
-    new explicit human resume, second merge verification, default FF-only sync,
-    full normal gate PASS, explicit tag approval, tag creation/push, and
-    approved cleanup
+  - `merged` -> `released` only after a second STOP POINT 2, new explicit
+    human resume, second merge verification, default FF-only sync, full normal
+    gate PASS, explicit tag approval, and successful annotated tag creation
+    and separate tag push verification
   - `released` -> terminal
 
 Routing notes:
@@ -198,6 +204,10 @@ Routing notes:
   new explicit resume before second merge verification, default sync, release
   gate, tag, or cleanup. Release-diff publication, tag approval, and each
   destructive cleanup are distinct subsequent gates.
+- After the Lineage 2 merge path has passed the full normal gate, received tag
+  approval, and verified annotated tag creation and push, the topic transitions
+  immediately to `released`. Lineage 2 cleanup remains a separately approved
+  destructive follow-up gate and neither delays nor reverses `released`.
 
 ## Artifact Paths
 
@@ -290,7 +300,8 @@ Artifact path notes:
 - `v0.77.0` is absent from remote immediately before tag creation, the
   README/VERSION release commit is visible on merged default-branch history,
   the tag is annotated against that merged commit, and tag creation and tag
-  push are separate verified actions.
+  push are separate verified actions. Their successful verification immediately
+  transitions the topic to `released`; later cleanup is independent.
 - Lineage 1 cleanup needs a distinct new destructive approval after its
   merged/resume/sync evidence; Lineage 2 cleanup needs its own destructive
   approval. For each lineage, worktree removal precedes local branch deletion,
@@ -337,11 +348,13 @@ Artifact path notes:
 9. A pre-existing local or remote `v0.77.0`, a dirty workspace, or a release
    commit absent from merged default history blocks tag creation. With every
    gate PASS and separate tag approval, the annotated tag targets the merged
-   default release commit; tag creation and tag push are individually evidenced.
+   default release commit; tag creation and tag push are individually evidenced,
+   then the topic transitions to `released` before any cleanup gate.
 10. Without the applicable destructive approval, each lineage's worktree/branch
     deletion is blocked. With it, cleanup verifies clean worktree, removes it
     before local branch deletion, deletes a remote branch only under separate
-    approval, and leaves stashes unchanged.
+    approval, and leaves stashes unchanged; it does not delay or revoke an
+    already-recorded `released` transition.
 
 ## Reviewer Handoff
 
@@ -376,11 +389,12 @@ Artifact path notes:
   then enforce every normal release gate. No release action is skipped, waived,
   or inferred. The `v0.77.0` tag is created only after full PASS and separate
   human tag approval; it is annotated at the merged default-branch release
-  commit and pushed in a distinct action.
+  commit and pushed in a distinct action. Successful tag creation and push
+  immediately transition the topic to `released`.
 - **Lineage 2 cleanup**: after tag verification, wait for its destructive
-  approval before cleanup. Remove the managed worktree before local branch
-  deletion; delete the remote branch only under explicit approval; retain all
-  stashes.
+  approval before cleanup. This independent follow-up does not block or alter
+  `released`. Remove the managed worktree before local branch deletion; delete
+  the remote branch only under explicit approval; retain all stashes.
 
 ## Open Questions / Unresolved Items
 
