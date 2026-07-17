@@ -58,6 +58,11 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
+- As of version `0.77.0`, PR #116 was merged into `dev`, adding the stable
+  `skills/step-creator/` skill, which creates one
+  caller-selected `base-plan`, `agent-skill-plan`, or
+  `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible
+  plan with fixed worktree, PR, release, and cleanup gates.
 - As of version `0.76.1`, PR #115 merged the
   `creator-reviewer-template-platform-path-alignment` topic into `dev`,
   aligning the stable `agent-skill-creator`, `agent-skill-reviewer`, and
@@ -345,6 +350,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
 | `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
 | `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
+| `step-creator` | creates one caller-selected `base-plan`, `agent-skill-plan`, or `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible plan with fixed worktree, PR, release, and cleanup gates |
 | `subagent-dispatch-policy` | chooses the next allowed role for one bounded task slice, or stops, without turning file paths, registries, or runtime semantics into dispatch targets |
 | `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |
 
