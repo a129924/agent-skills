@@ -58,7 +58,7 @@ agents/                           # canonical repo-defined workflow agent artifa
 
 ## Historical Migration Snapshot
 
-- As of version `0.77.0`, PR #116 was merged to `dev`, adding the stable
+- As of version `0.77.0`, PR #116 was merged into `dev`, adding the stable
   `skills/step-creator/` skill, which creates one
   caller-selected `base-plan`, `agent-skill-plan`, or
   `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible
