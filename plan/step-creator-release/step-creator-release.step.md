@@ -10,7 +10,7 @@ created: 2026-07-17
 
 | Current status | Allowed next transitions | Next actor |
 | --- | --- | --- |
-| Local planning-only PR #117 comment revision: `reviewer-in-progress`; baseline planning artifacts are committed/pushed in Ready PR #117, `OPEN` and not merged | `approved` \| `needs-rework`; on `approved`, explicit human authorization and bounded follow-up publication are required before returning to Lineage 1 human merge | Independent Plan-Reviewer |
+| Local four-artifact planning-only PR #117 comment revision: `reviewer-in-progress`; baseline plan/step are committed/pushed in Ready PR #117, `OPEN` and not merged | `approved` \| `needs-rework`; on `approved`, explicit human authorization and bounded follow-up publication are required before returning to Lineage 1 human merge | Independent Plan-Reviewer |
 
 ## Actionable Steps
 
@@ -21,12 +21,12 @@ created: 2026-07-17
 
 ### Planning Review and Lineage 1 Ready-PR Gate
 
-- [X] **Actor:** Plan-Creator — **Action:** Create or correct only `plan/step-creator-release/step-creator-release.plan.md` and `plan/step-creator-release/step-creator-release.step.md` in Lineage 1.
+- [X] **Actor:** Plan-Creator — **Action:** Create or correct only the four Lineage 1 planning/handoff artifacts listed in the topic plan: plan, step, summary, and review log. Keep the summary's required close/handoff sections and the review log's factual triage/current-verdict record synchronized with the parent plan.
 - [X] **Actor:** Plan-Reviewer — **Action:** Independently review the current planning artifacts; return only `approved` or `needs-rework` JSON.
 - [X] **Actor:** Main Agent — **Action:** Obtain explicit human STOP POINT 1 authorization before Lineage 1 commit, push, or Ready PR. This pre-execution gate does not enter the Lineage 2 release lifecycle or synthesize any release status transition.
-- [X] **Actor:** Main Agent — **Action:** Commit and push exactly the two planning artifacts on Lineage 1, then open Ready PR #117. Do not stage `README.md`, `VERSION`, or release changes.
-- [ ] **Actor:** Plan-Reviewer — **Action:** Independently review the latest planning-only revision of the current committed artifacts on Lineage 1 / PR #117; return only `approved` or `needs-rework` JSON before any authorized follow-up publication.
-- [ ] **Actor:** Main Agent — **Action:** Only after that independent `approved` result and new explicit human authorization, commit and push the bounded planning-only follow-up to PR #117. Only then return to the Lineage 1 human merge gate; do not stage `README.md`, `VERSION`, or release changes.
+- [X] **Actor:** Main Agent — **Action:** Commit and push the initial plan/step planning artifacts on Lineage 1, then open Ready PR #117. Do not stage `README.md`, `VERSION`, or release changes.
+- [ ] **Actor:** Plan-Reviewer — **Action:** Independently review the latest four-artifact planning-only revision on Lineage 1 / PR #117; return only `approved` or `needs-rework` JSON before any authorized follow-up publication.
+- [ ] **Actor:** Main Agent — **Action:** Only after that independent `approved` result and new explicit human authorization, commit and push the bounded four-artifact planning-only follow-up to PR #117. Only then return to the Lineage 1 human merge gate; do not stage `README.md`, `VERSION`, or release changes.
 - [ ] **Actor:** Human — **Action:** Merge the first Ready PR. This is STOP POINT 2; automated execution stops after the human merge handoff.
 
 ### Lineage 1 Post-merge Resume and Cleanup
@@ -69,14 +69,15 @@ created: 2026-07-17
 
 ## Handoff / Gate Notes
 
-- Current progression truth is a local planning-only PR #117 comment revision
-  at `reviewer-in-progress`. The baseline two planning artifacts remain
+- Current progression truth is a local four-artifact planning-only PR #117
+  comment revision at `reviewer-in-progress`. The baseline plan/step remain
   committed, pushed, and published in Ready PR #117, which is `OPEN` and not
-  merged. Only independent `approved`, then a new explicit human authorization
-  and bounded follow-up publication, returns the topic to Lineage 1's human
-  merge gate. It remains outside the Lineage 2 release lifecycle; neither PR
-  #117 nor worktree existence authorizes a release `planned` or
-  `publish-in-progress` state.
+  merged; the authorized summary/review-log follow-up and synchronized parent
+  updates await independent review. Only independent `approved`, then a new
+  explicit human authorization and bounded follow-up publication, returns the
+  topic to Lineage 1's human merge gate. It remains outside the Lineage 2
+  release lifecycle; neither PR #117 nor worktree existence authorizes a
+  release `planned` or `publish-in-progress` state.
 - There are exactly two PR/merge lineages. Lineage 1 publishes only planning
   artifacts; Lineage 2 publishes README/VERSION from a new managed worktree
   created from the FF-synced default branch. Both PRs require separately

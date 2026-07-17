@@ -20,7 +20,12 @@
 ## Scope
 
 - **In scope**:
-  - create and review this topic's two planning artifacts;
+  - create and review exactly these four Lineage 1 planning and planning-review
+    handoff artifacts:
+    `plan/step-creator-release/step-creator-release.plan.md`,
+    `plan/step-creator-release/step-creator-release.step.md`,
+    `plan/step-creator-release/step-creator-release.summary.md`, and
+    `plan/step-creator-release/step-creator-release.review-log.md`;
   - run two separately managed, non-`dev` lineages: a planning-artifact Ready
     PR followed by a release-diff Ready PR;
   - after the first verified merge, STOP POINT 2 resume, FF-only default sync,
@@ -53,10 +58,14 @@
 - This is a stable-library-affecting, normal-path release topic initiated by a
   human override of the earlier explicit no-release outcome for merged PR
   #116. It is not an emergency release and no normal gate may be waived.
-- The first Ready PR contains only
-  `plan/step-creator-release/step-creator-release.plan.md` and
-  `plan/step-creator-release/step-creator-release.step.md`. README, VERSION,
-  and tag actions are deferred until after that PR is merged, STOP POINT 2 is
+- The final intended Lineage 1 Ready-PR file set is exactly
+  `plan/step-creator-release/step-creator-release.plan.md`,
+  `plan/step-creator-release/step-creator-release.step.md`,
+  `plan/step-creator-release/step-creator-release.summary.md`, and
+  `plan/step-creator-release/step-creator-release.review-log.md`. Its initial
+  publication contained the first two artifacts; the latter two are an
+  authorized planning-only PR-comment follow-up. README, VERSION, and tag
+  actions are deferred until after that PR is merged, STOP POINT 2 is
   explicitly resumed, merge state is verified, the default branch is FF-only
   synchronized, and a second managed release-diff worktree exists.
 - **Lineage 1 selector** is fixed to
@@ -132,8 +141,9 @@
 
 ## Boundaries / Exclusions
 
-- Plan-Creator owns only the two planning artifacts. It does not edit README,
-  VERSION, tags, GitHub state, or release branches.
+- Plan-Creator owns only the four Lineage 1 planning and planning-review
+  handoff artifacts. It does not edit README, VERSION, tags, GitHub state, or
+  release branches.
 - Plan-Reviewer independently reviews the planning artifacts. Release
   Implementer updates only the exact post-merge allowed files; an independent
   Reviewer evaluates that release diff and must not approve its own output.
@@ -147,15 +157,16 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: Lineage 1 planning artifacts are committed and pushed, and
-  Ready PR #117 is `OPEN` and not merged. A local planning-only revision for
-  current PR comments is `reviewer-in-progress`; its next actor is an
-  independent Plan-Reviewer and its only immediate outcomes are `approved` or
-  `needs-rework`. On `approved`, an explicit human authorization and a bounded
-  follow-up commit/push of only the two planning artifacts are required before
-  returning to the Lineage 1 human merge gate. Neither the baseline PR nor the
-  local revision authorizes README or VERSION writes, a release lifecycle
-  `planned`, or a Lineage 2 `publish-in-progress` transition.
+- **Current**: The baseline plan and step are committed and pushed in Ready PR
+  #117, which is `OPEN` and not merged. A local four-artifact planning-only
+  revision for current PR comments is `reviewer-in-progress`; its next actor is
+  an independent Plan-Reviewer and its only immediate outcomes are `approved`
+  or `needs-rework`. On `approved`, an explicit human authorization and a
+  bounded follow-up commit/push of only the four planning/handoff artifacts are
+  required before returning to the Lineage 1 human merge gate. Neither the
+  baseline PR nor the local revision authorizes README or VERSION writes, a
+  release lifecycle `planned`, or a Lineage 2 `publish-in-progress`
+  transition.
 - **Execution model**: Lineage 1 committed planning-artifact Ready PR + local
   planning-only revision review -> `approved` -> explicit human authorization
   and bounded follow-up publication -> human merge -> STOP POINT 2
@@ -215,13 +226,16 @@ Routing notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/step-creator-release/step-creator-release.plan.md` | Plan-Creator | Current execution contract for the bounded release topic |
 | Topic progression | `plan/step-creator-release/step-creator-release.step.md` | Plan-Creator | Progression and human-gate record for this topic |
+| Topic close summary | `plan/step-creator-release/step-creator-release.summary.md` | Plan-Creator | Current-truth pre-release close/handoff summary; it records completed Lineage 1 planning work and explicit required follow-up without claiming the topic, release, or PR is merged |
+| Review triage log | `plan/step-creator-release/step-creator-release.review-log.md` | Plan-Creator | Repo-visible factual PR #117 planning-review/comment triage record; update for each routing-controlling planning revision before independent review, retain the current independent verdict or explicitly state that it is pending, and do not depend on mutable GitHub thread state alone |
 | Stable-library summary | `README.md` | Release Implementer | Two locked literal additions in the bounded Lineage 2 release diff on its `publish-in-progress` -> Ready PR -> merge path |
 | Version source | `VERSION` | Release Implementer | Current sole discovered authority; update to `0.77.0` only if the Lineage 2 inventory confirms it remains authoritative, on the same `publish-in-progress` -> Ready PR -> merge path |
 
 Artifact path notes:
 
-- The exact planned Written set is the two planning files, `README.md`, and
-  `VERSION`. The Git tag is an external post-merge action, not an artifact path.
+- The exact planned Written set is the four Lineage 1 planning/handoff files,
+  `README.md`, and `VERSION`. The Git tag is an external post-merge action,
+  not an artifact path.
 - If post-merge inventory finds an additional authoritative version source,
   execution is `BLOCKED` until this plan is repaired to list that exact path;
   it must not be silently edited outside this contract.
@@ -258,21 +272,28 @@ Artifact path notes:
 ## Implementation Steps
 
 1. Plan-Creator creates or corrects only
-   `plan/step-creator-release/step-creator-release.plan.md` and
-   `plan/step-creator-release/step-creator-release.step.md` in Lineage 1's
-   selected managed worktree, then hands the draft to an independent
-   Plan-Reviewer. It performs no release implementation, Git publication,
-   review verdict, gate routing, or cleanup action.
+   `plan/step-creator-release/step-creator-release.plan.md`,
+   `plan/step-creator-release/step-creator-release.step.md`,
+   `plan/step-creator-release/step-creator-release.summary.md`, and
+   `plan/step-creator-release/step-creator-release.review-log.md` in Lineage
+   1's selected managed worktree, then hands the draft to an independent
+   Plan-Reviewer. The summary records current state, completed, not completed,
+   required follow-up, and next handoff; the review log records factual
+   comment-revision triage and the current independent verdict or pending
+   status. It performs no release implementation, Git publication, review
+   verdict, gate routing, or cleanup action.
 
 ## Validation / Acceptance Checks
 
-- The current committed planning artifacts are published only in Ready PR #117,
-  which is `OPEN` and not merged. The current local PR-comment repair changes
-  only the same two planning paths and is `reviewer-in-progress`; independent
-  `approved`, then explicit human authorization and a bounded follow-up
-  commit/push, are required before it returns to Lineage 1's human merge gate.
-  It does not enter the Lineage 2 release lifecycle or route README/VERSION to
-  `publish-in-progress`. Lineage 1's Ready PR contains exactly those two files.
+- Ready PR #117 is `OPEN` and not merged. Its initial committed publication
+  contains the plan and step; the current authorized local PR-comment repair
+  adds only the exact summary and review-log paths and updates the parent plan
+  and step, so its final intended Lineage 1 file set is exactly the four
+  planning/handoff artifacts in **Artifact Paths**. The current revision is
+  `reviewer-in-progress`; independent `approved`, then explicit human
+  authorization and a bounded follow-up commit/push, are required before it
+  returns to Lineage 1's human merge gate. It does not enter the Lineage 2
+  release lifecycle or route README/VERSION to `publish-in-progress`.
 - Lineage 1 and Lineage 2 each have distinct branch/worktree selectors, Ready
   PRs, human merge evidence, and default-branch FF-only synchronization. No
   README/VERSION edit happens in `dev`, the primary worktree, or Lineage 1.
@@ -310,15 +331,19 @@ Artifact path notes:
 ## TestCase
 
 1. Lineage 1 preflight confirms its fixed managed worktree/branch identity;
-   `git diff --check` passes and only the two planning artifacts are changed.
+   `git diff --check` passes and only the four exact planning/handoff artifacts
+   are changed. The summary contains current state, completed, not completed,
+   required follow-up, and next handoff; the review log identifies its owner,
+   update timing, factual PR #117 comment-revision triage, and current verdict
+   or pending status without relying only on GitHub thread state.
 2. Independent Plan-Reviewer reviews the current committed planning artifacts
    and any latest PR #117 planning-only revision, then returns exactly the JSON
    handoff. A plan that enters the release lifecycle early, omits either
    lineage, writes README/VERSION early, creates an early tag, or misses a STOP
    gate returns `needs-rework`.
 3. Before STOP POINT 1 authorization, Lineage 1 commit/push/Ready PR is
-   blocked. After authorization, its staging and PR contain exactly the two
-   planning artifacts and neither `README.md` nor `VERSION`.
+   blocked. After authorization, its staging and PR contain exactly the four
+   planning/handoff artifacts and neither `README.md` nor `VERSION`.
 4. A first PR that is only approved or closed is rejected at STOP POINT 2. Only
    verifiable merged state plus a new explicit human resume permits default
    branch detection and FF-only synchronization; a distinct new explicit human
