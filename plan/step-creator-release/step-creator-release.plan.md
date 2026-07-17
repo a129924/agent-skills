@@ -89,13 +89,25 @@
   agree before editing and all must be synchronized to `0.77.0`; disagreement
   is `BLOCKED`. Tag-only mode is allowed only when none exists, which current
   facts do not support.
-- `README.md` is required and may receive only these additions:
-  1. a `v0.77.0` / PR #116 / `skills/step-creator/` historical
-     migration-and-release entry; and
-  2. a `step-creator` Current skills table row between `sense-env-scaffold` and
-     `subagent-dispatch-policy`, accurately stating that it creates a
-     caller-selected profile-specific `plan/<topic>/<topic>.step.md` with
-     fixed worktree, PR, release, and cleanup gates.
+- `README.md` is required and may receive only these exact literal additions;
+  neither their wording nor their insertion locations may be varied:
+  1. insert immediately before the existing `0.76.1` bullet in
+     `## Historical Migration Snapshot`:
+
+     ```md
+     - As of version `0.77.0`, PR #116 merged the `step-creator` topic into `dev`,
+       adding the stable `skills/step-creator/` skill, which creates one
+       caller-selected `base-plan`, `agent-skill-plan`, or
+       `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible
+       plan with fixed worktree, PR, release, and cleanup gates.
+     ```
+
+  2. insert immediately after the existing `sense-env-scaffold` row and before
+     the existing `subagent-dispatch-policy` row in `## Current skills`:
+
+     ```md
+     | `step-creator` | creates one caller-selected `base-plan`, `agent-skill-plan`, or `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible plan with fixed worktree, PR, release, and cleanup gates |
+     ```
 - The normal release gate requires independent reviewer approval, green CI,
   passing base tests, passing strict type checks, passing lint, documentation
   synchronization, synchronized version sources, a clean workspace, and tag
@@ -129,12 +141,18 @@
 
 ## Status / Allowed Transitions
 
-- **Current**: pre-execution planning-publication review is
-  `reviewer-in-progress` for the two uncommitted planning artifacts. It is
-  outside this release topic's lifecycle and is not `planned`,
-  `publish-in-progress`, or executable release authority.
-- **Execution model**: pre-execution planning review -> STOP POINT 1 ->
-  Lineage 1 planning-artifact Ready PR -> human merge -> STOP POINT 2
+- **Current**: Lineage 1 planning artifacts are committed and pushed, and
+  Ready PR #117 is `OPEN` and not merged. A local planning-only revision for
+  current PR comments is `reviewer-in-progress`; its next actor is an
+  independent Plan-Reviewer and its only immediate outcomes are `approved` or
+  `needs-rework`. On `approved`, an explicit human authorization and a bounded
+  follow-up commit/push of only the two planning artifacts are required before
+  returning to the Lineage 1 human merge gate. Neither the baseline PR nor the
+  local revision authorizes README or VERSION writes, a release lifecycle
+  `planned`, or a Lineage 2 `publish-in-progress` transition.
+- **Execution model**: Lineage 1 committed planning-artifact Ready PR + local
+  planning-only revision review -> `approved` -> explicit human authorization
+  and bounded follow-up publication -> human merge -> STOP POINT 2
   resume/merge verification/default FF-only sync/new explicit destructive
   approval/Lineage 1 cleanup -> new Lineage 2 managed release-diff worktree
   from synced default HEAD ->
@@ -187,8 +205,8 @@ Routing notes:
 | --- | --- | --- | --- |
 | Topic plan | `plan/step-creator-release/step-creator-release.plan.md` | Plan-Creator | Current execution contract for the bounded release topic |
 | Topic progression | `plan/step-creator-release/step-creator-release.step.md` | Plan-Creator | Progression and human-gate record for this topic |
-| Stable-library summary | `README.md` | Release Implementer | Locked history entry and one Current skills row after verified post-merge resume |
-| Version source | `VERSION` | Release Implementer | Current sole discovered authority; update only if post-merge inventory confirms it remains authoritative |
+| Stable-library summary | `README.md` | Release Implementer | Two locked literal additions in the bounded Lineage 2 release diff on its `publish-in-progress` -> Ready PR -> merge path |
+| Version source | `VERSION` | Release Implementer | Current sole discovered authority; update to `0.77.0` only if the Lineage 2 inventory confirms it remains authoritative, on the same `publish-in-progress` -> Ready PR -> merge path |
 
 Artifact path notes:
 
@@ -203,18 +221,25 @@ Artifact path notes:
 
 ## Stable library metadata
 
-- `README row`: add the locked `v0.77.0` / PR #116 / `skills/step-creator/`
-  historical migration-and-release entry; add exactly one Current skills row
-  between `sense-env-scaffold` and `subagent-dispatch-policy` describing the
-  caller-selected profile-specific `plan/<topic>/<topic>.step.md` generator
-  with fixed worktree, PR, release, and cleanup gates.
+- `README row`: add exactly the two literal insertions in **Locked Decisions**:
+  the Historical Migration Snapshot bullet immediately before `0.76.1`, and
+  the Current skills table row immediately after `sense-env-scaffold` and
+  before `subagent-dispatch-policy`. No date placeholder, alternate wording,
+  table reflow, or other README change is allowed.
 - `VERSION bump`: current discovered `0.76.1` -> locked `0.77.0`; revalidate
   the current source inventory and values after merge before writing. Any
   discovered authoritative sources are synchronized to `0.77.0` only after
   this plan lists their exact paths.
-- `timing`: planning artifacts at `publish-in-progress`; README and version
-  changes at post-merge `release`; annotated tag after release commit/push,
-  full PASS gate, remote uniqueness recheck, and explicit human tag approval.
+- `timing`: Lineage 1 planning artifacts are already committed/pushed in
+  pre-execution Ready PR #117 and await its human merge. README and VERSION are
+  bounded Lineage 2 release-diff implementation work: after Lineage 1 merged
+  evidence, STOP POINT 2 resume, FF-only default sync, cleanup approval, and
+  Lineage 2 worktree creation, they proceed through
+  `creator-in-progress` -> independent approval -> `publish-in-progress` ->
+  Ready PR -> human merge. They are never a direct default-branch write or a
+  second-merge-only `release` write. The annotated tag remains post-second-
+  merge, after full PASS, remote uniqueness recheck, and explicit human tag
+  approval.
 - `rationale`: merged PR #116 adds the stable `step-creator` capability, a
   feature-level release explicitly locked by the human as `0.77.0`.
 - `release notes`: the locked README historical entry is the release-facing
@@ -231,12 +256,13 @@ Artifact path notes:
 
 ## Validation / Acceptance Checks
 
-- The uncommitted planning draft changes only the two planning paths and is in
-  a pre-execution `reviewer-in-progress` planning-publication review.
-  Independent approval plus STOP POINT 1 commit/push makes it a committed
-  planning artifact fact; it does not enter the release lifecycle or route to
-  `publish-in-progress`. The Lineage 1 Ready PR contains exactly those two
-  files.
+- The current committed planning artifacts are published only in Ready PR #117,
+  which is `OPEN` and not merged. The current local PR-comment repair changes
+  only the same two planning paths and is `reviewer-in-progress`; independent
+  `approved`, then explicit human authorization and a bounded follow-up
+  commit/push, are required before it returns to Lineage 1's human merge gate.
+  It does not enter the Lineage 2 release lifecycle or route README/VERSION to
+  `publish-in-progress`. Lineage 1's Ready PR contains exactly those two files.
 - Lineage 1 and Lineage 2 each have distinct branch/worktree selectors, Ready
   PRs, human merge evidence, and default-branch FF-only synchronization. No
   README/VERSION edit happens in `dev`, the primary worktree, or Lineage 1.
@@ -274,9 +300,11 @@ Artifact path notes:
 
 1. Lineage 1 preflight confirms its fixed managed worktree/branch identity;
    `git diff --check` passes and only the two planning artifacts are changed.
-2. Independent Plan-Reviewer returns exactly the JSON handoff. A planning draft
-   that enters the release lifecycle, a missing two-lineage rule, early
-   README/VERSION edit, early tag, or missing STOP gate returns `needs-rework`.
+2. Independent Plan-Reviewer reviews the current committed planning artifacts
+   and any latest PR #117 planning-only revision, then returns exactly the JSON
+   handoff. A plan that enters the release lifecycle early, omits either
+   lineage, writes README/VERSION early, creates an early tag, or misses a STOP
+   gate returns `needs-rework`.
 3. Before STOP POINT 1 authorization, Lineage 1 commit/push/Ready PR is
    blocked. After authorization, its staging and PR contain exactly the two
    planning artifacts and neither `README.md` nor `VERSION`.
@@ -294,10 +322,11 @@ Artifact path notes:
    update to `0.77.0`; two disagreeing authorities, an unreadable authority,
    or a newly discovered unlisted authority is `BLOCKED` without a version
    write.
-7. README verification proves exactly one v0.77.0/PR #116/`skills/step-creator/`
-   historical entry and exactly one `step-creator` row between
-   `sense-env-scaffold` and `subagent-dispatch-policy`; any other restructure
-   fails scope validation.
+7. README verification proves the two exact literals from **Locked Decisions**:
+   exactly one v0.77.0/PR #116/`skills/step-creator/` historical entry
+   immediately before `0.76.1`, and exactly one `step-creator` row immediately
+   after `sense-env-scaffold` and before `subagent-dispatch-policy`; any other
+   restructure or wording change fails scope validation.
 8. A second PR that is only approved or closed cannot advance to tagging. Even
    after its verified human merge, a second STOP POINT 2 and new explicit human
    resume are required before its merged-state verification and FF-only default

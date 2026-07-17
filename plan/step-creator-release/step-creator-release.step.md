@@ -10,7 +10,7 @@ created: 2026-07-17
 
 | Current status | Allowed next transitions | Next actor |
 | --- | --- | --- |
-| Pre-execution planning-publication review: `reviewer-in-progress` | `approved` \| `needs-rework` outside the release lifecycle | Independent Plan-Reviewer |
+| Local planning-only PR #117 comment revision: `reviewer-in-progress`; baseline planning artifacts are committed/pushed in Ready PR #117, `OPEN` and not merged | `approved` \| `needs-rework`; on `approved`, explicit human authorization and bounded follow-up publication are required before returning to Lineage 1 human merge | Independent Plan-Reviewer |
 
 ## Actionable Steps
 
@@ -22,9 +22,11 @@ created: 2026-07-17
 ### Planning Review and Lineage 1 Ready-PR Gate
 
 - [X] **Actor:** Plan-Creator — **Action:** Create or correct only `plan/step-creator-release/step-creator-release.plan.md` and `plan/step-creator-release/step-creator-release.step.md` in Lineage 1.
-- [ ] **Actor:** Plan-Reviewer — **Action:** Independently review the uncommitted planning draft; return only `approved` or `needs-rework` JSON. It must remain `reviewer-in-progress` until this result.
-- [ ] **Actor:** Main Agent — **Action:** On `approved`, obtain explicit human STOP POINT 1 authorization before Lineage 1 commit, push, or Ready PR. The reviewed planning artifacts become a committed artifact fact only; this pre-execution gate does not enter the release lifecycle or synthesize any release status transition.
-- [ ] **Actor:** Main Agent — **Action:** Commit and push exactly the two planning artifacts on Lineage 1, then open the first Ready PR. Do not stage `README.md`, `VERSION`, or release changes.
+- [X] **Actor:** Plan-Reviewer — **Action:** Independently review the current planning artifacts; return only `approved` or `needs-rework` JSON.
+- [X] **Actor:** Main Agent — **Action:** Obtain explicit human STOP POINT 1 authorization before Lineage 1 commit, push, or Ready PR. This pre-execution gate does not enter the Lineage 2 release lifecycle or synthesize any release status transition.
+- [X] **Actor:** Main Agent — **Action:** Commit and push exactly the two planning artifacts on Lineage 1, then open Ready PR #117. Do not stage `README.md`, `VERSION`, or release changes.
+- [ ] **Actor:** Plan-Reviewer — **Action:** Independently review the latest planning-only revision of the current committed artifacts on Lineage 1 / PR #117; return only `approved` or `needs-rework` JSON before any authorized follow-up publication.
+- [ ] **Actor:** Main Agent — **Action:** Only after that independent `approved` result and new explicit human authorization, commit and push the bounded planning-only follow-up to PR #117. Only then return to the Lineage 1 human merge gate; do not stage `README.md`, `VERSION`, or release changes.
 - [ ] **Actor:** Human — **Action:** Merge the first Ready PR. This is STOP POINT 2; automated execution stops after the human merge handoff.
 
 ### Lineage 1 Post-merge Resume and Cleanup
@@ -42,7 +44,7 @@ created: 2026-07-17
 ### Lineage 2 Release-diff Implementation and Ready-PR Gate
 
 - [ ] **Actor:** Release Implementer — **Action:** In the selected Lineage 2 worktree only, rediscover authoritative version sources and values. Block on disagreement, unreadable source, unlisted additional authority, or an unexpected tag-only condition; do not write `dev` or a primary worktree.
-- [ ] **Actor:** Release Implementer — **Action:** If the inventory confirms the listed authority, set `VERSION` to `0.77.0` and make only the locked README v0.77.0/PR #116/`skills/step-creator/` historical entry plus the `step-creator` Current skills row between `sense-env-scaffold` and `subagent-dispatch-policy`.
+- [ ] **Actor:** Release Implementer — **Action:** If the inventory confirms the listed authority, set `VERSION` to `0.77.0` and add only the two exact `README.md` literals locked in `plan/step-creator-release/step-creator-release.plan.md`: the Historical Migration Snapshot bullet immediately before `0.76.1`, and the Current skills row immediately after `sense-env-scaffold` and before `subagent-dispatch-policy`.
 - [ ] **Actor:** Reviewer — **Action:** Independently review the Lineage 2 README/version diff against the approved plan. `needs-rework` returns only to Release Implementer.
 - [ ] **Actor:** Main Agent — **Action:** After independent approval and explicit publication authorization, commit and push the bounded Lineage 2 release diff, then open the second Ready PR. Never write or commit directly on default branch.
 - [ ] **Actor:** Human — **Action:** Merge the second Ready PR. This is a second STOP POINT 2; automated execution stops. Do not tag an unmerged Lineage 2 branch commit.
@@ -61,12 +63,19 @@ created: 2026-07-17
 - [ ] **Actor:** Main Agent — **Action:** Delete the Lineage 2 remote branch only with separate explicit approval; preserve all stashes.
 - [ ] **Actor:** Main Agent — **Action:** Verify final repository state and record `released` closure.
 
+## Implementation Steps
+
+- [ ] **Actor:** Release Implementer — **Action:** Only after PR #117 is verified `MERGED`, a new STOP POINT 2 resume, FF-only default sync, the distinct Lineage 1 cleanup approval, and Lineage 2 worktree creation, rediscover authoritative version sources; then update only `VERSION` to `0.77.0` if confirmed and add the two exact locked `README.md` literals in the Lineage 2 release diff.
+
 ## Handoff / Gate Notes
 
-- Current progression truth is a pre-execution `reviewer-in-progress`
-  planning-publication review, because these planning artifacts are uncommitted
-  and under independent plan review. It is outside the release lifecycle;
-  neither a draft file nor worktree existence authorizes a release `planned` or
+- Current progression truth is a local planning-only PR #117 comment revision
+  at `reviewer-in-progress`. The baseline two planning artifacts remain
+  committed, pushed, and published in Ready PR #117, which is `OPEN` and not
+  merged. Only independent `approved`, then a new explicit human authorization
+  and bounded follow-up publication, returns the topic to Lineage 1's human
+  merge gate. It remains outside the Lineage 2 release lifecycle; neither PR
+  #117 nor worktree existence authorizes a release `planned` or
   `publish-in-progress` state.
 - There are exactly two PR/merge lineages. Lineage 1 publishes only planning
   artifacts; Lineage 2 publishes README/VERSION from a new managed worktree
