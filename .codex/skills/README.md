@@ -89,6 +89,7 @@ Current materialization model:
 | `python-testing-pytest` | `skills/python-testing-pytest/` | `materialized-copy` |
 | `python-type-hints-strict` | `skills/python-type-hints-strict/` | `materialized-copy` |
 | `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` |
+| `scope-draft-plan` | `skills/scope-draft-plan/` | `materialized-copy` |
 | `step-creator` | `skills/step-creator/` | `materialized-copy` |
 | `subagent-dispatch-policy` | `skills/subagent-dispatch-policy/` | `materialized-copy` |
 | `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` |
