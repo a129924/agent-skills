@@ -9,7 +9,7 @@ do not turn the sections into an implementation plan.
 
 ## 1. 判定摘要
 
-- **建議模式**：BC Mission／Cross-BC Mission／Feasibility Spike
+- **建議模式**：BC Mission
 - **Primary BC**：
 - **核心結果**：
 - **Scope 信心**：高／中／低

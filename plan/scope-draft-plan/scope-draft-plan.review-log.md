@@ -2,7 +2,7 @@
 
 ## Current Review State
 
-- Latest independent skill-review verdict: `PASS` (no blockers)
+- Latest independent skill-review verdict: `approved` (reviewer prose: PASS; no blockers)
 - Plan-Reviewer Round 2 approved the corrected topic plan; Creator then
   delivered the seven locked skill files at `review-ready`. Independent skill
   review passed. Progression and Phase 4.5 routing remain owned by their
@@ -87,7 +87,7 @@ constraint.
 
 - Creator handoff state: `review-ready`
 - Reviewer: independent `agent-skill-reviewer`
-- Verdict: `PASS`
+- Verdict: `approved`
 - Date: 2026-07-24
 - Blockers: none
 - Finding summary: all seven locked skill files passed structure and
@@ -100,6 +100,31 @@ constraint.
 
 This is the independently returned skill-review verdict. It is not a
 topic-plan reviewer handoff and no topic-plan JSON schema is fabricated for it.
+
+### PR #119 Correction Plan Review
+
+- Reviewer: independent Plan-Reviewer
+- Verdict: `approved`
+- Date: 2026-07-24
+- Finding summary: The correction contract remains within the open PR #119
+  topic boundary. It requires the existing inventory builder to add only the
+  canonical `skills/scope-draft-plan` record and limits implementation to the
+  four named PR-comment repairs. It neither changes the inventory contract nor
+  opens a new worktree, PR, release route, or Human Gate.
+
+#### Reviewer verdict JSON
+
+```json
+{
+  "verdict": "approved",
+  "blocking_issues": [],
+  "copilot_feedback_triage": {
+    "ADDRESS": [],
+    "DISCUSS": [],
+    "SKIP": []
+  }
+}
+```
 
 ## Routing Rule
 

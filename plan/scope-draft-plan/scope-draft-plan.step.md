@@ -20,6 +20,8 @@ current_plan_input: plan/scope-draft-plan/scope-draft-plan.plan.md
 - [X] independent skill review
 - [X] Phase 4.5 planner contract alignment and STOP POINT 1
 - [X] feature publication (commit, push, and PR)
+- [X] Planner correction contract for PR #119 inventory drift
+- [ ] bounded PR-comment correction, inventory regeneration, and independent review
 - [ ] human merge handoff (PR #119 is open)
 - [ ] post-merge synchronization, deferred release metadata, release gate,
   explicit tag approval, and tag push
@@ -105,13 +107,33 @@ current_plan_input: plan/scope-draft-plan/scope-draft-plan.plan.md
   release-timing drift; STOP POINT 1 received explicit human authorization
   before publication.
 
+### PR #119 correction loop
+
+- [X] Planner classified the P1 inventory drift as `medium / PLANNER_REPLAN`.
+- [X] Added parent-contract paths for the correction artifacts and generated
+  canonical inventory snapshot; the original exact-11 publication count is no
+  longer the current PR write-set contract.
+- [ ] A separate Implementer completes exactly four bounded PR-comment repairs:
+  the output template permits only a BC Mission or blocks Cross-BC / Spike
+  alternatives; this step artifact corrects the stale post-publication
+  characterization; the summary corrects the same characterization; and the review log records
+  `approved` as the skill-review gate verdict, with `PASS` only explanatory
+  prose if retained. The Implementer then regenerates the inventory with the
+  existing builder and verifies exactly 57 records: exactly one newly added
+  record whose `canonical_path` equals `skills/scope-draft-plan` (no trailing
+  slash), with all existing 56 records unchanged.
+- [ ] A separate Reviewer approves the bounded correction before Main Agent
+  commits and pushes it to PR #119.
+
 ### feature PR and human merge handoff
 
 - [X] Pre-commit validation passed, STOP POINT 1 authorization was received,
   and commit `71f56cb1646dc218ba8b7cbd10409a60229faa3a` was created and pushed
   on `feat/andrew/scope-draft-plan`.
-- [X] Opened Draft PR #119 to `dev` with exactly the 11 locked feature paths:
-  the four topic-local artifacts and seven canonical skill files; `README.md`
+- [X] Opened Draft PR #119 to `dev`; the original publication commit contained
+  four topic-local artifacts and seven canonical skill files. The current PR
+  correction write set is defined by the parent plan and additionally includes
+  the two correction artifacts and generated inventory snapshot; `README.md`
   and `VERSION` remain excluded.
 - [ ] PR #119 is `pr-open` at the human review / merge boundary. STOP POINT 2
   applies after the human merge handoff; do not poll or start Phase 9 / 10
@@ -137,9 +159,12 @@ current_plan_input: plan/scope-draft-plan/scope-draft-plan.plan.md
   Reviewer is independent from Creator. The topic is `pr-open` after passing
   Phase 4.5 and STOP POINT 1; Main Agent owns the deferred Phase 10 metadata
   and tag route only after merge, STOP POINT 2, and explicit human resume.
-- The managed feature worktree was clean immediately after publication. This
-  subsequent topic-local status synchronization is uncommitted by design and
-  does not record a new reviewer verdict; `review-log.md` remains unchanged.
+- The managed feature worktree was clean immediately after publication. The
+  current topic-local correction artifacts and status updates await the same
+  PR #119 correction commit and do not record a new reviewer verdict; the
+  review log awaits its bounded gate-verdict repair.
 - Analysis artifacts are absent. Do not create them implicitly; treat a
   plan-review finding that they are required as a blocker.
 - Any unsupported expansion routes to plan repair before work continues.
+- The PR #119 correction is bounded to the existing topic. It does not create a
+  new worktree, PR, release route, or Human Gate.
