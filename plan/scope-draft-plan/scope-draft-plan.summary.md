@@ -2,12 +2,15 @@
 
 ## Current state
 
-The topic is `approved` and ready for Phase 4.5 planner contract alignment.
-The managed feature worktree, four topic-local planning artifacts, and seven
-locked canonical skill files exist. The corrected plan passed independent
-Plan-Reviewer review, and the independent skill reviewer returned `PASS` with
-no blockers. No feature commit, PR, merge, deferred release metadata update,
-or tag has occurred.
+The topic is `pr-open` at the human review / merge boundary. Phase 4.5 planner
+contract alignment passed, STOP POINT 1 received explicit human authorization,
+and commit `71f56cb1646dc218ba8b7cbd10409a60229faa3a` was pushed on
+`feat/andrew/scope-draft-plan`. Draft PR #119 to `dev` is open. The published
+commit contains exactly the 11 locked feature paths: four topic-local planning
+artifacts and seven canonical skill files. Validations passed and the managed
+feature worktree was clean immediately after publication. This subsequent
+topic-local status synchronization is uncommitted by design. No merge,
+deferred release metadata update, or tag has occurred.
 
 ## Completed
 
@@ -32,26 +35,37 @@ or tag has occurred.
   frontmatter, Local references, non-binding handoff, scope boundaries,
   language preference, at-most-three high-impact questions, and
   technical-layer exclusion all passed.
+- Completed Phase 4.5 planner contract alignment with no scope, contract,
+  ownership, path, or release-timing drift, then received STOP POINT 1 human
+  authorization.
+- Ran passing pre-commit validation; committed and pushed
+  `71f56cb1646dc218ba8b7cbd10409a60229faa3a` on
+  `feat/andrew/scope-draft-plan`.
+- Opened Draft PR #119 to `dev` containing exactly the four topic-local
+  artifacts and seven canonical skill files. `README.md` and `VERSION` remain
+  deferred to Phase 10 only.
+- Confirmed the managed feature worktree was clean after publication, before
+  this topic-local status synchronization.
 
 ## Not completed
 
-- Phase 4.5 planner contract alignment and the resulting STOP POINT 1 human
-  authorization before feature publish.
-- Feature PR, human merge handoff, and explicit post-merge resume.
+- Human review and merge of Draft PR #119, followed by an explicit human
+  resume after confirmed merge. STOP POINT 2 forbids polling or implicit
+  continuation.
 - Main Agent's deferred Phase 10 catalog / version update, release gate, and
   tag authorization / push.
 
 ## Required follow-up
 
-Main Agent must perform Phase 4.5 planner contract alignment against the
-approved topic plan, absent-analysis warning, exact artifact paths, role
-boundaries, deferred stable-library timing, and independently reviewed skill
-package. If alignment passes, execution stops at STOP POINT 1 for explicit
-human authorization before commit, push, or PR creation; any detected drift
-returns only the affected work to its declared owner.
+At the current `pr-open` boundary, no agent may begin Phase 9 or Phase 10.
+After a confirmed human merge and a new explicit human resume, Main Agent must
+perform Phase 9 synchronization and then execute the locked Phase 10 deferred
+release action: update only `README.md` and `VERSION`, run the release gate,
+obtain separate tag authorization, and then create / push `v0.78.0` if the
+gate passes.
 
 ## Next handoff
 
 - **Next actor:** Main Agent
-- **Next step:** Perform Phase 4.5 planner contract alignment, then stop at
-  STOP POINT 1 pending explicit human authorization if alignment passes.
+- **Next step:** Remain at the Draft PR #119 human review / merge boundary;
+  after confirmed merge, stop at STOP POINT 2 until an explicit human resume.
