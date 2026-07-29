@@ -20,32 +20,35 @@ status: needs-rework
 - [X] human-publish-authorization
 - [X] commit-push-ready-pr
 - [X] pr-comment-triage
-- [ ] pr-feedback-correction-implementation
-- [ ] pr-feedback-independent-review
+- [X] pr-feedback-correction-implementation
+- [X] pr-feedback-independent-review
+- [X] pr-feedback-follow-up-correction-planning
+- [X] pr-feedback-follow-up-correction-implementation
+- [X] pr-feedback-follow-up-independent-review
+- [X] pr-feedback-current-correction-planning
+- [X] pr-feedback-current-correction-implementation
+- [X] pr-feedback-current-correction-review-routing
+- [X] pr-feedback-final-reconciliation-planning
+- [ ] pr-feedback-final-reconciliation-implementation
+- [ ] pr-feedback-final-reconciliation-independent-review
 - [ ] pr-comment-review-and-fix
 
 ## Actionable Steps
 
-1. PR #120 is `needs-rework` only for P2-1: the canonical
-   `skills/plan-step-tracker/examples.md` lost two Markdown hard-break markers.
-   Its two projections are the locked three-file synchronization write set.
-2. P2-2 (completed human publish authorization and the `pr-open` to
-   `needs-rework` workflow state) is Planner-owned and resolved in this topic
-   step and the parent plan. P2-3 (portable current verification) is
-   Planner-owned and resolved in the parent plan's `PATH`-resolvable
-   `pre-commit` and writable `PRE_COMMIT_HOME` prerequisite. Neither authorizes
-   an Implementer write.
-3. Route the exact P2-1 contract in
-   `agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md`
-   to an independent Implementer. The only implementation writes are the three
-   named examples; the Implementer must replace the two relevant trailing
-   double-space hard-break markers with `<br>` in each file.
-4. After implementation evidence is recorded in the PR-feedback correction
-   step, route the result to an independent Reviewer. Only an `approved`
-   reviewer verdict returns the topic to `pr-open` and resumes
-   `pr-comment-review-and-fix`.
-5. The prior Copilot quota limitation remains an external-review limitation;
-   it does not resolve, replace, or reduce the three P2 comments.
+1. All prior Commit A/B and `plan-step-tracker` repairs are completed
+   historical work. The sole active contract is
+   `agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-plan.md`.
+2. Route only the three canonical / projection `version-pinning.md` paths to
+   an independent Implementer. Each replaces its intentional Markdown
+   trailing-double-space break with the literal `<br>` equivalent.
+3. Verify the complete PR-base classification: 40 hygiene-only published-skill
+   assets plus six explicit `<br>` rendering exceptions. The isolated all-files
+   temporary workspace must reproduce exactly the 17-path non-skill inventory;
+   its diff is never retained in this feature worktree.
+4. Route the bounded repair and final PR-base diff evidence to an independent
+   Reviewer. Only `approved` resumes `pr-comment-review-and-fix`; the Main
+   Agent resolves satisfied threads and replies only to unresolved actionable
+   threads.
 
 ## Handoff / Gate Notes
 
@@ -55,8 +58,8 @@ status: needs-rework
 - Branch: `feature/andrew/agent-skills-published-asset-hygiene-baseline`
 - Current status: `needs-rework`; human publish authorization was received,
   the bounded changes were committed and pushed, and Ready PR #120 remains
-  open. P2-2 and P2-3 are resolved Planner-owned corrections; only P2-1 routes
-  to `pr-feedback-correction-implementation`.
+  open. Earlier P2 repairs and Commit A/B are historical. The active route is
+  `pr-feedback-final-reconciliation-implementation`.
 - Current verification evidence for the 46 tracked published-skill assets is
   normalized byte equality against `HEAD`: apply only trailing horizontal
   whitespace removal, terminal-blank-line removal, and exactly one final LF
@@ -72,13 +75,17 @@ status: needs-rework
   The review log contains the sole implementation-review `approved` JSON
   verdict; the separately approved Phase 4.5 Plan-Reviewer result is recorded
   in the parent plan without changing that log.
-- P2-1 remains unresolved pending independent implementation and review.
-  P2-2 and P2-3 are resolved by the named parent and topic-step planning
-  updates. The requested Copilot review could not run because of quota
-  exhaustion; that remains an external limitation, not an approved review or a
-  reason to close the PR loop.
+- The final reconciliation remains unresolved pending independent implementation
+  and review. The requested Copilot review could not run because of quota
+  exhaustion; that remains an external limitation, not an approved review or
+  a reason to close the PR loop.
 - Current dynamic verification requires a `pre-commit` executable on `PATH`
   and a writable `PRE_COMMIT_HOME`; the historical correction-step evidence
   retains its original machine-local commands.
+- Commit A/B's 57-record canonical inventory / eight-row provenance result is
+  completed historical evidence. The final reconciliation locks an exact
+  17-path temporary all-files inventory and a PR-base diff classification of
+  40 hygiene-only assets plus six `<br>` exceptions; the consumer-like
+  workspace remains the required passing gate.
 - Merge remains outside this step and requires the applicable human
   authorization.

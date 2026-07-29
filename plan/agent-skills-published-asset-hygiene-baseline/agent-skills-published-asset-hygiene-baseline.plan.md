@@ -20,27 +20,29 @@ without modifying published assets.
 ## Scope
 
 - **In scope**:
-  - The 42 previously identified published-skill asset paths, the root
-    `.pre-commit-config.yaml`, and the four published-skill correction targets
-    declared in `Artifact Paths`.
-  - Only trailing-whitespace removal and final-LF normalization.
-  - The bounded PR #120 correction declared below: in each of the three
-    `plan-step-tracker/examples.md` copies, replace the two hard-break
-    trailing-double-space markers in the `Output` / `Exit code` / `Note`
-    three-line block with `<br>`.
-  - Recording the all-files result as a 24-path non-skill blocker inventory;
-    this is evidence only, not authorization to fix those files. The final
-    feature diff must contain none of those 24 paths.
+  - The sole active correction is the current PR #120 contract: Commit A
+    preserves two Markdown `PASS:` soft breaks and configures the existing hook
+    to recognize them; Commit B rebuilds canonical inventory and revalidates
+    existing Codex projection provenance.
+  - Retain the earlier 24-path full-repository result as historical evidence.
+    The final reconciliation instead reproduces its exact current 17-path
+    non-skill inventory in a disposable workspace and requires zero
+    feature-worktree diff for those 17 paths.
+  - Run the consumer-like temporary workspace gate and require it to pass
+    without hook rewrites.
 
 - **Out of scope**:
+  - Any write outside the exact Commit A and Commit B paths named by the
+    current correction contract, including planning artifacts, old correction
+    artifacts, PR metadata, and the frozen hygiene-baseline implementation.
+    The only exception is the sequenced post-Commit-B Planner correction-step
+    write followed by the independent Reviewer review-log append.
   - Any semantic edit: skill names, paths, Markdown structure,
     cross-references, instructions, functionality, projection mechanisms, or
     release workflow.
-  - Fixing any of the 24 non-skill hygiene blockers, adding exclusions, CI,
-    fixtures, README/VERSION changes, tags, releases, commits, pushes, or PRs.
-  - Replacing the GitHub-only semantic divergence in
-    `.github/skills/python-serialization-boundaries/REVIEW.md` with a
-    canonical or Codex copy.
+- Fixing any of the 24 non-skill hygiene blockers, adding exclusions, CI,
+  fixtures, README/VERSION changes, tags, releases, pushes, or PR creation.
+  The two contract-specified commits are the sole exception.
 
 ## Locked Decisions
 
@@ -48,25 +50,28 @@ without modifying published assets.
   `.codex/skills/` are compatibility/projection surfaces and never determine
   source truth.
 - The root config uses `pre-commit/pre-commit-hooks` at `v4.6.0`, contains only
-  `trailing-whitespace` and `end-of-file-fixer`, and has no `exclude`.
-- The PR #120 correction is a rendering-preservation exception to the original
-  hygiene-only write rule: it replaces exactly two Markdown hard-break markers
-  with `<br>` in each listed `plan-step-tracker` example. It preserves the
-  affected three rendered lines and does not authorize a broader Markdown or
-  semantic rewrite.
-- The original 42 asset paths plus root config remain in scope. The correction
-  adds final-LF-only normalization for the three published
-  `python-pre-commit` template paths, and hygiene-only normalization for the
-  GitHub-only `python-serialization-boundaries` review file.
-- `.github/skills/python-serialization-boundaries/REVIEW.md` has a pre-existing
-  GitHub-specific Date semantic divergence. It is a projection-hygiene-only
-  exception: normalize whitespace/EOF only; do not require byte equality and
-  do not modify a canonical or `.codex` counterpart.
+  `trailing-whitespace` and `end-of-file-fixer`, and has no `exclude`; it is a
+  locked validation input. Its active correction adds only
+  `--markdown-linebreak-ext=md` to `trailing-whitespace`.
+- The active correction restores the one intended `PASS:` Markdown soft break
+  in each canonical `git-branch-naming` and `git-commit-convention` skill and
+  its two existing projections. It does not authorize other Markdown or
+  semantic rewrites.
+- The pre-existing GitHub-specific Python CLI path divergence in
+  `.github/skills/plan-step-tracker/examples.md` is preserved. Full-file
+  equality is not required; the affected line pairs must be byte-identical.
+- The earlier PR-feedback correction and four-`<br>` follow-up artifacts are
+  immutable historical truth, not current authority. The active Implementer
+  and Reviewer handoff is exclusively
+  `agent-skills-published-asset-hygiene-baseline.pr-feedback-follow-up-correction-plan.md`.
+- The earlier 24-path all-files inventory is historical evidence. The final
+  17-path all-files inventory is the current temporary-workspace expected
+  failure; neither inventory may be repaired, suppressed, or retained in the
+  feature worktree.
 - This is a non-stable-library topic: `README.md` and `VERSION` do not change;
   there is no release action.
 - Correction severity is `medium`, routing state is `PLANNER_REPLAN`, and the
-  correction artifacts are historical truth. This parent plan remains the
-  execution-facing current truth.
+  parent plan remains the execution-facing current truth.
 
 ## Boundaries / Exclusions
 
@@ -136,10 +141,10 @@ without modifying published assets.
 
 - **Current**: `needs-rework`; human publish authorization was received, the
   bounded changes were committed and pushed, and Ready PR #120 remains open.
-  Of its three P2 comments, only the canonical Markdown rendering defect (P2-1)
-  remains for independent implementation and review. The workflow-state
-  correction (P2-2) and portable verification prerequisite (P2-3) are
-  Planner-owned and resolved in the parent plan and topic step.
+  All earlier hard-break repairs are historical. The active route preserves two
+  `PASS:` soft breaks across canonical and projection surfaces, locks the
+  hook's Markdown-linebreak behavior, then performs deterministic inventory
+  regeneration and Codex-provenance revalidation in two ordered commits.
 - **Execution model**: the frozen correction is complete, its second
   correction record is resolved, and Phase 4.5 parent current-truth
   reconciliation is independently approved. The completed publish route is
@@ -161,15 +166,13 @@ without modifying published assets.
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
-- **Routing note**: PR #120 returned three distinct P2 comments. P2-1 is the
-  canonical Markdown rendering defect and is accepted for the bounded
-  three-projection `<br>` repair below. P2-2 required the published human
-  authorization / `needs-rework` state to be made current; the parent plan and
-  topic step now do so. P2-3 required portable `pre-commit` / writable-cache
-  criteria; the parent plan now defines them. The prior Copilot quota
-  limitation remains an external-review limitation. After independent review
-  accepts the P2-1 implementation, return to `pr-open`; merge and release
-  remain outside this route.
+- **Routing note**: the active bounded correction supersedes only the current
+  follow-up execution authority. Commit A contains the hook and soft-break
+  changes; Commit B contains the complete canonical inventory rebuild and the
+  eight affected Codex-provenance rows, each pointing to Commit A. A requested
+  ninth provenance row is a human governance check, not an inferred change.
+  After independent review accepts both commits, return to `pr-open`; merge and
+  release remain outside this route.
 
 ## Approved Verification Record — 2026-07-29
 
@@ -247,17 +250,15 @@ without modifying published assets.
     absolute paths. This Planner-owned correction is complete in the parent
     plan through a `PATH`-resolvable `pre-commit` and writable
     `PRE_COMMIT_HOME` prerequisite.
-- Current phase is `needs-rework`; active step is
-  `pr-feedback-correction-implementation`. The human publish authorization,
-  commit, push, and Ready PR creation remain completed historical facts.
-- The only active repair is P2-1: replace the two removed hard-break markers
-  with `<br>` in the affected three-line block of each example, so the three
-  rendered lines remain distinct. It does not alter the pre-existing
-  GitHub-specific CLI path.
-- The exact correction contract is
-  `agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md`.
-  Its step artifact and the review log control the Implementer and Reviewer
-  handoffs; no other PR comment is implied by this route.
+- The original P2-1 repair completed: it restored the two hard-break markers
+  in the `read_all` block of each projection. Its implementation and review
+  route are historical; the human publish authorization, commit, push, and
+  Ready PR creation remain completed historical facts.
+- The original correction contract at
+  `agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md`
+  and its step artifact are historical. The later follow-up contract controls
+  the current Implementer and Reviewer handoffs; no other PR comment is
+  implied by this route.
 
 ## Artifact Paths
 
@@ -268,8 +269,12 @@ without modifying published assets.
 | First correction step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.correction-step.md` | Planning actor / Implementer | Historical first-correction progression evidence; immutable historical truth |
 | Second correction plan | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.second-correction-plan.md` | Planning actor | Resolved second `medium` restore-only correction record |
 | Second correction step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.second-correction-step.md` | Planning actor / Implementer | Resolved second-correction progression and closure evidence |
-| PR-feedback correction plan | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md` | Planning actor | Current bounded PR #120 correction contract; historical after independent review closes it |
-| PR-feedback correction step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-step.md` | Planning actor / Implementer | Current bounded implementation progression and validation evidence |
+| PR-feedback correction plan | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md` | Planning actor | Historical bounded PR #120 correction contract |
+| PR-feedback correction step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-step.md` | Planning actor / Implementer | Historical bounded implementation progression and validation evidence |
+| PR-feedback follow-up correction plan | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-follow-up-correction-plan.md` | Planning actor | Historical Commit A/B correction contract; superseded by final reconciliation |
+| PR-feedback follow-up correction step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-follow-up-correction-step.md` | Planning actor | Historical Commit A/B progression and evidence handoff |
+| PR-feedback final reconciliation plan | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-plan.md` | Planning actor | Current bounded PR #120 correction contract |
+| PR-feedback final reconciliation step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-step.md` | Planning actor / Implementer | Current bounded progression, verification, and reviewer handoff |
 | Topic step | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.step.md` | Planning actor / Main Agent | Multi-role workflow progression truth |
 | Review log | `plan/agent-skills-published-asset-hygiene-baseline/agent-skills-published-asset-hygiene-baseline.review-log.md` | Reviewer / Main Agent | Persisted reviewer verdicts and routing evidence |
 | Root hook config | `.pre-commit-config.yaml` | Implementer | All-repository hygiene hook contract |
@@ -289,7 +294,9 @@ without modifying published assets.
 | Original published assets | `skills/python-tdd-test-authoring/references/behavior-change-classifier.md`; `.github/skills/python-tdd-test-authoring/references/behavior-change-classifier.md`; `.codex/skills/python-tdd-test-authoring/references/behavior-change-classifier.md` | Implementer | Canonical asset and existing projections |
 | Correction published assets | `skills/python-pre-commit/templates/pre-commit-config.yaml`; `.github/skills/python-pre-commit/templates/pre-commit-config.yaml`; `.codex/skills/python-pre-commit/templates/pre-commit-config.yaml` | Implementer | Final-LF-only canonical asset and projections |
 | Projection hygiene-only exception | `.github/skills/python-serialization-boundaries/REVIEW.md` | Implementer | Final-LF hygiene only; retain existing GitHub semantic divergence |
-| PR #120 feedback target | `skills/plan-step-tracker/examples.md`; `.github/skills/plan-step-tracker/examples.md`; `.codex/skills/plan-step-tracker/examples.md` | Implementer | Replace only the two hard-break markers in the affected consecutive three-line block with `<br>`; preserve rendered lines and affected-block byte equality |
+| Historical PR #120 feedback target | `skills/plan-step-tracker/examples.md`; `.github/skills/plan-step-tracker/examples.md`; `.codex/skills/plan-step-tracker/examples.md` | Implementer | Completed hard-break repair; retained only as historical evidence |
+| Current correction Commit A | `.pre-commit-config.yaml`; `skills/git-branch-naming/SKILL.md`; `.github/skills/git-branch-naming/SKILL.md`; `.codex/skills/git-branch-naming/SKILL.md`; `skills/git-commit-convention/SKILL.md`; `.github/skills/git-commit-convention/SKILL.md`; `.codex/skills/git-commit-convention/SKILL.md` | Implementer | Add only `--markdown-linebreak-ext=md` and restore the one intended `PASS:` soft break per skill/surface |
+| Current correction Commit B | `artifacts/skills-inventory.jsonl`; `.codex/skills/provenance.md` | Implementer | Deterministic 57-record canonical rebuild and exactly eight provenance-row updates referencing Commit A |
 | Second-correction restore-only paths | `.github/guides/MAIN-AGENT-WORKFLOW.md`; `.github/guides/REFERENCE-INTAKE-PROCESS.md`; `.github/prompts/create-agent-plan.prompt.md`; `analysis/creator-reviewer-template-platform-path-alignment/technical-spec.md`; `analysis/plan-step-tracker/requirements.md`; `analysis/plan-step-tracker/technical-spec.md`; `analysis/platform-projection-adapter/technical-spec.md`; `analysis/python-descriptors-attribute-access/requirements.md`; `analysis/python-descriptors-attribute-access/technical-spec.md`; `analysis/python-implementation-workflow-sdd-tdd/technical-spec.md`; `analysis/python-tooling-skills/technical-spec.md`; `analysis/spec-docs-mvp-generator/requirements.md`; `analysis/spec-docs-mvp-generator/technical-spec.md`; `plan/agent-handoff-workflow.md`; `plan/python-docstrings/python-docstrings.plan.md`; `plan/reference-intake-workflow/reference-intake-workflow.plan.md` | Implementer | Restore only to the `HEAD` pre-hook baseline; no hygiene repair |
 
 If work needs a path not listed here, stop and return to Planner; it is not an
@@ -297,61 +304,60 @@ implicit extension of this mission.
 
 ## Implementation Steps
 
-The following numbered steps are retained as completed historical evidence for
-the resolved second correction. They grant no current implementation authority.
-The active PR #120 write set, validation, and Implementer handoff are governed
-exclusively by
-`agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md`.
+The earlier hygiene baseline and PR-feedback correction are historical evidence
+only. The current Implementer handoff is governed exclusively by
+`agent-skills-published-asset-hygiene-baseline.pr-feedback-follow-up-correction-plan.md`.
 
-1. Preserve the root hook config and all approved published-asset
-   normalizations; do not re-run a broad formatter as a substitute for bounded
-   repair.
-2. Preserve the three `python-pre-commit` template final-LF changes and the
-   hygiene-only final-LF change in the GitHub-only serialization review file;
-   do not alter their bytes otherwise.
-3. Restore only the 16 paths named for the active second correction to their
-   `HEAD` pre-hook baseline. Do not hygiene-fix any non-skill path and do not
-   touch the eight paths already restored by the first correction.
-4. Update only the second correction step with factual
-   completion/validation evidence. Do not edit the parent plan, either
-   correction plan, topic step, or review log during implementation.
+1. Commit A changes only `.pre-commit-config.yaml` and the six canonical /
+   projection `SKILL.md` paths for `git-branch-naming` and
+   `git-commit-convention`, exactly as frozen by the current correction plan.
+2. Commit B follows Commit A and changes only
+   `artifacts/skills-inventory.jsonl` and `.codex/skills/provenance.md`.
+   Rebuild the complete 57-record canonical inventory, update exactly eight
+   eligible provenance rows to Commit A, and do not create a ninth row.
+3. Preserve every other byte, including completed historical hard-break
+   repairs and all locked projection exceptions. Do not edit planning
+   artifacts, older correction artifacts, or PR metadata.
+4. The Implementer returns factual validation evidence only; it does not write
+   planning artifacts. The named Planner updates the correction step
+   after implementation, and the independent Reviewer updates the review log
+   after review. These are the only non-A/B writes: the Planner write is allowed
+   only after Commit B and the Reviewer append only after that record is
+   complete. Do not widen either implementation write set to remedy the
+   expected temporary all-files failure.
 
 ## Validation / Acceptance Checks
 
 - Current dynamic verification prerequisite: `pre-commit` must resolve on
   `PATH`, and `PRE_COMMIT_HOME` must name a writable cache directory. Do not
   encode a machine-specific interpreter or cache path in current acceptance
-  criteria. Historical correction-step command evidence remains unchanged.
+  criteria.
 - `pre-commit validate-config` succeeds.
-- `git diff --check` reports no whitespace errors in the allowed diff.
-- Compare every canonical target with its `.github` and `.codex` projection
-  byte-for-byte, except that:
-  - `.github/skills/plan-step-tracker/examples.md` may retain its existing
-    platform-specific CLI-path semantic difference; all three copies still
-    pass hygiene; and
-  - `.github/skills/python-serialization-boundaries/REVIEW.md` is hygiene-only
-    and receives no equality comparison.
+- Run `pre-commit` against exactly the six scoped `SKILL.md` paths and require
+  it to pass without rewrite. The two `PASS:` lines retain exactly two trailing
+  spaces before LF in canonical and both projections. `git diff --check` also
+  succeeds.
+- Each scoped canonical skill is byte-identical to its `.github` and `.codex`
+  projection. The root configuration remains the locked two-hook configuration
+  with the sole `markdown-linebreak-ext=md` argument addition.
+- The rebuilt inventory has 57 sorted unique canonical records and is
+  byte-identical to a second builder run. Only the eight named canonical
+  records receive new hashes. Exactly the corresponding eight Codex provenance
+  rows change and each cites Commit A; GitHub-only serialization remains absent
+  from both generated change sets.
 - In an isolated full-repository Git workspace with a baseline commit,
-  `pre-commit run --all-files` must produce exactly the 24 non-skill blocker
-  inventory paths and no published-skill path. Restore that workspace after
-  inventory capture; do not retain those non-skill modifications in the topic
-  worktree.
+  `pre-commit run --all-files` is expected to fail and rewrite exactly the 24
+  frozen non-skill inventory paths, with no published-skill rewrite. Discard
+  that workspace after recording the result; do not retain its changes.
 - Before review, `git diff --name-only` restricted to the complete 24-path
-  blocker inventory must produce no output in the feature worktree, while the
-  approved published-skill assets and root config remain in the diff.
+  blocker inventory must produce no output in the feature worktree.
 - In a consumer-like temporary Git workspace, copy every published in-scope
   asset and `.pre-commit-config.yaml`, make a baseline commit, run
   `pre-commit run --all-files`, then require empty `git status --short` and a
   successful `git diff --exit-code`.
-- For the current PR #120 correction, run `pre-commit` against exactly the
-  three listed examples and require no file rewrite. Verify that each affected
-  `Output` / `Exit code` / `Note` block contains `<br>` after its first two
-  lines and renders as three lines. The three affected blocks must be
-  byte-identical; full-file equality remains subject to the locked
-  GitHub-specific CLI-path divergence.
-- The reviewer must verify the correction's parent-sync condition, the exact
-  write set, the retained semantic exceptions, and that reviewer routing is
-  persisted in the review log.
+- The Reviewer must verify both commit boundaries, each exact write set, the
+  57/8 inventory and provenance invariants, temporary-workspace 24-path
+  boundary, consumer-like passing gate, and persisted review routing.
 
 ## Reviewer Handoff
 
@@ -369,3 +375,50 @@ authorization gates.
 
 None. The 24-path all-files failure is an explicit out-of-scope blocker
 inventory, not an unresolved requirement for this topic.
+
+## Current PR Correction — 2026-07-29
+
+- **Current status:** `needs-rework`; current active step is
+  `pr-feedback-current-correction-implementation`.
+- The single active contract is
+  `agent-skills-published-asset-hygiene-baseline.pr-feedback-follow-up-correction-plan.md`.
+  It supersedes only the uncommitted follow-up execution route; all earlier
+  PR-feedback artifacts remain immutable historical truth.
+- Commit A is the seven-path hook / soft-break correction. Commit B is the
+  two-path generated artifact update and must cite Commit A's actual SHA.
+- `artifacts/skills-inventory.jsonl` remains the full 57-record canonical
+  inventory: exactly eight eligible records may change. `.codex/skills/provenance.md`
+  updates exactly the corresponding eight rows. A ninth row, including the
+  GitHub-only serialization projection, requires human governance direction.
+- The frozen 24-path full-repository hook result remains out of scope. Capture
+  it only in a discarded temporary Git workspace; the consumer-like workspace
+  is the passing dynamic gate.
+
+## Final PR Reconciliation — 2026-07-29
+
+This section supersedes earlier text that names the follow-up correction as
+active or treats the 24-path inventory as the current expected all-files
+result. The parent plan remains current truth; all earlier correction artifacts
+and the 24-path inventory remain retained historical truth.
+
+- **Current status:** `needs-rework`; the sole active authority is
+  `agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-plan.md`.
+- **Bounded repair:** only canonical
+  `skills/python-pre-commit/references/version-pinning.md` and its existing
+  `.github/skills/` and `.codex/skills/` projections may change. Replace the
+  intended Markdown trailing-double-space source-of-truth break with `<br>` in
+  all three byte-identical copies. No other implementation path is authorized.
+- **Final PR-base proof:** compare against merge-base
+  `d177401ff56a221ce104555687655a8ea1a55fae` (`origin/dev` at planning time).
+  The 46 changed published-skill assets are exactly 40 hygiene-only assets and
+  six explicit rendering-preservation exception assets: three
+  `plan-step-tracker/examples.md` copies and three `version-pinning.md` copies.
+  The config, inventory, provenance, and explicitly listed planning artifacts
+  are reviewed separately; no unclassified path may enter the PR diff.
+- **Temporary all-files boundary:** an isolated baseline workspace reproduces
+  exactly 17 non-skill rewrites. That expected failure is evidence only, must
+  be discarded, and must have zero feature-worktree diff. The consumer-like
+  workspace remains a passing no-rewrite gate.
+- **Routing:** after independent review accepts this bounded repair and final
+  PR-base proof, return to `pr-open` for thread handling. Resolve only
+  satisfied PR threads; leave a scoped reply on any still-actionable thread.

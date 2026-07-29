@@ -58,3 +58,47 @@ corrected implementation.
 - Independent Implementer and Reviewer handoffs for P2-1 are controlled by
   `agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-plan.md`
   and `agent-skills-published-asset-hygiene-baseline.pr-feedback-correction-step.md`.
+
+## Current PR #120 Correction Routing — 2026-07-29
+
+- Planner superseded the uncommitted follow-up execution authority with one
+  bounded current correction contract. The completed hard-break repairs remain
+  historical and are not reopened.
+- Commit A is limited to root Markdown-linebreak hook configuration and one
+  `PASS:` soft-break restoration in each canonical/projection copy of
+  `git-branch-naming` and `git-commit-convention`.
+- Commit B is limited to deterministic regeneration of the complete canonical
+  inventory and Codex provenance revalidation. The inventory has 57 records;
+  exactly eight canonical hashes and exactly eight existing provenance rows may
+  change, each provenance row citing Commit A.
+- The GitHub-only `python-serialization-boundaries` hygiene projection is not
+  canonical. It must not add an inventory record or Codex provenance row. Any
+  request for a ninth row is a human governance check.
+- No Reviewer verdict exists for this current correction. It must not be
+  treated as approved or used to resolve PR threads before independent review.
+- This review log has no implementation-write authority. After Commit B and
+  the Planner's correction-step evidence record, the independent Reviewer may
+  append only its JSON verdict and rationale here. Any other non-A/B write is
+  outside the correction contract and returns to Planner.
+
+## Final PR #120 Reconciliation Routing — 2026-07-29
+
+- Commit A (`86184c9`) and Commit B (`6a255979`) remain historical completed
+  work. Their contract is no longer the active implementation authority.
+- Current PR-base reconciliation classifies 46 changed published-skill assets:
+  40 hygiene-only assets and six rendering-preservation exception assets. The
+  exceptions are the three `plan-step-tracker/examples.md` copies (six
+  explicit `<br>` markers per copy) and the three
+  `python-pre-commit/references/version-pinning.md` copies (one required
+  `<br>` marker per copy).
+- The final bounded repair changes only the three `version-pinning.md` copies.
+  It replaces the prior Markdown trailing-double-space source-of-truth break
+  with `<br>`; it does not authorize any other semantic, path, inventory,
+  provenance, or hook change.
+- In a discarded temporary Git workspace, current `pre-commit run --all-files`
+  rewrites exactly 17 non-skill paths. This is expected-failure inventory
+  evidence only; no listed path may appear in the feature-worktree diff.
+- No PR thread may be resolved from this routing note. The independent
+  Reviewer must review the final-reconciliation evidence and PR-base diff;
+  then the Main Agent resolves only threads that are fully satisfied, and
+  leaves a scoped reply on any remaining actionable thread.
