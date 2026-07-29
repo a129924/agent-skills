@@ -3,4 +3,5 @@ repos:
     rev: v4.6.0
     hooks:
       - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
       - id: end-of-file-fixer
