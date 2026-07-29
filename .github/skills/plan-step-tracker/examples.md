@@ -54,8 +54,8 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_all my-fe
 [ ] 6. Integration tests
 ```
 
-**Output**: 11 lines (5 workflow stage + 6 implementation checkboxes)
-**Exit code**: 0
+**Output**: 11 lines (5 workflow stage + 6 implementation checkboxes)<br>
+**Exit code**: 0<br>
 **Note**: Lowercase `[x]` included; Agent should see the formatting inconsistency
 
 ### Grep Fallback
