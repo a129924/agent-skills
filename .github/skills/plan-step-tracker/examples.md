@@ -99,8 +99,8 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_not_run m
 Warning: Found lowercase [x] at line 25; treating as pending
 ```
 
-**Output**: 7 lines (3 pending workflow stages + 4 pending implementation steps)
-**Exit code**: 0
+**Output**: 7 lines (3 pending workflow stages + 4 pending implementation steps)<br>
+**Exit code**: 0<br>
 
 ### Grep Fallback
 
@@ -135,8 +135,8 @@ $ python .github/skills/plan-step-tracker/scripts/step_tracker.py read_success m
 [X] 3. Add basic tests
 ```
 
-**Output**: 4 lines (2 done workflow stages + 2 done implementation steps)
-**Exit code**: 0
+**Output**: 4 lines (2 done workflow stages + 2 done implementation steps)<br>
+**Exit code**: 0<br>
 
 ### Grep Fallback
 
