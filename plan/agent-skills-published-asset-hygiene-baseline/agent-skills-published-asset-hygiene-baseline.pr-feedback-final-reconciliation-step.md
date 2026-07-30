@@ -1,6 +1,6 @@
 ---
 topic: agent-skills-published-asset-hygiene-baseline
-status: needs-rework
+status: complete
 ---
 
 # PR #120 Final Reconciliation Steps
@@ -8,8 +8,8 @@ status: needs-rework
 ## Workflow Stages
 
 - [X] final-reconciliation-planning
-- [ ] final-reconciliation-implementation
-- [ ] final-reconciliation-independent-review
+- [X] final-reconciliation-implementation
+- [X] final-reconciliation-independent-review
 - [ ] pr-comment-review-and-fix
 
 ## Actionable Steps
@@ -37,3 +37,6 @@ status: needs-rework
   historical and must not be edited.
 - The temporary all-files inventory is a test artifact, not a write set.
 - No merge or release is authorized by this step.
+- Final reconciliation is closed: the independent Reviewer recorded
+  `approved` in the review log. The Main Agent now owns PR thread handling;
+  only a new actionable thread may open a new bounded correction route.
