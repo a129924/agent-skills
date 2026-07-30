@@ -197,16 +197,20 @@ broaden the locked decisions below without a new approved plan revision.
 
 ## Status / Allowed Transitions
 
-- **Current**: `creator-in-progress`. This plan is an uncommitted revision
-  under Plan-Creator repair and must not be represented as `planned`; in the
-  canonical status model, `planned` means the topic plan is committed and
+- **Current**: `review-ready`. This uncommitted plan amendment and its required
+  progression artifact are ready for independent Plan-Reviewer re-review, but
+  must not be represented as `planned`; in the canonical status model,
+  `planned` means the topic plan and progression artifact are committed and
   ready for execution.
 - **Execution model**: Plan-Reviewer re-review first. Its plan-review verdict
   is a gate on this candidate plan, not a claim that the topic status has
   reached `approved`. If the plan passes re-review, a human must separately
-  and explicitly authorize a **plan-only repository commit** before this plan
-  may be marked `planned`. That approval does not authorize an external
-  user-profile write. Once the plan-only commit is complete, a second explicit
+  and explicitly authorize a **plan-amendment-only repository commit** for the
+  revised plan and the topic progression artifact before this plan may be
+  marked `planned`. That approval does not authorize an external user-profile
+  write. After that commit, the Main Agent verifies the progression artifact
+  and creates the approved `feature/andrew/windows-wsl-dev` worktree from that
+  commit. Once the artifact records a validated worktree, a second explicit
   human authorization is required before the independent Implementer may
   create or modify the external user-profile Skill or user-level instruction
   file. Independent Reviewer review follows only after that external
@@ -230,13 +234,15 @@ Routing notes:
 - The immediate gate is an independent Plan-Reviewer verdict using the JSON
   contract below. A `needs-rework` verdict routes only to Plan-Creator for a
   bounded plan repair; it does not authorize external implementation.
-- After Plan-Reviewer approval, stop for the human plan-only commit
-  authorization. That limited commit is a Phase 1 planning precondition: it
-  does not enter `publish-in-progress`, push, or open a PR by inference. After
-  the successful, explicitly authorized commit makes the plan `planned`, stop
-  again for the independent external-write authorization before dispatching
-  the Implementer. The Main Agent must create or validate the listed
-  progression artifact before that dispatch.
+- After Plan-Reviewer approval, stop for the human plan-amendment-only commit
+  authorization. That limited commit includes only the revised topic plan and
+  its topic-local progression artifact; it does not enter
+  `publish-in-progress`, push, or open a PR by inference. Once that commit
+  makes the plan `planned`, the Main Agent must validate the progression
+  artifact, create the approved feature worktree from that commit, and record
+  the verified branch, worktree path, and base commit in the progression
+  artifact. Stop again for the independent external-write authorization before
+  dispatching the Implementer.
 - The standard Phase 4.5 plan-alignment checkpoint applies after the external
   implementation review. Any scope, contract, or workflow drift routes back to
   the appropriate independent role; it never authorizes policy bypass.
@@ -246,7 +252,7 @@ Routing notes:
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/agent-skill-implementation-plan/agent-skill-implementation-plan.plan.md` | Plan-Creator | Repo-visible execution contract for this user-scoped topic |
-| Topic progression artifact | `plan/agent-skill-implementation-plan/agent-skill-implementation-plan.step.md` | Planning actor / Main Agent | Required current-truth progression state before the second and later role handoffs |
+| Topic progression artifact | `plan/agent-skill-implementation-plan/agent-skill-implementation-plan.step.md` | Plan-Creator (initial contract); Main Agent (truthful gate-state updates only) | Required current-truth progression state before the second and later role handoffs |
 | Review routing log | `plan/agent-skill-implementation-plan/agent-skill-implementation-plan.review-log.md` | Plan-Reviewer / Reviewer | Required repo-visible routing record when review findings control rework or re-review |
 | Topic close summary | `plan/agent-skill-implementation-plan/agent-skill-implementation-plan.summary.md` | Main Agent | Required current-truth close and handoff artifact; before close or handoff it must contain `current state`, `completed`, `not completed`, `required follow-up`, and `next handoff` with both `next actor` and `next step` |
 
@@ -254,6 +260,29 @@ Artifact path notes:
 
 - The external implementation targets are fixed in `Locked Decisions` and are
   intentionally not repo-visible or staged artifacts.
+- The Plan-Creator creates this topic-local progression artifact together with
+  this plan amendment. It is not a reusable Skill, is not created through a
+  `step-creator` profile, and must not write or claim any `skills/**` source or
+  platform projection.
+- The progression artifact has exactly these required sections: `Workflow
+  Stages`, `Actionable Steps`, and `Handoff / Gate Notes`. `Workflow Stages`
+  records each stage's state, entry evidence, required next gate, and next
+  owner. `Actionable Steps` records the one next bounded action for each
+  non-terminal stage. `Handoff / Gate Notes` records the plan amendment commit
+  boundary, feature-worktree boundary, external-write authorization boundary,
+  and the rule that no status update may change a locked decision.
+- Plan-Creator owns initial creation and any plan-alignment amendment of the
+  artifact. The Main Agent may update only current stage, verified evidence,
+  and next handoff after a completed gate; it must not alter its workflow
+  contract, the plan, or implementation scope. A later contradiction routes
+  back to Plan-Creator.
+- Creation timing is fixed: the artifact is created before this re-review and
+  reviewed and committed with this plan amendment. The feature worktree may be
+  created only after that commit. The Main Agent changes the feature-worktree
+  stage to `feature-worktree-ready` only after it verifies the branch
+  `feature/andrew/windows-wsl-dev`, its worktree path, and its base commit.
+  The Implementer may be dispatched only after that state and a separate,
+  explicit human authorization for external user-profile writes.
 - This topic does not modify `README.md`, `VERSION`, `.github/**`, `.codex/**`,
   `skills/**`, or any project repository. Any proposed repository write beyond
   the listed planning artifacts is plan drift and must stop.
