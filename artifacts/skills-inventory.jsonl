@@ -5,8 +5,8 @@
 {"canonical_path":"skills/business-to-technical-translation","tree_hash":"3185f10d935e6ed1c2c4205dec7fe837ab9a9b59773b625fec326426774ba59e"}
 {"canonical_path":"skills/context-package-builder","tree_hash":"fb4785081e66d52337c821ea1ce1a10ec37ee829cf2ce7d71876e782ece4805d"}
 {"canonical_path":"skills/copilot-instructions-init","tree_hash":"cd071879c43da83ef3b523802aa8f5ea8dce798b2914d6b665a4429640a280ba"}
-{"canonical_path":"skills/git-branch-naming","tree_hash":"9abeb6a15c4cbd51ee6b443e4b2ea10020c90a08732b9fef1ffeb6a0d2c1c4ce"}
-{"canonical_path":"skills/git-commit-convention","tree_hash":"fabd5e5aaf4d881b098966625529d125791a4ea59d887b1f9cae81dd7be352e0"}
+{"canonical_path":"skills/git-branch-naming","tree_hash":"6802368bc3ade30d112a90bcad3ad0058b70202401fbc18654ecaaa51e708d0c"}
+{"canonical_path":"skills/git-commit-convention","tree_hash":"6e15acf6fb1b967d737157af3ae48a88b8d8dfef79cf4fc9cf9b7fc7fc93870b"}
 {"canonical_path":"skills/git-post-merge-workflow","tree_hash":"e063fc0aaeffa6630252bbdd8a821598618e768b205c818726f72a74f73368ff"}
 {"canonical_path":"skills/git-release-management","tree_hash":"368d48c96f9022b0a6dc70924a435d0a21eda8332a3c52d0caea966dbe529076"}
 {"canonical_path":"skills/handoff-routing-policy","tree_hash":"7e44a988b19c90c1aec7660f75e8b09355b7a3095d5964d075fd4fe5a3ea9431"}
