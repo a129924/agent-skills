@@ -102,10 +102,10 @@ class Fibonacci:
     def __init__(self, limit):
         self.limit = limit
         self.a, self.b = 0, 1
-    
+
     def __iter__(self):
         return self
-    
+
     def __next__(self):
         if self.a >= self.limit:
             raise StopIteration
@@ -125,11 +125,11 @@ class RepeatingIterator:
     def __init__(self, items):
         self.items = items
         self.index = 0
-    
+
     def __iter__(self):
         self.index = 0  # Reset on each iteration
         return self
-    
+
     def __next__(self):
         if self.index >= len(self.items):
             raise StopIteration
@@ -173,7 +173,7 @@ for user in load_users():  # Each iteration hits the database
 ```python
 def load_users():
     """Load and return all users from database.
-    
+
     Note: This function executes database queries eagerly.
     """
     return [database.query(f"SELECT * FROM users WHERE id = {user_id}") for user_id in user_ids]
@@ -183,7 +183,7 @@ def load_users():
 ```python
 def load_users():
     """Yield users from database lazily.
-    
+
     Warning: Each iteration executes a database query.
     Use list(load_users()) to materialize all results at once.
     """
@@ -236,7 +236,7 @@ class DataRange:
     def __init__(self, start, end):
         self.start = start
         self.end = end
-    
+
     def __iter__(self):
         return iter(range(self.start, self.end))
 
