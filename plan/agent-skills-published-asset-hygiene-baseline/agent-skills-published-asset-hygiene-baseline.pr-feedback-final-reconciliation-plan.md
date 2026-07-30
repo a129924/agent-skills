@@ -4,10 +4,10 @@
 
 - **Status transition:** `pr-open` -> `needs-rework`
 - **Severity / route:** `medium` / `PLANNER_REPLAN`
-- **Current truth:** Commit C and dependent Commit D are completed historical
-  truth. This plan is the sole active correction contract for Commit E and
-  dependent Commit F; all earlier correction artifacts grant no implementation
-  authority.
+- **Current truth:** Commit C/D and the completed `PASS:` E6/F2 are historical
+  truth. This plan is the sole active correction contract for the final
+  `SOFT FAIL:` E6 and dependent F2; all earlier correction artifacts grant no
+  implementation authority.
 
 ## Locked Scope
 
@@ -19,8 +19,9 @@ Completed historical work was ordered as Commit C (the three
 (`artifacts/skills-inventory.jsonl` and `.codex/skills/provenance.md`). Commit
 C replaced the source-of-truth break with `<br>` and synchronized projections;
 Commit D rebuilt the 57-record inventory and updated the one eligible
-`python-pre-commit` Codex provenance row to cite Commit C. These completed
-paths are not reopened.
+`python-pre-commit` Codex provenance row to cite Commit C. The subsequent
+`PASS:` E6/F2 repair updated the same six skill projections and their two
+derived records. These completed paths are not reopened.
 
 The independent Implementer may now modify exactly these six Commit E paths:
 
@@ -31,7 +32,7 @@ The independent Implementer may now modify exactly these six Commit E paths:
 - `.github/skills/git-commit-convention/SKILL.md`
 - `.codex/skills/git-commit-convention/SKILL.md`
 
-In each canonical source, replace only the intended `PASS:` Markdown
+In each canonical source, replace only the intended `SOFT FAIL:` Markdown
 trailing-double-space break with literal `<br>`, then synchronize the exact
 canonical bytes to both projections.
 
@@ -40,7 +41,7 @@ two dependent Commit F paths: `artifacts/skills-inventory.jsonl` and
 `.codex/skills/provenance.md`. Commit F must deterministically rebuild the 57
 canonical inventory records and update only the `git-branch-naming` and
 `git-commit-convention` tree hashes and corresponding Codex provenance rows,
-each citing Commit E. No other content, Markdown structure, name, path,
+each citing the final Commit E. No other content, Markdown structure, name, path,
 cross-reference, hook, planning artifact, or provenance row may be changed by
 the Implementer.
 
@@ -55,7 +56,8 @@ the time of this contract) for the final PR-base check.
   `git-branch-naming/SKILL.md`, `git-commit-convention/SKILL.md`,
   `plan-step-tracker/examples.md`, and
   `python-pre-commit/references/version-pinning.md`. The first two groups each
-  contain one restored `PASS:` `<br>` marker; the step-tracker copies
+  contain the completed `PASS:` marker and the final `SOFT FAIL:` `<br>`
+  marker; the step-tracker copies
   retain six `<br>` markers each; and the version-pinning copies retain one
   `<br>` marker each.
 - The remaining 34 published-skill assets may differ from the PR base only by
@@ -70,8 +72,8 @@ the time of this contract) for the final PR-base check.
 
 ## Temporary All-Files Boundary
 
-Run `pre-commit run --all-files` only in a disposable baseline Git workspace,
-never in the feature worktree. The expected failure inventory is exactly:
+Do not run `pre-commit run --all-files` in the feature worktree. The retained
+disposable-workspace expected-failure inventory is exactly:
 
 - `.github/guides/MAIN-AGENT-WORKFLOW.md`
 - `.github/guides/REFERENCE-INTAKE-PROCESS.md`
@@ -92,29 +94,30 @@ never in the feature worktree. The expected failure inventory is exactly:
 - `plan/reference-intake-workflow/reference-intake-workflow.plan.md`
 
 Do not repair, suppress, retain, or add an `exclude` for any of these paths.
-The disposable workspace is discarded; the feature worktree must have no diff
-for all 17 paths.
+The disposable workspace is historical evidence; the feature worktree must
+have no diff for all 17 paths.
 
 ## Validation and Handoff
 
-- Require `pre-commit validate-config`, a targeted six-file Commit E hook run,
+- Require `pre-commit validate-config`, a targeted six-file final Commit E hook run,
   a targeted two-file Commit F generated-artifact validation, and `git diff
   --check` to pass without rewrite.
 - Require byte equality between each canonical Commit E skill and both
-  projections; each has exactly one literal `<br>` on its intended `PASS:`
-  line. Retain the already-validated byte equality and one literal
+  projections; each has exactly one literal `<br>` on its intended `SOFT FAIL:`
+  line, while retaining the completed `PASS:` `<br>`. Retain the already-validated byte equality and one literal
   `<br>` after `Source of truth` in `version-pinning.md`.
 - Require Commit F to produce 57 sorted unique inventory records, change only
   the two named canonical tree hashes, and update exactly their two Codex
-  provenance rows to cite Commit E. A second deterministic build must be
+  provenance rows to cite the final Commit E. A second deterministic build must be
   byte-identical.
 - In a consumer-like temporary Git workspace containing published assets and
   `.pre-commit-config.yaml`, baseline then run all hooks; require success,
   empty `git status --short`, and successful `git diff --exit-code`.
-- The Reviewer verifies the completed C3/D2 boundary, the active E6/F2
-  implementation boundary, the exact 17-path temporary inventory, the 34/12
-  PR-base asset classification, and absence of unclassified PR-base diff
-  paths. Then it appends its JSON verdict to the review log.
+- The Reviewer verifies the completed C3/D2 and `PASS:` E6/F2 boundaries, the
+  active `SOFT FAIL:` E6/F2 implementation boundary, the retained 17-path
+  temporary inventory, the 34/12 PR-base asset classification, and absence of
+  unclassified PR-base diff paths. Then it appends its JSON verdict to the
+  review log; only then may the Main Agent resolve the remaining thread.
 
 ```json
 {"verdict":"approved|needs-rework","blocking_issues":[],"pr_base":"d177401ff56a221ce104555687655a8ea1a55fae","completed_commit_boundaries":{"C":3,"D":2},"active_commit_boundaries":{"E":6,"F":2},"published_asset_classification":{"hygiene_only":34,"rendering_exceptions":12}}

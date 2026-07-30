@@ -11,27 +11,31 @@ status: needs-rework
 - [X] final-reconciliation-implementation
 - [X] final-reconciliation-independent-review
 - [X] final-reconciliation-current-truth-replan
-- [ ] final-reconciliation-current-correction-implementation
-- [ ] final-reconciliation-current-correction-review
+- [X] final-reconciliation-current-correction-implementation
+- [X] final-reconciliation-current-correction-review
+- [ ] final-reconciliation-soft-fail-correction-implementation
+- [ ] final-reconciliation-soft-fail-correction-review
 - [ ] pr-comment-review-and-fix
 
 ## Actionable Steps
 
-1. Commits C3 and D2 are completed historical evidence: C changed the three
+1. Commits C3/D2 and the completed `PASS:` E6/F2 are historical evidence: C changed the three
    `version-pinning.md` paths, then D refreshed its inventory and Codex
    provenance record. Do not re-run or reopen them.
-2. Route exactly the six Commit E `git-branch-naming` and
+2. Route exactly the six final Commit E `git-branch-naming` and
    `git-commit-convention` canonical/projection paths to an independent
-   Implementer. Each replaces only its intended `PASS:` Markdown hard break
+   Implementer. Each replaces only its intended `SOFT FAIL:` Markdown hard break
    with `<br>` and synchronizes projections from canonical.
-3. After Commit E, route exactly the two Commit F generated paths to that
+3. After final Commit E, route exactly the two Commit F generated paths to that
    Implementer. Rebuild the 57-record inventory deterministically and update only
-   the two matching Codex provenance rows to cite Commit E.
+   the two matching Codex provenance rows to cite the final Commit E.
 4. Validate scoped hooks, `pre-commit validate-config`, `git diff --check`,
    projection equality, the deterministic 57-record inventory/two-row
-   provenance result, the consumer-like no-rewrite gate, and the disposable
-   exact 17-path all-files inventory.
-5. An independent Reviewer verifies the C3/D2 historical boundary, E6/F2
+   provenance result, and the consumer-like no-rewrite gate. Do not run
+   `pre-commit run --all-files` in the feature worktree; the 17-path inventory
+   remains retained disposable-workspace evidence.
+5. An independent Reviewer verifies the C3/D2 and completed `PASS:` E6/F2
+   historical boundaries, final `SOFT FAIL:` E6/F2
    implementation boundary, and final PR-base classification of 34
    hygiene-only assets plus 12 rendering exceptions. It appends an `approved`
    or `needs-rework` JSON verdict to the review log.
@@ -47,5 +51,6 @@ status: needs-rework
 - The temporary all-files inventory is a test artifact, not a write set.
 - No merge or release is authorized by this step.
 - The prior final reconciliation is closed historical evidence. This current
-  `needs-rework` route owns only E6/F2. The Main Agent resumes PR thread
-  handling only after the independent review records `approved`.
+  `needs-rework` route owns only the final `SOFT FAIL:` E6/F2. The Main Agent
+  resumes PR thread handling and resolves the remaining thread only after the
+  independent review records `approved`.

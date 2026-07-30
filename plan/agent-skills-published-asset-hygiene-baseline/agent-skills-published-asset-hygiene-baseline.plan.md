@@ -23,15 +23,15 @@ without modifying published assets.
   - The completed final-reconciliation route is historical evidence: Commit C
     changed the three `version-pinning.md` surfaces, then dependent Commit D
     refreshed the canonical inventory and its affected Codex provenance row.
-  - The sole active PR #120 correction restores the intended `PASS:`
-    Markdown line break in `git-branch-naming` and `git-commit-convention`
+  - The completed `PASS:` E6/F2 repair is historical evidence. The sole active
+    PR #120 correction restores the intended `SOFT FAIL:` Markdown line break
+    in `git-branch-naming` and `git-commit-convention`
     across their canonical, GitHub, and Codex surfaces, then refreshes the two
     derived records whose canonical hashes change. It does not reopen any
     earlier Commit A--D write set.
-  - Retain the earlier 24-path full-repository result as historical evidence.
-    The final reconciliation instead reproduces its exact current 17-path
-    non-skill inventory in a disposable workspace and requires zero
-    feature-worktree diff for those 17 paths.
+  - Retain the earlier 24-path full-repository result and the current 17-path
+    non-skill inventory as historical expected-failure evidence. The feature
+    worktree must retain zero diff for those 17 paths.
   - Run the consumer-like temporary workspace gate and require it to pass
     without hook rewrites.
 
@@ -56,15 +56,15 @@ without modifying published assets.
   `trailing-whitespace` and `end-of-file-fixer`, and has no `exclude`; it is a
   locked validation input. Its active correction adds only
   `--markdown-linebreak-ext=md` to `trailing-whitespace`.
-- The active correction replaces only the intended `PASS:` Markdown
+- The active correction replaces only the intended `SOFT FAIL:` Markdown
   trailing-double-space break in each canonical `git-branch-naming` and
   `git-commit-convention` skill with literal `<br>`, and synchronizes exact
   canonical bytes to its two existing projections. It does not authorize any
   other Markdown or semantic rewrite.
-- Commit C's three `version-pinning.md` writes and Commit D's two derived
-  writes are completed historical facts. The next independent Implementer route is Commit E
-  (the six named Markdown surfaces) followed by dependent Commit F (the
-  inventory and provenance records for the two changed canonical skills).
+- Commit C/D and the completed `PASS:` E6/F2 repair are historical facts. The
+  next independent Implementer route is the final `SOFT FAIL:` E6 (the six
+  named Markdown surfaces) followed by dependent F2 (the inventory and
+  provenance records for the two changed canonical skills).
 - The pre-existing GitHub-specific Python CLI path divergence in
   `.github/skills/plan-step-tracker/examples.md` is preserved. Full-file
   equality is not required; the affected line pairs must be byte-identical.
@@ -72,10 +72,9 @@ without modifying published assets.
   immutable historical truth, not current authority. The exclusive current
   Implementer and Reviewer handoff is
   `agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-plan.md`.
-- The earlier 24-path all-files inventory is historical evidence. The final
-  17-path all-files inventory is the current temporary-workspace expected
-  failure; neither inventory may be repaired, suppressed, or retained in the
-  feature worktree.
+- The earlier 24-path and current 17-path all-files inventories are historical
+  expected-failure evidence. Neither may be repaired, suppressed, retained, or
+  re-run in the feature worktree.
 - This is a non-stable-library topic: `README.md` and `VERSION` do not change;
   there is no release action.
 - Correction severity is `medium`, routing state is `PLANNER_REPLAN`, and the
@@ -150,10 +149,10 @@ without modifying published assets.
 
 - **Current**: `needs-rework`; Ready PR #120 remains open after review
   identified a current-truth drift. Commits C and D are complete historical
-  work. The active route is Commit E, which restores two intended `PASS:`
-  presentation breaks across six canonical/projection skill paths, followed
-  by dependent Commit F, which refreshes the two derived records for the two
-  canonical hash changes.
+  work. The active route is the final `SOFT FAIL:` E6, which restores two
+  intended presentation breaks across six canonical/projection skill paths,
+  followed by dependent F2, which refreshes the two derived records for the
+  two canonical hash changes.
 - **Execution model**: the frozen correction is complete, its second
   correction record is resolved, and Phase 4.5 parent current-truth
   reconciliation is independently approved. The completed publish route is
@@ -176,8 +175,8 @@ without modifying published assets.
   - `pr-open` -> `merged`
   - `merged` -> terminal
 - **Routing note**: the active bounded correction supersedes only the completed
-  final-reconciliation execution authority. Commit E contains the six
-  Markdown rendering-preservation writes; dependent Commit F contains the
+  final-reconciliation execution authority. The final E6 contains the six
+  `SOFT FAIL:` Markdown rendering-preservation writes; dependent F2 contains the
   deterministic canonical inventory rebuild and exactly the two eligible
   Codex-provenance row updates, each referencing Commit E. After independent
   review accepts both commits, return to `pr-open`; merge and release remain
@@ -308,8 +307,8 @@ without modifying published assets.
 | Historical correction Commit B | `artifacts/skills-inventory.jsonl`; `.codex/skills/provenance.md` | Implementer | Historical deterministic 57-record rebuild and eight provenance-row update referencing Commit A |
 | Historical final-reconciliation Commit C | `skills/python-pre-commit/references/version-pinning.md`; `.github/skills/python-pre-commit/references/version-pinning.md`; `.codex/skills/python-pre-commit/references/version-pinning.md` | Implementer | Completed rendering-preservation repair: literal `<br>` at the source-of-truth break |
 | Historical final-reconciliation Commit D | `artifacts/skills-inventory.jsonl`; `.codex/skills/provenance.md` | Implementer | Completed dependent deterministic rebuild: one `python-pre-commit` canonical hash and one corresponding Codex provenance row reference Commit C |
-| Active correction Commit E | `skills/git-branch-naming/SKILL.md`; `.github/skills/git-branch-naming/SKILL.md`; `.codex/skills/git-branch-naming/SKILL.md`; `skills/git-commit-convention/SKILL.md`; `.github/skills/git-commit-convention/SKILL.md`; `.codex/skills/git-commit-convention/SKILL.md` | Independent Implementer | Replace only each intended `PASS:` Markdown hard break with literal `<br>` and synchronize projections from canonical |
-| Active correction Commit F | `artifacts/skills-inventory.jsonl`; `.codex/skills/provenance.md` | Independent Implementer | Dependent deterministic rebuild: update only `git-branch-naming` and `git-commit-convention` canonical hashes and their two Codex provenance rows to Commit E |
+| Active correction Commit E | `skills/git-branch-naming/SKILL.md`; `.github/skills/git-branch-naming/SKILL.md`; `.codex/skills/git-branch-naming/SKILL.md`; `skills/git-commit-convention/SKILL.md`; `.github/skills/git-commit-convention/SKILL.md`; `.codex/skills/git-commit-convention/SKILL.md` | Independent Implementer | Replace only each intended `SOFT FAIL:` Markdown hard break with literal `<br>` and synchronize projections from canonical |
+| Active correction Commit F | `artifacts/skills-inventory.jsonl`; `.codex/skills/provenance.md` | Independent Implementer | Dependent deterministic rebuild: update only `git-branch-naming` and `git-commit-convention` canonical hashes and their two Codex provenance rows to the final `SOFT FAIL:` Commit E |
 | Second-correction restore-only paths | `.github/guides/MAIN-AGENT-WORKFLOW.md`; `.github/guides/REFERENCE-INTAKE-PROCESS.md`; `.github/prompts/create-agent-plan.prompt.md`; `analysis/creator-reviewer-template-platform-path-alignment/technical-spec.md`; `analysis/plan-step-tracker/requirements.md`; `analysis/plan-step-tracker/technical-spec.md`; `analysis/platform-projection-adapter/technical-spec.md`; `analysis/python-descriptors-attribute-access/requirements.md`; `analysis/python-descriptors-attribute-access/technical-spec.md`; `analysis/python-implementation-workflow-sdd-tdd/technical-spec.md`; `analysis/python-tooling-skills/technical-spec.md`; `analysis/spec-docs-mvp-generator/requirements.md`; `analysis/spec-docs-mvp-generator/technical-spec.md`; `plan/agent-handoff-workflow.md`; `plan/python-docstrings/python-docstrings.plan.md`; `plan/reference-intake-workflow/reference-intake-workflow.plan.md` | Implementer | Restore only to the `HEAD` pre-hook baseline; no hygiene repair |
 
 If work needs a path not listed here, stop and return to Planner; it is not an
@@ -321,9 +320,9 @@ These are independent-Implementer-only implementation steps. Planning-current-tr
 review verdict recording, PR replies, and thread resolution are deliberately
 outside this section and must not be inferred as Implementer authority.
 
-1. Commit E changes only the six `git-branch-naming` and
+1. The final Commit E changes only the six `git-branch-naming` and
    `git-commit-convention` canonical/projection paths listed in `Artifact
-   Paths`. In each canonical source, replace only the intended `PASS:`
+   Paths`. In each canonical source, replace only the intended `SOFT FAIL:`
    Markdown hard break with literal `<br>`, then copy those exact canonical
    bytes to the corresponding GitHub and Codex projections.
 2. After Commit E is committed, Commit F changes only
@@ -331,7 +330,7 @@ outside this section and must not be inferred as Implementer authority.
    Rebuild the complete canonical inventory deterministically; update only the
    two canonical records and two eligible Codex provenance rows for
    `git-branch-naming` and `git-commit-convention`, with both rows citing
-   Commit E.
+   the final Commit E.
 3. Preserve every other byte. Do not modify planning artifacts, historical
    correction artifacts, review-log content, PR metadata, or any non-skill
    expected-failure inventory path.
@@ -343,8 +342,8 @@ outside this section and must not be inferred as Implementer authority.
   encode a machine-specific interpreter or cache path in current acceptance
   criteria.
 - `pre-commit validate-config` succeeds.
-- Run `pre-commit` against exactly the six Commit E `SKILL.md` paths and
-  require it to pass without rewrite. Each intended `PASS:` line ends in
+- Run `pre-commit` against exactly the six final Commit E `SKILL.md` paths and
+  require it to pass without rewrite. Each intended `SOFT FAIL:` line ends in
   literal `<br>` in canonical and both projections. `git diff --check` also
   succeeds.
 - Each scoped canonical skill is byte-identical to its `.github` and `.codex`
@@ -353,22 +352,20 @@ outside this section and must not be inferred as Implementer authority.
 - The rebuilt inventory has 57 sorted unique canonical records and is
   byte-identical to a second builder run. Only `git-branch-naming` and
   `git-commit-convention` receive new canonical hashes. Exactly their two
-  Codex provenance rows change and each cites Commit E; GitHub-only
+  Codex provenance rows change and each cites the final Commit E; GitHub-only
   serialization remains absent from both generated change sets.
-- In an isolated full-repository Git workspace with a baseline commit,
-  `pre-commit run --all-files` is expected to fail and rewrite exactly the 17
-  current non-skill inventory paths, with no published-skill rewrite. Discard
-  that workspace after recording the result; do not retain its changes.
-- Before review, `git diff --name-only` restricted to the exact 17-path
-  current inventory must produce no output in the feature worktree.
+- Do not run `pre-commit run --all-files` in the feature worktree. The retained
+  exact 17-path temporary-workspace inventory remains expected-failure evidence
+  only; neither it nor the older 24-path inventory is an active write set.
 - In a consumer-like temporary Git workspace, copy every published in-scope
   asset and `.pre-commit-config.yaml`, make a baseline commit, run
   `pre-commit run --all-files`, then require empty `git status --short` and a
   successful `git diff --exit-code`.
-- The Reviewer must verify the C3/D2 historical boundary, E6/F2 exact write
-  set, 57-record/two-row inventory and provenance invariants,
-  temporary-workspace 17-path boundary, consumer-like passing gate, and
-  persisted review routing.
+- The Reviewer must verify the completed `PASS:` E6/F2 boundary, final
+  `SOFT FAIL:` E6/F2 exact write set, 57-record/two-row inventory and
+  provenance invariants, retained temporary-workspace inventory boundary,
+  consumer-like passing gate, and persisted review routing before the Main
+  Agent resolves the remaining thread.
 
 ## Reviewer Handoff
 
@@ -393,7 +390,8 @@ inventory, not an unresolved requirement for this topic.
   provenance result, and frozen 24-path full-repository inventory are
   historical evidence only. They grant no active implementation authority.
 - The sole current authority is the final-reconciliation plan's independent
-  Implementer E6/F2 route and its exact 17-path temporary all-files inventory.
+  Implementer final `SOFT FAIL:` E6/F2 route and retained 17-path temporary
+  all-files inventory.
 
 ## Final PR Reconciliation — 2026-07-29
 
@@ -410,12 +408,18 @@ and the 24-path inventory remain retained historical truth.
   changed only `artifacts/skills-inventory.jsonl` and
   `.codex/skills/provenance.md` for the resulting `python-pre-commit` hash.
   Neither boundary is reopened.
-- **Active bounded repair:** Commit E changes only the six canonical/projection
+- **Completed historical repair:** the preceding E6/F2 changed only the six
+  canonical/projection `git-branch-naming/SKILL.md` and
+  `git-commit-convention/SKILL.md` paths, replacing each intended `PASS:`
+  Markdown hard break with `<br>`, then refreshed their two derived records.
+  That repair is not reopened.
+- **Active bounded repair:** final Commit E changes only the same six
+  canonical/projection
   `git-branch-naming/SKILL.md` and `git-commit-convention/SKILL.md` paths,
-  replacing each intended `PASS:` Markdown hard break with `<br>`.
+  replacing each intended `SOFT FAIL:` Markdown hard break with `<br>`.
   Dependent Commit F then changes only `artifacts/skills-inventory.jsonl` and
   `.codex/skills/provenance.md`, updating the two affected canonical hashes and
-  their two provenance rows to cite Commit E.
+  their two provenance rows to cite the final Commit E.
 - **Final PR-base proof:** compare against merge-base
   `d177401ff56a221ce104555687655a8ea1a55fae` (`origin/dev` at planning time).
   The 46 changed published-skill assets are exactly 34 hygiene-only assets and
@@ -425,10 +429,9 @@ and the 24-path inventory remain retained historical truth.
   `python-pre-commit/references/version-pinning.md`.
   The config, inventory, provenance, and explicitly listed planning artifacts
   are reviewed separately; no unclassified path may enter the PR diff.
-- **Temporary all-files boundary:** an isolated baseline workspace reproduces
-  exactly 17 non-skill rewrites. That expected failure is evidence only, must
-  be discarded, and must have zero feature-worktree diff. The consumer-like
-  workspace remains a passing no-rewrite gate.
+- **Temporary all-files boundary:** the isolated 17-path expected-failure
+  inventory remains evidence only and must not be re-run in the feature
+  worktree. The consumer-like workspace remains a passing no-rewrite gate.
 - **Routing:** after independent review accepts this bounded repair and final
   PR-base proof, return to `pr-open` for thread handling. Resolve only
   satisfied PR threads; leave a scoped reply on any still-actionable thread.

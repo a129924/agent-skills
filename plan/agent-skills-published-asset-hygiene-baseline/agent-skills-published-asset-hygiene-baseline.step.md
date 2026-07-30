@@ -32,28 +32,30 @@ status: needs-rework
 - [X] pr-feedback-final-reconciliation-implementation
 - [X] pr-feedback-final-reconciliation-independent-review
 - [X] pr-feedback-final-reconciliation-current-truth-replan
-- [ ] pr-feedback-final-reconciliation-current-correction-implementation
-- [ ] pr-feedback-final-reconciliation-current-correction-independent-review
+- [X] pr-feedback-final-reconciliation-current-correction-implementation
+- [X] pr-feedback-final-reconciliation-current-correction-independent-review
+- [ ] pr-feedback-final-soft-fail-correction-implementation
+- [ ] pr-feedback-final-soft-fail-correction-independent-review
 - [ ] pr-comment-review-and-fix
 
 ## Actionable Steps
 
-1. All work through Commit D is completed historical evidence. Commit C changed
+1. All work through the completed `PASS:` E6/F2 is historical evidence. Commit C changed
    exactly three `version-pinning.md` paths; dependent Commit D changed exactly
    the inventory and Codex provenance records required for that canonical hash.
 2. The sole active contract is
    `agent-skills-published-asset-hygiene-baseline.pr-feedback-final-reconciliation-plan.md`.
-   Route Commit E's six `git-branch-naming` and `git-commit-convention`
+   Route the final Commit E's six `git-branch-naming` and `git-commit-convention`
    canonical/projection paths to an independent Implementer; each intended
-   `PASS:` Markdown hard break becomes literal `<br>`.
-3. Route dependent Commit F's two generated paths to the Implementer after Commit
+   `SOFT FAIL:` Markdown hard break becomes literal `<br>`.
+3. Route dependent final Commit F's two generated paths to the Implementer after Commit
    E. The deterministic rebuild updates only the two affected canonical hashes
-   and their two Codex provenance rows to cite Commit E.
-4. Verify the final PR-base classification: 34 hygiene-only published-skill
-   assets plus 12 explicit rendering exceptions. The isolated all-files
-   temporary workspace must reproduce exactly the 17-path non-skill inventory;
-   its diff is never retained in this feature worktree.
-5. Route the E6/F2 evidence to an independent Reviewer. Only `approved`
+   and their two Codex provenance rows to cite the final Commit E.
+4. Do not run `pre-commit run --all-files` in the feature worktree. The
+   retained isolated 17-path non-skill inventory is expected-failure evidence,
+   never an implementation write set.
+5. Route the completed `PASS:` E6/F2 and final `SOFT FAIL:` E6/F2 evidence to
+   an independent Reviewer. Only `approved`
    resumes `pr-comment-review-and-fix`; the Main Agent resolves satisfied
    threads and replies only to unresolved actionable threads.
 
@@ -66,7 +68,7 @@ status: needs-rework
 - Current status: `needs-rework`; Ready PR #120 remains open. Earlier P2
   repairs, Commit A/B, and the completed C3/D2 final-reconciliation route are
   historical. The active route is
-  `pr-feedback-final-reconciliation-current-correction-implementation`.
+  `pr-feedback-final-soft-fail-correction-implementation`.
 - Current verification evidence for the 46 tracked published-skill assets is
   normalized byte equality against `HEAD`: apply only trailing horizontal
   whitespace removal, terminal-blank-line removal, and exactly one final LF
@@ -89,10 +91,10 @@ status: needs-rework
 - Current dynamic verification requires a `pre-commit` executable on `PATH`
   and a writable `PRE_COMMIT_HOME`; the historical correction-step evidence
   retains its original machine-local commands.
-- Commit A/B and C3/D2 inventory/provenance results are completed historical
-  evidence. The current correction locks E6/F2, an exact 17-path temporary
-  all-files inventory, and a PR-base diff classification of 34 hygiene-only
-  assets plus 12 `<br>` exceptions; the consumer-like workspace remains the
-  required passing gate.
+- Commit A/B, C3/D2, and the completed `PASS:` E6/F2 results are historical
+  evidence. The current correction locks the final `SOFT FAIL:` E6/F2 route,
+  retains the 17-path temporary all-files inventory without rerunning it in the
+  feature worktree, and keeps the consumer-like workspace as the required
+  passing gate.
 - Merge remains outside this step and requires the applicable human
   authorization.
