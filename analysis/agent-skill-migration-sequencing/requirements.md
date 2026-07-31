@@ -163,4 +163,3 @@ This topic is ready to move past planning when:
 3. `can_start_now` is the primary scheduling view
 4. workflow-baseline dependency is explicit rather than implicit
 5. no shared workflow governance file is modified in this phase
-

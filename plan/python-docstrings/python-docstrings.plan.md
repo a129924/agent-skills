@@ -14,7 +14,7 @@ Design a `python-docstrings` Agent Skill that teaches when and how to write clea
   - Dataclass and structured data field-level documentation
   - Inline comment policy (when docstring is better)
   - Type hint and docstring alignment
-  
+
 - **Out of scope**:
   - Async/await specific conventions
   - Framework-specific docstrings (FastAPI, Pydantic, SQLAlchemy auto-docs)

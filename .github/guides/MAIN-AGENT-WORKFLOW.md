@@ -226,17 +226,17 @@ Copilot comments:
 1. Main Agent invokes `agent-skill-reviewer` SubAgent:
    ```
    /fleet 根據 review-checklist.md 與 plan 評審 .github/skills/<skill-name>/
-   
+
    上下文：
    - Plan file: plan/<topic>/<topic>.plan.md
    - Copilot comments: [list above]
-   
+
     評審內容：
     1. 符合 plan 的 Implementation steps？
     2. 例子和參考資料足夠深入？
     3. Copilot 的評論是否都妥當？ (address/discuss/skip)
     4. `Artifact paths` 是否有效且與實際輸出位置一致？
-   
+
    回傳 JSON 格式。
    ```
 
@@ -276,9 +276,9 @@ Copilot comments:
 - Main Agent commits:
   ```bash
   git commit -m "feat: address review feedback on <skill-name>
-  
+
   - Fixed [items from ADDRESS]
-  
+
   Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
   ```
 - Continue to Phase 4.5

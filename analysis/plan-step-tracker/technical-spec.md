@@ -44,7 +44,7 @@
    # requires-python = ">=3.11"
    # ///
    """Step status tracker for plan/<topic>/<topic>.step.md files.
-   
+
    Usage:
      python step_tracker.py read_all <topic>
      python step_tracker.py read_not_run <topic>

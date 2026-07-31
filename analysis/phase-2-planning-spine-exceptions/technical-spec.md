@@ -124,4 +124,3 @@ provides evidence that the change is wording-only and does not alter behavior.
   to `skills/plan-creator/**` and `skills/plan-reviewer/**`.
 - The topic step artifact must stop no later than `human-check`.
 - No planning artifact may imply permission to edit `.github/**` or `.codex/**`.
-

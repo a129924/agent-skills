@@ -48,4 +48,3 @@ Use this when briefing the next agent:
 > keep the scope bounded. Recommended skills: `git-post-merge-workflow`,
 > `worktree-manager`, `plan-creator`, `plan-reviewer`, `agent-skill-creator`,
 > `agent-skill-reviewer`.
-

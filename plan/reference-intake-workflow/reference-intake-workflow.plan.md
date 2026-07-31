@@ -145,7 +145,7 @@ Artifact path notes:
 
 - **Status**: `review-ready` ← Phase 3 (Creator implementation) complete
 - **Last updated**: 2026-04-24
-- **Implementation commits**: 
+- **Implementation commits**:
   - `bdc3028`: plan(reference-intake-workflow): initial topic plan
   - `3cf3c89`: feat(reference-intake): implement 5-layer external reference intake workflow
 - **Next phase trigger**: Reviewer evaluates Phase 4 (Reviewer pass) per agent-skill-reviewer

@@ -227,4 +227,3 @@ None. This baseline is ready for `business-to-technical-translation`.
 
 Next step: `business-to-technical-translation` →
 `analysis/python-retrofit-plan-review/technical-spec.md`
-

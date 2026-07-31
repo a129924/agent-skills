@@ -258,7 +258,7 @@ Final status: COMPLETE
 
 ### Q: How do I deprecate an adopted idea?
 
-**A**: 
+**A**:
 1. Mark the relevant section in creator/reviewer/template with a deprecation comment
 2. Create a follow-up topic to migrate existing skills
 3. Update INTAKE.md and OTHER-PROJECT-EXAMPLES.md with the deprecation note

@@ -153,4 +153,3 @@ updated: 2026-05-09
 | 新需求（D1 classifier）是否已納入？ | ✅ R-NEW 已定義 |
 
 **結論：基線已凍結。可進行 technical translation。**
-
