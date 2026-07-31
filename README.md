@@ -294,6 +294,7 @@ Process documentation and workflow guidance for repository operations:
 | `OTHER-PROJECT-EXAMPLES.md` | changelog of external ideas adopted into this repository's stable library via the reference intake workflow |
 | `docs/migration/codex-skills-spec-worktree.md` | branch-local spec-worktree validation contract for `.codex/skills/` projection experiments |
 | `docs/migration/plan-review-protocol.md` | repeatable planner/reviewer protocol for migration-branch `plan.md` review |
+| `docs/process/wsl-native-pre-commit-validation.md` | run pre-commit for a Windows linked worktree commit from WSL-native Git metadata |
 
 ## Current skills
 | Skill | Role |
