@@ -5,173 +5,209 @@
 **Semantic warning — optional analysis layer absent:** neither
 `analysis/semantic-first-design/requirements.md` nor
 `analysis/semantic-first-design/technical-spec.md` exists. This plan uses the
-explicit human decisions captured for this topic; it does not claim a frozen
-analysis prerequisite. If either analysis artifact is introduced later, stop
-and reconcile its authority before changing this plan.
+explicit human decisions for this topic. If either artifact is introduced,
+stop and reconcile its authority before changing this plan.
 
 ## Goal / Outcome
 
-- Add a Python-first reusable `semantic-first-design` skill at the canonical
-  `skills/` source surface. It guides agents to make important semantics visible
-  in names, types, signatures, composition, and explicit failure handling.
-- The completed topic has three focused skill artifacts and a stable-library
-  promotion contract; it does not change the existing specialised Python skills.
+- Maintain a Python-first reusable `semantic-first-design` skill whose important
+  semantics are visible locally in names, types, signatures, composition, and
+  distinguishable failure paths.
+- Repair the PR feedback without changing the topic's architecture, canonical
+  source surface, stable-library intent, or release boundary.
 
 ## Scope
 
 - **In scope**:
-  - Create the three canonical skill artifacts listed under `Artifact Paths`.
-  - Create this topic's plan, progression, and review-routing artifacts.
-  - After independent reviewer approval, update the designated README row and
-    bump `VERSION` from `0.77.0` to `0.78.0` during `publish-in-progress`.
+  - Repair this topic's three planning artifacts and re-run independent
+    planning review before any implementation repair.
+  - Maintain the exact six-file canonical skill document set listed in
+    `Artifact Paths`, including the three named split references.
+  - Regenerate the checked-in canonical-skill inventory once, only after all
+    six canonical skill files are final.
+  - Keep the approved README row and `VERSION` `0.78.0` stable unless a
+    reviewer identifies a directly related correction.
 
 - **Out of scope**:
-  - Changes to existing Python skills, their contracts, or their content.
-  - `.github/**` and `.codex/**` skill projections or platform-path migration.
-  - Runtime code, API changes, release notes, tags, releases, merge, and
-    post-merge cleanup.
+  - Changes to existing specialised Python skills or their contracts.
+  - `.github/**`, `.codex/**`, platform projections, runtime code, tags,
+    releases, merge, and post-merge cleanup.
 
 ## Locked Decisions
 
-- This is a Python-first reusable semantic guardrail, not a replacement for
-  specialised Python design skills.
-- The sole canonical implementation source is `skills/semantic-first-design/`.
-  Its exact artifacts are `SKILL.md`, `reference.md`, and `examples.md`.
-- The skill identifies ambiguity in contracts, type/state, absence,
-  boolean/policy, boundaries, composition, abstraction, and failure semantics;
-  it directs specialised work to existing skills rather than duplicating them.
-- The implementation must prefer the smallest semantic distinction that removes
-  ambiguity. It must not prescribe wrapper types, interfaces, enums, or patterns
-  merely for uniformity.
-- This is a stable-library-affecting topic. `README.md` and `VERSION` change only
-  after independent review approval, at `publish-in-progress`.
-- A merged change has no automatic release or tag: a human gate after merge must
-  explicitly authorize any release action.
+- This is a Python-first semantic guardrail, not a replacement for specialised
+  Python design skills.
+- The canonical implementation is exactly this six-file document set:
+  `skills/semantic-first-design/SKILL.md`, `reference.md`, `examples.md`,
+  `references/contracts-and-state.md`, `references/policy-and-failure.md`, and
+  `references/boundary-composition-and-abstraction.md`.
+- `reference.md` is a short index and routing surface; the split references own
+  the detailed material named by their filenames. `examples.md` supplies
+  compact positive and negative examples only.
+- The skill output narrows the assessment to **one material ambiguity** and its
+  smallest explicit distinction; it does not emit a prioritized collection of
+  ambiguities.
+- The normal-absence example keeps `customer_id: str`; this topic must not
+  invent `CustomerId` merely to demonstrate semantic-first design.
+- Serialization is a bounded handoff: the skill and one example may identify a
+  serialization-boundary ambiguity and route the concrete decision to
+  `python-serialization-boundaries`; they must not redefine that skill's rules.
+- Stable-library metadata remains published: README row and VERSION `0.78.0`
+  are already part of the PR. There is no automatic release or tag after merge.
 
 ## Boundaries / Exclusions
 
-- Plan-Creator owns only the topic planning artifacts. It does not implement or
-  approve the skill.
-- Implementer creates only the three canonical skill artifacts inside the locked
-  scope. It must not update existing Python skills or projections.
-- Plan-Reviewer independently reviews planning artifacts; Reviewer independently
-  reviews the implementation. Neither role authors the implementation.
-- Main Agent owns branch/worktree routing, publish actions, PR flow, and human
-  gates. Human review is the terminal handoff after the draft PR opens.
-- Any requested path outside `Artifact Paths`, contract drift, or semantic scope
-  expansion requires plan repair before execution continues.
+- Plan-Creator changes only this plan, progression, and review-routing log.
+- Implementer changes only listed implementation/inventory paths; it does not
+  alter existing specialised skills or platform projections.
+- Plan-Reviewer independently reviews the repaired planning artifacts before
+  any Implementer work. Reviewer independently evaluates implementation work.
+- Human PR feedback is triaged in the review log; it does not self-approve the
+  repair or bypass either independent review.
+- A path, contract, or scope request outside `Artifact Paths` requires a new
+  planning repair before execution continues.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
-- **Execution model**: use the canonical creator -> reviewer -> publish -> merge
-  path. An independent Plan-Reviewer check occurs before creator implementation;
-  it validates the plan but does not replace a canonical topic status.
-- **Phase 4.5**: apply the standard planner contract-alignment rule after the
-  implementation Reviewer returns `approved`.
-- **Human gates**: STOP POINT 1 governs commit, push, and draft PR preparation.
-  After the draft PR is opened, stop for human review. After merge, STOP POINT 2
-  applies; release/tag work requires a new explicit human resume and approval.
-- **Allowed transitions**:
-  - `planned` -> `creator-in-progress`
-  - `creator-in-progress` -> `review-ready`
-  - `review-ready` -> `reviewer-in-progress`
-  - `reviewer-in-progress` -> `approved`
-  - `reviewer-in-progress` -> `needs-rework`
-  - `needs-rework` -> `creator-in-progress`
-  - `approved` -> `creator-in-progress`
-  - `approved` -> `publish-in-progress`
-  - `publish-in-progress` -> `pr-open`
-  - `publish-in-progress` -> `merged`
-  - `pr-open` -> `needs-rework`
-  - `pr-open` -> `merged`
-  - `merged` -> terminal
+- **Historical PR return**: `pr-open` -> `needs-rework` occurred after human
+  review. It records why this bounded repair started; it is not the current
+  active stage.
+- **Historical renewed review**: the renewed Plan-Reviewer returned `approved`;
+  the renewed Implementation Reviewer later returned `needs-rework` solely for
+  a planning lifecycle/log contradiction. The latter is the received trigger
+  for this planning-state repair; all skill and inventory thread content passed.
+- **Historical post-repair planning approval**: the independent Plan-Reviewer
+  returned `approved` for this Planning-state repair. That fifth recorded
+  verdict completes planning repair and does not require new Implementer work.
+- **Historical final implementation approval**: the sixth recorded Final
+  Implementation Reviewer verdict is `approved`. All six review gates are
+  complete; no further content repair is required.
+- **Current**: `publish-in-progress`. The next actor is the
+  Implementer/Main Agent publication flow: Main Agent owns publication, with
+  Implementer validation support only. Commit/push still require passing
+  validation and the explicit prior user authorization already recorded.
+- **Historical completed stages**: original plan authoring, independent
+  planning approval, feature implementation, independent implementation
+  approval, publish preparation, commit/push, and PR opening remain completed
+  history. They are not re-executed or represented as fresh approvals.
+- **Current repair lifecycle**:
+  1. Historical `needs-rework` -> `creator-in-progress` -> `review-ready`:
+     Plan-Creator completed the first bounded planning-artifact repair.
+  2. Historical `review-ready` -> `reviewer-in-progress` -> `approved`:
+     the renewed Plan-Reviewer approved that prior planning round.
+  3. Historical implementation work and its renewed Reviewer pass reached
+     `needs-rework` only because planning lifecycle/log state contradicted the
+     recorded review history; skill and inventory content passed.
+  4. Historical `needs-rework` -> `creator-in-progress` -> `review-ready` ->
+     `reviewer-in-progress` -> `approved`: Plan-Creator completed this
+     Planning-state repair and the post-repair Plan-Reviewer approved it.
+  5. Historical final implementation review `reviewer-in-progress` ->
+     `approved`: the sixth review gate accepted the existing seven fixes.
+  6. Current `approved` -> `publish-in-progress`: no content repair remains.
+     Main Agent may commit/push only after current validation passes and the
+     explicit prior user authorization is confirmed; the existing PR then
+     returns to `pr-open` for human review.
+- **Allowed transitions** additionally retain the canonical historical path:
+  `planned` -> `creator-in-progress` -> `review-ready` ->
+  `reviewer-in-progress` -> `approved` -> `publish-in-progress` -> `pr-open`;
+  `pr-open` -> `needs-rework|merged`; `merged` -> terminal.
+- Commit/push requires the already-authorized topic scope plus passing current
+  validation. Human review remains required after the new push; merge, tag,
+  release, and post-merge work are stop points.
 
 ## Artifact Paths
 
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/semantic-first-design/semantic-first-design.plan.md` | Plan-Creator | Current execution contract and locked scope |
-| Topic progression | `plan/semantic-first-design/semantic-first-design.step.md` | Plan-Creator; then Main Agent | Current stage readiness and gate record |
-| Review routing log | `plan/semantic-first-design/semantic-first-design.review-log.md` | Plan-Creator initializes; Plan-Reviewer and Reviewer append their own verdicts | Repo-visible routing record when independent review controls rework |
-| Canonical skill instructions | `skills/semantic-first-design/SKILL.md` | Implementer | Python-first trigger, boundary, workflow, and output contract |
-| Semantic reference | `skills/semantic-first-design/reference.md` | Implementer | Decision heuristics and routing to specialised Python skills |
-| Worked examples | `skills/semantic-first-design/examples.md` | Implementer | Positive and negative ambiguity-resolution examples |
-| Stable-library index | `README.md` | Main Agent | Add the approved skill row during `publish-in-progress` |
-| Repository version | `VERSION` | Main Agent | Bump from `0.77.0` to `0.78.0` during `publish-in-progress` |
+| Topic progression | `plan/semantic-first-design/semantic-first-design.step.md` | Plan-Creator; then Main Agent | Current stage readiness and gates |
+| Review routing log | `plan/semantic-first-design/semantic-first-design.review-log.md` | Plan-Creator initializes; independent reviewers append verdicts | Historical verdicts and PR-feedback routing |
+| Canonical skill instructions | `skills/semantic-first-design/SKILL.md` | Implementer | Python-first trigger, output, boundary, workflow, and local-reference contract |
+| Short semantic index | `skills/semantic-first-design/reference.md` | Implementer | Concise decision index routing to the split references and specialised skills |
+| Worked examples | `skills/semantic-first-design/examples.md` | Implementer | Positive and negative ambiguity-resolution examples, including bounded serialization handoff |
+| Contracts and state reference | `skills/semantic-first-design/references/contracts-and-state.md` | Implementer | Truthful contracts, earned guarantees, and normal absence |
+| Policy and failure reference | `skills/semantic-first-design/references/policy-and-failure.md` | Implementer | Boolean/policy choices and distinguishable failure semantics |
+| Boundary, composition, and abstraction reference | `skills/semantic-first-design/references/boundary-composition-and-abstraction.md` | Implementer | External translation, visible composition, and meaningful variation boundaries |
+| Generated skills inventory | `artifacts/skills-inventory.jsonl` | Implementer via generator | Checked-in canonical-skill completeness and tree-hash snapshot; never hand-edit |
+| Stable-library index | `README.md` | Main Agent | Existing approved semantic-first-design row |
+| Repository version | `VERSION` | Main Agent | Existing `0.78.0` stable-library version |
 
 Artifact path notes:
 
-- `README.md` and `VERSION` are intentionally deferred until independent
-  implementation approval; `.github/copilot-instructions.md` is not modified.
-- The external managed feature-worktree path is execution context, not a
-  repo-visible artifact path. Any new tracked path requires topic-plan repair
-  before modification.
+- After all six canonical skill documents are final, Implementer invokes
+  `scripts/build_skills_inventory.py` **exactly once** with its default output
+  to regenerate `artifacts/skills-inventory.jsonl`. No role hand-edits that
+  generated file.
+- The managed feature-worktree is execution context, not a repo-visible
+  artifact. No other tracked path is authorized by this plan.
 
 ## Stable library metadata
 
-- **README row**: add exactly this row to `README.md` under `## Current skills`:
+- **README row** remains exactly:
 
   ```markdown
   | `semantic-first-design` | guides Python-first design and review toward explicit contracts, states, policies, boundaries, composition, and failure semantics |
   ```
 
-- **Placement**: append it after the existing `sense-env-scaffold` row and before
-  `step-creator`, preserving the table's existing ordering convention for
-  non-`python-` general skills.
-- **VERSION bump**: MINOR, `0.77.0` -> `0.78.0`, because this adds a new
-  backwards-compatible stable capability.
-- **Timing**: `publish-in-progress`, only after the independent Reviewer returns
-  `approved` and Phase 4.5 confirms the implementation still matches this plan.
-- **Rationale**: the stable library should advertise only an approved canonical
-  skill; no release note, tag, or release is part of this promotion.
+- **VERSION** remains `0.78.0`.
+- **Timing**: those stable-library changes were published in the original
+  `publish-in-progress` stage. This repair does not change release timing.
+- **Release**: after merge, STOP POINT 2 applies. Any tag or release needs a
+  new explicit human authorization.
 
 ## Implementation Steps
 
-1. Implementer creates `skills/semantic-first-design/SKILL.md` as the bounded
-   Python-first guardrail, including clear triggers, exclusions, semantic-first
-   heuristics, minimal-change guidance, and direct routes to the existing
-   specialised Python skills.
-2. Implementer creates `reference.md` with the decision framework for explicit
-   contracts, state guarantees, optional values, policies, boundaries,
-   composition, abstraction, and failures. It must distinguish semantic
-   guidance from a mandate to add abstractions.
-3. Implementer creates `examples.md` with concise positive and negative Python
-   examples for ambiguous optional values, booleans, failures, hidden
-   dependencies, and unnecessary abstractions.
-4. Implementer validates the three artifacts against their declared contract and
-   returns `review-ready`. No stable-library metadata change occurs in these
-   creator steps.
+1. Implementer updates the exact six-file document set. `SKILL.md` declares
+   each local reference, keeps `reference.md` short, and emits one material
+   ambiguity, its smallest distinction, caller guarantee, and bounded route.
+2. Implementer places contract/state/normal-absence guidance only in
+   `references/contracts-and-state.md`; boolean/policy and distinguishable
+   failure guidance only in `references/policy-and-failure.md`; and boundary,
+   visible composition, and abstraction guidance only in
+   `references/boundary-composition-and-abstraction.md`.
+3. Implementer updates examples so normal absence uses
+   `find_customer(customer_id: str) -> Customer | None`, and adds one bounded
+   serialization example that routes to `python-serialization-boundaries`
+   without specifying its concrete policy.
+4. After all six canonical documents are final, Implementer runs
+   `scripts/build_skills_inventory.py` once with default output, validates the
+   generated JSONL, and returns `review-ready`.
 
 ## Validation / Acceptance Checks
 
-- All three planning artifacts exist at the listed paths and use canonical
-  workflow/status semantics; this plan contains all required shared-contract
-  sections in canonical order.
-- `SKILL.md` YAML and body agree on the Python-first, ambiguity-sensitive scope;
-  `reference.md` and `examples.md` have distinct, non-duplicative roles.
-- The implementation gives an explicit resolution path for ambiguous optional,
-  boolean/policy, and failure outcomes; it treats local reasoning and semantic
-  boundaries as review criteria.
-- The implementation does not prescribe fake steps, generic dependency
-  containers, blanket primitive wrappers, or one-interface-per-function rules.
-- Existing specialised Python skills and all `.github/**` / `.codex/**` paths
-  remain unchanged.
-- Independent Plan-Reviewer and Reviewer verdicts use the exact JSON contract in
-  this plan; a `needs-rework` verdict routes to the appropriate independent
-  creator/implementer rather than being self-approved.
-- Before publish, Phase 4.5 confirms the approved implementation's paths and
-  scope still match this plan. Before commit/push/PR, STOP POINT 1 must have
-  explicit human authorization and validation must pass.
+- The plan, step, and review log agree that all six review gates are complete,
+  including the final Implementation Reviewer `approved`; current status is
+  `publish-in-progress`, and no content repair remains.
+- Publication may proceed only after validation passes and explicit prior user
+  authorization for commit/push is confirmed. The next publication flow is
+  Main Agent-owned with Implementer validation support.
+- Every `## ... verdict` section in the review log contains exactly one valid
+  JSON object; the preserved historical approved verdicts remain byte-for-byte
+  equivalent in content. PR-feedback triage is prose outside verdict sections.
+- Exactly the six named canonical skill documents exist with non-overlapping
+  roles. `SKILL.md` and `reference.md` declare the local reference paths.
+- The skill output contains one material ambiguity, not a prioritized list;
+  the absence example uses `customer_id: str`; and the serialization handoff is
+  bounded to `python-serialization-boundaries`.
+- `artifacts/skills-inventory.jsonl` is regenerated once by the default
+  `scripts/build_skills_inventory.py` output after all canonical documents are
+  final, is valid JSONL, and contains the resulting semantic-first-design hash.
+- Validate planning contract sections, JSON objects, and whitespace before
+  handoff. Validate skill YAML/body alignment, local references, examples, and
+  inventory after implementation.
+- Existing specialised Python skills, platform projections, README row, and
+  VERSION remain unchanged during planning repair.
 
 ## Reviewer Handoff
 
 ```json
 {
-  "verdict": "approved|needs-rework",
+  "verdict": "approved",
   "blocking_issues": [],
   "copilot_feedback_triage": {
-    "ADDRESS": [],
+    "ADDRESS": [
+      "Run publication prerequisites; commit and push only after validation and explicit prior user authorization."
+    ],
     "DISCUSS": [],
     "SKIP": []
   }
@@ -180,12 +216,12 @@ Artifact path notes:
 
 ## Post-merge / release actions
 
-- After the human merges the draft PR, execution stops at STOP POINT 2.
+- After a human merges the PR, stop at STOP POINT 2.
 - There is no automatic release, annotated tag, release note, or local cleanup.
-- A new explicit human resume and release authorization is required to assess
-  whether `v0.78.0` should be tagged or released.
+- A new explicit human resume and release authorization are required before
+  assessing any `v0.78.0` tag or release.
 
 ## Open Questions / Unresolved Items
 
-- None. The optional analysis layer is absent and recorded as a semantic warning,
-  not an unresolved execution decision.
+- None. The PR feedback has a bounded planning repair direction. Independent
+  review is required for acceptance; it is not an unresolved design choice.

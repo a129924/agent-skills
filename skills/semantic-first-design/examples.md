@@ -1,7 +1,7 @@
 # Worked semantic-first examples
 
-These examples show the distinction to surface. They intentionally do not
-replace the concrete rules owned by the specialised Python skills.
+These examples expose one distinction at a time. They do not replace the
+concrete rules owned by the specialised Python skills.
 
 ## 1. Absence is not failure
 
@@ -11,18 +11,17 @@ def find_customer(customer_id: str) -> Customer | None:
     ...
 ```
 
-If a missing customer is normal but lookup failure is not, preserve `None` for
+If a missing customer is normal but lookup failure is not, retain `None` for
 the single normal absence meaning and expose failure explicitly:
 
 ```python
-def find_customer(customer_id: CustomerId) -> Customer | None:
+def find_customer(customer_id: str) -> Customer | None:
     # Raises the package's explicit lookup failure when the lookup cannot run.
     ...
 ```
 
-The semantic distinction is normal absence versus failure. Use
-`python-api-signature` for the signature and `python-error-handling` for the
-failure contract.
+The distinction is normal absence versus failure. Route the concrete signature
+to `python-api-signature` and the failure contract to `python-error-handling`.
 
 ## 2. A behavior choice is not always a boolean
 
@@ -58,23 +57,22 @@ def validate_config(raw: object) -> ValidatedConfig:
     ...
 ```
 
-The change is justified only when `ValidatedConfig` carries a distinct,
-caller-relevant guarantee. Use `python-type-hints-strict` and
-`python-model-selection` for the concrete type design.
+This is justified only when `ValidatedConfig` carries a distinct,
+caller-relevant guarantee. Route concrete type design to
+`python-type-hints-strict` and `python-model-selection`.
 
-## 4. Translate at the boundary
+## 4. Preserve transport meaning at serialization boundaries
 
 ```python
-# Leaks a vendor-specific weak response into domain code.
-def load_invoice(invoice_id: str) -> dict[str, object] | None:
-    return vendor_client.fetch(invoice_id)
+# Is `None` an explicit clear, a missing JSON field, or an unavailable value?
+def apply_patch(payload: dict[str, object]) -> None:
+    ...
 ```
 
-An adapter should translate vendor identifiers, weak payloads, missing results,
-and failures into the application's own stable contract before orchestration
-uses them. The semantic distinction is external protocol versus application
-meaning. Route architecture and errors to `python-library-architecture` and
-`python-error-handling`.
+For an API payload, database row, or queue message, identify the transport
+meaning that callers must preserve and hand off the conversion decision to
+`python-serialization-boundaries`. This skill does not choose the DTO, sentinel,
+normalization, or wire policy.
 
 ## 5. Visible composition without a fake abstraction
 
@@ -87,14 +85,15 @@ def send_receipt(receipt: Receipt) -> None:
 
 When sender selection affects behavior, pass or compose it visibly at the
 appropriate boundary. Do not compensate by adding a `Dependencies` container
-unless those values form a real, cohesive concept. Route architecture choices
-to `python-library-architecture`.
+unless those values form a real, cohesive concept. Route architecture choices to
+`python-library-architecture`.
 
 ## 6. Reject abstraction without a variation axis
 
 ```python
 class Formatter(Protocol):
     def format(self, value: str) -> str: ...
+
 
 class DefaultFormatter:
     def format(self, value: str) -> str:
