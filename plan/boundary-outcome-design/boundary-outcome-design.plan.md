@@ -19,6 +19,10 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 - **In scope**:
   - create the canonical `skills/boundary-outcome-design/` skill package at the
     exact paths in **Artifact Paths**;
+  - address PR thread `PRRT_kwDOSC_kWs6bDGEX` by regenerating the existing
+    canonical inventory snapshot at `artifacts/skills-inventory.jsonl` after
+    the complete new canonical skill exists; the independent Implementer may
+    change only that generated snapshot for this rework;
   - define the A--D review decision flow: identify layer, vocabulary owner,
     decision consumer, then choose Preserve, Translate, Compress, Promote to an
     application-safe exception, or leave as an unexpected exception;
@@ -36,6 +40,8 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
   - mandatory `Result[T, E]`, Unit of Work, Repository, or Adapter patterns;
   - `.github/**`, `.codex/**`, and every other platform projection or
     compatibility surface;
+  - any change to the inventory builder or its tests; this topic consumes the
+    existing inventory contract without redefining it;
   - tags, GitHub Releases, release notes, or any post-merge release action;
   - architecture, path, or contract changes outside this topic's exact artifact
     set.
@@ -75,7 +81,9 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 - Creator writes only the six canonical skill files listed below. Creator does
   not write reviewer verdicts, alter workflow state, update stable metadata, or
-  perform git / PR actions.
+  perform git / PR actions. For the planner-confirmed low-severity inventory
+  rework, an independent Implementer writes only the generated inventory
+  snapshot listed below; it does not reopen the six-file skill draft.
 - Reviewer independently evaluates the latest creator draft and records only
   the required JSON verdict in the review-log routing artifact. Reviewer does
   not implement corrections.
@@ -92,7 +100,7 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 ## Status / Allowed Transitions
 
-- **Current**: `approved`
+- **Current**: `needs-rework`
 - **Execution model**: canonical creator -> independent reviewer -> planner
   alignment -> publish -> Draft PR -> human review / merge handoff. The topic
   stops after merge and does not enter a release phase.
@@ -115,13 +123,23 @@ Routing notes:
 
 - The independent Plan-Reviewer accepted the planning baseline recorded at
   commit `125c928`; the independent Skill Reviewer has accepted the Creator's
-  six canonical skill files. The current state is `approved` and awaits Phase
-  4.5 planner alignment; it is not yet authorization for publication.
+  six canonical skill files. The current state is `needs-rework` at
+  `pr-comment-review-and-fix` on Ready PR #123, pending the bounded repair and
+  independent re-review before its PR thread can be resolved.
 - Apply the standard Phase 4.5 planner-alignment rule. An `approved` reviewer
   verdict may still return the topic to `creator-in-progress` for scope,
   contract, path, ownership, or stable-metadata drift.
 - Reviewer feedback that controls rework must be persisted at the exact
   `review-log.md` path; hidden chat is not a routing artifact.
+- PR thread `PRRT_kwDOSC_kWs6bDGEX` is planner-confirmed `low`-severity
+  artifact-scope drift. Its routing is `IMPLEMENT_PATCH`: the topic moves
+  through `pr-open` -> `needs-rework` -> `creator-in-progress` for an
+  independent Implementer to regenerate only the canonical inventory snapshot,
+  then returns to independent review before the PR thread can be resolved.
+- The inventory rework is `ADDRESS`, not `DISCUSS`: a stable canonical skill
+  absent from the checked-in canonical inventory is an incomplete published
+  artifact, even though the existing builder, tests, and inventory schema stay
+  unchanged.
 - STOP POINT 1 blocks publication until explicit human commit / push / PR
   authority exists. STOP POINT 2 begins once merge handoff is reached: stop;
   do not poll, sync, tag, release, or infer a resume without a new human
@@ -141,6 +159,9 @@ Routing notes:
 | Persistence failures reference | `skills/boundary-outcome-design/references/persistence-and-failures.md` | Creator | Repository, Unit of Work, Protocol, expected, and unexpected failure guidance |
 | Examples | `skills/boundary-outcome-design/examples.md` | Creator | Positive and negative boundary-design scenarios |
 | Review checklist | `skills/boundary-outcome-design/checklist.md` | Creator | Repeatable review prompts and anti-pattern detection |
+| Canonical inventory builder | `scripts/build_skills_inventory.py` | Existing inventory contract (read-only) | Sole generator for the deterministic canonical inventory; this topic must not modify it |
+| Inventory builder tests | `tests/test_build_skills_inventory.py` | Existing inventory contract (read-only) | Existing validation of canonical discovery, record schema, determinism, and hash behavior; this topic must not modify them |
+| Generated canonical inventory | `artifacts/skills-inventory.jsonl` | Independent Implementer | Complete deterministic snapshot produced by the existing builder; must contain exactly one `skills/boundary-outcome-design` record and no projection or agent path |
 | Stable-library summary | `README.md` | Main Agent | Exact stable-skill row at `publish-in-progress` |
 | Repository version baseline | `VERSION` | Main Agent | MINOR bump at `publish-in-progress` |
 
@@ -190,6 +211,12 @@ Artifact path notes:
    function to return Result, or turn this into a Python framework / code
    implementation guide. Hand the completed draft to independent review as
    `review-ready`.
+6. For PR thread `PRRT_kwDOSC_kWs6bDGEX`, after the planner contract update,
+   an independent Implementer runs the unchanged
+   `python3 scripts/build_skills_inventory.py --repo-root .` only after the
+   complete canonical skill package is present. This overwrites only
+   `artifacts/skills-inventory.jsonl`; it must not hand-author JSONL records or
+   modify the builder or tests.
 
 ## Validation / Acceptance Checks
 
@@ -210,6 +237,11 @@ Artifact path notes:
   reviewer handoff object below.
 - At `publish-in-progress`, README contains the exact row once and at the exact
   placement; `VERSION` is exactly `0.78.0`. No platform projection is changed.
+- The checked-in inventory is regenerated by the existing builder and validates
+  as a complete, sorted canonical `skills/` snapshot. It contains exactly one
+  `skills/boundary-outcome-design` record, no `agents/` or platform-projection
+  record, and a second unchanged builder run is byte-identical. The builder and
+  its tests remain unchanged.
 - Independent Reviewer returns `approved` or `needs-rework` through the JSON
   contract. Main Agent may advance only after approved review and passing Phase
   4.5 alignment.

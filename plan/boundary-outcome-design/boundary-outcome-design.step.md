@@ -1,8 +1,8 @@
 ---
 topic: boundary-outcome-design
-status: human-review
-current_step: human-review
-next_step: await-human-review
+status: needs-rework
+current_step: pr-comment-review-and-fix
+next_step: implementer-inventory-patch
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -18,7 +18,8 @@ analysis_layer: absent-non-blocking-warning
 - [X] independent-review
 - [X] planner-alignment
 - [X] publish
-- [ ] human-review
+- [X] human-review
+- [ ] pr-comment-review-and-fix
 - [ ] merge-handoff
 
 ## Actionable Steps
@@ -73,7 +74,24 @@ analysis_layer: absent-non-blocking-warning
 
 ### human-review
 
-- [ ] Stop with the Draft PR open for human review and merge direction.
+- [X] Human review completed and the PR was converted from Draft to Ready for
+  review. PR comment triage is now active.
+
+### pr-comment-review-and-fix
+
+- [X] Planner confirmed PR thread `PRRT_kwDOSC_kWs6bDGEX` as `ADDRESS` and
+  `low`-severity `IMPLEMENT_PATCH` artifact-scope drift: the new canonical
+  skill is absent from the generated canonical inventory snapshot.
+- [X] Update the parent plan, this progression artifact, review log, and
+  summary with the exact inventory owner, generator, validation, and rework
+  route; no correction artifact is required for this bounded local repair.
+- [ ] Route a separate Implementer to run the unchanged
+  `python3 scripts/build_skills_inventory.py --repo-root .` after confirming
+  the completed canonical skill package. Allowed write set is exactly
+  `artifacts/skills-inventory.jsonl`; `scripts/build_skills_inventory.py` and
+  `tests/test_build_skills_inventory.py` are read-only.
+- [ ] Obtain independent review of the generated snapshot, push the accepted
+  patch, then resolve only thread `PRRT_kwDOSC_kWs6bDGEX`.
 
 ### merge-handoff
 
@@ -82,9 +100,10 @@ analysis_layer: absent-non-blocking-warning
 
 ## Handoff / Gate Notes
 
-- Current status is `human-review`; planning review, independent skill review,
-  planner alignment, and stable-library publication are complete. Draft PR #123
-  is awaiting human review.
+- Current status is `needs-rework`; planning review, independent skill review,
+  planner alignment, stable-library publication, and human review are complete.
+  Ready PR #123 has a planner-confirmed inventory repair awaiting a separate
+  Implementer.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the

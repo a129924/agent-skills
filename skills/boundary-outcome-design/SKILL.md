@@ -79,11 +79,12 @@ Do not use this skill when:
    receives it and what different action follows. Preserve a distinction when
    it supports a meaningful different decision. Consider semantic compression
    only when the receiving layer treats alternatives identically.
-4. **D — Choose the boundary action.** Recommend exactly the least lossy
-   justified action: `Preserve`, `Translate`, `Compress`, `Promote to
-   application-safe exception`, or `Leave as unexpected exception`. Identify
-   the translation point. Do not mirror every lower-layer exception just by
-   changing its name.
+4. **D — Choose boundary actions per distinction.** For each
+   decision-relevant distinction, recommend one or more justified actions:
+   `Preserve`, `Translate`, `Compress`, `Promote to application-safe
+   exception`, or `Leave as unexpected exception`. Identify the translation
+   point for every `Translate` or `Compress` action. Do not mirror every
+   lower-layer exception just by changing its name.
 5. **Check state against operation.** Decide whether `None` or another
    optional value is a legal Domain state before calling it a failure. A valid
    state becomes an error only when the current operation rejects it, such as
@@ -106,6 +107,9 @@ Do not use this skill when:
 ## Required review output
 
 ```text
+Status:
+<READY | INCOMPLETE | BLOCKED>
+
 Observed boundary:
 <layer and contract owner>
 
@@ -121,8 +125,14 @@ Suggested translation point:
 Suggested outcome granularity:
 <alternatives the receiving layer needs, without prescribing implementation types>
 
-Boundary action:
-<Preserve | Translate | Compress | Promote to application-safe exception | Leave as unexpected exception>
+Boundary actions:
+- <distinction>: <one or more actions and their justification>
+
+Missing evidence:
+- <none, or evidence still needed>
+
+Clarification or next step:
+<none, or the question / evidence request needed to proceed>
 ```
 
 # Examples
@@ -141,8 +151,9 @@ Boundary action:
 - a concise boundary review in the required review-output structure
 - a recommendation that names semantic ownership, decision relevance,
   translation point, and outcome granularity
-- explicit uncertainty or a `BLOCKED` status when the missing context would
-  materially change the recommendation
+- explicit `INCOMPLETE` or `BLOCKED` status, missing evidence, and a
+  clarification or next step when the missing context would materially change
+  the recommendation
 
 # Validation
 
