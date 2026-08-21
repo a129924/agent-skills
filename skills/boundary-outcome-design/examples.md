@@ -7,6 +7,9 @@ rate-limit errors. The UseCase retries timeout and service-unavailable in the
 same way, but schedules rate-limited work from server-provided retry metadata.
 
 ```text
+Status:
+READY
+
 Observed boundary:
 Adapter implementing an Application-owned outbound Port.
 
@@ -23,8 +26,17 @@ Adapter, while mapping the external client response/error.
 Suggested outcome granularity:
 DependencyUnavailable; RateLimited(retry metadata); successful capability result.
 
-Boundary action:
-Translate; compress timeout/service-unavailable; preserve rate-limit distinction.
+Boundary actions:
+- timeout/service unavailable: Translate at the Adapter, then compress to
+  DependencyUnavailable because the UseCase retries both identically.
+- rate limited: Translate at the Adapter and preserve RateLimited with retry
+  metadata because scheduling differs.
+
+Missing evidence:
+- none
+
+Clarification or next step:
+none
 ```
 
 Do not infer that every HTTP status needs its own Port outcome. The examples are
@@ -37,6 +49,9 @@ semantic roles, not required type names.
 temporary-unavailable handling for both.
 
 ```text
+Status:
+READY
+
 Observed boundary:
 Checkout UseCase operation result.
 
@@ -52,8 +67,15 @@ Checkout UseCase when interpreting the Port result.
 Suggested outcome granularity:
 TemporarilyUnavailable; operation success; other operation-specific results.
 
-Boundary action:
-Compress.
+Boundary actions:
+- timeout/unavailable: Compress at the Checkout UseCase to
+  TemporarilyUnavailable because fallback and user messaging are identical.
+
+Missing evidence:
+- none
+
+Clarification or next step:
+none
 ```
 
 The Port and UseCase do not need the same type or number of alternatives.
@@ -64,6 +86,9 @@ The Port and UseCase do not need the same type or number of alternatives.
 operation requires one.
 
 ```text
+Status:
+READY
+
 Observed boundary:
 Application operation interpreting valid Domain state.
 
@@ -80,8 +105,17 @@ UseCase after obtaining Subject state, not Adapter retrieval.
 Suggested outcome granularity:
 Exported; ValueRequired.
 
-Boundary action:
-Preserve valid Domain state; translate it to an operation result only for export.
+Boundary actions:
+- value absent: Preserve it as valid Domain state, then translate it at the
+  UseCase to ValueRequired because export rejects absence.
+- value present: Preserve the state and proceed with export because the
+  operation accepts it.
+
+Missing evidence:
+- none
+
+Clarification or next step:
+none
 ```
 
 **Incorrect reasoning:** `optional_value: Value | None` means `Subject` is
@@ -94,6 +128,9 @@ write conflict. The ORM may also raise an unexpected driver failure during
 either operation.
 
 ```text
+Status:
+READY
+
 Observed boundary:
 Repository lookup and Unit of Work transaction completion are separate boundaries.
 
@@ -111,8 +148,19 @@ Repository for lookup capability; Unit of Work for transaction completion.
 Suggested outcome granularity:
 Entity | absence at lookup; Committed | Conflict at commit; unexpected failure stays controlled propagation.
 
-Boundary action:
-Preserve normal absence and transaction conflict; leave unexpected driver failure as unexpected exception.
+Boundary actions:
+- lookup miss: Preserve normal absence at the Repository because Application
+  follows its ordinary absence path.
+- write conflict: Translate at Unit of Work commit and preserve the conflict
+  distinction because the caller may refresh, retry, or report it.
+- unexpected driver failure: Leave as an unexpected exception with controlled
+  propagation because no local recovery decision is defined.
+
+Missing evidence:
+- none
+
+Clarification or next step:
+none
 ```
 
 **Incorrect reasoning:** All database failures must be `CommitOutcome`, or a

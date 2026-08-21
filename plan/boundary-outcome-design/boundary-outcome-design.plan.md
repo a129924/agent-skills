@@ -30,9 +30,15 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
     Adapter responsibilities, UseCase outcome interpretation, legitimate
     optional Domain state, Repository and Unit of Work boundaries, Protocol
     limitations, and expected versus unexpected failures;
-  - add the locked stable-library README row and bump `VERSION` from `0.77.0`
-    to `0.78.0` during `publish-in-progress` after independent approval and
-    planner alignment.
+  - retain the published stable-library README row and, under the explicit
+    human override recorded for this PR-comment rework, bump `VERSION` from
+    `0.78.0` to `0.79.0`; an independent Implementer makes that bounded
+    repair and an independent Reviewer approves it before Main Agent / publisher
+    commit, push, and source-thread resolution.
+  - align the primary positive examples in
+    `skills/boundary-outcome-design/examples.md` with the required `SKILL.md`
+    review-output schema: `Status`, plural `Boundary actions`, `Missing
+    evidence`, and `Clarification or next step`.
 
 - **Out of scope**:
   - application code, code refactors, framework integrations, or concrete
@@ -70,10 +76,18 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 - Expected failures with meaningful caller decisions may become explicit
   outcomes. Programming defects, corrupted invariants, impossible states, and
   unexpected driver failures are not forced into an ever-growing outcome union.
-- Stable metadata timing is locked to `publish-in-progress`: after Reviewer
-  `approved` and passing Phase 4.5 planner alignment, Main Agent updates
-  `README.md` and `VERSION` in the same bounded publication diff. No tag,
-  release note, or GitHub Release is part of this topic.
+- The completed initial publication was at `publish-in-progress`: after
+  Reviewer `approved` and Phase 4.5 planner alignment, Main Agent / publisher
+  updated `README.md` and `VERSION` in the same bounded publication diff.
+  Feature topic commit `5e3f14f` changed its `VERSION` from `0.77.0` to
+  `0.78.0`; PR #123 base commit `7dc4936` still has `0.77.0`.
+- The explicit human override fixes the remaining Round 6 comment rework as
+  `0.78.0` -> `0.79.0`. It is not a new `publish-in-progress` action: an
+  independent Implementer modifies only `VERSION` and
+  `skills/boundary-outcome-design/examples.md`, then an independent Reviewer
+  must approve before Main Agent / publisher commits, pushes, and resolves the
+  Round 6 source threads. No tag, release note, or GitHub Release is part of
+  this topic.
 - This plan is the frozen execution contract. The missing optional analysis
   layer is a warning, not permission to reopen scope or invent requirements.
 
@@ -82,15 +96,24 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 - Creator writes only the six canonical skill files listed below. Creator does
   not write reviewer verdicts, alter workflow state, update stable metadata, or
   perform git / PR actions. For the planner-confirmed low-severity inventory
-  rework, an independent Implementer writes only the generated inventory
-  snapshot listed below; it does not reopen the six-file skill draft.
+  rework, the completed inventory repair did not reopen the six-file skill
+  draft. For the current Round 6 comment rework, an independent Implementer writes only
+  `VERSION` and `skills/boundary-outcome-design/examples.md`: the former makes
+  the human-approved `0.78.0` -> `0.79.0` bump and the latter aligns primary
+  positive examples to the required review-output schema. It does not alter
+  README, other skill files, inventory, workflow artifacts, or platform
+  surfaces. An independent Reviewer must approve this two-file patch before
+  Main Agent / publisher commits, pushes, or resolves any Round 6 thread.
 - Reviewer independently evaluates the latest creator draft and records only
   the required JSON verdict in the review-log routing artifact. Reviewer does
   not implement corrections.
-- Main Agent owns branch/worktree preparation, Phase 4.5 alignment,
-  `publish-in-progress` stable metadata, commit, push, Draft PR, PR routing,
-  and the post-merge stop. Main Agent must route any needed correction to a
-  separate Creator / Implementer rather than modifying the skill directly.
+- Main Agent / publisher owns branch/worktree preparation, Phase 4.5 alignment,
+  the completed initial `publish-in-progress` metadata, Draft PR, PR routing,
+  and the post-merge stop. For the current Round 6 patch, Main Agent / publisher
+  does not modify either implementation file; only after independent Reviewer
+  `approved` does it commit, push, and resolve the Round 6 source threads.
+  Main Agent must route any needed correction to a separate Creator /
+  Implementer rather than modifying the skill directly.
 - The topic must not reopen architecture or path choices recorded above. Any
   needed file outside **Artifact Paths** is plan drift: stop and repair this
   plan before work continues.
@@ -123,23 +146,25 @@ Routing notes:
 
 - The independent Plan-Reviewer accepted the planning baseline recorded at
   commit `125c928`; the independent Skill Reviewer has accepted the Creator's
-  six canonical skill files. The current state is `needs-rework` at
-  `pr-comment-review-and-fix` on Ready PR #123, pending the bounded repair and
-  independent re-review before its PR thread can be resolved.
+  six canonical skill files. The inventory repair was independently approved
+  in Round 5, committed, pushed, and its authoritative threads were resolved.
+  The current state is `needs-rework` at `pr-comment-review-and-fix` on Ready
+  PR #123, pending only the bounded `VERSION` and examples-schema repairs and
+  their independent review.
 - Apply the standard Phase 4.5 planner-alignment rule. An `approved` reviewer
   verdict may still return the topic to `creator-in-progress` for scope,
   contract, path, ownership, or stable-metadata drift.
 - Reviewer feedback that controls rework must be persisted at the exact
   `review-log.md` path; hidden chat is not a routing artifact.
-- PR thread `PRRT_kwDOSC_kWs6bDGEX` is planner-confirmed `low`-severity
-  artifact-scope drift. Its routing is `IMPLEMENT_PATCH`: the topic moves
-  through `pr-open` -> `needs-rework` -> `creator-in-progress` for an
-  independent Implementer to regenerate only the canonical inventory snapshot,
-  then returns to independent review before the PR thread can be resolved.
-- The inventory rework is `ADDRESS`, not `DISCUSS`: a stable canonical skill
-  absent from the checked-in canonical inventory is an incomplete published
-  artifact, even though the existing builder, tests, and inventory schema stay
-  unchanged.
+- The prior inventory `ADDRESS` repair is complete. The current threads
+  `PRRT_kwDOSC_kWs6bDxub`, `PRRT_kwDOSC_kWs6bDxuk`, and
+  `PRRT_kwDOSC_kWs6bDxuv`, and `PRRT_kwDOSC_kWs6bDxuq` require planning-
+  artifact correction. The explicit human-approved `0.79.0` decision and the
+  examples-schema `ADDRESS` route the current implementation only to an
+  independent Implementer for `VERSION` and
+  `skills/boundary-outcome-design/examples.md`; after independent Reviewer
+  `approved`, Main Agent / publisher commits, pushes, and resolves the four
+  Round 6 threads.
 - STOP POINT 1 blocks publication until explicit human commit / push / PR
   authority exists. STOP POINT 2 begins once merge handoff is reached: stop;
   do not poll, sync, tag, release, or infer a resume without a new human
@@ -157,13 +182,13 @@ Routing notes:
 | Overview reference | `skills/boundary-outcome-design/reference.md` | Creator | Navigation and concise boundary-reasoning overview |
 | Layer semantics reference | `skills/boundary-outcome-design/references/layer-semantics.md` | Creator | Domain, Application / UseCase, Port, and Adapter semantic ownership |
 | Persistence failures reference | `skills/boundary-outcome-design/references/persistence-and-failures.md` | Creator | Repository, Unit of Work, Protocol, expected, and unexpected failure guidance |
-| Examples | `skills/boundary-outcome-design/examples.md` | Creator | Positive and negative boundary-design scenarios |
+| Examples | `skills/boundary-outcome-design/examples.md` | Creator; Round 6 independent Implementer | Positive and negative boundary-design scenarios; the Round 6 repair is limited to examples 1--4 |
 | Review checklist | `skills/boundary-outcome-design/checklist.md` | Creator | Repeatable review prompts and anti-pattern detection |
 | Canonical inventory builder | `scripts/build_skills_inventory.py` | Existing inventory contract (read-only) | Sole generator for the deterministic canonical inventory; this topic must not modify it |
 | Inventory builder tests | `tests/test_build_skills_inventory.py` | Existing inventory contract (read-only) | Existing validation of canonical discovery, record schema, determinism, and hash behavior; this topic must not modify them |
 | Generated canonical inventory | `artifacts/skills-inventory.jsonl` | Independent Implementer | Complete deterministic snapshot produced by the existing builder; must contain exactly one `skills/boundary-outcome-design` record and no projection or agent path |
 | Stable-library summary | `README.md` | Main Agent | Exact stable-skill row at `publish-in-progress` |
-| Repository version baseline | `VERSION` | Main Agent | MINOR bump at `publish-in-progress` |
+| Repository version baseline | `VERSION` | Historical initial publication: Main Agent / publisher; Round 6: independent Implementer | Historical `0.77.0` -> `0.78.0` at `publish-in-progress`; current human-approved `0.78.0` -> `0.79.0` comment rework |
 
 Artifact path notes:
 
@@ -182,10 +207,16 @@ Artifact path notes:
   `| \`boundary-outcome-design\` | guides semantic Outcome and exception design across Domain, Application, Port, Adapter, Repository, and Unit of Work boundaries |`
   in the README skills table after
   `business-to-technical-translation` and before `copilot-instructions-init`.
-- `VERSION bump`: `0.77.0` -> `0.78.0` (MINOR).
-- `timing`: `publish-in-progress`, after independent reviewer `approved` and
-  Phase 4.5 planner alignment; include both metadata files in the same bounded
-  publication diff as the approved skill.
+- `VERSION bump`: historical initial publication changed the feature topic
+  `VERSION` from `0.77.0` -> `0.78.0` in commit `5e3f14f`; the PR #123 base
+  commit `7dc4936` remains `0.77.0`. The explicit human override defines the
+  remaining bounded comment rework as `0.78.0` -> `0.79.0` (MINOR).
+- `timing`: the README row remains the completed `publish-in-progress`
+  metadata change. The sole remaining metadata change is the `0.79.0` VERSION
+  repair during `pr-comment-review-and-fix`: an independent Implementer makes
+  the two-file patch, then independent Reviewer approval gates Main Agent /
+  publisher commit, push, and Round 6 thread resolution. It is not a new
+  release action.
 - `rationale`: a new canonical stable-library skill needs discoverability in the
   human-facing catalog and a corresponding backward-compatible MINOR version.
 - `release notes / tags`: none. Post-merge has no tag, release-note, or GitHub
@@ -217,11 +248,22 @@ Artifact path notes:
    complete canonical skill package is present. This overwrites only
    `artifacts/skills-inventory.jsonl`; it must not hand-author JSONL records or
    modify the builder or tests.
+7. An independent Implementer changes only
+   `skills/boundary-outcome-design/examples.md` and `VERSION`. In examples
+   1--4, retain the existing semantic scenarios but add the exact `SKILL.md`
+   review-output fields: `Status`, plural `Boundary actions`, `Missing
+   evidence`, and `Clarification or next step`. Set `VERSION` from `0.78.0`
+   to `0.79.0`; do not modify README, other skill files, inventory, scripts,
+   tests, or platform surfaces. When both allowed writes are complete, hand
+   the patch off as `review-ready`.
 
 ## Validation / Acceptance Checks
 
-- All twelve exact artifact paths exist at the appropriate phase; all six
-  creator-owned companion files are declared by `SKILL.md` local references.
+- All fifteen exact Artifact Paths listed in the table exist at the appropriate
+  phase: four planning artifacts, six Creator-owned skill files, the
+  read-only inventory builder and its tests, the generated inventory, README,
+  and VERSION. All six creator-owned companion files are declared by
+  `SKILL.md` local references.
 - The skill frontmatter and body agree on trigger, purpose, input, process,
   validation, failure handling, and exclusions.
 - Guidance distinguishes infrastructure facts, Port capability outcomes,
@@ -235,8 +277,10 @@ Artifact path notes:
 - The topic plan uses only canonical status transitions, keeps Creator,
   Reviewer, and Main Agent ownership separate, and contains the one JSON
   reviewer handoff object below.
-- At `publish-in-progress`, README contains the exact row once and at the exact
-  placement; `VERSION` is exactly `0.78.0`. No platform projection is changed.
+- README contains the exact row once and at the exact placement. Historical
+  feature commit `5e3f14f` changed `VERSION` from `0.77.0` to `0.78.0` while
+  PR #123 base `7dc4936` remains `0.77.0`. After the current bounded repair,
+  `VERSION` is exactly `0.79.0`; no platform projection is changed.
 - The checked-in inventory is regenerated by the existing builder and validates
   as a complete, sorted canonical `skills/` snapshot. It contains exactly one
   `skills/boundary-outcome-design` record, no `agents/` or platform-projection

@@ -46,8 +46,11 @@
 
 - Planning review and independent skill review are complete with `approved`
   verdicts. Stable metadata was published, the branch was pushed, and Ready PR
-  #123 is open. The bounded PR-comment rework has passed its final independent
-  review; commit, push, and authoritative-thread resolution remain.
+  #123 is open. The inventory PR-comment rework passed Round 5 independent
+  review, was committed and pushed, and its authoritative threads were
+  resolved. The topic remains `needs-rework` at
+  `pr-comment-review-and-fix` only for the subsequently received plan-contract,
+  version, and examples-schema threads recorded below.
 
 ## PR Comment Triage Round 3
 
@@ -134,6 +137,109 @@
     "pytest": "N/A (INFO)"
   },
   "next_step": "commit-push-resolve-authoritative-threads"
+}
+```
+
+## PR Comment Triage Round 6 — Plan Contract and Version Override
+
+- Source threads: `PRRT_kwDOSC_kWs6bDxub`, `PRRT_kwDOSC_kWs6bDxuk`,
+  `PRRT_kwDOSC_kWs6bDxuv`, and `PRRT_kwDOSC_kWs6bDxuq`.
+- `PRRT_kwDOSC_kWs6bDxub`: `ADDRESS`. The progression artifact retained a
+  stale inventory-Implementer handoff after the generated inventory repair and
+  Round 5 independent review had completed. Correct the progression and
+  summary to preserve that completed history and remove the obsolete action.
+- `PRRT_kwDOSC_kWs6bDxuk`: `ADDRESS`. The acceptance check said “twelve exact
+  artifact paths,” but the Artifact Paths table contains fifteen exact paths:
+  four planning artifacts, six skill files, the builder, its tests, generated
+  inventory, README, and VERSION. Preserve the full enumerated contract.
+- `PRRT_kwDOSC_kWs6bDxuv`: `ADDRESS`. Verifiable topic history is that feature
+  commit `5e3f14f` changed `VERSION` from `0.77.0` to `0.78.0`, while PR #123
+  base commit `7dc4936` remains `0.77.0`. The human explicitly defines the
+  remaining Round 6 repair as `0.78.0` -> `0.79.0`.
+- `PRRT_kwDOSC_kWs6bDxuq`: `ADDRESS`. The Round 2 triage finding is in scope:
+  the primary positive examples do not use the review-output schema required
+  by `SKILL.md`. Preserve the scenarios, but align examples 1--4 with
+  `Status`, plural `Boundary actions`, `Missing evidence`, and
+  `Clarification or next step`.
+- Routing: the explicit human override makes `PRRT_kwDOSC_kWs6bDxuv`
+  `ADDRESS`; `PRRT_kwDOSC_kWs6bDxuq` is also `ADDRESS`. The returned planning
+  artifacts require independent Plan-Reviewer re-review first. After its
+  `approved` verdict, an independent Implementer may change only `VERSION`
+  and `skills/boundary-outcome-design/examples.md`. An independent Reviewer
+  must approve that bounded two-file patch before Main Agent / publisher
+  commits, pushes, and resolves all four source threads. The workflow remains
+  `needs-rework` / `pr-comment-review-and-fix` until then.
+
+```json
+{
+  "review_kind": "pr-comment-plan-contract-correction",
+  "verdict": "needs-rework",
+  "blocking_issues": [
+    {
+      "thread_id": "PRRT_kwDOSC_kWs6bDxuv",
+      "classification": "ADDRESS",
+      "required_change": "VERSION 0.78.0 -> 0.79.0",
+      "owner": "independent Implementer"
+    },
+    {
+      "thread_id": "PRRT_kwDOSC_kWs6bDxuq",
+      "classification": "ADDRESS",
+      "required_change": "Align primary positive examples to the SKILL.md review-output schema",
+      "owner": "independent Implementer"
+    }
+  ],
+  "implementation": {
+    "allowed_write_paths": [
+      "VERSION",
+      "skills/boundary-outcome-design/examples.md"
+    ],
+    "required_next_gate": "independent Plan-Reviewer re-review, then independent Reviewer approval"
+  },
+  "copilot_feedback_triage": {
+    "ADDRESS": [
+      "PRRT_kwDOSC_kWs6bDxub",
+      "PRRT_kwDOSC_kWs6bDxuk",
+      "PRRT_kwDOSC_kWs6bDxuv",
+      "PRRT_kwDOSC_kWs6bDxuq"
+    ],
+    "DISCUSS": [],
+    "SKIP": []
+  },
+  "workflow_state": {
+    "status": "needs-rework",
+    "current_step": "pr-comment-review-and-fix",
+    "next_step": "plan-reviewer-round-6-re-review"
+  }
+}
+```
+
+## Plan Review Round 6 — Step 7 Role-Boundary Correction
+
+- Reviewer: independent Plan-Reviewer
+- Verdict: `approved`
+- Scope reviewed: the Round 6 Step 7 role-boundary correction only. It
+  confines the independent Implementer to `VERSION` (`0.78.0` -> `0.79.0`)
+  and the primary positive examples 1--4 schema fields in
+  `skills/boundary-outcome-design/examples.md`.
+- Next step: an independent Implementer applies that bounded two-file patch.
+  Independent Reviewer approval and Main Agent / publisher commit, push, and
+  source-thread resolution remain outside Implementation Steps and are still
+  required before the four Round 6 threads may be resolved.
+
+```json
+{
+  "verdict": "approved",
+  "blocking_issues": [],
+  "copilot_feedback_triage": {
+    "ADDRESS": [],
+    "DISCUSS": [],
+    "SKIP": [
+      {
+        "comment": "Round 6 Step 7 role-boundary correction.",
+        "why": "Implementation Step 7 now confines the independent Implementer to VERSION 0.78.0 -> 0.79.0 and examples 1--4 schema fields, then hands off as review-ready. Reviewer approval and Main Agent / publisher commit, push, and thread-resolution gates remain outside Implementation Steps in workflow, metadata, and routing sections."
+      }
+    ]
+  }
 }
 ```
 
