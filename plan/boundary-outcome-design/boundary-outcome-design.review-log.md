@@ -51,8 +51,74 @@
   resolved. The Round 6 version and examples-schema patch was also
   independently approved at PR head `45e8fe5`, committed, pushed, and its
   source threads were resolved. The topic remains `needs-rework` at
-  `pr-comment-review-and-fix` only for two subsequently received bounded skill
-  fixes and their final independent review.
+  `pr-comment-review-and-fix`: Round 3's receiving-consumer
+  contract/checklist/inventory patch is already applied at `f51773d`; only the
+  Round 4 examples receiving-consumer repair and one independent review of the
+  combined bounded skill patch remain.
+
+## PR Comment Triage Round 4 — Receiving Consumer Follow-up
+
+- Source thread `PRRT_kwDOSC_kWs6bFP5-`: `ADDRESS`, completed by this
+  Plan-Creator workflow-truth correction. The prior handoff incorrectly routed
+  the already-applied Round 3 patch back to an Implementer. Commit `f51773d`
+  already changed the required distinction schema in `SKILL.md`, synchronized
+  `checklist.md`, and regenerated the inventory with the unchanged builder.
+- Source thread `PRRT_kwDOSC_kWs6bFP57`: `ADDRESS`, pending independent
+  Implementer repair. In positive examples 1--4, every
+  decision-relevant-distinction row must explicitly name both the receiving
+  consumer (role/layer) and that consumer's decision, matching the canonical
+  required-output schema.
+- Frozen implementation scope: only
+  `skills/boundary-outcome-design/examples.md` for the new Round 4 repair.
+  Do not modify `SKILL.md`, `checklist.md`, inventory, README, VERSION,
+  scripts, tests, or platform projections. The completed Round 3 files are
+  review evidence, not a second implementation task.
+- Required gate: after the examples repair, an independent Reviewer must
+  review the combined bounded skill patch: the completed Round 3
+  `SKILL.md`/`checklist.md`/inventory changes and the Round 4 `examples.md`
+  repair. Commit, push, and resolution of the two Round 4 source threads occur
+  only after that verdict.
+
+```json
+{
+  "review_kind": "pr-comment-triage-round-4-receiving-consumer-follow-up",
+  "verdict": "needs-rework",
+  "completed_patch": {
+    "commit": "f51773d",
+    "state": "implementation-complete-awaiting-independent-review",
+    "paths": [
+      "skills/boundary-outcome-design/SKILL.md",
+      "skills/boundary-outcome-design/checklist.md",
+      "artifacts/skills-inventory.jsonl"
+    ]
+  },
+  "blocking_issues": [
+    {
+      "thread_id": "PRRT_kwDOSC_kWs6bFP57",
+      "classification": "ADDRESS",
+      "required_change": "For every distinction in positive examples 1--4, name receiving consumer and consumer decision.",
+      "owner": "independent Implementer"
+    }
+  ],
+  "completed_routing_correction": {
+    "thread_id": "PRRT_kwDOSC_kWs6bFP5-",
+    "owner": "Plan-Creator",
+    "result": "Round 3 is implementation complete; next implementation is only the Round 4 examples repair."
+  },
+  "implementation": {
+    "allowed_write_paths": [
+      "skills/boundary-outcome-design/examples.md"
+    ],
+    "required_next_gate": "independent Reviewer approval of the combined Round 3 and Round 4 bounded skill patch",
+    "thread_resolution": "after-independent-review, commit, and push"
+  },
+  "workflow_state": {
+    "status": "needs-rework",
+    "current_step": "pr-comment-review-and-fix",
+    "next_step": "independent-implementer-examples-receiving-consumer-repair"
+  }
+}
+```
 
 ## PR Comment Triage Round 3
 

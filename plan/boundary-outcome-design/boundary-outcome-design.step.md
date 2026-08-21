@@ -2,7 +2,7 @@
 topic: boundary-outcome-design
 status: needs-rework
 current_step: pr-comment-review-and-fix
-next_step: independent-implementer-two-new-skill-fixes
+next_step: independent-implementer-examples-receiving-consumer-repair
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -107,9 +107,22 @@ analysis_layer: absent-non-blocking-warning
   threads were resolved. In particular, `PRRT_kwDOSC_kWs6bDxub` no longer
   leaves a stale inventory-repair handoff: the completed inventory history and
   the Round 6 approval are both persisted in the workflow artifacts.
-- [ ] Route the two newly received bounded skill fixes to an independent
-  Implementer, then obtain one final independent Reviewer verdict before any
-  further PR-thread resolution or merge handoff.
+- [X] Round 3 already applied the receiving-consumer contract repair at
+  `f51773d`: `SKILL.md` now requires a receiving consumer for each
+  distinction, `checklist.md` verifies it, and the unchanged inventory builder
+  regenerated `artifacts/skills-inventory.jsonl`. This completed patch must
+  not be routed to an Implementer again.
+- [X] Plan-Creator synchronized the stale implementer handoff after source
+  thread `PRRT_kwDOSC_kWs6bFP5-`: the existing Round 3 patch is implementation
+  complete, not pending implementation.
+- [ ] Route only source thread `PRRT_kwDOSC_kWs6bFP57` to an independent
+  Implementer. The allowed skill write is
+  `skills/boundary-outcome-design/examples.md`: examples 1--4 must name the
+  receiving consumer and consumer decision for every listed distinction.
+- [ ] Obtain one independent Reviewer verdict after the examples repair. The
+  review scope is the existing Round 3 contract/checklist/inventory patch plus
+  the new examples repair; do not resolve either Round 4 source thread or
+  advance to merge handoff before that verdict and the subsequent commit/push.
 
 ### merge-handoff
 
@@ -123,9 +136,12 @@ analysis_layer: absent-non-blocking-warning
   publication, human review, the inventory repair, its Round 5 independent
   review, and the Round 6 `VERSION` / examples-schema repair are complete.
   The Round 6 repair was independently approved at PR head `45e8fe5`, then
-  committed, pushed, and its source threads were resolved. Ready PR #123 now
-  awaits two newly received bounded skill fixes and their final independent
-  review; it does not await review of the already-approved Round 6 patch.
+  committed, pushed, and its source threads were resolved. The Round 3
+  receiving-consumer contract/checklist/inventory patch is already applied at
+  `f51773d`; Ready PR #123 now awaits only the Round 4 examples
+  receiving-consumer repair and one independent review of the combined bounded
+  skill patch. It does not await implementation of the already-applied Round 3
+  patch or review of the already-approved Round 6 patch.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the

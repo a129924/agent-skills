@@ -11,8 +11,10 @@ Plan-Reviewer Round 6 gate and the bounded `VERSION` / primary-examples repair
 also passed independent review at PR head `45e8fe5`; `VERSION` is `0.79.0` and
 examples 1--4 use the required review-output fields. That approved repair was
 committed, pushed, and its source threads were resolved. The current rework is
-limited to two newly received skill fixes followed by one final independent
-review; no review remains pending for the Round 6 patch.
+limited to the Round 4 examples receiving-consumer repair followed by one
+independent review of that repair together with the already-applied Round 3
+contract/checklist/inventory patch. No review remains pending for the Round 6
+patch, and Round 3 must not be re-implemented.
 
 ## Completed
 
@@ -51,22 +53,28 @@ review; no review remains pending for the Round 6 patch.
 
 ## Not completed
 
-- Two newly received bounded skill fixes and the final independent Reviewer
-  verdict for those fixes.
+- The Round 4 examples receiving-consumer repair: for every distinction in
+  positive examples 1--4, name the receiving consumer and that consumer's
+  decision.
+- One independent Reviewer verdict for the combined already-applied Round 3
+  contract/checklist/inventory patch and the Round 4 examples repair.
 - Remaining PR review / merge decision. No merge or post-merge operation has
   occurred.
 
 ## Required follow-up
 
-Main Agent must route the two new bounded skill fixes to an independent
-Implementer and then dispatch an independent Reviewer for the completed new
-patch. The prior `VERSION` / examples 1--4 evidence is closed: its approved
-review is recorded at head `45e8fe5`, and the source threads are resolved.
-This state update is not authorization to modify README, inventory, scripts,
-tests, or platform surfaces.
+Main Agent must route only the Round 4 examples receiving-consumer repair to
+an independent Implementer, then dispatch an independent Reviewer for the
+combined Round 3 and Round 4 bounded skill patch. Round 3 was already applied
+at `f51773d`; it is review evidence, not a task to repeat. The prior `VERSION`
+/ examples 1--4 evidence is closed: its approved review is recorded at head
+`45e8fe5`, and the source threads are resolved. This state update is not
+authorization to modify README, VERSION, inventory, scripts, tests, or
+platform surfaces.
 
 ## Next handoff
 
 - **Next actor:** Independent Implementer
-- **Next step:** Apply only the two newly routed skill fixes, then hand the
-  bounded patch to an independent Reviewer for final review.
+- **Next step:** Apply only the Round 4 examples receiving-consumer repair,
+  then hand the combined bounded skill patch to an independent Reviewer for
+  final review.
