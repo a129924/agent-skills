@@ -34,8 +34,16 @@ Use this checklist before handing off a review or recommendation.
 - [ ] Expected failures have a named consumer decision.
 - [ ] Defects, impossible states, and unknown technical failures are not added
       to a Result union merely for completeness.
-- [ ] The review output includes observed boundary, potential vocabulary leak,
-      decision-relevant distinctions, suggested translation point, suggested
-      outcome granularity, and boundary action.
+- [ ] The review output has a `Status` of `READY`, `INCOMPLETE`, or `BLOCKED`.
+- [ ] The review output includes the observed boundary and potential vocabulary
+      leak.
+- [ ] Every decision-relevant distinction names both its receiving consumer and
+      that consumer's decision.
+- [ ] The review output includes a suggested translation point and suggested
+      outcome granularity.
+- [ ] The review output lists one or more `Boundary actions`, with a
+      justification for each action.
+- [ ] The review output includes `Missing evidence`.
+- [ ] The review output includes `Clarification or next step`.
 - [ ] Missing evidence is marked `INCOMPLETE`; materially different plausible
       policies are marked `BLOCKED` rather than guessed.

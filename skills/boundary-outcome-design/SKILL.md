@@ -124,7 +124,7 @@ Potential vocabulary leak:
 <none, or lower-layer term and why it leaks>
 
 Decision-relevant distinctions:
-- <distinction>: <consumer decision>
+- <distinction>: receiving consumer=<role/layer>; consumer decision=<action>
 
 Suggested translation point:
 <layer/component, or none>

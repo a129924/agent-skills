@@ -2,7 +2,7 @@
 topic: boundary-outcome-design
 status: needs-rework
 current_step: pr-comment-review-and-fix
-next_step: independent-review-round-6
+next_step: independent-implementer-two-new-skill-fixes
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -99,11 +99,17 @@ analysis_layer: absent-non-blocking-warning
   `Clarification or next step`. These are `ADDRESS` repairs for
   `PRRT_kwDOSC_kWs6bDxuv` and `PRRT_kwDOSC_kWs6bDxuq`; do not change README,
   other skill files, inventory, scripts, tests, or platform surfaces.
-- [ ] Obtain independent Reviewer `approved` for that bounded two-file change.
-  Only then may Main Agent / publisher commit, push, and resolve threads
-  `PRRT_kwDOSC_kWs6bDxub`,
-  `PRRT_kwDOSC_kWs6bDxuk`, `PRRT_kwDOSC_kWs6bDxuv`, and
-  `PRRT_kwDOSC_kWs6bDxuq`.
+- [X] Independent Reviewer Round 6 approved the bounded `VERSION` and
+  primary-examples repair at PR head `45e8fe5`. The approved evidence confirms
+  `VERSION` is `0.79.0` and examples 1--4 use `Status`, plural `Boundary
+  actions`, `Missing evidence`, and `Clarification or next step`.
+- [X] The approved repair was committed, pushed, and the Round 6 source
+  threads were resolved. In particular, `PRRT_kwDOSC_kWs6bDxub` no longer
+  leaves a stale inventory-repair handoff: the completed inventory history and
+  the Round 6 approval are both persisted in the workflow artifacts.
+- [ ] Route the two newly received bounded skill fixes to an independent
+  Implementer, then obtain one final independent Reviewer verdict before any
+  further PR-thread resolution or merge handoff.
 
 ### merge-handoff
 
@@ -112,14 +118,14 @@ analysis_layer: absent-non-blocking-warning
 
 ## Handoff / Gate Notes
 
-- Current status is `needs-rework`; planning review, independent skill review,
-  planner alignment, stable-library publication, human review, the inventory
-  repair, and its Round 5 independent review are complete. The independent
-  Plan-Reviewer Round 6 gate and the bounded independent Implementer patch
-  are also complete. Ready PR #123 now awaits an independent Reviewer verdict
-  for the `VERSION` `0.78.0` -> `0.79.0` and examples-schema repairs. Only
-  after that approval may Main Agent / publisher commit, push, and resolve the
-  Round 6 threads.
+- Current status is `needs-rework` at `pr-comment-review-and-fix`. Planning
+  review, independent skill review, planner alignment, stable-library
+  publication, human review, the inventory repair, its Round 5 independent
+  review, and the Round 6 `VERSION` / examples-schema repair are complete.
+  The Round 6 repair was independently approved at PR head `45e8fe5`, then
+  committed, pushed, and its source threads were resolved. Ready PR #123 now
+  awaits two newly received bounded skill fixes and their final independent
+  review; it does not await review of the already-approved Round 6 patch.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the

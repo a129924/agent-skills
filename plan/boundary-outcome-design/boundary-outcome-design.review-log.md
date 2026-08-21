@@ -48,9 +48,11 @@
   verdicts. Stable metadata was published, the branch was pushed, and Ready PR
   #123 is open. The inventory PR-comment rework passed Round 5 independent
   review, was committed and pushed, and its authoritative threads were
-  resolved. The topic remains `needs-rework` at
-  `pr-comment-review-and-fix` only for the subsequently received plan-contract,
-  version, and examples-schema threads recorded below.
+  resolved. The Round 6 version and examples-schema patch was also
+  independently approved at PR head `45e8fe5`, committed, pushed, and its
+  source threads were resolved. The topic remains `needs-rework` at
+  `pr-comment-review-and-fix` only for two subsequently received bounded skill
+  fixes and their final independent review.
 
 ## PR Comment Triage Round 3
 
@@ -240,6 +242,47 @@
       }
     ]
   }
+}
+```
+
+## PR-comment Rework Independent Review Round 6
+
+- Reviewer: independent Reviewer
+- Verdict: `approved`
+- Evidence: PR head `45e8fe5` contains the approved bounded repair. `VERSION`
+  is `0.79.0`; primary positive examples 1--4 retain their scenarios and use
+  the required `SKILL.md` review-output fields: `Status`, plural `Boundary
+  actions`, `Missing evidence`, and `Clarification or next step`.
+- Scope reviewed: only `VERSION` and
+  `skills/boundary-outcome-design/examples.md`. This approval closes the
+  already-completed Round 6 implementation gate; it is not approval of the
+  two subsequently received skill fixes.
+- Stale-state correction: `PRRT_kwDOSC_kWs6bDxub` required the progression
+  evidence to stop advertising a completed repair as pending. The step and
+  summary artifacts now retain the completed inventory history, the Round 6
+  approval evidence, and the actual current rework state.
+- Thread resolution eligibility: after the approved repair was committed and
+  pushed, source threads `PRRT_kwDOSC_kWs6bDxub`,
+  `PRRT_kwDOSC_kWs6bDxuk`, `PRRT_kwDOSC_kWs6bDxuv`, and
+  `PRRT_kwDOSC_kWs6bDxuq` were resolved.
+
+```json
+{
+  "review_kind": "pr-comment-rework-independent-review-round-6",
+  "verdict": "approved",
+  "blocking_issues": [],
+  "evidence": {
+    "pr_head": "45e8fe5",
+    "version": "0.79.0",
+    "primary_examples_1_to_4_schema": "pass"
+  },
+  "resolved_thread_ids": [
+    "PRRT_kwDOSC_kWs6bDxub",
+    "PRRT_kwDOSC_kWs6bDxuk",
+    "PRRT_kwDOSC_kWs6bDxuv",
+    "PRRT_kwDOSC_kWs6bDxuq"
+  ],
+  "next_step": "route-two-new-skill-fixes-then-final-independent-review"
 }
 ```
 

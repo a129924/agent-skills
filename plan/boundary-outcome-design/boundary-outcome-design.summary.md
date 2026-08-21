@@ -7,11 +7,12 @@ feature worktree, four topic planning artifacts, six Creator-owned canonical
 skill files, the stable README row, and the completed inventory repair exist.
 The inventory repair passed the Round 5 independent review, was committed and
 pushed, and its authoritative threads were resolved. The independent
-Plan-Reviewer Round 6 gate has approved the returned planning artifacts, and
-the bounded independent Implementer patch is present in the worktree:
-`VERSION` is `0.79.0` and primary examples 1--4 use the required review-output
-fields. The patch awaits its final independent Reviewer verdict; no final
-general review has been approved.
+Plan-Reviewer Round 6 gate and the bounded `VERSION` / primary-examples repair
+also passed independent review at PR head `45e8fe5`; `VERSION` is `0.79.0` and
+examples 1--4 use the required review-output fields. That approved repair was
+committed, pushed, and its source threads were resolved. The current rework is
+limited to two newly received skill fixes followed by one final independent
+review; no review remains pending for the Round 6 patch.
 
 ## Completed
 
@@ -43,30 +44,29 @@ general review has been approved.
 - Received the bounded independent Implementer patch: `VERSION` is bumped
   from `0.78.0` to `0.79.0`, and examples 1--4 are aligned with the required
   review-output schema.
+- Recorded the independent Reviewer Round 6 `approved` verdict for that
+  two-file patch at PR head `45e8fe5`; committed and pushed the approved
+  result, resolved its source threads, and removed the stale state that still
+  described the patch as awaiting review.
 
 ## Not completed
 
-- Independent Reviewer approval of the bounded two-file implementation; this
-  is not yet a final general-review approval. After approval, Main Agent /
-  publisher must commit, push, and resolve
-  `PRRT_kwDOSC_kWs6bDxub`, `PRRT_kwDOSC_kWs6bDxuk`,
-  `PRRT_kwDOSC_kWs6bDxuv`, and `PRRT_kwDOSC_kWs6bDxuq`.
+- Two newly received bounded skill fixes and the final independent Reviewer
+  verdict for those fixes.
 - Remaining PR review / merge decision. No merge or post-merge operation has
   occurred.
 
 ## Required follow-up
 
-Main Agent must dispatch an independent Reviewer for the already-complete
-two-file patch (`VERSION` and
-`skills/boundary-outcome-design/examples.md`). The reviewer must verify the
-human-approved `0.78.0` -> `0.79.0` bump and examples 1--4 schema alignment.
-Only after its `approved` verdict may Main Agent / publisher commit, push, and
-resolve the four Round 6 threads. This is not authorization to modify README,
-other skill files, inventory, scripts, tests, or platform surfaces.
+Main Agent must route the two new bounded skill fixes to an independent
+Implementer and then dispatch an independent Reviewer for the completed new
+patch. The prior `VERSION` / examples 1--4 evidence is closed: its approved
+review is recorded at head `45e8fe5`, and the source threads are resolved.
+This state update is not authorization to modify README, inventory, scripts,
+tests, or platform surfaces.
 
 ## Next handoff
 
-- **Next actor:** Independent Reviewer
-- **Next step:** Review the completed `VERSION` and primary-positive-examples
-  patch. On `approved`, hand off to Main Agent / publisher for commit, push,
-  and resolution of only the four Round 6 source threads.
+- **Next actor:** Independent Implementer
+- **Next step:** Apply only the two newly routed skill fixes, then hand the
+  bounded patch to an independent Reviewer for final review.
