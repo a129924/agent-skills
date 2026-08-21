@@ -1,8 +1,8 @@
 ---
 topic: boundary-outcome-design
-status: planned
-current_step: plan-review
-next_step: independent-plan-review
+status: approved
+current_step: planner-alignment
+next_step: phase-4.5-planner-alignment
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -13,9 +13,9 @@ analysis_layer: absent-non-blocking-warning
 
 - [X] worktree
 - [X] planning-artifacts
-- [ ] plan-review
-- [ ] creator-implementation
-- [ ] independent-review
+- [X] plan-review
+- [X] creator-implementation
+- [X] independent-review
 - [ ] planner-alignment
 - [ ] publish
 - [ ] human-review
@@ -40,23 +40,23 @@ analysis_layer: absent-non-blocking-warning
 
 ### plan-review
 
-- [ ] Obtain an independent Plan-Reviewer verdict using the JSON contract in
-  the topic plan.
-- [ ] If the verdict is `needs-rework`, return only planning-artifact repairs to
-  Plan-Creator, persist the verdict in the review log, and re-review.
+- [X] Obtain the independent Plan-Reviewer `approved` verdict using the JSON
+  contract; the approved planning baseline is commit `125c928`.
+- [X] Persist the verdict in the review log. No planning rework is open.
 
 ### creator-implementation
 
-- [ ] After plan approval, dispatch a separate Creator / Implementer to create
-  only the six canonical skill files in the frozen artifact set.
-- [ ] Do not allow Creator to write reviewer verdicts, stable metadata, or git /
-  PR actions.
+- [X] A separate Creator / Implementer delivered only the six canonical skill
+  files in the frozen artifact set.
+- [X] Creator delivery is complete and has entered `review-ready`; it does not
+  constitute independent skill approval, stable metadata, or git / PR action.
 
 ### independent-review
 
-- [ ] Dispatch an independent Reviewer for the creator-owned skill output.
-- [ ] Persist reviewer-controlled routing in the review log. `needs-rework`
-  returns to a separate Creator / Implementer; `approved` proceeds to Phase 4.5.
+- [X] Independent Skill Reviewer approved all six canonical Creator-owned skill
+  files and persisted the JSON verdict in the review log.
+- [X] Reviewer recorded `pytest` as N/A (INFO); the result does not replace the
+  required independent review verdict.
 
 ### planner-alignment
 
@@ -84,8 +84,9 @@ analysis_layer: absent-non-blocking-warning
 
 ## Handoff / Gate Notes
 
-- Current status is `planned`; plan review is pending. No creator implementation
-  or stable-library publication is yet approved by workflow state.
+- Current status is `approved`; planning review and independent skill review are
+  approved. Phase 4.5 planner alignment and stable-library publication remain
+  pending.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the

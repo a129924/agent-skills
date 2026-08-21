@@ -92,7 +92,7 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`
+- **Current**: `approved`
 - **Execution model**: canonical creator -> independent reviewer -> planner
   alignment -> publish -> Draft PR -> human review / merge handoff. The topic
   stops after merge and does not enter a release phase.
@@ -113,6 +113,10 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 Routing notes:
 
+- The independent Plan-Reviewer accepted the planning baseline recorded at
+  commit `125c928`; the independent Skill Reviewer has accepted the Creator's
+  six canonical skill files. The current state is `approved` and awaits Phase
+  4.5 planner alignment; it is not yet authorization for publication.
 - Apply the standard Phase 4.5 planner-alignment rule. An `approved` reviewer
   verdict may still return the topic to `creator-in-progress` for scope,
   contract, path, ownership, or stable-metadata drift.

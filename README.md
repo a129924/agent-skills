@@ -303,6 +303,7 @@ Process documentation and workflow guidance for repository operations:
 | `agent-skill-template` | provides the canonical template with complexity-gated sections and risk-based validation guidance |
 | `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines at `analysis/<topic>/requirements.md` through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
 | `business-to-technical-translation` | translates frozen business baselines into technical specs with feasibility checks, architecture-compliance analysis, cost-of-realization warnings, and rollback-to-alignment triggers |
+| `boundary-outcome-design` | guides semantic Outcome and exception design across Domain, Application, Port, Adapter, Repository, and Unit of Work boundaries |
 | `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with stale-fact and overwrite-choice hard stops |
 | `context-package-builder` | builds one minimal handoff package for a real subAgent dispatch, keeping only frozen truth, bounded evidence, and explicit unknowns while excluding whole-chat history, registry hints, and workflow reconstruction |
 | `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
