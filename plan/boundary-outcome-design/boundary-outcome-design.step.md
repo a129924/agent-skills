@@ -1,8 +1,8 @@
 ---
 topic: boundary-outcome-design
-status: approved
-current_step: planner-alignment
-next_step: phase-4.5-planner-alignment
+status: human-review
+current_step: human-review
+next_step: await-human-review
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -16,8 +16,8 @@ analysis_layer: absent-non-blocking-warning
 - [X] plan-review
 - [X] creator-implementation
 - [X] independent-review
-- [ ] planner-alignment
-- [ ] publish
+- [X] planner-alignment
+- [X] publish
 - [ ] human-review
 - [ ] merge-handoff
 
@@ -60,18 +60,16 @@ analysis_layer: absent-non-blocking-warning
 
 ### planner-alignment
 
-- [ ] Main Agent verifies scope, contract, path, ownership, and stable-metadata
+- [X] Main Agent verified scope, contract, path, ownership, and stable-metadata
   alignment against the frozen topic plan.
-- [ ] Any drift returns to `creator-in-progress`; otherwise move to
-  `publish-in-progress`.
+- [X] No drift required rework; the topic advanced to `publish-in-progress`.
 
 ### publish
 
-- [ ] At `publish-in-progress`, Main Agent adds the exact README row, changes
-  `VERSION` to `0.78.0`, validates the bounded diff, then acts only with STOP
-  POINT 1 human authorization.
-- [ ] Commit by topic, push, and open a Draft PR only after approval and passing
-  validation.
+- [X] At `publish-in-progress`, Main Agent added the exact README row, changed
+  `VERSION` to `0.78.0`, and validated the bounded diff with STOP POINT 1 human
+  authorization.
+- [X] Committed by topic, pushed, and opened Draft PR #123 after validation.
 
 ### human-review
 
@@ -84,9 +82,9 @@ analysis_layer: absent-non-blocking-warning
 
 ## Handoff / Gate Notes
 
-- Current status is `approved`; planning review and independent skill review are
-  approved. Phase 4.5 planner alignment and stable-library publication remain
-  pending.
+- Current status is `human-review`; planning review, independent skill review,
+  planner alignment, and stable-library publication are complete. Draft PR #123
+  is awaiting human review.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the
