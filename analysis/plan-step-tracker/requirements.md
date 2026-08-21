@@ -204,4 +204,3 @@ created: YYYY-MM-DD
 此文件已凍結（v2）。所有需求有明確 actor、條件、可觀察結果與 metric。  
 **C1、C2 已解決；C3 已決定（Python CLI 為主執行層）。**  
 新增需求 R8（Python CLI）與 R9（Tests）可進入技術翻譯。
-

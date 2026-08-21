@@ -294,6 +294,7 @@ Process documentation and workflow guidance for repository operations:
 | `OTHER-PROJECT-EXAMPLES.md` | changelog of external ideas adopted into this repository's stable library via the reference intake workflow |
 | `docs/migration/codex-skills-spec-worktree.md` | branch-local spec-worktree validation contract for `.codex/skills/` projection experiments |
 | `docs/migration/plan-review-protocol.md` | repeatable planner/reviewer protocol for migration-branch `plan.md` review |
+| `docs/process/wsl-native-pre-commit-validation.md` | run pre-commit for a Windows linked worktree commit from WSL-native Git metadata |
 
 ## Current skills
 | Skill | Role |
@@ -351,6 +352,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
 | `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
 | `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
+| `semantic-first-design` | guides Python-first design and review toward explicit contracts, states, policies, boundaries, composition, and failure semantics |
 | `step-creator` | creates one caller-selected `base-plan`, `agent-skill-plan`, or `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible plan with fixed worktree, PR, release, and cleanup gates |
 | `subagent-dispatch-policy` | chooses the next allowed role for one bounded task slice, or stops, without turning file paths, registries, or runtime semantics into dispatch targets |
 | `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |

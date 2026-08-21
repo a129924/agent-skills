@@ -327,4 +327,3 @@ Artifact path notes:
   - machine-readable block validation and supported assertion-kind checks
   - risk-alignment, locatability, and lane-mismatch review checks
   - no default widening into authoring or executor changes
-

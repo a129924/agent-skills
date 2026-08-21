@@ -84,7 +84,14 @@ Do not use this skill when:
    `Preserve`, `Translate`, `Compress`, `Promote to application-safe
    exception`, or `Leave as unexpected exception`. Identify the translation
    point for every `Translate` or `Compress` action. Do not mirror every
-   lower-layer exception just by changing its name.
+   lower-layer exception just by changing its name. `Promote` is for an
+   expected failure that needs a controlled exception path rather than a
+   value-style outcome. For an unexpected failure, select `Leave as
+   unexpected exception`; if it must cross a boundary, also name the
+   controlled-propagation exception boundary (for example, the Application
+   delivery boundary/global error handler) and any application-safe wrapping
+   there. Such wrapping does not reclassify the failure as `Promote` or as an
+   expected outcome.
 5. **Check state against operation.** Decide whether `None` or another
    optional value is a legal Domain state before calling it a failure. A valid
    state becomes an error only when the current operation rejects it, such as
@@ -194,11 +201,15 @@ Clarification or next step:
 
 ## Ambiguous Requirement
 
-- `BLOCKED` when multiple plausible caller decisions would produce materially
-  different granularity or boundary actions. Ask which consumer decision is
+- When caller-decision evidence is unavailable, use `INCOMPLETE` if no
+  unresolved policy choice has been identified: request the missing evidence
+  and give only a conditional recommendation.
+- `BLOCKED` takes precedence over `INCOMPLETE` when the available context
+  identifies multiple plausible caller decisions that would produce
+  materially different granularity or boundary actions. Ask which policy is
   intended; do not choose a taxonomy by preference.
-- If the decision differs only in non-material implementation detail, state
-  the assumption and continue with the least-leaky option.
+- If the alternatives differ only in non-material implementation detail,
+  state the assumption and continue with the least-leaky option.
 
 ## Execution Limitation
 

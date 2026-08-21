@@ -395,17 +395,17 @@ This phase now includes **two complementary review layers**:
 - Command pattern:
   ```
   /fleet 根據 review-checklist.md 與 plan 評審 .github/skills/<skill-name>/
-  
+
   路徑：
     - Skill folder: .github/skills/<skill-name>/
     - Topic plan: plan/<topic>/<topic>.plan.md
-  
+
    評審內容：
      1. 符合 plan 的 Implementation steps？
      2. 例子和參考資料足夠深入？
      3. Copilot 的評論是否都妥當？(address/discuss/skip)
      4. `Artifact paths` 是否有效且與實際輸出位置一致？
-  
+
   回傳 JSON：
   {
     "verdict": "approved|needs-rework",
@@ -457,7 +457,7 @@ This phase now includes **two complementary review layers**:
 ```
 
 #### Decision routing
-1. If verdict is `needs-rework`: 
+1. If verdict is `needs-rework`:
    - Extract blocking issues
    - Route to creator; move topic to `creator-in-progress`
    - Creator fixes and loops back to Step 4a
@@ -613,20 +613,20 @@ Ready to commit + push + open PR on GitHub?
 1. Commit all approved changes:
    ```bash
    git commit -m "feat: add <skill-name> skill to stable library
-   
+
    - Implements [topic-name] plan
    - SKILL.md with all required sections
    - examples.md with positive/negative cases
    - README.md updated (new row per stable-library metadata)
    - VERSION bumped: [old] → [new]
-   
+
    Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
    ```
 
 2. Commit plan status update:
    ```bash
    git commit -m "chore: mark plan status as pr-open
-   
+
    Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
    ```
 
@@ -798,7 +798,7 @@ Ready to hand off to human merge and stop here?
 - Do not poll, wait in the background, or ask again automatically.
 - A human may later resume from this stop point with a new explicit message.
 
-**If [Y]**: 
+**If [Y]**:
 - Instruct user: "Go to [PR link] and click Merge"
 - Stop the current execution immediately after handoff.
 - Do not poll GitHub for merge detection.

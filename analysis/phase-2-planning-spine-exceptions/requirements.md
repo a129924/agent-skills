@@ -112,4 +112,3 @@ This topic does not affect stable-library release surfaces.
 - no `README.md` update
 - no `VERSION` update
 - no release note or tag work
-

@@ -143,7 +143,9 @@ Decision-relevant distinctions:
 - unexpected driver failure: no defined local recovery decision
 
 Suggested translation point:
-Repository for lookup capability; Unit of Work for transaction completion.
+Repository for lookup capability; Unit of Work for transaction completion;
+Application delivery boundary/global error handler for controlled propagation
+of an unexpected driver failure.
 
 Suggested outcome granularity:
 Entity | absence at lookup; Committed | Conflict at commit; unexpected failure stays controlled propagation.
@@ -154,7 +156,10 @@ Boundary actions:
 - write conflict: Translate at Unit of Work commit and preserve the conflict
   distinction because the caller may refresh, retry, or report it.
 - unexpected driver failure: Leave as an unexpected exception with controlled
-  propagation because no local recovery decision is defined.
+  propagation to the Application delivery boundary/global error handler,
+  because no local recovery decision is defined. That boundary may wrap it as
+  an application-safe exception without reclassifying it as an expected
+  outcome.
 
 Missing evidence:
 - none
@@ -176,7 +181,9 @@ absence, ask for conflict resolution, and retry.
 `SdkTimeoutError` with identically named Outcome classes is not translation if
 the caller still sees only SDK facts and no new semantic decision is described.
 
-**Appropriate promotion:** If a corrupted invariant reaches an Application
-boundary, do not add `CorruptedInvariant` to every normal result union merely
-for completeness. Recommend the controlled application-safe exception/global
-handler path and identify it as unexpected.
+**Unexpected exception handling:** If a corrupted invariant reaches an
+Application boundary, do not add `CorruptedInvariant` to every normal result
+union merely for completeness. Leave it as an unexpected exception and route
+it through the named Application delivery boundary/global error handler. That
+boundary may safely wrap it for delivery, but this is not `Promote` and does
+not make the defect an expected outcome.

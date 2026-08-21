@@ -41,7 +41,7 @@
          - id: ruff
            args: ["--fix"]
          - id: ruff-format
-   
+
      # trailing-whitespace, check-yaml etc
      - repo: https://github.com/pre-commit/pre-commit-hooks
        rev: v4.5.0
@@ -52,7 +52,7 @@
          - id: check-merge-conflict
          - id: check-added-large-files
            args: ["--maxkb=500"]
-   
+
      # pytest (local, manual stage)
      - repo: local
        hooks:
@@ -64,7 +64,7 @@
            stages: [manual]
            pass_filenames: false
            always_run: true
-   
+
      # pyright (local, manual stage, optional)
      - repo: local
        hooks:
@@ -141,14 +141,14 @@
    line-length = 100
    target-version = "py${PYTHON_VERSION}"
    fix = true
-   
+
    [tool.ruff.lint]
    select = ["E","W","F","N","D","UP","B","A","C4","ARG","RUF"]
    ignore = ["D100","D101","D102","D103","D104","D105"]
-   
+
    [tool.ruff.lint.pydocstyle]
    convention = "google"
-   
+
    [tool.ruff.lint.per-file-ignores]
    "__init__.py" = ["F401"]
    "tests/**/*.py" = ["D","ARG"]
@@ -181,27 +181,27 @@
    import argparse
    import tomllib
    from pathlib import Path
-   
+
    def main():
        parser = argparse.ArgumentParser()
        parser.add_argument("--python-version", required=True, help="e.g., 3.10")
        parser.add_argument("--package-name", required=True, help="e.g., mylib")
        args = parser.parse_args()
-       
+
        pyproject_path = Path("pyproject.toml")
        if not pyproject_path.exists():
            raise FileNotFoundError("pyproject.toml not found")
-       
+
        # 讀 pyproject 偵測 sections
        with open(pyproject_path, 'rb') as f:
            data = tomllib.load(f)
-       
+
        existing_tools = set(data.get("tool", {}).keys())
-       
+
        # 逐個 template append
        output_lines = []
        skill_dir = Path(__file__).parent.parent
-       
+
        for tmpl_name, section_name in [
            ("toolconfig-ruff.toml.tmpl", "ruff"),
            ("toolconfig-pyright.toml.tmpl", "pyright"),
@@ -214,14 +214,14 @@
                content = content.replace("${PYTHON_VERSION}", args.python_version)
                content = content.replace("${PACKAGE_NAME}", args.package_name)
                output_lines.append(content)
-       
+
        if output_lines:
            with open(pyproject_path, 'a') as f:
                f.write("\n" + "\n\n".join(output_lines))
            print(f"✅ Appended tool sections to {pyproject_path}")
        else:
            print("ℹ️  All tool sections already exist")
-   
+
    if __name__ == "__main__":
        main()
    ```
@@ -238,7 +238,7 @@
        pyproject = tmp_path / "pyproject.toml"
        pyproject.write_text("[tool.ruff]\nline-length = 80\n")
        # 執行 script → 驗證 [tool.pyright] 被 append，但 [tool.ruff] 保留原值
-   
+
    # test_idempotent.py
    def test_idempotent_append(tmp_path):
        # 執行兩次 script → 驗證 sections 不重複
@@ -258,10 +258,10 @@
 2. Phase 6 section（新增）：
    ```
    ### Phase 6 — Pre-commit & Tooling Setup
-   
+
    **執行條件**：Phase 5 acceptance 通過
    **永遠執行**（無 Q9 分支）
-   
+
    1. 執行 `/fleet @.github/skills/python-pre-commit/`
    2. 執行 `/fleet @.github/skills/python-pyproject-toolconfig/`
       - python-version 參數：來自 Q3
