@@ -1,8 +1,8 @@
 ---
 topic: boundary-outcome-design
-status: review-ready
-current_step: pr-comment-review-and-fix
-next_step: independent-reviewer-combined-receiving-consumer-patch
+status: merged
+current_step: merge-handoff
+next_step: STOP-POINT-2-terminal
 requirements_baseline: human-approved Boundary Outcome Design draft
 analysis_layer: absent-non-blocking-warning
 ---
@@ -20,7 +20,7 @@ analysis_layer: absent-non-blocking-warning
 - [X] publish
 - [X] human-review
 - [X] pr-comment-review-and-fix
-- [ ] merge-handoff
+- [X] merge-handoff
 
 ## Actionable Steps
 
@@ -119,37 +119,25 @@ analysis_layer: absent-non-blocking-warning
   at `eff91c2`: examples 1--4 now name the receiving consumer and that
   consumer's decision for every listed distinction. Source thread
   `PRRT_kwDOSC_kWs6bFP57` must not be routed for duplicate implementation.
-- [ ] Await the independent Reviewer verdict for the completed combined
-  receiving-consumer patch. The review scope is the existing Round 3
-  contract/checklist/inventory patch plus the completed Round 4
-  required-output examples repair. Do not resolve either Round 4 source thread
-  or advance to merge handoff before that verdict and the subsequent
-  commit/push.
+- [X] Complete all bounded PR-comment repairs, required independent reviews,
+  commits, pushes, and authoritative source-thread resolutions before merge.
 
 ### merge-handoff
 
-- [ ] After confirmed merge, stop at STOP POINT 2. This topic has no tag,
-  release note, GitHub Release, or implicit post-merge continuation.
+- [X] PR #123 merged into `dev` on 2026-08-24 via merge commit `0f169d2`.
+- [X] Record terminal topic status `merged`. This topic has no tag, release
+  note, GitHub Release, local-sync action, or implicit post-merge continuation.
 
 ## Handoff / Gate Notes
 
-- Current status is `review-ready` at `pr-comment-review-and-fix`. The
-  canonical `needs-rework` -> `creator-in-progress` -> `review-ready`
-  transition is complete: the required bounded repairs are implemented and
-  ready for independent review. Planning review, independent skill review,
-  planner alignment, stable-library publication, human review, the inventory
-  repair, its Round 5 independent review, and the Round 6 `VERSION` /
-  examples-schema repair are complete. The Round 6 repair was independently
-  approved at PR head `45e8fe5`, then committed, pushed, and its source
-  threads were resolved. The Round 3 receiving-consumer
-  contract/checklist/inventory patch is already applied at `f51773d`, and the
-  Round 4 examples required-output repair is complete at `eff91c2`. Ready PR
-  #123 now awaits only one independent review of that combined bounded skill
-  patch. It does not await duplicate implementation of either completed patch
-  or review of the already-approved Round 6 patch.
+- Current status is terminal `merged`. PR #123 merged into `dev` on
+  2026-08-24 via merge commit `0f169d2`; all bounded PR-comment repairs and
+  their required independent reviews were completed before merge.
 - The human-approved draft is the requirements baseline. Missing analysis files
   are a recorded non-blocking warning, not an invitation to expand scope.
 - `plan.md` is the execution contract; this file tracks progression only; the
   summary owns close and human-handoff semantics.
 - STOP POINT 1 requires explicit human approval for commit, push, and PR.
-- STOP POINT 2 is terminal / no-op until a new explicit human resume message.
+- STOP POINT 2 is now active: do not poll, sync, tag, release, or infer any
+  continuation without a new explicit human resume message. This topic has no
+  release action even if resumed for a separate local cleanup task.

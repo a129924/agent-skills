@@ -123,7 +123,8 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 ## Status / Allowed Transitions
 
-- **Current**: `needs-rework`
+- **Current**: `merged` (PR #123 merged into `dev` on 2026-08-24 via merge
+  commit `0f169d2`)
 - **Execution model**: canonical creator -> independent reviewer -> planner
   alignment -> publish -> Draft PR -> human review / merge handoff. The topic
   stops after merge and does not enter a release phase.
@@ -144,31 +145,16 @@ requiring a particular Result type, Exception hierarchy, or modelling library.
 
 Routing notes:
 
-- The independent Plan-Reviewer accepted the planning baseline recorded at
-  commit `125c928`; the independent Skill Reviewer has accepted the Creator's
-  six canonical skill files. The inventory repair was independently approved
-  in Round 5, committed, pushed, and its authoritative threads were resolved.
-  The current state is `needs-rework` at `pr-comment-review-and-fix` on Ready
-  PR #123, pending only the bounded `VERSION` and examples-schema repairs and
-  their independent review.
+- All approved bounded PR-comment repairs, commits, pushes, and source-thread
+  resolutions completed before PR #123 merged into `dev` on 2026-08-24 via
+  merge commit `0f169d2`. The topic is terminal `merged`.
 - Apply the standard Phase 4.5 planner-alignment rule. An `approved` reviewer
   verdict may still return the topic to `creator-in-progress` for scope,
   contract, path, ownership, or stable-metadata drift.
 - Reviewer feedback that controls rework must be persisted at the exact
   `review-log.md` path; hidden chat is not a routing artifact.
-- The prior inventory `ADDRESS` repair is complete. The current threads
-  `PRRT_kwDOSC_kWs6bDxub`, `PRRT_kwDOSC_kWs6bDxuk`, and
-  `PRRT_kwDOSC_kWs6bDxuv`, and `PRRT_kwDOSC_kWs6bDxuq` require planning-
-  artifact correction. The explicit human-approved `0.79.0` decision and the
-  examples-schema `ADDRESS` route the current implementation only to an
-  independent Implementer for `VERSION` and
-  `skills/boundary-outcome-design/examples.md`; after independent Reviewer
-  `approved`, Main Agent / publisher commits, pushes, and resolves the four
-  Round 6 threads.
-- STOP POINT 1 blocks publication until explicit human commit / push / PR
-  authority exists. STOP POINT 2 begins once merge handoff is reached: stop;
-  do not poll, sync, tag, release, or infer a resume without a new human
-  instruction.
+- STOP POINT 2 is active: stop. Do not poll, sync, tag, release, or infer a
+  resume without a new explicit human instruction.
 
 ## Artifact Paths
 
@@ -211,12 +197,8 @@ Artifact path notes:
   `VERSION` from `0.77.0` -> `0.78.0` in commit `5e3f14f`; the PR #123 base
   commit `7dc4936` remains `0.77.0`. The explicit human override defines the
   remaining bounded comment rework as `0.78.0` -> `0.79.0` (MINOR).
-- `timing`: the README row remains the completed `publish-in-progress`
-  metadata change. The sole remaining metadata change is the `0.79.0` VERSION
-  repair during `pr-comment-review-and-fix`: an independent Implementer makes
-  the two-file patch, then independent Reviewer approval gates Main Agent /
-  publisher commit, push, and Round 6 thread resolution. It is not a new
-  release action.
+- `timing`: the README row and `0.79.0` VERSION repair completed before merge.
+  Neither creates a release action.
 - `rationale`: a new canonical stable-library skill needs discoverability in the
   human-facing catalog and a corresponding backward-compatible MINOR version.
 - `release notes / tags`: none. Post-merge has no tag, release-note, or GitHub
@@ -306,12 +288,12 @@ Artifact path notes:
 
 ## Post-merge / release actions
 
-- After a human merges the Draft PR, the topic reaches `merged` and is
-  terminal for release purposes. No tag, release note, GitHub Release, or
-  additional implementation is authorized by this topic after merge.
-- STOP POINT 2 requires a new explicit human resume before Phase 9 local sync
-  and final summary handoff. That resume does not authorize a tag, a release,
-  or any further implementation.
+- PR #123 merged into `dev` on 2026-08-24 via merge commit `0f169d2`; the
+  topic is terminal `merged`. No tag, release note, GitHub Release, or
+  additional implementation is authorized by this topic.
+- STOP POINT 2 is active. A new explicit human instruction is required for
+  any separate local-sync or cleanup task, and does not authorize a tag or
+  release.
 
 ## Open Questions / Unresolved Items
 
