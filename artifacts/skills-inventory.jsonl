@@ -1,6 +1,7 @@
 {"canonical_path":"skills/agent-skill-creator","tree_hash":"8fcebeb8d5803d7213de84309d62855cb3de20b56d26957ce1b380f5c3558037"}
 {"canonical_path":"skills/agent-skill-reviewer","tree_hash":"3e95cbf2de09a6a2941f8bd123b90c04fc6d8a302d7bf590e20a25de13ee3f6c"}
 {"canonical_path":"skills/agent-skill-template","tree_hash":"f00672c7ae894ce8aa6a800817636195ca6e81a31397f1dfa5d33510c243d4b6"}
+{"canonical_path":"skills/boundary-outcome-design","tree_hash":"88f1fc96ef6b52231195e1f3816285fc09fc68f4fd25aea5293c094cdd2d3298"}
 {"canonical_path":"skills/business-intent-alignment","tree_hash":"43282a0784b881e0d451286507447e977dc41201e49c57b746014faf0631e926"}
 {"canonical_path":"skills/business-to-technical-translation","tree_hash":"3185f10d935e6ed1c2c4205dec7fe837ab9a9b59773b625fec326426774ba59e"}
 {"canonical_path":"skills/context-package-builder","tree_hash":"fb4785081e66d52337c821ea1ce1a10ec37ee829cf2ce7d71876e782ece4805d"}
