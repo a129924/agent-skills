@@ -2,19 +2,21 @@
 
 ## Current state
 
-`needs-rework` at `pr-comment-review-and-fix` on Ready PR #123. The managed
-feature worktree, four topic planning artifacts, six Creator-owned canonical
-skill files, the stable README row, and the completed inventory repair exist.
-The inventory repair passed the Round 5 independent review, was committed and
-pushed, and its authoritative threads were resolved. The independent
-Plan-Reviewer Round 6 gate and the bounded `VERSION` / primary-examples repair
-also passed independent review at PR head `45e8fe5`; `VERSION` is `0.79.0` and
-examples 1--4 use the required review-output fields. That approved repair was
-committed, pushed, and its source threads were resolved. The Round 4 examples
-required-output repair is also complete at `eff91c2`. The current gate is one
-independent review of that completed repair together with the already-applied
-Round 3 contract/checklist/inventory patch. No review remains pending for the
-Round 6 patch, and neither Round 3 nor Round 4 may be re-implemented.
+`review-ready` at `pr-comment-review-and-fix` on Ready PR #123. The canonical
+`needs-rework` -> `creator-in-progress` -> `review-ready` transition is
+complete: the managed feature worktree, four topic planning artifacts, six
+Creator-owned canonical skill files, the stable README row, and the completed
+inventory repair exist. The inventory repair passed the Round 5 independent
+review, was committed and pushed, and its authoritative threads were resolved.
+The independent Plan-Reviewer Round 6 gate and the bounded `VERSION` /
+primary-examples repair also passed independent review at PR head `45e8fe5`;
+`VERSION` is `0.79.0` and examples 1--4 use the required review-output fields.
+That approved repair was committed, pushed, and its source threads were
+resolved. The Round 4 examples required-output repair is also complete at
+`eff91c2`. The current gate is one independent review of that completed repair
+together with the already-applied Round 3 contract/checklist/inventory patch.
+No review remains pending for the Round 6 patch, and neither Round 3 nor Round
+4 may be re-implemented.
 
 ## Completed
 
