@@ -44,15 +44,13 @@ Do not use this skill when:
 4. Confirm each optional file or folder has a clear declared role, including each file inside `references/` when that folder exists.
 5. Confirm the skill has one clear responsibility.
 6. Confirm the skill is portable, independent, and self-contained.
-7. For authoring-target transition topics, distinguish canonical-source review
-   from mirror/projection review:
-   - canonical-source review: confirm the draft lives under
-     `skills/<skill-name>/` as the canonical authoring target and does not
-     claim that `skills/` is already the current active workflow path
-   - mirror/projection review: only if a `.codex/skills/` surface is
-     explicitly in scope or injected by context/prompt, confirm it is treated
-     as a transition mirror/projection surface and not as the canonical source
-     of truth
+7. For path-alignment or transition topics, classify every path mention into
+   one of three roles only:
+   - canonical source / authoring-only: `skills/<skill-name>/`
+   - output-facing / runnable / copy-pasteable:
+     `.codex/skills/<skill-name>/`
+   - bootstrap fallback: `skills/<skill-name>/` only when the projected
+     entrypoint does not yet exist and the text labels it as fallback
 8. Assess whether the skill's validation weight matches its risk, branching, external-tool usage, and downstream impact.
 9. Treat `references/` as a split-reference supplement, not by itself as a replacement for the required companion-file rule.
 10. If `reference.md` is too broad, require it to be split into `references/`.
@@ -67,13 +65,16 @@ Do not use this skill when:
     only, treat downstream planning-spine `.codex/skills/*` assumptions as
     follow-up implications unless the inventory already gives explicit blocker
     evidence.
-19. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
-20. Confirm it has an explicit `Trigger / When to use` section.
-21. Return `approved` or `needs-rework` with concrete fixes.
+19. If the draft needs a concrete platform root such as `.codex/...` or
+    `.github/...` to stay truthful, return `needs-rework` or roll back to
+    alignment instead of approving a hardcoded default.
+20. Label each finding as BLOCKER, WARNING, or INFO before returning verdict.
+21. Confirm it has an explicit `Trigger / When to use` section.
+22. Return `approved` or `needs-rework` with concrete fixes.
 
 # Examples
-- Positive: Review a refactoring or release-gating skill whose `SKILL.md` has brief positive and negative examples, whose local files justify stronger validation, and whose `examples.md` covers the complex branches.
-- Negative: Approve a draft that has no negative example in `SKILL.md`, no `examples.md` for a branching refactor skill, or no stronger misuse-prevention guidance for a higher-risk gatekeeping skill.
+- Positive: Review a refactoring or release-gating skill whose `SKILL.md` has brief positive and negative examples, whose local files justify stronger validation, whose `examples.md` covers the complex branches, and whose first runnable path uses `.codex/...` rather than `skills/...`.
+- Negative: Approve a draft that has no negative example in `SKILL.md`, no `examples.md` for a branching refactor skill, uses `skills/...` as the default copy-pasteable path, or hardcodes `.codex/...` without injected context.
 
 # Outputs
 - `approved` or `needs-rework`
@@ -131,6 +132,10 @@ Omit this section when the review is performed as a standalone action.
   evidence already exists in inventory.
 - Do not assume any concrete `.codex/skills/` projection path unless
   context or prompt explicitly puts that surface in scope.
+- Do not treat `skills/<skill-name>/` as an acceptable default runnable or
+  copy-pasteable path.
+- Do not accept `skills/<skill-name>/` as fallback wording unless the draft
+  states that the projected entrypoint does not yet exist.
 - Do not author the final implementation directly.
 
 # Local references

@@ -1,9 +1,9 @@
 # Creator blueprint
 
-Use this as the default folder shape for a `review-ready` skill.
+Use this as the default output-facing folder shape for a `review-ready` skill.
 
 ```text
-skills/<skill-name>/
+.codex/skills/<skill-name>/
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
@@ -21,6 +21,17 @@ skills/<skill-name>/
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
+
+## Path-role rule
+
+- Author canonical source content under `skills/<skill-name>/`.
+- Show runnable, copy-pasteable, or output-facing locations as
+  `.codex/skills/<skill-name>/`.
+- If the projected entrypoint does not yet exist, you may mention
+  `skills/<skill-name>/` only as an explicitly labeled bootstrap fallback.
+- If truthful guidance would require hardcoding `.codex/...`, `.github/...`, or
+  another concrete platform root, roll back to alignment wording instead of
+  choosing a default platform.
 
 ## YAML Usage Policy
 
@@ -156,12 +167,13 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
 
 ## Creation rules
 - Use lowercase kebab-case for `<skill-name>`.
-- Treat `skills/<skill-name>/` as the canonical authoring target for transition
-  work; do not treat any `.codex/skills/` compatibility/projection surface
-  or promotion as part of this blueprint.
-- Only mention a `.codex/skills/` path when context or prompt explicitly
-  injects that compatibility/projection surface; do not assume a concrete
-  platform by default.
+- Treat `skills/<skill-name>/` as canonical source and authoring-only context.
+- Treat `.codex/skills/<skill-name>/` as the default runnable,
+  copy-pasteable, and output-facing path form.
+- Only use `skills/<skill-name>/` as a projected path when the projected
+  entrypoint does not yet exist and the text explicitly labels it as a
+  bootstrap fallback.
+- Do not assume a concrete platform root by default.
 - If responsibility, trigger, or boundaries are ambiguous, ask before drafting.
 - Classify validation weight before drafting: lightweight, medium-complexity, or higher-risk.
 - Propose `complexity` in YAML frontmatter for every new skill.

@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Callable, Sequence, TextIO
 
 
-PLACEHOLDER_PREFIX = ".<platform>/"
+PLACEHOLDER_PREFIX = ".codex/"
 IGNORED_SOURCE_DIR_NAMES = {"__pycache__"}
 IGNORED_SOURCE_SUFFIXES = {".pyc", ".pyo"}
 

@@ -48,7 +48,7 @@ whole-library source scope.
 
 ## Incorrect patterns
 
-- Running without `--platform-root` and expecting the CLI to guess the `.codex/skills/` target surface
+- Running without `--platform-root` and expecting the CLI to guess a concrete `.<platform>` surface
 - Running the projected skill and then hard-coding a fallback back to `skills/platform-projection-adapter/...` instead of using the local `.codex/skills/...` entrypoint
 - Treating dry-run as permission to write
 - Writing a second projection procedure in the skill text or in ad-hoc shell

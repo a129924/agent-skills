@@ -17,20 +17,20 @@ Typical verdict:
 
 A transition-scope review where:
 - canonical authoring intent points to `skills/<skill-name>/`
-- a `.codex/skills/...` artifact is reviewed only because context or
-  prompt explicitly injects that transition mirror / projection surface
-- the reviewed text does not claim `.codex/skills/` is the canonical
-  source
+- the first runnable or copy-pasteable path points to
+  `.codex/skills/<skill-name>/`
+- any operational mention of `skills/<skill-name>/` is explicitly labeled as a
+  bootstrap fallback because the projected entrypoint does not yet exist
 
 Typical verdict:
 - approved
 
 Typical reasons:
-- reviewer distinguishes canonical source from mirror/projection semantics
+- reviewer distinguishes canonical source, output-facing projection wording, and
+  bootstrap fallback
 - reviewer does not assume a concrete platform surface unless it was explicitly
   put in scope
-- transition wording preserves the current active path without collapsing source
-  of truth
+- transition wording keeps `skills/...` out of the default copy-pasteable path
 
 ## Approved example: higher-risk skill has stronger guardrails
 
@@ -89,16 +89,16 @@ Typical reasons:
 - split reference files are needed
 - local reference roles are not explicit enough
 
-## Needs-rework example: mirror review collapses source of truth
+## Needs-rework example: path roles are conflated
 
-A transition-scope review where a `.codex/skills/...` artifact says it is
-both the current mirror and the canonical source of truth for new authoring
-work.
+A transition-scope review where the draft tells users to create the skill at
+`skills/<skill-name>/`, hardcodes `.codex/skills/<skill-name>/` as the normal
+consumer path, and never states whether any `skills/...` mention is a fallback.
 
 Typical verdict:
 - needs-rework
 
 Typical reasons:
-- canonical source and mirror/projection roles are conflated
-- the review would silently re-promote `.codex/skills/` as the only source
-  of truth
+- canonical source, output-facing path, and fallback roles are conflated
+- `skills/...` is being re-promoted as the default operational path
+- a concrete platform root is being hardcoded without injected context

@@ -54,14 +54,19 @@ Create a second skill when:
 Do not treat a new skill as stable until `agent-skill-reviewer` returns
 `approved`.
 
-## Authoring-target rule
+## Path-role rule
 
-- treat `skills/<skill-name>/` as the canonical authoring target for transition
-  work
-- treat any `.codex/skills/` path as a compatibility or projection
-  surface rather than as the canonical source
+- treat `skills/<skill-name>/` as canonical source and authoring-only context
+- treat `.codex/skills/<skill-name>/` as the default runnable,
+  copy-pasteable, and output-facing path form
+- treat `skills/<skill-name>/` as a projected path only when the projected
+  entrypoint does not yet exist and the text explicitly labels it as a
+  bootstrap fallback
 - record downstream planning-spine implications as follow-up instead of editing
   those skill folders in the same phase
+- if truthful guidance would require hardcoding `.codex/...`, `.github/...`, or
+  another concrete platform root, roll back to alignment wording instead of
+  choosing a default platform
 
 ## Ownership rule
 

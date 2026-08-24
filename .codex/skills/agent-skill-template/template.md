@@ -1,9 +1,10 @@
 # Canonical skill template
 
-Use this as the default starting point for a `review-ready` skill.
+Use this as the default output-facing starting point for a `review-ready`
+skill.
 
 ```text
-skills/<skill-name>/
+.codex/skills/<skill-name>/
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
@@ -21,10 +22,16 @@ skills/<skill-name>/
 - Add `examples.md` when the skill is high complexity or the `SKILL.md`
   examples are not enough.
 - Add stronger validation guidance only when the skill's risk warrants it.
-- Use this template as the canonical authoring-target shape for
-  `skills/<skill-name>/` during transition work.
-- Treat any `.codex/skills/` path as a compatibility or projection surface
-  rather than a canonical authoring target.
+
+## Path-role rule
+
+- Author canonical source content under `skills/<skill-name>/`.
+- Use `.codex/skills/<skill-name>/` as the default runnable,
+  copy-pasteable, and output-facing path form.
+- If the projected entrypoint does not yet exist, you may mention
+  `skills/<skill-name>/` only as an explicitly labeled bootstrap fallback.
+- Do not hardcode `.codex/...`, `.github/...`, or another concrete platform
+  root unless context explicitly injects it.
 - Do not interpret this template as projection promotion, cutover, or runtime
   path design.
 
@@ -166,3 +173,5 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
   `FAIL -> stop`.
 - Add stronger validation signals only when risk, branching, tooling, or
   downstream impact justify them.
+- If truthful guidance would require a concrete platform root, roll back to
+  alignment wording instead of choosing a default platform here.
