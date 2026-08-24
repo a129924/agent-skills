@@ -17,10 +17,12 @@ Potential vocabulary leak:
 SdkTimeoutError and HTTP 503 would leak client/transport vocabulary through the Port.
 
 Decision-relevant distinctions:
-- timeout/service unavailable: receiving consumer is the UseCase
+- timeout/service unavailable: failure classification is expected failure;
+  receiving consumer is the UseCase
   (Application layer), which makes the same retry decision
-- rate limited: receiving consumer is the UseCase (Application layer), which
-  schedules retry work from retry metadata
+- rate limited: failure classification is expected failure; receiving consumer
+  is the UseCase (Application layer), which schedules retry work from retry
+  metadata
 
 Suggested translation point:
 Adapter, while mapping the external client response/error.
@@ -61,7 +63,8 @@ Potential vocabulary leak:
 None; both Port outcomes are capability vocabulary, but they exceed this operation's needs.
 
 Decision-relevant distinctions:
-- timeout/unavailable: receiving consumer is the Checkout UseCase
+- timeout/unavailable: failure classification is expected failure; receiving
+  consumer is the Checkout UseCase
   (Application layer), which uses the identical fallback and user message
 
 Suggested translation point:
@@ -99,10 +102,11 @@ Potential vocabulary leak:
 None.
 
 Decision-relevant distinctions:
-- value absent: receiving consumer is the Export UseCase (Application layer),
-  which must reject with an operation-specific result
-- value present: receiving consumer is the Export UseCase (Application layer),
-  which proceeds with export
+- value absent: failure classification is expected failure; receiving consumer
+  is the Export UseCase (Application layer), which must reject with an
+  operation-specific result
+- value present: failure classification is not a failure; receiving consumer is
+  the Export UseCase (Application layer), which proceeds with export
 
 Suggested translation point:
 UseCase after obtaining Subject state, not Adapter retrieval.
@@ -143,13 +147,15 @@ Potential vocabulary leak:
 Leaking the ORM's concrete conflict or driver exception into Application.
 
 Decision-relevant distinctions:
-- lookup miss: receiving consumer is the Application lookup caller
+- lookup miss: failure classification is not a failure; receiving consumer is
+  the Application lookup caller
   (Application layer), which follows its normal absence path
-- write conflict: receiving consumer is the Application transaction caller
+- write conflict: failure classification is expected failure; receiving
+  consumer is the Application transaction caller
   (Application layer), which may refresh, retry, or report conflict
-- unexpected driver failure: receiving consumer is the Application delivery
-  boundary/global error handler (Delivery layer), which has no defined local
-  recovery decision
+- unexpected driver failure: failure classification is unexpected failure;
+  receiving consumer is the Application delivery boundary/global error handler
+  (Delivery layer), which has no defined local recovery decision
 
 Suggested translation point:
 Repository for lookup capability; Unit of Work for transaction completion;

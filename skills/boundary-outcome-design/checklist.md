@@ -31,6 +31,8 @@ Use this checklist before handing off a review or recommendation.
 
 ## D. Handoff quality
 
+- [ ] Every distinction explicitly classifies itself as an expected failure,
+      unexpected failure, or not a failure.
 - [ ] Expected failures have a named consumer decision.
 - [ ] Defects, impossible states, and unknown technical failures are not added
       to a Result union merely for completeness.

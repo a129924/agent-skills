@@ -75,10 +75,12 @@ Do not use this skill when:
    alternative. Treat HTTP status codes, SDK timeout classes, ORM errors, and
    driver terms in Application or Domain contracts as a possible vocabulary
    leak unless the receiving layer deliberately owns that external meaning.
-3. **C — Identify the decision consumer.** For every distinction, record who
-   receives it and what different action follows. Preserve a distinction when
-   it supports a meaningful different decision. Consider semantic compression
-   only when the receiving layer treats alternatives identically.
+3. **C — Identify the decision consumer and failure classification.** For
+   every distinction, record who receives it, what different action follows,
+   and whether it is an `expected failure`, `unexpected failure`, or `not a
+   failure`. Preserve a distinction when it supports a meaningful different
+   decision. Consider semantic compression only when the receiving layer
+   treats alternatives identically.
 4. **D — Choose boundary actions per distinction.** For each
    decision-relevant distinction, recommend one or more justified actions:
    `Preserve`, `Translate`, `Compress`, `Promote to application-safe
@@ -124,7 +126,7 @@ Potential vocabulary leak:
 <none, or lower-layer term and why it leaks>
 
 Decision-relevant distinctions:
-- <distinction>: receiving consumer=<role/layer>; consumer decision=<action>
+- <distinction>: failure classification=<expected failure | unexpected failure | not a failure>; receiving consumer=<role/layer>; consumer decision=<action>
 
 Suggested translation point:
 <layer/component, or none>
@@ -175,7 +177,8 @@ Clarification or next step:
   operation accepts it.
 - Check Repository and Unit of Work failures at their actual operation or
   transaction boundary; do not assume all database failures occur at commit.
-- Classify each recommendation as expected failure or unexpected failure.
+- Classify every distinction as an expected failure, unexpected failure, or
+  not a failure.
 
 ## Quality Checks (best effort)
 
