@@ -17,9 +17,12 @@ status: pr-open
 - [X] Independent Implementer makes the one frozen portable-core repair.
 - [X] Independent Reviewer returns the canonical JSON implementation verdict:
   `approved`.
-- [ ] Planner verifies parent sync and correction acceptance before closure.
+- [ ] Planner alone may complete this checkbox after verifying parent sync, both
+  independent approvals, the corrective commit and push, and post-push PR
+  confirmation in the listed artifacts; then and only then may it close this
+  high-severity correction.
 
-## Phase 2 evidence — Dispatcher only
+## Phase 2 evidence — Dispatcher routing/evidence only
 
 - Branch: `docs/andrew/cross-language-skill-candidate-basis`
 - HEAD: `67ba9d7c7fe8204e982b0bf9504513eafed66e92`
@@ -33,11 +36,14 @@ status: pr-open
 ## Gate
 
 All required Phase 2 readiness fields above were directly observed after the
-recovery baseline and independent Plan-Reviewer approval. They permit the
-single canonical transition from `needs-rework` to `creator-in-progress` for
-the frozen repair. This pre-creator evidence is distinct from the later
-post-review publication state recorded below. It resolves no PR thread. Any
-failed or newly non-clean field returns the parent topic to `needs-rework`.
+recovery baseline and independent Plan-Reviewer approval. Dispatcher records
+this bounded evidence and routes it; Main Agent is accountable for the
+transition audit. Neither role commits, pushes, merges, or performs a repair.
+The evidence permits the single canonical transition from `needs-rework` to
+`creator-in-progress` for the frozen repair. This pre-creator evidence is
+distinct from the later post-review publication state recorded below. It
+resolves no PR thread. Any failed or newly non-clean field returns the parent
+topic to `needs-rework`.
 
 ## Post-review publication state
 

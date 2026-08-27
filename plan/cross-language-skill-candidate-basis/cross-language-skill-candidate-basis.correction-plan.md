@@ -36,11 +36,17 @@ or closed by assertion.
 ## Recovery route and acceptance
 
 1. Plan-Creator creates the parent-sync recovery baseline plus this correction
-   plan and correction step; a baseline-commit Implementer commits them.
+   plan and correction step. Main Agent is accountable for routing the
+   `planned` recovery transition and preserving its audit evidence; Dispatcher
+   records only bounded transition evidence and routing. Neither commits. An
+   independent Implementer performs the constrained baseline `git commit`
+   without amending, rebasing, resetting, force-pushing, or otherwise rewriting
+   history.
 2. An independent Plan-Reviewer returns the canonical JSON verdict for the
    committed baseline. `needs-rework` keeps the topic here.
 3. On `approved`, Dispatcher observes and records every required Phase 2 field
-   in the correction step. Any dirty/unresolved state blocks creator dispatch.
+   in the correction step, then routes the evidence to Main Agent for the
+   transition audit. Any dirty/unresolved state blocks creator dispatch.
 4. Independent Implementer repairs only the one candidate-document portable
    core entry; independent Reviewer re-reviews it with the canonical JSON
    verdict.
@@ -52,7 +58,9 @@ or closed by assertion.
 
 ## Closure
 
-Planner may close this correction only after parent sync, all required reviews,
-the corrective commit and push, and post-push PR confirmation. Those conditions
-do not by themselves close the correction; retain this file and the correction
-step as historical evidence and do not delete either artifact.
+Planner may complete the correction-progression closure checkbox and close this
+correction only after parent sync, all required reviews, the corrective commit
+and push, and post-push PR confirmation are evidenced in the listed artifacts.
+Those conditions do not by themselves close the correction; retain this file
+and the correction step as historical evidence and do not delete either
+artifact.

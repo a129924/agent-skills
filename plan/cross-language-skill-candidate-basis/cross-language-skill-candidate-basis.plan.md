@@ -75,10 +75,13 @@ changing this plan or implementing the candidate-basis document.
 
 - Plan-Creator owns the parent planning artifacts and correction artifacts in
   this pass. Plan-Reviewer independently reviews the committed recovery
-  baseline. Dispatcher records gate evidence and routes work. Implementer only
-  performs the frozen candidate-document repair. Reviewer independently checks
-  that repair. Main Agent owns PR transport and thread resolution, but no actor
-  may treat this recovery plan as authority to alter history.
+  baseline. Main Agent is accountable for the recovery transition and its
+  audit trail; Dispatcher records bounded gate evidence and routes work, but
+  neither role performs a git mutation. An independent Implementer performs
+  each constrained git mutation and the frozen candidate-document repair.
+  Reviewer independently checks that repair. Main Agent owns PR transport and
+  thread resolution, but no actor may treat this recovery plan as authority to
+  alter history.
 - Existing Phase 1 artifacts remain historical evidence and are not modified,
   reinterpreted as implementation authorization, or extended by this topic.
 - `skills/` remains the canonical source; `.github/**`, `.codex/**`, and other
@@ -141,11 +144,11 @@ changing this plan or implementing the candidate-basis document.
 | Artifact | Path | Owner | Role |
 | --- | --- | --- | --- |
 | Topic plan | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.plan.md` | Plan-Creator | Current execution contract and locked write boundary |
-| Topic progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.step.md` | Plan-Creator; then Dispatcher | Current workflow-stage and gate truth |
+| Topic progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.step.md` | Plan-Creator; Dispatcher (routing only); Main Agent (`pr-open` / `merged` state recording and routing only) | Current workflow-stage and gate truth; this write authority never authorizes a repository edit, commit, push, or merge |
 | Review routing log | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.review-log.md` | Plan-Reviewer; Reviewer; Planner | Separate independent verdict entries and recovery-routing trail |
-| Topic close summary | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.summary.md` | Plan-Creator; then Main Agent | Current PR/recovery handoff truth, then close outcome |
+| Topic close summary | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.summary.md` | Plan-Creator; Main Agent (`pr-open` / `merged` state recording and routing only) | Current PR/recovery handoff truth, then close outcome; this write authority never authorizes a repository edit, commit, push, or merge |
 | Correction plan | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.correction-plan.md` | Plan-Creator; Planner | Historical high-severity correction contract |
-| Correction progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.correction-step.md` | Plan-Creator; then Dispatcher | Historical correction-gate evidence and sequencing |
+| Correction progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.correction-step.md` | Plan-Creator; Dispatcher (routing/evidence only); Planner (evidence-based closure only) | Historical correction-gate evidence and sequencing; Planner may complete only the closure checkbox after all stated closure evidence is present |
 | Candidate-basis document | `docs/agent-skills-convergence/cross-language-candidate-basis.md` | Implementer | Evidence-backed 11-candidate inventory for human review |
 
 Artifact path notes:
@@ -159,6 +162,12 @@ Artifact path notes:
 - Plan-Reviewer and Reviewer each append only their own distinct verdict entry
   to the review log; neither role overwrites, approves, or reuses the other
   role's verdict.
+- Dispatcher may record bounded observations and route a result, but may not
+  commit, push, merge, or write a repair. Main Agent's `pr-open` / `merged`
+  writes to the progression and summary artifacts record or route observed
+  state only; they do not themselves authorize a repository modification,
+  commit, push, or merge. Each constrained git mutation remains a separately
+  dispatched Implementer action.
 - If a required action falls outside this table, stop and repair this plan.
   Correction artifacts are retained; deletion is forbidden.
 

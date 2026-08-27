@@ -107,3 +107,7 @@ created: 2026-08-27
   The independent repair and re-review are complete, and the complete
   corrective package has been committed and pushed. The post-push PR
   observation is complete; no post-recovery thread resolution is asserted.
+- Main Agent may record or route observed `pr-open` and `merged` state in this
+  progression artifact only. That record does not authorize a repository edit,
+  commit, push, or merge; each constrained git mutation requires a separately
+  dispatched Implementer action.
