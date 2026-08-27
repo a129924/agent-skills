@@ -2,46 +2,51 @@
 
 ## Current state
 
-`review-ready`: the Implementer-created candidate-basis document is ready for
-an independent Reviewer. The topic has not been approved, published, pushed,
-or opened as a pull request.
+`pr-open` + `needs-rework`: the PR remains open, but recovery is pending. The
+original commit, approvals, and publication actions are historical/suspect;
+they do not establish that the original plan-review or Phase 2 prerequisites
+were satisfied.
 
 ## Completed
 
-- Read the plan-approved evidence set and created the first-pass inventory at
-  `docs/agent-skills-convergence/cross-language-candidate-basis.md`.
-- Recorded the locked four groups and all 11 candidates exactly once.
-- For every candidate, recorded portable core, Python evidence, future Swift
-  and TypeScript appendix needs, language-specific blockers, recommended
-  follow-up action, and scope risk.
-- Preserved the evidence boundary: no Swift or TypeScript project validation,
-  generic-skill selection, or implementation authorization is claimed.
+- The first-pass inventory exists at
+  `docs/agent-skills-convergence/cross-language-candidate-basis.md` with four
+  groups and 11 candidates. Its historical workflow acceptance is not asserted.
+- Its entries contain portable-core, Python-evidence, Swift/TypeScript appendix,
+  blocker, follow-up, and scope-risk fields; no target-project validation is
+  claimed.
+- The candidate-basis document exists and retains its fixed 11-candidate scope.
+- Five compatible PR fixes are present: PR/summary state synchronization,
+  PR-loop retention, separated review-log ownership, and one STOP POINT 1
+  publish action.
+- The three correction findings have been routed as high severity without
+  rewriting history.
 
 ## Not completed
 
-- Independent implementation review has not occurred.
-- Human review of the evidence basis has not occurred.
-- No generic core, Swift appendix, TypeScript appendix, skill migration,
-  projection, runtime change, commit, push, or pull request exists.
+- A committed recovery baseline and independent recovery Plan-Reviewer verdict.
+- Observed Phase 2 branch/worktree evidence.
+- The bounded portable-core repair, independent implementation re-review, and
+  subsequent PR-thread resolution.
 
 ## Required follow-up
 
-- An independent Reviewer must verify the candidate count, evidence links,
-  language-boundary honesty, and strict write-set compliance.
-- If approved, Main Agent must perform plan-contract alignment before any
-  publication routing.
-- A future topic needs real target-project evidence before it can define or
-  implement any cross-language skill surface.
+- Commit the recovery baseline as an additive commit; do not amend, rebase,
+  reset, or force-push.
+- Plan-Creator routes the recovery baseline to a baseline-commit Implementer,
+  then to an independent Plan-Reviewer.
+- Only after its approval may Dispatcher record Phase 2 evidence and route the
+  frozen repair to an independent Implementer.
 
 ## Next handoff
 
-- **Next actor:** Reviewer.
-- **Next step:** return the topic plan's required JSON verdict for the
-  candidate-basis document; route `needs-rework` findings only to an
-  Implementer within the locked 11-candidate boundary.
+- **Next actor:** Plan-Creator, then independent Plan-Reviewer.
+- **Next step:** route the baseline-commit Implementer to commit this recovery
+  planning baseline; Plan-Reviewer verifies its parent/correction contract
+  before any creator dispatch.
 
 ## Stop condition
 
-Stop after the Reviewer verdict until Main Agent routing. Human review is still
-required before publication, and this topic must not advance to skill changes
-or language-specific implementation.
+Remain at `needs-rework` while recovery is pending. Do not resolve PR threads,
+merge, release, or advance to candidate-document repair until the committed
+baseline, independent plan review, and observed Phase 2 gate all pass.

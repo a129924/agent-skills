@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: planned
+status: needs-rework
 created: 2026-08-27
 ---
 
@@ -8,78 +8,65 @@ created: 2026-08-27
 
 ## Workflow Stages
 
-- [X] planned
-- [X] creator-in-progress
-- [X] review-ready
-- [X] reviewer-in-progress
-- [X] approved
-- [ ] needs-rework
-- [X] publish-in-progress
-- [ ] pr-open
+- [X] planned (historical/suspect; not evidence of compliant ordering)
+- [ ] creator-in-progress
+- [ ] review-ready
+- [ ] reviewer-in-progress
+- [ ] approved
+- [X] needs-rework
+- [ ] publish-in-progress
+- [X] pr-open (PR exists; recovery supersedes normal PR-loop advance)
 - [ ] merged
 
 ## Actionable Steps
 
-### planned
+### needs-rework — recovery pending
 
-- [X] Create the topic plan with explicit non-stable intent, read-only input
-  set, exact final write set, no-modify, and no-delete boundaries.
-- [X] Create this progression artifact because the topic requires Plan-Creator,
-  Plan-Reviewer, Implementer, Reviewer, Main Agent, and human handoffs.
-- [X] Lock the four groups and 11 candidates; do not add skills during this
-  topic.
-- [X] Plan-Reviewer independently verifies this plan and progression artifact
-  against `AGENTS.md`, `plan/agent-handoff-workflow.md`, and
-  `plan/topic-plan-contract.md`.
-- [X] Plan-Reviewer creates the listed review log only to record its routing
-  verdict, then returns the canonical JSON handoff. This is a pre-execution
-  validation gate within `planned`, not a workflow stage; only an `approved`
-  verdict permits `planned` -> `creator-in-progress`.
+- [X] Preserve the original five compatible PR fixes in the parent artifacts:
+  synchronized PR state and summary, PR feedback loop, separated verdict
+  ownership, and one publish action containing STOP POINT 1.
+- [ ] Commit the recovery planning baseline containing the synchronized parent
+  artifacts and both correction artifacts; do not amend, rebase, reset, or
+  force-push historical commits.
+- [ ] Independent Plan-Reviewer reviews the committed recovery baseline and
+  returns the canonical JSON verdict.
+- [ ] Dispatcher records the actual Phase 2 evidence in the correction step and
+  confirms every pre-creator requirement before routing an Implementer.
 
 ### creator-in-progress
 
-- [X] Implementer began after the approved Plan-Reviewer verdict.
-- [X] Read the locked evidence set and created only
-  `docs/agent-skills-convergence/cross-language-candidate-basis.md`.
-- [X] Recorded all 11 candidates once, preserving the generic-core plus
-  language-appendix model and labelling absent Swift/TypeScript evidence.
+- [ ] Independent Implementer repairs only the frozen
+  `python-implementation-review` portable-core wording in the candidate-basis
+  document; do not change the 11-candidate scope or correction artifacts.
 
 ### review-ready
 
-- [X] Implementer verified the locked write set and handed the
-  candidate-basis document to an independent Reviewer.
+- [ ] Implementer hands the bounded repair to an independent Reviewer.
 
 ### reviewer-in-progress
 
-- [X] Reviewer assessed completeness, evidence discipline, candidate count,
-  language-boundary honesty, and path/scope alignment.
+- [ ] Reviewer returns the canonical JSON verdict. A `needs-rework` result
+  remains in the normal loop; `approved` allows PR routing only after parent
+  and correction acceptance checks pass.
 
 ### approved
 
-- [X] Main Agent completed Phase 4.5 plan-contract alignment; the approved
-  candidate-basis document remains within the locked write boundary.
+- [ ] Reserved for the post-recovery independent Reviewer verdict.
 
 ### publish-in-progress
 
-- [X] Publish handoff is authorized after independent Reviewer approval.
-- [ ] Main Agent validates and stages only the exact topic artifact paths, then
-  commits, pushes, and opens the draft pull request.
-  routing.
+- [ ] Reserved for a separately authorized post-recovery repair publication.
 
 ### needs-rework
 
-- [ ] Route bounded findings to Implementer; do not change the candidate set,
-  create a language appendix, or alter existing topic artifacts.
-
-### publish-in-progress
-
-- [ ] Main Agent validates and stages only the exact topic artifact paths, then
-  waits for STOP POINT 1 human authorization before commit, push, and draft PR.
+- [X] Recovery is pending; do not change the candidate set, create a language
+  appendix, or alter history.
 
 ### pr-open
 
-- [ ] Stop at human review after draft PR creation; do not merge, release, tag,
-  or poll for merge completion.
+- [ ] After recovery and re-review, Main Agent may commit/push the reviewed
+  repair and resolve only threads addressed by evidence. Do not merge, release,
+  tag, or poll after a merge handoff.
 
 ### merged
 
@@ -95,14 +82,14 @@ created: 2026-08-27
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current canonical state: `planned`. Plan-Reviewer approval is a required
-  independent pre-execution validation gate before Implementer work; it is not
-  an additional workflow state. The plan-review result must be recorded in the
-  exact review-log path because it controls routing.
+- Current truth is `needs-rework`; the PR is open, but its earlier history and
+  approvals are historical/suspect because no committed planned baseline
+  preceded the original implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
   never claims of verified target-project behavior.
-- Plan-Reviewer approval is recorded in the topic review log; Implementer work
-  is complete and the Reviewer verdict is `approved`.
-- Current canonical state: `publish-in-progress`.
-- Next actor: Main Agent (publisher) to create the approved topic commit,
-  push it, and open a draft pull request for human review.
+- Pre-creator Phase 2 is a Status/Gate prerequisite, not Implementer work:
+  recovery baseline commit -> independent Plan-Reviewer `approved` ->
+  Dispatcher-recorded branch/HEAD/worktree/clean-state/untracked disposition/
+  baseline-SHA evidence -> `needs-rework` -> `creator-in-progress`.
+- The correction step starts entirely pending. Do not insert a claimed clean
+  status, SHA, or completed gate before Dispatcher directly observes it.
