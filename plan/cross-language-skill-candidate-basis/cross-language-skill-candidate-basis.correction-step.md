@@ -1,7 +1,7 @@
 ---
 topic: cross-language-skill-candidate-basis
 correction-severity: high
-status: creator-in-progress
+status: publish-in-progress
 ---
 
 # Cross-Language Skill Candidate Basis — Recovery Progression
@@ -14,8 +14,9 @@ status: creator-in-progress
   returns the canonical JSON verdict.
 - [X] Dispatcher records the observed Phase 2 evidence below after a Plan-Reviewer
   `approved` verdict.
-- [ ] Independent Implementer makes the one frozen portable-core repair.
-- [ ] Independent Reviewer returns the canonical JSON implementation verdict.
+- [X] Independent Implementer makes the one frozen portable-core repair.
+- [X] Independent Reviewer returns the canonical JSON implementation verdict:
+  `approved`.
 - [ ] Planner verifies parent sync and correction acceptance before closure.
 
 ## Phase 2 evidence — Dispatcher only
@@ -37,3 +38,17 @@ single canonical transition from `needs-rework` to `creator-in-progress` for
 the frozen repair. The external PR remains open; this evidence does not assert
 that a repair was published or that any PR thread was resolved. Any failed or
 newly non-clean field returns the parent topic to `needs-rework`.
+
+## Post-review publication state
+
+- The independent Implementer repair and independent Reviewer `approved`
+  verdict are complete, producing the canonical `approved` ->
+  `publish-in-progress` transition.
+- The complete corrective change set is not yet committed and pushed. The
+  recovery baseline, plan-review, and readiness commits remain local; the
+  branch was observed ahead of `origin` before this pending change set.
+- The external PR remains open. Its threads are unresolved pending a push and
+  a fresh, evidence-based PR observation; this record does not resolve any
+  thread or close this high-severity correction.
+- Next: Main Agent commits and pushes the complete corrective change set, then
+  confirms PR checks and threads before routing any resolution action.

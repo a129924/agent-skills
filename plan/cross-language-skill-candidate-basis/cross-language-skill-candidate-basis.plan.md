@@ -64,10 +64,10 @@ changing this plan or implementing the candidate-basis document.
   - `docs/agent-skills-convergence/phase-1/**` and
     `docs/agent-skills-convergence/phase-3/projection-adapter-design.md`.
   - The 11 candidate `skills/<candidate>/SKILL.md` files named in `Scope`.
-- **Written now** is exactly the six planning/correction artifacts listed in
-  `Artifact Paths`. The existing candidate document is read-only during this
-  Plan-Creator pass; a later Implementer may edit only its one bounded portable
-  core entry after all recovery gates pass.
+- **Recovery artifact set** is exactly the six planning/correction artifacts
+  listed in `Artifact Paths`. The candidate document was changed only by the
+  independent Implementer for its one bounded portable-core repair; this
+  Phase 4.5 synchronization does not reopen that document or the review log.
 - **Modify** outside those exact paths is prohibited. **Deleted** paths are
   none. If an additional path becomes necessary, stop and repair this plan.
 
@@ -92,10 +92,14 @@ changing this plan or implementing the candidate-basis document.
 
 ## Status / Allowed Transitions
 
-- **Current**: `creator-in-progress` — the recovery baseline is committed,
+- **Current**: `publish-in-progress` — the recovery baseline is committed,
   independently plan-reviewed, and has Dispatcher-recorded Phase 2 evidence.
-  The PR remains open; prior execution and approvals remain
-  historical/suspect, and the frozen repair is still pending.
+  The independent Implementer completed the one frozen repair and an
+  independent Reviewer returned `approved`. This is the canonical
+  `approved` -> `publish-in-progress` transition. The complete corrective
+  change set is not yet committed and pushed; the external PR remains open
+  and its threads are not yet resolved. Prior execution and approvals remain
+  historical/suspect rather than proof that the original sequence complied.
 - **Pre-creator Phase 2 gate**: this is a Status/Gate prerequisite, not an
   `Implementation Steps` item. Before `needs-rework` ->
   `creator-in-progress`, the recovery baseline must be committed, an independent
@@ -120,13 +124,17 @@ changing this plan or implementing the candidate-basis document.
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
-- **Routing note**: after implementation review approval, Main Agent performs
-  Phase 4.5 plan-contract alignment. Any path, contract, scope, or workflow
-  drift routes to `creator-in-progress`; it does not reopen the locked candidate
-  set or invent a new language architecture.
+- **Routing note**: Phase 4.5 plan-contract alignment found no new path,
+  contract, scope, or workflow drift and therefore moves the approved repair to
+  `publish-in-progress`. Main Agent must next commit and push the complete
+  corrective change set, then re-observe the open PR before evidence-based
+  thread routing. This transition does not reopen the locked candidate set or
+  invent a new language architecture.
 - **Recovery route**: the Planner has frozen all three findings as high-severity
-  correction. Only passed correction acceptance and independent re-review can
-  return the parent artifacts to execution-facing current truth.
+  correction. Parent truth is synchronized after the passed independent
+  re-review, but recovery remains open until the corrective change set is
+  committed and pushed and the open PR is rechecked; no thread is resolved by
+  this synchronization.
 
 ## Artifact Paths
 
@@ -145,8 +153,9 @@ Artifact path notes:
 - This topic does not modify `README.md`, `VERSION`, `.github/copilot-instructions.md`,
   `skills/**`, `.github/**`, or `.codex/**`.
 - The four parent planning paths and two correction paths are the only
-  Plan-Creator writes in this recovery pass. The candidate document remains a
-  later Implementer-only repair after its required gates.
+  Plan-Creator writes in this recovery pass. The candidate document's one
+  Implementer-only repair and its independent Reviewer verdict are already
+  present; neither is a Plan-Creator write in this Phase 4.5 sync.
 - Plan-Reviewer and Reviewer each append only their own distinct verdict entry
   to the review log; neither role overwrites, approves, or reuses the other
   role's verdict.
@@ -188,10 +197,14 @@ Artifact path notes:
   only after merge handoff.
 - The correction plan records three high-severity issues, fixed 11-candidate
   scope, no-history-rewrite rule, acceptance criteria, and required re-reviews.
-- The correction step starts with every task unchecked and no fabricated Phase
-  2 evidence, status tick, SHA, or clean-state assertion.
+- The correction step began with every task unchecked and no fabricated Phase
+  2 evidence, status tick, SHA, or clean-state assertion; its completed gate
+  entries are now limited to directly observed or independently reviewed work.
 - Before creator dispatch, the committed recovery baseline, independent
   Plan-Reviewer approval, and Dispatcher-recorded Phase 2 evidence exist.
+- Before re-entering the existing PR loop, the complete corrective change set
+  must be committed and pushed, then the PR's current threads and checks must
+  be observed. This plan does not claim either action is complete.
 
 ## Reviewer Handoff
 

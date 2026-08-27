@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: creator-in-progress
+status: publish-in-progress
 created: 2026-08-27
 ---
 
@@ -10,12 +10,13 @@ created: 2026-08-27
 
 - [X] planned (historical/suspect; not evidence of compliant ordering)
 - [X] creator-in-progress
-- [ ] review-ready
-- [ ] reviewer-in-progress
-- [ ] approved
-- [ ] needs-rework
-- [ ] publish-in-progress
-- [X] pr-open (PR remains open; frozen repair is in recovery execution)
+- [X] review-ready
+- [X] reviewer-in-progress
+- [X] approved
+- [X] needs-rework (high-severity recovery route completed before the frozen repair)
+- [X] publish-in-progress
+- [ ] pr-open (the external PR is open, but recovery has not yet re-entered
+  the post-push PR loop)
 - [ ] merged
 
 ## Actionable Steps
@@ -35,27 +36,33 @@ created: 2026-08-27
 
 ### creator-in-progress
 
-- [ ] Independent Implementer repairs only the frozen
+- [X] Independent Implementer repaired only the frozen
   `python-implementation-review` portable-core wording in the candidate-basis
-  document; do not change the 11-candidate scope or correction artifacts.
+  document without changing the 11-candidate scope or correction artifacts.
 
 ### review-ready
 
-- [ ] Implementer hands the bounded repair to an independent Reviewer.
+- [X] Implementer handed the bounded repair to an independent Reviewer.
 
 ### reviewer-in-progress
 
-- [ ] Reviewer returns the canonical JSON verdict. A `needs-rework` result
-  remains in the normal loop; `approved` allows PR routing only after parent
-  and correction acceptance checks pass.
+- [X] Reviewer returned the canonical JSON `approved` verdict. A
+  `needs-rework` result would remain in the normal loop; this `approved` result
+  permits Phase 4.5 alignment and publication preparation only.
 
 ### approved
 
-- [ ] Reserved for the post-recovery independent Reviewer verdict.
+- [X] The post-recovery independent Reviewer verdict is `approved`; Phase 4.5
+  alignment routes the topic to `publish-in-progress`.
 
 ### publish-in-progress
 
-- [ ] Reserved for a separately authorized post-recovery repair publication.
+- [ ] Main Agent commits the complete corrective change set by topic and pushes
+  it. Current repair, Reviewer verdict, and this state sync are not yet
+  committed; existing recovery commits remain unpushed.
+- [ ] After push, Main Agent re-observes the already-open PR's checks and
+  threads. Resolve only threads supported by that evidence; no thread is
+  resolved by this state transition.
 
 ### needs-rework
 
@@ -64,9 +71,9 @@ created: 2026-08-27
 
 ### pr-open
 
-- [ ] After recovery and re-review, Main Agent may commit/push the reviewed
-  repair and resolve only threads addressed by evidence. Do not merge, release,
-  tag, or poll after a merge handoff.
+- [ ] After the corrective change set is pushed and the PR is re-observed, the
+  topic re-enters the active `pr-open` loop. Resolve only threads addressed by
+  evidence. Do not merge, release, tag, or poll after a merge handoff.
 
 ### merged
 
@@ -82,7 +89,7 @@ created: 2026-08-27
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current truth is `creator-in-progress`; the PR remains open. Its earlier
+- Current truth is `publish-in-progress`; the PR remains open. Its earlier
   history and approvals are historical/suspect because no committed planned
   baseline preceded the original implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
@@ -93,5 +100,6 @@ created: 2026-08-27
   untracked disposition/baseline-SHA evidence in the correction step ->
   `needs-rework` -> `creator-in-progress`.
 - The correction step is the authoritative record of the direct observations.
-  The external PR is still open; no repair publication or thread resolution is
-  asserted.
+  The independent repair and re-review are complete, but the complete
+  corrective change set is not yet committed or pushed. The external PR is
+  still open; no post-recovery thread resolution is asserted.

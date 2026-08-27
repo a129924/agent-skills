@@ -2,9 +2,10 @@
 
 ## Current state
 
-`pr-open` + `creator-in-progress`: the PR remains open and the frozen repair
-is pending. The recovery baseline is committed, independently plan-reviewed,
-and its Phase 2 evidence is recorded. The original commit, approvals, and
+`publish-in-progress`: the PR remains externally open, while the recovery
+repair has completed independent review and awaits a complete corrective commit
+and push. The recovery baseline is committed, independently plan-reviewed, and
+its Phase 2 evidence is recorded. The original commit, approvals, and
 publication actions remain historical/suspect; they do not establish that the
 original plan-review or Phase 2 prerequisites were satisfied.
 
@@ -28,28 +29,31 @@ original plan-review or Phase 2 prerequisites were satisfied.
   the scoped branch and worktree, HEAD
   `67ba9d7c7fe8204e982b0bf9504513eafed66e92`, no untracked files, and a branch
   that is ahead 2 of `origin`.
+- The independent Implementer made the one frozen portable-core repair, and an
+  independent Reviewer returned the canonical `approved` verdict. Phase 4.5
+  synchronizes the parent lifecycle to `publish-in-progress`.
 
 ## Not completed
 
-- The bounded portable-core repair, independent implementation re-review, and
-  subsequent PR-thread resolution.
+- Commit and push of the complete corrective change set, followed by
+  re-observation of the already-open PR and evidence-based thread routing.
 
 ## Required follow-up
 
-- Independent Implementer repairs only the frozen
-  `python-implementation-review` portable-core wording in the candidate-basis
-  document.
-- Independent Reviewer re-reviews that bounded repair before any commit,
-  push, or evidence-based PR-thread resolution.
+- Main Agent commits the bounded repair, independent Reviewer verdict, and
+  Phase 4.5 planning synchronization by topic, then pushes the branch.
+- After the push, Main Agent confirms the current PR checks and threads before
+  resolving only those threads supported by correction evidence.
 
 ## Next handoff
 
-- **Next actor:** independent Implementer.
-- **Next step:** make only the frozen portable-core repair, then hand it to an
-  independent Reviewer.
+- **Next actor:** Main Agent (publisher / PR router).
+- **Next step:** commit and push the complete corrective change set, then
+  confirm the open PR state before any thread-resolution action.
 
 ## Stop condition
 
-Remain in `creator-in-progress` until the bounded repair has independent
-Reviewer approval. Do not resolve PR threads, merge, or release before that
-approval and evidence-based PR routing; the external PR remains open.
+Remain in `publish-in-progress` until the complete corrective change set is
+committed and pushed. Do not treat the existing open PR as recovery-complete,
+resolve PR threads, merge, or release before post-push evidence-based PR
+routing.

@@ -2,10 +2,11 @@
 
 ## Correction status
 
-`high` — recovery pending. This artifact is historical correction truth; the
-parent plan remains the execution-facing contract after required parent sync.
-The existing candidate-basis document is treated as suspect implementation
-until the frozen repair and its independent re-review pass.
+`high` — recovery publication pending. This artifact is historical correction
+truth; the parent plan is the execution-facing contract after parent sync. The
+frozen repair and its independent re-review have passed, but the complete
+corrective change set is not yet committed and pushed and the already-open PR
+has not yet undergone post-recovery thread routing.
 
 ## Frozen correction scope
 
@@ -43,10 +44,11 @@ or closed by assertion.
    verdict.
 5. Acceptance requires: fixed 11-candidate scope, no history rewrite, parent
    truth synchronized to the recovery route, Phase 2 evidence present, both
-   independent reviews passed, and only then evidence-based PR-thread routing.
+   independent reviews passed, the complete corrective change set committed and
+   pushed, and only then evidence-based PR-thread routing.
 
 ## Closure
 
-Planner may close this correction only after parent sync and all required
-reviews pass. Retain this file and the correction step as historical evidence;
-do not delete either artifact.
+Planner may close this correction only after parent sync, all required reviews,
+the corrective commit and push, and post-push PR confirmation. Retain this file
+and the correction step as historical evidence; do not delete either artifact.
