@@ -1,77 +1,79 @@
-# Cross-Language Skill Candidate Basis — High-Severity Recovery Plan
+# Cross-Language Skill Candidate Basis — Historical-Remediation Correction Plan
 
 ## Correction status
 
-`high` — recovery remains open in `review-ready`. This artifact is historical
-correction truth; the parent plan is the execution-facing contract after parent
-sync. Main Agent directly verified published baseline
-`c285c3a11be3a26dfaa661f88e4ace4973829d1f`, verified the exact five-file
-recovery comparison, and committed it as
-`b25c2a209cf3c22244543cbbc67a3eb02a866c48`. Neither completed observation nor
-commit resolves a PR thread or claims a Plan-Reviewer verdict.
+`high` — a prospective historical-remediation baseline is prepared at
+`review-ready`, but it is not yet committed or pushed. This correction artifact
+is historical truth; the synchronized parent artifacts remain current execution
+truth. No PR thread is resolved by preparation of this baseline.
 
 ## Frozen correction scope
 
 - The candidate scope remains exactly the locked 11 candidates in four groups.
-- No skill, platform surface, workflow contract, README, VERSION, target
-  project, candidate name, or candidate classification may change.
+- `python-implementation-review`'s earlier ordering repair remains a recorded
+  historical fact. It is not reopened by this route.
+- The `python-code-review` portable-core repair in `c285c3a` is retained as a
+  historical remediation in the current tree. No committed artifact before
+  that repair provides its implementation authorization; it therefore remains
+  historically suspect. This route neither re-executes it nor retroactively
+  certifies it.
+- No skill, candidate document, platform surface, workflow contract, README,
+  VERSION, target project, candidate name, or candidate classification may
+  change.
 - Recovery is additive. Never amend, rebase, reset, force-push, delete, or
-  otherwise rewrite the historical branch/PR commits.
+  otherwise rewrite the historical branch or PR commits.
 
 ## High-severity issues
 
-All three issues below are frozen as `high` correction; none may be downgraded
-or closed by assertion.
+All three issues remain `high`; none may be downgraded or closed by assertion.
 
 1. **Missing committed planning baseline:** original implementation and
-   approvals occurred without an earlier committed `planned` baseline, so the
-   historical sequence is suspect and cannot be certified compliant.
+   approvals occurred without an earlier committed `planned` baseline. That
+   sequence is suspect and cannot be certified compliant.
 2. **Missing Phase 2 readiness gate:** branch/worktree readiness was not
-   recorded by Main Agent before creator work. Under this explicit override,
-   Main Agent must directly observe and confirm the current facts before the
-   new additive baseline is committed and independently plan-reviewed; they
-   must not be invented or delegated to Dispatcher.
-3. **Python-specific portable core:** `python-implementation-review` states a
-   review ordering as universal despite the locked evidence limiting that order
-   to Python context.
+   recorded by Main Agent before creator work. Main Agent must directly verify
+   the prospective baseline before committing it; Dispatcher cannot substitute
+   for that verification.
+3. **Unproven historical authorization:** `python-code-review` was repaired in
+   `c285c3a`, but the preceding committed correction contract authorized only
+   the `python-implementation-review` repair. The current fixed tree may be
+   governed prospectively, but this historical repair remains suspect and may
+   not support a claim of historical workflow compliance.
 
-## Recovery route and acceptance
+## Prospective recovery route and acceptance
 
-1. Main Agent directly verified and recorded that `c285c3a` is the published
-   branch/HEAD baseline, then compared the execution worktree to it: exactly
-   the five listed recovery artifacts were modified, with no untracked file and
-   no unrelated modification. Dispatcher did not substitute for this observation
-   or confirmation.
-2. The recovery loop reached `review-ready` through `needs-rework` ->
-   `creator-in-progress` -> `review-ready`. Plan-Creator's bounded five-file
-   artifact preparation changed neither candidate scope nor existing history.
-3. Main Agent staged and committed exactly those five artifacts as additive
-   recovery baseline `b25c2a2`, without amending, rebasing, resetting,
-   force-pushing, deleting, or otherwise rewriting history. The committed
-   baseline is the fixed input to the pending independent review.
-4. Next, Main Agent routes `review-ready` -> `reviewer-in-progress` and
-   dispatches independent Plan-Reviewer review. Only after that transition may
-   Plan-Reviewer append its canonical verdict to the existing review log. Main
-   Agent alone commits and pushes that bounded record. The verdict routes to
-   `approved` or `needs-rework`; `approved` then permits
-   `publish-in-progress` -> `pr-open`, while `needs-rework` returns to the
-   beginning of this same canonical loop.
-5. The one candidate-document portable-core repair and its independent Reviewer
-   verdict are historical and complete. This override authorizes no further
-   candidate-document implementation or review.
-6. Acceptance requires fixed 11-candidate scope, no history rewrite, Main
-   Agent's direct baseline and five-file comparison evidence, additive baseline
-   commit `b25c2a2`, parent truth synchronized to this route, independent
-   Plan-Reviewer approval, publisher-owned commit/push and PR observation
-   evidence, and evidence-based PR-thread routing. The Plan-Reviewer's
-   review-log-only verdict-write exception does not expand the completed
-   five-file Main Agent baseline scope.
+1. Plan-Creator authors only the five baseline artifacts listed in `Artifact
+   Paths`: parent plan, parent progression, parent summary, correction plan,
+   and correction progression. This is the prospective governance contract for
+   the fixed current tree; it is not a new candidate-document implementation.
+2. Main Agent directly performs the Phase 2 branch/worktree check before the
+   first commit: confirm the scoped branch and current HEAD, clean/untracked
+   disposition, and that the pending diff contains exactly those five paths and
+   no candidate document or review log. If any check fails, stop at
+   `needs-rework`.
+3. With that check passing, Main Agent creates and pushes the first additive
+   baseline commit containing exactly those five paths. It is the immutable
+   review input and the required ancestor of the later verdict commit.
+4. Main Agent records the canonical `review-ready` ->
+   `reviewer-in-progress` routing and dispatches an independent Plan-Reviewer.
+   After the first commit exists, Plan-Reviewer may write only its canonical
+   JSON verdict to the existing review log. Its verdict must explicitly state
+   that `python-code-review`'s historical remediation remains suspect; it may
+   approve or reject only the prospective baseline's current-tree governance.
+5. Main Agent creates and pushes the second additive commit containing only
+   that Plan-Reviewer review-log verdict. The five-path baseline commit must be
+   its ancestor. A `needs-rework` verdict returns to
+   `creator-in-progress`; an `approved` verdict permits
+   `publish-in-progress` -> `pr-open` without resolving a PR thread by
+   assertion.
+6. Planner may close this correction only after the future route is compliant,
+   all required evidence and reviews are present, and the historical
+   `python-code-review` remediation is explicitly retained as suspect rather
+   than retrospectively accepted as compliant.
 
 ## Closure
 
-Planner may complete the correction-progression closure checkbox and close this
-correction only after parent sync, all required reviews, the corrective commit
-and push, and post-push PR confirmation are evidenced in the listed artifacts.
-Those conditions do not by themselves close the correction; retain this file
-and the correction step as historical evidence and do not delete either
-artifact.
+Retain this file and the correction progression after closure; deletion is
+forbidden. Historical acceptance means accepting the limitation of the record,
+not certifying the pre-existing repair. Planner alone verifies the prospective
+route and closure conditions.
