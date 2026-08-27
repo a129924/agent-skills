@@ -2,15 +2,15 @@
 
 ## Current state
 
-`pr-open`: the recovery repair has completed independent review, and the
-complete corrective package was committed and pushed at
-`21af6fff4d5f167db3459b55f8ea061c0ecf4d42`. Post-push observation found the
-PR `OPEN`, with `checks=[]` and no new threads or checks. All existing threads
-remain unresolved. The recovery baseline is committed, independently
-plan-reviewed, and its Phase 2 evidence is recorded. The original commit,
-approvals, and publication actions remain historical/suspect; they do not
-establish that the original plan-review or Phase 2 prerequisites were
-satisfied.
+`needs-rework`: the latest published corrective baseline is
+`c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must directly verify
+that published branch/HEAD baseline and verify that the execution worktree
+differs from it only by the exact five prepared recovery artifacts, with no
+untracked or unrelated change. The clean published baseline and intentionally
+modified five-file edit set are distinct facts. No PR thread is resolved. The
+original commit, approvals, and publication actions remain historical/suspect;
+they do not establish that the original plan-review or Phase 2 prerequisites
+were satisfied.
 
 ## Completed
 
@@ -26,42 +26,55 @@ satisfied.
   publish action.
 - The three correction findings have been routed as high severity without
   rewriting history.
-- Recovery baseline `9173c66` is committed, and independent Plan-Reviewer
-  approval is recorded in `67ba9d7`.
-- Dispatcher recorded clean Phase 2 readiness evidence in the correction step:
-  the scoped branch and worktree, HEAD
-  `67ba9d7c7fe8204e982b0bf9504513eafed66e92`, no untracked files, and a branch
-  that was ahead 2 of `origin` before the subsequent corrective push.
+- The historical recovery baseline `9173c66` and independent Plan-Reviewer
+  approval `67ba9d7` remain preserved without rewriting history.
+- The published baseline is
+  `c285c3a11be3a26dfaa661f88e4ace4973829d1f`; its historical post-push
+  observation is preserved but does not replace the new direct verification.
 - The independent Implementer made the one frozen portable-core repair, and an
-  independent Reviewer returned the canonical `approved` verdict. Phase 4.5
-  synchronized the parent lifecycle to `publish-in-progress`.
-- The complete corrective package was committed and pushed at
-  `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`, completing
-  `publish-in-progress` -> `pr-open`.
-- Post-push PR observation is complete: the PR is `OPEN`, `checks=[]`, and
-  there are no new threads or checks. No existing thread was resolved.
+  independent Reviewer returned the canonical `approved` verdict. These are
+  historical repair evidence only; they do not advance the current recovery
+  loop beyond `needs-rework`.
+- The new recovery loop is explicitly canonical: `needs-rework` ->
+  `creator-in-progress` -> `review-ready` -> `reviewer-in-progress` ->
+  `approved` -> `publish-in-progress` -> `pr-open`. No direct jump or thread
+  resolution is claimed.
 
 ## Not completed
 
-- PR comment and thread triage; all existing threads remain unresolved.
-- Planner verification of high-severity correction acceptance and correction
-  closure.
+- Main Agent's direct published-`c285c3a` baseline verification and exact
+  five-path execution-worktree comparison; Dispatcher cannot substitute for
+  either action.
+- Main Agent's new additive recovery-baseline commit, followed by the canonical
+  independent Plan-Reviewer verdict and publish/PR stages.
+- PR comment and thread triage; no existing thread is asserted resolved.
+- Planner verification of high-severity correction acceptance and closure after
+  the new baseline route completes.
 - Merge; no release action is required.
 
 ## Required follow-up
 
-- Main Agent triages current PR review comments, issue comments, and threads;
-  resolve only threads supported by correction evidence.
+- Main Agent directly verifies and records the published `c285c3a` baseline,
+  confirms the execution worktree contains only the five permitted recovery
+  edits with no untracked or unrelated change, then routes and records the full
+  canonical recovery loop. It stages and commits only the five files; do not
+  rewrite history.
+- After independent Plan-Reviewer approval and the `approved` ->
+  `publish-in-progress` -> `pr-open` route, Main Agent triages current PR
+  review comments, issue comments, and threads; resolve only threads supported
+  by correction evidence.
 - Planner may verify correction acceptance only under the correction contract;
   this summary does not close the high-severity recovery.
 
 ## Next handoff
 
-- **Next actor:** Main Agent (publisher / PR router).
-- **Next step:** perform active `pr-open` comment and thread triage.
+- **Next actor:** Main Agent (override-owned recovery baseline owner).
+- **Next step:** directly verify the published baseline and exact five-file
+  execution-worktree comparison, then begin the canonical recovery loop at
+  `needs-rework` -> `creator-in-progress`.
 
 ## Stop condition
 
-Remain in `pr-open` until PR review routing supplies an allowed next state. Do
-not treat the existing open PR as recovery-complete, resolve PR threads without
-supporting evidence, merge, or release.
+Remain in `needs-rework` until Main Agent has completed the override-owned
+baseline verification and the full canonical recovery loop reaches `pr-open`.
+Do not resolve PR threads without supporting evidence, merge, or release.

@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: pr-open
+status: needs-rework
 created: 2026-08-27
 ---
 
@@ -8,78 +8,71 @@ created: 2026-08-27
 
 ## Workflow Stages
 
-- [X] planned (historical/suspect; not evidence of compliant ordering)
-- [X] creator-in-progress
-- [X] review-ready
-- [X] reviewer-in-progress
-- [X] approved
-- [X] needs-rework (high-severity recovery route completed before the frozen repair)
-- [X] publish-in-progress
-- [X] pr-open (the corrective package is pushed and post-push PR observation
-  is complete)
-- [ ] merged
+Historical entries are retained only as suspect evidence. They do not satisfy
+the current recovery loop or authorize a direct status jump.
+
+- [X] historical `pr-open` returned to `needs-rework` through current PR feedback
+- [ ] `needs-rework` -> `creator-in-progress`
+- [ ] `creator-in-progress` -> `review-ready`
+- [ ] `review-ready` -> `reviewer-in-progress`
+- [ ] `reviewer-in-progress` -> `approved`
+- [ ] `approved` -> `publish-in-progress`
+- [ ] `publish-in-progress` -> `pr-open`
+- [ ] `pr-open` -> `merged` (STOP POINT 2 applies after human merge handoff)
 
 ## Actionable Steps
 
-### needs-rework — recovery gate completed
+### needs-rework — override-owned recovery gate
 
 - [X] Preserve the original five compatible PR fixes in the parent artifacts:
   synchronized PR state and summary, PR feedback loop, separated verdict
   ownership, and one publish action containing STOP POINT 1.
-- [X] Commit the recovery planning baseline containing the synchronized parent
-  artifacts and both correction artifacts; do not amend, rebase, reset, or
-  force-push historical commits. Recovery baseline: `9173c66`.
-- [X] Independent Plan-Reviewer reviewed the committed recovery baseline and
-  returned the canonical `approved` verdict in `67ba9d7`.
-- [X] Dispatcher recorded the actual Phase 2 evidence in the correction step
-  and confirmed every pre-creator requirement before routing an Implementer.
+- [ ] Main Agent directly verifies and records that `c285c3a` is the published
+  branch/HEAD baseline, then records the execution-worktree comparison: exactly
+  five permitted recovery artifacts, no untracked file, no unrelated change.
+  Dispatcher may route the result but cannot substitute for it.
 
 ### creator-in-progress
 
-- [X] Independent Implementer repaired only the frozen
-  `python-implementation-review` portable-core wording in the candidate-basis
-  document without changing the 11-candidate scope or correction artifacts.
+- [ ] After the direct Phase 2 verification, record the canonical
+  `needs-rework` -> `creator-in-progress` transition. Plan-Creator's prepared
+  work remains limited to the five permitted recovery artifacts.
 
 ### review-ready
 
-- [X] Implementer handed the bounded repair to an independent Reviewer.
+- [ ] Record `creator-in-progress` -> `review-ready`; freeze the exact five-file
+  edit set for Main Agent staging and the additive baseline commit.
 
 ### reviewer-in-progress
 
-- [X] Reviewer returned the canonical JSON `approved` verdict. A
-  `needs-rework` result would remain in the normal loop; this `approved` result
-  permits Phase 4.5 alignment and publication preparation only.
+- [ ] Main Agent stages and commits exactly the five permitted artifacts with no
+  other staged, unstaged, or untracked change, then records
+  `review-ready` -> `reviewer-in-progress`.
+- [ ] Independent Plan-Reviewer reviews that committed baseline and returns the
+  canonical JSON verdict.
 
 ### approved
 
-- [X] The post-recovery independent Reviewer verdict is `approved`; Phase 4.5
-  alignment routes the topic to `publish-in-progress`.
+- [ ] Record `reviewer-in-progress` -> `approved` only for an independent
+  Plan-Reviewer `approved` verdict; a `needs-rework` verdict restarts this
+  canonical loop.
 
 ### publish-in-progress
 
-- [X] Main Agent committed and pushed the complete corrective change set by
-  topic at `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`.
-- [X] Post-push observation of the already-open PR found it `OPEN`, with
-  `checks=[]` and no new threads or checks. All existing threads remain
-  unresolved; this transition resolves none of them.
-
-### needs-rework
-
-- [X] Recovery gate completed without changing the candidate set, creating a
-  language appendix, or altering history.
+- [ ] Main Agent records `approved` -> `publish-in-progress` and pushes the
+  approved additive baseline without rewriting history.
 
 ### pr-open
 
-- [X] The topic has re-entered the active `pr-open` loop after the pushed
-  corrective package and completed post-push observation.
-- [ ] Main Agent triages current PR review comments, issue comments, and
+- [ ] Record `publish-in-progress` -> `pr-open` only after PR observation.
+  Then Main Agent triages current PR review comments, issue comments, and
   threads. Resolve only threads addressed by evidence. Do not merge, release,
   tag, or poll after a merge handoff.
 
 ### merged
 
 - [ ] STOP POINT 2: only a new explicit human resume may initiate post-merge
-  local sync and creation of the topic close summary.
+  local sync and update of the existing topic close summary.
 
 ## Handoff / Gate Notes
 
@@ -90,24 +83,22 @@ created: 2026-08-27
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current truth is `pr-open`; the PR remains open. The corrective package is
-  pushed at `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`; post-push observation
-  found `checks=[]` and no new threads or checks. All existing threads remain
-  unresolved. Its earlier
-  history and approvals are historical/suspect because no committed planned
-  baseline preceded the original implementation sequence.
+- Current truth is `needs-rework`; the latest published corrective baseline is
+  `c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must distinguish the
+  clean published baseline from the intentionally modified five-file recovery
+  set. No PR thread is resolved. Earlier history and approvals are
+  historical/suspect because no committed planned baseline preceded the
+  original implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
   never claims of verified target-project behavior.
-- Pre-creator Phase 2 was a Status/Gate prerequisite, not Implementer work:
-  recovery baseline `9173c66` -> independent Plan-Reviewer `approved` verdict
-  in `67ba9d7` -> Dispatcher-recorded branch/HEAD/worktree/clean-state/
-  untracked disposition/baseline-SHA evidence in the correction step ->
-  `needs-rework` -> `creator-in-progress`.
+- Pre-creator Phase 2 is a Status/Gate prerequisite, not Implementer work.
+  Under the explicit human override, Main Agent directly verifies and confirms
+  the published `c285c3a` branch/HEAD baseline and the exact five-file
+  execution-worktree comparison (no untracked or unrelated change) in the
+  correction step; then the full canonical loop proceeds through creator,
+  review-ready, reviewer, approved, publish, and pr-open. Dispatcher may route
+  the result only. Independent Plan-Reviewer approval is required before the
+  topic can enter `publish-in-progress`.
 - The correction step is the authoritative record of the direct observations.
-  The independent repair and re-review are complete, and the complete
-  corrective package has been committed and pushed. The post-push PR
-  observation is complete; no post-recovery thread resolution is asserted.
-- Main Agent may record or route observed `pr-open` and `merged` state in this
-  progression artifact only. That record does not authorize a repository edit,
-  commit, push, or merge; each constrained git mutation requires a separately
-  dispatched Implementer action.
+  The old repair, re-review, and publication remain historical; they do not
+  satisfy the override-owned gate or assert post-recovery thread resolution.
