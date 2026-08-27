@@ -2,12 +2,13 @@
 
 ## Correction status
 
-`high` — recovery remains open in `needs-rework`. This artifact is historical
+`high` — recovery remains open in `review-ready`. This artifact is historical
 correction truth; the parent plan is the execution-facing contract after parent
-sync. The latest published corrective baseline is
-`c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must verify that exact
-published baseline and then the intentionally dirty five-file recovery edit
-set; neither observation resolves a PR thread.
+sync. Main Agent directly verified published baseline
+`c285c3a11be3a26dfaa661f88e4ace4973829d1f`, verified the exact five-file
+recovery comparison, and committed it as
+`b25c2a209cf3c22244543cbbc67a3eb02a866c48`. Neither completed observation nor
+commit resolves a PR thread or claims a Plan-Reviewer verdict.
 
 ## Frozen correction scope
 
@@ -36,31 +37,35 @@ or closed by assertion.
 
 ## Recovery route and acceptance
 
-1. Main Agent directly verifies and records that `c285c3a` is the published
-   branch/HEAD baseline, then compares the execution worktree to it: exactly
-   the five listed recovery artifacts are modified, with no untracked file and
-   no unrelated modification. Dispatcher may route but cannot substitute for
-   this observation or confirmation. Any failed field blocks progression.
-2. The recovery loop moves only through `needs-rework` ->
+1. Main Agent directly verified and recorded that `c285c3a` is the published
+   branch/HEAD baseline, then compared the execution worktree to it: exactly
+   the five listed recovery artifacts were modified, with no untracked file and
+   no unrelated modification. Dispatcher did not substitute for this observation
+   or confirmation.
+2. The recovery loop reached `review-ready` through `needs-rework` ->
    `creator-in-progress` -> `review-ready`. Plan-Creator's bounded five-file
-   artifact preparation is the creator work; it changes neither candidate scope
-   nor existing history.
-3. Main Agent stages and commits exactly those five artifacts as one additive
-   recovery baseline, without amending, rebasing, resetting, force-pushing, or
-   otherwise rewriting history. The committed baseline is the fixed input to
-   `review-ready` -> `reviewer-in-progress`.
-4. An independent Plan-Reviewer performs `reviewer-in-progress` and returns the
-   canonical verdict. Only `approved` permits Main Agent to complete
-   `approved` -> `publish-in-progress` -> `pr-open`; `needs-rework` returns to
-   the beginning of this same canonical loop.
+   artifact preparation changed neither candidate scope nor existing history.
+3. Main Agent staged and committed exactly those five artifacts as additive
+   recovery baseline `b25c2a2`, without amending, rebasing, resetting,
+   force-pushing, deleting, or otherwise rewriting history. The committed
+   baseline is the fixed input to the pending independent review.
+4. Next, Main Agent routes `review-ready` -> `reviewer-in-progress` and
+   dispatches independent Plan-Reviewer review. Only after that transition may
+   Plan-Reviewer append its canonical verdict to the existing review log. Main
+   Agent alone commits and pushes that bounded record. The verdict routes to
+   `approved` or `needs-rework`; `approved` then permits
+   `publish-in-progress` -> `pr-open`, while `needs-rework` returns to the
+   beginning of this same canonical loop.
 5. The one candidate-document portable-core repair and its independent Reviewer
    verdict are historical and complete. This override authorizes no further
    candidate-document implementation or review.
 6. Acceptance requires fixed 11-candidate scope, no history rewrite, Main
-   Agent's direct baseline and five-file comparison evidence, the new additive
-   baseline commit, parent truth synchronized to this route, independent
-   Plan-Reviewer approval, publish/PR observation evidence, and evidence-based
-   PR-thread routing.
+   Agent's direct baseline and five-file comparison evidence, additive baseline
+   commit `b25c2a2`, parent truth synchronized to this route, independent
+   Plan-Reviewer approval, publisher-owned commit/push and PR observation
+   evidence, and evidence-based PR-thread routing. The Plan-Reviewer's
+   review-log-only verdict-write exception does not expand the completed
+   five-file Main Agent baseline scope.
 
 ## Closure
 

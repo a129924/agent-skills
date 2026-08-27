@@ -2,15 +2,16 @@
 
 ## Current state
 
-`needs-rework`: the latest published corrective baseline is
-`c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must directly verify
-that published branch/HEAD baseline and verify that the execution worktree
-differs from it only by the exact five prepared recovery artifacts, with no
-untracked or unrelated change. The clean published baseline and intentionally
-modified five-file edit set are distinct facts. No PR thread is resolved. The
-original commit, approvals, and publication actions remain historical/suspect;
-they do not establish that the original plan-review or Phase 2 prerequisites
-were satisfied.
+`review-ready`: Main Agent directly verified published baseline
+`c285c3a11be3a26dfaa661f88e4ace4973829d1f` on branch
+`docs/andrew/cross-language-skill-candidate-basis`, verified that
+`git diff --name-status c285c3a..b25c2a2` contains exactly the five recovery
+artifacts, and committed that additive baseline as
+`b25c2a209cf3c22244543cbbc67a3eb02a866c48`. The resulting worktree is clean
+with no untracked files. No PR thread is resolved and no Plan-Reviewer verdict
+or reviewer-stage transition is claimed. The original commit, approvals, and
+publication actions remain historical/suspect; they do not establish that the
+original plan-review or Phase 2 prerequisites were satisfied.
 
 ## Completed
 
@@ -39,14 +40,20 @@ were satisfied.
   `creator-in-progress` -> `review-ready` -> `reviewer-in-progress` ->
   `approved` -> `publish-in-progress` -> `pr-open`. No direct jump or thread
   resolution is claimed.
+- Main Agent completed the override-owned Phase 2 verification and the
+  `needs-rework` -> `creator-in-progress` -> `review-ready` route. Its
+  additive baseline commit is `b25c2a2`; only the five designated parent and
+  correction artifacts changed, with no candidate-document change or history
+  rewrite.
 
 ## Not completed
 
-- Main Agent's direct published-`c285c3a` baseline verification and exact
-  five-path execution-worktree comparison; Dispatcher cannot substitute for
-  either action.
-- Main Agent's new additive recovery-baseline commit, followed by the canonical
-  independent Plan-Reviewer verdict and publish/PR stages.
+- The canonical independent Plan-Reviewer verdict on committed baseline
+  `b25c2a2`, followed by publisher-owned commit/push and PR stages. Main Agent
+  must first route `review-ready` -> `reviewer-in-progress`; only then may
+  Plan-Reviewer append its distinct verdict to the existing review log. Main
+  Agent commits and pushes that bounded entry; this exception does not expand
+  its completed five-file baseline scope.
 - PR comment and thread triage; no existing thread is asserted resolved.
 - Planner verification of high-severity correction acceptance and closure after
   the new baseline route completes.
@@ -54,27 +61,26 @@ were satisfied.
 
 ## Required follow-up
 
-- Main Agent directly verifies and records the published `c285c3a` baseline,
-  confirms the execution worktree contains only the five permitted recovery
-  edits with no untracked or unrelated change, then routes and records the full
-  canonical recovery loop. It stages and commits only the five files; do not
-  rewrite history.
-- After independent Plan-Reviewer approval and the `approved` ->
-  `publish-in-progress` -> `pr-open` route, Main Agent triages current PR
-  review comments, issue comments, and threads; resolve only threads supported
-  by correction evidence.
+- Main Agent routes `review-ready` -> `reviewer-in-progress` and dispatches
+  independent Plan-Reviewer review of `b25c2a2`. Only then may Plan-Reviewer
+  append its canonical verdict to the existing review log. Main Agent commits
+  and pushes that bounded record. An `approved` verdict then permits the
+  `reviewer-in-progress` -> `approved` -> `publish-in-progress` -> `pr-open`
+  route; Main Agent triages current PR review comments, issue comments, and
+  threads, resolving only threads supported by correction evidence.
 - Planner may verify correction acceptance only under the correction contract;
   this summary does not close the high-severity recovery.
 
 ## Next handoff
 
-- **Next actor:** Main Agent (override-owned recovery baseline owner).
-- **Next step:** directly verify the published baseline and exact five-file
-  execution-worktree comparison, then begin the canonical recovery loop at
-  `needs-rework` -> `creator-in-progress`.
+- **Next actor:** Main Agent (publisher / routing owner).
+- **Next step:** record `review-ready` -> `reviewer-in-progress` and dispatch
+  independent Plan-Reviewer review of committed baseline `b25c2a2`.
 
 ## Stop condition
 
-Remain in `needs-rework` until Main Agent has completed the override-owned
-baseline verification and the full canonical recovery loop reaches `pr-open`.
-Do not resolve PR threads without supporting evidence, merge, or release.
+Remain in `review-ready` until Main Agent records `reviewer-in-progress`. An
+independent Plan-Reviewer must not record a verdict before that transition; its
+verdict may route only to `approved` or `needs-rework`, and Main Agent owns all
+commit/push actions. Do not resolve PR threads without supporting evidence,
+merge, or release.

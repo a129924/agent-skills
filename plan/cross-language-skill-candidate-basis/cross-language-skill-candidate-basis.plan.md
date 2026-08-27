@@ -13,9 +13,9 @@ changing this plan or implementing the candidate-basis document.
 
 - Recover a trustworthy, repository-visible execution baseline for the existing
   11-candidate inventory topic without rewriting its history.
-- Complete the five-artifact additive recovery baseline and its independent
-  Plan-Reviewer gate; the candidate-document repair remains historical evidence
-  and is not future Implementer work in this recovery loop.
+- Complete the committed five-artifact additive recovery baseline and its
+  independent Plan-Reviewer gate; the candidate-document repair remains
+  historical evidence and is not future Implementer work in this recovery loop.
 
 ## Scope
 
@@ -66,14 +66,18 @@ changing this plan or implementing the candidate-basis document.
   - `docs/agent-skills-convergence/phase-1/**` and
     `docs/agent-skills-convergence/phase-3/projection-adapter-design.md`.
   - The 11 candidate `skills/<candidate>/SKILL.md` files named in `Scope`.
-- **Additive recovery-baseline edit set** is exactly these five planning and
-  correction artifacts: the parent plan, parent progression, parent summary,
-  correction plan, and correction progression listed in `Artifact Paths`.
-  The candidate document was changed only by the independent Implementer for
-  its one bounded portable-core repair; this recovery loop does not reopen that
-  document or the review log.
-- **Modify** outside those exact paths is prohibited. **Deleted** paths are
-  none. If an additional path becomes necessary, stop and repair this plan.
+- **Main Agent additive recovery-baseline edit set** was exactly these five
+  planning and correction artifacts: the parent plan, parent progression,
+  parent summary, correction plan, and correction progression listed in
+  `Artifact Paths`. The candidate document was changed only by the independent
+  Implementer for its one bounded portable-core repair; this recovery loop does
+  not reopen that document.
+- **Modify** outside those five paths was prohibited for Main Agent's additive
+  baseline commit; **Deleted** paths were none. After Main Agent routes the
+  topic to `reviewer-in-progress`, the independent Plan-Reviewer may append
+  only its verdict to the existing review log. Main Agent retains commit and
+  push ownership for that bounded record. This exception does not expand
+  candidate, history-rewrite, or implementation scope.
 
 ## Boundaries / Exclusions
 
@@ -83,10 +87,11 @@ changing this plan or implementing the candidate-basis document.
   result but cannot substitute for its observation or confirmation. Main Agent
   also owns and executes the new additive recovery-baseline commit, without
   amending, rebasing, resetting, force-pushing, or otherwise rewriting history.
-  Plan-Reviewer independently reviews that committed baseline. An independent
+  Plan-Reviewer independently reviews that committed baseline only after Main
+  Agent routes the topic to `reviewer-in-progress`. An independent
   Implementer remains limited to the frozen candidate-document repair, and an
   independent Reviewer checks that repair. Main Agent owns PR transport and
-  thread resolution.
+  thread resolution, including publisher-owned commit and push actions.
 - Existing Phase 1 artifacts remain historical evidence and are not modified,
   reinterpreted as implementation authorization, or extended by this topic.
 - `skills/` remains the canonical source; `.github/**`, `.codex/**`, and other
@@ -100,22 +105,19 @@ changing this plan or implementing the candidate-basis document.
 
 ## Status / Allowed Transitions
 
-- **Current**: `needs-rework` — the latest published corrective baseline is
-  `c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must directly verify
-  that exact published branch/HEAD baseline, then verify that the execution
-  worktree differs from it only by the five additive recovery artifacts, with
-  no untracked or unrelated change. The baseline commit is the clean reference;
-  the prepared five-file edit set is intentionally not a clean worktree. This
-  does not resolve a PR thread or close the high-severity correction. Prior
-  execution and approvals remain
-  historical/suspect rather than proof that the original sequence complied.
-- **Pre-creator Phase 2 gate**: this is a Status/Gate prerequisite, not an
-  `Implementation Steps` item. Before `needs-rework` ->
-  `creator-in-progress`, Main Agent must directly observe, confirm, and record
-  the published `c285c3a` branch/HEAD baseline and the execution-worktree
-  comparison: exactly the five recovery artifacts, no untracked file, and no
-  unrelated modification. Dispatcher may route the result only. Missing,
-  unrelated, or unverified evidence keeps the topic at `needs-rework`.
+- **Current**: `review-ready` — Main Agent directly completed the override-owned
+  Phase 2 verification against published baseline
+  `c285c3a11be3a26dfaa661f88e4ace4973829d1f` on branch
+  `docs/andrew/cross-language-skill-candidate-basis`, then committed the exact
+  five additive recovery artifacts as `b25c2a209cf3c22244543cbbc67a3eb02a866c48`.
+  The resulting worktree is clean with no untracked files. `git diff --name-status
+  c285c3a..b25c2a2` lists exactly those five paths; no candidate document or
+  history rewrite is included. No PR thread is resolved and no reviewer verdict
+  is claimed.
+- **Pre-creator Phase 2 gate**: completed by Main Agent as a Status/Gate
+  prerequisite, not an `Implementation Steps` item. Its direct observation and
+  confirmation are recorded in the correction progression. Dispatcher did not
+  substitute for the verification.
 - **Execution model**: canonical creator -> reviewer -> publish -> merge path;
   `pr-open` retains the canonical PR feedback loop until merge handoff. This
   topic has no release transition.
@@ -133,13 +135,15 @@ changing this plan or implementing the candidate-basis document.
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
-- **Routing note**: the latest PR feedback returns the topic to `needs-rework`.
-  The required recovery loop is exactly `needs-rework` ->
-  `creator-in-progress` -> `review-ready` -> `reviewer-in-progress` ->
-  `approved` -> `publish-in-progress` -> `pr-open`. The additive baseline
-  commit is the fixed review input between `review-ready` and
-  `reviewer-in-progress`; it is not a direct status jump. No action reopens the
-  locked candidate set or invents a new language architecture.
+- **Routing note**: the recovery loop has reached `review-ready` through
+  `needs-rework` -> `creator-in-progress` -> `review-ready`. Commit `b25c2a2`
+  is the fixed review input. Next, Main Agent routes
+  `review-ready` -> `reviewer-in-progress` and dispatches the independent
+  Plan-Reviewer. Only after that transition may Plan-Reviewer append its
+  independent verdict to the existing review log; Main Agent then owns commit
+  and push of the bounded record and routes the verdict to `approved` or
+  `needs-rework`. No action reopens the locked candidate set or invents a new
+  language architecture.
 - **Recovery route**: the Planner has frozen all three findings as high-severity
   correction. Recovery remains open until the override-owned baseline and
   direct Phase 2 confirmation are independently plan-reviewed and recorded.
@@ -151,7 +155,7 @@ changing this plan or implementing the candidate-basis document.
 | --- | --- | --- | --- |
 | Topic plan | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.plan.md` | Plan-Creator | Current execution contract and locked write boundary |
 | Topic progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.step.md` | Plan-Creator; Main Agent (override-owned Phase 2 evidence and state routing); Dispatcher (routing only) | Current workflow-stage and gate truth |
-| Review routing log | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.review-log.md` | Plan-Reviewer; Reviewer; Planner | Separate independent verdict entries and recovery-routing trail |
+| Review routing log | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.review-log.md` | Plan-Reviewer (bounded verdict only); Reviewer; Planner; Main Agent (publisher) | Separate independent verdict entries and recovery-routing trail |
 | Topic close summary | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.summary.md` | Plan-Creator; Main Agent | Current PR/recovery handoff truth, then close outcome |
 | Correction plan | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.correction-plan.md` | Plan-Creator; Planner; Main Agent (override-owned baseline execution) | Historical high-severity correction contract |
 | Correction progression | `plan/cross-language-skill-candidate-basis/cross-language-skill-candidate-basis.correction-step.md` | Plan-Creator; Main Agent (override-owned baseline and Phase 2 evidence); Dispatcher (routing only); Planner (evidence-based closure only) | Historical correction-gate evidence and sequencing |
@@ -161,21 +165,24 @@ Artifact path notes:
 
 - This topic does not modify `README.md`, `VERSION`, `.github/copilot-instructions.md`,
   `skills/**`, `.github/**`, or `.codex/**`.
-- The five parent/correction planning paths other than `review-log.md` are the
-  only Plan-Creator writes in this recovery pass. They are also the exact
-  additive recovery-baseline commit set. The candidate document's one
+- The five parent/correction planning paths other than `review-log.md` were the
+  only Plan-Creator writes in this recovery pass and were the exact Main Agent
+  additive recovery-baseline commit set in `b25c2a2`. The candidate document's one
   Implementer-only repair and its independent Reviewer verdict are already
   present; neither is a Plan-Creator write in this recovery loop.
 - Plan-Reviewer and Reviewer each append only their own distinct verdict entry
   to the review log; neither role overwrites, approves, or reuses the other
-  role's verdict.
-- The explicit human override authorizes Main Agent to directly verify and
+  role's verdict. For the pending Plan-Reviewer gate, Plan-Reviewer may append
+  that bounded verdict only after `reviewer-in-progress`; Main Agent alone
+  commits and pushes it. This does not expand the five-file Main Agent baseline
+  scope.
+- The explicit human override authorized Main Agent to directly verify and
   record the published `c285c3a` baseline, verify that the execution worktree
-  contains exactly the five additive recovery-artifact edits with no untracked
-  or unrelated change, then stage and commit that exact set. Dispatcher may
-  route observations only; it may not confirm readiness, commit, push, merge,
-  or write a repair. This exception does not authorize history rewriting,
-  candidate-document changes, or thread resolution without supporting evidence.
+  contained exactly the five additive recovery-artifact edits with no untracked
+  or unrelated change, then stage and commit that exact set as `b25c2a2`.
+  Dispatcher routed observations only. This completed exception does not
+  authorize history rewriting, candidate-document changes, or thread resolution
+  without supporting evidence.
 - If a required action falls outside this table, stop and repair this plan.
   Correction artifacts are retained; deletion is forbidden.
 
@@ -198,10 +205,9 @@ Artifact path notes:
   Python runtime/toolchain rules.
 - The candidate-basis document makes no path migration, projection, runtime,
   workflow-binding, implementation, or stable-library recommendation.
-- Relative to `c285c3a`, only the exact five additive recovery artifacts may
-  modify tracked content; no other tracked path may change, no path may be
-  deleted, no untracked file may exist, and existing Phase 1 files remain
-  unchanged.
+- Relative to `c285c3a`, `b25c2a2` modifies only the exact five additive
+  recovery artifacts; no other tracked path changed, no path was deleted, no
+  untracked file remained, and existing Phase 1 files remain unchanged.
 - The plan and step artifact retain canonical sections and transitions; the new
   Plan-Reviewer handoff uses the fixed JSON shape. No new Reviewer handoff is
   created for the historical candidate-document repair.
@@ -212,14 +218,16 @@ Artifact path notes:
   only after merge handoff.
 - The correction plan records three high-severity issues, fixed 11-candidate
   scope, no-history-rewrite rule, acceptance criteria, and required re-reviews.
-- The correction step begins the new recovery loop with every new-loop task
-  unchecked and no fabricated Phase 2 evidence, status tick, SHA, or
-  clean-worktree assertion.
-- Before `creator-in-progress`, Main Agent has directly recorded the published
-  baseline and exact five-file execution-worktree comparison. Before
-  `reviewer-in-progress`, Main Agent has committed that exact five-file set.
-  Before `approved`, an independent Plan-Reviewer has approved that commit.
-  Dispatcher routing does not satisfy any of those Main Agent responsibilities.
+- The correction step records only Main Agent's directly observed Phase 2
+  evidence and committed baseline; it does not fabricate a Plan-Reviewer
+  verdict, status transition, or thread resolution.
+- Main Agent directly recorded the published baseline and exact five-file
+  execution-worktree comparison, then committed that exact set as `b25c2a2`.
+  Main Agent must route to `reviewer-in-progress` before an independent
+  Plan-Reviewer may return its verdict; only that verdict can route to
+  `approved` or `needs-rework`. Main Agent owns commit and push of the verdict
+  record. Dispatcher routing does not satisfy any of those Main Agent
+  responsibilities.
 - The new loop reaches `pr-open` only after `approved` ->
   `publish-in-progress` -> `pr-open`, with commit/push/PR observation evidence.
   Neither the new loop nor historical observations resolve a thread or claim

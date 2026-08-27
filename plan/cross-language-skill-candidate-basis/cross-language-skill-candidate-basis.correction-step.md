@@ -1,28 +1,30 @@
 ---
 topic: cross-language-skill-candidate-basis
 correction-severity: high
-status: needs-rework
+status: review-ready
 ---
 
 # Cross-Language Skill Candidate Basis — Recovery Progression
 
 ## Recovery Steps
 
-- [ ] Main Agent directly verifies and confirms the published `c285c3a`
+- [X] Main Agent directly verified and confirmed the published `c285c3a`
   baseline and the exact five-file execution-worktree comparison below;
-  Dispatcher may route the result but cannot substitute for the observation or
-  confirmation.
-- [ ] Route `needs-rework` -> `creator-in-progress`; Plan-Creator's prepared
-  changes remain limited to the exact five recovery artifacts.
-- [ ] Route `creator-in-progress` -> `review-ready`; no candidate document,
-  review log, or unrelated artifact is added to the edit set.
-- [ ] Main Agent stages exactly those five planning artifacts, confirms no other
-  staged, unstaged, or untracked change exists, and executes the new additive
-  recovery-baseline commit without amending, rebasing, resetting, force-pushing,
-  or deleting historical commits.
-- [ ] Route `review-ready` -> `reviewer-in-progress`; independent Plan-Reviewer
-  reviews that newly committed additive baseline and returns the canonical JSON
-  verdict.
+  Dispatcher did not substitute for the observation or confirmation.
+- [X] Routed `needs-rework` -> `creator-in-progress`; Plan-Creator's prepared
+  changes remained limited to the exact five recovery artifacts.
+- [X] Routed `creator-in-progress` -> `review-ready`; no candidate document,
+  review log, or unrelated artifact was added to the Main Agent edit set.
+- [X] Main Agent staged exactly those five planning artifacts, confirmed no other
+  staged, unstaged, or untracked change existed, and executed additive
+  recovery-baseline commit `b25c2a2` without amending, rebasing, resetting,
+  force-pushing, deleting, or rewriting historical commits.
+- [ ] Main Agent routes `review-ready` -> `reviewer-in-progress` and dispatches
+  independent Plan-Reviewer review of committed baseline `b25c2a2`.
+- [ ] Only after that transition, Plan-Reviewer appends only its canonical JSON
+  verdict to the existing review log. Plan-Reviewer does not commit or push;
+  Main Agent owns commit and push of that bounded record. The verdict routes to
+  `approved` or `needs-rework`.
 - [ ] On `approved`, Main Agent completes only `approved` ->
   `publish-in-progress` -> `pr-open` with push and PR observation evidence. A
   `needs-rework` verdict restarts this same loop; no direct status jump exists.
@@ -40,13 +42,17 @@ status: needs-rework
 - Branch: `docs/andrew/cross-language-skill-candidate-basis`.
 - Worktree path:
   `/Users/andrew/code/python/agent-skills.worktrees/agent-20260827-cross-language-skill-candidate-basis`.
-- Published-baseline check: Main Agent must verify that the checked-out branch
-  and `HEAD` identify the published `c285c3a` baseline before assessing the
-  additive edit set. This is a clean immutable reference, not a claim that the
-  prepared execution worktree has no changes.
-- Execution-worktree disposition to verify directly before staging: compared
+- Published-baseline check: Main Agent directly verified that the scoped branch
+  and published baseline identify `c285c3a` before assessing the additive edit
+  set. This is a clean immutable reference, not a claim that the prepared
+  execution worktree had no changes.
+- Execution-worktree disposition verified directly before staging: compared
   with `c285c3a`, exactly the five allowed recovery-file modifications below,
   no untracked files, and no unrelated modification.
+- Additive baseline commit: `b25c2a209cf3c22244543cbbc67a3eb02a866c48`.
+- Post-commit disposition: the same scoped worktree is clean with no untracked
+  files. `git diff --name-status c285c3a..b25c2a2` lists exactly the five paths
+  below; it contains no candidate-document change and no history rewrite.
 - Previous recovery baseline SHA: `9173c66` (historical only).
 - Previous Plan-Reviewer verdict commit: `67ba9d7` (historical only).
 - Required staged set after the direct published-baseline observation: exactly
@@ -60,16 +66,17 @@ status: needs-rework
 
 ## Gate
 
-The listed prior post-push state is historical evidence only. Main Agent must
-directly re-observe and confirm every published-baseline and
-execution-worktree-comparison field before routing `needs-rework` ->
-`creator-in-progress`, then confirm the exact allowed staged set and absence of
-all other staged, unstaged, and untracked changes before the additive commit.
-Dispatcher may route but cannot perform or attest either confirmation. The
-required loop is `needs-rework` -> `creator-in-progress` -> `review-ready` ->
-`reviewer-in-progress` -> `approved` -> `publish-in-progress` -> `pr-open`.
-It resolves no PR thread. Any failed, unrelated, untracked, or reviewer
-`needs-rework` result returns or keeps the loop at `needs-rework`.
+Main Agent completed every direct published-baseline and execution-worktree
+comparison field before routing `needs-rework` -> `creator-in-progress`, then
+confirmed the exact allowed staged set and absence of all other staged,
+unstaged, and untracked changes before commit `b25c2a2`. Dispatcher did not
+perform or attest either confirmation. The required loop is now at
+`review-ready`; Main Agent must next route to `reviewer-in-progress` before the
+independent Plan-Reviewer may append its distinct verdict to the existing
+review log. Plan-Reviewer does not commit or push; Main Agent owns publication
+of that bounded entry. This is explicitly permitted and does not expand the
+five-file Main Agent additive baseline scope. It resolves no PR thread. Any
+reviewer `needs-rework` result returns the loop to `needs-rework`.
 
 ## Historical post-review publication evidence
 
@@ -81,6 +88,7 @@ It resolves no PR thread. Any failed, unrelated, untracked, or reviewer
 - Post-push repository observation found the scoped branch synchronized with
   `origin`, clean porcelain status, and no untracked files. This record
   resolves no thread and does not close this high-severity correction.
-- Next: Main Agent performs the override-owned direct Phase 2 verification and
-  additive baseline commit. Planner alone may later verify correction acceptance
-  before closure.
+- Next: Main Agent routes to `reviewer-in-progress` and dispatches independent
+  Plan-Reviewer review of committed baseline `b25c2a2`. Only its review-log
+  verdict write is permitted for Plan-Reviewer; Main Agent owns commit and
+  push. Planner alone may later verify correction acceptance before closure.

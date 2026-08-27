@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: needs-rework
+status: review-ready
 created: 2026-08-27
 ---
 
@@ -12,8 +12,8 @@ Historical entries are retained only as suspect evidence. They do not satisfy
 the current recovery loop or authorize a direct status jump.
 
 - [X] historical `pr-open` returned to `needs-rework` through current PR feedback
-- [ ] `needs-rework` -> `creator-in-progress`
-- [ ] `creator-in-progress` -> `review-ready`
+- [X] `needs-rework` -> `creator-in-progress`
+- [X] `creator-in-progress` -> `review-ready`
 - [ ] `review-ready` -> `reviewer-in-progress`
 - [ ] `reviewer-in-progress` -> `approved`
 - [ ] `approved` -> `publish-in-progress`
@@ -27,29 +27,32 @@ the current recovery loop or authorize a direct status jump.
 - [X] Preserve the original five compatible PR fixes in the parent artifacts:
   synchronized PR state and summary, PR feedback loop, separated verdict
   ownership, and one publish action containing STOP POINT 1.
-- [ ] Main Agent directly verifies and records that `c285c3a` is the published
-  branch/HEAD baseline, then records the execution-worktree comparison: exactly
+- [X] Main Agent directly verified and recorded that `c285c3a` is the published
+  branch/HEAD baseline, then recorded the execution-worktree comparison: exactly
   five permitted recovery artifacts, no untracked file, no unrelated change.
-  Dispatcher may route the result but cannot substitute for it.
+  Dispatcher did not substitute for it.
 
 ### creator-in-progress
 
-- [ ] After the direct Phase 2 verification, record the canonical
+- [X] After the direct Phase 2 verification, recorded the canonical
   `needs-rework` -> `creator-in-progress` transition. Plan-Creator's prepared
-  work remains limited to the five permitted recovery artifacts.
+  work remained limited to the five permitted recovery artifacts.
 
 ### review-ready
 
-- [ ] Record `creator-in-progress` -> `review-ready`; freeze the exact five-file
-  edit set for Main Agent staging and the additive baseline commit.
+- [X] Recorded `creator-in-progress` -> `review-ready`; Main Agent froze, staged,
+  and committed the exact five-file edit set as `b25c2a2`.
 
 ### reviewer-in-progress
 
-- [ ] Main Agent stages and commits exactly the five permitted artifacts with no
-  other staged, unstaged, or untracked change, then records
-  `review-ready` -> `reviewer-in-progress`.
-- [ ] Independent Plan-Reviewer reviews that committed baseline and returns the
-  canonical JSON verdict.
+- [X] Main Agent staged and committed exactly the five permitted artifacts as
+  `b25c2a2`, with no other staged, unstaged, or untracked change. The topic
+  remains `review-ready`; no reviewer transition is claimed.
+- [ ] Main Agent records `review-ready` -> `reviewer-in-progress` and
+  dispatches independent Plan-Reviewer review of committed baseline `b25c2a2`.
+- [ ] Only after that recorded transition, independent Plan-Reviewer appends
+  its canonical JSON verdict to the existing review log. Plan-Reviewer does not
+  commit or push; Main Agent owns publication of that bounded record.
 
 ### approved
 
@@ -83,22 +86,23 @@ the current recovery loop or authorize a direct status jump.
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current truth is `needs-rework`; the latest published corrective baseline is
-  `c285c3a11be3a26dfaa661f88e4ace4973829d1f`. Main Agent must distinguish the
-  clean published baseline from the intentionally modified five-file recovery
-  set. No PR thread is resolved. Earlier history and approvals are
-  historical/suspect because no committed planned baseline preceded the
-  original implementation sequence.
+- Current truth is `review-ready`. Main Agent directly verified published
+  baseline `c285c3a11be3a26dfaa661f88e4ace4973829d1f` on the scoped branch,
+  verified the exact five-file recovery diff with no untracked or unrelated
+  change, and committed it as `b25c2a2`. The worktree is clean with no untracked
+  files. No PR thread is resolved; earlier history and approvals remain
+  historical/suspect because no committed planned baseline preceded the original
+  implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
   never claims of verified target-project behavior.
-- Pre-creator Phase 2 is a Status/Gate prerequisite, not Implementer work.
-  Under the explicit human override, Main Agent directly verifies and confirms
+- Pre-creator Phase 2 was a Status/Gate prerequisite, not Implementer work.
+  Under the explicit human override, Main Agent directly verified and confirmed
   the published `c285c3a` branch/HEAD baseline and the exact five-file
-  execution-worktree comparison (no untracked or unrelated change) in the
-  correction step; then the full canonical loop proceeds through creator,
-  review-ready, reviewer, approved, publish, and pr-open. Dispatcher may route
-  the result only. Independent Plan-Reviewer approval is required before the
-  topic can enter `publish-in-progress`.
+  execution-worktree comparison, then committed that exact set as `b25c2a2`.
+  Dispatcher routed the result only. Independent Plan-Reviewer approval is still
+  required before the topic can enter `publish-in-progress`.
 - The correction step is the authoritative record of the direct observations.
-  The old repair, re-review, and publication remain historical; they do not
-  satisfy the override-owned gate or assert post-recovery thread resolution.
+  After Main Agent records `reviewer-in-progress`, the pending Plan-Reviewer
+  may write only its distinct review-log verdict. Main Agent alone commits and
+  pushes that bounded entry; this does not expand the completed five-file Main
+  Agent baseline scope or assert post-recovery thread resolution.
