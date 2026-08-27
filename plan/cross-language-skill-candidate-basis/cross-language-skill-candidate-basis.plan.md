@@ -92,9 +92,10 @@ changing this plan or implementing the candidate-basis document.
 
 ## Status / Allowed Transitions
 
-- **Current**: `needs-rework` — recovery pending. The PR remains open, but the
-  prior execution and approvals are historical/suspect until this recovery
-  baseline is committed and independently reviewed.
+- **Current**: `creator-in-progress` — the recovery baseline is committed,
+  independently plan-reviewed, and has Dispatcher-recorded Phase 2 evidence.
+  The PR remains open; prior execution and approvals remain
+  historical/suspect, and the frozen repair is still pending.
 - **Pre-creator Phase 2 gate**: this is a Status/Gate prerequisite, not an
   `Implementation Steps` item. Before `needs-rework` ->
   `creator-in-progress`, the recovery baseline must be committed, an independent

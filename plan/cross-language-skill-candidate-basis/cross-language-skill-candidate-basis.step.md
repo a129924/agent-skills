@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: needs-rework
+status: creator-in-progress
 created: 2026-08-27
 ---
 
@@ -9,29 +9,29 @@ created: 2026-08-27
 ## Workflow Stages
 
 - [X] planned (historical/suspect; not evidence of compliant ordering)
-- [ ] creator-in-progress
+- [X] creator-in-progress
 - [ ] review-ready
 - [ ] reviewer-in-progress
 - [ ] approved
-- [X] needs-rework
+- [ ] needs-rework
 - [ ] publish-in-progress
-- [X] pr-open (PR exists; recovery supersedes normal PR-loop advance)
+- [X] pr-open (PR remains open; frozen repair is in recovery execution)
 - [ ] merged
 
 ## Actionable Steps
 
-### needs-rework — recovery pending
+### needs-rework — recovery gate completed
 
 - [X] Preserve the original five compatible PR fixes in the parent artifacts:
   synchronized PR state and summary, PR feedback loop, separated verdict
   ownership, and one publish action containing STOP POINT 1.
-- [ ] Commit the recovery planning baseline containing the synchronized parent
+- [X] Commit the recovery planning baseline containing the synchronized parent
   artifacts and both correction artifacts; do not amend, rebase, reset, or
-  force-push historical commits.
-- [ ] Independent Plan-Reviewer reviews the committed recovery baseline and
-  returns the canonical JSON verdict.
-- [ ] Dispatcher records the actual Phase 2 evidence in the correction step and
-  confirms every pre-creator requirement before routing an Implementer.
+  force-push historical commits. Recovery baseline: `9173c66`.
+- [X] Independent Plan-Reviewer reviewed the committed recovery baseline and
+  returned the canonical `approved` verdict in `67ba9d7`.
+- [X] Dispatcher recorded the actual Phase 2 evidence in the correction step
+  and confirmed every pre-creator requirement before routing an Implementer.
 
 ### creator-in-progress
 
@@ -59,8 +59,8 @@ created: 2026-08-27
 
 ### needs-rework
 
-- [X] Recovery is pending; do not change the candidate set, create a language
-  appendix, or alter history.
+- [X] Recovery gate completed without changing the candidate set, creating a
+  language appendix, or altering history.
 
 ### pr-open
 
@@ -82,14 +82,16 @@ created: 2026-08-27
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current truth is `needs-rework`; the PR is open, but its earlier history and
-  approvals are historical/suspect because no committed planned baseline
-  preceded the original implementation sequence.
+- Current truth is `creator-in-progress`; the PR remains open. Its earlier
+  history and approvals are historical/suspect because no committed planned
+  baseline preceded the original implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
   never claims of verified target-project behavior.
-- Pre-creator Phase 2 is a Status/Gate prerequisite, not Implementer work:
-  recovery baseline commit -> independent Plan-Reviewer `approved` ->
-  Dispatcher-recorded branch/HEAD/worktree/clean-state/untracked disposition/
-  baseline-SHA evidence -> `needs-rework` -> `creator-in-progress`.
-- The correction step starts entirely pending. Do not insert a claimed clean
-  status, SHA, or completed gate before Dispatcher directly observes it.
+- Pre-creator Phase 2 was a Status/Gate prerequisite, not Implementer work:
+  recovery baseline `9173c66` -> independent Plan-Reviewer `approved` verdict
+  in `67ba9d7` -> Dispatcher-recorded branch/HEAD/worktree/clean-state/
+  untracked disposition/baseline-SHA evidence in the correction step ->
+  `needs-rework` -> `creator-in-progress`.
+- The correction step is the authoritative record of the direct observations.
+  The external PR is still open; no repair publication or thread resolution is
+  asserted.

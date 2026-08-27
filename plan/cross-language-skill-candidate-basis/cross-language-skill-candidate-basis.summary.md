@@ -2,10 +2,11 @@
 
 ## Current state
 
-`pr-open` + `needs-rework`: the PR remains open, but recovery is pending. The
-original commit, approvals, and publication actions are historical/suspect;
-they do not establish that the original plan-review or Phase 2 prerequisites
-were satisfied.
+`pr-open` + `creator-in-progress`: the PR remains open and the frozen repair
+is pending. The recovery baseline is committed, independently plan-reviewed,
+and its Phase 2 evidence is recorded. The original commit, approvals, and
+publication actions remain historical/suspect; they do not establish that the
+original plan-review or Phase 2 prerequisites were satisfied.
 
 ## Completed
 
@@ -21,32 +22,34 @@ were satisfied.
   publish action.
 - The three correction findings have been routed as high severity without
   rewriting history.
+- Recovery baseline `9173c66` is committed, and independent Plan-Reviewer
+  approval is recorded in `67ba9d7`.
+- Dispatcher recorded clean Phase 2 readiness evidence in the correction step:
+  the scoped branch and worktree, HEAD
+  `67ba9d7c7fe8204e982b0bf9504513eafed66e92`, no untracked files, and a branch
+  that is ahead 2 of `origin`.
 
 ## Not completed
 
-- A committed recovery baseline and independent recovery Plan-Reviewer verdict.
-- Observed Phase 2 branch/worktree evidence.
 - The bounded portable-core repair, independent implementation re-review, and
   subsequent PR-thread resolution.
 
 ## Required follow-up
 
-- Commit the recovery baseline as an additive commit; do not amend, rebase,
-  reset, or force-push.
-- Plan-Creator routes the recovery baseline to a baseline-commit Implementer,
-  then to an independent Plan-Reviewer.
-- Only after its approval may Dispatcher record Phase 2 evidence and route the
-  frozen repair to an independent Implementer.
+- Independent Implementer repairs only the frozen
+  `python-implementation-review` portable-core wording in the candidate-basis
+  document.
+- Independent Reviewer re-reviews that bounded repair before any commit,
+  push, or evidence-based PR-thread resolution.
 
 ## Next handoff
 
-- **Next actor:** Plan-Creator, then independent Plan-Reviewer.
-- **Next step:** route the baseline-commit Implementer to commit this recovery
-  planning baseline; Plan-Reviewer verifies its parent/correction contract
-  before any creator dispatch.
+- **Next actor:** independent Implementer.
+- **Next step:** make only the frozen portable-core repair, then hand it to an
+  independent Reviewer.
 
 ## Stop condition
 
-Remain at `needs-rework` while recovery is pending. Do not resolve PR threads,
-merge, release, or advance to candidate-document repair until the committed
-baseline, independent plan review, and observed Phase 2 gate all pass.
+Remain in `creator-in-progress` until the bounded repair has independent
+Reviewer approval. Do not resolve PR threads, merge, or release before that
+approval and evidence-based PR routing; the external PR remains open.
