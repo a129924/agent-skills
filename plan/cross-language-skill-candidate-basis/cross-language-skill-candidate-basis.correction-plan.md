@@ -2,11 +2,13 @@
 
 ## Correction status
 
-`high` — recovery publication pending. This artifact is historical correction
-truth; the parent plan is the execution-facing contract after parent sync. The
-frozen repair and its independent re-review have passed, but the complete
-corrective change set is not yet committed and pushed and the already-open PR
-has not yet undergone post-recovery thread routing.
+`high` — recovery remains open in `pr-open`. This artifact is historical
+correction truth; the parent plan is the execution-facing contract after parent
+sync. The frozen repair and its independent re-review have passed, and the
+complete corrective package was committed and pushed at
+`21af6fff4d5f167db3459b55f8ea061c0ecf4d42`. Post-push observation found the
+PR `OPEN`, with `checks=[]` and no new threads or checks; all existing threads
+remain unresolved.
 
 ## Frozen correction scope
 
@@ -44,11 +46,13 @@ or closed by assertion.
    verdict.
 5. Acceptance requires: fixed 11-candidate scope, no history rewrite, parent
    truth synchronized to the recovery route, Phase 2 evidence present, both
-   independent reviews passed, the complete corrective change set committed and
-   pushed, and only then evidence-based PR-thread routing.
+   independent reviews passed, the complete corrective package committed and
+   pushed, and completed post-push PR observation before evidence-based
+   PR-thread routing.
 
 ## Closure
 
 Planner may close this correction only after parent sync, all required reviews,
-the corrective commit and push, and post-push PR confirmation. Retain this file
-and the correction step as historical evidence; do not delete either artifact.
+the corrective commit and push, and post-push PR confirmation. Those conditions
+do not by themselves close the correction; retain this file and the correction
+step as historical evidence and do not delete either artifact.

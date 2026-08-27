@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: publish-in-progress
+status: pr-open
 created: 2026-08-27
 ---
 
@@ -15,8 +15,8 @@ created: 2026-08-27
 - [X] approved
 - [X] needs-rework (high-severity recovery route completed before the frozen repair)
 - [X] publish-in-progress
-- [ ] pr-open (the external PR is open, but recovery has not yet re-entered
-  the post-push PR loop)
+- [X] pr-open (the corrective package is pushed and post-push PR observation
+  is complete)
 - [ ] merged
 
 ## Actionable Steps
@@ -57,12 +57,11 @@ created: 2026-08-27
 
 ### publish-in-progress
 
-- [ ] Main Agent commits the complete corrective change set by topic and pushes
-  it. Current repair, Reviewer verdict, and this state sync are not yet
-  committed; existing recovery commits remain unpushed.
-- [ ] After push, Main Agent re-observes the already-open PR's checks and
-  threads. Resolve only threads supported by that evidence; no thread is
-  resolved by this state transition.
+- [X] Main Agent committed and pushed the complete corrective change set by
+  topic at `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`.
+- [X] Post-push observation of the already-open PR found it `OPEN`, with
+  `checks=[]` and no new threads or checks. All existing threads remain
+  unresolved; this transition resolves none of them.
 
 ### needs-rework
 
@@ -71,9 +70,11 @@ created: 2026-08-27
 
 ### pr-open
 
-- [ ] After the corrective change set is pushed and the PR is re-observed, the
-  topic re-enters the active `pr-open` loop. Resolve only threads addressed by
-  evidence. Do not merge, release, tag, or poll after a merge handoff.
+- [X] The topic has re-entered the active `pr-open` loop after the pushed
+  corrective package and completed post-push observation.
+- [ ] Main Agent triages current PR review comments, issue comments, and
+  threads. Resolve only threads addressed by evidence. Do not merge, release,
+  tag, or poll after a merge handoff.
 
 ### merged
 
@@ -89,7 +90,10 @@ created: 2026-08-27
   read-only evidence. They are not part of this topic's write set.
 - This is a non-stable documentation/planning topic: `README.md`, `VERSION`,
   `skills/**`, `.github/**`, and `.codex/**` are prohibited writes.
-- Current truth is `publish-in-progress`; the PR remains open. Its earlier
+- Current truth is `pr-open`; the PR remains open. The corrective package is
+  pushed at `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`; post-push observation
+  found `checks=[]` and no new threads or checks. All existing threads remain
+  unresolved. Its earlier
   history and approvals are historical/suspect because no committed planned
   baseline preceded the original implementation sequence.
 - Swift and TypeScript entries are future-validation requirements or blockers,
@@ -100,6 +104,6 @@ created: 2026-08-27
   untracked disposition/baseline-SHA evidence in the correction step ->
   `needs-rework` -> `creator-in-progress`.
 - The correction step is the authoritative record of the direct observations.
-  The independent repair and re-review are complete, but the complete
-  corrective change set is not yet committed or pushed. The external PR is
-  still open; no post-recovery thread resolution is asserted.
+  The independent repair and re-review are complete, and the complete
+  corrective package has been committed and pushed. The post-push PR
+  observation is complete; no post-recovery thread resolution is asserted.

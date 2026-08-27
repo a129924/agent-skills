@@ -1,7 +1,7 @@
 ---
 topic: cross-language-skill-candidate-basis
 correction-severity: high
-status: publish-in-progress
+status: pr-open
 ---
 
 # Cross-Language Skill Candidate Basis — Recovery Progression
@@ -35,20 +35,20 @@ status: publish-in-progress
 All required Phase 2 readiness fields above were directly observed after the
 recovery baseline and independent Plan-Reviewer approval. They permit the
 single canonical transition from `needs-rework` to `creator-in-progress` for
-the frozen repair. The external PR remains open; this evidence does not assert
-that a repair was published or that any PR thread was resolved. Any failed or
-newly non-clean field returns the parent topic to `needs-rework`.
+the frozen repair. This pre-creator evidence is distinct from the later
+post-review publication state recorded below. It resolves no PR thread. Any
+failed or newly non-clean field returns the parent topic to `needs-rework`.
 
 ## Post-review publication state
 
 - The independent Implementer repair and independent Reviewer `approved`
   verdict are complete, producing the canonical `approved` ->
   `publish-in-progress` transition.
-- The complete corrective change set is not yet committed and pushed. The
-  recovery baseline, plan-review, and readiness commits remain local; the
-  branch was observed ahead of `origin` before this pending change set.
-- The external PR remains open. Its threads are unresolved pending a push and
-  a fresh, evidence-based PR observation; this record does not resolve any
-  thread or close this high-severity correction.
-- Next: Main Agent commits and pushes the complete corrective change set, then
-  confirms PR checks and threads before routing any resolution action.
+- The complete corrective package was committed and pushed at
+  `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`, completing the canonical
+  `publish-in-progress` -> `pr-open` transition.
+- Post-push observation found the external PR `OPEN`, with `checks=[]` and no
+  new threads or checks. All existing threads remain unresolved; this record
+  resolves none of them and does not close this high-severity correction.
+- Next: Main Agent performs active PR comment and thread triage. Planner alone
+  may later verify correction acceptance before closure.

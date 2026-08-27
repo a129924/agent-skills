@@ -92,13 +92,14 @@ changing this plan or implementing the candidate-basis document.
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress` — the recovery baseline is committed,
-  independently plan-reviewed, and has Dispatcher-recorded Phase 2 evidence.
-  The independent Implementer completed the one frozen repair and an
-  independent Reviewer returned `approved`. This is the canonical
-  `approved` -> `publish-in-progress` transition. The complete corrective
-  change set is not yet committed and pushed; the external PR remains open
-  and its threads are not yet resolved. Prior execution and approvals remain
+- **Current**: `pr-open` — the recovery baseline is committed, independently
+  plan-reviewed, and has Dispatcher-recorded Phase 2 evidence. The independent
+  Implementer completed the one frozen repair and an independent Reviewer
+  returned `approved`. The complete corrective package was committed and
+  pushed at `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`, completing the canonical
+  `publish-in-progress` -> `pr-open` transition. Post-push observation found
+  the PR `OPEN`, with `checks=[]` and no new threads or checks. All existing
+  threads remain unresolved. Prior execution and approvals remain
   historical/suspect rather than proof that the original sequence complied.
 - **Pre-creator Phase 2 gate**: this is a Status/Gate prerequisite, not an
   `Implementation Steps` item. Before `needs-rework` ->
@@ -125,16 +126,15 @@ changing this plan or implementing the candidate-basis document.
   - `pr-open` -> `merged`
   - `merged` -> terminal
 - **Routing note**: Phase 4.5 plan-contract alignment found no new path,
-  contract, scope, or workflow drift and therefore moves the approved repair to
-  `publish-in-progress`. Main Agent must next commit and push the complete
-  corrective change set, then re-observe the open PR before evidence-based
-  thread routing. This transition does not reopen the locked candidate set or
-  invent a new language architecture.
+  contract, scope, or workflow drift. The approved repair was published and
+  post-push PR observation completed, so the topic is in the active `pr-open`
+  loop. Main Agent next triages the already-observed open PR; this does not
+  reopen the locked candidate set or invent a new language architecture.
 - **Recovery route**: the Planner has frozen all three findings as high-severity
   correction. Parent truth is synchronized after the passed independent
-  re-review, but recovery remains open until the corrective change set is
-  committed and pushed and the open PR is rechecked; no thread is resolved by
-  this synchronization.
+  re-review. The corrective package is committed and pushed and the open PR
+  has been rechecked; recovery remains open pending Planner verification of
+  correction acceptance. No thread is resolved by this synchronization.
 
 ## Artifact Paths
 
@@ -203,8 +203,10 @@ Artifact path notes:
 - Before creator dispatch, the committed recovery baseline, independent
   Plan-Reviewer approval, and Dispatcher-recorded Phase 2 evidence exist.
 - Before re-entering the existing PR loop, the complete corrective change set
-  must be committed and pushed, then the PR's current threads and checks must
-  be observed. This plan does not claim either action is complete.
+  was committed and pushed, and the PR's current threads and checks were
+  observed at head `21af6fff4d5f167db3459b55f8ea061c0ecf4d42`. The observation
+  found `checks=[]` and no new threads or checks; it does not resolve any
+  existing thread or claim correction closure.
 
 ## Reviewer Handoff
 
