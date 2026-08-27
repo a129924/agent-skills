@@ -2,10 +2,12 @@
 
 ## Current state
 
-`review-ready`: Plan-Creator has prepared a prospective
-historical-remediation baseline for the fixed current tree. It is limited to
-the five parent/correction planning artifacts and is not committed or pushed
-yet. No PR thread is resolved and no new Plan-Reviewer verdict is claimed.
+`reviewer-in-progress`: Main Agent directly completed the required Phase 2
+verification and published the prospective historical-remediation baseline as
+commit `62e8c1f` (`docs: add prospective remediation baseline`). The baseline
+is limited to the five parent/correction planning artifacts. Independent
+Plan-Reviewer evaluation is now in progress; no new Plan-Reviewer verdict or
+PR thread resolution is claimed.
 
 The `python-code-review` portable-core repair in `c285c3a` remains present as
 historical remediation, but no preceding committed artifact proves its
@@ -19,16 +21,15 @@ retroactively certify or re-execute it.
   rewrite, but do not establish that the original workflow was compliant.
 - The Planner has frozen a prospective route that governs acceptance of the
   fixed current tree while preserving the historical authorization limitation.
-- Plan-Creator has written exactly five baseline artifacts: parent plan, parent
+- Plan-Creator wrote exactly five baseline artifacts: parent plan, parent
   progression, parent summary, correction plan, and correction progression.
+- Main Agent directly completed the Phase 2 verification and created and
+  pushed `62e8c1f`, which contains exactly those five artifacts.
 
 ## Not completed
 
-- Main Agent's direct Phase 2 verification of branch/HEAD, exact five-path
-  diff, and clean/untracked disposition.
-- The first baseline commit/push containing exactly those five paths.
-- Independent Plan-Reviewer JSON verdict in the existing review log after that
-  first commit and `reviewer-in-progress` routing.
+- Independent Plan-Reviewer JSON verdict in the existing review log after the
+  published `62e8c1f` baseline and `reviewer-in-progress` routing.
 - The second commit/push containing only that review-log verdict, with the
   first commit as ancestor.
 - Evidence-based PR comment triage and any thread resolution.
@@ -36,23 +37,20 @@ retroactively certify or re-execute it.
 
 ## Required follow-up
 
-1. Main Agent performs the direct Phase 2 validation described in the
-   correction progression; if it passes, commit and push only the five baseline
-   artifacts.
-2. Main Agent routes to `reviewer-in-progress` and dispatches Plan-Reviewer.
-   Plan-Reviewer writes only its canonical JSON verdict to the existing review
-   log, explicitly retaining the historical `python-code-review` limitation.
-3. Main Agent commits and pushes only that verdict as the second commit. An
+1. Independent Plan-Reviewer evaluates the published `62e8c1f` baseline and
+   may write only its canonical JSON verdict to the existing review log,
+   explicitly retaining the historical `python-code-review` limitation.
+2. Main Agent commits and pushes only that verdict as the second commit. An
    `approved` verdict applies prospectively to current-tree governance only;
    it does not certify the historical repair.
-4. Planner closes only after the future route is compliant and the historical
+3. Planner closes only after the future route is compliant and the historical
    remediation remains explicitly accepted as suspect.
 
 ## Next handoff
 
-- **Next actor:** Main Agent (publisher / routing owner).
-- **Next step:** directly validate the prepared five-path baseline, then create
-  and push the first additive baseline commit.
+- **Next actor:** Plan-Reviewer.
+- **Next step:** independently review the published `62e8c1f` prospective
+  baseline and record only the canonical verdict in the existing review log.
 
 ## Stop condition
 

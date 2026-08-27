@@ -63,23 +63,31 @@ changing this plan or implementing the candidate-basis document.
   `docs/agent-skills-convergence/phase-1/**`,
   `docs/agent-skills-convergence/phase-3/projection-adapter-design.md`, and
   the 11 listed candidate `skills/<candidate>/SKILL.md` files.
-- **Written** for the first prospective baseline commit is exactly the five
-  planning artifacts in this plan's `Artifact Paths`, excluding the review log.
-  **Modify** outside those five paths is prohibited; **Deleted** paths are none.
-- The review log is written only after the first baseline commit, by
-  Plan-Reviewer as one JSON verdict. Main Agent owns its separate commit/push.
+- The published prospective baseline is `62e8c1f`, whose first commit contains
+  exactly the five parent/correction planning artifacts and excludes the review
+  log. The next package is an additive **state-sync package** containing only
+  the parent plan, parent progression, parent summary, and correction
+  progression; it records the already-published Phase 2 evidence and
+  `reviewer-in-progress` handoff. **Modify** outside those four paths is
+  prohibited; **Deleted** paths are none.
+- Main Agent must commit and push the state-sync package before another
+  independent Plan-Reviewer appends one canonical JSON verdict to the existing
+  review log. Main Agent then owns a separate, verdict-only commit/push. The
+  review log is excluded from the state-sync package.
 
 ## Boundaries / Exclusions
 
-- Plan-Creator owns authorship of the five-path prospective baseline.
-- Main Agent directly owns Phase 2 branch/worktree validation, the first
-  five-path baseline commit/push, routing to `reviewer-in-progress`, and the
-  second review-log-only commit/push. Dispatcher cannot substitute for Phase 2
-  validation or publication ownership.
-- Only after the first commit exists may an independent Plan-Reviewer append
-  its canonical JSON verdict to the existing review log. That verdict reviews
-  current-tree governance and must state that historical `python-code-review`
-  remediation remains suspect in its `copilot_feedback_triage.DISCUSS` entry.
+- Plan-Creator owns authorship of the state-sync package. The preceding
+  five-path prospective baseline was published by Main Agent as `62e8c1f`.
+- Main Agent owns publication of the state-sync package, then routes its
+  published current truth to the independent Plan-Reviewer. Dispatcher cannot
+  substitute for this publication ownership.
+- Only after the state-sync package is committed and pushed may an independent
+  Plan-Reviewer append its canonical JSON verdict to the existing review log.
+  Main Agent owns the subsequent verdict-only commit/push. That verdict reviews
+  prospective current-tree governance and must state that historical
+  `python-code-review` remediation remains suspect in its
+  `copilot_feedback_triage.DISCUSS` entry.
 - Planner alone determines correction closure. Closure requires future
   compliance and explicit retention of the historical limitation; it must not
   re-label the old repair as historically authorized.
@@ -89,14 +97,15 @@ changing this plan or implementing the candidate-basis document.
 
 ## Status / Allowed Transitions
 
-- **Current**: `review-ready`. Plan-Creator prepared the prospective five-path
-  baseline; no new Main Agent validation, commit, push, reviewer transition, or
-  verdict is claimed.
-- **Required route**: Main Agent directly validates Phase 2 -> creates and
-  pushes first five-path baseline commit -> routes `review-ready` ->
-  `reviewer-in-progress` -> Plan-Reviewer writes review-log JSON only -> Main
-  Agent creates and pushes second review-log-only commit -> verdict routes to
-  `approved` or `needs-rework`.
+- **Current**: `reviewer-in-progress`. Main Agent directly completed the
+  recorded Phase 2 check and published the five-path prospective baseline as
+  `62e8c1f`; the parent progression, correction progression, and summary carry
+  the same current state. No new approval or PR thread resolution is claimed.
+- **Required route after `62e8c1f`**: Main Agent first commits and pushes the
+  exact four-path state-sync package -> independent Plan-Reviewer appends only
+  its canonical JSON verdict to the existing review log -> Main Agent creates
+  and pushes the second, verdict-only commit -> verdict routes to `approved` or
+  `needs-rework`.
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -108,9 +117,10 @@ changing this plan or implementing the candidate-basis document.
   - `publish-in-progress` -> `pr-open`
   - `pr-open` -> `needs-rework|merged`
   - `merged` -> terminal
-- **Stop rule**: any pending path outside the five-path baseline, a dirty or
-  untracked disposition outside it, or a verdict that certifies the historical
-  repair routes to `needs-rework`. No thread is resolved by this synchronization.
+- **Stop rule**: any staged state-sync path outside its exact four-path package,
+  any verdict-commit path outside the review log, or a verdict that certifies
+  the historical repair routes to `needs-rework`. No thread is resolved by this
+  synchronization.
 
 ## Artifact Paths
 
@@ -126,32 +136,41 @@ changing this plan or implementing the candidate-basis document.
 
 Artifact path notes:
 
-- The five paths before `review-log.md` are the exact first-commit set. The
-  review log is excluded from that commit and appears only in the separate
-  second commit after independent review.
-- The first commit must be an ancestor of the review-log verdict commit.
+- `62e8c1f` is the already-published first baseline commit and contains the
+  five paths before `review-log.md`.
+- The next state-sync package contains exactly the topic plan, topic
+  progression, topic close summary, and correction progression. The correction
+  plan remains historical evidence and is excluded from this package; the
+  review log is also excluded.
+- Only after that state-sync package is pushed may Plan-Reviewer append the
+  review-log verdict. Main Agent's immediately following verdict-only commit
+  contains only `review-log.md`; the state-sync package commit must be its
+  ancestor.
 - No other artifact is authorized by this correction route. If a needed action
   falls outside this table, stop and repair the plan.
 
 ## Implementation Steps
 
-1. Write only the five parent/correction planning artifacts in `Artifact Paths`.
+1. Synchronize only the four state-sync artifacts named in `Artifact path
+   notes` with the already-published `62e8c1f` Phase 2 and
+   `reviewer-in-progress` state.
 2. State the historical `python-code-review` limitation as a fixed fact without
    changing the candidate document, re-executing its repair, or asserting
    retrospective authorization.
-3. Hand the bounded five-path diff to Main Agent for its direct Phase 2 check
-   and publisher-owned two-commit route.
+3. Hand the bounded state-sync package to Main Agent for its publisher-owned
+   commit/push, then the independent review-log-only and verdict-only route.
 
 ## Validation / Acceptance Checks
 
 - Exactly 11 candidates remain once each in the four locked groups.
-- No candidate document, skill, platform surface, Phase 1 artifact, README,
-  VERSION, workflow contract, or review log is in the first commit.
-- Main Agent's direct Phase 2 check confirms branch/HEAD, exact five-path diff,
-  and no untracked or unrelated modification before the first commit.
-- The first commit contains exactly the five planning artifacts; the second
-  contains only the Plan-Reviewer review-log JSON, and the first is its
-  ancestor.
+- `62e8c1f` remains the published five-path prospective baseline; no claim
+  changes its historical or scope-limited meaning.
+- The next state-sync commit contains exactly the four artifacts specified in
+  `Artifact path notes`, is pushed before another review begins, and excludes
+  both the correction plan and review log.
+- The independent Plan-Reviewer appends only the canonical JSON verdict after
+  the state-sync commit is published; Main Agent's next commit contains only
+  that review-log update, with the state-sync commit as its ancestor.
 - The Plan-Reviewer verdict covers prospective governance of the fixed tree,
   uses the canonical JSON shape, and includes in
   `copilot_feedback_triage.DISCUSS` that the historical

@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis
-status: review-ready
+status: reviewer-in-progress
 created: 2026-08-27
 ---
 
@@ -12,7 +12,8 @@ created: 2026-08-27
 - [X] `needs-rework` -> `creator-in-progress`
 - [X] `creator-in-progress` -> `review-ready` for the prospective five-artifact
   historical-remediation baseline
-- [ ] `review-ready` -> `reviewer-in-progress`
+- [X] `review-ready` -> `reviewer-in-progress` after Main Agent's direct Phase
+  2 verification and published baseline commit `62e8c1f`
 - [ ] `reviewer-in-progress` -> `approved|needs-rework`
 - [ ] `approved` -> `publish-in-progress`
 - [ ] `publish-in-progress` -> `pr-open`
@@ -24,13 +25,14 @@ created: 2026-08-27
 
 - [X] Plan-Creator prepared only the five parent/correction planning artifacts
   listed in the correction progression.
-- [ ] Main Agent directly validates the Phase 2 branch/worktree state and exact
-  five-path diff, then creates and pushes the first additive baseline commit.
+- [X] Main Agent directly validated the Phase 2 branch/worktree state and exact
+  five-path diff, then created and pushed first additive baseline commit
+  `62e8c1f` (`docs: add prospective remediation baseline`).
 
 ### reviewer-in-progress
 
-- [ ] Main Agent routes the committed baseline to `reviewer-in-progress` and
-  dispatches independent Plan-Reviewer review.
+- [X] Main Agent routed the committed and pushed `62e8c1f` baseline to
+  `reviewer-in-progress` and dispatched independent Plan-Reviewer review.
 - [ ] Plan-Reviewer appends only its canonical JSON verdict to the existing
   review log. It reviews prospective governance of the fixed current tree and
   explicitly records that `python-code-review`'s historical remediation remains
@@ -60,8 +62,10 @@ created: 2026-08-27
 - The `python-code-review` change in `c285c3a` is preserved as historical
   remediation but lacks preceding repo-visible implementation authorization.
   It remains suspect and is not retrospectively certified or re-executed.
-- Plan-Creator owns baseline authorship. Main Agent owns direct Phase 2
-  verification, both commits, and both pushes. Plan-Reviewer acts only after
-  the first commit and writes only its JSON verdict to the existing review log.
+- Plan-Creator owned baseline authorship. Main Agent completed direct Phase 2
+  verification and the first commit/push as `62e8c1f`; it retains ownership of
+  any later commit/push. Plan-Reviewer is now independently evaluating that
+  published baseline and may write only its JSON verdict to the existing review
+  log. No Plan-Reviewer verdict is recorded by this artifact.
 - Planner may close the correction only after future compliant routing is
   evidenced and the historical limitation remains explicitly recorded.
