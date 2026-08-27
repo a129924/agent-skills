@@ -1,93 +1,63 @@
-# Cross-Language Skill Candidate Basis
+# 跨語言技能候選依據
 
-## Purpose and evidence boundary
+## 目的與證據邊界
 
-This document is a first-pass, read-only evidence basis for the 11 locked
-skills below. It identifies where a future topic could separate a portable
-core from Python, Swift, and TypeScript language appendices.
+本文件是針對下列 11 個已鎖定技能的第一輪、唯讀證據依據。它指出未來的主題可在哪些地方將可攜核心與 Python、Swift、TypeScript 的語言附錄分離。
 
-It is **not** validation of a Swift or TypeScript project, a final portability
-classification, or authority to change a skill, its name or path, a platform
-projection, workflow binding, runtime behavior, or stable-library surface.
-`skills/` remains the canonical source of reusable skill behavior under the
-repository authority model in [Repository Positioning](../repo-positioning.md).
+本文件**不是**對 Swift 或 TypeScript 專案的驗證、不是最終的可攜性分類，也不授權變更任何技能、其名稱或路徑、平台投影、工作流程繫結、執行期行為或穩定函式庫介面。在 [儲存庫定位](../repo-positioning.md) 所定義的儲存庫權責模型下，`skills/` 仍是可重用技能行為的正規來源。
 
-The only evidence used here is the locked current repository material:
+此處僅採用已鎖定的目前儲存庫資料作為證據：
 
-- [governance](../../AGENTS.md), [repository positioning](../repo-positioning.md),
-  [workflow contract](../../plan/agent-handoff-workflow.md), and
-  [topic-plan contract](../../plan/topic-plan-contract.md);
-- the accepted [Phase 1 summary](phase-1/00-summary.md),
-  [inventory](phase-1/01-skill-inventory.md),
-  [convergence candidates](phase-1/06-convergence-candidates.md), and
-  [human review verdict](phase-1/09-human-review-verdict.md); and
-- the 11 linked canonical `skills/<name>/SKILL.md` files below.
+- [治理](../../AGENTS.md)、[儲存庫定位](../repo-positioning.md)、[工作流程契約](../../plan/agent-handoff-workflow.md) 與 [主題計畫契約](../../plan/topic-plan-contract.md)；
+- 已接受的 [第 1 階段摘要](phase-1/00-summary.md)、[盤點](phase-1/01-skill-inventory.md)、[收斂候選項目](phase-1/06-convergence-candidates.md) 與 [人工審查結論](phase-1/09-human-review-verdict.md)；以及
+- 下列 11 個已連結的正規 `skills/<name>/SKILL.md` 檔案。
 
-“Swift appendix needed” and “TypeScript appendix needed” therefore mean
-future validation/design work, never observed project behavior.
+因此，「需要 Swift 附錄」與「需要 TypeScript 附錄」一律表示未來的驗證／設計工作，絕不表示已觀察到的專案行為。
 
-## Candidate model
+## 候選模型
 
-For a later, separately approved topic, a portable core would state the
-language-independent decision or behavior. A language appendix would map that
-core to a language's error model, type system, test framework, documentation
-format, tooling, and idioms. A language-specific blocker prevents treating the
-current Python instructions as that core without further evidence.
+對於後續另行核准的主題，可攜核心應表達與語言無關的決策或行為。語言附錄應將該核心對應至某語言的錯誤模型、型別系統、測試框架、文件格式、工具與慣例。若有語言特定阻礙因素，則在沒有更多證據前，不能將現行 Python 指引視為此核心。
 
-Scope risk describes the chance that a follow-up accidentally crosses this
-topic's boundary; it is not an implementation priority or a release decision.
+範圍風險描述後續工作意外跨越本主題邊界的可能性；它不是實作優先順序或發布決策。
 
-## Testing and validation
+## 測試與驗證
 
-| Candidate | Portable core | Python evidence | Swift appendix needed | TypeScript appendix needed | Language-specific blockers | Recommended action | Scope risk |
+| 候選項目 | 可攜核心 | Python 證據 | 需要的 Swift 附錄 | 需要的 TypeScript 附錄 | 語言特定阻礙因素 | 建議動作 | 範圍風險 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [`python-tdd-test-authoring`](../../skills/python-tdd-test-authoring/SKILL.md) | Before implementation, map approved behavior to observable tests; preserve an explicit readiness or blocked result. | Requires RED tests, a requirement-to-test mapping, production-code guard, and structured verdicts. | Define plan/spec evidence, test-first mechanics, async and actor-isolation treatment, and the chosen native test surface. | Define plan/spec evidence, runner and assertion conventions, async Promise behavior, and module-mocking treatment. | The current contract requires `pytest`, Python plan-routing names, Python test discovery, and Python-specific commands. | Defer; first design a language-neutral test-authoring contract, then validate separate appendices. | High: its workflow gates and file contracts can drift. |
-| [`python-testing-pytest`](../../skills/python-testing-pytest/SKILL.md) | Prefer isolated behavior tests; use reusable setup, data-driven cases, and interaction assertions only when the interaction is contractual. | Specifies pytest fixtures, parametrization, `unittest.mock`, and `monkeypatch`. | Map setup, parameterization, mocks/fakes, async tests, and isolation to the selected Swift testing framework. | Map setup, table-driven cases, mocks/fakes, async tests, and isolation to the selected TypeScript test runner. | Framework APIs and language concurrency/module semantics determine how the principles can be expressed. | Candidate for a small generic unit-test-design core with separately validated language appendices. | Medium: avoid silently selecting test frameworks. |
-| [`python-implementation-review`](../../skills/python-implementation-review/SKILL.md) | Verify an implementation against an approved plan: trace steps, enforce non-goals, compare public contract, and confirm planned tests before quality review. | Uses Python plan-review/code-review routing, `*.step.md` semantics, and Python API examples. | Define public-contract evidence for Swift modules, visibility, errors, and concurrency where relevant. | Define public-contract evidence for exported APIs, type declarations, runtime errors, and package boundaries. | Current sequencing and reviewer names are Python-specific; exact plan-section and progression rules are repository workflow contracts. | Defer until a future topic defines a language-neutral implementation-review handoff that defers to repository workflow authority. | High: workflow/contract ownership must not be duplicated. |
+| [`python-tdd-test-authoring`](../../skills/python-tdd-test-authoring/SKILL.md) | 在實作前，將已核准行為對應為可觀察的測試；保留明確的可就緒或受阻結果。 | 要求紅燈測試、需求至測試對應、正式程式碼防護措施與結構化結論。 | 定義計畫／規格證據、測試優先機制、非同步與 Actor 隔離處理方式，以及所選的原生測試介面。 | 定義計畫／規格證據、執行器與斷言慣例、非同步 Promise 行為，以及模組模擬處理方式。 | 現行契約要求 `pytest`、Python 計畫路由名稱、Python 測試探索與 Python 專屬命令。 | 延後；先設計語言中立的測試撰寫契約，再驗證各自的附錄。 | 高：其工作流程關卡與檔案契約可能漂移。 |
+| [`python-testing-pytest`](../../skills/python-testing-pytest/SKILL.md) | 優先採用隔離的行為測試；使用可重用設定、資料驅動案例，且只在互動屬於契約時進行斷言。 | 指定 pytest 測試夾具、參數化、`unittest.mock` 與 `monkeypatch`。 | 將設定、參數化、模擬物／假物件、非同步測試與隔離對應至所選的 Swift 測試框架。 | 將設定、表格驅動案例、模擬物／假物件、非同步測試與隔離對應至所選的 TypeScript 測試執行器。 | 框架 API 與語言的併發／模組語意決定這些原則的表達方式。 | 可作為小型通用單元測試設計核心的候選，並另行驗證語言附錄。 | 中：避免默默選定測試框架。 |
+| [`python-implementation-review`](../../skills/python-implementation-review/SKILL.md) | 依已核准計畫驗證實作：追溯步驟、強制非目標、比對公開契約，並在品質審查前確認計畫中的測試。 | 使用 Python 計畫審查／程式碼審查路由、`*.step.md` 語意與 Python API 範例。 | 定義 Swift 模組、可見性、錯誤，以及必要時併發的公開契約證據。 | 定義匯出 API、型別宣告、執行期錯誤與套件邊界的公開契約證據。 | 現行順序與審查者名稱為 Python 專屬；精確的計畫章節與推進規則屬於儲存庫工作流程契約。 | 延後至未來主題定義語言中立的實作審查交接，並由它遵從儲存庫工作流程權責。 | 高：不得重複擁有工作流程／契約。 |
 
-## Code review
+## 程式碼審查
 
-| Candidate | Portable core | Python evidence | Swift appendix needed | TypeScript appendix needed | Language-specific blockers | Recommended action | Scope risk |
+| 候選項目 | 可攜核心 | Python 證據 | 需要的 Swift 附錄 | 需要的 TypeScript 附錄 | 語言特定阻礙因素 | 建議動作 | 範圍風險 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [`python-code-review`](../../skills/python-code-review/SKILL.md) | After plan conformance review, assess code quality with explicit findings, severity, evidence location, and project-tooling-aware judgment. | Defines seven Python-focused dimensions and detects `pyproject.toml`, Python linters, and strict typing. | Define Swift package/tooling detection, ownership/concurrency checks, error conventions, test style, and observability expectations. | Define `tsconfig`/linter detection, type-safety policy, Promise/error behavior, test style, and observability expectations. | The seven dimensions contain Python syntax, PEP conventions, and `pyright`/`mypy`/`ruff` thresholds; no target policies are evidenced. | Defer; retain the generic review-process idea only, pending per-language quality policies. | High: genericizing severity rules would invent project policy. |
+| [`python-code-review`](../../skills/python-code-review/SKILL.md) | 在計畫符合性審查後，透過明確的發現事項、嚴重性、證據位置與考量專案工具的判斷來評估程式碼品質。 | 定義七個以 Python 為焦點的面向，並偵測 `pyproject.toml`、Python 靜態分析工具與嚴格型別檢查。 | 定義 Swift 套件／工具偵測、所有權／併發檢查、錯誤慣例、測試風格與可觀測性期待。 | 定義 `tsconfig`／靜態分析工具偵測、型別安全政策、Promise／錯誤行為、測試風格與可觀測性期待。 | 七個面向內含 Python 語法、PEP 慣例及 `pyright`／`mypy`／`ruff` 閾值；沒有目標政策的證據。 | 延後；僅保留通用審查流程的概念，等待各語言的品質政策。 | 高：泛化嚴重性規則會憑空創造專案政策。 |
 
-## Design boundaries
+## 設計邊界
 
-| Candidate | Portable core | Python evidence | Swift appendix needed | TypeScript appendix needed | Language-specific blockers | Recommended action | Scope risk |
+| 候選項目 | 可攜核心 | Python 證據 | 需要的 Swift 附錄 | 需要的 TypeScript 附錄 | 語言特定阻礙因素 | 建議動作 | 範圍風險 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [`semantic-first-design`](../../skills/semantic-first-design/SKILL.md) | Resolve one caller-relevant ambiguity with the smallest explicit distinction; route concrete design choices to their specialized owner. | Uses Python APIs, types, and named Python-specialist skills as routing examples. | Relate distinctions to `Optional`, `Result`, protocol/value semantics, and ownership or concurrency only when target context requires it. | Relate distinctions to `undefined`/`null`, discriminated unions, thrown errors, and structural typing only when target context requires it. | Existing routing targets and examples are Python-specific; target-language design conventions are not in evidence. | Strong candidate for a language-neutral semantic guardrail; validate appendix routing separately. | Low: preserve its one-ambiguity boundary. |
-| [`boundary-outcome-design`](../../skills/boundary-outcome-design/SKILL.md) | At each architectural boundary, preserve, translate, compress, promote, or propagate distinctions according to the receiving caller's decision needs. | Refers to Python `Result`, exceptions, `Protocol`, and Python-layer examples while the layer vocabulary rules are broader. | Define the relationship of `Error`, `Result`, async throws, and protocol-based ports to the generic outcome vocabulary. | Define the relationship of thrown values, discriminated unions, rejected Promises, and structural ports to that vocabulary. | Outcome representation and error propagation differ materially; no target architecture or caller-decision evidence is available. | Candidate for a generic boundary-semantics core; defer representation rules to language appendices. | Medium: do not prescribe one universal result/error taxonomy. |
-| [`python-error-handling`](../../skills/python-error-handling/SKILL.md) | Distinguish known domain failures from programmer misuse; translate known controllable failures once at a meaningful boundary and preserve causal context. | Requires `Exception` inheritance, Python chaining syntax, built-in exceptions, and excludes Python multi-error features. | Define `Error` conformance, typed/unchecked error conventions, `throws`, `Result`, and causal diagnostic preservation. | Define typed error policy, thrown values, rejected Promises, error causes, and runtime validation boundaries. | Python exception hierarchy and chaining cannot be carried unchanged; application error policy is not supplied for either target language. | Candidate for a generic error-semantics core after each language's error-model appendix is evidenced. | Medium: do not accidentally decide framework mapping, retry, or logging policy. |
-| [`python-serialization-boundaries`](../../skills/python-serialization-boundaries/SKILL.md) | Translate raw transport data at the boundary; preserve missing/null/update intent, normalize values deeply, and keep inbound and outbound contracts independently semantic. | Uses Python `dict`, `None`, `UUID`, `datetime`, `Decimal`, DTO examples, and Python-adjacent routing. | Define `Codable` and custom decoding rules, `Optional` versus missing semantics, date/decimal identifiers, and coding-key behavior. | Define runtime decoding/validation, `undefined` versus `null`, JSON shape rules, and type-only versus runtime guarantees. | Swift and TypeScript represent absence and runtime validation differently; no transport contract or codec policy is supplied. | Candidate for a generic serialization-semantics core; validate per-language boundary appendices against real transports. | Medium: PATCH semantics must not be guessed. |
+| [`semantic-first-design`](../../skills/semantic-first-design/SKILL.md) | 以最小的明確區分解決一項與呼叫端相關的歧義；將具體設計選擇路由給其專責負責者。 | 使用 Python API、型別與具名的 Python 專業技能作為路由範例。 | 僅在目標脈絡需要時，將差異關聯至 `Optional`、`Result`、協定／值語意，以及所有權或併發。 | 僅在目標脈絡需要時，將差異關聯至 `undefined`／`null`、判別聯集、拋出的錯誤與結構型別。 | 現有路由目標與範例為 Python 專屬；沒有目標語言設計慣例的證據。 | 強力候選，可成為語言中立的語意護欄；另行驗證附錄路由。 | 低：保留其單一歧義邊界。 |
+| [`boundary-outcome-design`](../../skills/boundary-outcome-design/SKILL.md) | 在每個架構邊界，依接收呼叫端的決策需求，保留、轉譯、壓縮、提升或傳播差異。 | 其層級詞彙規則較廣，但會提及 Python `Result`、例外、`Protocol` 與 Python 分層範例。 | 定義 `Error`、`Result`、非同步拋出錯誤與以協定為基礎的連接埠對通用結果詞彙的關係。 | 定義拋出的值、判別聯集、被拒絕的 Promise 與結構型連接埠對該詞彙的關係。 | 結果表示法與錯誤傳播有實質差異；沒有可用的目標架構或呼叫端決策證據。 | 可作為通用邊界語意核心的候選；將表示法規則延後至語言附錄。 | 中：不得規定單一通用的結果／錯誤分類法。 |
+| [`python-error-handling`](../../skills/python-error-handling/SKILL.md) | 區分已知領域失敗與程式設計者誤用；在有意義的邊界僅一次轉譯已知且可控制的失敗，並保留因果脈絡。 | 要求 `Exception` 繼承、Python 例外鏈結語法、內建例外，且排除 Python 多重錯誤功能。 | 定義 `Error` 遵循性、具型別／未檢查錯誤慣例、`throws`、`Result` 與因果診斷資訊保存。 | 定義型別化錯誤政策、拋出的值、被拒絕的 Promise、錯誤原因與執行期驗證邊界。 | Python 例外階層與鏈結無法原封不動移植；兩種目標語言均未提供應用程式錯誤政策。 | 在各語言錯誤模型附錄具備證據後，可作為通用錯誤語意核心的候選。 | 中：不得意外決定框架對應、重試或記錄政策。 |
+| [`python-serialization-boundaries`](../../skills/python-serialization-boundaries/SKILL.md) | 在邊界轉譯原始傳輸資料；保留缺少／空值／更新意圖、深度正規化值，並維持輸入與輸出契約各自的語意。 | 使用 Python `dict`、`None`、`UUID`、`datetime`、`Decimal`、DTO 範例與相鄰 Python 的路由。 | 定義 `Codable` 與自訂解碼規則、`Optional` 與缺少值語意、日期／十進位識別字，以及編碼鍵行為。 | 定義執行期解碼／驗證、`undefined` 與 `null`、JSON 形狀規則，以及僅型別與執行期保證。 | Swift 與 TypeScript 對缺值與執行期驗證的表達不同；沒有提供傳輸契約或編解碼器政策。 | 可作為通用序列化語意核心的候選；依真實傳輸介面驗證各語言邊界附錄。 | 中：不得猜測 PATCH 語意。 |
 
-## Coding style
+## 程式風格
 
-| Candidate | Portable core | Python evidence | Swift appendix needed | TypeScript appendix needed | Language-specific blockers | Recommended action | Scope risk |
+| 候選項目 | 可攜核心 | Python 證據 | 需要的 Swift 附錄 | 需要的 TypeScript 附錄 | 語言特定阻礙因素 | 建議動作 | 範圍風險 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| [`python-naming`](../../skills/python-naming/SKILL.md) | Use one consistent, repository-owned naming and visibility convention for each code surface; reject ambiguous mixed conventions. | Maps modules, classes, constants, and private helpers to Python `snake_case`, `PascalCase`, `UPPER_CASE`, and leading underscores. | Define Swift API, type, member, file, acronym, and access-control conventions from the target repository. | Define TypeScript package, file, type, value, export, and private-convention rules from the target repository. | The actual naming matrix is language and repository specific; no Swift/TypeScript policy is provided. | Preserve only the policy-selection method as a possible core; defer all naming rules to language/repository appendices. | Medium: no style-guide assumptions. |
-| [`python-control-flow`](../../skills/python-control-flow/SKILL.md) | Choose the clearest branch form for the decision shape; make meaningful absence/value distinctions explicit; use early exits when they improve readability. | Specifies `if`/`elif`, `match`/`case`, `None`, Python truthiness, and Python `Enum` examples. | Define `switch` exhaustiveness, pattern matching, `Optional`, guards, `if case`, and `defer` interaction. | Define union narrowing, `switch`, truthiness, `null`/`undefined`, guards, and Promise control-flow considerations. | Branch syntax, exhaustiveness, cleanup, and nullability rules differ; no target-language style policy is evidenced. | Candidate for a limited branching-principles core with language-specific decision matrices. | Medium: avoid abstract rules that hide safety differences. |
-| [`python-docstrings`](../../skills/python-docstrings/SKILL.md) | Document public contracts from explicit signals: purpose, caller-relevant conditions, outputs, and error behavior, without inventing rationale. | Requires Google Style docstrings, Python signatures, `Raises`, generators, and dataclass-specific guidance. | Define DocC syntax, symbol linking, parameters/returns/throws conventions, and public/internal documentation expectations. | Define TSDoc/JSDoc format, exported API documentation, Promise/rejection treatment, and generated declaration interplay. | Documentation syntax, toolchain integration, and public-surface norms are language-specific; no target documentation policy is provided. | Candidate for a contract-first documentation core; defer format and tooling as language appendices. | Low: retain the explicit-evidence rule and avoid dictating a format. |
+| [`python-naming`](../../skills/python-naming/SKILL.md) | 對每個程式碼介面使用一套一致、由儲存庫擁有的命名與可見性慣例；拒絕含混的混用慣例。 | 將模組、類別、常數與私有輔助函式對應至 Python `snake_case`、`PascalCase`、`UPPER_CASE` 與前置底線。 | 從目標儲存庫定義 Swift API、型別、成員、檔案、縮寫與存取控制慣例。 | 從目標儲存庫定義 TypeScript 套件、檔案、型別、值、匯出與私有慣例規則。 | 實際命名矩陣取決於語言及儲存庫；沒有 Swift/TypeScript 政策。 | 僅保留政策選擇方法作為可能核心；將所有命名規則延後至語言／儲存庫附錄。 | 中：不得假設風格指南。 |
+| [`python-control-flow`](../../skills/python-control-flow/SKILL.md) | 依決策形狀選擇最清晰的分支形式；明確呈現具意義的缺失／值差異；提早結束有助於可讀性時才使用。 | 指定 `if`／`elif`、`match`／`case`、`None`、Python 真值判斷與 Python `Enum` 範例。 | 定義 `switch` 窮盡性、模式比對、`Optional`、守衛敘述、`if case` 與 `defer` 的互動。 | 定義聯集窄化、`switch`、真值判斷、`null`／`undefined`、守衛敘述與 Promise 控制流程考量。 | 分支語法、窮盡性、清理與可空性規則不同；沒有目標語言風格政策的證據。 | 可成為有限的分支原則核心候選，並提供語言特定的決策矩陣。 | 中：避免以抽象規則掩蓋安全性差異。 |
+| [`python-docstrings`](../../skills/python-docstrings/SKILL.md) | 從明確訊號記錄公開契約：目的、與呼叫端相關的條件、輸出與錯誤行為，且不憑空補造理由。 | 要求 Google 樣式文件字串、Python 簽章、`Raises`、產生器與資料類別專屬指引。 | 定義 DocC 語法、符號連結、參數／回傳／拋出慣例，以及公開／內部文件期待。 | 定義 TSDoc／JSDoc 格式、匯出 API 文件、Promise／拒絕處理與產生之宣告的互動。 | 文件語法、工具鏈整合與公開介面規範為語言特定；沒有目標文件政策。 | 可作為契約優先文件核心的候選；將格式與工具延後為語言附錄。 | 低：保留明確證據規則，避免規定格式。 |
 
-## Deferred and out of scope
+## 延後項目與範圍外項目
 
-- This inventory does not assess the excluded Python runtime/toolchain,
-  project-lifecycle, object-model, syntax-specific, API/module, or async
-  skills.
-- It does not choose a canonical generic skill name, folder layout, appendix
-  schema, migration path, projection strategy, implementation order, or
-  release policy.
-- It does not read a Swift or TypeScript project, select a test runner,
-  linter, serializer, documentation tool, error representation, or coding
-  convention.
-- It does not alter the accepted Phase 1 evidence or authorize Phase 2/3
-  convergence or projection work. Those boundaries remain stated in the
-  [Phase 1 human verdict](phase-1/09-human-review-verdict.md) and
-  [projection-adapter design](phase-3/projection-adapter-design.md).
+- 本盤點不評估已排除的 Python 執行期／工具鏈、專案生命週期、物件模型、語法特定、API／模組或非同步技能。
+- 本文件不選擇正規的通用技能名稱、資料夾配置、附錄綱要、遷移路徑、投影策略、實作順序或發布政策。
+- 本文件不讀取 Swift 或 TypeScript 專案，不選定測試執行器、靜態分析工具、序列化器、文件工具、錯誤表示法或程式設計慣例。
+- 本文件不變更已接受的第 1 階段證據，也不授權進行第 2／3 階段收斂或投影工作。這些邊界仍由 [第 1 階段人工審查結論](phase-1/09-human-review-verdict.md) 及 [投影轉接器設計](phase-3/projection-adapter-design.md) 所述。
 
-## Human-review handoff
+## 交接給人工審查
 
-Human review should decide only whether this first-pass candidate set is a
-useful basis for a later, separately scoped discovery/design topic. That later
-topic must supply target Swift and TypeScript repository evidence before
-selecting any generic core, language appendix, implementation sequence, or
-skill change.
+人工審查應只決定此第一輪候選集合是否是後續另行設定範圍之探索／設計主題的有用依據。該後續主題必須在選擇任何通用核心、語言附錄、實作順序或技能變更前，提供目標 Swift 與 TypeScript 儲存庫證據。
