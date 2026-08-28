@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis-content-corrections
-status: approved
+status: publish-in-progress
 current_plan_input: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.plan.md
 ---
 
@@ -9,9 +9,11 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 ## Workflow Stages
 
 - [x] independent-plan-review
-- [ ] bounded-six-cell-implementation
-- [ ] independent-document-review
-- [ ] phase-4.5-alignment
+- [x] bounded-six-cell-implementation
+- [x] independent-document-review
+- [x] phase-4.5-planning-rework
+- [x] independent-plan-re-review
+- [x] phase-4.5-alignment
 - [ ] commit-push-pr
 - [ ] human-review-and-merge-handoff
 
@@ -27,29 +29,46 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 ### bounded-six-cell-implementation
 
 - Entry condition: independent Plan-Reviewer `approved` handoff.
-- Next actor: independent Implementer.
-- First commit the plan-review record and synchronized progression, then
-  change only the six frozen `可攜核心` cells in
-  `docs/agent-skills-convergence/cross-language-candidate-basis.md`.
+- Completed by: independent Implementer.
+- Result: only the six frozen `可攜核心` cells in
+  `docs/agent-skills-convergence/cross-language-candidate-basis.md` changed in
+  the current worktree; the result remains uncommitted.
 
 ### independent-document-review
 
 - Entry condition: Implementer returns `review-ready`.
-- Next actor: independent Reviewer.
-- Verify the six-cell write boundary, all locked text semantics, 11 candidates,
-  four groups, five excluded rows, evidence, appendices, names, and paths.
+- Completed by: independent document Code-Reviewer.
+- Result: `approved` for the bounded, uncommitted six-cell candidate edit.
+
+### phase-4.5-planning-rework
+
+- Completed by: Plan-Creator.
+- Phase 4.5 identified chronology and role-ownership drift in the planning /
+  progression artifacts. This rework corrects those artifacts only.
+- This step creates no reviewer verdict and does not complete Phase 4.5.
+
+### independent-plan-re-review
+
+- Entry condition: Phase 4.5 planning rework is `review-ready`.
+- Completed by: independent Plan-Reviewer.
+- Result: `approved`, preserved verbatim in the plan-review log. The approval
+  covers the repaired planning contract only and does not complete Phase 4.5.
 
 ### phase-4.5-alignment
 
-- Entry condition: independent Reviewer `approved` handoff.
-- Main Agent checks that the approved draft still matches the parent current-
-  truth contract. Drift routes to the owning role; no role may self-approve.
+- Entry condition: fresh independent Plan-Reviewer approval of the planning
+  rework.
+- Completed by: independent final Code-Reviewer, then Planner for alignment.
+- Result: the bounded document edit was independently revalidated against the
+  review-approved parent current-truth contract; Planner's final determination
+  was `can-proceed`. Phase 4.5 is complete.
 
 ### commit-push-pr
 
-- Entry condition: alignment passes and STOP POINT 1 is explicitly authorized.
-- Main Agent alone performs the bounded publication route. This baseline does
-  not authorize commit, push, PR, force-push, merge, or release.
+- Entry condition: a new explicit STOP POINT 1 authorization.
+- Parent current truth is `publish-in-progress` while waiting at this gate.
+  Main Agent alone performs the bounded publication route after authorization.
+  No commit, push, PR, force-push, merge, or release is recorded here.
 
 ### human-review-and-merge-handoff
 
@@ -61,7 +80,11 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 - Parent plan is current truth; this step is progression truth only.
 - Correction artifacts preserve high-severity recovery history only and do not
   approve work or replace the parent contract.
-- The plan-review log exists solely for the completed Plan-Reviewer gate. No
-  summary exists and none may be created before its own topic-close gate adds
-  an exact parent-plan path.
-- The next permitted handoff is independent Implementer only.
+- The plan-review log exists for the completed baseline Plan-Reviewer gate and
+  the current rework route. No summary exists and none may be created before
+  its own topic-close gate adds an exact parent-plan path.
+- The baseline and fresh Plan-Reviewer approvals, the earlier document
+  Code-Reviewer approval, and the final independent Code-Reviewer / Planner
+  alignment are preserved facts. Phase 4.5 is complete.
+- The parent current truth is `publish-in-progress`, waiting for a new explicit
+  STOP POINT 1 authorization. No publication has occurred.
