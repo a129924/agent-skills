@@ -27,8 +27,10 @@
 - The baseline established the parent plan, parent step, this correction plan,
   and this correction step before independent Plan-Reviewer review.
 - Preserve the parent plan's sole existing-file write and its exact six
-  `可攜核心` cell contract. The later bounded candidate edit is complete but
-  uncommitted; no further candidate-basis edit is authorized by this rework.
+  `可攜核心` cell contract. The later bounded candidate edit is committed in
+  `75676e2f472abeb04a034ab765f1973d6b4dfcf5` and force-pushed to the current
+  head of ready PR #125; no further candidate-basis edit is authorized by this
+  planning rework.
 - Preserve every parent-plan exclusion: the 11 candidates, four groups, other
   five rows, evidence, appendices, names, paths, `skills/**`, `agents/**`,
   `.github/**`, `.codex/**`, README, VERSION, release, and language-validation
@@ -40,17 +42,20 @@
    the four recovery artifacts.
 2. Independent Plan-Reviewer approval is recorded in
    `4235c92a8d8bc09f86a2a3a37a0e1bbb5e85df34` and preserved in the review log.
-3. Independent Implementer completes the bounded six-cell candidate edit in
-   the current worktree without a commit.
-4. Independent document Code-Reviewer approves that bounded, uncommitted
-   candidate edit.
+3. Independent Implementer completes the bounded six-cell candidate edit and
+   it is committed in `75676e2`.
+4. Independent document Code-Reviewer approves that bounded candidate edit.
 5. Phase 4.5 planning/progression rework received a fresh independent
    Plan-Reviewer `approved` verdict, preserved in the parent review log.
 6. Independent final Code-Reviewer revalidation and Planner alignment
    completed Phase 4.5. Parent synchronization and Planner correction closure
-   are complete; the parent current truth is `publish-in-progress`, waiting
-   for a new explicit STOP POINT 1 authorization. This historical record makes
-   no publication claim.
+   are complete; Main Agent then force-pushed `75676e2` to ready PR #125.
+7. New PR-head feedback routes the parent topic to `needs-rework`. This
+   historical record does not claim feedback coverage, thread resolution,
+   bounded observation, human merge handoff, merge, release, or close.
+8. An independent Plan-Reviewer approves the PR-loop planning repair. The
+   next parent route is a planning-only commit/push, followed by independent
+   thread-coverage verification; this does not claim either action completed.
 
 ## Closure Conditions
 

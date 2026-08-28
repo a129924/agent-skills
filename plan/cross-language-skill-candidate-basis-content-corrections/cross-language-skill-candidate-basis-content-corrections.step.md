@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis-content-corrections
-status: publish-in-progress
+status: needs-rework
 current_plan_input: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.plan.md
 ---
 
@@ -14,8 +14,15 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 - [x] phase-4.5-planning-rework
 - [x] independent-plan-re-review
 - [x] phase-4.5-alignment
-- [ ] commit-push-pr
-- [ ] human-review-and-merge-handoff
+- [x] commit-push-pr
+- [x] new-pr-feedback-routed
+- [x] pr-loop-contract-rework
+- [x] independent-plan-review-of-pr-loop-contract
+- [ ] planning-repair-commit-push
+- [ ] independent-thread-coverage-verification
+- [ ] feedback-driven-rework
+- [ ] pr-feedback-coverage-and-bounded-observation
+- [ ] human-merge-handoff
 
 ## Actionable Steps
 
@@ -26,65 +33,103 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
   `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`.
 - Result: `approved`, preserved verbatim in the plan-review log.
 
-### bounded-six-cell-implementation
-
-- Entry condition: independent Plan-Reviewer `approved` handoff.
-- Completed by: independent Implementer.
-- Result: only the six frozen `可攜核心` cells in
-  `docs/agent-skills-convergence/cross-language-candidate-basis.md` changed in
-  the current worktree; the result remains uncommitted.
-
-### independent-document-review
-
-- Entry condition: Implementer returns `review-ready`.
-- Completed by: independent document Code-Reviewer.
-- Result: `approved` for the bounded, uncommitted six-cell candidate edit.
-
-### phase-4.5-planning-rework
-
-- Completed by: Plan-Creator.
-- Phase 4.5 identified chronology and role-ownership drift in the planning /
-  progression artifacts. This rework corrects those artifacts only.
-- This step creates no reviewer verdict and does not complete Phase 4.5.
-
-### independent-plan-re-review
-
-- Entry condition: Phase 4.5 planning rework is `review-ready`.
-- Completed by: independent Plan-Reviewer.
-- Result: `approved`, preserved verbatim in the plan-review log. The approval
-  covers the repaired planning contract only and does not complete Phase 4.5.
-
-### phase-4.5-alignment
-
-- Entry condition: fresh independent Plan-Reviewer approval of the planning
-  rework.
-- Completed by: independent final Code-Reviewer, then Planner for alignment.
-- Result: the bounded document edit was independently revalidated against the
-  review-approved parent current-truth contract; Planner's final determination
-  was `can-proceed`. Phase 4.5 is complete.
-
 ### commit-push-pr
 
-- Entry condition: a new explicit STOP POINT 1 authorization.
-- Parent current truth is `publish-in-progress` while waiting at this gate.
-  Main Agent alone performs the bounded publication route after authorization.
-  No commit, push, PR, force-push, merge, or release is recorded here.
+- Completed by: Main Agent after STOP POINT 1 authorization.
+- Result: the bounded candidate correction was committed as
+  `75676e2f472abeb04a034ab765f1973d6b4dfcf5` and force-pushed to the current
+  head of ready-for-review PR #125.
+- This records neither resolved threads nor any merge, release, or close claim.
 
-### human-review-and-merge-handoff
+### new-pr-feedback-routed
 
-- Stop at the human PR-review / merge boundary. After merge, STOP POINT 2
-  requires new explicit human resume; no release work applies.
+- Entry condition: a fresh PR #125 snapshot after the PR was ready.
+- Completed by: Main Agent routing.
+- Result: new actionable PR-head feedback routes the topic from `pr-open` to
+  `needs-rework`. This progression artifact does not claim that every feedback
+  item was answered, resolved, or otherwise covered.
+
+### pr-loop-contract-rework
+
+- Completed by: Plan-Creator.
+- Result: parent and correction artifacts now truthfully record the committed /
+  force-pushed candidate edit, the open PR feedback route, Phase 7--8 signal
+  fetch and bounded observation requirements, and the pre-merge STOP POINT 2
+  boundary.
+- The output is `review-ready` for independent Plan-Reviewer review. It makes
+  no candidate-basis change and does not answer or resolve PR threads.
+
+### independent-plan-review-of-pr-loop-contract
+
+- Entry condition: `pr-loop-contract-rework` is `review-ready`.
+- Owner: independent Plan-Reviewer.
+- Completed result: `approved`, preserved verbatim in the plan-review log.
+- The approval covers the PR-loop planning repair only; it does not authorize
+  candidate implementation, publication, thread action, clean observation,
+  human merge handoff, merge, release, summary, or close.
+
+### planning-repair-commit-push
+
+- Entry condition: recorded independent Plan-Reviewer `approved` handoff for
+  the PR-loop planning repair.
+- Owner: Main Agent.
+- Required result: commit and push only the bounded planning/progression
+  repair. This step does not reply to or resolve PR threads and does not alter
+  the candidate basis.
+
+### independent-thread-coverage-verification
+
+- Entry condition: `planning-repair-commit-push` completes.
+- Owner: independent Reviewer.
+- Required result: use a fresh PR snapshot to classify and verify coverage of
+  every actionable thread before any thread reply, resolution, or further
+  feedback-driven implementation route. This verification records neither a
+  resolved-thread claim nor clean observation unless those facts are separately
+  established.
+
+### feedback-driven-rework
+
+- Entry condition: independent thread-coverage verification identifies a
+  bounded change that is required.
+- Owner: independent Implementer when a bounded change is required; independent
+  Reviewer when feedback affects logic, scope, requirements, boundaries, or
+  the locked contract.
+- Main Agent must re-fetch PR reviews / review state, review comments and
+  threads, issue comments, and checks after each relevant change. New
+  actionable feedback returns to `needs-rework`; direct-apply iterations are
+  limited to three. A thread may be replied to and resolved only when its
+  applicable outcome is actually satisfied; otherwise it remains blocking.
+
+### pr-feedback-coverage-and-bounded-observation
+
+- Entry condition: fresh PR signals establish full coverage of actionable
+  feedback and no currently blocking review, unresolved blocking thread,
+  actionable comment, or non-clean check remains.
+- Owner: Main Agent.
+- Run the bounded `consecutive-empty-checks` observations at exactly
+  `30s -> 60s -> 120s`, re-fetching all required PR signals after each wait.
+  Any new blocking signal resets the clean count and routes to `needs-rework`.
+- Only after three clean snapshots may Main Agent produce a bounded
+  clean-observation report for a human merge-readiness decision. A draft or
+  ready PR alone is not eligible for human merge handoff.
+
+### human-merge-handoff
+
+- Entry condition: bounded clean-observation report is complete and a human
+  explicitly chooses merge handoff.
+- STOP POINT 2: Main Agent stops immediately before the actual human merge;
+  it must not poll, wait, infer merge completion, or start post-merge work.
+- Phase 9 may begin only after a new explicit human message both confirms PR
+  #125 was merged and authorizes post-merge resume.
 
 ## Handoff / Gate Notes
 
 - Parent plan is current truth; this step is progression truth only.
 - Correction artifacts preserve high-severity recovery history only and do not
   approve work or replace the parent contract.
-- The plan-review log exists for the completed baseline Plan-Reviewer gate and
-  the current rework route. No summary exists and none may be created before
-  its own topic-close gate adds an exact parent-plan path.
-- The baseline and fresh Plan-Reviewer approvals, the earlier document
-  Code-Reviewer approval, and the final independent Code-Reviewer / Planner
-  alignment are preserved facts. Phase 4.5 is complete.
-- The parent current truth is `publish-in-progress`, waiting for a new explicit
-  STOP POINT 1 authorization. No publication has occurred.
+- Phase 4.5 and publication are completed facts. PR #125 remains open in
+  `needs-rework`; the PR-loop planning repair is independently approved and
+  awaits its planning-only commit/push followed by independent thread-coverage
+  verification. No thread coverage, clean observation, human merge handoff,
+  merge, release, summary, or topic-close fact is recorded.
+- This non-stable topic has no README, VERSION, release, or tag route.

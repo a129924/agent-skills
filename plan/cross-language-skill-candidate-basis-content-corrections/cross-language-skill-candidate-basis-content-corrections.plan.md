@@ -15,19 +15,21 @@ validation, migration, platform work, or any scope beyond those six cells.
 Maintain a truthful, reviewable recovery contract for the correction of exactly
 six `可攜核心` cells in
 `docs/agent-skills-convergence/cross-language-candidate-basis.md`. The bounded
-candidate edit is complete but uncommitted and has received independent
-document review. The repaired planning contract is review-approved; the
-independent final Code-Reviewer and Planner alignment completed Phase 4.5.
-The parent current truth is `publish-in-progress`, awaiting a new explicit
-STOP POINT 1 authorization; no publication has occurred.
+candidate edit was committed in `75676e2f472abeb04a034ab765f1973d6b4dfcf5`
+and force-pushed to the current head of ready-for-review PR #125. The repaired
+planning contract was review-approved and Phase 4.5 / publication completed.
+New PR-head feedback now routes the open PR to `needs-rework`; this planning
+repair is independently Plan-Reviewer approved. It makes no claim that the
+feedback, threads, clean observation, human merge handoff, merge, release, or
+topic close has completed.
 
 ## Scope
 
 - **In scope**:
   - Keep the parent and correction progression artifacts synchronized with the
-    recovery chronology, completed Phase 4.5 alignment, and the pre-publication
-    `publish-in-progress` state.
-  - Retain the bounded, uncommitted independent-Implementer edit of only the
+    recovery chronology, completed Phase 4.5 / publication, the open ready PR
+    #125, and its current `needs-rework` route.
+  - Retain the bounded independent-Implementer edit, committed in `75676e2`, of only the
     `可攜核心` cells for `python-tdd-test-authoring`,
     `python-testing-pytest`, `python-implementation-review`,
     `python-error-handling`, `python-serialization-boundaries`, and
@@ -79,7 +81,7 @@ STOP POINT 1 authorization; no publication has occurred.
   release or tag action exists.
 - This recovery records high-severity phase and role-separation drift. The
   removed pre-recovery implementation remains suspect and is not certified by
-  this contract. The current uncommitted six-cell edit is a later, bounded
+  this contract. The committed six-cell edit in `75676e2` is a later, bounded
   independent-Implementer output; it is not a resurrection or certification of
   that removed implementation.
 
@@ -97,31 +99,35 @@ STOP POINT 1 authorization; no publication has occurred.
 - The recovery chronology is: baseline `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`;
   independent Plan-Reviewer approval recorded in
   `4235c92a8d8bc09f86a2a3a37a0e1bbb5e85df34`; independent-Implementer
-  completion of the six-cell candidate edit in the current uncommitted worktree;
+  completion and commit of the six-cell candidate edit in
+  `75676e2f472abeb04a034ab765f1973d6b4dfcf5`;
   and independent document Code-Reviewer approval of that bounded edit.
   The fresh independent Plan-Reviewer handoff has approved the repaired
   planning contract. Independent final Code-Reviewer revalidation and Planner
-  alignment completed Phase 4.5; the parent current truth may proceed only to
-  the pre-publication `publish-in-progress` state.
-- There is no candidate-basis implementation commit, push, PR or force-push,
-  merge, release, summary, or completion claim.
+  alignment completed Phase 4.5; Main Agent then committed and force-pushed
+  `75676e2` to ready PR #125. New feedback on that PR routes the topic to
+  `needs-rework`; the independent Plan-Reviewer has approved the resulting
+  PR-loop planning repair.
+- There is no claim that PR threads are resolved, that a clean observation was
+  completed, that human merge handoff was selected, or that merge, release,
+  summary, or topic completion occurred.
 - A Plan-Reviewer finding of scope, contract, or workflow drift returns only to
   Plan-Creator. A later document-review finding returns only to the independent
   Implementer. Neither route reopens the locked scope.
 
 ## Status / Allowed Transitions
 
-- **Current**: `publish-in-progress`. The baseline and fresh independent
+- **Current**: `needs-rework`. The baseline and fresh independent
   Plan-Reviewer handoffs, independent document Code-Reviewer approval, and
   final independent Code-Reviewer / Planner alignment are recorded in the
-  recovery chronology. The six-cell candidate edit remains complete and
-  uncommitted. This state means only that the parent current truth is waiting
-  for a new explicit STOP POINT 1 authorization; it does not claim commit,
-  push, PR, force-push, thread resolution, merge, release, or summary.
-- **Execution model**: canonical creator -> reviewer -> publish -> merge path,
-  stopping after merge; no release transition applies. Planning review is a
-  hard pre-implementation gate and does not replace later independent review
-  of the document edit.
+  recovery chronology. Phase 4.5 and publication completed with
+  `75676e2` force-pushed to ready PR #125. Newly observed PR-head feedback is
+  actionable and routes the open PR to `needs-rework`; the independent
+  Plan-Reviewer has approved the PR-loop planning repair. Its coverage and
+  resolution remain unclaimed.
+- **Execution model**: canonical creator -> reviewer -> publish -> PR loop ->
+  human merge handoff path. Planning review is a hard pre-implementation gate
+  and does not replace later independent review of document changes.
 - **Allowed transitions**:
   - `planned` -> `creator-in-progress`
   - `creator-in-progress` -> `review-ready`
@@ -132,14 +138,27 @@ STOP POINT 1 authorization; no publication has occurred.
   - `approved` -> `creator-in-progress`
   - `approved` -> `publish-in-progress`
   - `publish-in-progress` -> `pr-open`
-  - `publish-in-progress` -> `merged`
   - `pr-open` -> `needs-rework`
   - `pr-open` -> `merged`
   - `merged` -> terminal
-- **Routing notes**: Phase 4.5 is complete after independent final
-  Code-Reviewer and Planner alignment. The next permitted route is Main Agent
-  publication only after a new explicit STOP POINT 1 authorization. STOP POINT
-  2 applies after merge.
+- **Routing notes**: Phase 4.5 and candidate publication are complete. The
+  independent Plan-Reviewer approved this PR-loop contract repair. Main Agent
+  must first commit and push that bounded planning-only repair. After that
+  publication, an independent Reviewer verifies thread coverage from a fresh
+  PR snapshot before any reply, resolution, or feedback-driven implementation.
+  In Phase 7--8, Main Agent fetches PR reviews and
+  review state, review comments and threads, issue comments, and check runs
+  after the PR is ready and after each relevant change. New actionable feedback
+  routes to `needs-rework`; all actionable thread coverage must be established
+  before bounded observation begins. Main Agent replies to and resolves a
+  thread only when its applicable outcome is actually satisfied; every other
+  actionable or unresolved blocking thread remains a blocker. Direct-apply
+  work is limited to three iterations; feedback that changes logic, scope,
+  requirements, boundaries, or
+  the locked contract returns to independent review. Only three consecutive
+  clean snapshots at `30s -> 60s -> 120s` permit a bounded clean-observation
+  report for human merge-readiness confirmation. A ready or draft PR never
+  directly enters human merge handoff.
 
 ## Artifact Paths
 
@@ -150,7 +169,7 @@ STOP POINT 1 authorization; no publication has occurred.
 | Correction plan | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.correction-plan.md` | Plan-Creator | Historical-truth record of high-severity recovery direction. |
 | Correction progression | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.correction-step.md` | Plan-Creator, then Main Agent | Historical recovery progression; it cannot replace parent current truth. |
 | Plan-review log | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.review-log.md` | Plan-Creator | Preserved reviewer-handoff history and current routing; it records no invented verdict. |
-| Candidate basis | `docs/agent-skills-convergence/cross-language-candidate-basis.md` | Independent Implementer | Sole existing-file write, already completed in the uncommitted worktree and limited to the six locked `可攜核心` cells. |
+| Candidate basis | `docs/agent-skills-convergence/cross-language-candidate-basis.md` | Independent Implementer | Sole existing-file write, completed in `75676e2` and limited to the six locked `可攜核心` cells. |
 
 Artifact path notes:
 
@@ -167,18 +186,19 @@ Artifact path notes:
 1. Plan-Creator synchronizes the parent plan, parent step, correction plan,
    correction step, and review log with the verified recovery chronology and
    keeps the frozen write boundary unchanged.
-2. Independent Implementer-owned output: complete the six locked `可攜核心`
-   cells and no other existing file. This output is present in the current
-   worktree and remains uncommitted.
-3. Plan-Creator leaves the completed candidate edit unchanged and marks the
-   corrected planning/progression artifacts `review-ready`.
+2. Independent Plan-Reviewer approves the PR-loop planning repair with one
+   JSON handoff, recorded by Plan-Creator. Main Agent then commits and pushes
+   only that planning repair; an independent Reviewer next verifies thread
+   coverage from fresh PR state. No candidate edit, thread response, thread
+   resolution, merge, or release is performed by this planning step.
 
 ## Validation / Acceptance Checks
 
 - Verify the planning/progression artifacts state the exact recovery chronology:
   baseline `a725e71`, its recorded independent Plan-Reviewer approval in
-  `4235c92`, completed uncommitted six-cell implementation, independent
-  document Code-Reviewer approval, and completed Phase 4.5 alignment.
+  `4235c92`, the committed and force-pushed six-cell implementation in
+  `75676e2`, independent document Code-Reviewer approval, and completed Phase
+  4.5 / publication.
 - Verify all required plan sections, exact paths, non-stable intent, semantic
   warning, role separation, parent/current-truth versus correction/historical-
   truth separation, and canonical transitions.
@@ -186,13 +206,15 @@ Artifact path notes:
   verbatim in execution meaning.
 - Verify the review log preserves the independent baseline and fresh
   Plan-Reviewer `approved` handoffs, preserves the later document-review fact,
-  and does not claim Phase 4.5, publication, summary, completion, or
+  records the committed / force-pushed PR fact, the approved PR-loop planning
+  repair, and current `needs-rework` routing, and does not claim thread
+  resolution, clean observation, human merge handoff, merge, summary, or
   Swift/TypeScript validation.
-- Verify independent final Code-Reviewer and Planner alignment completed Phase
-  4.5, leaving the parent current truth at `publish-in-progress` without any
-  publication claim or implied STOP POINT 1 authorization. Scope, contract,
-  or workflow drift remains blocking and conservatively returns to the owning
-  role.
+- Verify Phase 7--8 requires a complete fresh fetch of reviews / review state,
+  review comments and threads, issue comments, and checks; routes new feedback
+  to `needs-rework`; requires actionable-thread coverage; then uses exactly
+  three clean observations (`30s -> 60s -> 120s`) before producing only a
+  bounded clean-observation report for a human decision.
 
 ## Reviewer Handoff
 
@@ -210,8 +232,12 @@ Artifact path notes:
 
 ## Post-merge / release actions
 
-After merge, STOP POINT 2 requires explicit human resume for any separate
-follow-up. This topic has no README, VERSION, release, or tag action.
+Before a human manually merges PR #125, the bounded clean-observation report
+must be complete and a human must explicitly choose merge handoff. That choice
+is STOP POINT 2: Main Agent stops immediately before any actual human merge and
+does not poll or infer merge completion. Phase 9 is permitted only after a new,
+explicit human resume that both confirms the merge occurred and authorizes
+post-merge work. This topic has no README, VERSION, release, or tag action.
 
 ## Open Questions / Unresolved Items
 

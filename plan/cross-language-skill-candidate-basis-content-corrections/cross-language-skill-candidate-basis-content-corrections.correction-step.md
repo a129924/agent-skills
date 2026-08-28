@@ -16,6 +16,7 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 - [x] phase-4.5-planning-rework
 - [x] independent-plan-re-review
 - [x] parent-sync-and-planner-closure
+- [x] independent-plan-review-of-pr-loop-contract
 
 ## Actionable Steps
 
@@ -30,15 +31,15 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 
 - Entry condition: Plan-Reviewer `approved` handoff.
 - Completed by: independent Implementer.
-- Result: the six parent-plan `可攜核心` cells were repaired in the current
-  worktree and remain uncommitted. This is a new bounded output, not revived
-  suspect implementation state; no summary was created.
+- Result: the six parent-plan `可攜核心` cells were repaired and committed in
+  `75676e2f472abeb04a034ab765f1973d6b4dfcf5`. This is a new bounded output,
+  not revived suspect implementation state; no summary was created.
 
 ### independent-document-review
 
 - Entry condition: Implementer returns `review-ready`.
 - Completed by: independent document Code-Reviewer.
-- Result: `approved` for the bounded, uncommitted six-cell document edit.
+- Result: `approved` for the bounded six-cell document edit.
 
 ### phase-4.5-planning-rework
 
@@ -58,10 +59,19 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 - Entry condition: independent final Code-Reviewer and Planner alignment,
   Phase 4.5 completion, and any required parent sync.
 - Completed by: Planner.
-- Result: Phase 4.5 completed, parent current truth synchronized to
-  `publish-in-progress`, and correction closure confirmed. The parent is
-  waiting for a new explicit STOP POINT 1 authorization; this records no
-  publication action or authorization.
+- Result: Phase 4.5 completed, parent current truth synchronized, and
+  correction closure confirmed. Main Agent subsequently force-pushed
+  `75676e2` to ready PR #125; new PR-head feedback now routes the parent to
+  `needs-rework`. This historical step records no thread coverage, clean
+  observation, human merge handoff, merge, release, or close claim.
+
+### independent-plan-review-of-pr-loop-contract
+
+- Completed by: independent Plan-Reviewer.
+- Result: `approved`, preserved verbatim in the parent plan-review log. This
+  recovery-history fact approves only the PR-loop planning repair; the next
+  parent route is a planning-only commit/push and then independent
+  thread-coverage verification.
 
 ## Handoff / Gate Notes
 
@@ -71,7 +81,8 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
   exist. The bounded candidate edit, its independent document Code-Reviewer
   approval, and the final independent Code-Reviewer / Planner alignment are
   preserved facts.
-- This correction is resolved historical truth. It records no publication,
-  summary, or STOP POINT 1 authorization.
-- The parent current truth is `publish-in-progress`, waiting for a new
-  explicit STOP POINT 1 authorization.
+- This correction is resolved historical truth. It records the completed
+  candidate publication fact and the approved PR-loop planning repair, but no
+  planning-repair publication, thread coverage, thread resolution, clean
+  observation, human merge handoff, merge, release, summary, or topic close.
+- The parent current truth is `needs-rework` on open PR #125.
