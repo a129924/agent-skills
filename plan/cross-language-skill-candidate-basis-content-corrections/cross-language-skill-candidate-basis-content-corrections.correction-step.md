@@ -1,7 +1,7 @@
 ---
 topic: cross-language-skill-candidate-basis-content-corrections
 correction_severity: high
-status: planned
+status: approved
 parent_plan: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.plan.md
 parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.step.md
 ---
@@ -10,7 +10,7 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 
 ## Recovery Stages
 
-- [ ] independent-plan-review
+- [x] independent-plan-review
 - [ ] approved-six-cell-repair
 - [ ] independent-document-review
 - [ ] parent-sync-and-planner-closure
@@ -19,17 +19,18 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 
 ### independent-plan-review
 
-- Next actor: independent Plan-Reviewer.
-- Confirm the high-severity route, exact four-artifact baseline, six-cell
-  future write set, exclusions, semantic warning, role separation, and
-  current-truth / historical-truth boundary.
+- Completed by: independent Plan-Reviewer.
+- Recovery baseline reviewed:
+  `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`.
+- Result: `approved`, preserved verbatim in the parent plan-review log.
 
 ### approved-six-cell-repair
 
 - Entry condition: Plan-Reviewer `approved` handoff.
 - Next actor: independent Implementer.
-- The repair may edit only the six parent-plan `可攜核心` cells. It must not
-  resurrect prior implementation state or create a review-log or summary.
+- First commit the parent plan-review record and synchronized progression.
+  The repair may then edit only the six parent-plan `可攜核心` cells. It must
+  not resurrect prior implementation state or create a summary.
 
 ### independent-document-review
 
@@ -49,6 +50,7 @@ parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross
 
 - This correction step is historical recovery progression and cannot replace
   the parent plan or parent step.
-- No reviewer verdict, review-log, summary, completion claim, publication, or
-  candidate-basis edit exists at this baseline stage.
-- The next permitted route is independent Plan-Reviewer review.
+- The Plan-Reviewer verdict and parent plan-review log now exist. No
+  candidate-basis edit, document review, Phase 4.5 result, publication,
+  summary, or completion claim exists.
+- The next permitted route is independent Implementer only.

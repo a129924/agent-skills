@@ -21,8 +21,9 @@ authorized.
 ## Scope
 
 - **In scope**:
-  - Create only the four listed planning and correction artifacts for this
-    recovery baseline.
+  - Establish the four listed planning and correction artifacts for this
+    recovery baseline, then record the independent Plan-Reviewer handoff in
+    the listed review log.
   - After the separate Plan-Reviewer gate, allow an independent Implementer to
     edit only the `可攜核心` cells for `python-tdd-test-authoring`,
     `python-testing-pytest`, `python-implementation-review`,
@@ -79,26 +80,30 @@ authorized.
 
 ## Boundaries / Exclusions
 
-- The Plan-Creator owns these four baseline artifacts. An independent
-  Plan-Reviewer owns the next plan review. Only after approval may an
+- The Plan-Creator owns the planning and correction artifacts. An independent
+  Plan-Reviewer owns the plan-review gate; Plan-Creator records its delivered
+  handoff. Only after approval may an
   independent Implementer own the six-cell document edit; an independent
   Reviewer owns its later review. Main Agent owns branch, publication, PR, and
   post-merge routing.
 - The parent plan is the future execution-facing current truth; the parent step
   is progression truth only. The correction plan and correction step explain
   the high-severity recovery history and never replace the parent contract.
-- The recovery-baseline commit adds only the parent plan, parent step,
-  correction plan, and correction step. It has no candidate-basis
-  implementation commit, push, PR or force-push, merge, release, review
-  verdict or review log, summary, or completion claim.
+- The recovery-baseline commit added only the parent plan, parent step,
+  correction plan, and correction step. The later Plan-Reviewer approval is
+  recorded separately. There is no candidate-basis implementation commit,
+  push, PR or force-push, merge, release, document review, Phase 4.5 result,
+  summary, or completion claim.
 - A Plan-Reviewer finding of scope, contract, or workflow drift returns only to
   Plan-Creator. A later document-review finding returns only to the independent
   Implementer. Neither route reopens the locked scope.
 
 ## Status / Allowed Transitions
 
-- **Current**: `planned`. The recovery baseline awaits an independent
-  Plan-Reviewer; it is not `review-ready`, `approved`, or complete.
+- **Current**: `approved`. The independent Plan-Reviewer approved recovery
+  baseline `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`; the review log preserves
+  the exact handoff. Candidate implementation has not started. The next actor
+  is an independent Implementer.
 - **Execution model**: canonical creator -> reviewer -> publish -> merge path,
   stopping after merge; no release transition applies. Planning review is a
   hard pre-implementation gate and does not replace later independent review
@@ -130,22 +135,26 @@ authorized.
 | Parent progression | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.step.md` | Plan-Creator, then Main Agent | Progression truth; it does not approve or close the topic. |
 | Correction plan | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.correction-plan.md` | Plan-Creator | Historical-truth record of high-severity recovery direction. |
 | Correction progression | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.correction-step.md` | Plan-Creator, then Main Agent | Historical recovery progression; it cannot replace parent current truth. |
+| Plan-review log | `plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.review-log.md` | Plan-Creator | Exact delivered independent Plan-Reviewer handoff and next-actor routing. |
 | Candidate basis | `docs/agent-skills-convergence/cross-language-candidate-basis.md` | Independent Implementer after Plan-Reviewer approval | Sole future existing-file write, limited to the six locked `可攜核心` cells. |
 
 Artifact path notes:
 
 - `README.md`, `VERSION`, `.github/copilot-instructions.md`, `skills/**`,
   `agents/**`, `.github/**`, and `.codex/**` are not write paths.
-- No review-log or summary artifact belongs to this baseline. A later routing
-  gate must add an exact path before either artifact can be created.
+- The plan-review log records only the completed independent Plan-Reviewer
+  gate. No summary artifact exists; topic-close conditions must add its exact
+  path before a summary can be created.
 - Future work outside this table is a plan-alignment failure and must return to
   Plan-Creator before continuing.
 
 ## Implementation Steps
 
-1. Independent Plan-Reviewer evaluates this parent plan, parent step, and both
-   correction artifacts against the shared workflow and topic-plan contracts.
-2. Only after its `approved` handoff, an independent Implementer updates the
+1. Independent Plan-Reviewer evaluated recovery baseline
+   `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb` and returned `approved`; the
+   plan-review log preserves its exact handoff.
+2. An independent Implementer next commits the review record and synchronized
+   progression, then updates the
    six locked `可攜核心` cells and no other existing file.
 3. Independent Reviewer evaluates the bounded document diff against this
    frozen parent contract. Phase 4.5 routing and all publication actions remain
@@ -161,8 +170,10 @@ Artifact path notes:
   truth separation, and canonical transitions.
 - Verify all six locked cell requirements and every exclusion are preserved
   verbatim in execution meaning.
-- Verify no actual review verdict, review log, summary, completion claim, or
-  Swift/TypeScript validation claim exists in the baseline.
+- Verify the review log preserves the independent Plan-Reviewer `approved`
+  handoff for the recovery baseline and does not claim candidate
+  implementation, document review, Phase 4.5, publication, summary,
+  completion, or Swift/TypeScript validation.
 - Verify Plan-Reviewer approval is required before any candidate-basis edit;
   scope, contract, or workflow drift is blocking and conservatively returns to
   the owning role.

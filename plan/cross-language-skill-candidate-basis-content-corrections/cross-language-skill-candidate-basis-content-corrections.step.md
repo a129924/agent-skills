@@ -1,6 +1,6 @@
 ---
 topic: cross-language-skill-candidate-basis-content-corrections
-status: planned
+status: approved
 current_plan_input: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.plan.md
 ---
 
@@ -8,7 +8,7 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 
 ## Workflow Stages
 
-- [ ] independent-plan-review
+- [x] independent-plan-review
 - [ ] bounded-six-cell-implementation
 - [ ] independent-document-review
 - [ ] phase-4.5-alignment
@@ -19,16 +19,17 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 
 ### independent-plan-review
 
-- Next actor: independent Plan-Reviewer.
-- Review the parent plan and step together with the correction plan and
-  correction step. Return the single required JSON handoff.
-- No candidate-basis modification may start unless the verdict is `approved`.
+- Completed by: independent Plan-Reviewer.
+- Recovery baseline reviewed:
+  `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`.
+- Result: `approved`, preserved verbatim in the plan-review log.
 
 ### bounded-six-cell-implementation
 
 - Entry condition: independent Plan-Reviewer `approved` handoff.
 - Next actor: independent Implementer.
-- Change only the six frozen `可攜核心` cells in
+- First commit the plan-review record and synchronized progression, then
+  change only the six frozen `可攜核心` cells in
   `docs/agent-skills-convergence/cross-language-candidate-basis.md`.
 
 ### independent-document-review
@@ -60,6 +61,7 @@ current_plan_input: plan/cross-language-skill-candidate-basis-content-correction
 - Parent plan is current truth; this step is progression truth only.
 - Correction artifacts preserve high-severity recovery history only and do not
   approve work or replace the parent contract.
-- No review-log or summary exists. Neither may be created until its own
-  routing or close gate first requires an exact path in the parent plan.
-- The next permitted handoff is independent Plan-Reviewer only.
+- The plan-review log exists solely for the completed Plan-Reviewer gate. No
+  summary exists and none may be created before its own topic-close gate adds
+  an exact parent-plan path.
+- The next permitted handoff is independent Implementer only.
