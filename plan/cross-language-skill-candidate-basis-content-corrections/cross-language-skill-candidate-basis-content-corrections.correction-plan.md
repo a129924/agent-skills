@@ -1,69 +1,43 @@
-# Cross-Language Skill Candidate Basis Content Corrections — Recovery Record
+# Cross-Language Skill Candidate Basis Content Corrections — Recovery and Override Record
 
 ## Correction Classification
 
-- **Severity:** `high`.
-- **Frozen direction:** rebuild the feature branch from `origin/dev`,
-  re-establish planning truth, and preserve the bounded repair route without
-  reopening its six-cell contract.
-- **Reason:** the prior branch history combined planning, implementation,
-  review-state claims, and publication routing in a way that invalidated
-  confidence in phase and role separation. The removed implementation is
-  treated as suspect and was not carried into the recovery baseline.
+- **Recovery severity:** `high`; pre-recovery branch history remains historical
+  suspect state and is not revived.
+- **Active correction state:** parent `publish-in-progress`, with four-cell
+  canonical work retained as historical/pre-review evidence only. Phase 4.5
+  alignment and Main Agent publication routing are complete; the bounded
+  commit/push is pending. The canonical-source override remains limited to
+  those four portable-core cells.
 
 ## Historical-Truth Boundary
 
-- This correction plan records why recovery is required and which prospective
-  route repairs it. It is historical truth only.
-- The parent plan remains the current execution-facing contract; the parent
-  step remains progression truth. Neither may be overridden by this record.
-- This record does not replace the parent review log or create a new reviewer
-  verdict, approval, summary, or completion claim.
+- Recovery baseline `a725e71` and published PR-loop planning repair `1885c35`
+  are historical facts. `1885c35` is pushed to open PR #125; ten threads
+  remain unresolved.
+- Parent plan and step are current truth. Historical/pre-review evidence does
+  not permit publication or certify thread coverage, replies, resolution,
+  clean observation, human merge handoff, merge, release, summary, or close.
 
-## Frozen Repair Direction
+## Frozen Override Direction
 
-- The baseline started from `origin/dev` and retained no prior implementation
-  or review-state claim.
-- The baseline established the parent plan, parent step, this correction plan,
-  and this correction step before independent Plan-Reviewer review.
-- Preserve the parent plan's sole existing-file write and its exact six
-  `可攜核心` cell contract. The later bounded candidate edit is committed in
-  `75676e2f472abeb04a034ab765f1973d6b4dfcf5` and force-pushed to the current
-  head of ready PR #125; no further candidate-basis edit is authorized by this
-  planning rework.
-- Preserve every parent-plan exclusion: the 11 candidates, four groups, other
-  five rows, evidence, appendices, names, paths, `skills/**`, `agents/**`,
-  `.github/**`, `.codex/**`, README, VERSION, release, and language-validation
-  claims remain outside this correction.
+- Only `python-tdd-test-authoring`, `python-testing-pytest`,
+  `python-serialization-boundaries`, and `boundary-outcome-design` may change;
+  their canonical rules are locked in the parent plan.
+- The two other original cells, 11 candidates, four groups, evidence,
+  appendices, names, paths, skill/platform surfaces, README, VERSION, release,
+  and Swift/TypeScript validation claims remain excluded.
 
-## Recovery Chronology
+## Current Route
 
-1. Recovery baseline `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb` establishes
-   the four recovery artifacts.
-2. Independent Plan-Reviewer approval is recorded in
-   `4235c92a8d8bc09f86a2a3a37a0e1bbb5e85df34` and preserved in the review log.
-3. Independent Implementer completes the bounded six-cell candidate edit and
-   it is committed in `75676e2`.
-4. Independent document Code-Reviewer approves that bounded candidate edit.
-5. Phase 4.5 planning/progression rework received a fresh independent
-   Plan-Reviewer `approved` verdict, preserved in the parent review log.
-6. Independent final Code-Reviewer revalidation and Planner alignment
-   completed Phase 4.5. Parent synchronization and Planner correction closure
-   are complete; Main Agent then force-pushed `75676e2` to ready PR #125.
-7. New PR-head feedback routes the parent topic to `needs-rework`. This
-   historical record does not claim feedback coverage, thread resolution,
-   bounded observation, human merge handoff, merge, release, or close.
-8. An independent Plan-Reviewer approves the PR-loop planning repair. The
-   next parent route is a planning-only commit/push, followed by independent
-   thread-coverage verification; this does not claim either action completed.
-
-## Closure Conditions
-
-- Parent current truth is synchronized, independent final Code-Reviewer and
-  Planner alignment passed, and Planner correction closure is complete. This
-  correction is resolved historical truth.
-- The review log is retained because reviewer feedback and Phase 4.5 rework
-  control routing. A summary is created only when topic-close conditions
-  require it; none exists in this rework.
-- Correction closure is not granted by this artifact; a Planner confirms it
-  only after the required parent sync and reviews.
+- The four-cell canonical correction, including the Adapter--Port fix, is
+  historical/pre-review only. Phase 4.5 alignment is complete, and Main Agent
+  has selected the authorized publication route. Its bounded commit/push is
+  pending; no publication outcome is complete or claimed.
+- After publication, Phase 7--8 requires fresh review-state, comment/thread,
+  issue-comment, and check signals; full actionable-thread coverage; bounded
+  rework as needed; and clean snapshots at `30s -> 60s -> 120s` before human
+  merge-readiness. Thread action requires outcome satisfaction; blockers return
+  to `needs-rework`.
+- STOP POINT 2 occurs only after the clean-observation report and explicit
+  human merge-handoff choice. Main Agent stops before actual merge.

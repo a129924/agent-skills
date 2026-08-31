@@ -1,88 +1,72 @@
 ---
 topic: cross-language-skill-candidate-basis-content-corrections
 correction_severity: high
-status: resolved
+status: publish-in-progress
 parent_plan: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.plan.md
 parent_step: plan/cross-language-skill-candidate-basis-content-corrections/cross-language-skill-candidate-basis-content-corrections.step.md
 ---
 
-# Cross-Language Skill Candidate Basis Content Corrections — Recovery Steps
+# Cross-Language Skill Candidate Basis Content Corrections — Recovery and Override Steps
 
 ## Recovery Stages
 
-- [x] independent-plan-review
-- [x] approved-six-cell-repair
-- [x] independent-document-review
-- [x] phase-4.5-planning-rework
-- [x] independent-plan-re-review
-- [x] parent-sync-and-planner-closure
-- [x] independent-plan-review-of-pr-loop-contract
+- [x] high-severity-recovery-baseline
+- [x] published-pr-loop-planning-repair-1885c35
+- [x] canonical-source-override-planning-repair
+- [x] independent-plan-review-of-latest-clarification
+- [x] historical-four-cell-pre-review
+- [x] planner-phase-4-5-alignment-input
+- [x] main-agent-publish-or-rework-routing
+- [ ] fresh-pr-signal-thread-coverage-and-observation
+- [ ] human-merge-handoff
 
 ## Actionable Steps
 
-### independent-plan-review
+### historical-four-cell-pre-review
 
-- Completed by: independent Plan-Reviewer.
-- Recovery baseline reviewed:
-  `a725e71fd8cbe9ce6fb35fbf85ac7e250f878feb`.
-- Result: `approved`, preserved verbatim in the parent plan-review log.
+- Historical record: the four-cell canonical correction, including the
+  Adapter--Port fix, was presented before the current parent `needs-rework`
+  state. It is pre-review only and does not assert a current approval,
+  alignment, publication, or PR/thread outcome.
 
-### approved-six-cell-repair
+### planner-phase-4-5-alignment-input
 
-- Entry condition: Plan-Reviewer `approved` handoff.
-- Completed by: independent Implementer.
-- Result: the six parent-plan `可攜核心` cells were repaired and committed in
-  `75676e2f472abeb04a034ab765f1973d6b4dfcf5`. This is a new bounded output,
-  not revived suspect implementation state; no summary was created.
+- Entry condition: active parent `needs-rework` state and locked four-cell
+  scope.
+- Owner: Planner.
+- Completed result: Planner supplied Phase 4.5 alignment input without
+  changing locked scope or deciding publication/rework.
 
-### independent-document-review
+### main-agent-publish-or-rework-routing
 
-- Entry condition: Implementer returns `review-ready`.
-- Completed by: independent document Code-Reviewer.
-- Result: `approved` for the bounded six-cell document edit.
+- Entry condition: the required independent gate and Phase 4.5 input are
+  available.
+- Owner: Main Agent.
+- Completed result: following the independent Plan-Reviewer `approved` gate
+  and existing STOP POINT 1 authorization, Main Agent selected publication.
+  The bounded commit/push is pending; no publication outcome is claimed.
 
-### phase-4.5-planning-rework
+### fresh-pr-signal-thread-coverage-and-observation
 
-- Completed by: Plan-Creator.
-- The rework corrects planning/progression chronology and role ownership only.
-- It does not complete Phase 4.5 or create a reviewer verdict.
+- Entry condition: approved rework is published to PR #125.
+- Owner: Main Agent, with independent Reviewer re-entry where feedback changes
+  logic, scope, requirements, boundaries, or contract.
+- Required result: fresh-signal coverage, outcome-backed thread action,
+  bounded rework for blockers, then exact `30s -> 60s -> 120s` clean
+  observations before human merge-readiness report.
 
-### independent-plan-re-review
+### human-merge-handoff
 
-- Entry condition: the Phase 4.5 planning rework is `review-ready`.
-- Completed by: independent Plan-Reviewer.
-- Result: `approved`, preserved verbatim in the parent plan-review log. The
-  approval covers the repaired planning contract only.
-
-### parent-sync-and-planner-closure
-
-- Entry condition: independent final Code-Reviewer and Planner alignment,
-  Phase 4.5 completion, and any required parent sync.
-- Completed by: Planner.
-- Result: Phase 4.5 completed, parent current truth synchronized, and
-  correction closure confirmed. Main Agent subsequently force-pushed
-  `75676e2` to ready PR #125; new PR-head feedback now routes the parent to
-  `needs-rework`. This historical step records no thread coverage, clean
-  observation, human merge handoff, merge, release, or close claim.
-
-### independent-plan-review-of-pr-loop-contract
-
-- Completed by: independent Plan-Reviewer.
-- Result: `approved`, preserved verbatim in the parent plan-review log. This
-  recovery-history fact approves only the PR-loop planning repair; the next
-  parent route is a planning-only commit/push and then independent
-  thread-coverage verification.
+- Entry condition: clean-observation report and explicit human merge-handoff.
+- **STOP POINT 2:** stop before actual merge; wait for explicit human merge
+  confirmation and resume authorization before Phase 9.
 
 ## Handoff / Gate Notes
 
-- This correction step is historical recovery progression and cannot replace
-  the parent plan or parent step.
-- The baseline and fresh Plan-Reviewer verdicts and parent plan-review log
-  exist. The bounded candidate edit, its independent document Code-Reviewer
-  approval, and the final independent Code-Reviewer / Planner alignment are
-  preserved facts.
-- This correction is resolved historical truth. It records the completed
-  candidate publication fact and the approved PR-loop planning repair, but no
-  planning-repair publication, thread coverage, thread resolution, clean
-  observation, human merge handoff, merge, release, summary, or topic close.
-- The parent current truth is `needs-rework` on open PR #125.
+- `1885c35` remains pushed to open PR #125 with ten unresolved threads; the
+  newly aligned bounded change is pending commit/push.
+- The four-cell correction is historical/pre-review only. Phase 4.5 alignment
+  and Main Agent publication routing are complete; Main Agent alone owns the
+  pending commit/push. No publication is claimed.
+- This record claims no thread coverage, clean observation, merge, release,
+  summary, or close.
