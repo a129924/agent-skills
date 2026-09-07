@@ -317,18 +317,18 @@ Process documentation and workflow guidance for repository operations:
 | `plan-step-tracker` | Query topic step status or check completion; reject invalid completion evidence. |
 | `python-implementation-workflow` | orchestrates the end-to-end Python implementation workflow with active gates across plan review, TDD assessment, implementation, implementation review, code review, and medium/high-severity drift correction handling |
 | `python-naming` | Define or review Python identifier, file, and visibility naming conventions. |
-| `python-package-layout` | Set Python src-layout, packaging, CLI placement, and tests that exercise installed code. |
+| `python-package-layout` | Design or review Python src-layout, packaging, CLI placement, and tests that exercise installed code. |
 | `python-type-hints-strict` | Design or review annotations for Python projects that explicitly require Pyright strict mode. |
 | `python-model-selection` | Choose Enum, dataclass, ABC, or Protocol for Python structured data and contracts. |
 | `python-control-flow` | Design or review Python branching, guard clauses, match/case, and truthiness choices. |
-| `python-testing-pytest` | Design pure pytest unit tests, fixtures, assertions, and mocks without real I/O or async-runner configuration. |
-| `python-error-handling` | Design Python exception types, translation, chaining, and propagation; not retry orchestration or logging policy. |
-| `python-class-design` | Design ordinary Python classes, instance state, constructors, and public member placement. |
+| `python-testing-pytest` | Design or review pure pytest unit tests, fixtures, assertions, and mocks without real I/O or async-runner configuration. |
+| `python-error-handling` | Design or review Python exception types, translation, chaining, and propagation; not retry orchestration or logging policy. |
+| `python-class-design` | Design or review ordinary Python classes, instance state, constructors, and public member placement. |
 | `python-comprehensions` | Choose comprehensions, explicit loops, or map/filter when Python collection transformation needs readability review. |
 | `python-data-model-methods` | Choose Python foundational dunder methods and container protocols; distinguish dataclass-generated behavior. |
 | `python-operator-overloading` | Design Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch. |
 | `python-api-signature` | Design or review Python function signatures, defaults, parameter ordering, and call-site contracts. |
-| `python-module-boundaries` | Design Python module boundaries, public exports, import behavior, and internal contracts. |
+| `python-module-boundaries` | Design or review Python module boundaries, public exports, import behavior, and internal contracts. |
 | `python-context-management` | Design synchronous with-blocks and context managers for resource cleanup or temporary state restoration. |
 | `python-docstrings` | Write or review contract-first Python docstrings in Google Style. |
 | `python-decorators` | Design transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes. |
@@ -336,7 +336,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-async-await` | Design or review Python async boundaries, task ownership, cancellation, and async protocols. |
 | `python-async-planning` | Freeze async lifecycle, concurrency, failure, and cancellation decisions before risky Python implementation. |
 | `python-generators-iterators` | Choose collections versus lazy Python iteration and design generators or custom iterators. |
-| `python-library-architecture` | Design reusable Python libraries or SDKs with isolated themes, a side-effect-free core, and facades. |
+| `python-library-architecture` | Design or review reusable Python libraries or SDKs with isolated themes, a side-effect-free core, and facades. |
 | `python-project-init-greenfield` | Initialize a greenfield Python repository from a locked blueprint and verify its sensing assertions. |
 | `python-blueprint-authoring` | Author a greenfield Python blueprint using the existing six-section execution contract. |
 | `python-blueprint-review` | Review a greenfield Python blueprint against its locked schema before project initialization. |

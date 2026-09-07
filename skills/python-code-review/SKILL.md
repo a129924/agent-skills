@@ -84,7 +84,7 @@ For each dimension, record findings with severity, location, issue, and fix:
 ### Dimension 1 — Typing
 
 - Public functions and methods must have parameter and return annotations.
-- In strict-mode projects (`pyright strict` or `mypy --strict`): `Any`, `cast`, and `# type: ignore` without inline justification are `blocking`.
+- In strict-mode projects (Pyright configured with `typeCheckingMode = "strict"` or a matching `strict` path array, or `mypy --strict`): `Any`, `cast`, and `# type: ignore` without inline justification are `blocking`.
 - In non-strict projects: missing annotations on public APIs are `warning`; missing on private helpers are `info`.
 - Implicit `Optional` (e.g., `def f(x: str = None)`) is always `blocking`.
 - `# type: ignore` without an inline comment explaining why is always `warning`.
@@ -207,7 +207,7 @@ Dimensions with no findings are emitted as empty lists `[]`.
 
 - All 7 quality dimensions are reviewed: typing, lint, readability, error handling, anti-patterns, test quality, observability.
 - All findings are recorded with severity, location, issue, and fix — even when not blocking.
-- Detected tooling is recorded and used to calibrate severity (e.g., strict-mode escalation for `pyright strict`).
+- Detected tooling is recorded and used to calibrate severity (e.g., strict-mode escalation when Pyright configuration enables strict checking).
 - Dimensions with no findings are emitted as empty lists `[]`, not omitted.
 
 ## On Soft Fail

@@ -27,6 +27,7 @@ inputs:
   - the shared topic-plan contract from `plan/topic-plan-contract.md`
 outputs:
   - a repo-visible `plan/<topic>/<topic>.plan.md`
+  - conditionally updated `analysis/<topic>/requirements.md` and/or `analysis/<topic>/technical-spec.md` when a clear authorized revision changes that baseline
   - explicit scope, boundaries, locked decisions, and analysis-layer routing for the topic
   - exact artifact paths and workflow transitions
   - clear stable-library intent declared or explicitly absent
@@ -86,6 +87,7 @@ Do not use this skill when:
 
 # Outputs
 - a repo-visible `plan/<topic>/<topic>.plan.md`
+- conditionally updated `analysis/<topic>/requirements.md` and/or `analysis/<topic>/technical-spec.md` when a clear authorized revision changes that baseline
 - explicit scope, boundaries, locked decisions, and analysis-layer routing for the topic
 - exact artifact paths and workflow transitions
 - clear stable-library intent: declared or explicitly absent

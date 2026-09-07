@@ -616,6 +616,7 @@ def test_invalid_implementation_evidence_cannot_pass(tmp_path, content):
 @pytest.mark.parametrize("content", [
     "- [X] done\n- [??] unresolved\n",
     "- [X]\n",
+    "- [X] done\n- [X]done\n",
     "- [X] done\n1. [ ] unfinished\n",
     "- [X] done\n[ ] unfinished\n",
     "- [X] done\n  - [ ] indented\n",
