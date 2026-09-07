@@ -153,6 +153,11 @@ def render_source(source_path: Path, platform_root_text: str) -> str:
         ) from exc
     except OSError as exc:
         raise ProjectionError(f"Failed to read source file: {source_path}") from exc
+    # Preserve the replacement engine itself so its projected copy can be rerun.
+    if source_path.parts[-3:] == (
+        "platform-projection-adapter", "scripts", "platform_projection_adapter.py"
+    ):
+        return content
     platform_prefix = "/" if platform_root_text == "/" else f"{platform_root_text}/"
     return content.replace(PLACEHOLDER_PREFIX, platform_prefix)
 

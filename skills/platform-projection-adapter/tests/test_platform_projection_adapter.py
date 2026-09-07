@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import io
+import subprocess
 import sys
 from pathlib import Path
 
@@ -13,6 +14,10 @@ SCRIPT_PATH = (
     / "scripts"
     / "platform_projection_adapter.py"
 )
+
+# This is test data, not a consumer path. Build it at runtime so projecting
+# the test suite cannot turn placeholder fixtures into already-rendered paths.
+PLATFORM_PLACEHOLDER = "." + "<platform>/"
 
 
 def load_adapter_module(script_path: Path, module_name: str):
@@ -52,11 +57,11 @@ def make_repo(tmp_path: Path) -> Path:
     write_text(repo_root / "AGENTS.md", "# test repo\n")
     write_text(
         skills_root / "alpha" / "SKILL.md",
-        "Alpha uses .<platform>/skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n",
+        f"Alpha uses {PLATFORM_PLACEHOLDER}skills/alpha/SKILL.md and skills/alpha/SKILL.md.\n",
     )
     write_text(
         skills_root / "alpha" / "reference.md",
-        "Provenance lives at .<platform>/skills-provenance.json.\n",
+        f"Provenance lives at {PLATFORM_PLACEHOLDER}skills-provenance.json.\n",
     )
     write_text(
         skills_root / "nested" / "guides" / "note.md",
@@ -96,6 +101,41 @@ def test_dry_run_reports_summary_without_writing(adapter_module, tmp_path: Path)
     assert "conflicts: 0" in stdout
     assert "result: SAFE_TO_APPLY" in stdout
     assert not (target_root / "skills").exists()
+
+
+def test_generated_projection_preserves_and_runs_its_own_engine(adapter_module, tmp_path):
+    repo_root = make_repo(tmp_path)
+    engine_relative = Path("platform-projection-adapter/scripts/platform_projection_adapter.py")
+    source_engine = repo_root / "skills" / engine_relative
+    write_text(source_engine, SCRIPT_PATH.read_text())
+    projected_root = repo_root / ".codex"
+    code, _, _ = run_adapter(adapter_module, repo_root, "--platform-root", str(projected_root), "--apply")
+    assert code == 0
+    generated_engine = projected_root / "skills" / engine_relative
+    assert generated_engine.read_bytes() == source_engine.read_bytes()
+    generated_module = load_adapter_module(generated_engine, "generated_projection_engine")
+    second_root = tmp_path / ".second"
+    code, _, _ = run_adapter(generated_module, repo_root, "--platform-root", str(second_root), "--apply")
+    assert code == 0
+    generated_skill = (second_root / "skills/alpha/SKILL.md").read_text()
+    assert PLATFORM_PLACEHOLDER not in generated_skill
+    assert str(second_root) in generated_skill
+    code, stdout, _ = run_adapter(generated_module, repo_root, "--platform-root", str(second_root))
+    assert code == 0
+    assert "update: 0" in stdout
+    assert "conflicts: 0" in stdout
+
+    cli_result = subprocess.run(
+        [sys.executable, str(generated_engine), "--platform-root", ".from-cli", "--apply"],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    assert cli_result.returncode == 0, cli_result.stderr
+    cli_skill = (repo_root / ".from-cli/skills/alpha/SKILL.md").read_text()
+    assert ".from-cli/skills/alpha/SKILL.md" in cli_skill
+    assert PLATFORM_PLACEHOLDER not in cli_skill
 
 
 def test_dry_run_ignores_runtime_cache_junk(adapter_module, tmp_path: Path):

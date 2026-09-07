@@ -304,7 +304,7 @@ topic: all-complete
         assert "not found" in captured.err.lower()
 
     def test_check_all_succeeded_no_steps(self, temp_plan_dir, capsys):
-        """Return SUCCESS when no steps (empty list is complete)."""
+        """Reject missing completion evidence instead of vacuous success."""
         topic = "no-steps"
         topic_dir = temp_plan_dir / topic
         topic_dir.mkdir()
@@ -320,9 +320,8 @@ topic: no-steps
         result = check_all_succeeded(topic, temp_plan_dir)
         captured = capsys.readouterr()
 
-        assert result == 0
-        assert "SUCCESS" in captured.out
-        assert "0" in captured.out
+        assert result == 1
+        assert "No valid steps" in captured.err
 
 
 class TestEdgeCases:
@@ -540,3 +539,66 @@ topic: impl-command-blocked
 
         assert result == 1
         assert "BLOCKED" in captured.out
+# Regression: an empty or malformed implementation section is not completion.
+@pytest.mark.parametrize("content", [
+    "# Topic\n## Workflow Stages\n- [X] done\n",
+    "## Implementation Steps\n",
+    "## Implementation Steps\n- [?] uncertain\n",
+    "## Implementation Steps\n- [ ] pending\n",
+    "## Implementation Steps\n- [x] lowercase\n",
+    "## Implementation Steps\n- [X] done\n## Implementation Steps\n- [ ] hidden\n",
+    "## Implementation Steps\n- [X] done\n- malformed task\n",
+    "## Implementation Steps\n- [X] done\n1. [ ] unfinished\n",
+    "## Implementation Steps\n- [X] done\n[ ] unfinished\n",
+    "## Implementation Steps\n- [X] done\n- [??] unresolved\n",
+    "## Implementation Steps\n- [X]\n",
+])
+def test_invalid_implementation_evidence_cannot_pass(tmp_path, content):
+    import importlib.util
+    import sys
+
+    script = Path(__file__).resolve().parents[1] / "scripts/step_tracker.py"
+    spec = importlib.util.spec_from_file_location("tracker_completion_regression", script)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    plan_dir = tmp_path / "plan"
+    topic_dir = plan_dir / "audit"
+    topic_dir.mkdir(parents=True)
+    (topic_dir / "audit.step.md").write_text(content)
+    assert module.check_impl_steps_succeeded("audit", plan_dir) == 1
+
+
+@pytest.mark.parametrize("content", [
+    "- [X] done\n- [??] unresolved\n",
+    "- [X]\n",
+    "- [X] done\n1. [ ] unfinished\n",
+    "- [X] done\n[ ] unfinished\n",
+    "- [X] done\n  - [ ] indented\n",
+])
+def test_all_completion_rejects_malformed_evidence(tmp_path, content):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text(content)
+    assert check_all_succeeded("audit", tmp_path) == 1
+
+
+@pytest.mark.parametrize("checker", [check_all_succeeded, check_impl_steps_succeeded])
+def test_completion_rejects_unreadable_evidence(tmp_path, monkeypatch, checker):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text("## Implementation Steps\n- [X] done\n")
+
+    def deny_read(*args, **kwargs):
+        raise PermissionError("fixture read denied")
+
+    monkeypatch.setattr(Path, "read_text", deny_read)
+    assert checker("audit", tmp_path) == 1
+
+
+@pytest.mark.parametrize("checker", [check_all_succeeded, check_impl_steps_succeeded])
+def test_completion_rejects_invalid_encoding(tmp_path, checker):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_bytes(b"\xff\xfe")
+    assert checker("audit", tmp_path) == 1
