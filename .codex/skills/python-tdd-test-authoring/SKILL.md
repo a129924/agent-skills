@@ -66,7 +66,7 @@ Do not use this skill when:
    - If `spec.md` conflicts with `plan.md` Requirements, `spec.md` wins and the conflict is recorded in `issues`.
    - If D1 verdict is `non-trivial` and `spec.md` is missing, return `BLOCKED` and route back to `python-plan-authoring` to add `plan/<topic>/<topic>.spec.md`.
 5. **Map requirements to tests**: Create `test_mapping` entries (requirement_id → test_case_name) from the active behavior contract.
-6. **Check initial states per test**: Record each entry's expected and observed initial status (`red`, `pass_existing`, `skip`, or `xfail`) and its observed failure or status reason. A suite may legitimately mix those states.
+6. **Check initial states per test**: Record each entry's actual test command, expected and observed initial status (`red`, `pass_existing`, `skip`, or `xfail`), and its observed failure or status reason. A suite may legitimately mix those states.
 7. **Validate public contract coverage**: Ensure tests cover public functions, return types, error cases, and documented behavior.
 8. **Assess category coverage**: Map relevant happy-path, error, boundary, state/side-effect and integration behavior. Record a reason for N/A categories; do not invent side effects or integration points.
 9. **Enforce production_code_modified guard**: Verify `production_code_modified: false` before proceeding.
@@ -83,8 +83,8 @@ Do not use this skill when:
 - YAML verdict result file with schema:
   - `verdict: "red-tests-ready" | "needs-rework" | "insufficient-context" | "skip_with_reason" | "BLOCKED"`
   - `d1_verdict: { "verdict": "trivial|non-trivial", "reason": "..." }`
-  - `test_mapping: [{requirement_id, test_case_name, coverage_category, expected_initial_status, observed_initial_status, observation_reason}]`
-  - `validation_checks: {d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, initial_statuses_observed, production_code_modified}`
+  - `test_mapping: [{requirement_id, test_case_name, coverage_category, test_command, expected_initial_status, observed_initial_status, observation_reason}]`
+  - `validation_checks: {d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, initial_statuses_observed, test_commands_recorded, production_code_modified}`
   - `issues: []` (list of specific gaps or failures)
   - `next_step: string` (e.g., "Proceed to implementation" or "Fix test_mapping for Req#2")
 
@@ -96,7 +96,7 @@ Do not use this skill when:
 - D1 behavior-change classification is executed internally with structured verdict output.
 - For D1 `non-trivial`, `plan/<topic>/<topic>.spec.md` must exist.
 - Test file path is determinable from the plan (target module or package identifiable).
-- Run affected tests before production edits and record command, observed initial state and failure reason for each declared purpose. Only target-behavior failures establish RED; collection, import, fixture or unrelated environment failures do not. A declared status without observed evidence cannot satisfy `red-tests-ready`.
+- Run affected tests before production edits and record the actual command, observed initial state and failure reason for each declared purpose. Only target-behavior failures establish RED; collection, import, fixture or unrelated environment failures do not. A declared status without observed evidence or a non-empty command cannot satisfy `red-tests-ready`.
 
 ## Quality Checks (best effort)
 
@@ -141,7 +141,7 @@ If existing test files cannot be read (e.g., file system access error):
 - Inspect assertions to verify relevant behavior coverage; test-function counts do not establish categories.
 - Validate test_mapping cardinality: at least one test per requirement.
 - Confirm `production_code_modified: false` in all cases.
-- Compare each test mapping entry's declared `expected_initial_status` with its observed result and behavior evidence; counts alone are not evidence.
+- Compare each test mapping entry's declared `expected_initial_status` with its observed result, actual `test_command`, and behavior evidence; counts alone are not evidence.
 
 # Red Flags
 

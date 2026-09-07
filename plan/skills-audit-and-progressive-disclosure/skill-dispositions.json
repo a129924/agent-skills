@@ -327,7 +327,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "ecafb20322cf3ad7179ab538362209bad393d69fb01c40defcdcf70dec281112",
+    "source_tree_hash": "6a1887e29ea84bed9d0f473ba7416c26f1b939a0c0a76224f2824d4c08ae3894",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -1019,7 +1019,7 @@
   {
     "skill": "python-tdd-test-authoring",
     "before_entry_sha256": "48a045b138a49009adf6ceeab942d448a857278062cabc6de1594594303a3659",
-    "after_entry_sha256": "256ee4f4a1266f88bd389a01776878790547f53c0f6d03672f70865c5c0ac81c",
+    "after_entry_sha256": "4b60ae9db8e528940cb82c4d594f69b3c0acea352b03dab90f734a0ac38948e0",
     "before_lines": 174,
     "after_lines": 177,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -1033,7 +1033,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "1fe15ed04787970c263c8f920f973866b581625ddfb2515782577492530936fd",
+    "source_tree_hash": "4d11a066fd207789ea650bc87667f4c3793a40b04b54b8d4962f82f6ea1b61ab",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

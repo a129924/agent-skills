@@ -205,3 +205,18 @@ implementation-step gate reported 13 complete steps; and the final projected
 CLI dry run reported 287 noop with zero create, update, or conflict. The GitHub
 resolution state is recorded after this evidence commit is published. No CI,
 merge, release, or human approval is claimed here.
+
+## PR comment-fix verification — Round 4
+
+Two new current, unresolved threads were classified as direct, bounded repairs:
+multi-character list task markers bypassing the completion gate, and absent
+per-test invocation evidence in the TDD result schema. Canonical repair commit
+`e5cec04` adds regressions for `[XX]` and `[TODO]` list markers and requires
+`test_command` alongside each mapped test's status evidence. The projection
+preview identified five affected managed outputs and no creates; inventory and
+the two changed provenance/disposition hashes were refreshed. The full canonical
+suite passed 102 tests; projected runtime suites passed 72 tests; the real
+observer implementation-step gate reported 13 complete steps; and the final
+projected CLI dry run reported 287 noop with zero create, update, or conflict.
+The GitHub resolution state is recorded after this evidence commit is published.
+No CI, merge, release, or human approval is claimed here.

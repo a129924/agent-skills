@@ -100,3 +100,13 @@ merge/release.
 - [X] Commit canonical repair `b19f7f3`, regenerate affected Codex projections
   and inventory/provenance evidence, validate, push, then resolve only the five
   addressed Round 3 threads after GitHub reports the pushed head.
+
+## PR Comment Review / Fix — Round 4
+
+- [X] Fetch the current PR review state and triage two current, unresolved
+  direct-apply findings; retain earlier resolved threads as history.
+- [X] Reject multi-character list task markers while preserving Markdown-link
+  exemptions, and require per-test command evidence in the TDD result schema.
+- [X] Commit canonical repair `e5cec04`, regenerate affected Codex projections
+  and inventory/provenance evidence, validate, push, then resolve only the two
+  addressed Round 4 threads after GitHub reports the pushed head.

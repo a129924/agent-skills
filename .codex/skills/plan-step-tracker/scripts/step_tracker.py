@@ -200,14 +200,16 @@ def _validate_completion_lines(lines: list[str], *, implementation: bool = False
     """Reject malformed checkbox evidence without changing read-only queries."""
     for line in lines:
         stripped = line.strip()
-        checkbox_like = re.match(
-            r"^(?:(?:[-*+]|\d+[.)])\s*)?\[(?:\s|[^\]\s]|\?+)?\](?![(:])",
-            stripped,
+        list_checkbox_like = re.match(
+            r"^(?:[-*+]|\d+[.)])\s+\[[^\]]*\](?![(:])", stripped
+        )
+        bare_checkbox_like = re.match(
+            r"^\[(?:\s|[^\]\s]|\?+)?\](?![(:])", stripped
         )
         top_level_list_item = implementation and re.match(
             r"^(?:[-*+]\s|\d+[.)]\s)", line
         )
-        if checkbox_like or top_level_list_item:
+        if list_checkbox_like or bare_checkbox_like or top_level_list_item:
             if not re.fullmatch(r"- \[[ Xx]\] \S.*", line.rstrip()):
                 raise ValueError(f"Malformed or unsupported completion step: {line}")
 
