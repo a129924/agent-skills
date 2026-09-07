@@ -1,0 +1,4975 @@
+{
+  "baseline_commit": "c96eeb8b886d5e7885effbf2d56c7b9e337def8a",
+  "backup_archive": "/private/tmp/skills-audit-backup.frohct/baseline.tar.gz",
+  "backup_sha256": "1cf14fc04c71f7caf222d06ddf02c5bbe199dc0af0cd618ba881c3cb037de0e2",
+  "entries": [
+    {
+      "path": ".codex/skills/README.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fbc97a8c2c23d5e3b90373b346b60f37eaa43f968e4915b35964822e98652ef8"
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "47137eb6f9322ca382afb198861d2d23392a358204a6a62c24fc713e8035f247"
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/blueprint.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c117f7c67a0b61c200239763a94217f7f50729201864239ec9c4ecafc1eb60ad"
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dd2b48f7615f878de317089baac377259a059de6c03525263ea8a8b1f670e582"
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/folder-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1044c8004a53c55c124c251690074f9e80f27852e1f516606885994c1beb8049"
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-creator/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-reviewer/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "25860d9eb086e4f2796be5e46d4a3756f5b2a16100147c08354b8e5a1601de7a"
+    },
+    {
+      "path": ".codex/skills/agent-skill-reviewer/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "806dfb52002800ee15d15bcffdcfbef3e3aafafa93dae7713a6ec4f896d89098"
+    },
+    {
+      "path": ".codex/skills/agent-skill-reviewer/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-reviewer/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-reviewer/review-checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d4fa0f41c600759cd94814041172f05ca9c3078a234fd9b1eaa9754400ec718c"
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0c3bc89aaff3ba73bbc6e5f73bf8d016a95366ea6e3e3468e297f34107a8102a"
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/folder-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fc6e7b75139d11668c9753bf8e5b60394560afbd2ee8a0fde2df29453e820ed6"
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8ab58f1701e54b97fac4c117ed5db584a57fe844df0651411f8be8b0c24e4d81"
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/agent-skill-template/template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a533c05c91274e20c5e4e120b1bf50bd6b3a795fa2827695def698ec0c1f7397"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fd168f4a414fa60f9136bd27a6de172f52d93b69108eff437e57ba62ad600764"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c53d276db3610f025d75e11bebf86f35b4c92e2874a606897d6524a07858825a"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "64aaf185c7d091de2a97852739ebefc64c6f5dfd4d6d17b6b51cbc59c143f575"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fee83d5c30247126bf5be318657ff090bc2ae7c82adf48d4294ad4e9014aa359"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/references/layer-semantics.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f6c4af0b4a0f22d47baa986a1dca0e0bd5bcd7d60963b7dee2d9de4147c1f1df"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/references/persistence-and-failures.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "26d21e6e24c4931ea95334db076fd152e1811af3b976d41cbad8e5c2f4cec1ab"
+    },
+    {
+      "path": ".codex/skills/boundary-outcome-design/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "aab2a40fec45cd5a5669bf915ebc59f59b94be76bdb2bab0eaf11244d72ddfa6"
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a754686bcab70b75db50e3c5e68ae58f00f6f2963c8d759a003b4481da147de4"
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b2c06a6b3960b926a42c4a40e46b4ffce8f8af6389c2f167067c75f493991f58"
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7b76d0849a8d3188b4f3f022c53d9d84ccbc714fe4d56808a14a58bae8eac36d"
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/business-intent-alignment/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6a8bc45472bee7b34f7935502421959167d88464adac574006eeda1446c47904"
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c334c8be4e9bbfb26eac63fc4ab6d73f4239aee75b3eb44bef3a9898de69f8fb"
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ff526bdd981396107e9a5146a38974b56a44a3d0543cf6887a83fc2de6f2681b"
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "09cfb0e8e11a0f35d5eb45106b602f9f600a6f80dd9fec10953f7b7d5f22c495"
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/business-to-technical-translation/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/context-package-builder/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "07c909e5460c82e58b1c79cf91c2a6bc9acc1c756fac7b2a1c09d8881601cc2a"
+    },
+    {
+      "path": ".codex/skills/context-package-builder/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "caae540ef2179a7f96f50dd2a4864f8a47299eab365981c9d21ff4bf62fac2b1"
+    },
+    {
+      "path": ".codex/skills/context-package-builder/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/context-package-builder/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "95740449d88df3ec54ad0918653ec8dab261902a94db55a663d88bf0de085932"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "089f683295cc7fce93aa2d1cb5a142ca0d8d7c498684ff76327d29e19fa02969"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ceb3dba90808362246a02103ad71b6a192fc034a60f9fc16e3a679805c5079d5"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/references/input-sources-and-priority.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "551a6fb901f80431140eb2f8b2e653a0d328c407d0840bc13ad02df47138e7b0"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/references/instruction-layering.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "bb609f2e0aba4fab7f3cbe8d5e45b9e5c05e25fdea217003e8482325fb02f331"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/references/merge-and-conflict-policy.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "bba503d8162fa7c48681b8b46962f5097f2b6f84dbd3c9bbdb400e6d63fea91f"
+    },
+    {
+      "path": ".codex/skills/copilot-instructions-init/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4b678f8ecf46d249fe6bed043a30ad268c6e6f4ea70b30341056329ee2ec19cf"
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "91da11a9f3299c1ec9e4d91eb3e90eeabddbf39d36dcb04637faca87aa110d4f"
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/references/conflict-and-fallbacks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "aae475257853f5788938967c3d4823afc5967f305174817bd4b805654ee2e03c"
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/references/migration-playbooks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d83d1f197a0e14cdbc199f822adc773e9221cde7372109b667920bcb8fc803bc"
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/references/naming-patterns.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4367f0da69c835c0ad3e7e1f6ecb30f42845d371974abda613b83aaa2e256bcf"
+    },
+    {
+      "path": ".codex/skills/git-branch-naming/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0eadca8af8488dbf3d7761e3ff0c53c0348e6c327027e82e560418e79f4f3c00"
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a90db37c87304bab1eb73820b0245e6c7daca5cb0396b0942c9c71dc642283f4"
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/references/scope-alignment.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0afe1a6f2686d8067e527732298823082b17f5fc5b663fddbf94736ae8c9db04"
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/references/split-and-repair.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "448ff2d1f4aa6aa0d231d53b0fb828399890908b9ce3e9059dc464021bcccbc7"
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/references/type-selection.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "06b2323d83c861c7f6f61658c77ac23b1a79fe5c786a6f78ab2d79ce9b7d15fd"
+    },
+    {
+      "path": ".codex/skills/git-commit-convention/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-post-merge-workflow/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "64d413ae6b66b19f89afb440beb382d7ea45207b16a6ac0806b9e0bbc3298d17"
+    },
+    {
+      "path": ".codex/skills/git-post-merge-workflow/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9a151281615a6fc9b5beada51325e43a9b40d2ee6a9f59e6e7914eefc6de0463"
+    },
+    {
+      "path": ".codex/skills/git-post-merge-workflow/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-post-merge-workflow/references/stop-point-2-checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "890d43ee1e144e7e06d0544b0a138559480417395fb9f576917dddb6f575a735"
+    },
+    {
+      "path": ".codex/skills/git-post-merge-workflow/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-release-management/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e341300718c9304975cee17c082a3372fc0759883f9fe2c7161c61ac80052887"
+    },
+    {
+      "path": ".codex/skills/git-release-management/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6d850191d1edd85456e5d86e4315158149edca5d50a0ae693baa807e12d6b185"
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/emergency-path.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "37af256f11a0edfb281216bc7432efd8d61d885b29d1a5c9ec67f0d12ea0d436"
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/gate-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "eadb7239da2752d07261a4f61c64cbfbaf426ae03057cffb64ef44e1e38fea30"
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/version-bump-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "22f62a3b9a8a28d1f2186a9635b2562c3a1dface0623a6057ae4b6424efeca72"
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/version-sources.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4eb3e1d7e2c85c1556359d69cfe387e9ae084bb06f4d80b461edba398840425c"
+    },
+    {
+      "path": ".codex/skills/git-release-management/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/handoff-routing-policy/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ce7db44ae107d5e9c2f186e1022e68842f5914b983d2ed2a5d1a4e49d0cd84d3"
+    },
+    {
+      "path": ".codex/skills/handoff-routing-policy/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0b63d016a997d939885f23d7bb82459da34393365f21205838275d9b2b34aa02"
+    },
+    {
+      "path": ".codex/skills/handoff-routing-policy/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/handoff-routing-policy/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-creator/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e3c4874f6e7b3f8e22f89b5f88f974b4e2c1122454721ad3a211efe8d6215e24"
+    },
+    {
+      "path": ".codex/skills/plan-creator/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "beba4040bf1ecb06ed215128069f3b13af6626991120fdd03e03462daf8c6975"
+    },
+    {
+      "path": ".codex/skills/plan-creator/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4d7a65af7452a4e39faee4eaeceda6bbd304c793d6567e90c71b762f983d472b"
+    },
+    {
+      "path": ".codex/skills/plan-creator/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a4bf0490a3950ff69cbafe93ef3531493cbef20a7668453894a238cde7a02730"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/artifact-path-rule.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2d8e5ea78e4cfc7d1edce5f026a680400434d0dd3f0fc14db362084fce06527b"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/required-section-meaning.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f35ecc5841cd4819decaa56ff53729e4a4461a6bd9a9d82d73863394ff92bf12"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/role-boundary-rule.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "32f53403266ea7302b9ab6bacbbedee0cd3f70dffe793d75f68d1dbb73daf76a"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/stable-library-rule.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ac4aade3430c2c11107a18eabf08e26532359084b092b69a3b201667bb452eaf"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/stop-and-ask-triggers.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "cd9580cc3e5c4c9ac07cb5413a4faf08dac313ed8f039ae300fbc94d2e0208cb"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/template-usage-rule.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1b7cb02ca5a5119b6cc3ba7e2e35fa39bb55fbabb8e0af653be424b1956353f1"
+    },
+    {
+      "path": ".codex/skills/plan-creator/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-creator/templates/topic-plan-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "27ee9913bdc6d6a859ed25bc380e27df5de86e2389dc1e64e3de7899d55aaff3"
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c80b404bc3621159834873df5b8b74e2c04ce42aa20d4ad2f4e080b44335d9be"
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "783e30bb50ec0da26d6bc75d8ea8f916a11ad80c4d68ef2bac49d97b86633d28"
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "18a01f38957eeb03bf4fe0ee531ca6e4c5f03941d3967dfff7cfad0f7e5c6b44"
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dfeff4b57efad9be0adeca7d841e9a1cd3c67700658adf9a756e78c30c6d67e0"
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-reviewer/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6cc17cfb86c30f602b30febcf2ff2e63f17d80c90702fe6eff04a7bb06e0dae1"
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "355485582cbce7fa8c0354bacd28e4fa95ece60a83595e98dc0d6b39d4f493b2"
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "594d5aacb272a09baf1f193faeb3c3314dc71da80c0e3041cb676bca9a22910f"
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/scripts/step_tracker.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1f4b9d85689b6f8bbcc686b1dd38e8a3edfa1fe22219f06674adfa56836ecfd3"
+    },
+    {
+      "path": ".codex/skills/plan-step-tracker/tests/test_step_tracker.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "67d2b3c14920f64b33706649b00657c92b4f84f4b5b23d6d0e7906d231eacd0b"
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6efb7da546ddcc77baae0732710a21a997d05765a8d2275ef810d927dc40c04c"
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b3f326761d66bdd91ea33aabcde0dadb035c8f7fcc94bf7a712c4dcac1199420"
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b779cc51c349855cc6fcf16146867ced6011b0ae8e1a376a70ace9f988b8b249"
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/scripts/platform_projection_adapter.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b073c4bc62c926d7748912cadb5671bfbf0d44b6b1bce2aa1bf71b351f215c39"
+    },
+    {
+      "path": ".codex/skills/platform-projection-adapter/tests/test_platform_projection_adapter.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "db8fc493b78a66573ea29c4d2ce6c3eb85171fd4fa0ab8656a35b6200e1199a5"
+    },
+    {
+      "path": ".codex/skills/provenance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b971cdf99de594daede9943d363f8f2ec54a28e81d34342abd4400adc3d5a1a1"
+    },
+    {
+      "path": ".codex/skills/python-api-signature/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "26de2a6497f65971818a3aaffcc6d319e7fa5459ebfda069ae34b711ba7ab8f8"
+    },
+    {
+      "path": ".codex/skills/python-api-signature/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a92a02b1088d033ea414a0a20885fbc117d2c485a9a4b468db5ae5a08861a31b"
+    },
+    {
+      "path": ".codex/skills/python-api-signature/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-api-signature/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-async-await/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0a2905b6e2d7ddecce68b2d6357ff335ac2626acad90b5063aa193bdb8616e4f"
+    },
+    {
+      "path": ".codex/skills/python-async-await/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "89cb4e06934d54d5a7e6f5a394866e9c78912ee1fcb6d0a4dbdf940309842174"
+    },
+    {
+      "path": ".codex/skills/python-async-await/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c8ca50d6d41de7124e816f775b2b3284f162dc862a74faae6c0fb4f84c515ac7"
+    },
+    {
+      "path": ".codex/skills/python-async-await/references/async-protocols.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9d41c98c6ee5ea1c8246ad6d1507f6ceba0a9d0458723dbcf6faf26e22864285"
+    },
+    {
+      "path": ".codex/skills/python-async-await/references/cancellation-and-failure.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4019daa0295a95cfb59293c9ca778de3481b47dc5561901e37a1503f0e5c98e4"
+    },
+    {
+      "path": ".codex/skills/python-async-await/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-async-await/references/structured-concurrency.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9e7d08392d6c7997bb13bb33bc512a681810e70512f6c5c6d83c68034de6ce65"
+    },
+    {
+      "path": ".codex/skills/python-async-await/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-async-planning/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d91efd1e45f6f60f0c2441e0a96171e7cff5d3fd6c0476fca9c1bd5749c970b0"
+    },
+    {
+      "path": ".codex/skills/python-async-planning/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1e46a0137c60447f60b23b07bbc6ee1efde5264f3aed77948967d66966d19c4c"
+    },
+    {
+      "path": ".codex/skills/python-async-planning/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2b88392fa75241b69b81a698361061db5290d518ed284c41c4443016bfa12bd9"
+    },
+    {
+      "path": ".codex/skills/python-async-planning/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-async-planning/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "21e878517d0999ec80ee8b5299ec9adf085bdce095d91b7cc8e9907fc0bc368d"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8ba959cb6046f8462e314d5b592dae8895e7b4621a7d8fbe94387c6c0f63b3b4"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a12577ad734aa7cd7606b194c4e3d7fc3c63921f559da893d64040242b03c052"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/blueprint-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a60e1e27c06595d73e77ade05c5ca25884505fff1cf5946c52710f28c03c51b7"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/greenfield-lane-boundaries.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6ebfb056d4ff0af2c80543a558def980408328994a7f073d38f77ad88ce4d2d8"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/required-skills-validation.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8c365d7e155724366d08b75b0e48fec881f62cb6f75755eaff04dbd7779453e3"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/structural-invariants-locatability.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "933b1a5871b7e3c64eb65c12c5c63a607d8c0a04825c26dd6c8cc77453c87d70"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-authoring/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3ae473589bb230a0c14b100ee0d800df3071b29245dd9e8cbc8866367361a578"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "372125e4e4ee321559f3c50fa4e8de997d0e77d34ab780b7bc63deedd74c78e2"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "06ba016d6d21864bcea3c6a28a05350b0a74b70141587610edf5ad42576354bb"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/blueprint-v1-review-checks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "230dbf097e274d3a522ff1d5c200a5a2e6b3dedf6c2e1cbe7cfa27011a915a61"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/greenfield-fit-and-reroute.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "83c74d13275a1b35b89c8f097ef34daf7d6b6e1d24a4ece822c4838dd845a9db"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/required-skills-and-locatability-checks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d7acebef292f536a3040e3f6beb4dd24e08a7f63397356c87bb92fc3634cf785"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/review-verdict-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "115f95f580fa3be9f94b95fb336b91bdf46eb7f539a04e1ec0898729463ff4d1"
+    },
+    {
+      "path": ".codex/skills/python-blueprint-review/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-class-design/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9e285dcb1603e7315dd5f93b6c734369d43651de59be0090ea3eae0f3338938f"
+    },
+    {
+      "path": ".codex/skills/python-class-design/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "27ebd7fe22b2dd2ab24096f51312053ab59ed3599ba2beca25223d5e62d959b7"
+    },
+    {
+      "path": ".codex/skills/python-class-design/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-class-design/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-code-review/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1c80c5584415c7bc18c91741ccfeaa0b27163b334f2e846212b366a1cf7020eb"
+    },
+    {
+      "path": ".codex/skills/python-code-review/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "28d550162089602979ab8655ae1deee6f15ae106122561caaed8648d2393d504"
+    },
+    {
+      "path": ".codex/skills/python-code-review/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "edd0f0484840e88cf1ea0231a1f3eff60a51da813e0f0629cc4125bff45674ab"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/anti-patterns.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5b8313c93b44d073e9cc402404ad55b6ee9bdd65a25d486160c5d682395ebd98"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/cross-skill-signposts.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2a933f452aad98d36846bfd62402a17b72bd0b8cb05cd81cf35c76e686744d05"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/observability.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5a4eb39c335d04302ef186b6ae6404ce8adc9cae77ad9d463cadd9078a5ac516"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/test-quality.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "eab7bfc24114ce0d42744777a5a862ef67e0153a2238d90f7641ba77f567f2f4"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/tooling-detection.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "14f7095a252c6c83e5a68d8d32e7b51c13b9d392bccb68b8c184ad465de4516f"
+    },
+    {
+      "path": ".codex/skills/python-code-review/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-comprehensions/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b15ca6300af53ecfd71e56f33cd6afff121376bce9017203917b1bdb15669269"
+    },
+    {
+      "path": ".codex/skills/python-comprehensions/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e9b9c9fb053c62598caf049927ffcd67b49cb31ff7e2eb14d6ef5abb7d0e6b84"
+    },
+    {
+      "path": ".codex/skills/python-comprehensions/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b7eae6ba406d5f735df93f60a23888f940af4a798779256a2aa95c865ca84f24"
+    },
+    {
+      "path": ".codex/skills/python-comprehensions/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-comprehensions/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-context-management/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e67306a4131d8b4c1d0e8fc43a378f9a5a713fec3ea3bc10014c371ba0e57f4c"
+    },
+    {
+      "path": ".codex/skills/python-context-management/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "381f9eeec8ffb16835e6fc129eef28c44aaf9a776f4bf2fb98200f349196598c"
+    },
+    {
+      "path": ".codex/skills/python-context-management/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-context-management/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-control-flow/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dde6ac7f3ce6389102127f70f0ecf93adb59bf8b3641dab6f3e0ad448fcd4617"
+    },
+    {
+      "path": ".codex/skills/python-control-flow/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b279b568930eb73f63fbbfb10ce49f7ea78ac1fc1eb7fa58ae5d1ce50b15ab0d"
+    },
+    {
+      "path": ".codex/skills/python-control-flow/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-control-flow/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9c5a624b5081d95c38eed86b2983d77b302f3466b2305ad01ed5b6828e49c3a7"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a1871cd61081efb917ae5a8458bde52d88dceb283204d1da733243f9c9eb3335"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f3705d3a6924696d60499374356d82d57890a17f12bee9a69ec29366a593e544"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/references/construction-and-representation.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3b8be6a43ea80844614e1a6f9476d250ec15aee82298c45b7cbb1a704f3ea0d0"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/references/container-protocols.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "de1863c5ed6229051944fae4c3afe7d2fff749afa9822ce01a3455d83d446a3c"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/references/equality-hash-and-dataclass.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "92e2a8911f0dea4418a7843e4349fd4f579ab5913c1ce33d4cac62af0bba0814"
+    },
+    {
+      "path": ".codex/skills/python-data-model-methods/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-decorators/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1e74854de423c9507b0e8eafcf55c361fea9415b9d08ca6ffb0fa24be129dce2"
+    },
+    {
+      "path": ".codex/skills/python-decorators/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "26537201c1e1d23ccf5c028153491d4d4088122d307b3b3cd797d44c9d787974"
+    },
+    {
+      "path": ".codex/skills/python-decorators/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "82b03fe1e254fb7ef54f02be9f58bf45b3a72760924dadfa1c8bd3040405edc1"
+    },
+    {
+      "path": ".codex/skills/python-decorators/references/behavior-visibility.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fd0a8858008281121ad19a200a198edb53cb465dfa1a0c6c5d878cf154176201"
+    },
+    {
+      "path": ".codex/skills/python-decorators/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-decorators/references/framework-notes.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ee9114f2877e300f6d8505816d3465e4e62f6220e74103d37a6a1b0636585059"
+    },
+    {
+      "path": ".codex/skills/python-decorators/references/signature-integrity.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a4c8997e7a9163fe3a68af18e8fa366e3d106beb596b9caf106875a8cb659d57"
+    },
+    {
+      "path": ".codex/skills/python-decorators/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7b99c5854a9356d97aa8346fbd844d23857dbb03e521d8944b6e807ad31ddaf6"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0eb3986afdbe583575eeb293ba29097902344405a55b8ef1ccf293ddf7e3cfae"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7356e3b51a301d8fb143d528691db69732bf7ff7159ae660abc824561f612835"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/attribute-hooks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7abf4814910750c9badd4b8c6da26ea56aa24f5efdb2df454e879cc3f676707a"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/custom-descriptors.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ec13a679f5f3aca3e26ac9318aeafcedd34f715b7aa8d81657c3b9f11cdb9603"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/mechanism-ladder.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a1a24fd30417c5314d7e881a17c17d3abe57d7e2364d8dd90800a259e09766af"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/property-and-cached-property.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9caeee9da35bc6e9e03ccf40193b0f7cc28f0b36240ae0e55e82041b57dd12e5"
+    },
+    {
+      "path": ".codex/skills/python-descriptors-attribute-access/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-docstrings/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "361e25be3831926f2825f82c79801aac1e40666e49ba7472ff680bec4c523ea6"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3a3ae1aaa035639ec0bf4ec707d36096a50d7081d4e522b52274c96c5a825e4e"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "62972dd07884e91ff89da0ba6f44de5822b01a21e376ff842b8e43043ae34848"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/dataclass-patterns.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2610ba6e788e1f0327f6e9308c244aa47566f31de63dd23947650116b07987d2"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/error-semantics.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3628239b2ac279ee1ee12a24145d3e8c950bcf3a301b3bb8d4279317445873cc"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/google-style-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "57205cc1f354d57aee0c7ec8903966aab60a7f2c20aa6503db6234ac8112835d"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/semantic-intent.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1c76714e30f472802edac31220988a324c3b89878557126141c7679353500d51"
+    },
+    {
+      "path": ".codex/skills/python-docstrings/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-error-handling/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2259e7b1b0c8d246009e0bb3992affdac1ed997496d27cbf01cbf2ffa7862ef5"
+    },
+    {
+      "path": ".codex/skills/python-error-handling/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "737a59c7ea7113a714b75c12426c8b1e215d825b2c2cfadf5d1a495a1bf36e3d"
+    },
+    {
+      "path": ".codex/skills/python-error-handling/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-error-handling/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-generators-iterators/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a305ff6d114795ec2d2c4e8ede472d1bb5213eb76e69934cc96dab4180145dca"
+    },
+    {
+      "path": ".codex/skills/python-generators-iterators/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "84e81b4cdc4e8943c24a5972f776550bf4e308876d2e80a4be09a2110a3669c1"
+    },
+    {
+      "path": ".codex/skills/python-generators-iterators/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "aeb682c51b2743f4db505f2487ab552b092ffacbe47d4c6a132124e8341d2bc6"
+    },
+    {
+      "path": ".codex/skills/python-generators-iterators/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-generators-iterators/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "266d45b9cfb0db0590e4ec293b059132cff6783860784cad8ce2b87c5e5ed4e2"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d39dccdf4092cfbdfebebffc458cef73bbec77ee684d61ef6697681f3dae2542"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2253ab195153d9e2e80a41c7528d0021d8f108a3cc12f70ad900aafcf9c186a1"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/contract-deviation-rules.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0b97fcabbce1da541a9ba0d229194f69321102c50f28ab4b84f9613c4b68d195"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/plan-section-structure.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8e633b521adbea65524aeb7cec432c56285c77c19020b218314f66a38c5f264e"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/semantic-boundaries.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "48ec85a539fdf72d1ad5c916d65a00b35ae533f5f4fe8dcf8e19a342ea59a361"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/traceability-status.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5c4c1ee7d68e4584e64a0d5b264ef8f6728242579c20245e6bfca16448bf29fe"
+    },
+    {
+      "path": ".codex/skills/python-implementation-review/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-library-architecture/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c7fd774e6af90be1b0cd6b72ddf38862c5822889c599c1f382c241ae49ae8695"
+    },
+    {
+      "path": ".codex/skills/python-library-architecture/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a7717eb6697792c8b3619c957378200ce63c4c08bc15e2ec37ba6b2902aa3ef5"
+    },
+    {
+      "path": ".codex/skills/python-library-architecture/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6103b142156d30c073c885cb3cf7948505af7191d134497cdf7d3285ac40d30d"
+    },
+    {
+      "path": ".codex/skills/python-library-architecture/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-library-architecture/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-model-selection/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "6945228ee2d649ba37c308d998b3bd0147031801f24a5c94edbb04aab85166a2"
+    },
+    {
+      "path": ".codex/skills/python-model-selection/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "27a9d5ff48ebaa64e7592115655adae87fc6731a5e013a3fa217d9fe66c198a8"
+    },
+    {
+      "path": ".codex/skills/python-model-selection/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-model-selection/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-module-boundaries/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b12b89c6e030f2afb97c0ac35a4758d874b9175d687f9dfd17c39eabc786afdd"
+    },
+    {
+      "path": ".codex/skills/python-module-boundaries/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0fba1472c1d91209c8f1da625d0f67bfc18bcd1d6b7fd669f7ddd6186f5875d0"
+    },
+    {
+      "path": ".codex/skills/python-module-boundaries/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-module-boundaries/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-naming/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "16d7c0f66b619dec9a5630f0be4ce78605989774c6346345228f126c562c3101"
+    },
+    {
+      "path": ".codex/skills/python-naming/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b78c541c490c32d536e9c40474e73ff756169d5dd3fd83e93387fbec46ccc7fb"
+    },
+    {
+      "path": ".codex/skills/python-naming/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-naming/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4ebbbd99e0a9207b34955c1e615328916a7a46b6a5f6700302bb1cb7f5961257"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "671351e08f47830adc2a759b8523243d6b26e224b74350f756a57cfa2f10db1e"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "927e0a208189cd8256cc50a0f024f85048b7b387b09e3cb0687127ec6c739029"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/references/binary-operators.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ba0685e47e98cdc9139d80b93bca0e1ff18304706d411f47bd1012f3f3b7c5f0"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/references/comparison-and-ordering.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c143d8bd84cee7124646edefab291f60e6c986bd08b47e7fa2450e8c30a83edd"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/references/in-place-and-unary-operators.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f59157177a77333e32bee828d3261b86c1ee0e736271a4addfe3157f4815deec"
+    },
+    {
+      "path": ".codex/skills/python-operator-overloading/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-package-layout/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "69222e48127c9f1e7c35b682991dd659f68c9f887e60cb8902e96b64439d0154"
+    },
+    {
+      "path": ".codex/skills/python-package-layout/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d85b5c48214adfd5feea1b8277016bf1246be36c5c4ab56ce956e870b83a6444"
+    },
+    {
+      "path": ".codex/skills/python-package-layout/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "fb91a26c19284d165923e3b07153de1dc7fe02fdf8b3d73a3136c840b2338e95"
+    },
+    {
+      "path": ".codex/skills/python-package-layout/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-package-layout/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "cbc8901691a9445d66407745b24334204b3c0010df5b8a99fa1284fdb25632de"
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ed84756f38f0c1461edd34d22bb0470f80eebe3b16d0f2e7776d47680107dff3"
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/templates/python-plan-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "40188a6ea869158656ac922426bc95ad6664afcaad5123fb814675df24cb0406"
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/templates/spec-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "14bc52b7872d7d39967500ff68300163aac13eb59f2b3cdb3297099e49720d17"
+    },
+    {
+      "path": ".codex/skills/python-plan-authoring/templates/step-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ae95ef59b7870d54f8550038694fddc4dc34e23857f1a5969eced8ae6ff9c5f7"
+    },
+    {
+      "path": ".codex/skills/python-plan-review/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e623aa057f0466480ace06d477e7b41af04410134b4b842958894595096bb23e"
+    },
+    {
+      "path": ".codex/skills/python-plan-review/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2af43280c9d288473dc79eda5fb677a5deeb2b207df6b9c760e5bb81bf106ee3"
+    },
+    {
+      "path": ".codex/skills/python-plan-review/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ccf7f15750edb248a4e63656c38d198087e97a69f1c9eb69b21da2d8ab9aad06"
+    },
+    {
+      "path": ".codex/skills/python-plan-review/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-plan-review/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "cee7fc09648046da5cc5873233a1932a78e769eebd1035371cdc1f3114e0069e"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "178ccb75cfae995b559f90e2068180472d271ae3a8b697694858730913b38506"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d15c7db32d0a41c646123f917c1cbdb4fe5cf4a5596ac857046c421df0b12719"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/hooks-catalog.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ed0b045bbd0d8608884674eedd616cbec2502e92a8b95ab9a5d49b62043a6c2f"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/stage-matrix.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "df64d0ffcfe44d76600075f35a6d5a99a34a9a0539e56ff4620ee4e5daaa19e4"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/uv-run-format.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "330ed637b6c5bacd30dfc5ab2b91177411e18fb14341149718732a12e9a7dc2a"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/version-pinning.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c722b5b48ee64773597b02237de7a7d9f0ea143e2c4cf7a7ee9d64673cbc8877"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/scripts/apply_precommit.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7ef0f13f4d1f5c6d2598a4626780663e34e016e08b071a6033be0f0bfda5ed70"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/templates/pre-commit-config.yaml",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b25441eca0b3fcdf2afa87de9805c726df14a2916441c0856e600accb3ec2049"
+    },
+    {
+      "path": ".codex/skills/python-pre-commit/tests/test_apply_precommit.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c225dcb6ce088aa19204b6c87bb3ae48a86ece6c4d2f1885e3b558a79d8a1e5f"
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "646543cf3bbc18aa578367059daf60222f2cc449ae8e91b938e83728141a250e"
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "289fb3f72e11315bc45f682ad4a5f74a39a792a0476044f7f7674d7b57a4fa65"
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/references/baseline-generation-rules.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4410fbd792fb0b44e8da963146b1a277707db469d7c29f5c8f74086eda34ba6f"
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/references/blueprint-parsing-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "18519c3e411c52d0c18030672cd444d9878423503b89713c245f6fa03fc0fa6b"
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-project-init-greenfield/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b58faa8ef332780ff012948ecaf3aa9aef6ed97f831aa666f478ede875635682"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8c2efdc60ba148e04e5510e775bf53deea977deafee343e2c2ec8bb5ad471547"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/retrofit-conflict-resolution.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f736178ba4deea93ce1620c94af8e4e18430904b8ced83b7933468b26337cfb9"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/retrofit-plan-v2-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f079302baf9885736c9a97439d25534b9e298627208c4f05046903aa0bfc6912"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/retrofit-safety-guidelines.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "42c980dbcf76cbb85fdee683d89bd2b94cffc1e0d1eebcb8b24555358189c1f3"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/sensing-delta-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e82e16db8d06ad6900b1fb04d2e680d9f49bc7c168db6576f3d97a1b221af2c2"
+    },
+    {
+      "path": ".codex/skills/python-project-retrofit/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c81df6d5baca38976184dca9cc21b61b16503467f73d5d44e3410fb934b592eb"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "03375544760a5ad15716ba83092f54e9f874a11eb5b3cb2d12d35aa56c089250"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "9811bde13c7b439fbfe1dc8ec1ec1f9c96690e03b0972fc6b5dfa0aa7d53fec0"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8d05546610c774dd4a02e24fc5f79c7a02c9a873a284fa706bc498f0f96544b2"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/templates/toolconfig-pyright.toml.tmpl",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f1fafcc7db02bbbcaa096d8ee2779be3dae4d13e21ab2f081c7aa5ad5ad73c22"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/templates/toolconfig-pytest.toml.tmpl",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dad7ffc1d82de220052bf84f1d49bfa1d3fd87321bc24e2f1e3ce21e692ee7f3"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/templates/toolconfig-ruff.toml.tmpl",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3fc6602474757327a072d0a5efefdd03e409939c8a3aab7912f925490d9eac74"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/tests/test_existing_preserved.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a8cdeb73fbb59a5d3d4eee9b4073b40a56456b236d0d5f6f1ff1b7a7a8c77afd"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/tests/test_idempotent.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5a9658e7c7489df9321eb812864c51a8ed54fa79cb83aee0293f245ae736947a"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/tests/test_input_validation.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "0d81eb9febdf3f7bfb1a844fe42321d82fbe19a7521a0f449751157c8ffe2ab7"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/tests/test_section_detection.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e58fbeadbecb9847c41c312f1a7cd941196df7ef367e75548c35350f21ec23d5"
+    },
+    {
+      "path": ".codex/skills/python-pyproject-toolconfig/tests/test_substitution.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3c756f689b755e7b32b03c0231068a73fa92fe1c45d2b09ea4f25581e7c8df76"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ea76a0881cab39137ad63ca32062437ec46dfed5392810e7d69b92178c5ebd79"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ab6553397b478652cba0ab3d34b7d592ef886a15453e98d6b15f24405a83b159"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "db196971a5a35634be12bd578e6e23295f8c500be12643548f991e0c45b72e36"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/references/authoring-vs-executor-boundaries.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "046c85ebfe1e25329fc4e65c90d1aa04796951e2eff2118385d8d864a39c3536"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/references/migration-strategy-risk-model.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4b319dbc55ab0c8e639538d24761aabd9962f24c465bc272ca03799ba07737bc"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/references/retrofit-v2-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "65acfda390e539f622e30f60cb696efad938892a8d738b7e8091c74f5db3d8bf"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-authoring/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b2707f10fcff7fc4580da8253e45cb122b90a3e5b1e709135af71eac183779fc"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "7ba9534348813d71e85001df6fce603e43b31a4a4913abf53e2c9882690d9465"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dd695c3411ec104afe952c188b04284bae2ac93cf676fa56eb67e26fa5e5f445"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/lane-fit-and-reroute.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1604e74028e9211129566aee9e701c9d7ea5c01d51f60f1f2a3dc839de1d28f7"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/retrofit-v2-review-checks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "19bec2ecd4827551e597e9d16f7a1a9d26f19eeb473bf590253561adea86b70f"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/review-verdict-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5d47b95358605e4e48d6a04e74eee3eb50568a8f4c375d4aa3a88fa7627d7774"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/risk-boundary-and-locatability-checks.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ccde99eee0ee0d3053a7d24c004885b6c9b8501c5a3bbb0b2e87b6ddb39976f3"
+    },
+    {
+      "path": ".codex/skills/python-retrofit-plan-review/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/REVIEW.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "cb628d11b8832eed9c26a017813b7b4e5dab11007095062ac5559c3ff59b92d6"
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "58abc68524a76b780749a552264160b24b800275f3b16ea9404a7abdd8764cbd"
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b6153bcf5b63c0fd8d430413d914251fde2da46174411e9502700012b11ce1b2"
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5201bbba46f2e89cdf5ff6ac8f59ea092f1df85455bbaa7fdbe5a803c635af2c"
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-serialization-boundaries/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "48a045b138a49009adf6ceeab942d448a857278062cabc6de1594594303a3659"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "8a9b11f731b1d0ead7b59fd1bedfa5f8adfefa05733e8a79a72198613daf0a3c"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "51e598ccb3ec35ffe5db9ec527e76dced443f2f193ae022aa91efc62d09b99c1"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/references/atomic-commit-order.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "46ca6174fe4060888104b1b2d34e3895df972c1c52c606cef32213684eb3fb14"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/references/behavior-change-classifier.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "95592a384715aa35f18b57304744f52de7ae6eed70114e28a920a197b1aab038"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/references/codebase-evidence-levels.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4e6aa2ae59c51f9a87a524476bf2574701d0ab01347e8082a49c6311c1b87601"
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-tdd-test-authoring/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-testing-pytest/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "bd02e6b9a7bdcefc968d96f714d475cf144dea96b748dd65e7be4ee9d964c18d"
+    },
+    {
+      "path": ".codex/skills/python-testing-pytest/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "5b927b69fbfcefad05b8e3a30a260a6418ff3363f220b67ed814abc1a8916974"
+    },
+    {
+      "path": ".codex/skills/python-testing-pytest/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-testing-pytest/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-type-hints-strict/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "04796b79bd200f53de39a83990b520e964be40a4b886e7e9772fa6991d764c05"
+    },
+    {
+      "path": ".codex/skills/python-type-hints-strict/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c27757cb758217004cd0ac5690b25336f2e80939f5c88b5aa36be1464ecb3f7e"
+    },
+    {
+      "path": ".codex/skills/python-type-hints-strict/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f153382adbcee2a68b470fa506ce2c931b24003af3847bd111db61cffb91759e"
+    },
+    {
+      "path": ".codex/skills/python-type-hints-strict/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/python-type-hints-strict/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ce2d6af079b2ca747bf0c33e9b9fca3cae601c12835129d7da521d85410f0136"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f1af6753be4c13c52d4aa9534c80e2cb923798d8c7e02bab62cd7c9aaaf6f77b"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e013b9ecf14a057757cbd90dabab9ca2bc3977ffb8380f831fcfa818fba8f8a9"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "1a0d49e1a710898bbd8a0cabedd2b653657227479b85450772ff0e237c7b7051"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/references/handoff-routing.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "bd94cdacd8845b625e272963e9b14b9b9f27180fc5e7f0633865793d232a820f"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/references/output-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "44d98870ad998257775c3c4d4c61303c971152499adc2bdb7a47bf76aff9c788"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/references/scope-sizing.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "076083f6526cb752c3285d07a81d509ac9eae929106a3cd4be613c8e819ff269"
+    },
+    {
+      "path": ".codex/skills/scope-draft-plan/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b07f0882f447041cbcb162838bcf5089104fd0288a1f24e953866b798613b032"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c1a9c0854a0733670c8d918d08a74fac25f61d36d479b6146ddd9afd5ae2eba7"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "670a87c2fef44a62d2e763f0a86e928c098565c1f2efafcaf9f3178b3c3417d2"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/references/boundary-composition-and-abstraction.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c966fc765e5f259ed7a8fc62d05db7717181840685cb26bdb24954ff108c9486"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/references/contracts-and-state.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "b3931dd2320f334f0466946a42627aec2d890e1ee4a7c74754107a78687c34be"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/references/policy-and-failure.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "24a26afad97fe1ce1057c458c0e7d50201ca96c6f1745cd8b8ddef84f071623c"
+    },
+    {
+      "path": ".codex/skills/semantic-first-design/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "e49e2baed9da03f142129f5576a32fd5416149d2e23fb4e4f07ec8aa4951ec13"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c0f8e152b34f1c57829f11f93942632b24cef9422627bc030012684248e4bb74"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/references/env-manifest-schema.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ad2e235e4cdc6d2f2fbfa35ff35fcb124b32b36fbbfb6e878558509719aaf4c0"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/references/sense-env-cli-contract.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "920e2864ed802d23555bba4ad2dc066a4a45f23e2d323e85043fa97cd58dff66"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/scripts/sense_env.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "d8e32bcf068fe942e58d5280c4e889d0cd0ba593261f280d8d31e4d8fb74fd84"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/scripts/sense_env_runtime/__init__.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3d81e725a277cb14ae57bea809b31c6a7a353a2e1788c337d1e8718cbfe8e465"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/scripts/sense_env_runtime/contract.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2c3aa29284098df51d9bb81a3e7a2f3c5b3e3fdd638ff2f074f1e84978c51dae"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/scripts/sense_env_runtime/models.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "2d7023c1bdf6b48e67f1389f316cffa064b93e29ca32fdf977af7879b5f566e1"
+    },
+    {
+      "path": ".codex/skills/sense-env-scaffold/scripts/sense_env_runtime/runtime.py",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f2115ff95473f805f0c61059fe724fa3ef0ee200799bd78260864a846010884d"
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ff25bb4a75b3f9512e45920312b21e512ccc75b8654a0d5830c8d1868bb6e3f8"
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "a1d5164e5a69613505938ff7b6aacda640fdadfcc8f870918f158b508e475cbc"
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "35678f27aa96fc8b125900814e1c13a0306a1972eb29135c5d6a09114767ba04"
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/templates/data-ownership-map-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "eaddbcd2b0b4c969dbafe7006cd263cd0e8d600050ea96e4f618679cbb5171ae"
+    },
+    {
+      "path": ".codex/skills/spec-docs-mvp-generator/templates/spec-template.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "4c2a9ba8762fc42bef268f17f40965edff782f02553a41bf7d0f9c7086def2f0"
+    },
+    {
+      "path": ".codex/skills/step-creator/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3f51f110d9e08322655b3bd548576001826ffbdbf7eddc907b4e0f42b8bb2201"
+    },
+    {
+      "path": ".codex/skills/step-creator/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "3f4a0261ab2e0e2be5fb7d1ede11d9839e4f5d6a81d5e2991da55b483f533810"
+    },
+    {
+      "path": ".codex/skills/step-creator/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ffdc482495cf38c3c92c4ecc4ad08246deec3ada9ddace073b266f7f93d41e57"
+    },
+    {
+      "path": ".codex/skills/step-creator/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "c040de76c0033c63864e7308407a3dd9dd789f73d04d029ef6fa31767bc425e4"
+    },
+    {
+      "path": ".codex/skills/step-creator/references/agent-skill-plan-profile.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "58bf672a884b9dac604421c762391cf489947a50efa951d424901d1d17388c0c"
+    },
+    {
+      "path": ".codex/skills/step-creator/references/base-plan-profile.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "98fe43d356bc2581f0595cbc44e0a5f9daef5a7094d38e1890a5d87317c67636"
+    },
+    {
+      "path": ".codex/skills/step-creator/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/step-creator/references/python-plan-authoring-adapter.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "dd17a9e28fab8569fff332faf3f9fdfe5efab9001931b70d238d8e75116bf7a3"
+    },
+    {
+      "path": ".codex/skills/step-creator/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/step-creator/templates/shared-lifecycle-shell.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "36490834f7ef94d6593235a1e3affe72f926d02c7f3c1cbaa55799841af231e1"
+    },
+    {
+      "path": ".codex/skills/subagent-dispatch-policy/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "f7c7c89d1b534ba5f3504e051741d0adcb5b5cf8a20a4ae60d9e9da47b22c27b"
+    },
+    {
+      "path": ".codex/skills/subagent-dispatch-policy/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "824711cad6987c15811be3ce5e90d6f1af2f36c7ce9c9c7921518d2a2f470b14"
+    },
+    {
+      "path": ".codex/skills/subagent-dispatch-policy/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/subagent-dispatch-policy/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/worktree-manager/SKILL.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "eaa2843b965b30f4d3ea6cf98bdf2f9660220235fd0c94d6561159cd68d82e25"
+    },
+    {
+      "path": ".codex/skills/worktree-manager/checklist.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "cd88116a07b493566719c364297fd8cf65f84e670abfdc1ece0f527acf794262"
+    },
+    {
+      "path": ".codex/skills/worktree-manager/examples.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "018c245c0439b4f8874cf6dc5f0290e06b25783473680caf1502353cc88e04e6"
+    },
+    {
+      "path": ".codex/skills/worktree-manager/reference.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": "ff28fd2111b2d8b49fbe5f1246f60c62d67d225f87e969f62513a661b09b97c0"
+    },
+    {
+      "path": ".codex/skills/worktree-manager/references/detailed-guidance.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".codex/skills/worktree-manager/references/workflows.md",
+      "owner": "Main Agent",
+      "role": "generated projection or provenance",
+      "baseline_sha256": null
+    },
+    {
+      "path": ".github/guides/MAIN-AGENT-WORKFLOW.md",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "de2b36b6dca64753c4955587f451a146b4080bfb5854d0d5cb073ca3c97355f7"
+    },
+    {
+      "path": "AGENTS.md",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "d69e947bd80b875d3edaa5f2700a540afea8090c8a3884c89bb121f7b62170eb"
+    },
+    {
+      "path": "README.md",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "5a2659570f718843530421e7b4273968daf793581888157dea0004b8887d06ee"
+    },
+    {
+      "path": "artifacts/skills-inventory.jsonl",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "30e48f5fe56d38c8c3e5c1de98869987d17bd35777786398af70d039ed066b1d"
+    },
+    {
+      "path": "plan/agent-handoff-workflow.md",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "ece0374bf547080ada74c363102dfac6996ef0898b26f24acdf4c6ac4f4aa92e"
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/artifact-manifest.json",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/evaluate_models.py",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/findings.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/model-cases.json",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/model-results.jsonl",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/pr-body.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/skill-dispositions.json",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/skills-audit-and-progressive-disclosure.plan.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/skills-audit-and-progressive-disclosure.review-log.md",
+      "owner": "Reviewer",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/skills-audit-and-progressive-disclosure.step.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/skills-audit-and-progressive-disclosure.summary.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/skills-audit-and-progressive-disclosure/validation.md",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
+      "path": "plan/topic-plan-contract.md",
+      "owner": "Creator",
+      "role": "current governance or library index",
+      "baseline_sha256": "c051da94a11d26bca155940d8ec4b388fbe991b0391d53111b589ceab5562906"
+    },
+    {
+      "path": "skills/agent-skill-creator/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a52a72a914ac88aa589378add2462cd0a5e305455ff2533a9367d49e62a3f24d"
+    },
+    {
+      "path": "skills/agent-skill-creator/blueprint.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e5351dbac23d3241c4d5c91dfb06a40c6cededf8d34f0c919114ff5e1ed15775"
+    },
+    {
+      "path": "skills/agent-skill-creator/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b2d2f22d3a2a319e4499bb9518b89b67d279ec00fe43b942559f48dee2e9cacf"
+    },
+    {
+      "path": "skills/agent-skill-creator/folder-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6f0c3455890648fba7a6828c38ca26aa32c8046ac00883310e5f99de3ed6d760"
+    },
+    {
+      "path": "skills/agent-skill-creator/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-creator/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-reviewer/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "16acdaff6b7ed39ed15dc886c4186136ccd25c7adafc2219ea1f1d7c704dfdfc"
+    },
+    {
+      "path": "skills/agent-skill-reviewer/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "bdb14a3509cc4a45cc6551961efc3f99368ba666a4d4a784c85b5b40dca8fa0e"
+    },
+    {
+      "path": "skills/agent-skill-reviewer/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-reviewer/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-reviewer/review-checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8c18c41dcb73f501218c3fb3e7806635d49da2b2def50c3e7e653f40d2bed077"
+    },
+    {
+      "path": "skills/agent-skill-template/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cf827314e6fe0b91b4be0fa8d94605c72de621379b5b017dc5a30312198e7faf"
+    },
+    {
+      "path": "skills/agent-skill-template/folder-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6b4947bf37876f12f4289aedda6de9b2916fa19103260d59dc363105cdb9faaa"
+    },
+    {
+      "path": "skills/agent-skill-template/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "815163135ae271679b1086ff89644da1dbe68ce92f8caa2855a8dab6c84098f7"
+    },
+    {
+      "path": "skills/agent-skill-template/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-template/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/agent-skill-template/template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "903942475912eaa5de55c41eed40f5386e08fbccea3206c0a16d723cc8ccfb1e"
+    },
+    {
+      "path": "skills/boundary-outcome-design/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "fd168f4a414fa60f9136bd27a6de172f52d93b69108eff437e57ba62ad600764"
+    },
+    {
+      "path": "skills/boundary-outcome-design/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c53d276db3610f025d75e11bebf86f35b4c92e2874a606897d6524a07858825a"
+    },
+    {
+      "path": "skills/boundary-outcome-design/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "64aaf185c7d091de2a97852739ebefc64c6f5dfd4d6d17b6b51cbc59c143f575"
+    },
+    {
+      "path": "skills/boundary-outcome-design/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "fee83d5c30247126bf5be318657ff090bc2ae7c82adf48d4294ad4e9014aa359"
+    },
+    {
+      "path": "skills/boundary-outcome-design/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/boundary-outcome-design/references/layer-semantics.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f6c4af0b4a0f22d47baa986a1dca0e0bd5bcd7d60963b7dee2d9de4147c1f1df"
+    },
+    {
+      "path": "skills/boundary-outcome-design/references/persistence-and-failures.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "26d21e6e24c4931ea95334db076fd152e1811af3b976d41cbad8e5c2f4cec1ab"
+    },
+    {
+      "path": "skills/boundary-outcome-design/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/business-intent-alignment/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "aab2a40fec45cd5a5669bf915ebc59f59b94be76bdb2bab0eaf11244d72ddfa6"
+    },
+    {
+      "path": "skills/business-intent-alignment/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a754686bcab70b75db50e3c5e68ae58f00f6f2963c8d759a003b4481da147de4"
+    },
+    {
+      "path": "skills/business-intent-alignment/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b2c06a6b3960b926a42c4a40e46b4ffce8f8af6389c2f167067c75f493991f58"
+    },
+    {
+      "path": "skills/business-intent-alignment/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7b76d0849a8d3188b4f3f022c53d9d84ccbc714fe4d56808a14a58bae8eac36d"
+    },
+    {
+      "path": "skills/business-intent-alignment/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/business-intent-alignment/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/business-to-technical-translation/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6a8bc45472bee7b34f7935502421959167d88464adac574006eeda1446c47904"
+    },
+    {
+      "path": "skills/business-to-technical-translation/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c334c8be4e9bbfb26eac63fc4ab6d73f4239aee75b3eb44bef3a9898de69f8fb"
+    },
+    {
+      "path": "skills/business-to-technical-translation/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ff526bdd981396107e9a5146a38974b56a44a3d0543cf6887a83fc2de6f2681b"
+    },
+    {
+      "path": "skills/business-to-technical-translation/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "09cfb0e8e11a0f35d5eb45106b602f9f600a6f80dd9fec10953f7b7d5f22c495"
+    },
+    {
+      "path": "skills/business-to-technical-translation/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/business-to-technical-translation/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/context-package-builder/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "07c909e5460c82e58b1c79cf91c2a6bc9acc1c756fac7b2a1c09d8881601cc2a"
+    },
+    {
+      "path": "skills/context-package-builder/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "caae540ef2179a7f96f50dd2a4864f8a47299eab365981c9d21ff4bf62fac2b1"
+    },
+    {
+      "path": "skills/context-package-builder/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/context-package-builder/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/copilot-instructions-init/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "95740449d88df3ec54ad0918653ec8dab261902a94db55a663d88bf0de085932"
+    },
+    {
+      "path": "skills/copilot-instructions-init/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "089f683295cc7fce93aa2d1cb5a142ca0d8d7c498684ff76327d29e19fa02969"
+    },
+    {
+      "path": "skills/copilot-instructions-init/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ceb3dba90808362246a02103ad71b6a192fc034a60f9fc16e3a679805c5079d5"
+    },
+    {
+      "path": "skills/copilot-instructions-init/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/copilot-instructions-init/references/input-sources-and-priority.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "551a6fb901f80431140eb2f8b2e653a0d328c407d0840bc13ad02df47138e7b0"
+    },
+    {
+      "path": "skills/copilot-instructions-init/references/instruction-layering.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "bb609f2e0aba4fab7f3cbe8d5e45b9e5c05e25fdea217003e8482325fb02f331"
+    },
+    {
+      "path": "skills/copilot-instructions-init/references/merge-and-conflict-policy.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "bba503d8162fa7c48681b8b46962f5097f2b6f84dbd3c9bbdb400e6d63fea91f"
+    },
+    {
+      "path": "skills/copilot-instructions-init/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-branch-naming/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4b678f8ecf46d249fe6bed043a30ad268c6e6f4ea70b30341056329ee2ec19cf"
+    },
+    {
+      "path": "skills/git-branch-naming/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "91da11a9f3299c1ec9e4d91eb3e90eeabddbf39d36dcb04637faca87aa110d4f"
+    },
+    {
+      "path": "skills/git-branch-naming/references/conflict-and-fallbacks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "aae475257853f5788938967c3d4823afc5967f305174817bd4b805654ee2e03c"
+    },
+    {
+      "path": "skills/git-branch-naming/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-branch-naming/references/migration-playbooks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d83d1f197a0e14cdbc199f822adc773e9221cde7372109b667920bcb8fc803bc"
+    },
+    {
+      "path": "skills/git-branch-naming/references/naming-patterns.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4367f0da69c835c0ad3e7e1f6ecb30f42845d371974abda613b83aaa2e256bcf"
+    },
+    {
+      "path": "skills/git-branch-naming/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-commit-convention/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0eadca8af8488dbf3d7761e3ff0c53c0348e6c327027e82e560418e79f4f3c00"
+    },
+    {
+      "path": "skills/git-commit-convention/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a90db37c87304bab1eb73820b0245e6c7daca5cb0396b0942c9c71dc642283f4"
+    },
+    {
+      "path": "skills/git-commit-convention/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-commit-convention/references/scope-alignment.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0afe1a6f2686d8067e527732298823082b17f5fc5b663fddbf94736ae8c9db04"
+    },
+    {
+      "path": "skills/git-commit-convention/references/split-and-repair.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "448ff2d1f4aa6aa0d231d53b0fb828399890908b9ce3e9059dc464021bcccbc7"
+    },
+    {
+      "path": "skills/git-commit-convention/references/type-selection.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "06b2323d83c861c7f6f61658c77ac23b1a79fe5c786a6f78ab2d79ce9b7d15fd"
+    },
+    {
+      "path": "skills/git-commit-convention/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-post-merge-workflow/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "64d413ae6b66b19f89afb440beb382d7ea45207b16a6ac0806b9e0bbc3298d17"
+    },
+    {
+      "path": "skills/git-post-merge-workflow/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9a151281615a6fc9b5beada51325e43a9b40d2ee6a9f59e6e7914eefc6de0463"
+    },
+    {
+      "path": "skills/git-post-merge-workflow/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-post-merge-workflow/references/stop-point-2-checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "890d43ee1e144e7e06d0544b0a138559480417395fb9f576917dddb6f575a735"
+    },
+    {
+      "path": "skills/git-post-merge-workflow/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-release-management/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e341300718c9304975cee17c082a3372fc0759883f9fe2c7161c61ac80052887"
+    },
+    {
+      "path": "skills/git-release-management/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6d850191d1edd85456e5d86e4315158149edca5d50a0ae693baa807e12d6b185"
+    },
+    {
+      "path": "skills/git-release-management/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/git-release-management/references/emergency-path.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "37af256f11a0edfb281216bc7432efd8d61d885b29d1a5c9ec67f0d12ea0d436"
+    },
+    {
+      "path": "skills/git-release-management/references/gate-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "eadb7239da2752d07261a4f61c64cbfbaf426ae03057cffb64ef44e1e38fea30"
+    },
+    {
+      "path": "skills/git-release-management/references/version-bump-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "22f62a3b9a8a28d1f2186a9635b2562c3a1dface0623a6057ae4b6424efeca72"
+    },
+    {
+      "path": "skills/git-release-management/references/version-sources.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4eb3e1d7e2c85c1556359d69cfe387e9ae084bb06f4d80b461edba398840425c"
+    },
+    {
+      "path": "skills/git-release-management/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/handoff-routing-policy/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ce7db44ae107d5e9c2f186e1022e68842f5914b983d2ed2a5d1a4e49d0cd84d3"
+    },
+    {
+      "path": "skills/handoff-routing-policy/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0b63d016a997d939885f23d7bb82459da34393365f21205838275d9b2b34aa02"
+    },
+    {
+      "path": "skills/handoff-routing-policy/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/handoff-routing-policy/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-creator/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e3c4874f6e7b3f8e22f89b5f88f974b4e2c1122454721ad3a211efe8d6215e24"
+    },
+    {
+      "path": "skills/plan-creator/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "beba4040bf1ecb06ed215128069f3b13af6626991120fdd03e03462daf8c6975"
+    },
+    {
+      "path": "skills/plan-creator/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4d7a65af7452a4e39faee4eaeceda6bbd304c793d6567e90c71b762f983d472b"
+    },
+    {
+      "path": "skills/plan-creator/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a4bf0490a3950ff69cbafe93ef3531493cbef20a7668453894a238cde7a02730"
+    },
+    {
+      "path": "skills/plan-creator/references/artifact-path-rule.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2d8e5ea78e4cfc7d1edce5f026a680400434d0dd3f0fc14db362084fce06527b"
+    },
+    {
+      "path": "skills/plan-creator/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-creator/references/required-section-meaning.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f35ecc5841cd4819decaa56ff53729e4a4461a6bd9a9d82d73863394ff92bf12"
+    },
+    {
+      "path": "skills/plan-creator/references/role-boundary-rule.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "32f53403266ea7302b9ab6bacbbedee0cd3f70dffe793d75f68d1dbb73daf76a"
+    },
+    {
+      "path": "skills/plan-creator/references/stable-library-rule.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ac4aade3430c2c11107a18eabf08e26532359084b092b69a3b201667bb452eaf"
+    },
+    {
+      "path": "skills/plan-creator/references/stop-and-ask-triggers.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cd9580cc3e5c4c9ac07cb5413a4faf08dac313ed8f039ae300fbc94d2e0208cb"
+    },
+    {
+      "path": "skills/plan-creator/references/template-usage-rule.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1b7cb02ca5a5119b6cc3ba7e2e35fa39bb55fbabb8e0af653be424b1956353f1"
+    },
+    {
+      "path": "skills/plan-creator/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-creator/templates/topic-plan-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "27ee9913bdc6d6a859ed25bc380e27df5de86e2389dc1e64e3de7899d55aaff3"
+    },
+    {
+      "path": "skills/plan-reviewer/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c80b404bc3621159834873df5b8b74e2c04ce42aa20d4ad2f4e080b44335d9be"
+    },
+    {
+      "path": "skills/plan-reviewer/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "783e30bb50ec0da26d6bc75d8ea8f916a11ad80c4d68ef2bac49d97b86633d28"
+    },
+    {
+      "path": "skills/plan-reviewer/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "18a01f38957eeb03bf4fe0ee531ca6e4c5f03941d3967dfff7cfad0f7e5c6b44"
+    },
+    {
+      "path": "skills/plan-reviewer/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "dfeff4b57efad9be0adeca7d841e9a1cd3c67700658adf9a756e78c30c6d67e0"
+    },
+    {
+      "path": "skills/plan-reviewer/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-reviewer/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-step-tracker/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6cc17cfb86c30f602b30febcf2ff2e63f17d80c90702fe6eff04a7bb06e0dae1"
+    },
+    {
+      "path": "skills/plan-step-tracker/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "355485582cbce7fa8c0354bacd28e4fa95ece60a83595e98dc0d6b39d4f493b2"
+    },
+    {
+      "path": "skills/plan-step-tracker/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "594d5aacb272a09baf1f193faeb3c3314dc71da80c0e3041cb676bca9a22910f"
+    },
+    {
+      "path": "skills/plan-step-tracker/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-step-tracker/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/plan-step-tracker/scripts/step_tracker.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1f4b9d85689b6f8bbcc686b1dd38e8a3edfa1fe22219f06674adfa56836ecfd3"
+    },
+    {
+      "path": "skills/plan-step-tracker/tests/test_step_tracker.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "67d2b3c14920f64b33706649b00657c92b4f84f4b5b23d6d0e7906d231eacd0b"
+    },
+    {
+      "path": "skills/platform-projection-adapter/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0d90d7e8f9b721cf4beecbca186db27124295f5ab58fe01cfc4d4a2bdb5a8755"
+    },
+    {
+      "path": "skills/platform-projection-adapter/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2a2ffebc03ed9ca15088791e4d784bfa40efda03c9b6647f881017301ed19a11"
+    },
+    {
+      "path": "skills/platform-projection-adapter/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3cd7d4649b0574a9e82164dbfd71b40f3d275435cae352638e28fe722fad25d8"
+    },
+    {
+      "path": "skills/platform-projection-adapter/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/platform-projection-adapter/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/platform-projection-adapter/scripts/platform_projection_adapter.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b90b2e9513ad19fbae625238ee92377eef137c66cf7a1f9ef0c82563d24961a3"
+    },
+    {
+      "path": "skills/platform-projection-adapter/tests/test_platform_projection_adapter.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "59dcd263f1e431ce6a931b6ce01182e72de2f921cabffc4e60e98961b65eeb9e"
+    },
+    {
+      "path": "skills/python-api-signature/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "26de2a6497f65971818a3aaffcc6d319e7fa5459ebfda069ae34b711ba7ab8f8"
+    },
+    {
+      "path": "skills/python-api-signature/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a92a02b1088d033ea414a0a20885fbc117d2c485a9a4b468db5ae5a08861a31b"
+    },
+    {
+      "path": "skills/python-api-signature/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-api-signature/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-async-await/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0a2905b6e2d7ddecce68b2d6357ff335ac2626acad90b5063aa193bdb8616e4f"
+    },
+    {
+      "path": "skills/python-async-await/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "89cb4e06934d54d5a7e6f5a394866e9c78912ee1fcb6d0a4dbdf940309842174"
+    },
+    {
+      "path": "skills/python-async-await/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c8ca50d6d41de7124e816f775b2b3284f162dc862a74faae6c0fb4f84c515ac7"
+    },
+    {
+      "path": "skills/python-async-await/references/async-protocols.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9d41c98c6ee5ea1c8246ad6d1507f6ceba0a9d0458723dbcf6faf26e22864285"
+    },
+    {
+      "path": "skills/python-async-await/references/cancellation-and-failure.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4019daa0295a95cfb59293c9ca778de3481b47dc5561901e37a1503f0e5c98e4"
+    },
+    {
+      "path": "skills/python-async-await/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-async-await/references/structured-concurrency.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9e7d08392d6c7997bb13bb33bc512a681810e70512f6c5c6d83c68034de6ce65"
+    },
+    {
+      "path": "skills/python-async-await/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-async-planning/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d91efd1e45f6f60f0c2441e0a96171e7cff5d3fd6c0476fca9c1bd5749c970b0"
+    },
+    {
+      "path": "skills/python-async-planning/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1e46a0137c60447f60b23b07bbc6ee1efde5264f3aed77948967d66966d19c4c"
+    },
+    {
+      "path": "skills/python-async-planning/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2b88392fa75241b69b81a698361061db5290d518ed284c41c4443016bfa12bd9"
+    },
+    {
+      "path": "skills/python-async-planning/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-async-planning/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-blueprint-authoring/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "21e878517d0999ec80ee8b5299ec9adf085bdce095d91b7cc8e9907fc0bc368d"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8ba959cb6046f8462e314d5b592dae8895e7b4621a7d8fbe94387c6c0f63b3b4"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a12577ad734aa7cd7606b194c4e3d7fc3c63921f559da893d64040242b03c052"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/blueprint-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a60e1e27c06595d73e77ade05c5ca25884505fff1cf5946c52710f28c03c51b7"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/greenfield-lane-boundaries.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6ebfb056d4ff0af2c80543a558def980408328994a7f073d38f77ad88ce4d2d8"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/required-skills-validation.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8c365d7e155724366d08b75b0e48fec881f62cb6f75755eaff04dbd7779453e3"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/structural-invariants-locatability.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "933b1a5871b7e3c64eb65c12c5c63a607d8c0a04825c26dd6c8cc77453c87d70"
+    },
+    {
+      "path": "skills/python-blueprint-authoring/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-blueprint-review/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3ae473589bb230a0c14b100ee0d800df3071b29245dd9e8cbc8866367361a578"
+    },
+    {
+      "path": "skills/python-blueprint-review/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "372125e4e4ee321559f3c50fa4e8de997d0e77d34ab780b7bc63deedd74c78e2"
+    },
+    {
+      "path": "skills/python-blueprint-review/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "06ba016d6d21864bcea3c6a28a05350b0a74b70141587610edf5ad42576354bb"
+    },
+    {
+      "path": "skills/python-blueprint-review/references/blueprint-v1-review-checks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "230dbf097e274d3a522ff1d5c200a5a2e6b3dedf6c2e1cbe7cfa27011a915a61"
+    },
+    {
+      "path": "skills/python-blueprint-review/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-blueprint-review/references/greenfield-fit-and-reroute.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "83c74d13275a1b35b89c8f097ef34daf7d6b6e1d24a4ece822c4838dd845a9db"
+    },
+    {
+      "path": "skills/python-blueprint-review/references/required-skills-and-locatability-checks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d7acebef292f536a3040e3f6beb4dd24e08a7f63397356c87bb92fc3634cf785"
+    },
+    {
+      "path": "skills/python-blueprint-review/references/review-verdict-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "115f95f580fa3be9f94b95fb336b91bdf46eb7f539a04e1ec0898729463ff4d1"
+    },
+    {
+      "path": "skills/python-blueprint-review/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-class-design/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9e285dcb1603e7315dd5f93b6c734369d43651de59be0090ea3eae0f3338938f"
+    },
+    {
+      "path": "skills/python-class-design/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "27ebd7fe22b2dd2ab24096f51312053ab59ed3599ba2beca25223d5e62d959b7"
+    },
+    {
+      "path": "skills/python-class-design/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-class-design/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-code-review/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1c80c5584415c7bc18c91741ccfeaa0b27163b334f2e846212b366a1cf7020eb"
+    },
+    {
+      "path": "skills/python-code-review/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "28d550162089602979ab8655ae1deee6f15ae106122561caaed8648d2393d504"
+    },
+    {
+      "path": "skills/python-code-review/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "edd0f0484840e88cf1ea0231a1f3eff60a51da813e0f0629cc4125bff45674ab"
+    },
+    {
+      "path": "skills/python-code-review/references/anti-patterns.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5b8313c93b44d073e9cc402404ad55b6ee9bdd65a25d486160c5d682395ebd98"
+    },
+    {
+      "path": "skills/python-code-review/references/cross-skill-signposts.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2a933f452aad98d36846bfd62402a17b72bd0b8cb05cd81cf35c76e686744d05"
+    },
+    {
+      "path": "skills/python-code-review/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-code-review/references/observability.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5a4eb39c335d04302ef186b6ae6404ce8adc9cae77ad9d463cadd9078a5ac516"
+    },
+    {
+      "path": "skills/python-code-review/references/test-quality.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "eab7bfc24114ce0d42744777a5a862ef67e0153a2238d90f7641ba77f567f2f4"
+    },
+    {
+      "path": "skills/python-code-review/references/tooling-detection.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "14f7095a252c6c83e5a68d8d32e7b51c13b9d392bccb68b8c184ad465de4516f"
+    },
+    {
+      "path": "skills/python-code-review/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-comprehensions/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b15ca6300af53ecfd71e56f33cd6afff121376bce9017203917b1bdb15669269"
+    },
+    {
+      "path": "skills/python-comprehensions/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e9b9c9fb053c62598caf049927ffcd67b49cb31ff7e2eb14d6ef5abb7d0e6b84"
+    },
+    {
+      "path": "skills/python-comprehensions/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b7eae6ba406d5f735df93f60a23888f940af4a798779256a2aa95c865ca84f24"
+    },
+    {
+      "path": "skills/python-comprehensions/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-comprehensions/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-context-management/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e67306a4131d8b4c1d0e8fc43a378f9a5a713fec3ea3bc10014c371ba0e57f4c"
+    },
+    {
+      "path": "skills/python-context-management/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "381f9eeec8ffb16835e6fc129eef28c44aaf9a776f4bf2fb98200f349196598c"
+    },
+    {
+      "path": "skills/python-context-management/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-context-management/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-control-flow/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "dde6ac7f3ce6389102127f70f0ecf93adb59bf8b3641dab6f3e0ad448fcd4617"
+    },
+    {
+      "path": "skills/python-control-flow/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b279b568930eb73f63fbbfb10ce49f7ea78ac1fc1eb7fa58ae5d1ce50b15ab0d"
+    },
+    {
+      "path": "skills/python-control-flow/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-control-flow/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-data-model-methods/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9c5a624b5081d95c38eed86b2983d77b302f3466b2305ad01ed5b6828e49c3a7"
+    },
+    {
+      "path": "skills/python-data-model-methods/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a1871cd61081efb917ae5a8458bde52d88dceb283204d1da733243f9c9eb3335"
+    },
+    {
+      "path": "skills/python-data-model-methods/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f3705d3a6924696d60499374356d82d57890a17f12bee9a69ec29366a593e544"
+    },
+    {
+      "path": "skills/python-data-model-methods/references/construction-and-representation.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3b8be6a43ea80844614e1a6f9476d250ec15aee82298c45b7cbb1a704f3ea0d0"
+    },
+    {
+      "path": "skills/python-data-model-methods/references/container-protocols.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "de1863c5ed6229051944fae4c3afe7d2fff749afa9822ce01a3455d83d446a3c"
+    },
+    {
+      "path": "skills/python-data-model-methods/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-data-model-methods/references/equality-hash-and-dataclass.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "92e2a8911f0dea4418a7843e4349fd4f579ab5913c1ce33d4cac62af0bba0814"
+    },
+    {
+      "path": "skills/python-data-model-methods/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-decorators/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1e74854de423c9507b0e8eafcf55c361fea9415b9d08ca6ffb0fa24be129dce2"
+    },
+    {
+      "path": "skills/python-decorators/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "26537201c1e1d23ccf5c028153491d4d4088122d307b3b3cd797d44c9d787974"
+    },
+    {
+      "path": "skills/python-decorators/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "82b03fe1e254fb7ef54f02be9f58bf45b3a72760924dadfa1c8bd3040405edc1"
+    },
+    {
+      "path": "skills/python-decorators/references/behavior-visibility.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "fd0a8858008281121ad19a200a198edb53cb465dfa1a0c6c5d878cf154176201"
+    },
+    {
+      "path": "skills/python-decorators/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-decorators/references/framework-notes.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ee9114f2877e300f6d8505816d3465e4e62f6220e74103d37a6a1b0636585059"
+    },
+    {
+      "path": "skills/python-decorators/references/signature-integrity.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a4c8997e7a9163fe3a68af18e8fa366e3d106beb596b9caf106875a8cb659d57"
+    },
+    {
+      "path": "skills/python-decorators/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7b99c5854a9356d97aa8346fbd844d23857dbb03e521d8944b6e807ad31ddaf6"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0eb3986afdbe583575eeb293ba29097902344405a55b8ef1ccf293ddf7e3cfae"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7356e3b51a301d8fb143d528691db69732bf7ff7159ae660abc824561f612835"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/attribute-hooks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7abf4814910750c9badd4b8c6da26ea56aa24f5efdb2df454e879cc3f676707a"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/custom-descriptors.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ec13a679f5f3aca3e26ac9318aeafcedd34f715b7aa8d81657c3b9f11cdb9603"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/mechanism-ladder.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a1a24fd30417c5314d7e881a17c17d3abe57d7e2364d8dd90800a259e09766af"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/property-and-cached-property.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9caeee9da35bc6e9e03ccf40193b0f7cc28f0b36240ae0e55e82041b57dd12e5"
+    },
+    {
+      "path": "skills/python-descriptors-attribute-access/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-docstrings/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "361e25be3831926f2825f82c79801aac1e40666e49ba7472ff680bec4c523ea6"
+    },
+    {
+      "path": "skills/python-docstrings/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3a3ae1aaa035639ec0bf4ec707d36096a50d7081d4e522b52274c96c5a825e4e"
+    },
+    {
+      "path": "skills/python-docstrings/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "62972dd07884e91ff89da0ba6f44de5822b01a21e376ff842b8e43043ae34848"
+    },
+    {
+      "path": "skills/python-docstrings/references/dataclass-patterns.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2610ba6e788e1f0327f6e9308c244aa47566f31de63dd23947650116b07987d2"
+    },
+    {
+      "path": "skills/python-docstrings/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-docstrings/references/error-semantics.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3628239b2ac279ee1ee12a24145d3e8c950bcf3a301b3bb8d4279317445873cc"
+    },
+    {
+      "path": "skills/python-docstrings/references/google-style-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "57205cc1f354d57aee0c7ec8903966aab60a7f2c20aa6503db6234ac8112835d"
+    },
+    {
+      "path": "skills/python-docstrings/references/semantic-intent.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1c76714e30f472802edac31220988a324c3b89878557126141c7679353500d51"
+    },
+    {
+      "path": "skills/python-docstrings/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-error-handling/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2259e7b1b0c8d246009e0bb3992affdac1ed997496d27cbf01cbf2ffa7862ef5"
+    },
+    {
+      "path": "skills/python-error-handling/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "737a59c7ea7113a714b75c12426c8b1e215d825b2c2cfadf5d1a495a1bf36e3d"
+    },
+    {
+      "path": "skills/python-error-handling/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-error-handling/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-generators-iterators/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a305ff6d114795ec2d2c4e8ede472d1bb5213eb76e69934cc96dab4180145dca"
+    },
+    {
+      "path": "skills/python-generators-iterators/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "84e81b4cdc4e8943c24a5972f776550bf4e308876d2e80a4be09a2110a3669c1"
+    },
+    {
+      "path": "skills/python-generators-iterators/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "aeb682c51b2743f4db505f2487ab552b092ffacbe47d4c6a132124e8341d2bc6"
+    },
+    {
+      "path": "skills/python-generators-iterators/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-generators-iterators/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-implementation-review/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d3e6ac834fb87cd4c1da05d902d1f12b4d8fbc083410f2d3a449fd337314ac2f"
+    },
+    {
+      "path": "skills/python-implementation-review/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d39dccdf4092cfbdfebebffc458cef73bbec77ee684d61ef6697681f3dae2542"
+    },
+    {
+      "path": "skills/python-implementation-review/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2253ab195153d9e2e80a41c7528d0021d8f108a3cc12f70ad900aafcf9c186a1"
+    },
+    {
+      "path": "skills/python-implementation-review/references/contract-deviation-rules.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0b97fcabbce1da541a9ba0d229194f69321102c50f28ab4b84f9613c4b68d195"
+    },
+    {
+      "path": "skills/python-implementation-review/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-implementation-review/references/plan-section-structure.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8e633b521adbea65524aeb7cec432c56285c77c19020b218314f66a38c5f264e"
+    },
+    {
+      "path": "skills/python-implementation-review/references/semantic-boundaries.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "48ec85a539fdf72d1ad5c916d65a00b35ae533f5f4fe8dcf8e19a342ea59a361"
+    },
+    {
+      "path": "skills/python-implementation-review/references/traceability-status.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5c4c1ee7d68e4584e64a0d5b264ef8f6728242579c20245e6bfca16448bf29fe"
+    },
+    {
+      "path": "skills/python-implementation-review/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-library-architecture/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c7fd774e6af90be1b0cd6b72ddf38862c5822889c599c1f382c241ae49ae8695"
+    },
+    {
+      "path": "skills/python-library-architecture/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a7717eb6697792c8b3619c957378200ce63c4c08bc15e2ec37ba6b2902aa3ef5"
+    },
+    {
+      "path": "skills/python-library-architecture/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6103b142156d30c073c885cb3cf7948505af7191d134497cdf7d3285ac40d30d"
+    },
+    {
+      "path": "skills/python-library-architecture/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-library-architecture/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-model-selection/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "6945228ee2d649ba37c308d998b3bd0147031801f24a5c94edbb04aab85166a2"
+    },
+    {
+      "path": "skills/python-model-selection/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "27a9d5ff48ebaa64e7592115655adae87fc6731a5e013a3fa217d9fe66c198a8"
+    },
+    {
+      "path": "skills/python-model-selection/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-model-selection/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-module-boundaries/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b12b89c6e030f2afb97c0ac35a4758d874b9175d687f9dfd17c39eabc786afdd"
+    },
+    {
+      "path": "skills/python-module-boundaries/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0fba1472c1d91209c8f1da625d0f67bfc18bcd1d6b7fd669f7ddd6186f5875d0"
+    },
+    {
+      "path": "skills/python-module-boundaries/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-module-boundaries/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-naming/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "16d7c0f66b619dec9a5630f0be4ce78605989774c6346345228f126c562c3101"
+    },
+    {
+      "path": "skills/python-naming/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b78c541c490c32d536e9c40474e73ff756169d5dd3fd83e93387fbec46ccc7fb"
+    },
+    {
+      "path": "skills/python-naming/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-naming/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-operator-overloading/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4ebbbd99e0a9207b34955c1e615328916a7a46b6a5f6700302bb1cb7f5961257"
+    },
+    {
+      "path": "skills/python-operator-overloading/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "671351e08f47830adc2a759b8523243d6b26e224b74350f756a57cfa2f10db1e"
+    },
+    {
+      "path": "skills/python-operator-overloading/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "927e0a208189cd8256cc50a0f024f85048b7b387b09e3cb0687127ec6c739029"
+    },
+    {
+      "path": "skills/python-operator-overloading/references/binary-operators.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ba0685e47e98cdc9139d80b93bca0e1ff18304706d411f47bd1012f3f3b7c5f0"
+    },
+    {
+      "path": "skills/python-operator-overloading/references/comparison-and-ordering.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c143d8bd84cee7124646edefab291f60e6c986bd08b47e7fa2450e8c30a83edd"
+    },
+    {
+      "path": "skills/python-operator-overloading/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-operator-overloading/references/in-place-and-unary-operators.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f59157177a77333e32bee828d3261b86c1ee0e736271a4addfe3157f4815deec"
+    },
+    {
+      "path": "skills/python-operator-overloading/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-package-layout/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "69222e48127c9f1e7c35b682991dd659f68c9f887e60cb8902e96b64439d0154"
+    },
+    {
+      "path": "skills/python-package-layout/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d85b5c48214adfd5feea1b8277016bf1246be36c5c4ab56ce956e870b83a6444"
+    },
+    {
+      "path": "skills/python-package-layout/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "fb91a26c19284d165923e3b07153de1dc7fe02fdf8b3d73a3136c840b2338e95"
+    },
+    {
+      "path": "skills/python-package-layout/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-package-layout/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-plan-authoring/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cbc8901691a9445d66407745b24334204b3c0010df5b8a99fa1284fdb25632de"
+    },
+    {
+      "path": "skills/python-plan-authoring/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ed84756f38f0c1461edd34d22bb0470f80eebe3b16d0f2e7776d47680107dff3"
+    },
+    {
+      "path": "skills/python-plan-authoring/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-plan-authoring/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-plan-authoring/templates/python-plan-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "40188a6ea869158656ac922426bc95ad6664afcaad5123fb814675df24cb0406"
+    },
+    {
+      "path": "skills/python-plan-authoring/templates/spec-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "14bc52b7872d7d39967500ff68300163aac13eb59f2b3cdb3297099e49720d17"
+    },
+    {
+      "path": "skills/python-plan-authoring/templates/step-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ae95ef59b7870d54f8550038694fddc4dc34e23857f1a5969eced8ae6ff9c5f7"
+    },
+    {
+      "path": "skills/python-plan-review/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e623aa057f0466480ace06d477e7b41af04410134b4b842958894595096bb23e"
+    },
+    {
+      "path": "skills/python-plan-review/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2af43280c9d288473dc79eda5fb677a5deeb2b207df6b9c760e5bb81bf106ee3"
+    },
+    {
+      "path": "skills/python-plan-review/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ccf7f15750edb248a4e63656c38d198087e97a69f1c9eb69b21da2d8ab9aad06"
+    },
+    {
+      "path": "skills/python-plan-review/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-plan-review/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pre-commit/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cee7fc09648046da5cc5873233a1932a78e769eebd1035371cdc1f3114e0069e"
+    },
+    {
+      "path": "skills/python-pre-commit/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "178ccb75cfae995b559f90e2068180472d271ae3a8b697694858730913b38506"
+    },
+    {
+      "path": "skills/python-pre-commit/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d15c7db32d0a41c646123f917c1cbdb4fe5cf4a5596ac857046c421df0b12719"
+    },
+    {
+      "path": "skills/python-pre-commit/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pre-commit/references/hooks-catalog.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ed0b045bbd0d8608884674eedd616cbec2502e92a8b95ab9a5d49b62043a6c2f"
+    },
+    {
+      "path": "skills/python-pre-commit/references/stage-matrix.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "df64d0ffcfe44d76600075f35a6d5a99a34a9a0539e56ff4620ee4e5daaa19e4"
+    },
+    {
+      "path": "skills/python-pre-commit/references/uv-run-format.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "330ed637b6c5bacd30dfc5ab2b91177411e18fb14341149718732a12e9a7dc2a"
+    },
+    {
+      "path": "skills/python-pre-commit/references/version-pinning.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c722b5b48ee64773597b02237de7a7d9f0ea143e2c4cf7a7ee9d64673cbc8877"
+    },
+    {
+      "path": "skills/python-pre-commit/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pre-commit/scripts/apply_precommit.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7ef0f13f4d1f5c6d2598a4626780663e34e016e08b071a6033be0f0bfda5ed70"
+    },
+    {
+      "path": "skills/python-pre-commit/templates/pre-commit-config.yaml",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b25441eca0b3fcdf2afa87de9805c726df14a2916441c0856e600accb3ec2049"
+    },
+    {
+      "path": "skills/python-pre-commit/tests/test_apply_precommit.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c225dcb6ce088aa19204b6c87bb3ae48a86ece6c4d2f1885e3b558a79d8a1e5f"
+    },
+    {
+      "path": "skills/python-project-init-greenfield/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f73f49ae7cb43d09c321cf1887a00020f37f92c27bf179748aeef4a0d6db3bcb"
+    },
+    {
+      "path": "skills/python-project-init-greenfield/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "14020f3aacc5e55de2e4ec65cb1d731e02d0fafee3b0c0fe7bf8c98511340eeb"
+    },
+    {
+      "path": "skills/python-project-init-greenfield/references/baseline-generation-rules.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3f7d850777abc6f0645d6a2b6325be534edd0068e406bbf3ac9483a164d74130"
+    },
+    {
+      "path": "skills/python-project-init-greenfield/references/blueprint-parsing-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "18519c3e411c52d0c18030672cd444d9878423503b89713c245f6fa03fc0fa6b"
+    },
+    {
+      "path": "skills/python-project-init-greenfield/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-project-init-greenfield/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-project-retrofit/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9a466f75b2fde7ce426b38cfb5b150d65bf66da85fd17feb86dadc22fceda70f"
+    },
+    {
+      "path": "skills/python-project-retrofit/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ac6aadf39f2493707f9fb34491ffcf366fae19d26dc297156b31242ced68987b"
+    },
+    {
+      "path": "skills/python-project-retrofit/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-project-retrofit/references/retrofit-conflict-resolution.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f736178ba4deea93ce1620c94af8e4e18430904b8ced83b7933468b26337cfb9"
+    },
+    {
+      "path": "skills/python-project-retrofit/references/retrofit-plan-v2-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f079302baf9885736c9a97439d25534b9e298627208c4f05046903aa0bfc6912"
+    },
+    {
+      "path": "skills/python-project-retrofit/references/retrofit-safety-guidelines.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "42c980dbcf76cbb85fdee683d89bd2b94cffc1e0d1eebcb8b24555358189c1f3"
+    },
+    {
+      "path": "skills/python-project-retrofit/references/sensing-delta-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4220790612ba5589766b1e34e4d4e50710705a035425748cc2ecc841fd7d87c9"
+    },
+    {
+      "path": "skills/python-project-retrofit/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c81df6d5baca38976184dca9cc21b61b16503467f73d5d44e3410fb934b592eb"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "03375544760a5ad15716ba83092f54e9f874a11eb5b3cb2d12d35aa56c089250"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "9811bde13c7b439fbfe1dc8ec1ec1f9c96690e03b0972fc6b5dfa0aa7d53fec0"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8d05546610c774dd4a02e24fc5f79c7a02c9a873a284fa706bc498f0f96544b2"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/templates/toolconfig-pyright.toml.tmpl",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f1fafcc7db02bbbcaa096d8ee2779be3dae4d13e21ab2f081c7aa5ad5ad73c22"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/templates/toolconfig-pytest.toml.tmpl",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "dad7ffc1d82de220052bf84f1d49bfa1d3fd87321bc24e2f1e3ce21e692ee7f3"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/templates/toolconfig-ruff.toml.tmpl",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3fc6602474757327a072d0a5efefdd03e409939c8a3aab7912f925490d9eac74"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/tests/test_existing_preserved.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a8cdeb73fbb59a5d3d4eee9b4073b40a56456b236d0d5f6f1ff1b7a7a8c77afd"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/tests/test_idempotent.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5a9658e7c7489df9321eb812864c51a8ed54fa79cb83aee0293f245ae736947a"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/tests/test_input_validation.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "0d81eb9febdf3f7bfb1a844fe42321d82fbe19a7521a0f449751157c8ffe2ab7"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/tests/test_section_detection.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e58fbeadbecb9847c41c312f1a7cd941196df7ef367e75548c35350f21ec23d5"
+    },
+    {
+      "path": "skills/python-pyproject-toolconfig/tests/test_substitution.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3c756f689b755e7b32b03c0231068a73fa92fe1c45d2b09ea4f25581e7c8df76"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ea76a0881cab39137ad63ca32062437ec46dfed5392810e7d69b92178c5ebd79"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ab6553397b478652cba0ab3d34b7d592ef886a15453e98d6b15f24405a83b159"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "db196971a5a35634be12bd578e6e23295f8c500be12643548f991e0c45b72e36"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/references/authoring-vs-executor-boundaries.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "046c85ebfe1e25329fc4e65c90d1aa04796951e2eff2118385d8d864a39c3536"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/references/migration-strategy-risk-model.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4b319dbc55ab0c8e639538d24761aabd9962f24c465bc272ca03799ba07737bc"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/references/retrofit-v2-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "65acfda390e539f622e30f60cb696efad938892a8d738b7e8091c74f5db3d8bf"
+    },
+    {
+      "path": "skills/python-retrofit-plan-authoring/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b2707f10fcff7fc4580da8253e45cb122b90a3e5b1e709135af71eac183779fc"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7ba9534348813d71e85001df6fce603e43b31a4a4913abf53e2c9882690d9465"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "dd695c3411ec104afe952c188b04284bae2ac93cf676fa56eb67e26fa5e5f445"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/lane-fit-and-reroute.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1604e74028e9211129566aee9e701c9d7ea5c01d51f60f1f2a3dc839de1d28f7"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/retrofit-v2-review-checks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "19bec2ecd4827551e597e9d16f7a1a9d26f19eeb473bf590253561adea86b70f"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/review-verdict-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5d47b95358605e4e48d6a04e74eee3eb50568a8f4c375d4aa3a88fa7627d7774"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/risk-boundary-and-locatability-checks.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ccde99eee0ee0d3053a7d24c004885b6c9b8501c5a3bbb0b2e87b6ddb39976f3"
+    },
+    {
+      "path": "skills/python-retrofit-plan-review/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-serialization-boundaries/REVIEW.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cb628d11b8832eed9c26a017813b7b4e5dab11007095062ac5559c3ff59b92d6"
+    },
+    {
+      "path": "skills/python-serialization-boundaries/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "58abc68524a76b780749a552264160b24b800275f3b16ea9404a7abdd8764cbd"
+    },
+    {
+      "path": "skills/python-serialization-boundaries/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b6153bcf5b63c0fd8d430413d914251fde2da46174411e9502700012b11ce1b2"
+    },
+    {
+      "path": "skills/python-serialization-boundaries/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5201bbba46f2e89cdf5ff6ac8f59ea092f1df85455bbaa7fdbe5a803c635af2c"
+    },
+    {
+      "path": "skills/python-serialization-boundaries/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-serialization-boundaries/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "48a045b138a49009adf6ceeab942d448a857278062cabc6de1594594303a3659"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "8a9b11f731b1d0ead7b59fd1bedfa5f8adfefa05733e8a79a72198613daf0a3c"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "51e598ccb3ec35ffe5db9ec527e76dced443f2f193ae022aa91efc62d09b99c1"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/references/atomic-commit-order.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "46ca6174fe4060888104b1b2d34e3895df972c1c52c606cef32213684eb3fb14"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/references/behavior-change-classifier.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "95592a384715aa35f18b57304744f52de7ae6eed70114e28a920a197b1aab038"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/references/codebase-evidence-levels.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4e6aa2ae59c51f9a87a524476bf2574701d0ab01347e8082a49c6311c1b87601"
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-tdd-test-authoring/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-testing-pytest/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "bd02e6b9a7bdcefc968d96f714d475cf144dea96b748dd65e7be4ee9d964c18d"
+    },
+    {
+      "path": "skills/python-testing-pytest/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "5b927b69fbfcefad05b8e3a30a260a6418ff3363f220b67ed814abc1a8916974"
+    },
+    {
+      "path": "skills/python-testing-pytest/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-testing-pytest/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-type-hints-strict/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "04796b79bd200f53de39a83990b520e964be40a4b886e7e9772fa6991d764c05"
+    },
+    {
+      "path": "skills/python-type-hints-strict/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c27757cb758217004cd0ac5690b25336f2e80939f5c88b5aa36be1464ecb3f7e"
+    },
+    {
+      "path": "skills/python-type-hints-strict/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f153382adbcee2a68b470fa506ce2c931b24003af3847bd111db61cffb91759e"
+    },
+    {
+      "path": "skills/python-type-hints-strict/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/python-type-hints-strict/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/scope-draft-plan/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ce2d6af079b2ca747bf0c33e9b9fca3cae601c12835129d7da521d85410f0136"
+    },
+    {
+      "path": "skills/scope-draft-plan/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f1af6753be4c13c52d4aa9534c80e2cb923798d8c7e02bab62cd7c9aaaf6f77b"
+    },
+    {
+      "path": "skills/scope-draft-plan/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "e013b9ecf14a057757cbd90dabab9ca2bc3977ffb8380f831fcfa818fba8f8a9"
+    },
+    {
+      "path": "skills/scope-draft-plan/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1a0d49e1a710898bbd8a0cabedd2b653657227479b85450772ff0e237c7b7051"
+    },
+    {
+      "path": "skills/scope-draft-plan/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/scope-draft-plan/references/handoff-routing.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "bd94cdacd8845b625e272963e9b14b9b9f27180fc5e7f0633865793d232a820f"
+    },
+    {
+      "path": "skills/scope-draft-plan/references/output-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "44d98870ad998257775c3c4d4c61303c971152499adc2bdb7a47bf76aff9c788"
+    },
+    {
+      "path": "skills/scope-draft-plan/references/scope-sizing.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "076083f6526cb752c3285d07a81d509ac9eae929106a3cd4be613c8e819ff269"
+    },
+    {
+      "path": "skills/scope-draft-plan/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/semantic-first-design/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b07f0882f447041cbcb162838bcf5089104fd0288a1f24e953866b798613b032"
+    },
+    {
+      "path": "skills/semantic-first-design/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c1a9c0854a0733670c8d918d08a74fac25f61d36d479b6146ddd9afd5ae2eba7"
+    },
+    {
+      "path": "skills/semantic-first-design/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "670a87c2fef44a62d2e763f0a86e928c098565c1f2efafcaf9f3178b3c3417d2"
+    },
+    {
+      "path": "skills/semantic-first-design/references/boundary-composition-and-abstraction.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c966fc765e5f259ed7a8fc62d05db7717181840685cb26bdb24954ff108c9486"
+    },
+    {
+      "path": "skills/semantic-first-design/references/contracts-and-state.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "b3931dd2320f334f0466946a42627aec2d890e1ee4a7c74754107a78687c34be"
+    },
+    {
+      "path": "skills/semantic-first-design/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/semantic-first-design/references/policy-and-failure.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "24a26afad97fe1ce1057c458c0e7d50201ca96c6f1745cd8b8ddef84f071623c"
+    },
+    {
+      "path": "skills/semantic-first-design/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/sense-env-scaffold/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "907acf03db1657aa5e981a494124aa1f645b5bc49538c8d4cf1be994715bff06"
+    },
+    {
+      "path": "skills/sense-env-scaffold/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "1df865d15166630fac8c986a9e4c07a21cb1af3ad723c2665ba8de2b7e03f5c4"
+    },
+    {
+      "path": "skills/sense-env-scaffold/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/sense-env-scaffold/references/env-manifest-schema.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "601c623c2a566b1cd172d5ae5df699bbd61eb23144f6fc89f5747b82901f9307"
+    },
+    {
+      "path": "skills/sense-env-scaffold/references/sense-env-cli-contract.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "7fdb4db49b41da108cee6ed6501c410e0c9b31c16be7fbb6e46dadbaf3f26278"
+    },
+    {
+      "path": "skills/sense-env-scaffold/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/sense-env-scaffold/scripts/sense_env.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "d8e32bcf068fe942e58d5280c4e889d0cd0ba593261f280d8d31e4d8fb74fd84"
+    },
+    {
+      "path": "skills/sense-env-scaffold/scripts/sense_env_runtime/__init__.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3d81e725a277cb14ae57bea809b31c6a7a353a2e1788c337d1e8718cbfe8e465"
+    },
+    {
+      "path": "skills/sense-env-scaffold/scripts/sense_env_runtime/contract.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2c3aa29284098df51d9bb81a3e7a2f3c5b3e3fdd638ff2f074f1e84978c51dae"
+    },
+    {
+      "path": "skills/sense-env-scaffold/scripts/sense_env_runtime/models.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "2d7023c1bdf6b48e67f1389f316cffa064b93e29ca32fdf977af7879b5f566e1"
+    },
+    {
+      "path": "skills/sense-env-scaffold/scripts/sense_env_runtime/runtime.py",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f2115ff95473f805f0c61059fe724fa3ef0ee200799bd78260864a846010884d"
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ea02934aba4e3976f0360a9e5905b7904dc8dc52546ffc708eeb262a9a78d3b9"
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "a1d5164e5a69613505938ff7b6aacda640fdadfcc8f870918f158b508e475cbc"
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "35678f27aa96fc8b125900814e1c13a0306a1972eb29135c5d6a09114767ba04"
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/templates/data-ownership-map-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "eaddbcd2b0b4c969dbafe7006cd263cd0e8d600050ea96e4f618679cbb5171ae"
+    },
+    {
+      "path": "skills/spec-docs-mvp-generator/templates/spec-template.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "4c2a9ba8762fc42bef268f17f40965edff782f02553a41bf7d0f9c7086def2f0"
+    },
+    {
+      "path": "skills/step-creator/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3f51f110d9e08322655b3bd548576001826ffbdbf7eddc907b4e0f42b8bb2201"
+    },
+    {
+      "path": "skills/step-creator/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "3f4a0261ab2e0e2be5fb7d1ede11d9839e4f5d6a81d5e2991da55b483f533810"
+    },
+    {
+      "path": "skills/step-creator/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ffdc482495cf38c3c92c4ecc4ad08246deec3ada9ddace073b266f7f93d41e57"
+    },
+    {
+      "path": "skills/step-creator/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "c040de76c0033c63864e7308407a3dd9dd789f73d04d029ef6fa31767bc425e4"
+    },
+    {
+      "path": "skills/step-creator/references/agent-skill-plan-profile.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "58bf672a884b9dac604421c762391cf489947a50efa951d424901d1d17388c0c"
+    },
+    {
+      "path": "skills/step-creator/references/base-plan-profile.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "98fe43d356bc2581f0595cbc44e0a5f9daef5a7094d38e1890a5d87317c67636"
+    },
+    {
+      "path": "skills/step-creator/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/step-creator/references/python-plan-authoring-adapter.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "dd17a9e28fab8569fff332faf3f9fdfe5efab9001931b70d238d8e75116bf7a3"
+    },
+    {
+      "path": "skills/step-creator/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/step-creator/templates/shared-lifecycle-shell.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "36490834f7ef94d6593235a1e3affe72f926d02c7f3c1cbaa55799841af231e1"
+    },
+    {
+      "path": "skills/subagent-dispatch-policy/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "f7c7c89d1b534ba5f3504e051741d0adcb5b5cf8a20a4ae60d9e9da47b22c27b"
+    },
+    {
+      "path": "skills/subagent-dispatch-policy/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "824711cad6987c15811be3ce5e90d6f1af2f36c7ce9c9c7921518d2a2f470b14"
+    },
+    {
+      "path": "skills/subagent-dispatch-policy/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/subagent-dispatch-policy/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/worktree-manager/SKILL.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "eaa2843b965b30f4d3ea6cf98bdf2f9660220235fd0c94d6561159cd68d82e25"
+    },
+    {
+      "path": "skills/worktree-manager/checklist.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "cd88116a07b493566719c364297fd8cf65f84e670abfdc1ece0f527acf794262"
+    },
+    {
+      "path": "skills/worktree-manager/examples.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "018c245c0439b4f8874cf6dc5f0290e06b25783473680caf1502353cc88e04e6"
+    },
+    {
+      "path": "skills/worktree-manager/reference.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": "ff28fd2111b2d8b49fbe5f1246f60c62d67d225f87e969f62513a661b09b97c0"
+    },
+    {
+      "path": "skills/worktree-manager/references/detailed-guidance.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    },
+    {
+      "path": "skills/worktree-manager/references/workflows.md",
+      "owner": "Creator",
+      "role": "canonical skill artifact",
+      "baseline_sha256": null
+    }
+  ]
+}

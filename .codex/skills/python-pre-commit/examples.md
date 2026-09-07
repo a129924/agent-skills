@@ -87,7 +87,7 @@ repos:
 ```
 
 **Merge decision**:
-- `ruff` and `ruff-format` already present → update `rev` to the matching tag from https://github.com/astral-sh/ruff-pre-commit/releases; do not remove the existing `ruff` entry.
+- `ruff` and `ruff-format` already present → preserve the existing revision, arguments and stages. An upgrade or adding auto-fix behavior is a separate requested change.
 - `my-custom-check` is user-defined → leave untouched.
 - Missing canonical hooks → add `pre-commit-hooks` block and `pytest` (manual stage).
 
@@ -95,10 +95,9 @@ repos:
 ```yaml
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.9   # updated from ruff-pre-commit releases
+    rev: v0.9.0    # existing revision preserved
     hooks:
       - id: ruff
-        args: ["--fix"]   # added --fix per canonical spec
       - id: ruff-format
 
   - repo: https://github.com/pre-commit/pre-commit-hooks

@@ -168,12 +168,21 @@ def read_success(topic: str, plan_dir: Path = Path("plan")) -> int:
 def check_all_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int:
     """Check if all steps are complete. Exit 0 if yes, 1 if any pending."""
     try:
-        steps = parse_steps(topic, plan_dir)
-    except FileNotFoundError as e:
+        step_file = plan_dir / topic / f"{topic}.step.md"
+        if not step_file.exists():
+            raise FileNotFoundError(f"File not found: {step_file}")
+        lines = step_file.read_text(encoding="utf-8").splitlines()
+        _validate_completion_lines(lines)
+        steps = _parse_step_lines(lines)
+    except (OSError, UnicodeError, ValueError) as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
 
     pending_steps = [s for s in steps if s.status == "pending"]
+
+    if not steps:
+        print("❌ BLOCKED: No valid steps found", file=sys.stderr)
+        return 1
 
     if not pending_steps:
         total = len(steps)
@@ -187,11 +196,35 @@ def check_all_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int:
     return 1
 
 
+def _validate_completion_lines(lines: list[str], *, implementation: bool = False) -> None:
+    """Reject malformed checkbox evidence without changing read-only queries."""
+    for line in lines:
+        stripped = line.strip()
+        task_like = re.match(r"^(?:(?:[-*+]|\d+[.)])\s*)?\[", stripped)
+        list_item = re.match(r"^(?:[-*+]\s|\d+[.)]\s)", stripped)
+        if task_like or (implementation and list_item):
+            if not re.fullmatch(r"- \[[ Xx]\] \S.*", line.rstrip()):
+                raise ValueError(f"Malformed or unsupported completion step: {line}")
+
+
 def check_impl_steps_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int:
     """Check if all implementation steps are complete. Exit 0 if yes, 1 if any pending."""
     try:
-        steps = parse_impl_steps(topic, plan_dir)
-    except FileNotFoundError as e:
+        step_file = plan_dir / topic / f"{topic}.step.md"
+        lines = step_file.read_text(encoding="utf-8").splitlines()
+        headings = [i for i, line in enumerate(lines) if line.strip() == "## Implementation Steps"]
+        if len(headings) != 1:
+            raise ValueError("Expected exactly one Implementation Steps section")
+        section = []
+        for line in lines[headings[0] + 1:]:
+            if line.strip().startswith("## "):
+                break
+            section.append(line)
+        _validate_completion_lines(section, implementation=True)
+        steps = _parse_step_lines(section)
+        if not steps or any(not step.text for step in steps):
+            raise ValueError("Implementation Steps must contain non-empty checkbox steps")
+    except (OSError, UnicodeError, ValueError) as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
 

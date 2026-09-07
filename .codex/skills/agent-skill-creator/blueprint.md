@@ -7,7 +7,7 @@ Use this as the default output-facing folder shape for a `review-ready` skill.
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
-├── examples.md            # required for high-complexity or clearly higher-risk skills
+├── examples.md            # needed when high-risk branches require worked scenarios
 ├── checklist.md           # optional, useful for repeatable higher-risk validation
 ├── run-task.sh            # optional
 └── assets/                # optional
@@ -16,10 +16,8 @@ Use this as the default output-facing folder shape for a `review-ready` skill.
 - Use `reference.md` or `examples.md` as the required companion file.
 - Use `references/` only as a split-reference supplement, not as a replacement
   for the required companion file.
-- Add `references/` when one `reference.md` would exceed about 1,000 tokens or
-  more than 3 logical topics.
-- Add `examples.md` when the skill is high complexity or the `SKILL.md`
-  examples are not enough.
+- Add `references/` when one `reference.md` mixes independent topics that callers need separately.
+- Add `examples.md` when important branches or misuse need detail beyond the entrypoint.
 - Add stronger validation guidance only when the skill's risk warrants it.
 
 ## Path-role rule
@@ -187,7 +185,7 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
   focused or reduce it to a short overview while moving detailed topics into
   `references/`.
 - Put concise positive and negative examples in `SKILL.md`.
-- Add `examples.md` when the skill is high complexity or the brief examples are not enough for about 80% of routine usage.
+- Add `examples.md` when the skill has high-risk branches not explained by the brief examples.
 - Add `Validation` for medium complexity skills when ambiguity would materially change output (recommended otherwise); require it for high complexity skills.
 - Add `Failure Handling` when ambiguity would materially change output.
 - Add `Workflow State Contract` only when the skill joins multi-agent handoff.

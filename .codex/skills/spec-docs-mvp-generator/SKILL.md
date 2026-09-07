@@ -1,6 +1,6 @@
 ---
 name: spec-docs-mvp-generator
-description: Generate or backfill the minimum v1 spec document set for one explicit `spec-name` using only the local templates, while preserving existing authored content and refusing out-of-scope outputs.
+description: "Generate the v1 spec document set for one named spec from local templates, preserving existing authored content."
 complexity: medium
 use_when:
   - the caller needs the v1 starter docs for one explicit `spec-name`

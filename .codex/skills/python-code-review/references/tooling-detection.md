@@ -2,19 +2,21 @@
 
 ## Detection priority order
 
-The skill inspects project files in this order and stops at the first positive match.
-It does NOT execute any tools — it reads configuration to calibrate judgment.
+Inspect relevant sources per tool rather than stopping at the first matching file. Do not execute tools in this review.
 
-| Priority | File | What to look for |
-|---|---|---|
-| 1 | `pyproject.toml` | `[tool.mypy]`, `[tool.pyright]`, `[tool.ruff]`, `[tool.flake8]`, `[tool.pylint]` |
-| 2 | `Makefile` | Targets named `lint`, `typecheck`, `type-check`, `test`, `check` |
-| 3 | `README.md` / `CONTRIBUTING.md` | Validation commands, e.g., `ruff check .`, `mypy src/`, `pytest` |
-| 4 | Fallback | None found; apply generic Python best-practice defaults |
+| Source | Evidence |
+|---|---|
+| `pyproject.toml` | Ruff, Pyright, mypy, pytest and other configured tools |
+| Tool-specific files | `pyrightconfig.json`, `ruff.toml`, `.ruff.toml`, `mypy.ini`, `.mypy.ini`, `setup.cfg`; use the tool's actual precedence |
+| `Makefile` / CI / project docs | Selected validation commands, explicit flags and configuration paths |
+| Fallback | Only for a tool/dimension with no configuration evidence |
+
+For Pyright, `pyrightconfig.json` takes precedence over `[tool.pyright]`; follow `extends` and execution-environment overrides when relevant. Global strictness is `typeCheckingMode = "strict"` in TOML or `"typeCheckingMode": "strict"` in JSON. `strict` is an array of paths, not a boolean; apply path-specific strictness only to matching files. An explicit CLI/config selection must be accounted for. Report unresolved conflicts rather than guessing.
+Finding a linter is not evidence that the project lacks typing configuration.
 
 ## How detected tooling calibrates severity
 
-- `[tool.pyright]` with `strict = true` or `[tool.mypy]` with `strict = true`:
+- Effective Pyright strict mode for the reviewed file, or `[tool.mypy]` with `strict = true`:
   - `Any` annotations → `blocking`
   - Missing annotations on any public API → `blocking`
   - `# type: ignore` without inline comment → `blocking`

@@ -1,6 +1,6 @@
 ---
 name: sense-env-scaffold
-description: Run the sense_env.py scaffold to discover or assert facts about the repository environment. Use this when you need a structured JSON snapshot of the current environment state, or when you need to evaluate a contract's sensing assertions.
+description: "Discover repository facts as structured JSON or evaluate a contract with the sense_env.py CLI."
 complexity: medium
 risk_profile:
   - external_tooling

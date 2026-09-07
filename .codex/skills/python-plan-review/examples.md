@@ -12,7 +12,7 @@ A plan that:
 - includes the exact triggered async-planning subsections because the topic uses `AsyncSession`, `httpx.AsyncClient`, and timeout ownership
 - Non-goals has 3 explicit `will not` items
 - Implementation Steps are numbered, each naming a specific file and action
-- Test Plan names all 5 required categories plus the async validation cases
+- Test Plan names applicable categories (with justified N/A where appropriate) plus the async validation cases
 - Validation Commands list specific runnable commands
 - Risks and Rollback Plan each have at least one concrete item
 - Open Questions has no blocking entries

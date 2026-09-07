@@ -2,7 +2,7 @@
 
 | Topic | Skill |
 |---|---|
-| Verify code matches the plan — must run before `python-code-review` | `python-implementation-review` |
+| Verify code matches an approved plan — precedes quality review only in a formal workflow requiring that gate | `python-implementation-review` |
 | Deep strict-mode type-hint rules | `python-type-hints-strict` |
 | Unit test design — fixtures, parametrize, mocking | `python-testing-pytest` |
 | Exception hierarchy, translation, propagation | `python-error-handling` |

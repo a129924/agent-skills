@@ -22,14 +22,14 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
   - Error types (all documented exceptions have test cases).
   - Documented side effects or state changes (database writes, cache updates, etc.).
 
-- [ ] **5. Five test categories present**: Verify that test cases span all 5 categories:
+- [ ] **5. Applicable categories covered**: Assess each category; record a concrete N/A reason for categories with no affected behavior:
   - (1) **Happy path**: Main success scenario; behavior works as documented.
-  - (2) **Error/exception cases**: At least 2 tests for documented error conditions (ValueError, RuntimeError, custom exceptions).
+  - (2) **Error/exception cases**: Tests for the documented error conditions (ValueError, RuntimeError, custom exceptions).
   - (3) **Boundary/edge cases**: Limits, empty inputs, None, max/min values, boundary values (e.g., password exactly 8 chars).
   - (4) **State/side effects**: Tests that verify state is mutated correctly or side effects occur (database writes, file creation, cache updates).
   - (5) **Integration points**: If the code calls external services or collaborators, at least one mock/fake test to verify the contract.
 
-  Count: If fewer than 5 categories present → `needs-rework`.
+  Missing applicable behavior coverage → `needs-rework`; a justified N/A category is not a missing test.
 
 ---
 
@@ -41,7 +41,7 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
   - `xfail`: Tests are marked `@pytest.mark.xfail` (advanced; only if plan explicitly requests this).
   - `skip`: Tests are marked `@pytest.mark.skip` (rare; only if plan explicitly requests this).
 
-  If status is unset or unclear → `needs-rework`.
+  Run affected tests and record observed states. A RED assertion must demonstrate missing target behavior; import, collection, fixture and unrelated environment failures are not valid RED evidence. Green regression guards and explicitly requested skip/xfail cases need not fail. If status is unset or unclear → `needs-rework`.
 
 - [ ] **7. production_code_modified guard: FALSE**: Confirm that **NO production code has been modified**. Verification:
   - Check git status: `git diff src/` (or equivalent) should be empty or contain only test files.
@@ -101,7 +101,7 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 **Example needs-rework path:**
 - Items 1-3 ✓
 - Item 4 ✗ (public contract not covered; missing error type tests)
-- Item 5 ✗ (only 3 test categories found)
+- Item 5 ✗ (an applicable category is missing without a justification)
 - → Return `needs-rework` with issues listed
 
 **Example insufficient-context path:**

@@ -1,6 +1,6 @@
 ---
 name: python-tdd-test-authoring
-description: Create RED tests from an approved Python implementation plan before implementation begins. Use this when a plan is approved, run internal D1 classification, and produce structured verdict-driven test authoring.
+description: "Author behavior-mapped tests from an approved Python plan before production changes; verify declared initial states."
 complexity: high
 
 risk_profile:
@@ -68,7 +68,7 @@ Do not use this skill when:
 5. **Map requirements to tests**: Create `test_mapping` entries (requirement_id → test_case_name) from the active behavior contract.
 6. **Check existing tests**: Query test structure for `expected_initial_status` (pass, skip, xfail, or red).
 7. **Validate public contract coverage**: Ensure tests cover public functions, return types, error cases, and documented behavior.
-8. **Verify 5 test categories present**: Cover (1) happy path, (2) error/exception, (3) boundary/edge, (4) state/side effects, (5) integration points.
+8. **Assess category coverage**: Map relevant happy-path, error, boundary, state/side-effect and integration behavior. Record a reason for N/A categories; do not invent side effects or integration points.
 9. **Enforce production_code_modified guard**: Verify `production_code_modified: false` before proceeding.
 10. **Build output YAML**: Construct result with verdict, `d1_verdict`, test_mapping, validation checks, issues, and next_step.
 11. **Return verdict**: `red-tests-ready` (all checks pass), `needs-rework` (fixable gaps), `insufficient-context` (plan gaps), `skip_with_reason` (D1 trivial path), or `BLOCKED` (non-trivial path missing required `spec.md` and routed to `python-plan-authoring`).
@@ -96,12 +96,13 @@ Do not use this skill when:
 - D1 behavior-change classification is executed internally with structured verdict output.
 - For D1 `non-trivial`, `plan/<topic>/<topic>.spec.md` must exist.
 - Test file path is determinable from the plan (target module or package identifiable).
+- Run affected tests before production edits and record command, observed initial state and failure reason for each declared purpose. Only target-behavior failures establish RED; collection, import, fixture or unrelated environment failures do not. A declared status without observed evidence cannot satisfy `red-tests-ready`.
 
 ## Quality Checks (best effort)
 
-- Tests cover all 5 categories: happy path, error/exception, boundary/edge, state/side effects, integration points.
+- Tests cover applicable categories; N/A categories have a contract-based reason.
 - Each generated test contains at least one clear assertion.
-- Tests are genuinely RED — they fail before any production code is written (verify by running `pytest --no-header -rN <test_file>` and confirming all new tests fail).
+- Run the affected tests before production edits and compare observed results with each declared initial state. `red` must fail for the targeted missing behavior, not import, collection, fixture, or unrelated environment errors. `pass_existing` evidence stays green; explicit plan-requested `skip`/`xfail` is recorded but is not proof of a reproduced regression. A mixed suite need not have every new test fail. Keep actual commands and failure reasons.
 
 ## On Soft Fail
 
@@ -127,6 +128,8 @@ If a plan step is too vague to produce a testable assertion:
 
 ## Execution Limitation
 
+If tests cannot execute or fail only because of collection, imports, fixtures, or the environment, return `needs-rework` with the exact limitation and safe next action; do not claim `red-tests-ready`. Existing authorized local checks may be repaired and rerun without repeating the same permission request, but this does not authorize production changes or new external effects.
+
 If existing test files cannot be read (e.g., file system access error):
 - Note the limitation explicitly in the output YAML `issues` field.
 - Generate tests based on plan context only; do not fabricate assertions about existing test structure.
@@ -135,10 +138,10 @@ If existing test files cannot be read (e.g., file system access error):
 # Verification
 
 - Confirm D1 classifier decision matches verdict path (non-trivial → proceed; trivial → skip).
-- Count test functions to verify 5 categories present (happy, errors, boundary, state, integration).
+- Inspect assertions to verify relevant behavior coverage; test-function counts do not establish categories.
 - Validate test_mapping cardinality: at least one test per requirement.
 - Confirm `production_code_modified: false` in all cases.
-- Query test file for expected_initial_status and assertion count.
+- Compare declared `expected_initial_status` with observed test results and behavior assertions; counts alone are not evidence.
 
 # Red Flags
 
@@ -146,7 +149,7 @@ If existing test files cannot be read (e.g., file system access error):
 - D1 verdict is `trivial`: this is a valid skip path and must return `skip_with_reason`.
 - D1 verdict is `non-trivial` but `spec.md` is missing (BLOCKED route required).
 - Production code has been modified (hard constraint violated; abort immediately).
-- Fewer than 5 test categories found (needs-rework).
+- A relevant required behavior is untested without a justified N/A explanation (needs-rework).
 - Tests map to fewer requirements than listed in plan (incomplete coverage).
 
 # Common Rationalizations

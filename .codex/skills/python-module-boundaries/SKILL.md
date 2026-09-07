@@ -1,6 +1,6 @@
 ---
 name: python-module-boundaries
-description: Design or review regular Python package and module boundaries with explicit public surfaces, disciplined re-exports, safe imports, and clear internal-module contracts.
+description: "Design Python module boundaries, public exports, import behavior, and internal contracts."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

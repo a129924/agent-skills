@@ -40,6 +40,7 @@ Current materialization model:
 | `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` |
 | `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` |
 | `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` |
+| `boundary-outcome-design` | `skills/boundary-outcome-design/` | `materialized-copy` |
 | `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` |
 | `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` |
 | `context-package-builder` | `skills/context-package-builder/` | `materialized-copy` |
@@ -88,8 +89,10 @@ Current materialization model:
 | `python-tdd-test-authoring` | `skills/python-tdd-test-authoring/` | `materialized-copy` |
 | `python-testing-pytest` | `skills/python-testing-pytest/` | `materialized-copy` |
 | `python-type-hints-strict` | `skills/python-type-hints-strict/` | `materialized-copy` |
-| `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` |
 | `scope-draft-plan` | `skills/scope-draft-plan/` | `materialized-copy` |
+| `semantic-first-design` | `skills/semantic-first-design/` | `materialized-copy` |
+| `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` |
+| `spec-docs-mvp-generator` | `skills/spec-docs-mvp-generator/` | `materialized-copy` |
 | `step-creator` | `skills/step-creator/` | `materialized-copy` |
 | `subagent-dispatch-policy` | `skills/subagent-dispatch-policy/` | `materialized-copy` |
 | `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` |
@@ -98,22 +101,21 @@ Current materialization model:
 
 1. Make the canonical change in `skills/<skill-name>/`.
 2. Run the canonical bootstrap CLI with `--platform-root .codex`.
-3. Restore
-   `.codex/skills/platform-projection-adapter/scripts/platform_projection_adapter.py`
-   from the canonical `skills/...` copy if rematerialization concretized it.
+3. Verify the projected engine is byte-identical to canonical. The repaired renderer preserves this exception automatically; a mismatch is a failed projection, not a manual post-processing step.
 4. Update `.codex/skills/provenance.md` with the revalidated source commit and
    validation basis.
 
 ## Provenance requirement
 
 Each projected skill must be traceable to exactly one upstream source path,
-one surface mode, and one last-validated source commit. Maintain
+one surface mode, and exact source evidence: a committed source revision or an explicitly labeled working-tree snapshot with baseline commit and source tree hash. Maintain
 `.codex/skills/provenance.md` with at least:
 
 - `skill_name`
 - `upstream_path`
 - `materialization_mode`
-- `source_commit`
+- `source_commit` (or the explicitly labeled baseline of a working-tree snapshot)
+- `source_tree_hash`
 - `validation_basis`
 
 If provenance cannot be established for a projected skill, treat it as stale

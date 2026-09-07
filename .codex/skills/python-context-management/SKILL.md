@@ -1,6 +1,6 @@
 ---
 name: python-context-management
-description: Choose and design synchronous Python context managers for resource lifetime and temporary state restoration. Use this when drafting or reviewing `with` usage, `@contextmanager` versus class-based design, setup/cleanup failure handling, and ambient-state restoration.
+description: "Design synchronous with-blocks and context managers for resource cleanup or temporary state restoration."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -85,8 +85,8 @@ Before proceeding, confirm:
 
 **SOFT FAIL** — ask and wait before continuing:
 - Resource lifetime scope is unclear (cannot determine if a single `with` block covers it)
-- Whether the resource supports reuse across multiple `with` invocations is unknown
-- Whether cleanup failures should suppress, chain, or log-and-propagate is undefined
+- Required reuse conflicts with one-shot semantics and cannot be resolved from callers; otherwise default custom manager instances to one-shot
+- A required cleanup policy conflicts with the default (propagate the primary failure, never suppress by default); otherwise state and use that default
 
 **BLOCKED** — stop and redirect:
 - Resource involves `async with`, `async for`, or task cancellation → hand off to `python-async-await`

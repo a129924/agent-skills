@@ -75,6 +75,6 @@ class Money:
 
 **Boundary:** the mechanism of `@functools.total_ordering` — how it wraps
 methods, its performance characteristics, and its interaction with `__eq__` at
-the decorator level — is owned by `python-decorators`. This skill recommends
-using it as a semantic completion tool; consult `python-decorators` for decorator
+the decorator level — is outside `python-decorators`, which excludes class decorators. This skill recommends
+using it as a semantic completion tool; consult verified Python documentation for decorator
 mechanics.

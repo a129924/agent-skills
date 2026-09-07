@@ -1,6 +1,6 @@
 ---
 name: agent-skill-template
-description: Provide the canonical structure for a review-ready, portable, single-purpose Agent Skill in this repository, including complexity-gated sections and risk-based validation guidance. Use this when asked for the standard shape of a new skill or when building a new skill manually from a template.
+description: "Supply the repository scaffold when creating a new single-purpose skill manually."
 
 complexity: low
 
@@ -45,9 +45,9 @@ Do not use this skill when:
 6. Add concise positive and negative examples to `SKILL.md`.
 7. Add `reference.md` or `examples.md`.
 8. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
-9. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
+9. Split oversized reference material into `references/` when one `reference.md` mixes independent topics that callers need separately.
 10. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
-11. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+11. Add `examples.md` when the skill has high-risk branches not explained by the concise examples.
 12. Add stronger validation signals only when the skill's risk, branching, tooling, or downstream impact justifies them.
 13. If you add optional files or folders, declare each role in `Local references`.
 14. If the projected entrypoint does not yet exist, mention

@@ -1,6 +1,6 @@
 ---
 name: handoff-routing-policy
-description: Route the next allowed role after one explicit subAgent result, or stop, without encoding full workflows, registries, or runtime semantics.
+description: "Choose the next allowed role or stop after one explicit subagent result."
 complexity: medium
 ---
 

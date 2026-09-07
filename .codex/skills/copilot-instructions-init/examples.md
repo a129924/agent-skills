@@ -176,7 +176,7 @@ mlops-async/
 
 ## Implementation Rules
 - Async-first: use `httpx.AsyncClient` only; never `asyncio.to_thread`
-- Strict typing: pyright --strict; no `Any`; no `cast` without inline comment
+- Strict typing: pyright with typeCheckingMode="strict" configured; no `Any`; no `cast` without inline comment
 - No side effects at import time
 - All I/O functions must be `async def`
 - Use Pydantic v2 models for response parsing

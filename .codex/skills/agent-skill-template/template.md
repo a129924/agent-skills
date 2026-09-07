@@ -8,7 +8,7 @@ skill.
 ├── SKILL.md
 ├── reference.md            # required unless examples.md already covers local detail
 ├── references/             # optional, for split topic-specific reference files
-├── examples.md             # required for high-complexity or clearly higher-risk skills
+├── examples.md             # needed when high-risk branches require worked scenarios
 ├── checklist.md            # optional, useful for repeatable higher-risk validation
 ├── run-task.sh            # optional
 └── assets/                # optional
@@ -17,10 +17,8 @@ skill.
 - Use `reference.md` or `examples.md` as the required companion file.
 - Use `references/` only as a split-reference supplement, not as a replacement
   for the required companion file.
-- Add `references/` when one `reference.md` would exceed about 1,000 tokens or
-  more than 3 logical topics.
-- Add `examples.md` when the skill is high complexity or the `SKILL.md`
-  examples are not enough.
+- Add `references/` when one `reference.md` mixes independent topics that callers need separately.
+- Add `examples.md` when important branches or misuse need detail beyond the entrypoint.
 - Add stronger validation guidance only when the skill's risk warrants it.
 
 ## Path-role rule
@@ -162,8 +160,7 @@ Omit this section if the skill is not part of a multi-agent handoff workflow.
 - Add `checklist.md` only when the skill has repeatable review steps.
 - Keep scripts local to the skill that needs them.
 - Optional files or folders must declare their role in `Local references`.
-- Add `examples.md` when the skill is high complexity or when the concise
-  examples in `SKILL.md` are not enough.
+- Add `examples.md` when important branches or misuse need detail beyond the entrypoint.
 - Add `Validation` for medium complexity skills when ambiguity would materially
   change output; require it for high complexity skills.
 - Add `Failure Handling` when ambiguity would materially change output.

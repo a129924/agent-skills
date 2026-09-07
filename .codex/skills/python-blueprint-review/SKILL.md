@@ -1,6 +1,6 @@
 ---
 name: python-blueprint-review
-description: Review an authored greenfield `blueprint.md` contract against the locked blueprint v1 schema before `python-project-init-greenfield` execution begins.
+description: "Review a greenfield Python blueprint against its locked schema before project initialization."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

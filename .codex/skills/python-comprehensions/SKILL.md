@@ -1,6 +1,6 @@
 ---
 name: python-comprehensions
-description: Choose clear Python comprehensions and know when explicit loops or map/filter are more readable. Use this when drafting or reviewing list, dict, set comprehensions, generator expressions, and readability boundaries.
+description: "Choose comprehensions, explicit loops, or map/filter when Python collection transformation needs readability review."
 complexity: low
 risk_profile: []
 inputs:

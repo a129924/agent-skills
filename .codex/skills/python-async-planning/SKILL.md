@@ -1,6 +1,6 @@
 ---
 name: python-async-planning
-description: Freeze Python async planning decisions before implementation when a topic introduces async boundary, lifecycle, concurrency, failure, or cancellation risk.
+description: "Freeze async lifecycle, concurrency, failure, and cancellation decisions before risky Python implementation."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

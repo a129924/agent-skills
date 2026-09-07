@@ -1,7 +1,7 @@
 # Strict typing reference
 
 ## Baseline
-- Treat `pyright --strict` as the default compatibility target.
+- Treat `pyright` with `typeCheckingMode = "strict"` configured as the default compatibility target.
 - Annotate public function and method parameters and return values.
 - For Python 3.10+, use PEP 604 unions such as `User | None`; for Python 3.8/3.9 compatibility, use `Optional[User]` or `Union[...]`.
 - For Python 3.9+, use built-in generics such as `list[str]` and `dict[str, int]`; for Python 3.8 compatibility, use `List[str]` and `Dict[str, int]`.

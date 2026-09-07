@@ -32,7 +32,7 @@ Detailed examples for `python-project-init-greenfield`.
 
 ## Quality Thresholds
 - coverage: >=90
-- type_checking: pyright --strict passes
+- type_checking: pyright with typeCheckingMode="strict" configured passes
 - lint_pass: ruff check passes
 - test_pass: pytest passes
 

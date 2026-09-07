@@ -1,6 +1,6 @@
 # Reviewer checklist
 
-A skill is `approved` only if all of these are true:
+Evaluate the checks below by their severity. Approval requires no BLOCKER; WARNING and INFO do not silently become hard gates. Judge equivalent substantive guidance in routed local references as well as root headings.
 
 ## Required core
 - `SKILL.md` exists
@@ -40,12 +40,12 @@ A skill is `approved` only if all of these are true:
 - the skill includes example or reference material in the same folder
 - `SKILL.md` includes at least one concise correct example
 - `SKILL.md` includes at least one concise incorrect example
-- **each SKILL.md example is typically 10–20 lines** (code + explanation combined)
-- **Examples section in SKILL.md occupies no more than 10–15% of total SKILL.md length**
+- Examples should be only as long as needed to distinguish correct use from likely misuse; there is no line quota
+- Move substantial conditional examples to a relevant companion; do not enforce an entrypoint percentage
 
 ## Example depth
-- `examples.md` may stay optional when the concise `SKILL.md` examples already cover about 80% of routine usage
-- `examples.md` exists when the skill is high complexity
+- `examples.md` may stay optional when the concise `SKILL.md` examples already cover the main routine paths and likely misuse
+- `examples.md` exists when high-risk or branching behavior needs worked examples beyond the entrypoint
 - `examples.md` exists when the concise `SKILL.md` examples are not enough
 - detailed examples match the skill's main paths and anti-patterns
 
@@ -64,15 +64,13 @@ A skill is `approved` only if all of these are true:
 ## Reference depth
 - `reference.md` stays focused when one file is enough
 - `references/` supplements split reference detail and does not replace the required companion-file rule
-- split into `references/` when local reference detail grows beyond about 1,000 tokens
-- split into `references/` when local reference detail covers more than 3 logical topics
+- Split references when callers need distinct topics independently; length alone is not a rejection criterion
 - each split reference file is listed in `Local references` with its role
 
-## High-complexity triggers
-- code refactoring
-- branching or multi-path decisions
-- script or external-tool usage
-- higher-risk outputs or larger downstream impact
+## Complexity signals
+- Assess material branching, failure impact, reversibility, permissions, and downstream consumers together.
+- Code refactoring or use of a local script alone does not require high complexity.
+- Preserve safeguards useful to Sol and Luna as well as Astra; model capability alone is not evidence that a safety condition is redundant.
 
 ## Ownership and lifecycle
 - creator stops at `review-ready`
@@ -130,7 +128,7 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - "do everything" language
 - missing required core files
 - missing concise positive or negative examples in `SKILL.md`
-- missing `examples.md` for a high-complexity skill
+- missing worked examples needed to prevent a demonstrated high-risk misuse
 - missing stronger validation for a higher-risk or gatekeeping skill
 - scope drift into downstream regular-skill rollout when the topic plan locks a
   creator/reviewer-first phase
@@ -145,10 +143,10 @@ When the skill is intended for the stable library, review-checklist.md must veri
 - optional additions with no declared role
 - vague boundaries
 - review comments that would require inventing a different skill
-- **Examples section in SKILL.md exceeds 15% of total file length or individual examples exceed 20 lines** (signals over-documentation; defer detailed scenarios to `examples.md`)
+- Examples obscure task routing or duplicate guidance without a distinct purpose (assess substance, not length ratios)
 - YAML contradicts body sections
 - `Validation` present for a medium or high complexity skill but defines no SOFT FAIL or BLOCKED conditions
-- high complexity skill missing `Validation` entirely, or medium complexity skill missing `Validation` when ambiguity would materially change output
+- missing substantive validation (including a directly routed local equivalent) when actual risk requires it
 - `Workflow State Contract` present but missing `status` field
 - hard-stop `FAIL → stop` design in Validation for a recoverable gap
 
@@ -162,19 +160,16 @@ medium:
 - `Failure Handling` present if ambiguity would materially change output
 
 high:
-- `Validation` present and defines both Required and Quality Checks tiers
-- `Failure Handling` present with all three categories (Missing Context,
-  Ambiguous Requirement, Execution Limitation)
-- `Workflow State Contract` present if skill participates in multi-agent handoff
+- Validation defines substantive completion, required correctness checks and optional quality checks; equivalent directly routed content counts
+- Failure handling covers missing context, material ambiguity, and execution limitations; exact subheading spelling is not a gate
+- Handoff state, result and next action are explicit when participating in multi-agent handoff; a separate heading is optional
 
 ## Complexity and risk profile review
 
 - confirm `complexity` field exists in YAML frontmatter
 - confirm `complexity` matches the skill's actual workflow risk, branching, and
   downstream impact
-- escalate `low → medium` if the skill has multi-step outputs or downstream dependencies
-- escalate `medium → high` if the skill modifies code, creates plans used by
-  other agents, or participates in multi-agent handoff
+- Escalate complexity only when actual branching, failure impact, permissions, or downstream contract risk warrants it. Multiple steps, a local code edit, or a handoff alone is not an automatic high-complexity trigger
 - confirm `risk_profile` tags match actual skill behavior when present
 - escalate `complexity` when `risk_profile` tags understate actual behavior
 - do not approve a skill if required sections are missing after complexity escalation
@@ -183,19 +178,21 @@ high:
 
 BLOCKER — must fix before approved:
 - missing required core files
-- missing `Validation` for a high complexity skill
+- missing substantive completion criteria or validation for a high-risk skill, including a directly routed local equivalent
+- missing failure handling that leaves a material risk unresolved
+- missing required handoff status/next action when another agent consumes the result
 - YAML contradicts body
 - `Validation` present but has no SOFT FAIL or BLOCKED conditions
 - hard-stop `FAIL → stop` design for a recoverable gap
 
 WARNING — approved with notes:
-- `Validation` missing Quality Checks tier for medium or high complexity skill
-- `Failure Handling` missing one of the three required categories
+- A separate Quality Checks heading is absent but required correctness checks are present
+- A Failure Handling category heading is absent but equivalent safe handling is explicit elsewhere
 - YAML advisory fields missing but body is complete
 - `risk_profile` absent for a medium or high complexity skill
 
 INFO — optional improvement:
-- `Workflow State Contract` absent for high complexity skill that participates in handoff
+- Optional workflow-state heading absent when the required handoff state is already explicit elsewhere
 - `complexity` field absent on legacy skill not currently under edit
 
 ## Verdict rules

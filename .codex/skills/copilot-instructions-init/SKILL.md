@@ -1,6 +1,6 @@
 ---
 name: copilot-instructions-init
-description: Generate or refresh a target project's `.github/copilot-instructions.md` from current sensed facts, installed skills, and plan contracts, with hard stops for stale facts, missing facts, and materially different existing instructions.
+description: "Create or refresh a project's Copilot instructions from current repository facts and declared contracts."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

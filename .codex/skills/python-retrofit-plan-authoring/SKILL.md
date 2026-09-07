@@ -1,6 +1,6 @@
 ---
 name: python-retrofit-plan-authoring
-description: Author a review-ready Retrofit V2 `retrofit-plan.md` for an existing Python repository, with locked section order, machine-readable migration risk metadata, and strict separation between planning strategy and runtime gate decisions.
+description: "Author a Retrofit V2 migration contract for an existing Python repository; do not execute it."
 complexity: high
 
 risk_profile:

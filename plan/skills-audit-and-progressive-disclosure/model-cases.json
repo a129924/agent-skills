@@ -1,0 +1,91 @@
+{
+  "baseline": "c96eeb8b886d5e7885effbf2d56c7b9e337def8a",
+  "models": [
+    "gpt-6-astra",
+    "gpt-5.6-sol",
+    "gpt-5.6-luna"
+  ],
+  "reasoning_effort": "medium",
+  "planned_runs": 72,
+  "actual_runs": 78,
+  "authorization_status": "explicit_user_authorization_received_2026-09-07",
+  "limitations": [
+    "decision probes, not full tool-using workflow tests",
+    "selected-family references are preloaded, so on-demand retrieval savings are not measured",
+    "no latency or comparative token-efficiency claim"
+  ],
+  "cases": [
+    {
+      "id": "typo",
+      "skill": "python-plan-authoring",
+      "request": "Correct a spelling error in a Python comment in one file. No behavior changes.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "standalone-review",
+      "skill": "python-code-review",
+      "request": "Review the supplied Python diff for quality only. There is no approved implementation plan and no formal workflow handoff. The diff adds fully annotated def square(x: int) -> int: return x * x, with parametrized return-value tests.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "workflow-approval",
+      "skill": "python-implementation-review",
+      "request": "Perform the formal implementation-against-plan gate. Code exists, but the required approved plan cannot be supplied or verified.",
+      "expected_action": "block"
+    },
+    {
+      "id": "discoverable-facts",
+      "skill": "python-pyproject-toolconfig",
+      "request": "Append missing tool sections. Project configuration explicitly targets Python 3.12; src/acme is the sole import package. Existing pyproject.toml parses. The user has not repeated those values in chat.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "context-default",
+      "skill": "python-context-management",
+      "request": "Replace manual open/try/finally/close with an equivalent one-block file read. Existing code propagates read errors; callers never reuse the handle. Python 3.12. No custom error hierarchy is requested.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "decorator-order",
+      "skill": "python-decorators",
+      "request": "Add authentication and caching wrappers to an endpoint. It is unresolved whether cached responses may be returned before authentication or whether identity affects the cache key. Existing callers do not resolve this policy.",
+      "expected_action": "ask"
+    },
+    {
+      "id": "changed-intent",
+      "skill": "plan-creator",
+      "request": "The recorded analysis says CSV output. The user now explicitly says replace CSV output with JSON, retain all other scope, and synchronize the affected analysis and plan. No release is requested; paths and scope are otherwise fixed.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "draft-pr",
+      "skill": "git-release-management",
+      "request": "Open a draft PR for an authorized committed documentation-only change in a non-Python repository. Local applicable checks pass. CI starts on PR creation and human review will follow. Branch/base and push authority are explicit. No merge or release requested.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "amend-message",
+      "skill": "git-commit-convention",
+      "request": "Draft a corrected subject for the latest identified unpushed commit. No staged changes. The diff and intended meaning are known; only recommend the message-only amend, do not execute it.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "routing-gap",
+      "skill": "semantic-first-design",
+      "request": "Explain a retry-and-logging policy decision. python-error-handling explicitly excludes retry orchestration and logging policy. No dedicated owner skill exists. Applicable project policy permits bounded retries for idempotent operations and prohibits secrets in logs.",
+      "expected_action": "proceed"
+    },
+    {
+      "id": "invalid-step-gate",
+      "skill": "python-implementation-review",
+      "request": "Run formal implementation review. Plan approval and diff exist. The topic step file exists but contains only ## Workflow Stages and no ## Implementation Steps. A grep for pending implementation tasks returns no matches.",
+      "expected_action": "block"
+    },
+    {
+      "id": "pii-log",
+      "skill": "python-code-review",
+      "request": "Review for quality in a correctly sequenced formal workflow. The project's explicit no-PII logging rule applies. The implementation logs logger.info('created', extra={'email': email}) where email is a customer address. Decide whether approval can proceed.",
+      "expected_action": "block"
+    }
+  ]
+}

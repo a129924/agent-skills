@@ -1,6 +1,6 @@
 ---
 name: python-data-model-methods
-description: Choose clear Python data-model methods. Use this when deciding whether an ordinary class should define foundational dunder methods, expose base container protocols, or rely on dataclass-generated behavior.
+description: "Choose Python foundational dunder methods and container protocols; distinguish dataclass-generated behavior."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

@@ -1,6 +1,6 @@
 ---
 name: python-serialization-boundaries
-description: Design or review Python serialization boundaries as semantic translation gates for API, database, and message payloads.
+description: "Review Python API, database, or message serialization as explicit semantic translation."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
