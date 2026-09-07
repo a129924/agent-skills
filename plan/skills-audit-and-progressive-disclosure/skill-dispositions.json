@@ -229,7 +229,7 @@
   {
     "skill": "git-release-management",
     "before_entry_sha256": "e341300718c9304975cee17c082a3372fc0759883f9fe2c7161c61ac80052887",
-    "after_entry_sha256": "6ae6d550037ffc5ecd437aa0aba346cdbe9bdfffafca9de7808564659294d380",
+    "after_entry_sha256": "1055b32c3e78f0c3da8f4d976d81d09e969018aa78b5906b199faa8b0db441e0",
     "before_lines": 171,
     "after_lines": 100,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -243,7 +243,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "491508e9f1f041223014d4f49b95c13fffbadc3e98d012bae20781ae24a33fa1",
+    "source_tree_hash": "7717184fea022579f1bbf6e2cbbc27d89a7a031390d19dc956e4323fc1988ffb",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -327,7 +327,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "6a1887e29ea84bed9d0f473ba7416c26f1b939a0c0a76224f2824d4c08ae3894",
+    "source_tree_hash": "107e9542421cd068007cb4d045c72627c9be68c35db73e3e82957eba546fb0d3",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -1033,7 +1033,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "4d11a066fd207789ea650bc87667f4c3793a40b04b54b8d4962f82f6ea1b61ab",
+    "source_tree_hash": "0ef0c446fe2190b89b639fe8cbd6a08ddba06127b6a74dac952eaab821f57d01",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

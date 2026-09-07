@@ -65,7 +65,7 @@ def parse_impl_steps(topic: str, plan_dir: Path = Path("plan")) -> list[Step]:
     impl_lines: list[str] = []
     in_impl_section = False
 
-    for line in lines:
+    for line in _without_fenced_code(lines):
         stripped = line.strip()
         if stripped == "## Implementation Steps":
             in_impl_section = True
@@ -78,6 +78,26 @@ def parse_impl_steps(topic: str, plan_dir: Path = Path("plan")) -> list[Step]:
             impl_lines.append(line)
 
     return _parse_step_lines(impl_lines)
+
+
+def _without_fenced_code(lines: list[str]) -> list[str]:
+    """Exclude fenced-code examples from Markdown structure checks."""
+    visible: list[str] = []
+    fence: tuple[str, int] | None = None
+
+    for line in lines:
+        marker = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if marker:
+            token = marker.group(1)
+            if fence is None:
+                fence = (token[0], len(token))
+            elif token[0] == fence[0] and len(token) >= fence[1]:
+                fence = None
+            continue
+        if fence is None:
+            visible.append(line)
+
+    return visible
 
 
 def _parse_step_lines(lines: list[str]) -> list[Step]:
@@ -171,7 +191,7 @@ def check_all_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int:
         step_file = plan_dir / topic / f"{topic}.step.md"
         if not step_file.exists():
             raise FileNotFoundError(f"File not found: {step_file}")
-        lines = step_file.read_text(encoding="utf-8").splitlines()
+        lines = _without_fenced_code(step_file.read_text(encoding="utf-8").splitlines())
         _validate_completion_lines(lines)
         steps = _parse_step_lines(lines)
     except (OSError, UnicodeError, ValueError) as e:
@@ -220,7 +240,7 @@ def check_impl_steps_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int
         step_file = plan_dir / topic / f"{topic}.step.md"
         if not step_file.exists():
             raise FileNotFoundError(f"File not found: {step_file}")
-        lines = step_file.read_text(encoding="utf-8").splitlines()
+        lines = _without_fenced_code(step_file.read_text(encoding="utf-8").splitlines())
         headings = [i for i, line in enumerate(lines) if line.strip() == "## Implementation Steps"]
         if len(headings) != 1:
             raise ValueError("Expected exactly one Implementation Steps section")

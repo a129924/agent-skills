@@ -29,18 +29,19 @@ companion copies were retained because they support independent installation.
 
 ## Verified
 
-103 canonical tests and 72 projected runtime tests pass. Three bounded independent
+105 canonical tests and 73 projected runtime tests pass. Three bounded independent
 review slices returned approved after corrections. Actual projected CLI rerun:
 287 noop, zero changes/conflicts. Frontmatter, references, hashes, manifest bounds
 and whitespace checked; see validation.md and the review log for exact limits.
 
-All 72 original model observations, 6 affected-case reruns, and a complete 36-record
-final-catalog after rerun completed. Latest action-label agreement before → after:
-Astra 8/12 → 12/12, Sol 8/12 → 12/12, Luna 7/12 → 11/12. Luna's one latest
-mismatch asks for execution authorization in the read-only `discoverable-facts`
-probe; the unmodified raw result is preserved. Label agreement is not end-to-end
-success. Preloaded references and single observations do not establish retrieval
-efficiency, speed or general reliability.
+All 72 original model observations, 6 affected-case reruns, a complete 36-record
+final-catalog after rerun, and 3 current selected-family reruns completed. Latest
+action-label agreement before → after: Astra 8/12 → 12/12, Sol 8/12 → 12/12,
+Luna 7/12 → 11/12. Luna's one latest mismatch asks for execution authorization
+in the read-only `discoverable-facts` probe; the unmodified raw result is
+preserved. Label agreement is not end-to-end success. Preloaded references and
+single observations do not establish retrieval efficiency, speed or general
+reliability.
 
 ## Recovery and location
 

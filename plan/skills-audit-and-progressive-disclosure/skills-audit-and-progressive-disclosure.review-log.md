@@ -128,6 +128,18 @@ result asks for execution authorization despite the probe's read-only decision
 constraint; it remains an observed mismatch, not a rewritten result. This
 post-acceptance evidence refresh does not claim a new independent acceptance.
 
+## PR review Round 6 evidence refresh
+
+Four direct repairs were committed as `0e9facb`: a resolved-path boundary for
+the evaluator, fenced-code exclusion in the Implementation Steps scanner,
+complete successful TDD example mappings, and a documentation-sync merge gate.
+Canonical and projected suites passed 105 and 73 tests. The release-skill body
+changed the selected-family prompt for `draft-pr`, so Astra, Sol, and Luna were
+rerun for that case only; all 36 latest after prompt hashes now match the current
+tree. The retained raw total is 117. The latest action-label counts remain Astra
+12/12, Sol 12/12, Luna 11/12; the existing Luna mismatch remains unmodified.
+This post-acceptance evidence refresh does not claim a new independent acceptance.
+
 Canonical runtime and instruction topics were committed separately. Provenance
 now points to actual canonical source commit e635f127dd861a02be3c4139401457ec29f41890,
 with final exact source hashes. Publishing/evidence metadata does not change the

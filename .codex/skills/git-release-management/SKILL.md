@@ -56,7 +56,7 @@ Do not use this skill when:
 # Process
 1. Select the requested endpoint before applying gates:
    - Draft PR: verify authorized branch/base, intended committed diff, relevant local checks, and honest disclosure of pending checks/review. CI or human approval that the PR will request is not a creation prerequisite. Stop at human review; never infer merge or tag permission.
-   - Merge readiness: require the repository's applicable review, CI, test, lint and typing gates; report absent evidence as `merge readiness unconfirmed`, and `ready to merge` only when all applicable evidence passes. Tag uniqueness and version-to-tag agreement apply only when this is also a release.
+   - Merge readiness: require the repository's applicable review, CI, test, lint and typing gates, plus relevant documentation sync when public APIs or documented contracts change; report absent evidence as `merge readiness unconfirmed`, and `ready to merge` only when all applicable evidence passes. Tag uniqueness and version-to-tag agreement apply only when this is also a release.
    - Release/tag: follow the normal or explicit emergency path in `references/detailed-guidance.md`. That release-specific procedure, validation and failure handling apply to this endpoint, not ordinary draft creation.
 2. For draft PR or merge assessment, use the endpoint checks above and report the remaining gates.
 3. For release/tag, read `references/detailed-guidance.md` for version synchronization, normal/emergency gates, tagging safety, and failure recovery before proceeding.
@@ -75,7 +75,7 @@ Do not use this skill when:
 
 # Validation
 - Draft PR is complete when the intended committed diff is published to the correct base as a draft and pending checks/review are disclosed. An existing draft is reused, not duplicated.
-- Merge readiness requires actual applicable repository gate evidence; this skill does not authorize merging.
+- Merge readiness requires actual applicable repository gate evidence, including documentation sync when public APIs or documented contracts change; this skill does not authorize merging.
 - For release/tag validation and repair, read `references/detailed-guidance.md` before any tagging decision.
 
 # Failure Handling

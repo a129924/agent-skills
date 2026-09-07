@@ -121,3 +121,14 @@ merge/release.
 - [X] Commit canonical repair `9fd151d`, regenerate four affected Codex
   projections and inventory/provenance evidence, validate, push, then resolve
   only the four addressed Round 5 threads after GitHub reports the pushed head.
+
+## PR Comment Review / Fix — Round 6
+
+- [X] Fetch the current PR review state and triage four current, unresolved
+  direct-apply findings; retain earlier resolved threads as history.
+- [X] Confine evaluator Markdown reads to canonical Skills, ignore fenced-code
+  headings in the implementation gate, complete the TDD example evidence, and
+  require applicable documentation sync for merge readiness.
+- [X] Commit canonical repair `0e9facb`, regenerate four affected Codex
+  projections and inventory/provenance evidence, validate, push, then resolve
+  only the four addressed Round 6 threads after GitHub reports the pushed head.

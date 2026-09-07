@@ -4,8 +4,8 @@
 
 | Check | Observed result |
 | --- | --- |
-| Canonical inventory, projection, tracker, pre-commit, toolconfig and evaluator suites | 103 passed |
-| Generated Codex projection and tracker suites | 72 passed |
+| Canonical inventory, projection, tracker, pre-commit, toolconfig and evaluator suites | 105 passed |
+| Generated Codex projection and tracker suites | 73 passed |
 | Independent runtime checks | 64 suite tests plus 24 malformed-input probes passed |
 | Generated-engine subprocess CLI auto-root | Passed; independently reviewed |
 | Actual projected CLI dry-run against `.codex` | 287 noop, 0 create, 0 update, 0 conflicts; exit 0 |
@@ -91,10 +91,13 @@ whitespace check removed a trailing blank line in that reference; repeated the
 same three cases to match final content hashes. A later PR review identified
 four changed discovery descriptions, so the prior after snapshot no longer
 matched the final catalog. After canonical commit `9fd151d`, the complete
-12-case × 3-model after suite was rerun. All 114 raw records are retained:
-36 before, 36 initial after, 6 affected-case reruns, and 36 final-catalog reruns.
-All 36 latest after records were observed with no unexpected tool event; their
-prompt hashes match the current canonical catalog and selected-family Markdown.
+12-case × 3-model after suite was rerun. A later `git-release-management` body
+repair changed only the selected-family Markdown for the `draft-pr` case, so its
+three model records were rerun. All 117 raw records are retained: 36 before,
+36 initial after, 6 affected-case reruns, 36 final-catalog reruns, and 3 current
+selected-family reruns. All 36 latest after records were observed with no
+unexpected tool event; their prompt hashes match the current canonical catalog
+and selected-family Markdown.
 
 | Model (medium effort) | Before action matches | Latest final-catalog after action matches |
 | --- | --- | --- |
@@ -252,3 +255,24 @@ projected CLI dry run reported 287 noop with zero create, update, or conflict.
 The recalculated boundary is 222 changed paths in the 829-entry manifest. The
 GitHub resolution state is recorded after this evidence commit is published. No
 CI, merge, release, or human approval is claimed here.
+
+## PR comment-fix verification — Round 6
+
+Four current, unresolved threads were classified as direct, bounded repairs:
+the evaluator could follow a Markdown symlink outside canonical Skills; fenced
+Markdown examples could be miscounted as a second Implementation Steps section;
+a TDD success example omitted two declared test records; and merge readiness
+did not explicitly require applicable documentation sync. Canonical commit
+`0e9facb` confines evaluator reads to resolved paths within `skills/`, adds the
+symlink regression, excludes fenced code from step structure checks, completes
+the two test-mapping records, and adds the merge documentation gate. The
+projection preview identified exactly four managed outputs; regeneration rebuilt
+inventory and the three changed provenance/disposition hashes. Full canonical
+tests passed 105; projected runtime suites passed 73; the observer gate reported
+13 complete steps; and the final projected CLI dry run reported 287 noop with
+zero create, update, or conflict. The release body changed only `draft-pr`'s
+selected-family prompt, so its three Astra/Sol/Luna records were rerun; all 36
+latest after prompt hashes now match the current tree, with the retained Luna
+action mismatch documented above. The GitHub resolution state is recorded after
+this evidence commit is published. No CI, merge, release, or human approval is
+claimed here.
