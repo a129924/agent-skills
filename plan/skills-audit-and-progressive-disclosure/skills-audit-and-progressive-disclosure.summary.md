@@ -1,7 +1,9 @@
 # Skills audit implementation handoff
 
-Status: publish-in-progress. Implementation, model comparison, final independent
-acceptance and planner alignment complete; topic commits/push/draft PR are next.
+Status: pr-open — completed through draft publication and human-review handoff.
+PR: https://github.com/a129924/agent-skills/pull/126
+Verified OPEN, draft, base dev and the intended feature head. Human review is not
+complete; merge/release remain unauthorized.
 
 ## Changed
 
@@ -47,17 +49,32 @@ efficiency, speed or general reliability. All raw observations are preserved.
 - Backup SHA-256: `1cf14fc04c71f7caf222d06ddf02c5bbe199dc0af0cd618ba881c3cb037de0e2`
 - Backup integrity: 580 baseline manifest files verified; no source file deleted.
 
-Original `dev` checkout is clean. Changes remain uncommitted in the feature
-worktree; keep that worktree and archive. Do not restore over it wholesale.
+Original `dev` checkout remains unchanged. The implementation is committed and
+pushed in three topics: runtime fixes (8a7f221), canonical instructions (e635f12),
+and projection/evaluation evidence (8e2f67d). A final documentation-only handoff
+commit records the actual PR state. Keep the feature worktree and archive for
+review and recovery; do not restore over the worktree wholesale.
 
-## Remaining / resume condition
+## Not completed / required follow-up
 
 User explicitly authorized transmitting evaluation-required Skills content,
 including unpublished edits, to Codex Astra / Sol / Luna on 2026-09-07. Auto-review
-accepted the subsequent before/after evaluation commands. Evaluation and reason
-inspection and final independent acceptance are complete. Perform authorized
-topic commits → push → draft PR → human review. No speed or
-general model-quality improvement is claimed.
+accepted the subsequent before/after evaluation commands. Evaluation, reason
+inspection, independent acceptance, commits, push and draft creation are complete.
+No speed or general model-quality improvement is claimed.
+
+Human review is outstanding. GitHub reported no CI check entries at the handoff
+check; absent checks are not passing checks. Confirm any applicable CI/review
+requirements before a separately authorized merge. No merge, release, tag or
+worktree cleanup was performed.
 
 Do not merge or release. README historical index omissions remain documented;
 the plan restricted this pass to refreshing existing rows.
+
+## Next handoff
+
+- Actor: Human reviewer.
+- Step: Review draft PR #126, including retained safety boundaries and the
+  documented limitations; decide whether further changes are needed.
+- Agent continuation: Only respond to review feedback within its authorized
+  scope. Do not infer approval to merge, release or clean up the worktree.

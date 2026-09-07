@@ -136,3 +136,13 @@ no timeout occurred, so this unexercised path remains a documented limitation.
   workflow row are recorded in findings.md for a separate indexing decision.
 - All descriptions and issue-related documents were reviewed, not every code
   example in every companion. No improvement in speed or model quality is claimed.
+
+## Publication verification
+
+Three implementation/evidence topic commits were pushed normally. Draft PR #126
+was created and read back as OPEN/draft, base dev, intended feature head:
+https://github.com/a129924/agent-skills/pull/126
+
+At that check, `statusCheckRollup=[]` and `reviewDecision` was empty. Neither is
+a green-CI or human-approval signal. Human review is the next handoff; merge,
+release, tags and worktree cleanup are outside this delivery.

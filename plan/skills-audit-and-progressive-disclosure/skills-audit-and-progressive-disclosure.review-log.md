@@ -118,3 +118,16 @@ Canonical runtime and instruction topics were committed separately. Provenance
 now points to actual canonical source commit e635f127dd861a02be3c4139401457ec29f41890,
 with final exact source hashes. Publishing/evidence metadata does not change the
 evaluated Skills content. The original approved verdicts remain as recorded.
+
+## Draft publication handoff
+
+Committed topics: 8a7f221 (runtime), e635f12 (canonical instructions), 8e2f67d
+(projection and audit evidence). Normal push created the feature branch; no
+history was rewritten. Opened https://github.com/a129924/agent-skills/pull/126
+and verified `state=OPEN`, `isDraft=true`, `baseRefName=dev`, and
+`headRefName=refactor/andrew/skills-audit-disclosure`.
+
+At the handoff check, GitHub returned no CI check entries and no human review
+decision. This is draft publication, not a passing-CI or merge-ready assertion.
+The final documentation-only commit records this observed state; next actor is
+the human reviewer. No merge/release or cleanup action was taken.

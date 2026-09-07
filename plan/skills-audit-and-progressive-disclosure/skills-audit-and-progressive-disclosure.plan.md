@@ -41,7 +41,7 @@ Sol, and Luna. Produce topic commits and a draft PR for human review.
 
 ## Status / Allowed Transitions
 
-Current: `publish-in-progress` — final independent topic acceptance and planner alignment approved; authorized topic commits, push and draft PR are next. Human owns merge/release.
+Current: `pr-open` — topic commits pushed and draft PR #126 opened against dev. Independent acceptance approved; next actor is the human reviewer. Merge/release are not authorized.
 
 `planned -> creator-in-progress -> review-ready -> reviewer-in-progress -> approved`
 
@@ -129,5 +129,5 @@ On 2026-09-07 the user explicitly authorized transmitting the evaluation-require
 Skills content, including unpublished edits, to Codex Astra, Sol and Luna.
 The automatic approval reviewer accepted the evaluation commands after that
 authorization. The earlier data-transfer blocker is resolved. Required model
-evidence and final independent acceptance are complete. Proceed with authorized
-topic commits, push and draft PR; no unresolved user choice remains in scope.
+evidence, final independent acceptance and authorized draft publication are
+complete. PR #126 awaits human review; no merge/release permission is inferred.
