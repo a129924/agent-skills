@@ -23,7 +23,7 @@
   {
     "skill": "agent-skill-reviewer",
     "before_entry_sha256": "16acdaff6b7ed39ed15dc886c4186136ccd25c7adafc2219ea1f1d7c704dfdfc",
-    "after_entry_sha256": "62d96c153afd4f567b9339b04033762ada12c6f1143f6f396b06c7e2ae3bda9b",
+    "after_entry_sha256": "b0c51489a58d832c7898daaee245043905573cd4ae4e959bfea1f05e2e489369",
     "before_lines": 143,
     "after_lines": 143,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -37,7 +37,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "9c3e3f0c84167e307a02838be9a90437e616bfe0d1d55a339b8308eb8fd8d343",
+    "source_tree_hash": "f8e5867040d293ef99c5b5d86e704f787765ac4ae39e0cab87103c3549ca8a85",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -271,7 +271,7 @@
   {
     "skill": "plan-creator",
     "before_entry_sha256": "e3c4874f6e7b3f8e22f89b5f88f974b4e2c1122454721ad3a211efe8d6215e24",
-    "after_entry_sha256": "20f42b3b989d8f9e539d2c04481a0b811c2e514bba490e5520e31fd002dac249",
+    "after_entry_sha256": "fc5bfa07ae37761527e363dd9987d17f07845b3caf9a0dbf4c6c34ebf6ee1ae2",
     "before_lines": 181,
     "after_lines": 181,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -285,7 +285,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "262fafdfef5cee610f4f1371461dc935e2eb3e345fa1faf9c55c233c2e1ff12a",
+    "source_tree_hash": "6eb4ff2dab4b151420d4d0ceab56e0ad8cfbe5a21c9c62d40792bc163d61c500",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -327,7 +327,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "92728a491cdc730e68d4432b8c370b6470673da21fe1e8907fab1da8b59312a9",
+    "source_tree_hash": "ecafb20322cf3ad7179ab538362209bad393d69fb01c40defcdcf70dec281112",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -460,7 +460,7 @@
   {
     "skill": "python-class-design",
     "before_entry_sha256": "9e285dcb1603e7315dd5f93b6c734369d43651de59be0090ea3eae0f3338938f",
-    "after_entry_sha256": "7b93e49f994fe0fb3b4bd9967b60ec7a20e3da9c97175ec4c3e8277b13e4b506",
+    "after_entry_sha256": "d76684a82aa2d5202685aee9f43948cdce1368969001e88e90f040dc3ff00f39",
     "before_lines": 93,
     "after_lines": 93,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -474,14 +474,14 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "bd3d03aa48da39cdcd84a53ea9ba8279fc7c705fdd35c7087b48c53c806e14c3",
+    "source_tree_hash": "d50d5dab53dbe7ebf1548af05fa1d70e4aa335f557604ffbffa6e3e7072c8747",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
   {
     "skill": "python-code-review",
     "before_entry_sha256": "1c80c5584415c7bc18c91741ccfeaa0b27163b334f2e846212b366a1cf7020eb",
-    "after_entry_sha256": "b52db1d5d5339032a01b11f5d625447b684c879a6a6e52fe1464181a73f04a40",
+    "after_entry_sha256": "967ce78598bad9531ac029c65d0041a7133d63a4b8ae4f174a36302eba64e225",
     "before_lines": 265,
     "after_lines": 257,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -495,7 +495,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "56b6bafa66730787b514edbd5574e1ee2735b7395b78f7e6c2b0fc4e82b79d6a",
+    "source_tree_hash": "896752d00677027253cb90d9b2277149e085fb7b6408fb9f19efd221313eda35",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -643,7 +643,7 @@
   {
     "skill": "python-error-handling",
     "before_entry_sha256": "2259e7b1b0c8d246009e0bb3992affdac1ed997496d27cbf01cbf2ffa7862ef5",
-    "after_entry_sha256": "f252354465aea95c4c745f800c01a43e951a0f7907fcfc772135b76feec01b98",
+    "after_entry_sha256": "c3d4fed7728f14241561aaf912f1d99e688975e6a49e65b9817dab6e5d6ca9c3",
     "before_lines": 88,
     "after_lines": 88,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -657,7 +657,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "2eebc98b70949978e7b5f632f607a6ffd77af70c84151a47ff4e53b080394777",
+    "source_tree_hash": "64e005793f4b5b4a498473508d3477a09ea94d4860b5cafbd3ea6fe6397eab85",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -706,7 +706,7 @@
   {
     "skill": "python-library-architecture",
     "before_entry_sha256": "c7fd774e6af90be1b0cd6b72ddf38862c5822889c599c1f382c241ae49ae8695",
-    "after_entry_sha256": "544d5f23b999d297fc9ace4fe28a023cf0552f249b8d65575893bdeb05872bfc",
+    "after_entry_sha256": "516d90b14c1b624c44c734062c12ecc1ce0ea0cd7377f0788283fe7c76bb776f",
     "before_lines": 102,
     "after_lines": 102,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -720,7 +720,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "2fe57c76f1ab343abb9be4d90688b433d985a884f9d3195bec7670819a4f847d",
+    "source_tree_hash": "901db2df71d545ff542b89d2c7c2472807790d0042108e615220af89af6ed389",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -748,7 +748,7 @@
   {
     "skill": "python-module-boundaries",
     "before_entry_sha256": "b12b89c6e030f2afb97c0ac35a4758d874b9175d687f9dfd17c39eabc786afdd",
-    "after_entry_sha256": "c328b5bd4a7bf62eb938d82474e62dff3972edf68182a59170e35090c748c35a",
+    "after_entry_sha256": "7ac12d506348b0da46d54bca793d612997ca4451c78b3f5e06d8a2117e9aca72",
     "before_lines": 95,
     "after_lines": 95,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -762,7 +762,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "ebc3927aa007c3b1fde6d91908b675ac74e089f0297e991fcb719ac72aacf4f5",
+    "source_tree_hash": "bf3a1ce1c4933116518a951cf43b5e45f6546792ffef22405164fe3d3a2d30fb",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -809,7 +809,7 @@
   {
     "skill": "python-package-layout",
     "before_entry_sha256": "69222e48127c9f1e7c35b682991dd659f68c9f887e60cb8902e96b64439d0154",
-    "after_entry_sha256": "209f534a11a78d4ec080700e922aadef0b8dea200572bdad39cf91de7e25cd9e",
+    "after_entry_sha256": "c8495a05d5b2e94dab10d10c68802590aa2086aaacd378f8e4db71b3fe0e095f",
     "before_lines": 100,
     "after_lines": 100,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -823,7 +823,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "99dfd58f9bd79a7f745201a30a8b6f3c407397317dadbc96eec71526d9fba936",
+    "source_tree_hash": "8c1fa869ab3eb857b47f72fa6482fb792dc499246c9ac5b38bcd5b28386004e9",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -1040,7 +1040,7 @@
   {
     "skill": "python-testing-pytest",
     "before_entry_sha256": "bd02e6b9a7bdcefc968d96f714d475cf144dea96b748dd65e7be4ee9d964c18d",
-    "after_entry_sha256": "eaf12c366c7883220db67460ef64319290b74e183847aaabe5d0c5dd7e499f18",
+    "after_entry_sha256": "c80d7383bf7e8702e35d71fb6a473eec396fc9b9ac262b5f4c622098c744eef6",
     "before_lines": 119,
     "after_lines": 119,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -1054,7 +1054,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "25d98afa074d52a62ae73b934e347a78041fab64b820dfc8f7d9c0bb2998dc64",
+    "source_tree_hash": "a2751d36ad714730089cdf38b0ff5f5ea074d36e87992e655358077b9add91a2",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

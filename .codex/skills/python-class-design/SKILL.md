@@ -1,6 +1,6 @@
 ---
 name: python-class-design
-description: "Design ordinary Python classes, instance state, constructors, and public member placement."
+description: "Design or review ordinary Python classes, instance state, constructors, and public member placement."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive

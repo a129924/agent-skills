@@ -201,7 +201,8 @@ def _validate_completion_lines(lines: list[str], *, implementation: bool = False
     for line in lines:
         stripped = line.strip()
         checkbox_like = re.match(
-            r"^(?:(?:[-*+]|\d+[.)])\s*)?\[[^\]]*\](?:\s|$)", stripped
+            r"^(?:(?:[-*+]|\d+[.)])\s*)?\[(?:\s|[^\]\s]|\?+)?\](?![(:])",
+            stripped,
         )
         top_level_list_item = implementation and re.match(
             r"^(?:[-*+]\s|\d+[.)]\s)", line

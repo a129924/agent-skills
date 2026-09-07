@@ -1,6 +1,6 @@
 ---
 name: python-module-boundaries
-description: "Design Python module boundaries, public exports, import behavior, and internal contracts."
+description: "Design or review Python module boundaries, public exports, import behavior, and internal contracts."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

@@ -89,3 +89,14 @@ merge/release.
 - [X] Commit canonical repair `8a919ab`, regenerate affected Codex projections
   and inventory/provenance evidence, validate, push, then resolve only the six
   addressed Round 2 threads after GitHub reports the pushed head.
+
+## PR Comment Review / Fix — Round 3
+
+- [X] Fetch the current PR review state and triage five current, unresolved
+  direct-apply findings; retain the earlier resolved threads as history.
+- [X] Make malformed completion evidence fail closed, restore omitted review
+  discovery triggers, align reviewer Validation routing, declare conditional
+  analysis outputs, and correct Pyright strict-mode language.
+- [X] Commit canonical repair `b19f7f3`, regenerate affected Codex projections
+  and inventory/provenance evidence, validate, push, then resolve only the five
+  addressed Round 3 threads after GitHub reports the pushed head.

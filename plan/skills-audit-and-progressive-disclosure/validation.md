@@ -189,3 +189,19 @@ observer implementation-step gate reported 13 complete steps; and the final
 projected CLI dry run reported 287 noop with zero create, update, or conflict.
 The GitHub resolution state is recorded after this evidence commit is published.
 No CI, merge, release, or human approval is claimed here.
+
+## PR comment-fix verification — Round 3
+
+Five new current, unresolved threads were classified as direct, bounded repairs:
+completion evidence with no post-marker space; design/review discovery wording;
+reviewer Validation routing; conditional analysis-baseline outputs; and remaining
+non-command Pyright strict references. Canonical repair commit `b19f7f3` adds a
+regression for `- [X]done`, keeps ordinary Markdown links outside completion
+evidence, and makes the matching documentation changes. The projection preview
+identified eleven affected managed outputs and no creates; inventory and the ten
+changed provenance/disposition hashes were refreshed. The full canonical suite
+passed 100 tests; projected runtime suites passed 70 tests; the real observer
+implementation-step gate reported 13 complete steps; and the final projected
+CLI dry run reported 287 noop with zero create, update, or conflict. The GitHub
+resolution state is recorded after this evidence commit is published. No CI,
+merge, release, or human approval is claimed here.

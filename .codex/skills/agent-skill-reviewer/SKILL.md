@@ -58,7 +58,7 @@ Do not use this skill when:
 12. If the skill is higher-risk or acts as a gatekeeper, require stronger validation signals or equivalent local guidance that makes misuse harder.
 13. Confirm `complexity` field exists in YAML and matches the skill's actual workflow risk, branching, and downstream impact; escalate if risk tags understate behavior.
 14. Confirm YAML governance metadata (`use_when`, `do_not_use_when`, `inputs`, `outputs`) aligns with body sections and does not contradict them.
-15. Confirm `Validation` section exists for high complexity skills; for medium complexity, confirm it exists when ambiguity would materially change output (per folder-contract.md); confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
+15. Confirm high-complexity skills have a `Validation` section or a directly routed, readily locatable equivalent with substantive required and quality checks; for medium complexity, confirm the same when ambiguity would materially change output (per folder-contract.md). Confirm it defines SOFT FAIL or BLOCKED conditions, not only hard stops.
 16. Confirm `Failure Handling` covers Missing Context, Ambiguous Requirement, and Execution Limitation for high complexity skills.
 17. Confirm no hard-stop `FAIL → stop` design exists for a recoverable gap.
 18. For transition topics that touch creator / reviewer / template contracts

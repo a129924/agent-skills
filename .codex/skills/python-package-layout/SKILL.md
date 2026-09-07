@@ -1,6 +1,6 @@
 ---
 name: python-package-layout
-description: "Set Python src-layout, packaging, CLI placement, and tests that exercise installed code."
+description: "Design or review Python src-layout, packaging, CLI placement, and tests that exercise installed code."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
