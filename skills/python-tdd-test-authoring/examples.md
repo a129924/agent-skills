@@ -47,24 +47,28 @@ test_mapping:
   - requirement_id: "Req#1"
     test_case_name: "test_create_user_with_valid_email"
     coverage_category: "happy_path"
+    test_command: "pytest --no-header -rN tests/models/test_user.py -k test_create_user_with_valid_email"
     expected_initial_status: "red"
     observed_initial_status: "red"
     observation_reason: "The planned behavior is not implemented yet."
   - requirement_id: "Req#2"
     test_case_name: "test_password_hashed_with_bcrypt"
     coverage_category: "state"
+    test_command: "pytest --no-header -rN tests/models/test_user.py -k test_password_hashed_with_bcrypt"
     expected_initial_status: "red"
     observed_initial_status: "red"
     observation_reason: "The planned state change is not implemented yet."
   - requirement_id: "Req#3"
     test_case_name: "test_create_user_invalid_email_raises_error"
     coverage_category: "error_cases"
+    test_command: "pytest --no-header -rN tests/models/test_user.py -k test_create_user_invalid_email_raises_error"
     expected_initial_status: "red"
     observed_initial_status: "red"
     observation_reason: "The planned rejection behavior is not implemented yet."
   - requirement_id: "Req#4"
     test_case_name: "test_create_user_weak_password_raises_error"
     coverage_category: "error_cases"
+    test_command: "pytest --no-header -rN tests/models/test_user.py -k test_create_user_weak_password_raises_error"
     expected_initial_status: "red"
     observed_initial_status: "red"
     observation_reason: "The planned rejection behavior is not implemented yet."
@@ -76,6 +80,7 @@ validation_checks:
   public_contract_coverage: true
   test_categories_present: 5
   initial_statuses_observed: true
+  test_commands_recorded: true
   production_code_modified: false
 
 issues: []
@@ -193,12 +198,14 @@ test_mapping:
   - requirement_id: "Req#1"
     test_case_name: "test_create_user_rejects_email_with_leading_whitespace"
     coverage_category: "boundary"
+    test_command: null
     expected_initial_status: "unset"
     observed_initial_status: "not_observed"
     observation_reason: "Test execution is deferred until the ambiguous requirement is clarified."
   - requirement_id: "Req#2"
     test_case_name: "test_error_message_includes_raw_email"
     coverage_category: "error_cases"
+    test_command: null
     expected_initial_status: "unset"
     observed_initial_status: "not_observed"
     observation_reason: "Test execution is deferred until the ambiguous requirement is clarified."
@@ -215,14 +222,15 @@ validation_checks:
     - state_side_effect: "UserAccount.create() validation has no state change when it rejects input."
     - integration: "The stated requirements name no external integration point."
   initial_statuses_observed: false
+  test_commands_recorded: false
   production_code_modified: false
 
 issues:
   - "Req#3 is too vague: 'Improve error handling for edge cases'. Add specific requirements for each edge case (e.g., null email, empty string, domain validation)."
   - "Add a valid-email happy-path test. State/side-effect and integration categories are N/A for the stated contract and do not require invented tests."
-  - "Per-test initial status was not observed. Set each expected status, run the tests, and record the observed result and reason."
+  - "Per-test initial evidence was not observed. Set each expected status, run the tests, and record the command, observed result, and reason."
 
-next_step: "Return to plan review. Clarify Req#3 with specific edge cases. Then run and record each test's initial status before resubmitting for test authoring."
+next_step: "Return to plan review. Clarify Req#3 with specific edge cases. Then run and record each test's command and initial status before resubmitting for test authoring."
 ```
 
 ---
