@@ -586,7 +586,11 @@ after the staged set is already valid. Explicit authorization already granted fo
 README / VERSION appear in the staged set only when the topic plan schedules them
 before PR creation.
 
-Main Agent displays:
+When the current topic already has the explicit bounded authorization described
+above, record that authorization in the handoff evidence and proceed directly
+to Phase 6. Do not repeat the prompt below.
+
+When no valid bounded authorization exists, Main Agent displays:
 ```
 ✅ VALIDATION COMPLETE
 

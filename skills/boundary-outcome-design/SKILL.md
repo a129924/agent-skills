@@ -1,6 +1,6 @@
 ---
 name: boundary-outcome-design
-description: "Review Outcome and exception translation when results cross application, domain, or persistence boundaries."
+description: "Design or review Outcome and exception translation when results cross application, domain, or persistence boundaries."
 complexity: high
 
 risk_profile:

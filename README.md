@@ -304,7 +304,7 @@ Process documentation and workflow guidance for repository operations:
 | `agent-skill-template` | Supply the repository scaffold when creating a new single-purpose skill manually. |
 | `business-intent-alignment` | Resolve ambiguous business intent into measurable requirements before technical planning. |
 | `business-to-technical-translation` | Translate a frozen business baseline into a technical specification; surface feasibility conflicts. |
-| `boundary-outcome-design` | Review Outcome and exception translation when results cross application, domain, or persistence boundaries. |
+| `boundary-outcome-design` | Design or review Outcome and exception translation when results cross application, domain, or persistence boundaries. |
 | `copilot-instructions-init` | Create or refresh a project's Copilot instructions from current repository facts and declared contracts. |
 | `context-package-builder` | Build a minimal context package for one already-bounded, real subagent handoff. |
 | `git-branch-naming` | Choose a semantic development branch name or repair work started on the wrong branch. |
@@ -320,7 +320,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-package-layout` | Set Python src-layout, packaging, CLI placement, and tests that exercise installed code. |
 | `python-type-hints-strict` | Design or review annotations for Python projects that explicitly require Pyright strict mode. |
 | `python-model-selection` | Choose Enum, dataclass, ABC, or Protocol for Python structured data and contracts. |
-| `python-control-flow` | Review Python branching, guard clauses, match/case, and truthiness choices. |
+| `python-control-flow` | Design or review Python branching, guard clauses, match/case, and truthiness choices. |
 | `python-testing-pytest` | Design pure pytest unit tests, fixtures, assertions, and mocks without real I/O or async-runner configuration. |
 | `python-error-handling` | Design Python exception types, translation, chaining, and propagation; not retry orchestration or logging policy. |
 | `python-class-design` | Design ordinary Python classes, instance state, constructors, and public member placement. |
@@ -348,7 +348,7 @@ Process documentation and workflow guidance for repository operations:
 | `python-tdd-test-authoring` | Author behavior-mapped tests from an approved Python plan before production changes; verify declared initial states. |
 | `python-implementation-review` | Check a Python implementation against an approved plan; enforce valid step evidence before tracing. |
 | `python-code-review` | Review Python code quality in a standalone diff or formal workflow; standalone reviews need no approved plan. |
-| `python-serialization-boundaries` | Review Python API, database, or message serialization as explicit semantic translation. |
+| `python-serialization-boundaries` | Design or review Python API, database, or message serialization as explicit semantic translation. |
 | `python-pre-commit` | Create or merge pre-commit configuration for uv-based Python projects while preserving existing hooks. |
 | `python-pyproject-toolconfig` | Append missing Ruff, Pyright, and pytest sections to pyproject.toml; preserve existing configuration. |
 | `sense-env-scaffold` | Discover repository facts as structured JSON or evaluate a contract with the sense_env.py CLI. |

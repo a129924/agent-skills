@@ -1,6 +1,6 @@
 ---
 name: python-control-flow
-description: "Review Python branching, guard clauses, match/case, and truthiness choices."
+description: "Design or review Python branching, guard clauses, match/case, and truthiness choices."
 complexity: low
 risk_profile: []
 inputs:
