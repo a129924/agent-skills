@@ -172,3 +172,20 @@ Generated runtime tests and a final zero-drift projection check then passed:
 
 These local results support resolving the corresponding addressed threads. No CI
 or human approval is claimed by them.
+
+## PR comment-fix verification — Round 2
+
+Six new current, unresolved threads were classified as direct, bounded repairs:
+existing authorization routing; two design discovery descriptions; per-test TDD
+initial-state schema; README canonical-description synchronization; merge-readiness
+result states; and a completion-gate false positive for ordinary Markdown links.
+Canonical repair commit `8a919ab` adds the link regression cases and preserves
+the completion gate's rejection of malformed task evidence. The projection
+preview identified eight affected managed outputs and no creates; those outputs
+were regenerated with the existing adapter, and the 59-record inventory and the
+five changed provenance/disposition hashes were refreshed. The full canonical
+suite passed 99 tests; projected runtime suites passed 69 tests; the real
+observer implementation-step gate reported 13 complete steps; and the final
+projected CLI dry run reported 287 noop with zero create, update, or conflict.
+The GitHub resolution state is recorded after this evidence commit is published.
+No CI, merge, release, or human approval is claimed here.

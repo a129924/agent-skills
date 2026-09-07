@@ -1,7 +1,7 @@
 {"canonical_path":"skills/agent-skill-creator","tree_hash":"7cc17a23a8140a4cf6460e8183f3686a2fb4710277243f0988cb50c47d2f45bb"}
 {"canonical_path":"skills/agent-skill-reviewer","tree_hash":"9c3e3f0c84167e307a02838be9a90437e616bfe0d1d55a339b8308eb8fd8d343"}
 {"canonical_path":"skills/agent-skill-template","tree_hash":"d0a572edc12d7e4aebfb972b20200e6b345e2bad61ed5791f0858d926f2a6142"}
-{"canonical_path":"skills/boundary-outcome-design","tree_hash":"ed417af07bb399de0583451c69cc81d83039ba2a3d02d97bb626f7d09904a213"}
+{"canonical_path":"skills/boundary-outcome-design","tree_hash":"07cdcbd2c5f1c0e437988761034706f36aa55a29e9c8a6761eedc1519e20e215"}
 {"canonical_path":"skills/business-intent-alignment","tree_hash":"81c017e3f2d43256db7d502e826e45e701ef4031764b523f32b5fa0da1bf4947"}
 {"canonical_path":"skills/business-to-technical-translation","tree_hash":"6deba53054cb53cff8ef1e3fff63515c6e58929a032dc37a7f4a9c86921b26de"}
 {"canonical_path":"skills/context-package-builder","tree_hash":"29b89f0bca44f22ec9876d467c4b6bb97cff0346b7f404815923c63502dc2e8c"}
@@ -9,11 +9,11 @@
 {"canonical_path":"skills/git-branch-naming","tree_hash":"ef369b33202b22081442cf70be8f4eba4b00292793a6c1dcbaa94c66b47dfccf"}
 {"canonical_path":"skills/git-commit-convention","tree_hash":"2afd85bea6890ac138d10c3121fe829f09d8c85f5f3b1297d2ec9d3a71930e60"}
 {"canonical_path":"skills/git-post-merge-workflow","tree_hash":"3eba0fdb295495514edb4605b94a28177d3e751717c6a3925a7ae0b205a8dadb"}
-{"canonical_path":"skills/git-release-management","tree_hash":"6510a0e567eb5c331ffc98619994fa57656939108146f47d06e7b577d5f0a65c"}
+{"canonical_path":"skills/git-release-management","tree_hash":"491508e9f1f041223014d4f49b95c13fffbadc3e98d012bae20781ae24a33fa1"}
 {"canonical_path":"skills/handoff-routing-policy","tree_hash":"5fb3db110432d1ec15a6105a719c1a5125c04dda5fe29e2c4a482422ef996ac9"}
 {"canonical_path":"skills/plan-creator","tree_hash":"262fafdfef5cee610f4f1371461dc935e2eb3e345fa1faf9c55c233c2e1ff12a"}
 {"canonical_path":"skills/plan-reviewer","tree_hash":"475a573f0645304bd09125f243015ff93f3892a6ca8b2abc08a7588f0088a75a"}
-{"canonical_path":"skills/plan-step-tracker","tree_hash":"fd1dc54cc93f0f1f3446d1f9569cfa19c0982be76ff7af910bb4310a152cb359"}
+{"canonical_path":"skills/plan-step-tracker","tree_hash":"92728a491cdc730e68d4432b8c370b6470673da21fe1e8907fab1da8b59312a9"}
 {"canonical_path":"skills/platform-projection-adapter","tree_hash":"aec877178ab83528361dc6f587a80cd83d10db22e2188da70d7dd49fd4b91159"}
 {"canonical_path":"skills/python-api-signature","tree_hash":"75f1e4591938d0a0251618c0080926da73c8061dc46f9257da3148e32f118f7c"}
 {"canonical_path":"skills/python-async-await","tree_hash":"7809879a28ac33ba421cf92fb4eba6c4ff8993048a0c329158e3f78cec92808b"}
@@ -24,7 +24,7 @@
 {"canonical_path":"skills/python-code-review","tree_hash":"56b6bafa66730787b514edbd5574e1ee2735b7395b78f7e6c2b0fc4e82b79d6a"}
 {"canonical_path":"skills/python-comprehensions","tree_hash":"429658e03609afd80c57301354d3d2bd5fb67ff85bebfeccc8f0c2b544e08559"}
 {"canonical_path":"skills/python-context-management","tree_hash":"05f54ecdce6eb30ac0d87a3cc68b61ca7564dec30ec9364d7871e7f9d47c07ac"}
-{"canonical_path":"skills/python-control-flow","tree_hash":"c052049307f2c155d48756715ccc2fdb05aac19038d7eae07a48cddce1beacb7"}
+{"canonical_path":"skills/python-control-flow","tree_hash":"86d3dd164f7a31554e5f7e5e0bb12df2b18b455166b0cf5cee2a61393d659ec8"}
 {"canonical_path":"skills/python-data-model-methods","tree_hash":"6d971c8983cec4bc6997947179b5222ebecf527f1bb01bfe2f4e508d78bac561"}
 {"canonical_path":"skills/python-decorators","tree_hash":"1dbc47c55b97c759e885378042e0caff4161354678907ad61709bed48d8f1b03"}
 {"canonical_path":"skills/python-descriptors-attribute-access","tree_hash":"ea692d6d633a40e6c590934c7934994cb61e0ddeb5f106c2a64760c1fa1f9625"}
@@ -47,7 +47,7 @@
 {"canonical_path":"skills/python-retrofit-plan-authoring","tree_hash":"b1cd03e241fde4d18526ad64051f2bededfcdee1e43d2f25039ec3b1d26c66a7"}
 {"canonical_path":"skills/python-retrofit-plan-review","tree_hash":"72c4e64b3be36b76ed706246e2a33fa76b63e9ab8b4ad8d8c866d9555308bf0c"}
 {"canonical_path":"skills/python-serialization-boundaries","tree_hash":"e1ccd9faa104d07dd19eff760a542b8b2e39c8cc0eb19c22c2a0af1e0c1ffd66"}
-{"canonical_path":"skills/python-tdd-test-authoring","tree_hash":"e8dc3edf313cff4612f4cec2bee04981773c56d0f4ac47c297fdd31fdb592973"}
+{"canonical_path":"skills/python-tdd-test-authoring","tree_hash":"1fe15ed04787970c263c8f920f973866b581625ddfb2515782577492530936fd"}
 {"canonical_path":"skills/python-testing-pytest","tree_hash":"25d98afa074d52a62ae73b934e347a78041fab64b820dfc8f7d9c0bb2998dc64"}
 {"canonical_path":"skills/python-type-hints-strict","tree_hash":"9be796e8bba1f46f5811463601e94de68212cde55844bea17a00bf818f5cad2f"}
 {"canonical_path":"skills/scope-draft-plan","tree_hash":"1ff61fc77791e835e9085f64874217f633d2f579719c3fd7e51dcc07d7e5c741"}

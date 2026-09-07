@@ -66,7 +66,7 @@ Do not use this skill when:
    - If `spec.md` conflicts with `plan.md` Requirements, `spec.md` wins and the conflict is recorded in `issues`.
    - If D1 verdict is `non-trivial` and `spec.md` is missing, return `BLOCKED` and route back to `python-plan-authoring` to add `plan/<topic>/<topic>.spec.md`.
 5. **Map requirements to tests**: Create `test_mapping` entries (requirement_id → test_case_name) from the active behavior contract.
-6. **Check existing tests**: Query test structure for `expected_initial_status` (pass, skip, xfail, or red).
+6. **Check initial states per test**: Record each entry's expected and observed initial status (`red`, `pass_existing`, `skip`, or `xfail`) and its observed failure or status reason. A suite may legitimately mix those states.
 7. **Validate public contract coverage**: Ensure tests cover public functions, return types, error cases, and documented behavior.
 8. **Assess category coverage**: Map relevant happy-path, error, boundary, state/side-effect and integration behavior. Record a reason for N/A categories; do not invent side effects or integration points.
 9. **Enforce production_code_modified guard**: Verify `production_code_modified: false` before proceeding.
@@ -75,7 +75,7 @@ Do not use this skill when:
 
 # Examples
 
-- **Positive**: Plan with clear Requirements (feature, two bug fixes, refactor), D1 says non-trivial, tests map to all requirements, coverage includes happy path + 3 error cases + boundary case + state assertion + endpoint mock, expected_initial_status is red, production code unmodified → verdict: `red-tests-ready`.
+- **Positive**: Plan with clear Requirements (feature, two bug fixes, refactor), D1 says non-trivial, tests map to all requirements, coverage includes happy path + 3 error cases + boundary case + state assertion + endpoint mock, and each mapping records matching RED evidence; production code unmodified → verdict: `red-tests-ready`.
 - **Negative**: Invoking this skill when production code has already been modified — hard constraint violated; return `insufficient-context` immediately, do not produce `test_mapping`. Another misuse: invoking when the plan has not yet been approved — return `insufficient-context`, stop, and ask for the approved plan before proceeding.
 
 # Outputs
@@ -83,8 +83,8 @@ Do not use this skill when:
 - YAML verdict result file with schema:
   - `verdict: "red-tests-ready" | "needs-rework" | "insufficient-context" | "skip_with_reason" | "BLOCKED"`
   - `d1_verdict: { "verdict": "trivial|non-trivial", "reason": "..." }`
-  - `test_mapping: [{requirement_id, test_case_name, coverage_category}]`
-  - `validation_checks: {d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, expected_initial_status, production_code_modified}`
+  - `test_mapping: [{requirement_id, test_case_name, coverage_category, expected_initial_status, observed_initial_status, observation_reason}]`
+  - `validation_checks: {d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, initial_statuses_observed, production_code_modified}`
   - `issues: []` (list of specific gaps or failures)
   - `next_step: string` (e.g., "Proceed to implementation" or "Fix test_mapping for Req#2")
 
@@ -141,7 +141,7 @@ If existing test files cannot be read (e.g., file system access error):
 - Inspect assertions to verify relevant behavior coverage; test-function counts do not establish categories.
 - Validate test_mapping cardinality: at least one test per requirement.
 - Confirm `production_code_modified: false` in all cases.
-- Compare declared `expected_initial_status` with observed test results and behavior assertions; counts alone are not evidence.
+- Compare each test mapping entry's declared `expected_initial_status` with its observed result and behavior evidence; counts alone are not evidence.
 
 # Red Flags
 
@@ -156,7 +156,7 @@ If existing test files cannot be read (e.g., file system access error):
 
 - "D1 says it's a trivial change, can we skip?": Yes, return `skip_with_reason` with D1 verdict; this is a valid outcome, not an error.
 - "Some requirements don't have obvious test cases": Needs-rework; add at least one test per requirement or clarify requirement.
-- "Test file doesn't exist yet": That's OK; create the file structure and set expected_initial_status to red; still red-tests-ready if coverage is complete.
+- "Test file doesn't exist yet": That's OK; create the file structure, run it, and record each mapping's RED observation; still red-tests-ready if coverage is complete.
 - "Production code is already half-written": Stop; this violates the hard constraint. Test authoring must happen first.
 
 # Boundaries
@@ -165,13 +165,13 @@ If existing test files cannot be read (e.g., file system access error):
 - **Hard constraint 2: D1 classifier decision gates the verdict.** If D1 says `trivial`, honor it and return `skip_with_reason`; do not override.
 - **Hard constraint 2.5: D1 verdict output format is fixed.** Emit `{ "verdict": "trivial|non-trivial", "reason": "..." }` exactly.
 - **Hard constraint 3: Test mapping must be complete.** Every requirement must have at least one test; partial coverage → needs-rework.
-- **Hard constraint 4: Expected initial status must be set.** Verdict must declare whether tests start red, xfail, skip, or pass (for pass_existing case); absence → needs-rework.
+- **Hard constraint 4: Per-test initial status must be observed.** Each mapping must declare and evidence whether it is red, pass_existing, xfail, or skip; absence → needs-rework.
 - **Hard constraint 5: For non-trivial paths, spec.md is mandatory.** Missing `plan/<topic>/<topic>.spec.md` must return `BLOCKED` and route back to plan-authoring.
 
 # Local references
 
 - `examples.md`: 6 detailed scenarios（含 `d1_verdict`、`BLOCKED` 路由、`non-trivial` enum）與完整輸入/輸出。
-- `checklist.md`: 9-item repeatable verification checklist (D1 decision, requirements mapped, public contract, test categories, expected_initial_status, production_code_modified guard, test file structure, YAML schema, boundaries enforced).
+- `checklist.md`: 9-item repeatable verification checklist (D1 decision, requirements mapped, public contract, test categories, per-test observed initial status, production_code_modified guard, test file structure, YAML schema, boundaries enforced).
 - `references/behavior-change-classifier.md`: D1 classifier rules and examples (`trivial|non-trivial` only; maps to skill-level verdict paths).
 - `references/codebase-evidence-levels.md`: D2 evidence classification (insufficient, minimal, sufficient context to author tests).
 - `references/atomic-commit-order.md`: Commit sequencing rules (test-first, atomic requirements, enforcement modes).

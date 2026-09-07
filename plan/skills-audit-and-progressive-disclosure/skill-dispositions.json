@@ -63,7 +63,7 @@
   {
     "skill": "boundary-outcome-design",
     "before_entry_sha256": "fd168f4a414fa60f9136bd27a6de172f52d93b69108eff437e57ba62ad600764",
-    "after_entry_sha256": "28977a5cb2e1336ac0aa85a627d7d236bf4e875153849ba7ae736055b917f1a0",
+    "after_entry_sha256": "981480da3a51a18ec3d35859c9d12024b6bb3e9722c960eb14c8f6934d873cd3",
     "before_lines": 270,
     "after_lines": 270,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -77,7 +77,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "ed417af07bb399de0583451c69cc81d83039ba2a3d02d97bb626f7d09904a213",
+    "source_tree_hash": "07cdcbd2c5f1c0e437988761034706f36aa55a29e9c8a6761eedc1519e20e215",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -229,7 +229,7 @@
   {
     "skill": "git-release-management",
     "before_entry_sha256": "e341300718c9304975cee17c082a3372fc0759883f9fe2c7161c61ac80052887",
-    "after_entry_sha256": "498bfa4ab4e8bb0f638532f44204bd562a2b77250e8075a6b904e5f059ad62c8",
+    "after_entry_sha256": "6ae6d550037ffc5ecd437aa0aba346cdbe9bdfffafca9de7808564659294d380",
     "before_lines": 171,
     "after_lines": 100,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -243,7 +243,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "6510a0e567eb5c331ffc98619994fa57656939108146f47d06e7b577d5f0a65c",
+    "source_tree_hash": "491508e9f1f041223014d4f49b95c13fffbadc3e98d012bae20781ae24a33fa1",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -327,7 +327,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "fd1dc54cc93f0f1f3446d1f9569cfa19c0982be76ff7af910bb4310a152cb359",
+    "source_tree_hash": "92728a491cdc730e68d4432b8c370b6470673da21fe1e8907fab1da8b59312a9",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -542,7 +542,7 @@
   {
     "skill": "python-control-flow",
     "before_entry_sha256": "dde6ac7f3ce6389102127f70f0ecf93adb59bf8b3641dab6f3e0ad448fcd4617",
-    "after_entry_sha256": "44bf437d7c83cc93c8b00d5853cace39b424ef21377c3f36f2ffd2170358fe9b",
+    "after_entry_sha256": "d068e721d288adeb4423d6caf4c04eb5d5e482fa16d31ca527a4ebb9dabcf7d4",
     "before_lines": 69,
     "after_lines": 69,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -554,7 +554,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "c052049307f2c155d48756715ccc2fdb05aac19038d7eae07a48cddce1beacb7",
+    "source_tree_hash": "86d3dd164f7a31554e5f7e5e0bb12df2b18b455166b0cf5cee2a61393d659ec8",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -1019,7 +1019,7 @@
   {
     "skill": "python-tdd-test-authoring",
     "before_entry_sha256": "48a045b138a49009adf6ceeab942d448a857278062cabc6de1594594303a3659",
-    "after_entry_sha256": "8c17ae0e54fdccd567334bb0065cc3c7190a6eab30d2c18902baa356bc31dd74",
+    "after_entry_sha256": "256ee4f4a1266f88bd389a01776878790547f53c0f6d03672f70865c5c0ac81c",
     "before_lines": 174,
     "after_lines": 177,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -1033,7 +1033,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "e8dc3edf313cff4612f4cec2bee04981773c56d0f4ac47c297fdd31fdb592973",
+    "source_tree_hash": "1fe15ed04787970c263c8f920f973866b581625ddfb2515782577492530936fd",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

@@ -14,8 +14,8 @@ inputs:
   - whether the change includes API or contract changes that require synced documentation
   - whether an emergency marker and human confirmation exist
 outputs:
-  - release decision — blocked, ready for PR, ready to tag, or emergency-path pending human confirmation
-  - normal-path or emergency-path gate result with explicit failed-gate diagnostics
+  - readiness decision — blocked, ready for PR, merge readiness unconfirmed, ready to merge, ready to tag, or emergency-path pending human confirmation
+  - endpoint-specific gate result with explicit failed-gate diagnostics
   - repair guidance for each failed gate condition
   - safe PR or tagging commands when all gates are satisfied
   - version-bump guidance based on commit semantics
@@ -56,7 +56,7 @@ Do not use this skill when:
 # Process
 1. Select the requested endpoint before applying gates:
    - Draft PR: verify authorized branch/base, intended committed diff, relevant local checks, and honest disclosure of pending checks/review. CI or human approval that the PR will request is not a creation prerequisite. Stop at human review; never infer merge or tag permission.
-   - Merge readiness: require the repository's applicable review, CI, test, lint and typing gates; report absent evidence as unconfirmed. Tag uniqueness and version-to-tag agreement apply only when this is also a release.
+   - Merge readiness: require the repository's applicable review, CI, test, lint and typing gates; report absent evidence as `merge readiness unconfirmed`, and `ready to merge` only when all applicable evidence passes. Tag uniqueness and version-to-tag agreement apply only when this is also a release.
    - Release/tag: follow the normal or explicit emergency path in `references/detailed-guidance.md`. That release-specific procedure, validation and failure handling apply to this endpoint, not ordinary draft creation.
 2. For draft PR or merge assessment, use the endpoint checks above and report the remaining gates.
 3. For release/tag, read `references/detailed-guidance.md` for version synchronization, normal/emergency gates, tagging safety, and failure recovery before proceeding.
@@ -67,8 +67,8 @@ Do not use this skill when:
 - **Negative**: Allow `[emergency]` to skip failing tests, ignore an existing tag, or release from a dirty workspace because the change "looks small."
 
 # Outputs
-- a release decision: blocked, ready for PR, ready to tag, or emergency-path pending human confirmation
-- a clear normal-path or emergency-path gate result
+- a readiness decision: blocked, ready for PR, merge readiness unconfirmed, ready to merge, ready to tag, or emergency-path pending human confirmation
+- a clear endpoint-specific gate result
 - explicit failed-gate diagnostics and repair guidance
 - safe commands only for the requested endpoint after its applicable gate is satisfied
 - version-bump guidance based on commit semantics

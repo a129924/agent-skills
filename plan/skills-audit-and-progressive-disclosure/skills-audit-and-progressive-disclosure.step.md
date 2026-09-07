@@ -78,3 +78,14 @@ merge/release.
 - [X] Push both comment-fix topic commits to the existing PR branch.
 - [X] Resolve only the eight threads above after the pushed head is verified.
 - [X] Stop for renewed human/automated review; do not merge or release.
+
+## PR Comment Review / Fix — Round 2
+
+- [X] Fetch the current PR review state and triage six current, unresolved
+  direct-apply findings; preserve prior resolved threads as historical evidence.
+- [X] Repair bounded authorization routing, discovery/README consistency,
+  per-test TDD initial-state evidence, merge-readiness results, and Markdown
+  link handling in the completion gate; add link regressions.
+- [X] Commit canonical repair `8a919ab`, regenerate affected Codex projections
+  and inventory/provenance evidence, validate, push, then resolve only the six
+  addressed Round 2 threads after GitHub reports the pushed head.

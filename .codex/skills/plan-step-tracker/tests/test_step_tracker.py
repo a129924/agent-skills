@@ -627,6 +627,18 @@ def test_all_completion_rejects_malformed_evidence(tmp_path, content):
     assert check_all_succeeded("audit", tmp_path) == 1
 
 
+@pytest.mark.parametrize("content", [
+    "- [X] done\n[Design notes](https://example.test/design)\n",
+    "- [X] done\n[design]: https://example.test/design\n",
+])
+def test_all_completion_allows_ordinary_markdown_links(tmp_path, content):
+    """Links are prose, not malformed checkbox evidence."""
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text(content)
+    assert check_all_succeeded("audit", tmp_path) == 0
+
+
 @pytest.mark.parametrize("checker", [check_all_succeeded, check_impl_steps_succeeded])
 def test_completion_rejects_unreadable_evidence(tmp_path, monkeypatch, checker):
     topic_dir = tmp_path / "audit"

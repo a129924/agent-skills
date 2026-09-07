@@ -35,9 +35,9 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
 
 ## Status and constraint checks
 
-- [ ] **6. expected_initial_status set**: Decision is made and documented for how tests should start:
+- [ ] **6. Per-test initial status observed**: Every test_mapping entry records expected and observed initial status plus an observation reason. A suite may mix these states:
   - `red`: Tests are written and failing (most common TDD case).
-  - `pass`: Tests are written but already passing (pass_existing refactor case; run test suite to confirm).
+  - `pass_existing`: Tests are written but already passing (refactor guard; run the test suite to confirm).
   - `xfail`: Tests are marked `@pytest.mark.xfail` (advanced; only if plan explicitly requests this).
   - `skip`: Tests are marked `@pytest.mark.skip` (rare; only if plan explicitly requests this).
 
@@ -60,8 +60,8 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
   - Output YAML has all required keys:
     - `verdict` (one of: `red-tests-ready`, `needs-rework`, `insufficient-context`, `skip_with_reason`, `BLOCKED`)
     - `d1_verdict` (object: `{ "verdict": "trivial|non-trivial", "reason": "..." }`)
-    - `test_mapping` (list of objects with keys: `requirement_id`, `test_case_name`, `coverage_category`)
-    - `validation_checks` (object with all checks, including: d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, expected_initial_status, production_code_modified)
+    - `test_mapping` (list of objects with keys: `requirement_id`, `test_case_name`, `coverage_category`, `expected_initial_status`, `observed_initial_status`, `observation_reason`)
+    - `validation_checks` (object with all checks, including: d1_decision, behavior_contract_source, requirements_mapped, public_contract_coverage, test_categories_present, initial_statuses_observed, production_code_modified)
     - `issues` (list of strings; empty list if no issues)
     - `next_step` (string describing next action)
 
@@ -75,7 +75,7 @@ Use this checklist when authoring or reviewing RED tests for a Python implementa
   - **Boundary 1 (Never modify production code)**: Verified in item #7 above. If violated → abort.
   - **Boundary 2 (D1 classifier gates verdict)**: If D1 says `trivial`, honor it; do not override to `red-tests-ready`. Return `skip_with_reason` instead.
   - **Boundary 3 (Test mapping must be complete)**: Every requirement has at least one test. If not → `needs-rework`.
-  - **Boundary 4 (expected_initial_status must be set)**: Verdict includes expected_initial_status. If missing → `needs-rework`.
+  - **Boundary 4 (per-test initial status must be observed)**: Every test_mapping entry includes expected_initial_status, observed_initial_status, and observation_reason. If any is missing → `needs-rework`.
   - **Boundary 5 (non-trivial requires spec.md)**: If D1 is `non-trivial` and `plan/<topic>/<topic>.spec.md` is missing, return `BLOCKED` and route to `python-plan-authoring`.
 
   If any boundary is violated → reflect violation in verdict and issue list.
