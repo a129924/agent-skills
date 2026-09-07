@@ -200,9 +200,11 @@ def _validate_completion_lines(lines: list[str], *, implementation: bool = False
     """Reject malformed checkbox evidence without changing read-only queries."""
     for line in lines:
         stripped = line.strip()
-        task_like = re.match(r"^(?:(?:[-*+]|\d+[.)])\s*)?\[", stripped)
-        list_item = re.match(r"^(?:[-*+]\s|\d+[.)]\s)", stripped)
-        if task_like or (implementation and list_item):
+        checkbox_like = re.match(r"^(?:(?:[-*+]|\d+[.)])\s*)?\[", stripped)
+        top_level_list_item = implementation and re.match(
+            r"^(?:[-*+]\s|\d+[.)]\s)", line
+        )
+        if checkbox_like or top_level_list_item:
             if not re.fullmatch(r"- \[[ Xx]\] \S.*", line.rstrip()):
                 raise ValueError(f"Malformed or unsupported completion step: {line}")
 
@@ -211,6 +213,8 @@ def check_impl_steps_succeeded(topic: str, plan_dir: Path = Path("plan")) -> int
     """Check if all implementation steps are complete. Exit 0 if yes, 1 if any pending."""
     try:
         step_file = plan_dir / topic / f"{topic}.step.md"
+        if not step_file.exists():
+            raise FileNotFoundError(f"File not found: {step_file}")
         lines = step_file.read_text(encoding="utf-8").splitlines()
         headings = [i for i, line in enumerate(lines) if line.strip() == "## Implementation Steps"]
         if len(headings) != 1:

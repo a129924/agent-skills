@@ -107,7 +107,7 @@ def test_generated_projection_preserves_and_runs_its_own_engine(adapter_module, 
     repo_root = make_repo(tmp_path)
     engine_relative = Path("platform-projection-adapter/scripts/platform_projection_adapter.py")
     source_engine = repo_root / "skills" / engine_relative
-    write_text(source_engine, SCRIPT_PATH.read_text())
+    write_text(source_engine, SCRIPT_PATH.read_text(encoding="utf-8"))
     projected_root = repo_root / ".codex"
     code, _, _ = run_adapter(adapter_module, repo_root, "--platform-root", str(projected_root), "--apply")
     assert code == 0
@@ -117,7 +117,7 @@ def test_generated_projection_preserves_and_runs_its_own_engine(adapter_module, 
     second_root = tmp_path / ".second"
     code, _, _ = run_adapter(generated_module, repo_root, "--platform-root", str(second_root), "--apply")
     assert code == 0
-    generated_skill = (second_root / "skills/alpha/SKILL.md").read_text()
+    generated_skill = (second_root / "skills/alpha/SKILL.md").read_text(encoding="utf-8")
     assert PLATFORM_PLACEHOLDER not in generated_skill
     assert str(second_root) in generated_skill
     code, stdout, _ = run_adapter(generated_module, repo_root, "--platform-root", str(second_root))
@@ -133,7 +133,7 @@ def test_generated_projection_preserves_and_runs_its_own_engine(adapter_module, 
         check=False,
     )
     assert cli_result.returncode == 0, cli_result.stderr
-    cli_skill = (repo_root / ".from-cli/skills/alpha/SKILL.md").read_text()
+    cli_skill = (repo_root / ".from-cli/skills/alpha/SKILL.md").read_text(encoding="utf-8")
     assert ".from-cli/skills/alpha/SKILL.md" in cli_skill
     assert PLATFORM_PLACEHOLDER not in cli_skill
 
