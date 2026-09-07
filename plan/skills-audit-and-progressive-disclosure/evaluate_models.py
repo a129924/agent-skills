@@ -36,13 +36,20 @@ CASES = (
 
 def source(path: Path, phase: str) -> str:
     """Read only skill Markdown from the frozen base or current worktree."""
-    relative = path.relative_to(ROOT)
+    try:
+        relative = path.relative_to(ROOT)
+    except ValueError as error:
+        raise ValueError(f"outside Markdown export scope: {path}") from error
     if relative.parts[0] != "skills" or path.suffix != ".md":
         raise ValueError(f"outside Markdown export scope: {relative}")
+    resolved = path.resolve(strict=True)
+    skills_root = (ROOT / "skills").resolve()
+    if not resolved.is_relative_to(skills_root):
+        raise ValueError(f"outside canonical skills tree: {relative}")
     if phase == "before":
         result = subprocess.run(["git", "show", f"{BASE}:{relative}"], cwd=ROOT, capture_output=True, text=True, check=False)
         return result.stdout if result.returncode == 0 else ""
-    return path.read_text(encoding="utf-8")
+    return resolved.read_text(encoding="utf-8")
 
 
 def prompt_for(case: tuple[str, str, str, str], phase: str) -> str:
