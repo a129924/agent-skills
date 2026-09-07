@@ -1,6 +1,6 @@
 ---
 name: plan-creator
-description: Create a valid, repo-visible `plan/<topic>/<topic>.plan.md` for this repository, with correct workflow phases, status transitions, artifact paths, analysis-layer handling, reviewer handoff contract, and stable-library intent handling.
+description: "Author a repository topic plan with explicit scope, artifacts, workflow gates, and handoff criteria."
 complexity: high
 risk_profile:
   - ambiguity_sensitive
@@ -22,7 +22,7 @@ inputs:
   - whether the topic affects stable-library surfaces
   - any locked decisions that should not be rediscovered during implementation
   - optional analysis-layer artifacts at `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md`
-  - any explicit human `override` instruction if chat-time guidance should outrank analysis artifacts
+  - any clear user revision to the analysis baseline, including its affected scope
   - the current workflow contract from `plan/agent-handoff-workflow.md`
   - the shared topic-plan contract from `plan/topic-plan-contract.md`
 outputs:
@@ -57,7 +57,7 @@ Do not use this skill when:
 - whether the topic affects stable-library surfaces
 - any locked decisions that should not be rediscovered during implementation
 - optional analysis-layer artifacts at `analysis/<topic>/requirements.md` and `analysis/<topic>/technical-spec.md`
-- any explicit human `override` instruction if chat-time guidance should outrank analysis artifacts
+- any clear user revision to the analysis baseline, including its affected scope
 - the current workflow contract from `plan/agent-handoff-workflow.md`
 - the shared topic-plan contract from `plan/topic-plan-contract.md`
 
@@ -69,7 +69,7 @@ Do not use this skill when:
    - if both files exist, enter strict mode: treat `analysis/<topic>/technical-spec.md` as the execution-facing source of truth, use `analysis/<topic>/requirements.md` as the business-intent guardrail, and map the output plan 100% to the technical spec instead of inventing alternative work from chat context
    - if one file exists without the other, emit an explicit semantic warning that names the missing companion artifact and explains that the analysis layer is incomplete
    - if neither file exists, emit an explicit semantic warning that the plan is being authored without the optional analysis layer
-   - analysis-layer artifacts outrank conversation-time instructions unless a human explicitly says `override`
+   - analysis artifacts are the recorded baseline; a clear later user revision updates that baseline without requiring a magic word. Record the affected contract and synchronize authorized artifacts before downstream use
 5. Decide whether the topic is:
    - review-ready-only with no stable-library surfaces, or
    - a topic that explicitly affects stable-library surfaces and therefore needs declared timing and stable-library metadata
@@ -111,7 +111,7 @@ Do not use this skill when:
 - analysis-layer priority routing is stated before the plan body begins
 - strict mode maps the plan 100% to `analysis/<topic>/technical-spec.md` when both analysis artifacts exist
 - missing analysis artifacts produce explicit semantic warnings instead of silent fallback
-- chat-time instructions do not outrank analysis artifacts unless a human explicitly says `override`
+- clear user revisions are reflected in the affected baseline; ambiguous contradictions are surfaced before handoff
 
 ## On Soft Fail
 - mark the plan as INCOMPLETE; list missing analysis artifacts or unresolvable scope items explicitly
@@ -131,7 +131,7 @@ Do not use this skill when:
 - `We can decide whether this touches README or VERSION after implementation.`
 - `Artifact paths do not need to be exact as long as the scope sounds right.`
 - `A rough status model is good enough if the intent is obvious.`
-- `The latest chat instruction should automatically override analysis files.`
+- `An ambiguous chat remark silently replaces the entire analysis baseline.`
 
 # Boundaries
 - Do not implement the topic's actual skill or code artifact.
@@ -139,7 +139,7 @@ Do not use this skill when:
 - Do not guess stable-library timing or release intent.
 - Do not rely on hidden chat context instead of a repo-visible plan.
 - Do not let absent analysis files fail silently; warn explicitly.
-- Do not let casual chat instructions override analysis artifacts without an explicit human `override`.
+- Do not treat ambiguous remarks as blanket permission to discard analysis; honor clear revisions and update only affected contracts.
 - Do not generate a generic project-management plan for another repository.
 - `plan/topic-plan-contract.md` is the shared repo-level fallback contract when the topic-plan template is absent.
 
@@ -152,11 +152,11 @@ Do not use this skill when:
 ## Ambiguous Requirement
 - if stable-library timing is unclear, stop and ask rather than guessing; do not fill with `TBD` or `later`
 - if artifact paths cannot be determined exactly, stop and list what is missing
-- if analysis artifacts conflict with chat-time instructions and no explicit human `override` is present, stop and require the human to choose before continuing
+- if a conflict remains ambiguous after reading the latest user intent and baseline, ask which contract is intended; a clear revision does not require another confirmation
 
 ## Execution Limitation
 - if the topic-plan template is absent, fall back to the required section list in `plan/topic-plan-contract.md` rather than inventing a new shape
-- if a human `override` instruction is ambiguous about which analysis file it overrides, ask for clarification before discarding analysis content
+- if a revision is ambiguous about which contract changes, ask before discarding analysis content
 
 # Workflow State Contract
 

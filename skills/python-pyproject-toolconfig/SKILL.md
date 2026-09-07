@@ -1,12 +1,12 @@
 ---
 name: python-pyproject-toolconfig
-description: Append missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings.
+description: "Append missing Ruff, Pyright, and pytest sections to pyproject.toml; preserve existing configuration."
 complexity: medium
 risk_profile:
   - code_modification
 inputs:
-  - "--python-version: Python 版本字串，必須向人類詢問（例如 3.10、3.12）"
-  - "--package-name: 套件/模組名稱，用於 pyright include 路徑，必須向人類詢問"
+  - "--python-version: Python 版本字串，先從明確的專案設定確認；有衝突才詢問（例如 3.10、3.12）"
+  - "--package-name: 套件/模組名稱，用於 pyright include 路徑，先從明確的專案設定確認；有衝突才詢問"
   - "pyproject.toml: 執行前必須已存在於當前工作目錄"
 outputs:
   - "修改後的 pyproject.toml，補充了缺少的 [tool.ruff]、[tool.pyright]、[tool.pytest.ini_options] section"
@@ -42,38 +42,38 @@ do_not_use_when:
 
 | 輸入 | 來源 | 說明 |
 |---|---|---|
-| `--python-version` | **必須詢問人類** | Python 版本字串，含點號，例如 `3.10`、`3.12` |
-| `--package-name` | **必須詢問人類** | 套件/模組名稱，用於 pyright include 路徑，例如 `mylib` |
+| `--python-version` | 專案設定或使用者明示 | Python 版本字串，含點號，例如 `3.10`、`3.12` |
+| `--package-name` | 專案設定或使用者明示 | 套件/模組名稱，用於 pyright include 路徑，例如 `mylib` |
 | `pyproject.toml` | 當前工作目錄 | 執行前必須已存在 |
 
-**重要**：`--python-version` 和 `--package-name` 必須向人類詢問，不得自行推斷或猜測。
+**重要**：先檢查目標 Python 版本設定、`requires-python` 與 `src/` 的可匯入套件。若範圍不能唯一決定目標版本，或存在多個候選套件，才詢問；不要把 distribution name 當成 import name，也不要把執行工具的 Python 版本當成專案目標版本。記錄採用值與來源。
 
 # Process
 
 1. **確認** 當前工作目錄中 `pyproject.toml` 存在。
 
-2. **詢問人類** 兩個必要值：
+2. **查明** 兩個必要值；僅對無法由現有證據解決的選擇詢問：
    - `--python-version`：專案 Python 目標版本，格式含點號（例如 `3.10`）
    - `--package-name`：位於 `src/` 下的可匯入套件名稱（例如 `mylib`）
 
 3. **執行 script**（從專案根目錄）：
    ```bash
-   uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+   uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
      --python-version 3.10 \
      --package-name mylib
    ```
 
 4. **確認 stdout 輸出**：確認哪些 section 被 append（`✅ Will append`），哪些因已存在而跳過（`ℹ️ already exists`）。
 
-5. **驗證** `pyproject.toml` 仍為合法 TOML：
+5. **驗證** `pyproject.toml` 仍為合法 TOML。以下驗證執行環境需 Python 3.11+（`tomllib`），與上面的專案目標版本分開；若現有環境較舊，使用已安裝的 TOML parser 或 Python 3.11+，不要未經授權安裝工具：
    ```bash
-   uv run -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
+   uv run python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
    ```
 
 # Examples
 
 - **Positive**: Run from project root with `--python-version 3.11 --package-name mypackage`; script detects no existing `[tool.*]` sections and appends ruff, pyright, and pytest blocks. See `examples.md` for full expected stdout.
-- **Negative**: Passing `--python-version py311` instead of `3.11`; this produces `target-version = "pypy311"` in the ruff section. Always pass bare version strings such as `3.10` or `3.11`.
+- **Negative**: Passing `--python-version py311` instead of `3.11` is rejected by argument validation before any write. Pass dotted version strings such as `3.10` or `3.11`.
 
 # Outputs
 
@@ -100,12 +100,12 @@ do_not_use_when:
 - verify appended sections do not duplicate existing sections
 
 ## On Soft Fail
-- If required inputs (python-version, package-name) are missing, stop and ask before proceeding
+- If required values remain unresolved after inspecting project evidence, report the gap and ask before appending
 
 # Failure Handling
 
 ## Missing Context
-- BLOCKED — if pyproject.toml does not exist or python-version / package-name not provided, stop and ask
+- BLOCKED — if pyproject.toml does not exist, or target values remain ambiguous after inspection, stop and ask
 
 ## Ambiguous Requirement
 - If package name is ambiguous, ask for clarification; do not guess

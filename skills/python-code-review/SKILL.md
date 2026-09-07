@@ -1,6 +1,6 @@
 ---
 name: python-code-review
-description: Review Python code quality across typing, lint, readability, error handling, anti-patterns, test quality, and observability. Use this after python-implementation-review has already approved the implementation against the plan.
+description: "Review Python code quality in a standalone diff or formal workflow; standalone reviews need no approved plan."
 complexity: high
 risk_profile:
   - ambiguity_sensitive
@@ -8,7 +8,7 @@ risk_profile:
 inputs:
   - Python source files under review (or git diff)
   - Project tooling config (pyproject.toml, Makefile, README.md, CONTRIBUTING.md) — absence acceptable
-  - Confirmation that python-implementation-review has already approved the implementation
+  - Workflow context, if this is a formal implementation handoff; no plan approval is needed for standalone quality review
 outputs:
   - verdict: approved | needs-rework
   - tooling_detected: detected tools or "generic fallback"
@@ -18,7 +18,7 @@ use_when:
   - A code review must assess quality independent of plan alignment
   - A PR is being evaluated for merge readiness on quality grounds
 do_not_use_when:
-  - python-implementation-review has not yet run or has returned needs-rework
+  - A formal workflow handoff is blocked by its required implementation-review gate
   - The task is to compare code against a plan document (use python-implementation-review)
   - The task is only about naming conventions (use python-naming)
   - The task is only about type hints in isolation (use python-type-hints-strict)
@@ -44,7 +44,7 @@ Use this skill when:
 - a PR is being evaluated for merge readiness on quality grounds
 
 Do NOT use this skill when:
-- `python-implementation-review` has not yet run or has returned `needs-rework`
+- a formal workflow handoff is blocked by its required implementation-review gate
 - the task is to compare code against a plan document (use `python-implementation-review`)
 - the task is only about naming conventions (use `python-naming`)
 - the task is only about type hints in isolation (use `python-type-hints-strict`)
@@ -55,29 +55,21 @@ Do NOT use this skill when:
 
 - The Python source files under review (or git diff)
 - The project's `pyproject.toml`, `Makefile`, `README.md`, or `CONTRIBUTING.md` (used for tooling detection; absence is acceptable)
-- Confirmation that `python-implementation-review` has already approved the implementation
+- Workflow context if applicable; confirm implementation approval for a formal handoff only
 
 # Process
 
 ## Step 0 — Sequencing gate (MUST execute first)
 
-Confirm that `python-implementation-review` has already approved this implementation.
-
-- If confirmation is absent or the implementation has not been reviewed: **refuse**, output a routing message, and stop.
-  > "Sequencing gate: python-implementation-review must approve the implementation before python-code-review runs. Please run python-implementation-review first."
+Distinguish standalone quality review from a formal workflow handoff.
+- For a requested diff/code-quality review, proceed without inventing a plan prerequisite; the verdict covers only inspected quality, not plan completion or merge readiness.
+- In a formal workflow that requires implementation review first, retain that gate. If its approval is absent or `needs-rework`, report the missing gate and stop the handoff. Do not describe a standalone quality verdict as satisfying it.
 
 ## Step 1 — Detect project tooling
 
-Inspect the project in this order and stop at the first positive match:
-
-1. **`pyproject.toml`** — check for `[tool.mypy]`, `[tool.pyright]`, `[tool.ruff]`, `[tool.flake8]`
-2. **`Makefile`** — check for `lint`, `typecheck`, `test` targets
-3. **`README.md` / `CONTRIBUTING.md`** — check for validation command references
-4. **Fallback** — no tooling found; apply generic Python best-practice judgment without failing
-
-Record detected tools in the output as `tooling_detected`. Use detected configuration to frame judgment — for example, if `[tool.pyright]` has `strict = true`, then `Any` usage is flagged as blocking.
-
-The skill does NOT execute tools. It reads configuration to calibrate severity.
+Read relevant configuration and accumulate evidence per tool; finding Ruff must not end the search for typing or test configuration. Read `references/tooling-detection.md` for precedence and severity calibration.
+Record detected tools and effective strictness in `tooling_detected`. Pyright uses `typeCheckingMode = "strict"` (or a matching `strict` path array), not a boolean `strict` setting or a `--strict` CLI option. `pyrightconfig.json` takes precedence over `[tool.pyright]`.
+This review reads configuration; it does not execute tooling.
 
 ## Step 2 — Review all 7 quality dimensions
 
@@ -209,7 +201,7 @@ Dimensions with no findings are emitted as empty lists `[]`.
 ## Required Checks
 
 - Code diff or source files must be provided; the review cannot proceed without reviewable content.
-- Confirmation that `python-implementation-review` has already approved this implementation must be present before any dimension is assessed.
+- For a formal handoff, confirm its required implementation-review gate; a standalone quality review needs no plan approval.
 
 ## Quality Checks (best effort)
 
@@ -245,10 +237,10 @@ If referenced test files, dependency modules, or configuration files cannot be i
 - Do not enforce a hard coverage gate — note obviously untested branches as `info` or `warning`.
 - Do not apply strict-mode typing rules unless the project's configuration enables strict mode.
 - Do not flag `__getattr__` / `__setattr__` usage without first checking the escape-hatch conditions in `python-descriptors-attribute-access`.
-- Do not approve an implementation if `python-implementation-review` has not already run.
+- Do not claim plan completion or bypass a formal implementation-review gate using a standalone quality verdict.
 
 **Cross-skill signposts:**
-- `python-implementation-review` — verifies code matches the plan; must run before this skill
+- `python-implementation-review` — verifies an approved plan; precedes quality review only in workflows requiring that gate
 - `python-type-hints-strict` — deep strict-mode typing guidance
 - `python-testing-pytest` — deep unit test design guidance
 - `python-error-handling` — deep exception hierarchy and translation guidance

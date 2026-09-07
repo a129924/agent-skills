@@ -1,6 +1,6 @@
 ---
 name: python-class-design
-description: Design or review ordinary Python classes with clear public surfaces, disciplined instance state, thin constructors, and limited use of properties and name mangling.
+description: "Design ordinary Python classes, instance state, constructors, and public member placement."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive

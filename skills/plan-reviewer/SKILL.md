@@ -1,6 +1,6 @@
 ---
 name: plan-reviewer
-description: Independently review a repo-visible `plan/<topic>/<topic>.plan.md` for this repository after the plan exists and before execution proceeds. Use this when a topic plan needs a contract-level verdict against the repository workflow and plan-authoring rules.
+description: "Independently review an authored repository topic plan before execution."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

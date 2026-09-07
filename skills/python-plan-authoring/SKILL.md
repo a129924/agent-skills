@@ -1,6 +1,6 @@
 ---
 name: python-plan-authoring
-description: Create an executable Python implementation plan that freezes scope, contracts, decisions, affected files, tests, and validation commands before coding begins. Not a todo list — an implementation contract that executor can follow and reviewer can verify.
+description: "Author a nontrivial Python implementation contract from intent and inspected facts; exclude isolated trivial edits."
 complexity: high   # creates multi-section plans that gate execution; required sections follow
 risk_profile:
   - ambiguity_sensitive   # missing input fundamentally changes plan scope
@@ -9,8 +9,8 @@ inputs:
   - feature or change intent with scope
   - relevant codebase context (modules, packages, public APIs)
   - 'D1 structured verdict when available: `{ "verdict": "trivial|non-trivial", "reason": "..." }`'
-  - all 7 required decision answers
-  - at least 3 Non-goals
+  - evidence to resolve the 7 decision fields, including justified not-applicable answers
+  - relevant Non-goals
   - measurable requirements for the change
   - test strategy signals
   - project validation commands or config reference
@@ -58,9 +58,9 @@ Do not use this skill when:
 - the feature, change, or bug fix being planned
 - the relevant current codebase context (existing modules, packages, public APIs)
 - D1 structured verdict when available: `{ "verdict": "trivial|non-trivial", "reason": "..." }`
-- explicit answers to all required decision points (module placement, API shape, breaking changes, dependencies, error handling, typing)
+- project evidence and user intent for decision points (module placement, API shape, breaking changes, dependencies, error handling, typing)
 - measurable requirements for the change
-- at least 3 Non-goals stating what this change will NOT do
+- relevant Non-goals stating what this change will NOT do
 - test strategy signals (expected test categories and test file location)
 - the project's existing validation commands or config files (`pyproject.toml`, `Makefile`, `README`)
 - async-capable evidence and async baseline inputs when the request changes async boundary, lifecycle, concurrency, failure, or cancellation behavior
@@ -69,20 +69,10 @@ Do not use this skill when:
 # Process
 
 ## Stop-and-ask conditions
-Stop before drafting. Ask the user for the missing information when any of the following are absent:
 
-1. **No Decisions content** — the user has not answered all required decision points:
-   - Which module or package receives the new code?
-   - Is a new public API being added?
-   - Are existing interfaces being modified?
-   - Are breaking changes allowed?
-   - Are new dependencies being added?
-   - What is the error handling strategy?
-   - What is the typing strategy?
-2. **No Non-goals** — the user has not provided at least 3 items that this change will NOT do.
-3. **No Validation Commands** — no commands are given and no project config file (`pyproject.toml`, `Makefile`, `README`) is referenced.
-4. **Vague Implementation Steps** — the user describes high-level wishes rather than executable steps. `"Refactor the parser"` is not acceptable. `"1. Inspect src/parser.py. 2. Extract validate() into validators.py..."` IS acceptable.
-5. **Async-capable topic without a frozen async baseline** — the request introduces async-capable evidence but does not yet answer the async boundary, resource lifecycle, concurrency model, failure model, cancellation / timeout policy, validation plan, and implementer handoff notes needed to freeze the triggered async baseline. Use `python-async-planning` only as the routing aid for gathering that baseline.
+First inspect the relevant code and project configuration and use the user's stated scope. The author supplies executable steps and proposes decisions grounded in that evidence; the user need not prewrite the plan.
+Ask only when unresolved alternatives would materially change scope, public behavior, breaking-change permission, dependencies, safety, or async ownership. Record supported decisions and sources; never silently choose among conflicting contracts.
+Missing noncritical details may produce an INCOMPLETE draft with named gaps. Do not hand off a contract-critical TBD for implementation. For triggered async work, gather and freeze the required async baseline before implementation approval.
 
 ## Authoring steps
 1. Confirm this is a Python implementation planning task. If the request is execution or review, stop and redirect.
@@ -98,7 +88,7 @@ Stop before drafting. Ask the user for the missing information when any of the f
    State the single concrete outcome this change achieves. One or two sentences.
 
    **2. Non-goals**
-   List at least 3 items stating what this change will NOT do. Examples: no full module refactor, no CLI change, no new external dependency, no performance work.
+   List relevant scope exclusions stating what this change will NOT do. Examples: no full module refactor, no CLI change, no new external dependency, no performance work.
 
    **3. Current Context**
    Briefly describe the relevant existing code, module, or system state. Name the files, classes, or functions that provide context for the change.
@@ -148,7 +138,7 @@ Stop before drafting. Ask the user for the missing information when any of the f
    Numbered, executable steps with explicit file references. Each step names a specific file and a specific action. NOT: `"Refactor the validation module."` YES: `"1. Open src/utils/validation.py. Add validate_email(email: str) -> bool below existing validators."`
 
    **9. Test Plan**
-   Must be specific. Name the test file and cover all of the following categories:
+   Name the relevant test files and assess each category below; mark a category N/A with a concrete reason when no affected behavior needs it. Do not add redundant tests solely to fill categories:
    - Happy path
    - Invalid input
    - Edge case
@@ -191,11 +181,11 @@ Stop before drafting. Ask the user for the missing information when any of the f
 7. Verify the plan before handoff:
     - All 13 sections are present in order.
     - `Decisions` includes `Async-planning status` plus all 7 required standard items.
-    - `Non-goals` lists at least 3 items.
+    - `Non-goals` lists relevant scope exclusions.
     - `Implementation Steps` are executable and reference specific files.
     - `plan/<topic>/<topic>.step.md` exists, includes `topic`, `phase: plan-authoring`, and `created`, and mirrors every numbered Implementation Step as `- [ ]`.
     - If D1 verdict is `non-trivial`, `plan/<topic>/<topic>.spec.md` exists and includes all three required sections.
-    - `Test Plan` covers all 5 test categories.
+    - `Test Plan` addresses applicable test categories and justifies N/A categories.
     - `Validation Commands` are present or reference a project config.
     - `Risks` and `Rollback Plan` name concrete items, not placeholders.
     - If `Async-planning status` is `triggered`, the exact async-planning subsections and contradiction handling are present in the plan text itself.
@@ -238,10 +228,10 @@ Stop before drafting. Ask the user for the missing information when any of the f
 - when D1 verdict is `non-trivial`, `plan/<topic>/<topic>.spec.md` is produced alongside plan/step artifacts and follows the required 3-part structure
 - `Decisions` section addresses all 7 required items (no TBD placeholders in contract-critical fields)
 - `Decisions` includes a reviewable `Async-planning status` line with cited trigger or exemption evidence
-- `Non-goals` lists at least 3 items
+- `Non-goals` lists relevant scope exclusions
 - `Implementation Steps` reference specific files and executable actions
 - `*.step.md` includes the executor note, all 6 Workflow Stages, and mirrored `## Implementation Steps` entries initialized as `- [ ]`
-- `Test Plan` covers all 5 categories: happy path, invalid input, edge case, regression, backward compatibility
+- `Test Plan` assesses applicable categories (or gives a reason for N/A): happy path, invalid input, edge case, regression, backward compatibility
 - `Validation Commands` are present or explicitly reference a project config file
 - async-capable topics with `Async-planning status: triggered` include the exact async-planning subsections
 - exempt topics still cite the exemption explicitly in `Async-planning status`
@@ -263,7 +253,7 @@ Stop before drafting. Ask the user for the missing information when any of the f
 # Failure Handling
 
 ## Missing Context
-- BLOCKED — if any of the 5 stop-and-ask conditions are triggered (missing Decisions, Non-goals, Validation Commands, vague Steps, or missing async baseline for a triggered topic): stop, list missing items, ask user before drafting
+- BLOCKED for unresolved contract-critical choices after inspection; identify the conflicting alternatives and ask. Missing discoverable facts alone are not a reason to require the user to prewrite a plan
 - mark any drafted section that relies on missing context as INCOMPLETE
 
 ## Ambiguous Requirement
@@ -272,15 +262,15 @@ Stop before drafting. Ask the user for the missing information when any of the f
 
 ## Execution Limitation
 - if codebase context is unavailable: state the limitation explicitly; use placeholder file paths clearly marked as `<to be confirmed>`
-- do not invent module names, signatures, paths, or async ownership rules the user has not provided
+- do not present invented codebase facts as observed; clearly distinguish supported proposals from existing contracts
 
 # Boundaries
 - Do not execute the plan.
 - Do not approve or mark the plan as complete.
-- Do not invent module names, file paths, API signatures, or async ownership rules that the user has not provided.
+- Do not invent existing facts or silently change user-approved contracts; proposals must be grounded in inspection and explicit scope.
 - Do not skip required sections or merge sections together.
-- Do not accept vague Implementation Steps — stop and ask instead.
-- Do not accept fewer than 3 Non-goals items.
+- Turn intent into concrete Implementation Steps using inspection; ask only about remaining material choices.
+- Do not pad Non-goals to meet a count; require explicit, relevant scope exclusions.
 - Do not treat this skill as a generic project planning tool for non-Python work.
 - Do not treat `*.step.md` as optional when producing a `*.plan.md`.
 - Do not treat `*.spec.md` as optional when D1 verdict is `non-trivial`.

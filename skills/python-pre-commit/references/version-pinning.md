@@ -6,11 +6,12 @@
 
 | Approach | When to use | Trade-off |
 |----------|------------|-----------|
-| Check ruff-pre-commit releases | Always | Authoritative source; requires a manual lookup step |
-| Pin to current latest stable | Greenfield project | Easy to set up; update when upgrading ruff |
+| Keep the existing pin | Merge missing hooks | Preserves current behavior; upgrading is a separate choice |
+| Use the generator's documented default | New config with no requested override | Reproducible pin; does not claim latest release |
+| Check ruff-pre-commit releases | Explicit upgrade or version selection | Authoritative source; requires lookup |
 
 **Source of truth**: https://github.com/astral-sh/ruff-pre-commit/releases<br>
-The `rev` for `ruff-pre-commit` is independent of the ruff version resolved by `uv`. Always derive the rev tag from the ruff-pre-commit releases page, not from `pyproject.toml` or the locally-installed ruff version.
+The `rev` for `ruff-pre-commit` is independent of the ruff version resolved by `uv`. When choosing a new pin, verify it against the releases page rather than inventing a tag from the locally installed version. An ordinary merge preserves the existing pin; a new config may use the documented generator default without claiming it is current.
 
 **Updating** (when upgrading ruff):
 1. Update the ruff version constraint in `pyproject.toml`.

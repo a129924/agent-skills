@@ -1,6 +1,6 @@
 ---
 name: python-control-flow
-description: Choose clear general-purpose Python branching patterns. Use this when drafting or reviewing `if/elif`, `match/case`, guard clauses, and truthiness rules.
+description: "Review Python branching, guard clauses, match/case, and truthiness choices."
 complexity: low
 risk_profile: []
 inputs:

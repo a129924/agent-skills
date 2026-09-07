@@ -1,6 +1,6 @@
 ---
 name: git-branch-naming
-description: Name or repair development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance when work has already started on the wrong branch.
+description: "Choose a semantic development branch name or repair work started on the wrong branch."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive   # task type, namespace token, or current branch state changes the recommendation meaningfully

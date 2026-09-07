@@ -1,6 +1,6 @@
 ---
 name: python-package-layout
-description: Design or review conservative Python package layouts with `src/`, `pyproject.toml`, clear library-vs-CLI placement, and tests that exercise packaged code rather than local-path accidents.
+description: "Set Python src-layout, packaging, CLI placement, and tests that exercise installed code."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

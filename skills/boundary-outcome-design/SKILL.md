@@ -1,6 +1,6 @@
 ---
 name: boundary-outcome-design
-description: Design or review semantic Outcome and exception boundaries across Domain, Application, Port, Adapter, Repository, and Unit of Work layers. Use when a failure or result may leak lower-layer vocabulary or be compressed at the wrong boundary.
+description: "Review Outcome and exception translation when results cross application, domain, or persistence boundaries."
 complexity: high
 
 risk_profile:

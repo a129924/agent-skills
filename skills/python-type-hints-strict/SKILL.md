@@ -1,6 +1,6 @@
 ---
 name: python-type-hints-strict
-description: Define or enforce Python type-hint rules for projects that run pyright in strict mode. Use this when drafting typing guidance or reviewing code against a strict typing baseline.
+description: "Design or review annotations for Python projects that explicitly require Pyright strict mode."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -15,7 +15,7 @@ outputs:
   - an explicit decision order for repo-owned types, refinements, and boundary-only `object`
   - local reference files for compatibility rules, edge cases, and anti-patterns
 use_when:
-  - a project mandates `pyright --strict`
+  - a project mandates `pyright` with `typeCheckingMode = "strict"` configured
   - code review must decide whether a typing pattern is acceptable
   - a coding standard needs a strict type-hint section
 do_not_use_when:
@@ -24,11 +24,11 @@ do_not_use_when:
 ---
 
 # Purpose
-Define one strict typing contract for Python code that must pass `pyright --strict`.
+Define one strict typing contract for Python code that must pass `pyright` with `typeCheckingMode = "strict"` configured.
 
 # Trigger / When to use
 Use this skill when:
-- a project mandates `pyright --strict`
+- a project mandates `pyright` with `typeCheckingMode = "strict"` configured
 - code review must decide whether a typing pattern is acceptable
 - a coding standard needs a strict type-hint section
 
@@ -44,7 +44,7 @@ Do not use this skill when:
 - whether a proposed `object` site is a true untrusted boundary or narrowing-helper input
 
 # Process
-1. Start from `pyright --strict` as the default baseline.
+1. Start from `pyright` with `typeCheckingMode = "strict"` configured as the default baseline.
 2. Require explicit parameter and return annotations on public functions and methods.
 3. Match syntax to the supported Python version: for Python 3.10+ prefer `User | None`; for Python 3.9+ prefer `list[str]`; for Python 3.8/3.9 compatibility use `Optional[User]`, `Union[...]`, and `List[str]` where needed.
 4. Before accepting `object`, check whether a repo-owned alias, value type, model, protocol, or other concrete domain type already exists for that position.

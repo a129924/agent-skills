@@ -86,21 +86,23 @@ existing_tools = set(data.get("tool", {}).keys())
 ### 從專案根目錄執行（標準用法）
 
 ```bash
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version 3.11 \
   --package-name mylib
 ```
 
 ### 驗證結果 TOML 合法
 
+此命令執行環境需 Python 3.11+ 的 `tomllib`；不等同於 script 的專案目標版本參數。
+
 ```bash
-uv run -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
+uv run python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
 ```
 
 ### 查看 script help
 
 ```bash
-uv run --python 3.13 skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py --help
+uv run --python 3.13 .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py --help
 ```
 
 ### 執行 skill 單元測試

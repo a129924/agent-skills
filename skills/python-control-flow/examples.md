@@ -24,7 +24,7 @@ def label_for(status: JobStatus) -> str:
 ```
 
 - Use it for closed dispatch on one subject.
-- Under `pyright --strict`, this can also help narrowing or exhaustiveness when it is already the clearer form.
+- Under `pyright` with `typeCheckingMode = "strict"` configured, this can also help narrowing or exhaustiveness when it is already the clearer form.
 - Prefer explicit cases on closed subjects instead of routine `case _:`.
 
 ### Choose `if/elif`

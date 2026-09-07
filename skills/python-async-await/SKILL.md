@@ -1,6 +1,6 @@
 ---
 name: python-async-await
-description: Choose and design general Python async/await code with explicit async boundaries, structured concurrency, and clear cancellation and async-protocol behavior.
+description: "Design or review Python async boundaries, task ownership, cancellation, and async protocols."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -24,7 +24,7 @@ use_when:
   - reviewing cancellation, timeout, or grouped task-failure behavior
 do_not_use_when:
   - the main task is framework-specific async runtime policy or server bootstrap
-  - the main task is deep async testing guidance; use `python-testing-pytest`
+  - the main task is async runner or plugin configuration; consult project policy and verified plugin documentation, not python-testing-pytest
   - the main task is synchronous `with` design; use `python-context-management`
   - the main task is general exception hierarchy design outside async-specific failure semantics; use `python-error-handling`
 ---
@@ -45,7 +45,7 @@ Use this skill when:
 
 Do not use this skill when:
 - the main task is framework-specific async runtime policy or server bootstrap
-- the main task is deep async testing guidance; use `python-testing-pytest`
+- the main task is async runner or plugin configuration; consult project policy and verified plugin documentation, not `python-testing-pytest`
 - the main task is synchronous `with` design; use `python-context-management`
 - the main task is general exception hierarchy design outside async-specific
   failure semantics; use `python-error-handling`
@@ -114,7 +114,7 @@ Before proceeding, confirm:
 
 **BLOCKED** — stop and redirect:
 - The main task is framework-specific async runtime, server bootstrap, or worker lifecycle → out of scope; do not proceed
-- The main task is deep async testing or pytest-asyncio plugin policy → redirect to `python-testing-pytest`
+- For pure unit-test structure, use `python-testing-pytest`. Async runners and pytest-asyncio plugin configuration are outside both skills; inspect project configuration and verified plugin documentation, disclosing the coverage gap
 
 # Failure Handling
 
@@ -146,8 +146,7 @@ Before proceeding, confirm:
 
 # Boundaries
 - Do not define framework-specific async runtime, server, or worker policy.
-- Do not define deep async testing patterns, pytest plugins, or test-client
-  policy; use `python-testing-pytest`.
+- Do not claim ownership of async runner/plugin or test-client policy. `python-testing-pytest` covers pure unit-test structure, not plugin configuration; use project policy and verified documentation for that gap.
 - Do not redefine general exception hierarchy or translation rules outside
   async-specific cancellation and grouped-failure semantics; use
   `python-error-handling`.

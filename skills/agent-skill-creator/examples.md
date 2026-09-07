@@ -45,7 +45,7 @@ Result:
 ```
 
 Why this needs `examples.md`:
-- refactoring is high complexity
+- this refactor has materially different high-impact branches
 - brief examples in `SKILL.md` are not enough
 - scripts and branching paths need detailed positive and negative cases
 

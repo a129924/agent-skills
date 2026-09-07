@@ -1,6 +1,6 @@
 ---
 name: python-generators-iterators
-description: Choose clear Python iteration patterns. Use this when deciding whether code should return a concrete collection versus a generator, or when designing generator functions, generator expressions, and custom iterator classes.
+description: "Choose collections versus lazy Python iteration and design generators or custom iterators."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

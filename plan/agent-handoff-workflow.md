@@ -25,7 +25,7 @@ in different contexts.
   are consumer guidance only for topic-plan contract questions and must not
   contradict repo-level stop points, ownership, status transitions, or the
   shared topic-plan contract.
-- Hidden chat context must never override repo-visible workflow artifacts.
+- Hidden chat context must never silently override repo-visible workflow artifacts. Clear user revisions require updating the affected authorized artifact; no literal `override` keyword is required. Ask only when the intended contract change remains ambiguous.
 
 ## Core principles
 - Planning decisions must be captured in repo-visible files, not left in hidden
@@ -83,7 +83,7 @@ in different contexts.
 - Correction artifacts are historical truth only:
   - they explain why current truth changed
   - they do not replace the parent contract
-- Hidden chat context must never override repo-visible workflow artifacts.
+- Hidden chat context must never silently override repo-visible workflow artifacts. Clear user revisions require updating the affected authorized artifact; no literal `override` keyword is required. Ask only when the intended contract change remains ambiguous.
 - If repo-level contracts and topic-local truth artifacts conflict in a way
   that changes execution meaning, stop and surface the conflict rather than
   silently choosing whichever artifact is more convenient.
@@ -581,7 +581,7 @@ Before committing, validate and stage changes:
 
 STOP POINT 1 is a positive authorization gate, not a terminal pause. Its job is
 to prevent unsafe commit / push / PR creation, not to force an artificial halt
-after the staged set is already valid.
+after the staged set is already valid. Explicit authorization already granted for the same bounded commit / push / draft-PR workflow satisfies this permission gate once validation passes; a new scope or material risk requires a new decision.
 
 README / VERSION appear in the staged set only when the topic plan schedules them
 before PR creation.

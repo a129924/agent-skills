@@ -20,5 +20,4 @@ collection, a skipped action, or an unchanged value unless that result is a
 clear, intentional normal domain state. A caller must be able to tell failure
 from valid absence or success whenever the distinction changes its next action.
 
-Route exception hierarchy, translation, retry, and logging policy to
-`python-error-handling`.
+Route exception hierarchy and translation to `python-error-handling`. Retry orchestration and logging policy have no dedicated owner in this library; disclose that boundary and consult project policy or verified general guidance instead of sending an out-of-scope handoff.

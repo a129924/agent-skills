@@ -1,6 +1,6 @@
 ---
 name: python-descriptors-attribute-access
-description: Choose and design Python attribute access mechanisms using the least-powerful-sufficient ladder — from plain attributes through @property, @cached_property, custom descriptors, and attribute hook methods — with strict discouragement of __getattr__, __setattr__, and __getattribute__.
+description: "Choose Python properties, descriptors, or attribute hooks; require justification for dynamic interception."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -11,7 +11,7 @@ inputs:
   - Any static analysis tools in use (pyright, mypy)
 outputs:
   - An attribute access implementation using the weakest sufficient mechanism
-  - All attribute read/write paths statically navigable (pyright --strict reports no implicit Any)
+  - All attribute read/write paths statically navigable (pyright with typeCheckingMode="strict" configured reports no implicit Any)
   - Any ladder skip justified in code comments or documentation
   - Escape hatch conditions documented if __getattr__ / __setattr__ / __getattribute__ are used
 use_when:
@@ -102,9 +102,9 @@ Before proceeding, confirm:
 - **Reuse scope defined**: will the logic be shared across 3+ attributes (custom descriptor trigger)?
 
 **SOFT FAIL** — ask and wait before continuing:
-- Python version floor is unknown → cannot safely recommend `@cached_property`; ask for version before proceeding
+- Python version floor is unknown → inspect project settings; ask before recommending a version-dependent mechanism only if the floor remains unresolved
 - Whether the class is a proxy, adapter, or delegation layer is unclear → ask before allowing rung 5–6 escape hatches
-- Whether attribute logic requires reuse across multiple attributes is unknown → cannot determine if a custom descriptor is justified
+- Reuse scope is unknown → stay with the weakest sufficient plain attribute or `@property`; ask only if required reuse semantics would change correctness
 
 **BLOCKED** — stop and redirect:
 - Task involves ORM-specific descriptor patterns (Django, SQLAlchemy) → out of scope; do not proceed
@@ -133,7 +133,7 @@ def __getattr__(self, name: str) -> str:
 # Outputs
 
 - An attribute access implementation using the weakest sufficient mechanism
-- All attribute read/write paths statically navigable (`pyright --strict` reports no implicit `Any`)
+- All attribute read/write paths statically navigable (`pyright` with `typeCheckingMode = "strict"` configured reports no implicit `Any`)
 - Any ladder skip justified in code comments or documentation
 - Escape hatch conditions documented if `__getattr__` / `__setattr__` / `__getattribute__` are used
 
@@ -157,8 +157,8 @@ def __getattr__(self, name: str) -> str:
 
 # Failure Handling
 
-- **Insufficient context**: if Python version floor or attribute access pattern cannot be determined, emit SOFT FAIL, state what is missing, and ask before recommending a rung.
-- **Ambiguous requirement**: if reuse scope is unclear (1 attribute vs. 3+), recommend the conservative default (`@property`) and note a custom descriptor may be needed if the count grows.
+- **Insufficient context**: inspect project settings and callers first. Ask if attribute semantics remain unclear, or if an unresolved version floor affects the selected mechanism. An unknown floor alone does not block a version-independent plain attribute or `@property` recommendation.
+- **Ambiguous requirement**: if reuse scope is unclear, retain the weakest sufficient plain attribute or `@property`; a custom descriptor needs demonstrated reuse or lookup semantics. Do not jump a rung solely because reuse is unknown.
 - **Out-of-scope pattern detected**: if the task involves metaclass attribute handling, ORM-specific descriptors, or `__slots__` decisions, stop immediately and redirect to the appropriate skill.
 
 # Local references

@@ -14,7 +14,7 @@ requires-python = ">=3.11"
 
 **執行命令：**
 ```bash
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version 3.11 \
   --package-name mylib
 ```
@@ -48,7 +48,7 @@ target-version = "py311"
 
 **執行命令：**
 ```bash
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version 3.11 \
   --package-name mylib
 ```
@@ -92,12 +92,12 @@ EOF
 **錯誤做法**：
 ```bash
 # ❌ 傳入 "py311" 或 "311"
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version py311 \
   --package-name mylib
 
 # ❌ 傳入不含點號的純數字
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version 311 \
   --package-name mylib
 ```
@@ -106,14 +106,14 @@ uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
 
 | 傳入值 | ruff target-version | pyright pythonVersion |
 |---|---|---|
-| `py311` (錯) | `"pypy311"` ❌ | `"py311"` ❌ |
-| `311` (錯) | `"py311"` 看似對 | `"311"` ❌ |
+| `py311` (錯) | argparse 拒絕，不寫入 | 不寫入 |
+| `311` (錯) | argparse 拒絕，不寫入 | 不寫入 |
 | `3.11` (正確) | `"py311"` ✅ | `"3.11"` ✅ |
 
 **正確做法**：
 ```bash
 # ✅ 傳入含點號的版本字串
-uv run skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
+uv run .<platform>/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
   --python-version 3.11 \
   --package-name mylib
 ```

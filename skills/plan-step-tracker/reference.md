@@ -26,8 +26,8 @@ Supported operations:
 | `read_all` | prints all parsed checkbox lines | `0` |
 | `read_not_run` | prints pending lines, including `[x]` | `0` |
 | `read_success` | prints completed `[X]` lines | `0` |
-| `check_all_succeeded` | prints success summary if all done; otherwise blocked summary plus pending lines | `0` when complete, `1` when pending |
-| `check_impl_steps_succeeded` | prints success summary when `## Implementation Steps` is complete; otherwise blocked summary plus pending implementation lines | `0` when implementation steps are complete, `1` when pending |
+| `check_all_succeeded` | prints success summary if all done; otherwise blocked summary plus pending lines | `0` for valid nonempty completed evidence, `1` when pending or invalid |
+| `check_impl_steps_succeeded` | prints success summary when `## Implementation Steps` is complete; otherwise blocked summary plus pending implementation lines | `0` for valid nonempty completed implementation evidence, `1` when pending or invalid |
 
 Error contract:
 
@@ -38,7 +38,7 @@ Error contract:
 
 - `check_impl_steps_succeeded` inspects only checkbox lines under the `## Implementation Steps` section.
 - Pending items outside `## Implementation Steps` do not block `check_impl_steps_succeeded`.
-- If the file has no `## Implementation Steps` checkbox lines, `check_impl_steps_succeeded` treats that section as complete and returns success.
+- Exactly one Implementation Steps section must exist and contain valid nonempty task text. Missing, empty, duplicate, unreadable, or malformed evidence returns `1`; only uppercase `[X]` is done. Query operations keep their permissive parsing contract, but completion checks reject unsupported task formats rather than silently ignoring them.
 
 ## Grep fallback guidance
 
@@ -64,33 +64,9 @@ grep '^\- \[X\]' plan/<topic>/<topic>.step.md
 grep '^\- \[.\]' plan/<topic>/<topic>.step.md | sed 's/^- //'
 ```
 
-Blocking fallback example:
+Completion fallback:
 
-```bash
-PENDING=$(grep -c '^\- \[[ x]\]' plan/<topic>/<topic>.step.md)
-if [ "$PENDING" -eq 0 ]; then
-  echo 'SUCCESS: All steps complete'
-  exit 0
-else
-  echo "BLOCKED: $PENDING steps pending"
-  grep '^\- \[[ x]\]' plan/<topic>/<topic>.step.md
-  exit 1
-fi
-```
-
-Implementation-only fallback example:
-
-```bash
-IMPL_PENDING=$(sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep -c '^\- \[[ x]\]')
-if [ "$IMPL_PENDING" -eq 0 ]; then
-  echo 'SUCCESS: All implementation steps complete'
-  exit 0
-else
-  echo "BLOCKED: $IMPL_PENDING implementation steps pending"
-  sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep '^\- \[[ x]\]'
-  exit 1
-fi
-```
+Grep is a listing aid, not a completion validator. Zero matches, a failed read, or an empty section cannot prove completion. If the CLI cannot run, inspect the file directly: require readable input, the intended section exactly once, at least one nonempty supported task, no malformed markers, and only `[X]` tasks. For a whole-file check, validate all task-like lines rather than the implementation section alone. If any of these checks cannot be established, report BLOCKED; do not emit an automated success exit based on grep counts.
 
 Fallback limitation:
 

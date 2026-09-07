@@ -1,6 +1,6 @@
 ---
 name: python-operator-overloading
-description: Defines Python operator overloading rules for binary arithmetic contracts, reflected operator pairing, in-place return semantics, unary operator purity, comparison ordering consistency, and the NotImplemented dispatch protocol.
+description: "Design Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -25,7 +25,7 @@ use_when:
 do_not_use_when:
   - The question is about `__eq__` or `__hash__` definition (use `python-data-model-methods`)
   - The question is about mutable vs immutable class design (use `python-class-design`)
-  - The question is about `@functools.total_ordering` decorator mechanics (use `python-decorators`)
+  - The question is about `@functools.total_ordering` decorator mechanics (class-decorator mechanics are outside the ordinary-decorator skill too)
   - The operator is framework-specific (SQLAlchemy, NumPy broadcasting, etc.)
 ---
 
@@ -51,7 +51,7 @@ Use this skill when:
 Do not use this skill when:
 - The question is about `__eq__` or `__hash__` definition → use `python-data-model-methods`
 - The question is about mutable vs immutable class design → use `python-class-design`
-- The question is about `@functools.total_ordering` decorator mechanics → use `python-decorators`
+- The question is about `@functools.total_ordering` decorator mechanics → consult verified Python documentation; the ordinary-decorator skill excludes class decorators
 - The operator is framework-specific (SQLAlchemy, NumPy broadcasting, etc.)
 
 # Inputs
@@ -101,7 +101,7 @@ Do not use this skill when:
 8. **Recommend `@functools.total_ordering` when appropriate.** If the class
    defines `__eq__` and exactly one ordering method, recommend
    `@functools.total_ordering` to complete the contract. For decorator
-   mechanics, signpost to `python-decorators`.
+   mechanics, consult verified Python documentation; `python-decorators` excludes class decorators.
 
 # Validation
 
@@ -154,8 +154,8 @@ class Money:
 - **`python-class-design`** — owns mutable vs immutable class design. This skill
   owns only the in-place operator return syntax contract; consult
   `python-class-design` for whether a class should be mutable at all.
-- **`python-decorators`** — owns `@functools.total_ordering` decorator mechanics.
-  This skill recommends using it; for how it works, consult `python-decorators`.
+- `@functools.total_ordering` mechanics — consult Python documentation; there is no class-decorator owner in this library.
+  This skill recommends using it; class-decorator mechanics require verified Python documentation.
 - Framework-specific operators (SQLAlchemy `==` expressions, NumPy broadcasting)
   are out of scope.
 - Complex cross-type coercion (currency conversion, unit normalization) is out

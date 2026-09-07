@@ -1,6 +1,6 @@
 ---
 name: python-library-architecture
-description: Design or review reusable Python library/package architecture with theme isolation, a side-effect-free `core`, and facade/client composition for multi-theme libraries and SDK-style packages.
+description: "Design reusable Python libraries or SDKs with isolated themes, a side-effect-free core, and facades."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
