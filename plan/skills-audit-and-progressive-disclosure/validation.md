@@ -148,3 +148,27 @@ subsequently authorized Ready-for-review status; GitHub then reported
 `isDraft=false` with the same base/head. Neither state is a green-CI or
 human-approval signal. Human review is the next handoff; merge, release, tags
 and worktree cleanup are outside this delivery.
+
+## PR comment-fix verification
+
+After PR #126 became Ready for review, eight current unresolved threads were
+triaged and repaired directly. Canonical targeted suites passed 67 tests; the
+existing `observer-dispatcher-canonical-baseline` implementation-step gate
+reported 13 completed steps. The documented isolated TOML command was executed
+with the installed `/opt/homebrew/bin/python3` (Python 3.14) through
+`uv run --no-project --python`, and `tomllib` loaded a valid payload.
+
+The projection preview found exactly nine expected changed outputs; they were
+regenerated with the existing adapter and the 59-record inventory was rebuilt.
+Generated runtime tests and a final zero-drift projection check then passed:
+
+| Check | Result |
+| --- | --- |
+| Full canonical suite | 97 passed |
+| Generated runtime suites | 67 passed |
+| Projected CLI dry run | 287 noop; 0 create, update, or conflict |
+| Inventory/dispositions/provenance | 59 records; all entry/tree hashes and 7 changed source rows verified |
+| Canonical frontmatter | 59 YAML names match skill directories |
+
+These local results support resolving the corresponding addressed threads. No CI
+or human approval is claimed by them.

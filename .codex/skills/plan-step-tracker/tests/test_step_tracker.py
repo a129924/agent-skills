@@ -489,6 +489,50 @@ topic: impl-pending
         assert "BLOCKED" in captured.out
         assert "Pending step" in captured.out
 
+    def test_check_impl_steps_succeeded_file_not_found(self, temp_plan_dir, capsys):
+        """Use the same missing-file diagnostic as the whole-file check."""
+        result = check_impl_steps_succeeded("nonexistent", temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "File not found:" in captured.err
+
+    def test_check_impl_steps_succeeded_allows_nested_descriptive_lists(
+        self, temp_plan_dir, capsys
+    ):
+        """Nested non-checkbox lists may document a completed top-level task."""
+        topic = "impl-nested-description"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Update the bounded write set
+  - `src/example.py`
+  - `tests/test_example.py`
+- [X] Run the affected tests
+"""
+        )
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "SUCCESS" in captured.out
+
+    def test_check_impl_steps_succeeded_rejects_nested_checkbox(self, temp_plan_dir):
+        """A nested checkbox is hidden completion evidence, not prose."""
+        topic = "impl-nested-checkbox"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Top-level task
+  - [X] Hidden subtask
+"""
+        )
+
+        assert check_impl_steps_succeeded(topic, temp_plan_dir) == 1
+
     def test_main_check_impl_steps_succeeded_command_success(
         self, workflow_and_impl_step_file, monkeypatch, capsys
     ):

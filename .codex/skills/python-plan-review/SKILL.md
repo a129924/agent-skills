@@ -260,7 +260,7 @@ blocking_issues:
 - `The executor can infer the module location from context.`
 - `The async details are implementation concerns, not plan concerns.`
 - `The reviewer can fix the async wording mentally.`
-- `Two Non-goals are close enough to three.`
+- `A fixed count of Non-goals matters more than whether they constrain scope.`
 - `Empty validation commands are fine because CI will figure it out.`
 - `The open question will probably be resolved before implementation starts.`
 - `Returning suggestions is enough even if the verdict is missing.`

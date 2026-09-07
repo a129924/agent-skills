@@ -138,3 +138,30 @@ The user authorized converting PR #126 to Ready for review. GitHub confirmed
 `state=OPEN`, `isDraft=false`, base `dev`, the intended feature head, no review
 decision, and no CI check entries at the verification point. This status change
 does not claim CI approval or authorize merge/release. Next actor: human reviewer.
+
+## PR comment review / fix — #126
+
+Fetched current review threads after the Ready-for-review transition. All eight
+unresolved, non-outdated threads were triaged `ADDRESS-DIRECT`:
+
+- plan-step-tracker: consistent missing-file diagnostics; preserve nested
+  descriptive lists while rejecting hidden checkbox tasks.
+- projection test: make three `read_text()` calls explicitly UTF-8.
+- serialization discovery: retain both design and review trigger wording.
+- toolconfig: validate TOML with an installed 3.11+ interpreter outside the
+  target project environment.
+- TDD example and plan-review rationalization: remove stale fixed-count rules
+  while retaining applicable coverage/scope requirements.
+- commit convention: declare Git execution and amend history-rewrite risks.
+
+Canonical repair commit: `4b73479`. The generated projection, exact inventory,
+provenance and disposition hashes are synchronized in the following topic commit.
+Validation before thread resolution: 67 affected canonical tests passed; the
+existing observer step gate reports 13 completed implementation steps; an
+isolated existing interpreter passed `tomllib` validation. This direct-fix pass
+does not claim CI or human approval and does not authorize merge/release.
+
+Final generated verification: 97 canonical tests and 67 generated runtime tests
+passed; the projected CLI returned 287 noop and zero create/update/conflict.
+All 59 inventory/disposition hashes and the seven changed provenance rows were
+checked before the resolve action.

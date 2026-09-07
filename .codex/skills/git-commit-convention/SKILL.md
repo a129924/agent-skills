@@ -4,6 +4,8 @@ description: "Draft or review semantic commits, topic splits, and message-only a
 complexity: medium
 risk_profile:
   - ambiguity_sensitive   # partial staging or unclear intent changes the commit draft meaningfully
+  - external_tooling      # may inspect or execute Git commands when authorized
+  - destructive_action    # content amendment rewrites the latest commit and needs explicit authorization
 inputs:
   - staged files, staged hunks, and git status
   - business intent behind the change from recent conversation

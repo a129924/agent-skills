@@ -187,9 +187,9 @@
   {
     "skill": "git-commit-convention",
     "before_entry_sha256": "0eadca8af8488dbf3d7761e3ff0c53c0348e6c327027e82e560418e79f4f3c00",
-    "after_entry_sha256": "83e6ab0e544be29ab78213217f966878cc29bacf10b171e0880c6e89ca01a4ef",
+    "after_entry_sha256": "f7ce30d43dbf028a4c9055bc0dd3bd8e8210bd9a5767d683b8cad35bb0e1a7ad",
     "before_lines": 107,
-    "after_lines": 108,
+    "after_lines": 110,
     "discovery": "task-first description compared with trigger by independent reviewer",
     "entrypoint": "retain focused process and existing conditional routing; no forced split",
     "retained_entry_sections": [
@@ -201,7 +201,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "66fee10dd89889231d9d3c0caea8f7267a05487f8bb757d4640b1f7583a2832c",
+    "source_tree_hash": "2afd85bea6890ac138d10c3121fe829f09d8c85f5f3b1297d2ec9d3a71930e60",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -327,7 +327,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "6c914e48bc523e2c31be97c5a08234134d29bbc49bdf83aa071e490249119ab4",
+    "source_tree_hash": "fd1dc54cc93f0f1f3446d1f9569cfa19c0982be76ff7af910bb4310a152cb359",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -348,7 +348,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "4fafb26bbcc3d84c5bcd2df5f68327e27367b304a9917c8682f6f012a79e12e6",
+    "source_tree_hash": "aec877178ab83528361dc6f587a80cd83d10db22e2188da70d7dd49fd4b91159",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -851,7 +851,7 @@
   {
     "skill": "python-plan-review",
     "before_entry_sha256": "e623aa057f0466480ace06d477e7b41af04410134b4b842958894595096bb23e",
-    "after_entry_sha256": "eccb8a0bb2d3de37b86e525ffa764e971ca63b7db0b48adde419d0b077cdab73",
+    "after_entry_sha256": "13278cb5efe008ff3bc08e0dd143c5bb6fe6595e36f152f43a222259005ed5a3",
     "before_lines": 282,
     "after_lines": 282,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -865,7 +865,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "7e336150eb73ef13a3c194eeffdfe0a465ace373dec8c747e3d5ad38e06b2a1c",
+    "source_tree_hash": "0e8c3737dd0f56d122c89f7190b61e846b2dfcc6b72b4938fb4230906736938f",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -935,7 +935,7 @@
   {
     "skill": "python-pyproject-toolconfig",
     "before_entry_sha256": "c81df6d5baca38976184dca9cc21b61b16503467f73d5d44e3410fb934b592eb",
-    "after_entry_sha256": "5e11bc8794ea7f2cffee31c1a8b5a9e355c0cf4701d87f7e85805acb291c92e5",
+    "after_entry_sha256": "dc4786498ec7701f5154317498d7efdc4def7a6f38c7dc85fafc7fc1d966ebc7",
     "before_lines": 124,
     "after_lines": 124,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -949,7 +949,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "a0189573b5538c87291373b84c23414fe25f7a214f7dd2fd29c9300399349143",
+    "source_tree_hash": "5695241a17ab4c0ce86cc43ceaeb8be32c70ea7f5d467a033094c47c0ce826bf",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -998,7 +998,7 @@
   {
     "skill": "python-serialization-boundaries",
     "before_entry_sha256": "58abc68524a76b780749a552264160b24b800275f3b16ea9404a7abdd8764cbd",
-    "after_entry_sha256": "af1a4a5f0472b2686b49ab15321384e91362a5f1d17a96ca14e7906fd14aa03b",
+    "after_entry_sha256": "c14ba574661821a54279700f009093b0bceb121f50ddedb5cafab3f29fec4249",
     "before_lines": 163,
     "after_lines": 163,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -1012,7 +1012,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "be3488fb0a6b85e972bac399cb25d2e1763383dc6f25d7656c6ba95b5dc4422e",
+    "source_tree_hash": "e1ccd9faa104d07dd19eff760a542b8b2e39c8cc0eb19c22c2a0af1e0c1ffd66",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -1033,7 +1033,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "e83ba8bb270654772b875e453f9b38738e217f09535fcfecd74c00dbe6b29e80",
+    "source_tree_hash": "e8dc3edf313cff4612f4cec2bee04981773c56d0f4ac47c297fdd31fdb592973",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

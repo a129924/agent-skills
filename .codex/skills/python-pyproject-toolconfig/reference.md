@@ -58,7 +58,7 @@ with open("pyproject.toml", "rb") as f:
 
 3. **重複 table 偵測**：script 在 append 前先用 `tomllib.load()` 讀取並確認目標 section 不存在，避免產生重複 table（重複 table 在 TOML 中是非法的）。
 
-4. **最終驗證**：Process 第 5 步要求用 `tomllib.load()` 驗證結果，確保 append 後的 TOML 仍合法。
+4. **最終驗證**：Process 第 5 步以已安裝的 Python 3.11+ interpreter 執行 `tomllib.load()` 驗證結果，確保 append 後的 TOML 仍合法；驗證環境不採用目標專案的 Python 選擇。
 
 ---
 
@@ -93,10 +93,10 @@ uv run .codex/skills/python-pyproject-toolconfig/scripts/apply_toolconfig.py \
 
 ### 驗證結果 TOML 合法
 
-此命令執行環境需 Python 3.11+ 的 `tomllib`；不等同於 script 的專案目標版本參數。
+此命令執行環境需 Python 3.11+ 的 `tomllib`；不等同於 script 的專案目標版本參數。先確認該絕對路徑已存在，並用 `--no-project` 避免發現或選用目標專案環境。
 
 ```bash
-uv run python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
+uv run --no-project --python /absolute/path/to/python3.11 python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
 ```
 
 ### 查看 script help

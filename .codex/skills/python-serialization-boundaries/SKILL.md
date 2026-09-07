@@ -1,6 +1,6 @@
 ---
 name: python-serialization-boundaries
-description: "Review Python API, database, or message serialization as explicit semantic translation."
+description: "Design or review Python API, database, or message serialization as explicit semantic translation."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

@@ -35,3 +35,46 @@ Verified OPEN and Ready for review, base dev, intended feature head. No CI check
 were reported at the handoff check; this is not a green-CI claim. Human review
 remains outstanding. Next actor: Human; next step: review the Ready PR. Do not
 merge/release.
+
+## PR Comment Review / Fix Workflow Stages
+
+- [X] fetch-pr-comments
+- [X] triage-unresolved-threads
+- [X] implementer-fix
+- [X] commit-by-topic
+- [X] push-and-resolve-satisfied-threads
+
+## PR Comment Review / Fix Steps
+
+### fetch-pr-comments
+
+- [X] Fetch GitHub review threads, review summaries, issue comments, review
+  state, and checks for PR #126 after it became Ready for review.
+- [X] Record 8 unresolved, current threads: two Copilot suggestions and six
+  Codex findings. `reviewDecision` and check entries were absent at fetch time.
+
+### triage-unresolved-threads
+
+- [X] Classify all 8 as `ADDRESS-DIRECT`: each is a bounded correctness,
+  consistency, metadata, example, or UTF-8 test-read repair. None changes the
+  approved product scope or asks for merge/release authority.
+
+### implementer-fix
+
+- [X] Preserve fail-closed checkbox validation while allowing nested non-checkbox
+  explanatory lists; add regressions and a consistent missing-file diagnostic.
+- [X] Apply the remaining seven targeted documentation/test metadata repairs.
+- [X] Verify 67 affected canonical tests, the real observer implementation-step
+  gate, isolated TOML validation, and YAML risk metadata.
+
+### commit-by-topic
+
+- [X] Commit canonical review repairs: `4b73479`.
+- [X] Commit generated Codex projection, inventory/provenance, and this review
+  evidence in the current topic commit.
+
+### push-and-resolve-satisfied-threads
+
+- [X] Push both comment-fix topic commits to the existing PR branch.
+- [X] Resolve only the eight threads above after the pushed head is verified.
+- [X] Stop for renewed human/automated review; do not merge or release.

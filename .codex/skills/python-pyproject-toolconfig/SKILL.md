@@ -65,9 +65,9 @@ do_not_use_when:
 
 4. **確認 stdout 輸出**：確認哪些 section 被 append（`✅ Will append`），哪些因已存在而跳過（`ℹ️ already exists`）。
 
-5. **驗證** `pyproject.toml` 仍為合法 TOML。以下驗證執行環境需 Python 3.11+（`tomllib`），與上面的專案目標版本分開；若現有環境較舊，使用已安裝的 TOML parser 或 Python 3.11+，不要未經授權安裝工具：
+5. **驗證** `pyproject.toml` 仍為合法 TOML。以下驗證執行環境需 Python 3.11+（`tomllib`），與上面的專案目標版本分開。先查明已安裝的 3.11+ interpreter 絕對路徑；以 `--no-project` 避免 `uv` 選到目標專案的較舊環境。若沒有可用 interpreter，使用已確認存在的 TOML parser；不要未經授權安裝工具：
    ```bash
-   uv run python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
+   uv run --no-project --python /absolute/path/to/python3.11 python -c "import tomllib; tomllib.load(open('pyproject.toml','rb')); print('TOML valid')"
    ```
 
 # Examples

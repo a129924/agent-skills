@@ -168,7 +168,7 @@ next_step: "Skip new test authoring. Keep running existing suite before/after re
    - Req#3 → CANNOT MAP: requirement is too vague; what "edge cases"?
 3. Validation fails: test_mapping is incomplete (only 2 of 3 requirements mapped).
 4. Public contract check: Unclear if other edge cases need test coverage.
-5. Test categories: Only 2 found (happy path and error); boundary, state, integration missing.
+5. Test categories: boundary and error handling are covered by the two mapped requirements. State/side-effect and integration are N/A because this input-validation change has neither; a valid-email happy-path case is still applicable and missing.
 
 **Output YAML:**
 
@@ -190,13 +190,18 @@ validation_checks:
   behavior_contract_source: "spec.md"
   requirements_mapped: false
   public_contract_coverage: "partial"
-  test_categories_present: 2  # missing: boundary (need more edge cases), state, integration
+  test_categories_present:
+    - boundary
+    - error_cases
+  test_categories_not_applicable:
+    - state_side_effect: "UserAccount.create() validation has no state change when it rejects input."
+    - integration: "The stated requirements name no external integration point."
   expected_initial_status: "unset"
   production_code_modified: false
 
 issues:
   - "Req#3 is too vague: 'Improve error handling for edge cases'. Add specific requirements for each edge case (e.g., null email, empty string, domain validation)."
-  - "Only 2 test categories found; need 5. Add tests for: state/side effects, integration (if any), and more boundary cases."
+  - "Add a valid-email happy-path test. State/side-effect and integration categories are N/A for the stated contract and do not require invented tests."
   - "expected_initial_status not set. Should new tests start as red, xfail, or skip?"
 
 next_step: "Return to plan review. Clarify Req#3 with specific edge cases. Add expected_initial_status. Then resubmit for test authoring."
