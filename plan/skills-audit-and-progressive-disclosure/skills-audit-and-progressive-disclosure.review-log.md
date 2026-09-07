@@ -114,6 +114,20 @@ All three still return the expected action with appropriate reasons. Total raw
 records: 78 (36 before, 36 initial after, 6 preserved reruns). This is a direct
 formatting correction under the reviewer contract, not a semantic scope change.
 
+## PR review Round 5 evidence refresh
+
+Four later PR findings changed four discovery descriptions and exposed a
+model-evaluation output-path gap. The discovery repair was committed as
+`9fd151d`; it is the immutable canonical catalog used for a fresh complete after
+suite. The runner now rejects every output basename except `model-results.jsonl`.
+The fresh suite added 36 observed, no-tool records, so the retained raw total is
+114 (36 before, 36 initial after, 6 partial reruns, 36 final-catalog reruns).
+The latest prompt hashes all match that canonical catalog. Latest action-label
+agreement is Astra 12/12, Sol 12/12, Luna 11/12. The Luna discoverable-facts
+result asks for execution authorization despite the probe's read-only decision
+constraint; it remains an observed mismatch, not a rewritten result. This
+post-acceptance evidence refresh does not claim a new independent acceptance.
+
 Canonical runtime and instruction topics were committed separately. Provenance
 now points to actual canonical source commit e635f127dd861a02be3c4139401457ec29f41890,
 with final exact source hashes. Publishing/evidence metadata does not change the

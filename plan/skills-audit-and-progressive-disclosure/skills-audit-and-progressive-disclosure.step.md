@@ -110,3 +110,14 @@ merge/release.
 - [X] Commit canonical repair `e5cec04`, regenerate affected Codex projections
   and inventory/provenance evidence, validate, push, then resolve only the two
   addressed Round 4 threads after GitHub reports the pushed head.
+
+## PR Comment Review / Fix — Round 5
+
+- [X] Fetch the current PR review state and triage four current, unresolved
+  direct-apply findings; retain earlier resolved threads as history.
+- [X] Restore review discovery for four Python Skills, restrict model-evidence
+  append output with a regression test, recalculate the manifest boundary, and
+  rerun the full after model suite against the final discovery catalog.
+- [X] Commit canonical repair `9fd151d`, regenerate four affected Codex
+  projections and inventory/provenance evidence, validate, push, then resolve
+  only the four addressed Round 5 threads after GitHub reports the pushed head.

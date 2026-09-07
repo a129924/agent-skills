@@ -4,8 +4,8 @@
 
 | Check | Observed result |
 | --- | --- |
-| Canonical inventory, projection, tracker, pre-commit and toolconfig suites | 94 passed |
-| Generated Codex projection and tracker suites | 64 passed |
+| Canonical inventory, projection, tracker, pre-commit, toolconfig and evaluator suites | 103 passed |
+| Generated Codex projection and tracker suites | 72 passed |
 | Independent runtime checks | 64 suite tests plus 24 malformed-input probes passed |
 | Generated-engine subprocess CLI auto-root | Passed; independently reviewed |
 | Actual projected CLI dry-run against `.codex` | 287 noop, 0 create, 0 update, 0 conflicts; exit 0 |
@@ -16,7 +16,7 @@
 | Local-reference scan | 221 candidates; 218 actual local/repo paths resolve; 3 are illustrative/output names, not missing dependencies |
 | Python syntax | Both changed runtimes and evaluator parse with Python AST |
 | Topic JSON | Parseable; source hashes recorded per skill |
-| Change boundary | All 219 final changed paths in the 828-entry approved manifest |
+| Change boundary | All 222 final changed paths in the 829-entry approved manifest |
 | Whitespace | Tracked and staged checks passed after removing a new reference's trailing blank line |
 | Original checkout | `dev` worktree remains clean |
 | Recovery archive | SHA-256 matched; all 580 matching manifest baseline files verified from readable archive members |
@@ -88,29 +88,37 @@ Executed `evaluate_models.py before` and `evaluate_models.py after`, each with
 After correcting a stale release-procedure cross-reference, executed
 `evaluate_models.py after --case draft-pr` with the same output. A later staged
 whitespace check removed a trailing blank line in that reference; repeated the
-same three cases to match final content hashes. All 78 raw records are retained:
-36 before, 36 initial after and 6 affected-case reruns.
-All were observed, with no execution-limited result or unexpected tool event.
+same three cases to match final content hashes. A later PR review identified
+four changed discovery descriptions, so the prior after snapshot no longer
+matched the final catalog. After canonical commit `9fd151d`, the complete
+12-case × 3-model after suite was rerun. All 114 raw records are retained:
+36 before, 36 initial after, 6 affected-case reruns, and 36 final-catalog reruns.
+All 36 latest after records were observed with no unexpected tool event; their
+prompt hashes match the current canonical catalog and selected-family Markdown.
 
-| Model (medium effort) | Before action matches | Final after action matches |
+| Model (medium effort) | Before action matches | Latest final-catalog after action matches |
 | --- | --- | --- |
 | gpt-6-astra | 8/12 | 12/12 |
 | gpt-5.6-sol | 8/12 | 12/12 |
-| gpt-5.6-luna | 7/12 | 12/12 |
+| gpt-5.6-luna | 7/12 | 11/12 |
 
 These counts measure agreement with predefined next-action labels, not complete
 workflow success. Manual inspection of all answers found a before-Luna PII case
 with the correct `block` label but an incorrect additional claim that workflow
-approval was absent. The after answer recognizes sequencing is satisfied and
-blocks specifically on PII. The before count is not a semantic pass rate.
-All final after reasons are consistent with their supplied scenario and expected
-next action; selected-skill arrays are not independently scored.
+approval was absent. The latest after answer recognizes sequencing is satisfied
+and blocks specifically on PII. The before count is not a semantic pass rate.
+The latest Luna `discoverable-facts` answer is the sole final-catalog mismatch:
+it correctly recognizes that inputs are resolved, but asks for execution
+authorization even though this probe requests a read-only decision. The raw
+answer is retained; it was not relabeled or retried selectively. Selected-skill
+arrays are not independently scored.
 
-All three models now proceed on standalone review and discoverable facts, block
-on missing-plan, invalid-step and PII gates, and ask about unresolved auth/cache
-order. Before Astra/Sol blocked draft creation; before Luna unnecessarily asked
-about explicit changed intent and blocked a documented routing gap. No final
-after action mismatches were observed in this fixed sample.
+All three models now proceed on standalone review, block on missing-plan,
+invalid-step and PII gates, and ask about unresolved auth/cache order. Astra and
+Sol also proceed on discoverable facts; Luna instead makes the documented
+authorization request. Before Astra/Sol blocked draft creation; before Luna
+unnecessarily asked about explicit changed intent and blocked a documented
+routing gap.
 
 The runner exports only discovery descriptions and selected-family Markdown,
 using fresh ephemeral read-only Codex calls. The CLI method was checked against
@@ -122,15 +130,20 @@ test. One observation per phase/case is not a repeated reliability study.
 Prompt hashes identify content; use the latest after record per model/case for
 the delivered snapshot, retaining superseded records for traceability.
 
+The evaluator now accepts only the topic-owned `model-results.jsonl` basename;
+the regression test exercises accepted, same-directory-wrong-name, and
+outside-topic paths. This prevents a mistyped `--output` from appending model
+records to another topic document.
+
 Independent evaluation-method review: approved with these interpretation limits.
 Timeout handling preserves an error summary rather than partial stdout/stderr;
 no timeout occurred, so this unexercised path remains a documented limitation.
 
 ## Remaining limitations
 
-- Required model observations are complete. Final independent topic acceptance
-  and publishing are tracked in the topic review log and summary; no merge or
-  release is authorized.
+- Required model observations are complete, with one retained latest-after
+  action-label mismatch. Final independent topic acceptance and publishing are
+  tracked in the topic review log and summary; no merge or release is authorized.
 - The README's existing rows were refreshed without adding/removing rows, per
   the plan. Its historical missing canonical entries and extra noncanonical
   workflow row are recorded in findings.md for a separate indexing decision.
@@ -220,3 +233,22 @@ observer implementation-step gate reported 13 complete steps; and the final
 projected CLI dry run reported 287 noop with zero create, update, or conflict.
 The GitHub resolution state is recorded after this evidence commit is published.
 No CI, merge, release, or human approval is claimed here.
+
+## PR comment-fix verification — Round 5
+
+Four current, unresolved threads were classified as direct, bounded repairs:
+four review-capable descriptions omitted review language; the evaluator could
+append to an arbitrary topic file; the approved-manifest count was stale; and
+the latest after model evidence no longer matched the current discovery catalog.
+Canonical commit `9fd151d` restores the four discovery descriptions and limits
+the append target to `model-results.jsonl`, with a regression test. The projection
+preview identified exactly four managed outputs; regeneration rebuilt inventory
+and the four changed provenance/disposition hashes. The complete final-catalog
+12×3 after suite produced 36 observed no-tool records with current prompt hashes:
+Astra 12/12, Sol 12/12, Luna 11/12; the retained Luna mismatch is documented
+above. Full canonical tests passed 103; projected runtime suites passed 72; the
+observer implementation-step gate reported 13 complete steps; and the final
+projected CLI dry run reported 287 noop with zero create, update, or conflict.
+The recalculated boundary is 222 changed paths in the 829-entry manifest. The
+GitHub resolution state is recorded after this evidence commit is published. No
+CI, merge, release, or human approval is claimed here.

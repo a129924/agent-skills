@@ -521,7 +521,7 @@
   {
     "skill": "python-context-management",
     "before_entry_sha256": "e67306a4131d8b4c1d0e8fc43a378f9a5a713fec3ea3bc10014c371ba0e57f4c",
-    "after_entry_sha256": "cb8cfa6918f9d6154c6bc28471b851ec2b40974ec47ff32079e56abe48e50e7a",
+    "after_entry_sha256": "d59014c3c5f76cb28b4e04a59a7ef936cc3e2a3b36bcc875a0c7d554645873cb",
     "before_lines": 125,
     "after_lines": 125,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -535,7 +535,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "05f54ecdce6eb30ac0d87a3cc68b61ca7564dec30ec9364d7871e7f9d47c07ac",
+    "source_tree_hash": "29fdf80182f17ff2341165f5c94bb6e2a1ef0e978de5e057c0f54101d0c848a8",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -582,7 +582,7 @@
   {
     "skill": "python-decorators",
     "before_entry_sha256": "1e74854de423c9507b0e8eafcf55c361fea9415b9d08ca6ffb0fa24be129dce2",
-    "after_entry_sha256": "e7f0c7e86ba270324cf247bf6285734ac13b074ebacb463f1ec1e69cc9dff37e",
+    "after_entry_sha256": "683b325911fc25d61a15b6c3b41a146bd9f71d3018c68aecf3b4d500c1b60c5a",
     "before_lines": 181,
     "after_lines": 181,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -596,7 +596,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "1dbc47c55b97c759e885378042e0caff4161354678907ad61709bed48d8f1b03",
+    "source_tree_hash": "ccbb2f19cc904a65d8bb645f071270de197dee4407803967316a5452b3c08836",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -664,7 +664,7 @@
   {
     "skill": "python-generators-iterators",
     "before_entry_sha256": "a305ff6d114795ec2d2c4e8ede472d1bb5213eb76e69934cc96dab4180145dca",
-    "after_entry_sha256": "775d2b65a6cdc34bf30b02c2b37bb76d6214ce9bff2f4c0eccd05fe98b468124",
+    "after_entry_sha256": "b8b5b157406266f433a42f8f9c3d8a03e5bcdd2edd64011a60b82bd77559c615",
     "before_lines": 182,
     "after_lines": 182,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -678,7 +678,7 @@
       "# Boundaries",
       "# Local references"
     ],
-    "source_tree_hash": "85b07750580060069409bc336dd09fbf9fb981463706f9a64b61f9b405b4f761",
+    "source_tree_hash": "9b2af5fd8dc8b388ab7d73aa1318868a9de41b258da56ecb1333bab05ad49dbf",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },
@@ -788,7 +788,7 @@
   {
     "skill": "python-operator-overloading",
     "before_entry_sha256": "4ebbbd99e0a9207b34955c1e615328916a7a46b6a5f6700302bb1cb7f5961257",
-    "after_entry_sha256": "b37519d6dd615a7041c6a13331ba8a160c23f93cd26c4f9088264d1375d9613e",
+    "after_entry_sha256": "8425d3c8b51624fdd2603ecb35255f150551791b4d6f230c77823d9da724e9d9",
     "before_lines": 185,
     "after_lines": 185,
     "discovery": "task-first description compared with trigger by independent reviewer",
@@ -802,7 +802,7 @@
       "# Failure Handling",
       "# Local references"
     ],
-    "source_tree_hash": "d0a7b2213bcd39aa24c020b9df26f551aaeb164fc065b6a0725d19f1efbbdd75",
+    "source_tree_hash": "97c168ee67b9b4b5d6c4cceb83813802d95dcede794614fea179974bc3630d3c",
     "knowledge_retention": "existing companions and scripts retained; only issue-specific obsolete or contradictory rules replaced",
     "review": "approved description/trigger slice; full companion coverage limited to issue-related families"
   },

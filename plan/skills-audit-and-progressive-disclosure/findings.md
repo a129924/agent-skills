@@ -125,7 +125,7 @@ All 17 issues are confirmed static/runtime defects. Bounded model-decision obser
 
 ## Bounded evidence and remaining limitations
 
-- Explicit content/destination authorization was received. All 72 planned observations and 6 affected-case reruns completed; raw records and interpretation limits are in model-results.jsonl and validation.md.
+- Explicit content/destination authorization was received. All 72 planned observations, 6 affected-case reruns, and the complete 36-record final-catalog rerun completed; raw records and interpretation limits are in model-results.jsonl and validation.md.
 - No latency, token-efficiency, task-success-rate, or cross-model improvement claim is made.
 - All 59 descriptions were compared with triggers; issue-related companion families were deeply reviewed. This is not a claim that every existing example in all companions was executed.
 - GitHub skill copies remain inspection-only: baseline comparison found 43 absent files and 32 differing files. This historical compatibility drift was not silently migrated.

@@ -1,6 +1,6 @@
 ---
 name: python-context-management
-description: "Design synchronous with-blocks and context managers for resource cleanup or temporary state restoration."
+description: "Design or review synchronous with-blocks and context managers for resource cleanup or temporary state restoration."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
