@@ -1,6 +1,6 @@
 ## 目的與範圍
 
-依已批准計畫修正 17 項確認問題，檢視全部 59 個 canonical Skills。此 PR 為 draft，交由人工審查；不包含 merge、release 或 VERSION 調整。
+依已批准計畫修正 17 項確認問題，檢視全部 59 個 canonical Skills。此 PR 已 Ready for review，交由人工審查；不包含 merge、release 或 VERSION 調整。
 
 ## 主要修改
 

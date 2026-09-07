@@ -41,7 +41,7 @@ Sol, and Luna. Produce topic commits and a draft PR for human review.
 
 ## Status / Allowed Transitions
 
-Current: `pr-open` — topic commits pushed and draft PR #126 opened against dev. Independent acceptance approved; next actor is the human reviewer. Merge/release are not authorized.
+Current: `pr-open` — topic commits pushed and PR #126 is Ready for review against dev. Independent acceptance approved; next actor is the human reviewer. Merge/release are not authorized.
 
 `planned -> creator-in-progress -> review-ready -> reviewer-in-progress -> approved`
 
@@ -120,7 +120,7 @@ No Copilot scan is claimed without actual evidence; empty triage is permitted.
 
 ## Post-merge / release actions
 
-None authorized. Deliver draft PR for human review, keep the feature worktree,
+None authorized. Deliver the Ready-for-review PR to the human reviewer, keep the feature worktree,
 and report backup location, test results, limitations and unfinished checks.
 
 ## Open Questions / Unresolved Items
@@ -129,5 +129,6 @@ On 2026-09-07 the user explicitly authorized transmitting the evaluation-require
 Skills content, including unpublished edits, to Codex Astra, Sol and Luna.
 The automatic approval reviewer accepted the evaluation commands after that
 authorization. The earlier data-transfer blocker is resolved. Required model
-evidence, final independent acceptance and authorized draft publication are
-complete. PR #126 awaits human review; no merge/release permission is inferred.
+evidence, final independent acceptance and authorized PR publication are
+complete. PR #126 is Ready for review and awaits human review; no merge/release
+permission is inferred.

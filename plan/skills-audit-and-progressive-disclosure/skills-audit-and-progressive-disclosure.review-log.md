@@ -131,3 +131,10 @@ At the handoff check, GitHub returned no CI check entries and no human review
 decision. This is draft publication, not a passing-CI or merge-ready assertion.
 The final documentation-only commit records this observed state; next actor is
 the human reviewer. No merge/release or cleanup action was taken.
+
+## Ready-for-review update
+
+The user authorized converting PR #126 to Ready for review. GitHub confirmed
+`state=OPEN`, `isDraft=false`, base `dev`, the intended feature head, no review
+decision, and no CI check entries at the verification point. This status change
+does not claim CI approval or authorize merge/release. Next actor: human reviewer.

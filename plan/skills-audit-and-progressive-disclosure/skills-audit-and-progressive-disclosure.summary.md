@@ -1,8 +1,8 @@
 # Skills audit implementation handoff
 
-Status: pr-open — completed through draft publication and human-review handoff.
+Status: pr-open — completed through Ready-for-review publication and human-review handoff.
 PR: https://github.com/a129924/agent-skills/pull/126
-Verified OPEN, draft, base dev and the intended feature head. Human review is not
+Verified OPEN, Ready for review, base dev and the intended feature head. Human review is not
 complete; merge/release remain unauthorized.
 
 ## Changed
@@ -60,7 +60,8 @@ review and recovery; do not restore over the worktree wholesale.
 User explicitly authorized transmitting evaluation-required Skills content,
 including unpublished edits, to Codex Astra / Sol / Luna on 2026-09-07. Auto-review
 accepted the subsequent before/after evaluation commands. Evaluation, reason
-inspection, independent acceptance, commits, push and draft creation are complete.
+inspection, independent acceptance, commits, push and Ready-for-review transition
+are complete.
 No speed or general model-quality improvement is claimed.
 
 Human review is outstanding. GitHub reported no CI check entries at the handoff
@@ -74,7 +75,7 @@ the plan restricted this pass to refreshing existing rows.
 ## Next handoff
 
 - Actor: Human reviewer.
-- Step: Review draft PR #126, including retained safety boundaries and the
+- Step: Review Ready PR #126, including retained safety boundaries and the
   documented limitations; decide whether further changes are needed.
 - Agent continuation: Only respond to review feedback within its authorized
   scope. Do not infer approval to merge, release or clean up the worktree.

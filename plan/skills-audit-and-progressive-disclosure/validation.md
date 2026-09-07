@@ -139,10 +139,12 @@ no timeout occurred, so this unexercised path remains a documented limitation.
 
 ## Publication verification
 
-Three implementation/evidence topic commits were pushed normally. Draft PR #126
-was created and read back as OPEN/draft, base dev, intended feature head:
+Three implementation/evidence topic commits were pushed normally. PR #126 was
+initially created as a draft and read back as OPEN/draft, base dev, intended feature head:
 https://github.com/a129924/agent-skills/pull/126
 
-At that check, `statusCheckRollup=[]` and `reviewDecision` was empty. Neither is
-a green-CI or human-approval signal. Human review is the next handoff; merge,
-release, tags and worktree cleanup are outside this delivery.
+At that check, `statusCheckRollup=[]` and `reviewDecision` was empty. The user
+subsequently authorized Ready-for-review status; GitHub then reported
+`isDraft=false` with the same base/head. Neither state is a green-CI or
+human-approval signal. Human review is the next handoff; merge, release, tags
+and worktree cleanup are outside this delivery.
