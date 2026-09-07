@@ -108,6 +108,16 @@ def evaluate(model: str, case: tuple[str, str, str, str], phase: str) -> dict:
     return record | {"status": status, "exit_code": result.returncode, "raw_answer": raw, "answer": answer, "action_matches": action == case[3] if status == "observed" else None, "usage": usages, "unexpected_tools": forbidden_tools, "errors": errors, "stderr": result.stderr[-1000:] if result.returncode else ""}
 
 
+def validate_output_path(output_path: Path) -> Path:
+    """Require the append-only evidence file owned by this topic."""
+    resolved = output_path.resolve()
+    if resolved.parent != TOPIC:
+        raise ValueError("output must be a file in this topic directory")
+    if resolved.name != "model-results.jsonl":
+        raise ValueError("output must be named model-results.jsonl")
+    return resolved
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("phase", choices=("before", "after"))
@@ -115,9 +125,11 @@ def main() -> int:
     parser.add_argument("--model", choices=MODELS)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    # The output path must be topic-owned; append preserves prior observations.
-    if args.output.resolve().parent != TOPIC:
-        parser.error("output must be a file in this topic directory")
+    # Append is limited to this topic's dedicated evidence file.
+    try:
+        args.output = validate_output_path(args.output)
+    except ValueError as error:
+        parser.error(str(error))
     jobs = [(model, case) for model in MODELS if args.model in (None, model) for case in CASES if args.case in (None, case[0])]
     with args.output.open("a", encoding="utf-8") as output, ThreadPoolExecutor(max_workers=3) as pool:
         futures = [pool.submit(evaluate, model, case, args.phase) for model, case in jobs]

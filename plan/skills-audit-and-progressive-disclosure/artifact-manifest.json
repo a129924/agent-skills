@@ -2482,6 +2482,12 @@
       "baseline_sha256": null
     },
     {
+      "path": "tests/test_evaluate_models.py",
+      "owner": "Main Agent",
+      "role": "topic execution evidence",
+      "baseline_sha256": null
+    },
+    {
       "path": "plan/skills-audit-and-progressive-disclosure/findings.md",
       "owner": "Main Agent",
       "role": "topic execution evidence",

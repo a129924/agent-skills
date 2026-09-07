@@ -1,6 +1,6 @@
 ---
 name: python-generators-iterators
-description: "Choose collections versus lazy Python iteration and design generators or custom iterators."
+description: "Design or review collections, lazy Python iteration, generators, and custom iterators."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

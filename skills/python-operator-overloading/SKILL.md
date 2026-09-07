@@ -1,6 +1,6 @@
 ---
 name: python-operator-overloading
-description: "Design Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch."
+description: "Design or review Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

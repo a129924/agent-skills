@@ -1,6 +1,6 @@
 ---
 name: python-decorators
-description: "Design transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes."
+description: "Design or review transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

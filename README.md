@@ -326,16 +326,16 @@ Process documentation and workflow guidance for repository operations:
 | `python-class-design` | Design or review ordinary Python classes, instance state, constructors, and public member placement. |
 | `python-comprehensions` | Choose comprehensions, explicit loops, or map/filter when Python collection transformation needs readability review. |
 | `python-data-model-methods` | Choose Python foundational dunder methods and container protocols; distinguish dataclass-generated behavior. |
-| `python-operator-overloading` | Design Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch. |
+| `python-operator-overloading` | Design or review Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch. |
 | `python-api-signature` | Design or review Python function signatures, defaults, parameter ordering, and call-site contracts. |
 | `python-module-boundaries` | Design or review Python module boundaries, public exports, import behavior, and internal contracts. |
-| `python-context-management` | Design synchronous with-blocks and context managers for resource cleanup or temporary state restoration. |
+| `python-context-management` | Design or review synchronous with-blocks and context managers for resource cleanup or temporary state restoration. |
 | `python-docstrings` | Write or review contract-first Python docstrings in Google Style. |
-| `python-decorators` | Design transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes. |
+| `python-decorators` | Design or review transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes. |
 | `python-descriptors-attribute-access` | Choose Python properties, descriptors, or attribute hooks; require justification for dynamic interception. |
 | `python-async-await` | Design or review Python async boundaries, task ownership, cancellation, and async protocols. |
 | `python-async-planning` | Freeze async lifecycle, concurrency, failure, and cancellation decisions before risky Python implementation. |
-| `python-generators-iterators` | Choose collections versus lazy Python iteration and design generators or custom iterators. |
+| `python-generators-iterators` | Design or review collections, lazy Python iteration, generators, and custom iterators. |
 | `python-library-architecture` | Design or review reusable Python libraries or SDKs with isolated themes, a side-effect-free core, and facades. |
 | `python-project-init-greenfield` | Initialize a greenfield Python repository from a locked blueprint and verify its sensing assertions. |
 | `python-blueprint-authoring` | Author a greenfield Python blueprint using the existing six-section execution contract. |
