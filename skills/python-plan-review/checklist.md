@@ -21,7 +21,7 @@ Use this checklist before returning a verdict for a Python `*.plan.md`.
 ## Section completeness — all 13 required top-level sections
 
 - [ ] **Goal** — present and states a single concrete, measurable outcome
-- [ ] **Non-goals** — present; ≥3 explicit "will not" items (see Non-goals quality below)
+- [ ] **Non-goals** — present; relevant explicit "will not" items (see Non-goals quality below)
 - [ ] **Current Context** — present; describes the existing state of the codebase or system being changed
 - [ ] **Requirements** — present; lists concrete acceptance criteria, not just "make it work"
 - [ ] **Decisions** — present; addresses all 7 required decision topics (see Decisions quality below)
@@ -62,7 +62,7 @@ If any section above is absent → stop and return `needs-rework` naming every m
 
 ## Non-goals quality
 
-- [ ] At least 3 items are present
+- [ ] Relevant scope exclusions are present; no minimum count
 - [ ] Each item is an explicit `will not` or `out of scope` statement
 - [ ] No item is a vague placeholder such as `nothing excluded` or `TBD`
 
@@ -77,7 +77,7 @@ If any section above is absent → stop and return `needs-rework` naming every m
 
 ## Test Plan quality
 
-- [ ] Includes ALL 5 of the following test case categories (missing any one → `needs-rework`):
+- [ ] Assesses these categories with tests for applicable behavior or a concrete N/A reason:
   - happy path
   - invalid input
   - edge case

@@ -1,6 +1,6 @@
 ---
 name: python-plan-review
-description: Review a Python *.plan.md for executability — verifying all 13 required sections, decision completeness, explicit async trigger or exemption citation, async-planning coverage when triggered, step precision, test specificity, and validation coverage before implementation begins.
+description: "Review a Python implementation plan for executable decisions, contracts, async applicability, and test coverage."
 complexity: high
 risk_profile:
   - ambiguity_sensitive
@@ -108,16 +108,16 @@ Do not use this skill when:
     - Review may not silently override the frozen async baseline.
    - If plan-visible async-capable evidence conflicts with an exemption claim, require contradiction handling or `retrofit required` instead of silently choosing one side.
 8. Validate **Non-goals**.
-   - Must contain ≥3 explicit "will not" items that scope what this plan excludes.
-   - Fewer than 3 items, or a generic placeholder such as "nothing excluded" → `needs-rework`.
+   - Must contain explicit, relevant scope exclusions; there is no minimum item count.
+   - Missing meaningful exclusions, or a generic placeholder such as "nothing excluded" → `needs-rework`.
 9. Validate **Implementation Steps**.
    - Steps must be numbered.
    - Each step must reference a concrete file, module, or component by name.
    - `"Refactor the parser"` alone → fails; `"Update src/parser.py to handle empty lists"` → passes.
    - `"Write tests"` without naming the test file or what to test → fails.
 10. Validate **Test Plan**.
-    - Must include ALL 5 of the following test case categories: happy path, invalid input, edge case, regression, backward compatibility.
-    - Missing any one of these 5 categories → `needs-rework`.
+    - Assess happy path, invalid input, edge case, regression, and backward compatibility; accept a concrete N/A reason when a category has no affected behavior.
+    - Missing applicable behavior coverage without justification → `needs-rework`.
     - `"Add tests for this feature"` alone → fails.
     - If async-planning is triggered and `### Validation plan` names timeout, cancellation, resource cleanup, grouped failure, or concurrency-specific checks, those checks must also appear consistently in `## Test Plan`.
 11. Validate **Validation Commands**.
@@ -189,9 +189,9 @@ blocking_issues:
 - async-capable plans include all 7 required async-planning subsections under `## Decisions`
 - exempt plans still include an explicit exemption citation in `Async-planning status`
 - contradictions in async decisions are recorded with `### Async contradiction log` instead of being silently overridden
-- Non-goals contains ≥3 explicit "will not" items
+- Non-goals contains relevant explicit "will not" items
 - Implementation Steps are numbered and each references a concrete file, module, or component by name
-- Test Plan names all 5 required categories: happy path, invalid input, edge case, regression, backward compatibility
+- Test Plan assesses these categories, allowing justified N/A: happy path, invalid input, edge case, regression, backward compatibility
 - Validation Commands name specific runnable commands or explicitly reference a project config file
 - Risks and Rollback Plan each contain at least one concrete item
 - no Open Question is explicitly marked as blocking implementation start
@@ -232,7 +232,7 @@ blocking_issues:
 - confirm triggered async plans include the exact seven async-planning subsections
 - confirm contradictions are logged instead of silently resolved
 - confirm retrofit cases use the phrase `retrofit required`
-- confirm Non-goals has ≥3 explicit `will not` items
+- confirm Non-goals has relevant explicit `will not` items
 - confirm Implementation Steps are numbered and file-specific
 - confirm Test Plan names specific test case categories and stays aligned with async validation when triggered
 - confirm Validation Commands name specific commands or reference a project config file
@@ -260,7 +260,7 @@ blocking_issues:
 - `The executor can infer the module location from context.`
 - `The async details are implementation concerns, not plan concerns.`
 - `The reviewer can fix the async wording mentally.`
-- `Two Non-goals are close enough to three.`
+- `A fixed count of Non-goals matters more than whether they constrain scope.`
 - `Empty validation commands are fine because CI will figure it out.`
 - `The open question will probably be resolved before implementation starts.`
 - `Returning suggestions is enough even if the verdict is missing.`

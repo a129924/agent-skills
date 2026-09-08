@@ -1,6 +1,6 @@
 ---
 name: python-implementation-review
-description: Review a Python implementation against its approved plan to confirm all Implementation Steps are complete, no scope has crept beyond Non-goals, the Public Contract is unchanged, and the Test Plan cases are present. Run BEFORE python-code-review.
+description: "Check a Python implementation against an approved plan; enforce valid step evidence before tracing."
 complexity: high
 
 risk_profile:
@@ -80,17 +80,16 @@ Do not use this skill when:
      ```
 
      Then continue to step 2.
-   - If `plan/<topic>/<topic>.step.md` exists, check only the `## Implementation Steps` section for pending lines that match `^\- \[[ x]\]`. Do not scan `## Workflow Stages`.
-   - Portable default:
+   - If the step file exists, first verify it is readable, has exactly one `## Implementation Steps` section, and contains at least one valid nonempty `- [X] ...`, `- [ ] ...`, or `- [x] ...` task. Reject malformed task markers or duplicate sections. Do not scan `## Workflow Stages` as implementation evidence.
+   - Only uppercase `[X]` is done. Blank `[ ]` and lowercase `[x]` are pending.
+   - When the local helper is available, use:
 
      ```bash
-     sed -n '/^## Implementation Steps/,/^## /p' plan/<topic>/<topic>.step.md | grep '^\- \[[ x]\]'
+     python .codex/skills/plan-step-tracker/scripts/step_tracker.py check_impl_steps_succeeded <topic>
      ```
 
-     No matches → all Implementation Steps are complete → continue to step 2.
-     One or more matches → pending Implementation Steps remain. Lowercase `[x]` is pending, not done.
-   - Optional helper path: a repository may also reference `python .codex/skills/plan-step-tracker/scripts/step_tracker.py ...`, but only when that path is narrowed to the same `## Implementation Steps` semantics as the portable check above. It is never a hard dependency for this skill.
-   - If pending Implementation Steps are found, emit the BLOCKED refusal output below and stop immediately. Do not build the traceability matrix, and do not produce a YAML verdict block.
+     Run from the repository root (the CLI resolves `plan/` relative to the current directory). Exit 0 is complete; exit 1 is pending or invalid evidence. The helper is optional: direct inspection must enforce the same checks. A failed read or zero grep matches is never proof of completion.
+   - Pending or invalid evidence is BLOCKED before tracing; output the exact pending steps or file/format problem and its repair. Do not emit a YAML verdict.
 
 2. **Build the traceability matrix.**
     - For each numbered item in `## Implementation Steps`, locate evidence in the implementation.
@@ -171,7 +170,7 @@ Action required:
 ## Required Checks
 - Approved `*.plan.md` must be provided and its formal approval confirmed before tracing begins.
 - Implementation diff or changed file set must be present.
-- If `plan/<topic>/<topic>.step.md` exists, the review must block on any pending line inside `## Implementation Steps` before tracing begins.
+- If `plan/<topic>/<topic>.step.md` exists, the review must block on pending tasks, missing/empty/duplicate Implementation Steps sections, malformed markers, or unreadable content before tracing begins.
 - `## Workflow Stages` must never be used as blocking evidence for the step gate.
 - Every numbered item in `## Implementation Steps` must be explicitly verified against the implementation.
 
@@ -193,7 +192,7 @@ Action required:
 - WARN — if `plan/<topic>/<topic>.step.md` is missing, emit the warning, suggest re-running `python-plan-authoring`, and continue with the review.
 
 ## Step Gate
-- BLOCKED — if `plan/<topic>/<topic>.step.md` contains pending lines under `## Implementation Steps`, stop before the traceability matrix and use the plain-text BLOCKED output format.
+- BLOCKED — if the existing step file is unreadable, malformed, missing or duplicating its Implementation Steps section, has no valid tasks, or contains pending tasks, stop before the traceability matrix and use the plain-text BLOCKED output format.
 - Do not produce a YAML verdict block for a BLOCKED step-gate result.
 
 ## Ambiguous Requirement

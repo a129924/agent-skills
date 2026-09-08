@@ -22,7 +22,7 @@ is not in the instance `__dict__`, the class, or any base class. This makes
 ### Why it is harmful by default
 
 - IDE tools cannot statically resolve attributes dispatched through `__getattr__`.
-- `pyright --strict` and mypy flag attributes accessed via `__getattr__` as `Any`.
+- `pyright` with `typeCheckingMode = "strict"` configured and mypy flag attributes accessed via `__getattr__` as `Any`.
 - Silent `AttributeError` suppression (returning a default instead of raising)
   hides bugs and makes debugging hard.
 - Infinite recursion during `__init__` is a common and non-obvious failure mode (see R10).

@@ -1,6 +1,6 @@
 ---
 name: plan-step-tracker
-description: Query step status (pending/done) in plan/<topic>/<topic>.step.md with minimal token cost and explicit blocking when incomplete.
+description: "Query topic step status or check completion; reject invalid completion evidence."
 complexity: medium
 risk_profile:
   - external_tooling

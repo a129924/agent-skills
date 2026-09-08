@@ -1,6 +1,6 @@
 ---
 name: python-blueprint-authoring
-description: Author a review-ready greenfield `blueprint.md` contract for a new or baseline-only Python repository, reusing the locked blueprint v1 schema already consumed by `python-project-init-greenfield`.
+description: "Author a greenfield Python blueprint using the existing six-section execution contract."
 complexity: high
 risk_profile:
   - ambiguity_sensitive
@@ -130,7 +130,7 @@ Do not use this skill when:
 - list the specific missing inputs explicitly; do not fabricate locators, package names, or sensing assertions to fill gaps
 
 ## Ambiguous Requirement
-- note the assumption explicitly as a sub-bullet under an existing section of the blueprint (e.g., under `## Implementation Notes`)
+- note the assumption explicitly as a sub-bullet under an existing section of the blueprint (e.g., under the existing `## Project Overview` section when the assumption concerns context; otherwise use the relevant existing schema section)
 - proceed with best-effort draft using the stated assumption
 - flag the assumption clearly so the reviewer and `python-project-init-greenfield` consumer can evaluate it before handoff
 

@@ -171,19 +171,19 @@ inside a skill folder unless the repository spec gives them a fixed role.
 ## Example policy
 - `SKILL.md` should include one concise positive example and one concise
   negative example
-- `examples.md` may stay optional when the concise `SKILL.md` examples already
-  cover about 80% of routine usage
-- `examples.md` becomes required for higher-complexity skills, such as
-  refactoring, branching workflows, script/tool usage, or higher-risk outputs
+- `examples.md` may stay optional when concise `SKILL.md` examples cover the
+  routine path and no important high-risk branch needs a worked example
+- add `examples.md` when high-risk branches or output details are not covered by
+  the concise examples
 - reviewer may still require `examples.md` when the concise examples are not
-  enough
+  enough for the skill's actual risk or decision points
 
 ## Reference policy
 - keep `reference.md` focused when one file is enough
 - `references/` is a split-reference supplement, not by itself a replacement for
   the required companion-file rule
-- split into `references/` when `reference.md` grows beyond about 1,000 tokens
-  or more than 3 logical topics
+- split into `references/` when callers need independent topics that would make
+  one `reference.md` too broad to route or maintain clearly
 - if `reference.md` is the chosen companion file and becomes too broad, keep it
   focused or reduce it to a short overview while moving detailed topics into
   `references/`
@@ -299,63 +299,63 @@ Process documentation and workflow guidance for repository operations:
 ## Current skills
 | Skill | Role |
 | --- | --- |
-| `agent-skill-creator` | creates new repo-compliant, single-purpose skills with complexity classification, risk-appropriate validation, and explicit local-file roles |
-| `agent-skill-reviewer` | reviews skills for complexity-gated sections, YAML-body alignment, risk-appropriate validation, severity-labeled findings, and lifecycle compliance |
-| `agent-skill-template` | provides the canonical template with complexity-gated sections and risk-based validation guidance |
-| `business-intent-alignment` | aligns ambiguous business intent into measurable requirements baselines at `analysis/<topic>/requirements.md` through Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts |
-| `business-to-technical-translation` | translates frozen business baselines into technical specs with feasibility checks, architecture-compliance analysis, cost-of-realization warnings, and rollback-to-alignment triggers |
-| `boundary-outcome-design` | guides semantic Outcome and exception design across Domain, Application, Port, Adapter, Repository, and Unit of Work boundaries |
-| `copilot-instructions-init` | generates or refreshes target-project `.github/copilot-instructions.md` from sensed facts, installed skills, and plan contracts, with stale-fact and overwrite-choice hard stops |
-| `context-package-builder` | builds one minimal handoff package for a real subAgent dispatch, keeping only frozen truth, bounded evidence, and explicit unknowns while excluding whole-chat history, registry hints, and workflow reconstruction |
-| `git-branch-naming` | names or repairs development branches with semantic prefixes, `<type>/<username>/<short-description>` structure, and migration guidance |
-| `git-commit-convention` | drafts semantic commit messages from staged changes and recommends split or amend repair paths |
-| `git-post-merge-workflow` | standardizes post-merge cleanup and local synchronization, including safe branch deletion defaults and verification checks |
-| `git-release-management` | enforces strict PR/release gates, version synchronization, and safe tagging or emergency release handling |
-| `handoff-routing-policy` | routes the next allowed role after one explicit subAgent result using the frozen verdict set, or stops when bounded routing cannot continue |
-| `plan-creator` | creates repo-visible topic plans with canonical workflow transitions, analysis-layer routing, exact artifact paths, and stable-library timing contracts |
-| `plan-reviewer` | independently reviews repo-visible topic plans against workflow contracts and returns fixed-schema JSON verdicts before execution |
-| `plan-step-tracker` | queries `pending` / `done` step status in `plan/<topic>/<topic>.step.md`, including implementation-only gate checks, with minimal token cost and explicit blocking when incomplete |
+| `agent-skill-creator` | Draft a new single-purpose repository skill for independent review; not for small edits to an existing skill. |
+| `agent-skill-reviewer` | Independently approve or request rework on a new or materially changed repository skill. |
+| `agent-skill-template` | Supply the repository scaffold when creating a new single-purpose skill manually. |
+| `business-intent-alignment` | Resolve ambiguous business intent into measurable requirements before technical planning. |
+| `business-to-technical-translation` | Translate a frozen business baseline into a technical specification; surface feasibility conflicts. |
+| `boundary-outcome-design` | Design or review Outcome and exception translation when results cross application, domain, or persistence boundaries. |
+| `copilot-instructions-init` | Create or refresh a project's Copilot instructions from current repository facts and declared contracts. |
+| `context-package-builder` | Build a minimal context package for one already-bounded, real subagent handoff. |
+| `git-branch-naming` | Choose a semantic development branch name or repair work started on the wrong branch. |
+| `git-commit-convention` | Draft or review semantic commits, topic splits, and message-only amends; also answer commit-policy questions. |
+| `git-post-merge-workflow` | Inspect and perform authorized cleanup and fast-forward sync after a PR has merged. |
+| `git-release-management` | Assess draft-PR, merge, or release readiness using endpoint-specific gates; tagging needs release authorization. |
+| `handoff-routing-policy` | Choose the next allowed role or stop after one explicit subagent result. |
+| `plan-creator` | Author a repository topic plan with explicit scope, artifacts, workflow gates, and handoff criteria. |
+| `plan-reviewer` | Independently review an authored repository topic plan before execution. |
+| `plan-step-tracker` | Query topic step status or check completion; reject invalid completion evidence. |
 | `python-implementation-workflow` | orchestrates the end-to-end Python implementation workflow with active gates across plan review, TDD assessment, implementation, implementation review, code review, and medium/high-severity drift correction handling |
-| `python-naming` | defines Python naming rules for identifiers, files, folders, and visibility |
-| `python-package-layout` | defines conservative Python package layout rules for `src/`, `pyproject.toml`, library-vs-CLI placement, packaged data, extras, and tests that exercise installed package structure instead of repo-root import accidents |
-| `python-type-hints-strict` | defines Python type-hint rules for projects that require `pyright --strict`, including boundary-only `object` use and preservation of stronger repo-owned types |
-| `python-model-selection` | defines general Python construct-selection rules for Enum, dataclass, ABC, and Protocol |
-| `python-control-flow` | defines general Python control-flow rules for `if/elif`, `match/case`, guard clauses, and truthiness checks |
-| `python-testing-pytest` | defines pure Python pytest unit-testing rules for fixtures, parametrization, assertions, mocks, and coverage as a quality target |
-| `python-error-handling` | defines general Python exception-handling rules for custom errors, translation boundaries, chaining, propagation, and benign suppression |
-| `python-class-design` | defines ordinary Python class-design rules for public surfaces, thin constructors, disciplined instance state, properties, factories, and limited name mangling |
-| `python-comprehensions` | defines Python comprehension readability rules for single-level list/dict/set comprehensions, nested comprehensions, generator expressions, filter/map trade-offs, and when to use explicit loops instead |
-| `python-data-model-methods` | defines general Python data-model method rules for choosing foundational dunder methods, base container protocols, dataclass-generated behavior boundaries, and safe equality/hash semantics |
-| `python-operator-overloading` | defines Python operator overloading rules for binary arithmetic contracts, reflected operator pairing, in-place return semantics, unary operator purity, comparison ordering consistency, and the NotImplemented dispatch protocol |
-| `python-api-signature` | defines public Python function and method signature rules for safe defaults, clear parameter ordering, keyword-only clarity, and explicit call-site contracts |
-| `python-module-boundaries` | defines regular Python package and module boundary rules for explicit public surfaces, internal-module contracts, import style, and safe import behavior |
-| `python-context-management` | defines synchronous Python context-manager rules for resource lifetime, `@contextmanager` versus class-based choice, cleanup-failure handling, ambient-state restoration, and `ExitStack` usage |
-| `python-docstrings` | guides contract-first docstring writing in Google Style format with explicit intent derivation, error semantics documentation, and dataclass field-level contracts |
-| `python-decorators` | defines ordinary Python decorator rules for when to use decorators, how to preserve signature transparency, and when explicit calls or context managers are clearer |
-| `python-descriptors-attribute-access` | chooses and designs Python attribute access mechanisms using the least-powerful-sufficient ladder — from plain attributes through `@property`, `@cached_property`, custom descriptors, and attribute hook methods — with strict discouragement of `__getattr__`, `__setattr__`, and `__getattribute__` |
-| `python-async-await` | defines general Python async/await rules for choosing async boundaries, preserving structured concurrency, and handling cancellation, async protocols, and grouped task failure explicitly |
-| `python-async-planning` | defines planning-stage Python async architecture and risk-freezing rules for trigger evidence, lifecycle decisions, contradictions, retrofit handling, and portability boundaries before implementation |
-| `python-generators-iterators` | defines general Python generator and iterator rules for choosing concrete collections versus generators, generator functions versus custom iterators, lazy evaluation discipline, and iterator-protocol design |
-| `python-library-architecture` | defines clean Python library/package architecture rules for theme isolation, `core` contracts, facade/client composition, and zero-exception cross-theme dependency direction |
-| `python-project-init-greenfield` | executes Greenfield project initialization from blueprint contracts, including required skill installation, toolchain configuration, structural scaffolding, and acceptance handoff |
-| `python-blueprint-authoring` | authors review-ready greenfield `blueprint.md` contracts with locked section order, exact Required Skills library validation, stop-and-ask handling for abstract structure, and strict greenfield-only lane boundaries |
-| `python-blueprint-review` | reviews authored greenfield `blueprint.md` contracts against the locked blueprint v1 schema, exact Required Skills validity, structural locatability, and greenfield-only lane fit before executor handoff |
-| `python-project-retrofit` | retrofits existing Python projects with safe structural conflict detection (Shadow File Detection), implicit configuration discovery (Implicit Config Mining), Git safety checks, and Sensing Delta Report for transparent state transformation |
-| `python-retrofit-plan-authoring` | authors review-ready Retrofit V2 contracts with locked section order, migration-strategy risk metadata, stop-and-ask handling for abstract plans, and strict separation between planning strategy and runtime gate decisions |
-| `python-retrofit-plan-review` | reviews authored Retrofit V2 `retrofit-plan.md` contracts against the locked section order, machine-readable risk metadata, supported sensing assertion kinds, locatability, and retrofit lane fit before executor handoff |
-| `python-plan-authoring` | creates an executable Python implementation plan (`*.plan.md`) that freezes scope, decisions, affected files, tests, and validation commands before coding begins — an implementation contract, not a todo list |
-| `python-plan-review` | reviews a Python implementation plan against executability criteria, returning `approved`, `needs-rework`, or `insufficient-context` before any coding begins |
-| `python-tdd-test-authoring` | creates RED tests from an approved Python implementation plan before implementation begins, enforcing TDD discipline and preventing test-as-afterthought |
-| `python-implementation-review` | reviews a Python implementation against its approved plan, verifying all tasks are complete, no scope creep occurred, and no contracts were broken — not a code quality check |
-| `python-code-review` | reviews Python code quality across 7 dimensions (typing, lint, readability, error handling, anti-patterns, test quality, observability) with tool auto-detection and ordering gate after implementation-review |
-| `python-serialization-boundaries` | defines Python serialization boundaries as semantic translation gates for API, database, and message payloads, including missing/null intent preservation, type normalization, deep conversion, and asymmetric input/output contracts |
-| `python-pre-commit` | configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set (ruff, ruff-format, pre-commit-hooks); keeps slow hooks (pytest, pyright) on `manual` stage; includes `scripts/apply_precommit.py` for automated template-based config generation |
-| `python-pyproject-toolconfig` | appends missing ruff, pyright, and pytest configuration sections to an existing pyproject.toml without overwriting existing settings |
-| `sense-env-scaffold` | runs the `sense_env.py` scaffold to discover environment facts or evaluate sensing assertions with JSON manifest output and defined exit codes |
-| `semantic-first-design` | guides Python-first design and review toward explicit contracts, states, policies, boundaries, composition, and failure semantics |
-| `step-creator` | creates one caller-selected `base-plan`, `agent-skill-plan`, or `python-implementation-plan` `plan/<topic>/<topic>.step.md` from an eligible plan with fixed worktree, PR, release, and cleanup gates |
-| `subagent-dispatch-policy` | chooses the next allowed role for one bounded task slice, or stops, without turning file paths, registries, or runtime semantics into dispatch targets |
-| `worktree-manager` | manages Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing; enforces managed-path policy, release/remove separation, and risky-state escalation |
+| `python-naming` | Define or review Python identifier, file, and visibility naming conventions. |
+| `python-package-layout` | Design or review Python src-layout, packaging, CLI placement, and tests that exercise installed code. |
+| `python-type-hints-strict` | Design or review annotations for Python projects that explicitly require Pyright strict mode. |
+| `python-model-selection` | Choose Enum, dataclass, ABC, or Protocol for Python structured data and contracts. |
+| `python-control-flow` | Design or review Python branching, guard clauses, match/case, and truthiness choices. |
+| `python-testing-pytest` | Design or review pure pytest unit tests, fixtures, assertions, and mocks without real I/O or async-runner configuration. |
+| `python-error-handling` | Design or review Python exception types, translation, chaining, and propagation; not retry orchestration or logging policy. |
+| `python-class-design` | Design or review ordinary Python classes, instance state, constructors, and public member placement. |
+| `python-comprehensions` | Choose comprehensions, explicit loops, or map/filter when Python collection transformation needs readability review. |
+| `python-data-model-methods` | Choose Python foundational dunder methods and container protocols; distinguish dataclass-generated behavior. |
+| `python-operator-overloading` | Design or review Python arithmetic, reflected, in-place, unary, or ordering operators and NotImplemented dispatch. |
+| `python-api-signature` | Design or review Python function signatures, defaults, parameter ordering, and call-site contracts. |
+| `python-module-boundaries` | Design or review Python module boundaries, public exports, import behavior, and internal contracts. |
+| `python-context-management` | Design or review synchronous with-blocks and context managers for resource cleanup or temporary state restoration. |
+| `python-docstrings` | Write or review contract-first Python docstrings in Google Style. |
+| `python-decorators` | Design or review transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes. |
+| `python-descriptors-attribute-access` | Choose Python properties, descriptors, or attribute hooks; require justification for dynamic interception. |
+| `python-async-await` | Design or review Python async boundaries, task ownership, cancellation, and async protocols. |
+| `python-async-planning` | Freeze async lifecycle, concurrency, failure, and cancellation decisions before risky Python implementation. |
+| `python-generators-iterators` | Design or review collections, lazy Python iteration, generators, and custom iterators. |
+| `python-library-architecture` | Design or review reusable Python libraries or SDKs with isolated themes, a side-effect-free core, and facades. |
+| `python-project-init-greenfield` | Initialize a greenfield Python repository from a locked blueprint and verify its sensing assertions. |
+| `python-blueprint-authoring` | Author a greenfield Python blueprint using the existing six-section execution contract. |
+| `python-blueprint-review` | Review a greenfield Python blueprint against its locked schema before project initialization. |
+| `python-project-retrofit` | Execute a locked Python Retrofit V2 plan with risk-aligned human gates and acceptance checks. |
+| `python-retrofit-plan-authoring` | Author a Retrofit V2 migration contract for an existing Python repository; do not execute it. |
+| `python-retrofit-plan-review` | Review a Python Retrofit V2 plan for schema, risk, locatability, and executable acceptance assertions. |
+| `python-plan-authoring` | Author a nontrivial Python implementation contract from intent and inspected facts; exclude isolated trivial edits. |
+| `python-plan-review` | Review a Python implementation plan for executable decisions, contracts, async applicability, and test coverage. |
+| `python-tdd-test-authoring` | Author behavior-mapped tests from an approved Python plan before production changes; verify declared initial states. |
+| `python-implementation-review` | Check a Python implementation against an approved plan; enforce valid step evidence before tracing. |
+| `python-code-review` | Review Python code quality in a standalone diff or formal workflow; standalone reviews need no approved plan. |
+| `python-serialization-boundaries` | Design or review Python API, database, or message serialization as explicit semantic translation. |
+| `python-pre-commit` | Create or merge pre-commit configuration for uv-based Python projects while preserving existing hooks. |
+| `python-pyproject-toolconfig` | Append missing Ruff, Pyright, and pytest sections to pyproject.toml; preserve existing configuration. |
+| `sense-env-scaffold` | Discover repository facts as structured JSON or evaluate a contract with the sense_env.py CLI. |
+| `semantic-first-design` | Resolve one material Python design ambiguity in contracts, states, policies, boundaries, or failure semantics. |
+| `step-creator` | Create a topic step artifact from an eligible plan and an explicitly selected workflow profile. |
+| `subagent-dispatch-policy` | Select a permitted role or stop for one bounded task before a real subagent dispatch. |
+| `worktree-manager` | Create, inspect, release, or remove Git worktrees with separate authorization and safety gates. |
 
 ## Notes
 - Use `AGENTS.md` for governance guidance.

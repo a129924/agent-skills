@@ -9,7 +9,7 @@ Canonical YAML blocks for all four supported hook types. Copy these blocks into 
 | Repo URL | `https://github.com/astral-sh/ruff-pre-commit` |
 | Hooks | `ruff` (lint + autofix), `ruff-format` (formatter) |
 | Canonical rev | Use the tag from https://github.com/astral-sh/ruff-pre-commit/releases — independent of the uv-installed ruff version. |
-| Example rev | `v0.15.12` (update to current stable at config creation time) |
+| Example rev | `v0.15.12` (documented generator default; preserve existing pins during merge) |
 | Version source | Manual update from https://github.com/astral-sh/ruff-pre-commit/releases — version is independent of `uv run ruff --version` |
 
 **Canonical block**:
@@ -22,9 +22,9 @@ Canonical YAML blocks for all four supported hook types. Copy these blocks into 
     - id: ruff-format
 ```
 
-> **Version note**: The `rev` for `ruff-pre-commit` is independent of the ruff version installed by uv. Always check [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases) and update manually when upgrading. The default used by `scripts/apply_precommit.py` is `v0.15.12`.
+> **Version note**: The `rev` for `ruff-pre-commit` is independent of the ruff version installed by uv. Check [ruff-pre-commit releases](https://github.com/astral-sh/ruff-pre-commit/releases) when selecting an upgrade; a merge preserves existing pins. The documented generator default is `v0.15.12`, not a claim about the latest release.
 
-- Always add `args: ["--fix"]` to `ruff` so autofix runs on staged files before the commit is blocked.
+- For a newly created Ruff hook, `args: ["--fix"]` is the canonical default. When merging into an existing hook, preserve its arguments; adding auto-fix behavior requires a separately requested change.
 - Run `ruff-format` after `ruff` (pre-commit runs hooks in declaration order).
 
 ## pre-commit-hooks

@@ -1,6 +1,6 @@
 ---
 name: python-api-signature
-description: Design or review public Python function and method signatures for safe defaults, clear parameter ordering, and explicit call-site contracts.
+description: "Design or review Python function signatures, defaults, parameter ordering, and call-site contracts."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

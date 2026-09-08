@@ -121,34 +121,13 @@ Append the seven async-planning subsections under `## Decisions` before the plan
 Create a plan for adding retry logic and async fan-out to our HTTP client.
 ```
 
-**Why this is not authorable yet**
-The request is missing the normal planning decisions and the async-planning baseline. Drafting now would require inventing module paths, ownership, timeout policy, and concurrency rules.
+**Inspect before asking**
+Read the existing HTTP client, its callers, version/dependency configuration, and validation commands. Derive module locations, relevant Non-goals, and executable steps from that evidence. Do not require the user to write file-level steps or supply a minimum number of exclusions.
 
-**What the skill should ask before drafting**
-```
-Before I draft the plan, I need:
-
-1. The normal planning decisions:
-   - target module or package
-   - public API shape
-   - interface changes and breaking-change policy
-   - dependency decision
-   - error handling strategy
-   - typing strategy
-2. At least 3 Non-goals.
-3. Validation commands or the project config file to reference.
-4. File-level implementation steps.
-5. Async-planning inputs needed to freeze the triggered async baseline (use `python-async-planning` as the routing aid if needed):
-   - What stays synchronous and what becomes async?
-   - Who owns the HTTP client, retries, and cleanup?
-   - Is fan-out sequential, bounded concurrent, batch, or streaming?
-   - What is the timeout and cancellation owner?
-   - How should grouped failures be surfaced?
-   - What validation cases must prove the async design?
-```
+**Ask only about unresolved contract choices**
+If inspection does not settle whether retries are safe, who owns the client, the concurrency bound, or the timeout/cancellation policy, ask those specific questions. Freeze the resulting async baseline before implementation; an incomplete draft may record the remaining gaps but is not implementation-ready.
 
 **What the skill must NOT do**
-- invent a module path such as `src/http/retry.py`
-- assume `httpx.AsyncClient` ownership without input
-- write `Implementation Steps` like `"Add async retry logic"`
-- skip the async-planning block because the details look implementation-specific
+- Present an invented existing module or dependency as observed fact.
+- Silently choose HTTP client ownership or retry policy when alternatives change behavior.
+- Hand off vague Implementation Steps or defer the triggered async baseline to the implementer.

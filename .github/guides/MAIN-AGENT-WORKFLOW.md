@@ -734,3 +734,7 @@ Ready to hand off to human merge?
   - Max 3 PR iterations
   - Checkpoint-based resumability
   - Ask-user-only error handling
+
+## Current bounded authorization clarification
+
+Canonical skill behavior comes from `skills/`; `.github/skills` remains a compatibility surface. Read only task-relevant instructions. Existing explicit authorization for the same bounded commit, push and draft-PR workflow satisfies STOP POINT 1 after validation; do not request identical permission at every step. It does not authorize merge or release, and STOP POINT 2 remains intact. A clear user revision is recorded in the affected authorized plan/baseline before downstream use; no magic keyword is required.

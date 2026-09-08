@@ -1,88 +1,72 @@
 # `.codex/skills` Provenance
 
-This file records the current `.codex/skills` projection provenance for the
-whole canonical `skills/` library.
+This surface is generated from canonical `skills/`, not an authority owner.
 
-Current implementation note:
-
-- `source_commit` records the upstream canonical commit that was validated
-- `materialized-copy` rows are direct projections from `skills/<skill-name>/`
-  with `.codex/...` concretization applied where needed
-- `materialized-copy+canonical-runtime-exception` indicates the projected copy
-  keeps one file byte-identical to canonical after materialization
+The current records validate canonical content in the actual source commit below.
+`source_commit` contains the completed canonical topic changes; `source_tree_hash`
+is the exact per-skill hash produced by `scripts/build_skills_inventory.py`.
+The audit manifest retains the original baseline and recoverable snapshot evidence.
 
 ## Current provenance
 
-| skill_name | upstream_path | materialization_mode | source_commit | validation_basis |
-| --- | --- | --- | --- | --- |
-| `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `context-package-builder` | `skills/context-package-builder/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `copilot-instructions-init` | `skills/copilot-instructions-init/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `git-branch-naming` | `skills/git-branch-naming/` | `materialized-copy` | `4e03026` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 4e03026` |
-| `git-commit-convention` | `skills/git-commit-convention/` | `materialized-copy` | `4e03026` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 4e03026` |
-| `git-post-merge-workflow` | `skills/git-post-merge-workflow/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `git-release-management` | `skills/git-release-management/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `handoff-routing-policy` | `skills/handoff-routing-policy/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `plan-creator` | `skills/plan-creator/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `plan-step-tracker` | `skills/plan-step-tracker/` | `materialized-copy` | `86184c9` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 86184c9` |
-| `platform-projection-adapter` | `skills/platform-projection-adapter/` | `materialized-copy+canonical-runtime-exception` | `8ce10c2` | `materialized from canonical source; projected docs concretized to .codex/skills/...; scripts/platform_projection_adapter.py preserved byte-identical to canonical runtime` |
-| `python-api-signature` | `skills/python-api-signature/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-async-await` | `skills/python-async-await/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-async-planning` | `skills/python-async-planning/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-blueprint-authoring` | `skills/python-blueprint-authoring/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-blueprint-review` | `skills/python-blueprint-review/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-class-design` | `skills/python-class-design/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-code-review` | `skills/python-code-review/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-comprehensions` | `skills/python-comprehensions/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-context-management` | `skills/python-context-management/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-control-flow` | `skills/python-control-flow/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-data-model-methods` | `skills/python-data-model-methods/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-decorators` | `skills/python-decorators/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-descriptors-attribute-access` | `skills/python-descriptors-attribute-access/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-docstrings` | `skills/python-docstrings/` | `materialized-copy` | `86184c9` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 86184c9` |
-| `python-error-handling` | `skills/python-error-handling/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-generators-iterators` | `skills/python-generators-iterators/` | `materialized-copy` | `86184c9` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 86184c9` |
-| `python-implementation-review` | `skills/python-implementation-review/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-library-architecture` | `skills/python-library-architecture/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-model-selection` | `skills/python-model-selection/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-module-boundaries` | `skills/python-module-boundaries/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-naming` | `skills/python-naming/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-operator-overloading` | `skills/python-operator-overloading/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-package-layout` | `skills/python-package-layout/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-plan-authoring` | `skills/python-plan-authoring/` | `materialized-copy` | `86184c9` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 86184c9` |
-| `python-plan-review` | `skills/python-plan-review/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-pre-commit` | `skills/python-pre-commit/` | `materialized-copy` | `45ef2ec` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 45ef2ec` |
-| `python-project-init-greenfield` | `skills/python-project-init-greenfield/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-project-retrofit` | `skills/python-project-retrofit/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-pyproject-toolconfig` | `skills/python-pyproject-toolconfig/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-retrofit-plan-authoring` | `skills/python-retrofit-plan-authoring/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-retrofit-plan-review` | `skills/python-retrofit-plan-review/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-serialization-boundaries` | `skills/python-serialization-boundaries/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-tdd-test-authoring` | `skills/python-tdd-test-authoring/` | `materialized-copy` | `86184c9` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized; revalidated against canonical hygiene baseline at 86184c9` |
-| `python-testing-pytest` | `skills/python-testing-pytest/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `python-type-hints-strict` | `skills/python-type-hints-strict/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `scope-draft-plan` | `skills/scope-draft-plan/` | `materialized-copy` | `c45ffb8` | `direct materialization from canonical source; no .<platform>/ placeholders to concretize` |
-| `step-creator` | `skills/step-creator/` | `materialized-copy` | `2379e45` | `byte-identical materialization from canonical source; no .<platform>/ placeholders to concretize` |
-| `subagent-dispatch-policy` | `skills/subagent-dispatch-policy/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-| `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` | `8ce10c2` | `materialized from canonical source by platform-projection-adapter; .codex/skills/... concretized` |
-
-## Revalidation rule
-
-When an upstream source changes:
-
-1. verify the entry's `materialization_mode`
-2. rematerialize the `.codex` surface from canonical `skills/<skill-name>/`
-3. restore the canonical runtime exception for
-   `platform-projection-adapter/scripts/platform_projection_adapter.py` when needed
-4. confirm `.codex/skills/README.md` still matches the actual surface
-5. update the affected row in this file with the revalidated `source_commit`
-   and `validation_basis`
-
-If the source mapping cannot be verified, treat the projected surface as stale
-and do not use it as validation evidence.
+| skill_name | upstream_path | materialization_mode | source_commit | source_tree_hash | validation_basis |
+| --- | --- | --- | --- | --- | --- |
+| `agent-skill-creator` | `skills/agent-skill-creator/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `7cc17a23a8140a4cf6460e8183f3686a2fb4710277243f0988cb50c47d2f45bb` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `agent-skill-reviewer` | `skills/agent-skill-reviewer/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `f8e5867040d293ef99c5b5d86e704f787765ac4ae39e0cab87103c3549ca8a85` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `agent-skill-template` | `skills/agent-skill-template/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `d0a572edc12d7e4aebfb972b20200e6b345e2bad61ed5791f0858d926f2a6142` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `boundary-outcome-design` | `skills/boundary-outcome-design/` | `materialized-copy` | `8a919ab89e70408964fea47767b04d9fff2c0363` | `07cdcbd2c5f1c0e437988761034706f36aa55a29e9c8a6761eedc1519e20e215` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `business-intent-alignment` | `skills/business-intent-alignment/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `81c017e3f2d43256db7d502e826e45e701ef4031764b523f32b5fa0da1bf4947` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `business-to-technical-translation` | `skills/business-to-technical-translation/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `6deba53054cb53cff8ef1e3fff63515c6e58929a032dc37a7f4a9c86921b26de` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `context-package-builder` | `skills/context-package-builder/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `29b89f0bca44f22ec9876d467c4b6bb97cff0346b7f404815923c63502dc2e8c` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `copilot-instructions-init` | `skills/copilot-instructions-init/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `9d0b5490d8ce6f05ccd46169fecc793aad8e2ffe03f79fdf4ee85777089fb79e` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `git-branch-naming` | `skills/git-branch-naming/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `ef369b33202b22081442cf70be8f4eba4b00292793a6c1dcbaa94c66b47dfccf` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `git-commit-convention` | `skills/git-commit-convention/` | `materialized-copy` | `4b734791e2eca85704dfb6ff51a750a6ae3a50c5` | `2afd85bea6890ac138d10c3121fe829f09d8c85f5f3b1297d2ec9d3a71930e60` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `git-post-merge-workflow` | `skills/git-post-merge-workflow/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `3eba0fdb295495514edb4605b94a28177d3e751717c6a3925a7ae0b205a8dadb` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `git-release-management` | `skills/git-release-management/` | `materialized-copy` | `0e9facb8fb573e9ab8b227f74341975fa0f996fe` | `7717184fea022579f1bbf6e2cbbc27d89a7a031390d19dc956e4323fc1988ffb` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `handoff-routing-policy` | `skills/handoff-routing-policy/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `5fb3db110432d1ec15a6105a719c1a5125c04dda5fe29e2c4a482422ef996ac9` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `plan-creator` | `skills/plan-creator/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `6eb4ff2dab4b151420d4d0ceab56e0ad8cfbe5a21c9c62d40792bc163d61c500` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `plan-reviewer` | `skills/plan-reviewer/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `475a573f0645304bd09125f243015ff93f3892a6ca8b2abc08a7588f0088a75a` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `plan-step-tracker` | `skills/plan-step-tracker/` | `materialized-copy` | `0ed7d85ca431419ae68862b5edfbf13a73412427` | `e406bba18481510071cabfcf6e117108affdf7e02d395acb9dd89e7b284e6568` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `platform-projection-adapter` | `skills/platform-projection-adapter/` | `materialized-copy+canonical-runtime-exception` | `0ed7d85ca431419ae68862b5edfbf13a73412427` | `7ae516bf89766cbc013ca3437f8405dc1051a0b9a80cc0216c5708ab3e028f30` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-api-signature` | `skills/python-api-signature/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `75f1e4591938d0a0251618c0080926da73c8061dc46f9257da3148e32f118f7c` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-async-await` | `skills/python-async-await/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `7809879a28ac33ba421cf92fb4eba6c4ff8993048a0c329158e3f78cec92808b` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-async-planning` | `skills/python-async-planning/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `30258bf41a3f4e8d7dc0224c77bcaead0d7b13a9e5773752269ea3c1ac63da45` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-blueprint-authoring` | `skills/python-blueprint-authoring/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `787254488c765ba11a5d5e2f00aa0384dabc24a33a41368ea0fab0a6f8c8284f` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-blueprint-review` | `skills/python-blueprint-review/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `7d177b0324fbddb067bc0838899f3db8802d15a9983f868ca7c02aeacb546f8a` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-class-design` | `skills/python-class-design/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `d50d5dab53dbe7ebf1548af05fa1d70e4aa335f557604ffbffa6e3e7072c8747` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-code-review` | `skills/python-code-review/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `896752d00677027253cb90d9b2277149e085fb7b6408fb9f19efd221313eda35` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-comprehensions` | `skills/python-comprehensions/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `429658e03609afd80c57301354d3d2bd5fb67ff85bebfeccc8f0c2b544e08559` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-context-management` | `skills/python-context-management/` | `materialized-copy` | `9fd151d3650b59658df43a8273e37350b944516b` | `29fdf80182f17ff2341165f5c94bb6e2a1ef0e978de5e057c0f54101d0c848a8` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-control-flow` | `skills/python-control-flow/` | `materialized-copy` | `8a919ab89e70408964fea47767b04d9fff2c0363` | `86d3dd164f7a31554e5f7e5e0bb12df2b18b455166b0cf5cee2a61393d659ec8` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-data-model-methods` | `skills/python-data-model-methods/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `6d971c8983cec4bc6997947179b5222ebecf527f1bb01bfe2f4e508d78bac561` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-decorators` | `skills/python-decorators/` | `materialized-copy` | `9fd151d3650b59658df43a8273e37350b944516b` | `ccbb2f19cc904a65d8bb645f071270de197dee4407803967316a5452b3c08836` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-descriptors-attribute-access` | `skills/python-descriptors-attribute-access/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `ea692d6d633a40e6c590934c7934994cb61e0ddeb5f106c2a64760c1fa1f9625` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-docstrings` | `skills/python-docstrings/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `13b83cfab027b7d03d9052b17ba0ec073493bd60df89e000a2329bf35ab70890` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-error-handling` | `skills/python-error-handling/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `64e005793f4b5b4a498473508d3477a09ea94d4860b5cafbd3ea6fe6397eab85` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-generators-iterators` | `skills/python-generators-iterators/` | `materialized-copy` | `9fd151d3650b59658df43a8273e37350b944516b` | `9b2af5fd8dc8b388ab7d73aa1318868a9de41b258da56ecb1333bab05ad49dbf` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-implementation-review` | `skills/python-implementation-review/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `ec006dfdf4668ecb441de327b1e8f6439109bba59152913bc3d96e5cd6c55870` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-library-architecture` | `skills/python-library-architecture/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `901db2df71d545ff542b89d2c7c2472807790d0042108e615220af89af6ed389` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-model-selection` | `skills/python-model-selection/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `69fc525af536729dcef7a320091887e767d7e2dc58322776efa1eba74604bece` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-module-boundaries` | `skills/python-module-boundaries/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `bf3a1ce1c4933116518a951cf43b5e45f6546792ffef22405164fe3d3a2d30fb` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-naming` | `skills/python-naming/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `4b96d04c6bb62b932bc72e7feb2a1ea8075f0ebf6d3763df3b7aae00cbdecac3` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-operator-overloading` | `skills/python-operator-overloading/` | `materialized-copy` | `9fd151d3650b59658df43a8273e37350b944516b` | `97c168ee67b9b4b5d6c4cceb83813802d95dcede794614fea179974bc3630d3c` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-package-layout` | `skills/python-package-layout/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `8c1fa869ab3eb857b47f72fa6482fb792dc499246c9ac5b38bcd5b28386004e9` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-plan-authoring` | `skills/python-plan-authoring/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `9babe2fc096d2612394c4003597d210fbae63ac14567c64a79b9c6ba80a0d7d0` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-plan-review` | `skills/python-plan-review/` | `materialized-copy` | `4b734791e2eca85704dfb6ff51a750a6ae3a50c5` | `0e8c3737dd0f56d122c89f7190b61e846b2dfcc6b72b4938fb4230906736938f` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-pre-commit` | `skills/python-pre-commit/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `ecc70aa015cce577070eb37746cf90a5c54804356fffcf6c5c0410f691a987e5` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-project-init-greenfield` | `skills/python-project-init-greenfield/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `73359adaf2fc753d2013d96fa371396077f52b24dc7f398081b2009287d0a54a` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-project-retrofit` | `skills/python-project-retrofit/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `e78b671777670389d11906d69b00e41fd805c9246ade2c66f7321f1cf4db633b` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-pyproject-toolconfig` | `skills/python-pyproject-toolconfig/` | `materialized-copy` | `4b734791e2eca85704dfb6ff51a750a6ae3a50c5` | `5695241a17ab4c0ce86cc43ceaeb8be32c70ea7f5d467a033094c47c0ce826bf` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-retrofit-plan-authoring` | `skills/python-retrofit-plan-authoring/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `b1cd03e241fde4d18526ad64051f2bededfcdee1e43d2f25039ec3b1d26c66a7` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-retrofit-plan-review` | `skills/python-retrofit-plan-review/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `72c4e64b3be36b76ed706246e2a33fa76b63e9ab8b4ad8d8c866d9555308bf0c` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-serialization-boundaries` | `skills/python-serialization-boundaries/` | `materialized-copy` | `4b734791e2eca85704dfb6ff51a750a6ae3a50c5` | `e1ccd9faa104d07dd19eff760a542b8b2e39c8cc0eb19c22c2a0af1e0c1ffd66` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-tdd-test-authoring` | `skills/python-tdd-test-authoring/` | `materialized-copy` | `0e9facb8fb573e9ab8b227f74341975fa0f996fe` | `0ef0c446fe2190b89b639fe8cbd6a08ddba06127b6a74dac952eaab821f57d01` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-testing-pytest` | `skills/python-testing-pytest/` | `materialized-copy` | `b19f7f3ff5fefcbd204a84415565141c0f73009f` | `a2751d36ad714730089cdf38b0ff5f5ea074d36e87992e655358077b9add91a2` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `python-type-hints-strict` | `skills/python-type-hints-strict/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `9be796e8bba1f46f5811463601e94de68212cde55844bea17a00bf818f5cad2f` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `scope-draft-plan` | `skills/scope-draft-plan/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `1ff61fc77791e835e9085f64874217f633d2f579719c3fd7e51dcc07d7e5c741` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `semantic-first-design` | `skills/semantic-first-design/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `7a713748c3f912c63eaab14080544296ce1d60f57908c4912c7b3c318afc864e` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `sense-env-scaffold` | `skills/sense-env-scaffold/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `58fbcc5a3b2698f4cce902ed9f43cf8b558438c4f325035dbb8a3895b1adb3e8` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `spec-docs-mvp-generator` | `skills/spec-docs-mvp-generator/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `1c8be530d554b75793bc23e81c978598b1b7b510875cf02251aac2b0807e04ce` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `step-creator` | `skills/step-creator/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `24fa0498e7953a7b93960b23562889c0c83a0c109cde946b582cdea6a3f5af2c` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `subagent-dispatch-policy` | `skills/subagent-dispatch-policy/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `bf0c94710d1fb320f1a3cc34e70a57e392aa7497b0fc538ea69a7124cff98c1b` | committed source; canonical renderer; .codex concretization; engine byte preservation |
+| `worktree-manager` | `skills/worktree-manager/` | `materialized-copy` | `e635f127dd861a02be3c4139401457ec29f41890` | `5c28e7a7c597c043dfedf1c0a4cdfacc16dc7145b55b4aab42575dcfede83e1e` | committed source; canonical renderer; .codex concretization; engine byte preservation |

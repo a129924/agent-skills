@@ -1,6 +1,6 @@
 ---
 name: python-docstrings
-description: Write clear, contract-first docstrings using Google Style format with explicit intent and boundaries
+description: "Write or review contract-first Python docstrings in Google Style."
 complexity: low
 risk_profile: []
 inputs:

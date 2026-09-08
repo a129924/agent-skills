@@ -1,6 +1,6 @@
 ---
 name: business-intent-alignment
-description: Align ambiguous business intent into a measurable requirements baseline at `analysis/<topic>/requirements.md` by using Socratic questioning, contradiction surfacing, and extreme-boundary checks before technical translation starts.
+description: "Resolve ambiguous business intent into measurable requirements before technical planning."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive

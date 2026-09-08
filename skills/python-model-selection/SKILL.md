@@ -1,6 +1,6 @@
 ---
 name: python-model-selection
-description: Choose the right general-purpose Python construct for structured data and contracts. Use this when drafting or reviewing whether code should use Enum, dataclass, ABC, or Protocol.
+description: "Choose Enum, dataclass, ABC, or Protocol for Python structured data and contracts."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

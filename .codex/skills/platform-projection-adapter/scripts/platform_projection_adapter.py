@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Callable, Sequence, TextIO
 
 
-PLACEHOLDER_PREFIX = ".codex/"
+PLACEHOLDER_PREFIX = ".<platform>/"
 IGNORED_SOURCE_DIR_NAMES = {"__pycache__"}
 IGNORED_SOURCE_SUFFIXES = {".pyc", ".pyo"}
 
@@ -92,14 +92,34 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return args
 
 
-def repo_root_from_script(script_path: Path | None = None) -> Path:
-    resolved_script_path = resolve_for_overlap_check(script_path or Path(__file__))
-    for candidate in resolved_script_path.parents:
+def find_repo_root(start_path: Path) -> Path | None:
+    """Find a canonical repository by its governance and skills roots."""
+    for candidate in (start_path, *start_path.parents):
         if (candidate / "AGENTS.md").is_file() and (candidate / "skills").is_dir():
             return candidate
+
+    return None
+
+
+def repo_root_from_script(
+    script_path: Path | None = None,
+    working_directory: Path | None = None,
+) -> Path:
+    resolved_script_path = resolve_for_overlap_check(script_path or Path(__file__))
+    script_root = find_repo_root(resolved_script_path.parent)
+    if script_root is not None:
+        return script_root
+
+    resolved_working_directory = resolve_for_overlap_check(
+        working_directory or Path.cwd()
+    )
+    working_root = find_repo_root(resolved_working_directory)
+    if working_root is not None:
+        return working_root
+
     raise ProjectionError(
-        "Failed to locate repository root from script path: "
-        f"{resolved_script_path}"
+        "Failed to locate repository root from script path or working directory: "
+        f"script={resolved_script_path} cwd={resolved_working_directory}"
     )
 
 
@@ -153,6 +173,11 @@ def render_source(source_path: Path, platform_root_text: str) -> str:
         ) from exc
     except OSError as exc:
         raise ProjectionError(f"Failed to read source file: {source_path}") from exc
+    # Preserve the replacement engine itself so its projected copy can be rerun.
+    if source_path.parts[-3:] == (
+        "platform-projection-adapter", "scripts", "platform_projection_adapter.py"
+    ):
+        return content
     platform_prefix = "/" if platform_root_text == "/" else f"{platform_root_text}/"
     return content.replace(PLACEHOLDER_PREFIX, platform_prefix)
 

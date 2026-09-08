@@ -12,7 +12,7 @@ A stable skill in this repository usually has:
 ## Example depth rule
 
 - simple skills may rely on concise `SKILL.md` examples when they already cover
-  about 80% of routine usage
+  the main routine paths and likely misuse
 - higher-complexity skills should include `examples.md`
 - reviewer may still require `examples.md` when the brief examples are not enough
 
@@ -34,8 +34,7 @@ A stable skill in this repository usually has:
 - keep `reference.md` focused when one file is enough
 - treat `references/` as a split-reference supplement, not as a replacement for
   the required companion-file rule
-- split into `references/` when local reference detail grows beyond about 1,000
-  tokens or more than 3 logical topics
+- split into `references/` when local reference detail mixes independent topics that callers need separately
 - if `reference.md` is the chosen companion file and becomes too broad, keep it
   focused or reduce it to a short overview while moving detailed topics into
   `references/`

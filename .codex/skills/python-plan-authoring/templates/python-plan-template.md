@@ -10,7 +10,7 @@
      callers can check basic email format without an external library." -->
 
 ## Non-goals
-<!-- List at least 3 items stating what this change will NOT do.
+<!-- List relevant scope exclusions stating what this change will NOT do.
      Be specific — vague entries do not constrain scope. -->
 - This change will not ...
 - This change will not ...
@@ -33,7 +33,7 @@
 
 ## Decisions
 <!-- Answer ALL of the following before drafting the rest of the plan.
-     Leaving any item blank is a stop-and-ask condition. -->
+     Inspect the repository and propose evidence-backed decisions first. Use justified N/A where applicable; ask only about unresolved contract-critical choices. -->
 - Async-planning status: <!-- required in every plan. Use `triggered — cite trigger evidence: ...` when async-capable evidence is present, or `exempt — cite exemption evidence: ...` when the topic stays outside the async-planning gate. This is a repo-visible contract field, not proof that a skill was invoked. -->
 - Module/package placement: <!-- which module or package receives the new code -->
 - New public API: <!-- yes/no — if yes, name the function/class and its signature -->
@@ -111,7 +111,7 @@ Candidate files to inspect:
 3.
 
 ## Test Plan
-<!-- Name the test file and list test cases for all five required categories.
+<!-- Name test files and cases for applicable categories; give a concrete N/A reason for categories without affected behavior.
      "Add tests" is not acceptable — be specific about what each test covers.
      If async-planning is triggered, include the async-specific validation cases named
      in `### Validation plan`. -->

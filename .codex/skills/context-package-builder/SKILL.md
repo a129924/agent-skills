@@ -1,6 +1,6 @@
 ---
 name: context-package-builder
-description: Build one minimal task-specific handoff package for a real subAgent dispatch without carrying unrelated history, registry hints, or workflow reconstruction.
+description: "Build a minimal context package for one already-bounded, real subagent handoff."
 complexity: medium
 ---
 

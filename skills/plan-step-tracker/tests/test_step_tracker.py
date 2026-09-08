@@ -304,7 +304,7 @@ topic: all-complete
         assert "not found" in captured.err.lower()
 
     def test_check_all_succeeded_no_steps(self, temp_plan_dir, capsys):
-        """Return SUCCESS when no steps (empty list is complete)."""
+        """Reject missing completion evidence instead of vacuous success."""
         topic = "no-steps"
         topic_dir = temp_plan_dir / topic
         topic_dir.mkdir()
@@ -320,9 +320,8 @@ topic: no-steps
         result = check_all_succeeded(topic, temp_plan_dir)
         captured = capsys.readouterr()
 
-        assert result == 0
-        assert "SUCCESS" in captured.out
-        assert "0" in captured.out
+        assert result == 1
+        assert "No valid steps" in captured.err
 
 
 class TestEdgeCases:
@@ -490,6 +489,90 @@ topic: impl-pending
         assert "BLOCKED" in captured.out
         assert "Pending step" in captured.out
 
+    def test_check_impl_steps_succeeded_file_not_found(self, temp_plan_dir, capsys):
+        """Use the same missing-file diagnostic as the whole-file check."""
+        result = check_impl_steps_succeeded("nonexistent", temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 1
+        assert "File not found:" in captured.err
+
+    def test_check_impl_steps_succeeded_allows_nested_descriptive_lists(
+        self, temp_plan_dir, capsys
+    ):
+        """Nested non-checkbox lists may document a completed top-level task."""
+        topic = "impl-nested-description"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Update the bounded write set
+  - `src/example.py`
+  - `tests/test_example.py`
+- [X] Run the affected tests
+"""
+        )
+
+        result = check_impl_steps_succeeded(topic, temp_plan_dir)
+        captured = capsys.readouterr()
+
+        assert result == 0
+        assert "SUCCESS" in captured.out
+
+    def test_check_impl_steps_succeeded_rejects_nested_checkbox(self, temp_plan_dir):
+        """A nested checkbox is hidden completion evidence, not prose."""
+        topic = "impl-nested-checkbox"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Top-level task
+  - [X] Hidden subtask
+"""
+        )
+
+        assert check_impl_steps_succeeded(topic, temp_plan_dir) == 1
+
+    def test_check_impl_steps_succeeded_ignores_fenced_heading_example(
+        self, temp_plan_dir
+    ):
+        """A code-fence example is not a second Markdown implementation section."""
+        topic = "impl-fenced-heading"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Complete the implementation
+
+## Notes
+```markdown
+## Implementation Steps
+- [ ] Example only
+```
+"""
+        )
+
+        assert check_impl_steps_succeeded(topic, temp_plan_dir) == 0
+
+    def test_check_impl_steps_succeeded_ignores_indented_heading_example(
+        self, temp_plan_dir
+    ):
+        """An indented code example is not a second Markdown implementation section."""
+        topic = "impl-indented-heading"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Complete the implementation
+
+## Notes
+    ## Implementation Steps
+    - [ ] Example only
+"""
+        )
+
+        assert check_impl_steps_succeeded(topic, temp_plan_dir) == 0
+
     def test_main_check_impl_steps_succeeded_command_success(
         self, workflow_and_impl_step_file, monkeypatch, capsys
     ):
@@ -540,3 +623,81 @@ topic: impl-command-blocked
 
         assert result == 1
         assert "BLOCKED" in captured.out
+# Regression: an empty or malformed implementation section is not completion.
+@pytest.mark.parametrize("content", [
+    "# Topic\n## Workflow Stages\n- [X] done\n",
+    "## Implementation Steps\n",
+    "## Implementation Steps\n- [?] uncertain\n",
+    "## Implementation Steps\n- [ ] pending\n",
+    "## Implementation Steps\n- [x] lowercase\n",
+    "## Implementation Steps\n- [X] done\n## Implementation Steps\n- [ ] hidden\n",
+    "## Implementation Steps\n- [X] done\n- malformed task\n",
+    "## Implementation Steps\n- [X] done\n1. [ ] unfinished\n",
+    "## Implementation Steps\n- [X] done\n[ ] unfinished\n",
+    "## Implementation Steps\n- [X] done\n- [??] unresolved\n",
+    "## Implementation Steps\n- [X]\n",
+])
+def test_invalid_implementation_evidence_cannot_pass(tmp_path, content):
+    import importlib.util
+    import sys
+
+    script = Path(__file__).resolve().parents[1] / "scripts/step_tracker.py"
+    spec = importlib.util.spec_from_file_location("tracker_completion_regression", script)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    plan_dir = tmp_path / "plan"
+    topic_dir = plan_dir / "audit"
+    topic_dir.mkdir(parents=True)
+    (topic_dir / "audit.step.md").write_text(content)
+    assert module.check_impl_steps_succeeded("audit", plan_dir) == 1
+
+
+@pytest.mark.parametrize("content", [
+    "- [X] done\n- [??] unresolved\n",
+    "- [X] done\n- [XX] unresolved\n",
+    "- [X] done\n- [TODO] unresolved\n",
+    "- [X]\n",
+    "- [X] done\n- [X]done\n",
+    "- [X] done\n1. [ ] unfinished\n",
+    "- [X] done\n[ ] unfinished\n",
+    "- [X] done\n  - [ ] indented\n",
+])
+def test_all_completion_rejects_malformed_evidence(tmp_path, content):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text(content)
+    assert check_all_succeeded("audit", tmp_path) == 1
+
+
+@pytest.mark.parametrize("content", [
+    "- [X] done\n[Design notes](https://example.test/design)\n",
+    "- [X] done\n[design]: https://example.test/design\n",
+])
+def test_all_completion_allows_ordinary_markdown_links(tmp_path, content):
+    """Links are prose, not malformed checkbox evidence."""
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text(content)
+    assert check_all_succeeded("audit", tmp_path) == 0
+
+
+@pytest.mark.parametrize("checker", [check_all_succeeded, check_impl_steps_succeeded])
+def test_completion_rejects_unreadable_evidence(tmp_path, monkeypatch, checker):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_text("## Implementation Steps\n- [X] done\n")
+
+    def deny_read(*args, **kwargs):
+        raise PermissionError("fixture read denied")
+
+    monkeypatch.setattr(Path, "read_text", deny_read)
+    assert checker("audit", tmp_path) == 1
+
+
+@pytest.mark.parametrize("checker", [check_all_succeeded, check_impl_steps_succeeded])
+def test_completion_rejects_invalid_encoding(tmp_path, checker):
+    topic_dir = tmp_path / "audit"
+    topic_dir.mkdir()
+    (topic_dir / "audit.step.md").write_bytes(b"\xff\xfe")
+    assert checker("audit", tmp_path) == 1

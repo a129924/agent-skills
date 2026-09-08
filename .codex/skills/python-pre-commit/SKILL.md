@@ -1,6 +1,6 @@
 ---
 name: python-pre-commit
-description: Configures pre-commit hooks for uv-based Python projects by producing a valid `.pre-commit-config.yaml` with the canonical hook set. Use this when a uv Python project needs pre-commit setup or an existing config needs hooks merged in.
+description: "Create or merge pre-commit configuration for uv-based Python projects while preserving existing hooks."
 complexity: medium
 risk_profile:
   - code_modification
@@ -56,7 +56,7 @@ Do not use this skill when:
    - Include the `pytest` hook using `stages: [manual]`. It must never be on the default stage.
    - Include the `pyright` hook with `stages: [manual]` only if the project uses pyright strict mode.
 
-4. **Write the config** — use `scripts/apply_precommit.py` to generate `.pre-commit-config.yaml` from the canonical template:
+4. **Write the config** — for a NEW file only, use `scripts/apply_precommit.py` to generate `.pre-commit-config.yaml` from the canonical template:
    ```
    # New config (preview first):
    uv run scripts/apply_precommit.py --dry-run
@@ -67,9 +67,9 @@ Do not use this skill when:
    # Write with a specific older ruff version:
    uv run scripts/apply_precommit.py --ruff-version v0.11.9
 
-   # Overwrite existing config:
-   uv run scripts/apply_precommit.py --force
    ```
+   For an existing file, do not run the generator with `--force` to merge. Read the relevant blocks in `references/hooks-catalog.md` and merge only missing hooks manually, preserving existing repos, revisions, arguments, stages, comments, and custom hooks. The generator supports whole-file replacement, not merging; use `--force` only for an explicitly requested replacement after a recoverable backup.
+
    If the script is not available, fall back to manually producing `.pre-commit-config.yaml` following the hook structure in `references/hooks-catalog.md`.
 
    After writing the config, apply the pyright decision from Step 3:
@@ -118,7 +118,7 @@ Do not use this skill when:
 
 ## On Soft Fail
 - Return with a clear explanation of what could not be completed; do not silently produce a partial config.
-- If ruff rev cannot be determined, report the issue and fall back to the default rev (`v0.15.12`) only if the user explicitly accepts the default.
+- If ruff rev cannot be determined, report the issue and use the documented pinned default rev (`v0.15.12`) when no different version is requested; record that currency was not verified.
 
 # Failure Handling
 

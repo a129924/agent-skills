@@ -1,6 +1,6 @@
 ---
 name: business-to-technical-translation
-description: Translate a frozen business baseline into `analysis/<topic>/technical-spec.md` with technical tasks, feasibility constraints, architecture-compliance checks, cost-of-realization estimates, and rollback-to-alignment behavior when reality conflicts with intent.
+description: "Translate a frozen business baseline into a technical specification; surface feasibility conflicts."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive

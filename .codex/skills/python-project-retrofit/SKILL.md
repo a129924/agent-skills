@@ -1,6 +1,6 @@
 ---
 name: python-project-retrofit
-description: Retrofit an existing Python repository from a locked Retrofit V2 `retrofit-plan.md`, with risk-alignment blocking, mandatory human gates, destructive preview for HIGH-risk plans, and acceptance handoff through `sense_env.py`.
+description: "Execute a locked Python Retrofit V2 plan with risk-aligned human gates and acceptance checks."
 complexity: high
 risk_profile:
   - destructive_action

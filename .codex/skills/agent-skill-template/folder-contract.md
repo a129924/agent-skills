@@ -39,12 +39,8 @@ truthful, roll back to alignment wording instead of choosing a platform here.
 
 ## Example policy
 - `SKILL.md` must contain one concise correct example and one concise incorrect example
-- `examples.md` may stay optional when the concise `SKILL.md` examples already cover about 80% of routine usage
-- `examples.md` is required for:
-  - code refactoring
-  - branching or multi-path decisions
-  - script or external-tool usage
-  - higher-risk outputs
+- `examples.md` may stay optional when the concise `SKILL.md` examples already cover the main routine paths and likely misuse
+- `examples.md` is required when meaningful branching, unsafe misuse, or high-impact failure needs worked scenarios not adequately covered in the entrypoint. A local code edit or CLI invocation alone is not sufficient reason
 - reviewer may still require `examples.md` when the concise examples are not enough
 
 ## Risk-based validation
@@ -66,8 +62,7 @@ truthful, roll back to alignment wording instead of choosing a platform here.
 - keep `reference.md` focused when one file is enough
 - `references/` is a split-reference supplement, not by itself a replacement for
   the required companion-file rule
-- split into `references/` when `reference.md` grows beyond about 1,000 tokens
-  or more than 3 logical topics
+- split into `references/` when `reference.md` mixes independent topics that callers need separately
 - if `reference.md` is the chosen companion file and becomes too broad, keep it
   focused or reduce it to a short overview while moving detailed topics into
   `references/`
@@ -134,7 +129,7 @@ complexity: medium
 complexity: high
 - Validation: required
 - Failure Handling: required
-- Workflow State Contract: recommended when participating in multi-agent handoff
+- Handoff state, result, and next action: required when participating in multi-agent handoff; a separate Workflow State Contract heading is optional
 
 ## Risk Profile Policy
 
@@ -157,8 +152,7 @@ Rules:
 - `risk_profile` may be empty for low-complexity documentation-only skills
 - any skill with `multi_agent_handoff`, `destructive_action`, or
   `code_modification` should be at least `medium` complexity
-- any skill with both `code_modification` and `external_tooling` should usually
-  be `high` complexity
+- combined `code_modification` and `external_tooling` warrants inspection of actual failure impact and reversibility; it does not automatically make a bounded local edit high complexity
 - reviewer may escalate complexity when risk tags understate actual behavior
 
 ## Validation Policy
@@ -234,3 +228,9 @@ metadata.
 `risk_profile` is used to guide creator and reviewer judgment. It does not imply
 that Copilot or another agent runtime will parse or enforce these values. Risk
 tags must not contradict the Markdown body.
+
+## Entrypoint and model fit
+
+Keep discovery descriptions brief and task-specific. The entrypoint retains triggers, essential safety and authorization constraints, completion criteria, and links stating when each detail is needed. Read only the relevant branch documents. A short single-path skill does not need an extra routing file.
+
+Keep portable companion copies when they serve independent installations; consolidate only after checking their consumers and purpose. Evaluate Astra, Sol, and Luna where those models are actual consumers. Do not remove useful examples or safeguards solely because one model may infer them. Missing section headings are not failures when equivalent required content is directly routed and unambiguous; missing substantive safety or acceptance content is a blocker.

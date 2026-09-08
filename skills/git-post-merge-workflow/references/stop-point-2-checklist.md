@@ -15,7 +15,7 @@ Use this checklist after manual merge handoff and before any post-merge cleanup 
 ## 2. Local sync entry checks
 - [ ] Current worktree, untracked files, stashes, and preserved local edits are understood before switching branches.
 - [ ] The repository default branch is detected dynamically from current repo configuration.
-- [ ] The default branch can be updated with `git pull --ff-only`. If local branch has no upstream, use `git pull <detected-remote>/<default-branch> --ff-only` instead. If neither works, stop and repair divergence first.
+- [ ] The default branch can be updated with `git pull --ff-only`. If local branch has no upstream, use `git pull --ff-only <detected-remote> <default-branch>` instead. If neither works, stop and repair divergence first.
 - [ ] Any local-only state that must survive cleanup is captured or explicitly preserved before branch deletion.
 - [ ] If sync would overwrite unclear local state, stop and surface the conflict.
 

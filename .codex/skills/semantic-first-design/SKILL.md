@@ -1,6 +1,6 @@
 ---
 name: semantic-first-design
-description: Guide Python design and review toward explicit contracts, states, policies, boundaries, composition, and failure semantics when one material ambiguity prevents local reasoning.
+description: "Resolve one material Python design ambiguity in contracts, states, policies, boundaries, or failure semantics."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive
@@ -181,8 +181,7 @@ Do not use this skill when:
   `python-naming`.
 - Do not choose concrete Python model constructs; route them to
   `python-model-selection`.
-- Do not define exception hierarchy, translation, retry, or logging policy;
-  route failure-policy work to `python-error-handling`.
+- Route exception hierarchy and translation to `python-error-handling`. Retry orchestration and logging policy are outside that skill too; disclose the coverage gap and use relevant project policy or verified general guidance within the requested scope. Do not imply a completed handoff.
 - Do not define strict annotation syntax or typing escape hatches; route them
   to `python-type-hints-strict`.
 - Do not define payload, row, or queue-message conversion rules; route them to

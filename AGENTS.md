@@ -43,3 +43,10 @@ For the full repository role and migration boundary, see
 - It does not implement skill-path migration, platform directory changes,
   creator/reviewer/template path transition, workflow-to-agent binding, or
   runtime orchestration semantics.
+
+## Task-sized guidance and authorization
+
+- Read documents that govern the actual task or selected workflow branch; a trivial isolated edit does not require a full repository map or implementation plan.
+- Inspect discoverable repository facts before asking the user. Ask when unresolved choices materially change behavior, scope, risk, or authority.
+- Existing explicit authorization covers the same bounded actions and safe in-scope repairs; it does not authorize new destructive operations, merging, tagging, or unrelated publication.
+- Verify affected behavior in proportion to risk and report checks not run. Preserve guidance needed by supported Astra, Sol, and Luna consumers; do not infer model or speed improvements from shorter text.

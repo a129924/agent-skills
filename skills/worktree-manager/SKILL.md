@@ -1,6 +1,6 @@
 ---
 name: worktree-manager
-description: Manage Git worktree lifecycle operations with safe create, get-worktree, release, and remove routing.
+description: "Create, inspect, release, or remove Git worktrees with separate authorization and safety gates."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

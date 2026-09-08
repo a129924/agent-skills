@@ -1,6 +1,6 @@
 ---
 name: python-retrofit-plan-review
-description: Review an authored Retrofit V2 `retrofit-plan.md` contract against the locked section order, machine-readable risk metadata, supported sensing assertion kinds, authoring-versus-executor boundaries, and locatability before `python-project-retrofit` execution begins.
+description: "Review a Python Retrofit V2 plan for schema, risk, locatability, and executable acceptance assertions."
 complexity: high
 
 risk_profile:

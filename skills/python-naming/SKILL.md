@@ -1,6 +1,6 @@
 ---
 name: python-naming
-description: Define or normalize Python naming conventions for identifiers, files, folders, and visibility boundaries. Use this when drafting or reviewing Python code style rules centered on names.
+description: "Define or review Python identifier, file, and visibility naming conventions."
 complexity: low
 risk_profile: []
 inputs:

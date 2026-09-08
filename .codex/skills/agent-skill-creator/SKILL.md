@@ -1,6 +1,6 @@
 ---
 name: agent-skill-creator
-description: Create a new single-purpose Agent Skill folder that reaches review-ready with a clear trigger, risk-appropriate validation, concise positive and negative examples, and explicit roles for all local files. Use this when asked to draft or scaffold a new Agent Skill for this repository.
+description: "Draft a new single-purpose repository skill for independent review; not for small edits to an existing skill."
 
 complexity: high
 
@@ -59,9 +59,9 @@ Do not use this skill when:
 11. Write `SKILL.md` with an explicit `Trigger / When to use` section and concise positive and negative examples.
 12. Add `reference.md` or `examples.md`.
 13. Use `references/` only as a split-reference supplement, not as a replacement for the required companion-file rule.
-14. Split oversized reference material into `references/` when one `reference.md` would exceed about 1,000 tokens or more than 3 logical topics.
+14. Split oversized reference material into `references/` when one `reference.md` mixes independent topics that callers need separately.
 15. If `reference.md` is the chosen companion file and becomes too broad, keep it focused or reduce it to a short overview while moving detailed topics into `references/`.
-16. Add `examples.md` when the skill is high complexity or the concise examples are not enough for about 80% of routine usage.
+16. Add `examples.md` when the skill has high-risk branches not explained by the concise examples.
 17. When the skill is higher-risk or easy to misuse, add stronger validation signals in `SKILL.md` or local files, such as explicit verification guidance, red flags, rationalizations, or a checklist.
 18. Do not force heavyweight validation onto a simple low-risk skill just because another skill needed it.
 19. If you add optional files or subfolders, declare each role in `Local references`.
@@ -77,7 +77,7 @@ Do not use this skill when:
 - a default output-facing path written as `.codex/skills/<skill-name>/`
 - an explicitly labeled bootstrap fallback only when the projected entrypoint does not yet exist
 - `SKILL.md` with concise positive and negative examples
-- `examples.md` for high-complexity skills, or `reference.md` for local detail
+- `examples.md` for needed worked branches, or `reference.md` for local detail
 - `references/` when local reference detail must be split by topic
 - optional local additions with explicit roles
 - validation weight aligned to the skill's risk and complexity
@@ -93,7 +93,7 @@ Do not use this skill when:
 
 ## Quality Checks (best effort)
 - `risk_profile` tags match the actual skill behavior
-- `examples.md` is present when the skill is high complexity, involves branching or code modification, or the SKILL.md examples cover less than ~80% of routine usage
+- `examples.md` is present when important branches or misuse cases need examples beyond the entrypoint
 - stronger validation signals are present when risk warrants it
 - `Validation` and `Failure Handling` sections are present for high complexity output
 

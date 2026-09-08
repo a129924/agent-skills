@@ -1,6 +1,6 @@
 ---
 name: subagent-dispatch-policy
-description: Choose the next allowed role for one bounded task slice, or stop, without encoding workflow bindings, registry behavior, or runtime semantics.
+description: "Select a permitted role or stop for one bounded task before a real subagent dispatch."
 complexity: medium
 ---
 

@@ -181,20 +181,9 @@ $ python skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded my
 
 **Agent must halt**: When exit code is 1, Agent should **STOP** and report pending steps. Proceeding further violates the blocking contract.
 
-### Grep Fallback (Manual Blocking)
+### Grep fallback is inspection-only
 
-```bash
-# Count pending steps
-PENDING=$(grep -c '^\- \[ \]' plan/my-feature/my-feature.step.md)
-if [ $PENDING -eq 0 ]; then
-  echo "SUCCESS: All steps complete"
-  exit 0
-else
-  echo "BLOCKED: $PENDING steps pending"
-  grep '^\- \[ \]' plan/my-feature/my-feature.step.md
-  exit 1
-fi
-```
+Use the listing examples above to locate tasks. Do not use a zero pending-count to return success: unknown/malformed markers and missing sections can produce the same count. Apply every completion check from `reference.md` manually or return BLOCKED when validation is unavailable.
 
 ---
 
@@ -222,10 +211,10 @@ $ python skills/plan-step-tracker/scripts/step_tracker.py read_not_run empty-top
 # (empty output)
 
 $ python skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded empty-topic
-✅ SUCCESS: All 0 steps complete
+❌ BLOCKED: No valid steps found
 ```
 
-**Exit code**: 0 (no pending = success)
+**Exit code**: 1 (no completion evidence). Empty query output remains valid; empty completion evidence does not.
 
 ---
 
@@ -269,10 +258,10 @@ $ python skills/plan-step-tracker/scripts/step_tracker.py read_all no-checkboxes
 # (empty output)
 
 $ python skills/plan-step-tracker/scripts/step_tracker.py check_all_succeeded no-checkboxes
-✅ SUCCESS: All 0 steps complete
+❌ BLOCKED: No valid steps found
 ```
 
-**Exit code**: 0 (no items to track = not a failure)
+**Exit code**: 1 for the completion check (no valid evidence); `read_all` still returns 0 with empty query output.
 
 ---
 

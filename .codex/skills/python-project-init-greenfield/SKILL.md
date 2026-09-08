@@ -1,6 +1,6 @@
 ---
 name: python-project-init-greenfield
-description: Create a governed Python project baseline from a locked `blueprint.md` contract. Use this when a greenfield repository needs its first uv-aligned structure, copied Agent Skills, and a closed acceptance handoff through the canonical `sense-env-scaffold` CLI path.
+description: "Initialize a greenfield Python repository from a locked blueprint and verify its sensing assertions."
 complexity: high
 risk_profile:
   - destructive_action

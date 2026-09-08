@@ -1,6 +1,6 @@
 ---
 name: python-error-handling
-description: Design or review general Python exception handling. Use this when choosing custom errors, translation boundaries, chaining, and when failures should propagate.
+description: "Design or review Python exception types, translation, chaining, and propagation; not retry orchestration or logging policy."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:

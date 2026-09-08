@@ -1,6 +1,6 @@
 ---
 name: scope-draft-plan
-description: Converge a vague or over-fragmented product or engineering request into one independently acceptable Bounded Context Mission Draft Plan. Use before implementation planning when scope needs to become a complete end-to-end capability.
+description: "Converge ambiguous or fragmented scope into one end-to-end mission before implementation planning."
 complexity: medium
 risk_profile:
   - ambiguity_sensitive

@@ -8,7 +8,7 @@ Full worked examples for all branching paths described in `SKILL.md`.
 
 ### Context
 
-`pyproject.toml` contains `[tool.ruff]` and `[tool.pyright]` with `strict = false`.
+`pyproject.toml` contains `[tool.ruff]` and `[tool.pyright]` with `typeCheckingMode = "standard"`.
 No `Makefile`. Implementation file: `src/users/service.py`. Test file: `tests/test_service.py`.
 
 ### Code under review
@@ -41,11 +41,11 @@ class UserService:
         """Create a new active user and send a welcome notification."""
         user = User(name=name, email=email)
         self._repo.save(user)
-        logger.info("User created", extra={"email": email})
+        logger.info("User created", extra={"event": "user_created"})
         try:
             self._notifier.send_welcome(email, subject=WELCOME_EMAIL_SUBJECT)
-        except NotificationError as exc:
-            logger.warning("Welcome notification failed", extra={"email": email, "error": str(exc)})
+        except NotificationError:
+            logger.warning("Welcome notification failed", extra={"event": "welcome_failed"})
         return user
 ```
 
@@ -82,7 +82,7 @@ def test_create_user_logs_warning_when_notification_fails() -> None:
 
 ```
 verdict: approved
-tooling_detected: pyproject.toml → [tool.ruff], [tool.pyright] (strict = false)
+tooling_detected: pyproject.toml → [tool.ruff], [tool.pyright] (typeCheckingMode = "standard")
 
 findings:
   typing: []
@@ -156,7 +156,7 @@ findings:
 
 ```toml
 [tool.pyright]
-strict = true
+typeCheckingMode = "strict"
 ```
 
 ### Code under review
@@ -171,7 +171,7 @@ def process(data):
 
 ```
 verdict: needs-rework
-tooling_detected: pyproject.toml → [tool.pyright] (strict = true)
+tooling_detected: pyproject.toml → [tool.pyright] (typeCheckingMode = "strict")
 
 findings:
   typing:
@@ -275,16 +275,16 @@ findings:
 
 ---
 
-## Example 6 — Sequencing gate refusal
+## Example 6 — Formal workflow sequencing gate refusal
 
 ### Context
 
-The user asks for a code-quality review, but there is no record or confirmation that
+The user asks to advance the formal plan-to-implementation workflow, but there is no record or confirmation that
 `python-implementation-review` has already run on this implementation.
 
 ### User request
 
-> "Please review the code quality of my new authentication module."
+> "Advance this approved-plan workflow to its quality-review gate."
 
 ### Output
 
@@ -302,7 +302,7 @@ python-code-review has not started.
 
 `python-code-review` only judges code quality. Reviewing quality on an implementation
 that hasn't been verified against the plan risks approving good-quality code that
-implements the wrong thing. The sequencing gate prevents this false confidence.
+implements the wrong thing. This gate applies to that formal workflow. A standalone request to review an authentication diff proceeds directly and reports quality findings only; it does not certify plan completion.
 
 ---
 

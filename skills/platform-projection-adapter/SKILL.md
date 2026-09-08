@@ -1,6 +1,6 @@
 ---
 name: platform-projection-adapter
-description: Project the canonical `skills/` library into a caller-specified platform root by running the local CLI in dry-run mode by default and only enabling writes with explicit `--apply` and `--force`.
+description: "Project canonical skills to an explicitly selected platform root; preview before authorized writes."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

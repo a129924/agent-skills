@@ -1,6 +1,6 @@
 ---
 name: python-decorators
-description: Choose and design ordinary Python decorators that preserve signature transparency, keep behavior explicit, and avoid hiding lifetime-driven work.
+description: "Design or review transparent function decorators and decorator factories; not class decorators or hidden resource lifetimes."
 complexity: medium
 risk_profile: [ambiguity_sensitive]
 inputs:
@@ -151,7 +151,7 @@ Do not use this skill when:
 # Failure Handling
 
 - **Missing context**: if the intended behavior cannot be classified as call-driven vs lifetime-driven, emit SOFT FAIL, state what is missing, and ask before recommending a form.
-- **Ambiguous requirement**: if stacking order or signature transparency requirement is undecided, apply the safe default (preserve signature with `functools.wraps` + `ParamSpec`) and note it may need revision.
+- **Ambiguous requirement**: preserve metadata and typing with `functools.wraps` + `ParamSpec` when the wrapper contract is transparent. If stacking changes auth, caching, retry, or resource behavior and the order is unresolved, ask; signature preservation does not make either order safe.
 - **Out-of-scope pattern detected**: if the task involves class decorators doubling as descriptors, metaclass behavior, or framework internals, stop and redirect rather than providing a partial answer.
 
 # Boundaries

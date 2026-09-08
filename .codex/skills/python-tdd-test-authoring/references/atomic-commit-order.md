@@ -71,8 +71,8 @@ Add a CI/CD check to enforce test-first order:
 
 1. **On PR open**: Check if any production code commits exist without corresponding test commits.
    - If yes → Add comment: "Please add RED tests before production code commits."
-2. **On test commit detection**: Verify tests are RED (failing) with appropriate markers.
-   - If tests are GREEN → Comment: "Tests should be RED at authoring time; check for pre-existing implementations."
+2. **On test commit detection**: Compare actual results with declared initial states.
+   - A targeted RED regression must fail for the missing behavior, not collection/import/fixture errors. Passing existing-behavior guards and explicitly requested skip/xfail cases are valid when recorded; do not reject all green tests automatically.
 3. **On production code commit**: Verify all tests in that commit are either:
    - Tests modified to import/mock new code (OK, minimal changes).
    - No new test cases added (OK, only fixes to existing tests).
@@ -84,7 +84,7 @@ Reviewers should verify:
 - [ ] Test commits precede production code commits in git history.
 - [ ] Test commit modified only test files; no production code touched.
 - [ ] Production code commit references the test commit (e.g., "Implements tests from <commit>").
-- [ ] All tests authored in test commit are RED before production code commit.
+- [ ] Observed initial states match each test's declared purpose; RED tests reproduce the target behavior gap, while existing-behavior guards may pass.
 - [ ] All tests are GREEN after production code commit (or note xfail/skip if intentional).
 
 ---
@@ -99,7 +99,7 @@ When tests already exist and refactoring preserves behavior:
 
 1. **Commit 1** (optional): `test: Add boundary/edge case tests for UserAccount.create()`
    - Add any missing tests.
-   - All new tests start RED.
+   - Existing-behavior guards should pass; only a separately specified behavior gap requires a targeted RED test.
 2. **Commit 2**: `refactor: Extract _validate_email() helper`
    - Modify production code.
    - All tests (existing + new) should remain GREEN.

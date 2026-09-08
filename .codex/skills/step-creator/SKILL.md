@@ -1,6 +1,6 @@
 ---
 name: step-creator
-description: Create one new, profile-selected topic step-tracking artifact from an eligible topic plan, with fixed lifecycle gates and faithful source-step mapping. Use when a caller explicitly selects base-plan, agent-skill-plan, or python-implementation-plan.
+description: "Create a topic step artifact from an eligible plan and an explicitly selected workflow profile."
 complexity: high
 risk_profile:
   - ambiguity_sensitive

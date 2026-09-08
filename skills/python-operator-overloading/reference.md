@@ -29,8 +29,7 @@ Covers R3, R4:
 Covers R5, R8:
 - Ordering consistency rule — semantic alignment with `__eq__` as pre-condition
   dependency owned by `python-data-model-methods`
-- `@functools.total_ordering` recommendation; decorator mechanics signposted to
-  `python-decorators`
+- `@functools.total_ordering` recommendation; class-decorator mechanics require verified Python documentation, not the ordinary-decorator skill
 
 ---
 

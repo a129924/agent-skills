@@ -1,6 +1,6 @@
 ---
 name: python-testing-pytest
-description: Design or review pure Python unit tests in pytest. Use this when choosing assertions, parametrization, fixtures, and unittest.mock patterns without real I/O.
+description: "Design or review pure pytest unit tests, fixtures, assertions, and mocks without real I/O or async-runner configuration."
 
 complexity: medium
 
