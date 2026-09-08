@@ -13,8 +13,8 @@
 {"canonical_path":"skills/handoff-routing-policy","tree_hash":"5fb3db110432d1ec15a6105a719c1a5125c04dda5fe29e2c4a482422ef996ac9"}
 {"canonical_path":"skills/plan-creator","tree_hash":"6eb4ff2dab4b151420d4d0ceab56e0ad8cfbe5a21c9c62d40792bc163d61c500"}
 {"canonical_path":"skills/plan-reviewer","tree_hash":"475a573f0645304bd09125f243015ff93f3892a6ca8b2abc08a7588f0088a75a"}
-{"canonical_path":"skills/plan-step-tracker","tree_hash":"107e9542421cd068007cb4d045c72627c9be68c35db73e3e82957eba546fb0d3"}
-{"canonical_path":"skills/platform-projection-adapter","tree_hash":"aec877178ab83528361dc6f587a80cd83d10db22e2188da70d7dd49fd4b91159"}
+{"canonical_path":"skills/plan-step-tracker","tree_hash":"e406bba18481510071cabfcf6e117108affdf7e02d395acb9dd89e7b284e6568"}
+{"canonical_path":"skills/platform-projection-adapter","tree_hash":"7ae516bf89766cbc013ca3437f8405dc1051a0b9a80cc0216c5708ab3e028f30"}
 {"canonical_path":"skills/python-api-signature","tree_hash":"75f1e4591938d0a0251618c0080926da73c8061dc46f9257da3148e32f118f7c"}
 {"canonical_path":"skills/python-async-await","tree_hash":"7809879a28ac33ba421cf92fb4eba6c4ff8993048a0c329158e3f78cec92808b"}
 {"canonical_path":"skills/python-async-planning","tree_hash":"30258bf41a3f4e8d7dc0224c77bcaead0d7b13a9e5773752269ea3c1ac63da45"}

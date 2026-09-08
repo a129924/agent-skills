@@ -4,8 +4,8 @@
 
 | Check | Observed result |
 | --- | --- |
-| Canonical inventory, projection, tracker, pre-commit, toolconfig and evaluator suites | 105 passed |
-| Generated Codex projection and tracker suites | 73 passed |
+| Canonical inventory, projection, tracker, pre-commit, toolconfig and evaluator suites | 107 passed |
+| Generated Codex projection and tracker suites | 75 passed |
 | Independent runtime checks | 64 suite tests plus 24 malformed-input probes passed |
 | Generated-engine subprocess CLI auto-root | Passed; independently reviewed |
 | Actual projected CLI dry-run against `.codex` | 287 noop, 0 create, 0 update, 0 conflicts; exit 0 |
@@ -16,7 +16,7 @@
 | Local-reference scan | 221 candidates; 218 actual local/repo paths resolve; 3 are illustrative/output names, not missing dependencies |
 | Python syntax | Both changed runtimes and evaluator parse with Python AST |
 | Topic JSON | Parseable; source hashes recorded per skill |
-| Change boundary | All 222 final changed paths in the 829-entry approved manifest |
+| Change boundary | All 224 final changed paths in the 829-entry approved manifest |
 | Whitespace | Tracked and staged checks passed after removing a new reference's trailing blank line |
 | Original checkout | `dev` worktree remains clean |
 | Recovery archive | SHA-256 matched; all 580 matching manifest baseline files verified from readable archive members |
@@ -276,3 +276,23 @@ latest after prompt hashes now match the current tree, with the retained Luna
 action mismatch documented above. The GitHub resolution state is recorded after
 this evidence commit is published. No CI, merge, release, or human approval is
 claimed here.
+
+## PR comment-fix verification — Round 7
+
+Three current, unresolved threads were classified as direct, bounded repairs:
+an external projected entrypoint could not locate canonical source content; the
+creator README retained obsolete quantitative example/reference rules; and
+indented code examples could be mistaken for Implementation Steps headings.
+Canonical commit `0ed7d85` adds a fail-closed working-directory source lookup
+after script-path discovery, synchronizes the README to the risk-based creator
+rules, and excludes indented code from the Markdown structure scan, with two
+new runtime regressions. The projection preview identified exactly five managed
+outputs; regeneration rebuilt inventory and the two changed provenance/disposition
+hashes. Full canonical tests passed 107; projected runtime suites passed 75; the
+observer gate reported 13 complete steps; and the final projected CLI dry run
+reported 287 noop with zero create, update, or conflict. The current changed
+boundary is 224 paths, all represented in the 829-entry manifest. The evaluated
+discovery descriptions and selected-family Markdown are unchanged, so the 36
+latest model prompt hashes remain current without another model invocation. The
+GitHub resolution state is recorded after this evidence commit is published. No
+CI, merge, release, or human approval is claimed here.

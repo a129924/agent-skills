@@ -92,14 +92,34 @@ def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     return args
 
 
-def repo_root_from_script(script_path: Path | None = None) -> Path:
-    resolved_script_path = resolve_for_overlap_check(script_path or Path(__file__))
-    for candidate in resolved_script_path.parents:
+def find_repo_root(start_path: Path) -> Path | None:
+    """Find a canonical repository by its governance and skills roots."""
+    for candidate in (start_path, *start_path.parents):
         if (candidate / "AGENTS.md").is_file() and (candidate / "skills").is_dir():
             return candidate
+
+    return None
+
+
+def repo_root_from_script(
+    script_path: Path | None = None,
+    working_directory: Path | None = None,
+) -> Path:
+    resolved_script_path = resolve_for_overlap_check(script_path or Path(__file__))
+    script_root = find_repo_root(resolved_script_path.parent)
+    if script_root is not None:
+        return script_root
+
+    resolved_working_directory = resolve_for_overlap_check(
+        working_directory or Path.cwd()
+    )
+    working_root = find_repo_root(resolved_working_directory)
+    if working_root is not None:
+        return working_root
+
     raise ProjectionError(
-        "Failed to locate repository root from script path: "
-        f"{resolved_script_path}"
+        "Failed to locate repository root from script path or working directory: "
+        f"script={resolved_script_path} cwd={resolved_working_directory}"
     )
 
 

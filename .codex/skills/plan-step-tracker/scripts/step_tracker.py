@@ -86,6 +86,8 @@ def _without_fenced_code(lines: list[str]) -> list[str]:
     fence: tuple[str, int] | None = None
 
     for line in lines:
+        if line.startswith(("    ", "\t")):
+            continue
         marker = re.match(r"^\s*(`{3,}|~{3,})", line)
         if marker:
             token = marker.group(1)

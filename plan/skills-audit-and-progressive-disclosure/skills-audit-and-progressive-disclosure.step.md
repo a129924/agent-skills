@@ -132,3 +132,13 @@ merge/release.
 - [X] Commit canonical repair `0e9facb`, regenerate four affected Codex
   projections and inventory/provenance evidence, validate, push, then resolve
   only the four addressed Round 6 threads after GitHub reports the pushed head.
+
+## PR Comment Review / Fix — Round 7
+
+- [X] Fetch the current PR review state and triage three current, unresolved
+  direct-apply findings; retain earlier resolved threads as history.
+- [X] Support safe external projection entrypoints, align creator README policy,
+  and ignore indented-code headings in the implementation-step gate.
+- [X] Commit canonical repair `0ed7d85`, regenerate five affected Codex
+  projections and inventory/provenance evidence, validate, push, then resolve
+  only the three addressed Round 7 threads after GitHub reports the pushed head.

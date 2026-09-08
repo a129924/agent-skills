@@ -140,6 +140,19 @@ tree. The retained raw total is 117. The latest action-label counts remain Astra
 12/12, Sol 12/12, Luna 11/12; the existing Luna mismatch remains unmodified.
 This post-acceptance evidence refresh does not claim a new independent acceptance.
 
+## PR review Round 7 evidence refresh
+
+Three direct repairs were committed as `0ed7d85`: safe canonical-source discovery
+from the working directory for external projected entrypoints, creator README
+policy alignment, and indented-code exclusion in the Implementation Steps scan.
+Canonical and projected suites passed 107 and 75 tests. The source fallback is
+limited to ancestors with both `AGENTS.md` and canonical `skills/`; missing
+markers remain blocked. Five generated outputs were regenerated and the current
+224 changed paths remain covered by the 829-entry manifest. Evaluated discovery
+descriptions and selected-family Markdown are unchanged, so no model rerun was
+needed; the existing 36 latest prompt hashes remain current. This post-acceptance
+evidence refresh does not claim a new independent acceptance.
+
 Canonical runtime and instruction topics were committed separately. Provenance
 now points to actual canonical source commit e635f127dd861a02be3c4139401457ec29f41890,
 with final exact source hashes. Publishing/evidence metadata does not change the

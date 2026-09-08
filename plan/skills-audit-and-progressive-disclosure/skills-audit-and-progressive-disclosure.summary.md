@@ -29,7 +29,7 @@ companion copies were retained because they support independent installation.
 
 ## Verified
 
-105 canonical tests and 73 projected runtime tests pass. Three bounded independent
+107 canonical tests and 75 projected runtime tests pass. Three bounded independent
 review slices returned approved after corrections. Actual projected CLI rerun:
 287 noop, zero changes/conflicts. Frontmatter, references, hashes, manifest bounds
 and whitespace checked; see validation.md and the review log for exact limits.

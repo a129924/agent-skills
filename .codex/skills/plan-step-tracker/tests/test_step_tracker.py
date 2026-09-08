@@ -554,6 +554,25 @@ topic: impl-pending
 
         assert check_impl_steps_succeeded(topic, temp_plan_dir) == 0
 
+    def test_check_impl_steps_succeeded_ignores_indented_heading_example(
+        self, temp_plan_dir
+    ):
+        """An indented code example is not a second Markdown implementation section."""
+        topic = "impl-indented-heading"
+        topic_dir = temp_plan_dir / topic
+        topic_dir.mkdir()
+        (topic_dir / f"{topic}.step.md").write_text(
+            """## Implementation Steps
+- [X] Complete the implementation
+
+## Notes
+    ## Implementation Steps
+    - [ ] Example only
+"""
+        )
+
+        assert check_impl_steps_succeeded(topic, temp_plan_dir) == 0
+
     def test_main_check_impl_steps_succeeded_command_success(
         self, workflow_and_impl_step_file, monkeypatch, capsys
     ):
