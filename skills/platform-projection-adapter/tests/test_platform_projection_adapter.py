@@ -138,6 +138,36 @@ def test_generated_projection_preserves_and_runs_its_own_engine(adapter_module, 
     assert PLATFORM_PLACEHOLDER not in cli_skill
 
 
+def test_external_projected_entrypoint_uses_canonical_working_directory(
+    adapter_module, tmp_path: Path
+):
+    """An external platform root can find the canonical source from cwd."""
+    repo_root = make_repo(tmp_path)
+    engine_relative = Path("platform-projection-adapter/scripts/platform_projection_adapter.py")
+    write_text(repo_root / "skills" / engine_relative, SCRIPT_PATH.read_text(encoding="utf-8"))
+    external_root = tmp_path / "external" / ".codex"
+    code, _, _ = run_adapter(
+        adapter_module,
+        repo_root,
+        "--platform-root",
+        str(external_root),
+        "--apply",
+    )
+    assert code == 0
+    generated_engine = external_root / "skills" / engine_relative
+
+    result = subprocess.run(
+        [sys.executable, str(generated_engine), "--platform-root", str(tmp_path / ".second")],
+        cwd=repo_root,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert "result: SAFE_TO_APPLY" in result.stdout
+
+
 def test_dry_run_ignores_runtime_cache_junk(adapter_module, tmp_path: Path):
     repo_root = make_repo(tmp_path)
     pycache_root = repo_root / "skills" / "alpha" / "__pycache__"
@@ -266,7 +296,9 @@ def test_projected_codex_copy_runs_as_standalone_entrypoint(tmp_path: Path):
     assert "result: SAFE_TO_APPLY" in stdout
     assert not (target_root / "skills").exists()
 
-def test_repo_root_autodiscovery_failure_blocks_when_markers_are_missing(tmp_path: Path):
+def test_repo_root_autodiscovery_failure_blocks_when_markers_are_missing(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+):
     detached_root = tmp_path / "detached"
     detached_script = (
         detached_root / "scripts" / "platform_projection_adapter.py"
@@ -277,6 +309,7 @@ def test_repo_root_autodiscovery_failure_blocks_when_markers_are_missing(tmp_pat
         "platform_projection_adapter_detached",
     )
     target_root = tmp_path / ".codex-target"
+    monkeypatch.chdir(detached_root)
 
     exit_code, stdout, stderr = run_adapter(
         detached_module,
@@ -286,9 +319,9 @@ def test_repo_root_autodiscovery_failure_blocks_when_markers_are_missing(tmp_pat
     )
 
     assert exit_code == 1
-    assert "Failed to locate repository root from script path" in stderr
+    assert "Failed to locate repository root from script path or working directory" in stderr
     assert "result: BLOCKED" in stdout
-    assert "Failed to locate repository root from script path" in stdout
+    assert "Failed to locate repository root from script path or working directory" in stdout
     assert not (target_root / "skills").exists()
 
 

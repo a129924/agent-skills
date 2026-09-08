@@ -171,19 +171,19 @@ inside a skill folder unless the repository spec gives them a fixed role.
 ## Example policy
 - `SKILL.md` should include one concise positive example and one concise
   negative example
-- `examples.md` may stay optional when the concise `SKILL.md` examples already
-  cover about 80% of routine usage
-- `examples.md` becomes required for higher-complexity skills, such as
-  refactoring, branching workflows, script/tool usage, or higher-risk outputs
+- `examples.md` may stay optional when concise `SKILL.md` examples cover the
+  routine path and no important high-risk branch needs a worked example
+- add `examples.md` when high-risk branches or output details are not covered by
+  the concise examples
 - reviewer may still require `examples.md` when the concise examples are not
-  enough
+  enough for the skill's actual risk or decision points
 
 ## Reference policy
 - keep `reference.md` focused when one file is enough
 - `references/` is a split-reference supplement, not by itself a replacement for
   the required companion-file rule
-- split into `references/` when `reference.md` grows beyond about 1,000 tokens
-  or more than 3 logical topics
+- split into `references/` when callers need independent topics that would make
+  one `reference.md` too broad to route or maintain clearly
 - if `reference.md` is the chosen companion file and becomes too broad, keep it
   focused or reduce it to a short overview while moving detailed topics into
   `references/`

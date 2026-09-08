@@ -71,8 +71,10 @@ uv run skills/platform-projection-adapter/scripts/platform_projection_adapter.py
 - When the skill text describes a projection surface abstractly, prefer
   `.<platform>/...` wording over naming one concrete platform path.
 - The script locates the repository root by walking upward until it finds
-  `AGENTS.md` and the canonical `skills/` directory, so both canonical and
-  projected script paths stay valid runtime entrypoints.
+  `AGENTS.md` and the canonical `skills/` directory. If an external projected
+  entrypoint cannot find that root from its own path, it performs the same
+  checked lookup from the current working directory; invoke it from the source
+  repository in that case.
 
 ## Summary Fields
 
