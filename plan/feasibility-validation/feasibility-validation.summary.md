@@ -2,7 +2,7 @@
 
 ## current state
 
-2026-10-07: `approved`; revised eight-path contract and regenerated inventory have independent approvals. Planner final boundedness accepted and Main alignment verified; publishing/delivery remains pending. 2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
+2026-10-07: `pr-open`, inventory repair delivered after independent approvals and Planner final boundedness. Inventory 修正提交 `e3f212223417a95d9286df71d3b37c2a58693e9e` 已 push；新增 thread `PRRT_kwDOSC_kWs6pv07c` 已附 generator／60 筆驗收／hash 證據回覆並 resolve。2026-10-07T04:02:00.216237Z 的 HEAD `e3f212223417a95d9286df71d3b37c2a58693e9e` 快照確認 PR #127 OPEN／Ready、全部 12 threads resolved、unresolved = 0。此快照不表示未來 review 不會新增事項。 No merge authorization.
 依使用者交接的獨立 Planner 判定，此留言為 `REQUIRED_CORRECTION / ADDRESS`，採普通 `needs-rework / IMPLEMENT_CONTINUE`，屬同一 authorized topic 的 derivative inventory sync，不新增 correction layer。此記錄為 Plan-Creator 引述 Planner provenance，非本輪獨立核准。
 Current exact artifact contract: 3 skill + 4 planning + 1 generated inventory = 8 paths (all enumerated in plan). Original implementation / prior comment delivery is historical; topic is not merged or released.
 PR [#127](https://github.com/a129924/agent-skills/pull/127) originally opened as Draft; the snapshot at 2026-10-07T03:32:37.524174Z for HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` confirms OPEN and Ready (`isDraft=false`); base `dev`, head `feat/andrew/feasibility-validation`. User expressly authorized comment fixes → commit → push → reply/resolve; no merge authorization.
@@ -28,9 +28,11 @@ Original skill delivery and prior comment-repair evidence remain historical. Cur
 
 - Current inventory repair: independent planning amendment approved and committed `d661603`; regenerated inventory adds only `skills/feasibility-validation`, tree_hash `9f4ed20178d4bde9e8c12721a2393737d4d4ad7a9b11e3fc2b3190b5fb4a7100`. Independent Reviewer approved actual output; 60 unique roots, all hashes, unchanged 59 rows and repeated bytes verified. Inventory whitespace/EOF checks passed.
 
+- Inventory delivery commit `e3f2122` was pushed; new thread replied/resolved, all 12 threads resolved at 2026-10-07T04:02:00.216237Z. At that head, check-runs were empty and Codex issue-summary reported Running; later observation snapshots remain external.
+
 ## not completed
 
-- Current repair: Planner final boundedness accepted and Main alignment verified; authorized commit／push／reply-resolve remain pending. Generator, tests and three skill files are outside this repair change set.
+- Merge and later-head automation review remain separate; no merge-readiness claim. Generator, tests and three skill files are outside this repair change set.
 - Latest snapshot reports no check runs. Codex previous-head Completed at 2026-10-07T03:43:07.787356Z is historical automation status; the prior Running snapshot below remains historical and does not describe current state.
 
 - At 2026-10-07T03:39:06.872446Z on HEAD `a1817327343e568c9d0c95858438bfaf699970d4`, the Codex issue-comment status was Running for new commits. No completed automation review of a later record-only head is claimed; final bounded observations are saved outside the repo.
@@ -41,9 +43,9 @@ Original skill delivery and prior comment-repair evidence remain historical. Cur
 
 ## required follow-up
 
-Independent inventory planning/output reviews are approved. Planner checks final boundedness; Main verifies alignment and finishes authorized commit → push → reply/resolve. No merge authorization.
+Inventory planning/output reviews, Planner final boundedness and publishing alignment passed; authorized commit → push → reply/resolve completed. Human may inspect the one-row inventory change. No merge authorization.
 
 ## next handoff
 
-- next actor: Main Agent
-- next step: complete checks and the authorized commit → push → reply/resolve delivery.
+- next actor: human reviewer
+- next step: inspect the inventory fix and resolved thread; give explicit instructions for any further work.
