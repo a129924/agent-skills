@@ -41,7 +41,7 @@ Plan-Creator 落檔契約；獨立 Plan-Reviewer 核對落檔內容。Implemente
 
 ## Status / Allowed Transitions
 
-目前為 `pr-open`。Planning baseline 為 `85262e3`，實作 commit 為 `e48255a`；B1 已修正並獲獨立 Reviewer round 2 `approved`。Phase 4.5 alignment、reviewed hashes、YAML／links／模板 checks 與七檔 pre-commit 均通過。分支已 push，PR [#127](https://github.com/a129924/agent-skills/pull/127) 原以 Draft 建立，base `dev`。2026-10-07T03:32:37.524174Z、HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` 快照確認 OPEN、Ready（`isDraft=false`）；使用者已完成 human review 並明確授權 comment fixes → commit → push → reply/resolve。本輪 bounded comment fixes 已獲獨立 Plan-Reviewer 與 Reviewer approved；Main Agent 已核對契約 alignment、靜態檢查及七檔範圍，目前準備 commit、push 與 reply/resolve，不推論 merge readiness。
+目前為 `pr-open`。Planning baseline 為 `85262e3`，實作 commit 為 `e48255a`；B1 已修正並獲獨立 Reviewer round 2 `approved`。Phase 4.5 alignment、reviewed hashes、YAML／links／模板 checks 與七檔 pre-commit 均通過。分支已 push，PR [#127](https://github.com/a129924/agent-skills/pull/127) 原以 Draft 建立，base `dev`。2026-10-07T03:32:37.524174Z、HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` 快照確認 OPEN、Ready（`isDraft=false`）；使用者已完成 human review 並明確授權 comment fixes → commit → push → reply/resolve。本輪 bounded comment fixes 已獲獨立 Plan-Reviewer 與 Reviewer approved；Main Agent 已核對契約 alignment、靜態檢查、pre-commit 及七檔範圍。本輪修正提交 `a1817327343e568c9d0c95858438bfaf699970d4` 已 push；7 ADDRESS、4 SKIP 均已附理由回覆並 resolve。2026-10-07T03:39:06.872446Z 的 PR 快照確認 OPEN／Ready、11 threads 全部 resolved、unresolved = 0。該快照只描述該時間及 head，未宣告 merge readiness。，不推論 merge readiness。
 
 - 2026-10-07 已建立 worktree `/Users/andrew/code/python/agent-skills.worktrees/agent-20261007-feasibility-validation`，branch `feat/andrew/feasibility-validation`，initial HEAD `60b3b5b77515c354ed355c1adb28a8ed349dda67`。
 - 使用者已核准 formal plan 與 bounded commit／push／Draft PR 授權；無須重問同一授權，但仍須完成獨立審查、scope preview 與必要 gates。
@@ -110,4 +110,4 @@ PR Lens 以真實 base/head diff 製作 local artifacts，置於 repo 外 `/priv
 
 ## Open Questions / Unresolved Items
 
-無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Planning baseline、Creator 實作、獨立 skill review round 2、contract alignment 與本機 checks 已完成。原 Git 交付、human review handoff 及實際 human review 已完成；指定 HEAD 的 Copilot check success 與 11 則留言已有快照證據，非修正版核准。本輪 comment correction 已獲新的獨立 planning／bounded diff approval，commit、push、reply/resolve 尚待執行；不宣告 merge readiness 或外部 CI 核准。
+無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Planning baseline、Creator 實作、獨立 skill review round 2、contract alignment 與本機 checks 已完成。原 Git 交付、human review handoff 及實際 human review 已完成；指定 HEAD 的 Copilot check success 與 11 則留言已有快照證據，非修正版核准。本輪 comment correction 已獲新的獨立 planning／bounded diff approval；修正已 commit、push，11 threads 已回覆並 resolve；不宣告 merge readiness 或外部 CI 核准。

@@ -327,3 +327,12 @@ The initially reported snapshot-source WARNING was resolved by explicitly author
 - No full skill review was required for the typo; actual proactive behavior responsibility alignment was independently examined against the existing core.
 - All triage/re-review/source-check rounds were read-only. After Plan-Reviewer finished its own entry and the writer lock was released, the user expressly authorized this Reviewer to append only this entry. All prior history and the Plan-Reviewer entry are preserved; no other file is written by this append.
 - Thread replies/resolutions and new delivery actions are not claimed complete. Main may subsequently synchronize factual status documents.
+
+
+## 2026-10-07 — Main Agent PR comment delivery facts
+
+- Independent planning and bounded diff approvals above were received before publishing; Main verified plan alignment, same locked seven-path base scope, latest reviewed skill hash, unchanged companion hashes and static YAML/template/link contracts. Five affected files passed whitespace/EOF pre-commit.
+- 本輪修正提交 `a1817327343e568c9d0c95858438bfaf699970d4` 已 push；7 ADDRESS、4 SKIP 均已附理由回覆並 resolve。2026-10-07T03:39:06.872446Z 的 PR 快照確認 OPEN／Ready、11 threads 全部 resolved、unresolved = 0。該快照只描述該時間及 head，未宣告 merge readiness。
+- PR body synchronized to Ready and completed human review. Replies cite the fix commit or canonical medium rules; resolution receipts saved externally in `/private/tmp/feasibility-validation/pr-thread-resolution-results.json`.
+- Repair-head check snapshot: no check runs reported for this head. No claim that a later record commit has passed the same checks.
+- Main only records observed delivery facts; this entry is not a reviewer verdict. No runtime parser/model experiment, merge, release, tag, projection or dev-worktree modification.
