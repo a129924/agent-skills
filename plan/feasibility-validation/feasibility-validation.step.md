@@ -47,17 +47,18 @@ created: 2026-10-07
 - [X] 5. 明定完成語意（四狀態與任務完成分開）。
 - [X] 6. 保留重現規範（E001／E002、環境、指令、證據、資料保護）。
 
-- [ ] 7. Independent Plan-Reviewer approves the revised eight-path contract before any inventory write; Implementer regenerates only `artifacts/skills-inventory.jsonl` via existing `scripts/build_skills_inventory.py`.
-- [ ] Verify 60 unique canonical roots, existing hash/serialization contract, expected new tree_hash, repeat-run byte idempotence and unchanged existing 59 record bytes.
-- [ ] Independent Reviewer verifies generated output; Main completes alignment and applicable checks before authorized commit → push → reply/resolve for the new thread. No generator/tests/skill changes.
+- [X] 7. Independent Plan-Reviewer approves the revised eight-path contract before any inventory write; Implementer regenerates only `artifacts/skills-inventory.jsonl` via existing `scripts/build_skills_inventory.py`.
+- [X] Verify 60 unique canonical roots, existing hash/serialization contract, expected new tree_hash, repeat-run byte idempotence and unchanged existing 59 record bytes.
+- [X] Independent Reviewer approved generated output; no generator/tests/skill changes.
+- [ ] Planner final boundedness, Main alignment and authorized commit → push → reply/resolve for the new thread.
 
 ## Handoff / Gate Notes
 
-Current stage: `needs-rework`, bounded inventory repair underway; independent Plan-Reviewer approval pending. 2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
+Current stage: `approved`; independent planning contract and regenerated inventory reviews passed. Planning amendment committed `d661603`; 60-record output, all hashes, unchanged 59 rows and byte-repeatability verified. Planner final boundedness accepted and Main alignment verified; delivery remains pending. 2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
 依使用者交接的獨立 Planner 判定，此留言為 `REQUIRED_CORRECTION / ADDRESS`，採普通 `needs-rework / IMPLEMENT_CONTINUE`，屬同一 authorized topic 的 derivative inventory sync，不新增 correction layer。此記錄為 Plan-Creator 引述 Planner provenance，非本輪獨立核准。
 Current contract: exact 3 skill + 4 planning + 1 inventory = 8 paths, as enumerated in plan.
 Historical delivery facts follow; prior approvals and seven-path checks do not approve this revision. PR #127 originally opened as Draft; snapshot at 2026-10-07T03:32:37.524174Z for HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` confirms OPEN and Ready (`isDraft=false`), base `dev`, head `feat/andrew/feasibility-validation`. Historical independent round 2 approval, B1 repair and local checks are retained. Human review completed; user expressly authorized comment fixes → commit → push → reply/resolve. That historical repair has independent Plan-Reviewer and bounded diff Reviewer approval; Main Agent verified alignment, static checks and pre-commit. Fix commit `a1817327343e568c9d0c95858438bfaf699970d4` was pushed; all 11 reviewed threads received evidence/reasons and were resolved (7 ADDRESS, 4 SKIP), verified at 2026-10-07T03:39:06.872446Z. Merge remains unauthorized.
-Historical planning, implementation review and local publishing checks were done for the prior repair; current inventory repair gates remain pending. Existing bounded authorization satisfies STOP POINT 1; do not request it again. No merge authorization.
+Historical planning, implementation review and local publishing checks were done for the prior repair; inventory independent planning and output reviews have since passed; Planner final boundedness accepted and Main alignment verified; delivery remains pending. Existing bounded authorization satisfies STOP POINT 1; do not request it again. No merge authorization.
 Conversation independent plan-review PASS is historical conversation evidence only.
 Plan-Creator authors this authorized planning repair and appends supplied Planner provenance only; independent verdicts and delivery facts belong to their responsible owners.
 No dev worktree writes. No stable promotion, README/VERSION/projection changes, merge, tag or release.

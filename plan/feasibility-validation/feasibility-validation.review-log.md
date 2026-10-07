@@ -380,3 +380,35 @@ The initially reported snapshot-source WARNING was resolved by explicitly author
   }
 }
 ```
+
+
+## 2026-10-07 — Independent Reviewer: actual generated inventory repair
+
+- Verdict: **approved**; blocking issues: none. Bounded artifact verification for PR127 thread `PRRT_kwDOSC_kWs6pv07c`; no full skill review, runtime/model claim, final-gate or merge-readiness approval.
+- Actual HEAD `d6616030f2722f690cbef7da36a7447849439fe2` commits the eight-path planning amendment. Read actual AGENTS, topic plan/step/summary/review-log (including independent amendment approval), inventory plan/technical spec and existing generator. Inspected Main `/private/tmp/feasibility-validation/verify-inventory.py` but did not execute it or accept its verdict; ran own independent checks instead.
+- Actual inventory diffs against both HEAD and `c0552e8b764eff64ffbd713a582695ed928ca847`: exactly 1 added row / 0 deletions, skills/feasibility-validation only. Removing that row reproduces both original 59-row inventories byte-for-byte, including line endings and ordering.
+- Independently discovered 60 unique sorted top-level canonical roots and recomputed all 60 hashes without importing generator/Main verifier. Applied actual symlink/junk exclusions, relative POSIX lexical path sorting, UTF-8 path + NUL + file bytes + NUL SHA-256 stream. Every hash matches. New skill has 3 included files; actual tree_hash `9f4ed20178d4bde9e8c12721a2393737d4d4ad7a9b11e3fc2b3190b5fb4a7100`.
+- Verified exact canonical_path/tree_hash fields, full60 coverage, unique sorted paths, UTF-8 compact sorted-key serialization and trailing newline. Actual inventory: 7802 bytes, SHA-256 `c7ac1eea24f539dc2d8f4698c5490fc383523bbca87aff59db169bcfaad0d764`.
+- Actually ran existing generator twice with PYTHONDONTWRITEBYTECODE=1 and explicit external outputs `/private/tmp/feasibility-validation/skills-inventory-reviewer-run1.jsonl` and `/private/tmp/feasibility-validation/skills-inventory-reviewer-run2.jsonl`. Both exited 0, 60 records. Both are byte-identical to actual inventory and supplied `skills-inventory-preview.jsonl` / `skills-inventory-preview-repeat.jsonl` in that same external directory. Reviewer never generated into repository.
+- Before append, HEAD working diff is inventory only; cumulative initial-60b3b5b77515c354ed355c1adb28a8ed349dda67 diff equals exactly eight plan-listed paths. Since c0552e8 only four planning artifacts and inventory differ; no generator/test/skill diff. Main owns synchronization of stale pending factual doc states, alignment/applicable checks and routing Planner final gate after this result; this verdict does not perform those gates or verify PR resolution.
+- Only Reviewer repository write is this own evidence/verdict append. Original review-log bytes preserved; pre-append SHA-256 `5c72a2b67457beec395d3b1732b8655d2f872bc65d8f82d11034bf9c7f269f82`. No inventory/skill/script/test/dev write, API, commit, push or dispatch. Broader tests/safe-failure simulations not run: unchanged generator and bounded generated-artifact scope.
+
+```json
+{"verdict":"approved","blocking_issues":[],"copilot_feedback_triage":{"ADDRESS":[{"comment":"PRRT_kwDOSC_kWs6pv07c","location":"artifacts/skills-inventory.jsonl","why":"Actual missing-row repair passes independent all60 hashing, old59 raw-byte preservation, full canonical coverage and actual repeat-generation equality."}],"DISCUSS":[],"SKIP":[]}}
+```
+
+
+## 2026-10-07 — Independent Planner final boundedness gate: inventory repair
+
+- Gate verdict: **eligible-publish-align / accepted**; blocking issues: none. This is the Planner final boundedness decision for PR127 thread `PRRT_kwDOSC_kWs6pv07c`, not Main publishing alignment, delivery completion, external CI approval or merge approval.
+- Independently read actual feature plan, step, summary and review-log, including independent Plan-Reviewer amendment approval and independent Reviewer generated-output approval. Actual HEAD is `d6616030f2722f690cbef7da36a7447849439fe2`; current staged diff is empty. Inspected actual inventory diff and current factual-document changes against HEAD.
+- Cumulative diff against initial baseline `60b3b5b77515c354ed355c1adb28a8ed349dda67` contains exactly the eight enumerated paths: four topic planning files, three feasibility-validation skill files and `artifacts/skills-inventory.jsonl`. Since prior delivery HEAD `c0552e8b764eff64ffbd713a582695ed928ca847`, only the four planning files and inventory differ. No generator, tests, skill, workflow, platform, README or VERSION change is present in this repair.
+- Actual inventory diff adds exactly one row and deletes none: `skills/feasibility-validation`, tree_hash `9f4ed20178d4bde9e8c12721a2393737d4d4ad7a9b11e3fc2b3190b5fb4a7100`. Read-only actual inventory SHA-256 is `c7ac1eea24f539dc2d8f4698c5490fc383523bbca87aff59db169bcfaad0d764`, matching the independent Reviewer inspected artifact. Reviewer evidence explicitly covers actual60 canonical coverage, all60 independently recomputed hashes, original59 byte preservation and two real external generator outputs identical to the actual inventory. Planner did not rerun generator or tests.
+- Planning amendment approval precedes inventory execution and is recorded in committed HEAD. Current plan/step/summary changes synchronize completed independent approvals and regeneration while retaining publishing/delivery as pending. Exact eight-path contract, locked medium, three-file skill responsibilities, original behavior and architecture remain intact. No unresolved contract blocker was found; historical approvals and PR/check snapshots remain bounded to their historical heads.
+- Routing remains ordinary needs-rework / IMPLEMENT_CONTINUE for the same authorized derivative sync. No source-of-truth semantics, public contract meaning, architecture boundary or phase routing changes; no correction-layer artifacts or renewed authorization are required. This entry completes the previously pending Planner gate; Main may synchronize current gate/handoff facts within existing planning paths during alignment.
+- Next actor: Main Agent. Next step: Phase 4.5 publishing alignment and planned pre-commit checks on the five affected paths, then the already authorized topic commit -> push -> evidence-backed reply/resolve. Any substantive output or contract change after this inspected state requires the relevant independent re-check. Delivery and thread resolution remain pending; no new network observation is asserted.
+- Only this Planner evidence/verdict is appended to the feature review-log under explicit user authorization with the writer lock released. No other file write, dev change, network/API, Git mutation, dispatch or test execution by this Planner. No merge, release, tag, projection or post-merge authorization.
+
+```json
+{"gate":"planner-final-boundedness","verdict":"eligible-publish-align","result":"accepted","blocking_issues":[],"next_actor":"Main Agent","next_step":"publishing alignment and applicable checks before authorized commit/push/reply-resolve","merge_approval":false}
+```

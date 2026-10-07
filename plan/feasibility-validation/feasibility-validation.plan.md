@@ -41,7 +41,7 @@ Plan-Creator 落檔契約；獨立 Plan-Reviewer 核對落檔內容。Implemente
 
 ## Status / Allowed Transitions
 
-目前為 `needs-rework`（open PR 的 bounded inventory repair，planning 修訂待獨立 Plan-Reviewer approval）。2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
+目前為 `approved`（bounded inventory repair 的 planning 與 generated-output independent review 均通過；Planner final boundedness accepted，Main alignment 通過；Git 交付待完成）。2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
 
 依使用者交接的獨立 Planner 判定，此留言為 `REQUIRED_CORRECTION / ADDRESS`，採普通 `needs-rework / IMPLEMENT_CONTINUE`，屬同一 authorized topic 的 derivative inventory sync，不新增 correction layer。此記錄為 Plan-Creator 引述 Planner provenance，非本輪獨立核准。
 
@@ -121,4 +121,4 @@ Inventory 驗收：輸出可解析為 60 筆 JSONL，60 個唯一 canonical root
 
 ## Open Questions / Unresolved Items
 
-無待選實作問題；optional analysis layer `INCOMPLETE` 仍為 nonblocking warning。當前八路徑契約修訂待獨立 Plan-Reviewer approval；inventory 尚未再生，當輪 Reviewer verification、alignment、commit／push／reply-resolve 未完成。舊 approvals、hashes、七檔 checks、Draft 交付與 11 threads resolved 快照均保留為歷史，不核准本輪修訂。最新外部觀察未回報 check runs；Codex 在先前 HEAD 的 Completed（2026-10-07T03:43:07.787356Z）僅為歷史 automation 狀態，不等於本輪 gate 通過。
+無待選實作問題；optional analysis layer `INCOMPLETE` 仍為 nonblocking warning。八路徑契約修訂已獲獨立 Plan-Reviewer approved 並 commit `d661603`；inventory 已再生且獨立 Reviewer approved，60 筆 coverage／hash／byte-repeatability／既有 59 行不變均通過。Planner final boundedness accepted、Main alignment 通過；commit／push／reply-resolve 待完成。舊 approvals、hashes、七檔 checks、Draft 交付與 11 threads resolved 快照均保留為歷史，不核准本輪修訂。最新外部觀察未回報 check runs；Codex 在先前 HEAD 的 Completed（2026-10-07T03:43:07.787356Z）僅為歷史 automation 狀態，不等於本輪 gate 通過。
