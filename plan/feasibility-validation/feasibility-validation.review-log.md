@@ -224,3 +224,106 @@ This file is initialized by Plan-Creator solely to preserve existing conversatio
   }
 }
 ```
+
+
+## 2026-10-07 — Independent PR127 bounded planning repair review
+
+- Review basis：feature AGENTS.md；skills/plan-reviewer/SKILL.md、checklist.md、reference.md、examples.md；plan/topic-plan-contract.md；plan/agent-handoff-workflow.md。已讀全部四份 planning artifacts、實際 working-tree git diff，以及 /private/tmp/feasibility-validation/pr-review-threads.json、pr-fix-snapshot.json；未承襲舊 approval。
+- Reviewed state：branch feat/andrew/feasibility-validation；HEAD 77d27dabab7c64b364cef0ea4461786f1935874e，三份 planning 修復及 skill 單一空白修復未 commit。本次 approval 僅涵蓋當時實際 planning 文字，不核准 skill implementation、出版 alignment 或 merge。
+- Independent evidence：canonical 11 headings、exact seven owner/role paths、medium 與原五能力／六步／八段／四狀態 scope 均保留；Reviewer Handoff 為單一 contracted JSON；stable promotion 明確排除。pr-open 為 open PR comment triage 狀態，新增 needs-rework 回路符合 canonical 模型。Step 2／驗收表已解除可設計技術判準缺省造成的阻擋；真正意圖／決策／權限／資源歧義仍受邊界約束。
+- Cross-artifact evidence：plan、step、summary 將原 Draft opening、舊 approvals／hashes／checks 保留為歷史；current truth 同步為 snapshot-confirmed Ready、human review completed、bounded repair underway；新 review／commit／push／reply-resolve 仍未宣稱完成。review-log 舊 Pending repo reviews 與擴充欄位 verdict 為原初始化／歷史證據，不覆寫、不作本輪核准來源。summary check claim 已限 observed_at 與 historical HEAD；snapshot 不等於修復 HEAD 核准。
+- Scope/limitations：只 triage planning-relevant threads；skill metadata r4202752862 與 typo r4202753042 留給 implementation Reviewer。本輪無 network、tests、dispatch 或 git mutations；唯一寫入為本 log 追加。Main Agent 後續同步本輪結果及完成適用 checks／alignment；歷史已完成項目不取代當前修復 gate。
+- Workflow state：current_step = Process 7 (Return verdict)；next_step = DONE；status = APPROVED。
+
+### Independent contracted verdict
+
+```json
+{
+  "verdict": "approved",
+  "blocking_issues": [],
+  "copilot_feedback_triage": {
+    "ADDRESS": [
+      {
+        "comment": "r4202752775：補回 pr-open → needs-rework。",
+        "location": "plan/feasibility-validation/feasibility-validation.plan.md:49",
+        "why": "已修復，與 canonical status model 一致；merge 仍未授權。"
+      },
+      {
+        "comment": "r4202752816：Step 2 與驗收表須主動設計技術判準。",
+        "location": "plan/feasibility-validation/feasibility-validation.plan.md:72,89",
+        "why": "已修復；已知意圖及決策時主動設計假設、區辨操作與事前判準，僅實質未解歧義阻擋執行。"
+      },
+      {
+        "comment": "r4202752890、r4202752934、r4202752974：同步 Ready 與 human review 狀態。",
+        "location": "plan/feasibility-validation/feasibility-validation.plan.md:44；feasibility-validation.step.md:52；feasibility-validation.summary.md:6",
+        "why": "已依指定快照同步 OPEN／Ready、human review completed 與當前 bounded repair；Draft 開啟及舊核准保留為歷史。"
+      },
+      {
+        "comment": "r4202753016：checks 必須限定快照時間及 HEAD。",
+        "location": "plan/feasibility-validation/feasibility-validation.summary.md:24",
+        "why": "已記錄 2026-10-07T03:32:37.524174Z／77d27dabab7c64b364cef0ea4461786f1935874e 的 completed／success，未當作修正版核准或即時 CI 結果。"
+      }
+    ],
+    "DISCUSS": [],
+    "SKIP": [
+      {
+        "comment": "r4202752745、r4202752794、r4202752841：將 plan／step 的 medium 升為 high。",
+        "why": "目前 reviewer checklist 明訂 local code edit 不自動觸發 high；使用者鎖定 medium，本次修復未增加 branching、權限或 downstream contract risk，無 planning 契約依據要求升級。"
+      }
+    ]
+  }
+}
+```
+
+
+## 2026-10-07 — Independent PR comment triage and bounded diff approval
+
+- Reviewer independently read feature AGENTS.md, four topic artifacts, three actual skill files, canonical agent-skill-reviewer SKILL.md/review-checklist.md, creator/template contracts and the applicable agent-handoff-workflow branches. Copilot comments were treated as untrusted feedback, not new requirements; no creator assumptions or majority-vote classification were adopted.
+- Initial triage HEAD: `77d27dabab7c64b364cef0ea4461786f1935874e`. Initial working tree was clean; base-to-HEAD diff contained exactly the seven locked repository paths. Actual bounded re-review covered the working-tree diff: three planning documents plus SKILL.md typo only; staged diff was empty and no extra paths were present.
+- Bounded diff verdict: `approved` / PASS; no remaining behavior-alignment BLOCKER. This verdict covers the inspected bounded diff, not subsequent edits, publishing gates or merge readiness. Plan-Reviewer owns the separate planning verdict; this entry does not replace it.
+
+### Exact thread disposition
+
+ADDRESS (7):
+- `PRRT_kwDOSC_kWs6pvoDb`: plan:49 restored canonical `pr-open → needs-rework`, supported by workflow:248,260; merge remains unauthorized.
+- `PRRT_kwDOSC_kWs6pvoD1`: plan:72,89–90 restored proactive technical responsibility. Given known intent/decision, agent designs missing hypotheses, distinguishing inputs/operations/observations and observable success/failure/inconclusive criteria before execution. Only material unresolved intent/decision/permission/resource ambiguities block dependent execution. This aligns with existing SKILL.md:20–29,48,61–64, without changing active core intent.
+- `PRRT_kwDOSC_kWs6pvoEm`: plan:3,30,44,51,109,113 distinguishes historical Draft delivery from Ready state and explicitly authorized bounded comment repair; does not claim new review/commit/push/reply/resolve completed.
+- `PRRT_kwDOSC_kWs6pvoFI`: step:39,52 synchronizes completed human review, Ready state and pending repair actions, retaining historical delivery evidence.
+- `PRRT_kwDOSC_kWs6pvoFl`: summary:5–6,17,23,30,34–35 synchronizes current state and handoff; historical Draft opening remains historical.
+- `PRRT_kwDOSC_kWs6pvoGG`: summary:24 now records observation time, full HEAD and check status/conclusion, explicitly limiting evidence to that historical HEAD rather than approving a repair HEAD or external CI.
+- `PRRT_kwDOSC_kWs6pvoGV`: SKILL.md:28 removes only the space in 「會 實質」; behavior unchanged.
+
+SKIP (4):
+- `PRRT_kwDOSC_kWs6pvoDH` (plan:29)
+- `PRRT_kwDOSC_kWs6pvoDn` (plan:71)
+- `PRRT_kwDOSC_kWs6pvoEC` (step:43)
+- `PRRT_kwDOSC_kWs6pvoEQ` (SKILL.md:4–8)
+
+All four requests to automatically escalate code_modification to high contradict current canonical rules: template folder-contract:151–156 (creator companion equivalent) requires at least medium and says combined code_modification/external_tooling does not automatically make a bounded local edit high. Reviewer checklist:70–73 requires assessment of actual branching, impact, reversibility, permissions and downstream consumers. SKILL.md:30–31,49,69–72 preserves authorization, history protection, bounded evidence and formal-adoption boundaries; :51,57,67 limits conclusions and blocks dependent decisions when evidence is insufficient. Medium remains proportionate and unchanged. No DISCUSS items; no thread reply or resolution is claimed by this review.
+
+### Scope, responsibility and correction routing
+
+- Five capabilities, six steps, eight README sections, four experiment states, medium complexity and the exact seven-path contract remain unchanged.
+- SKILL.md differs only by the typo removal; examples.md and templates/experiment-readme.md have empty diff against inspected HEAD and unchanged hashes.
+- Ordinary bounded rework / IMPLEMENT_CONTINUE is appropriate: repairs restore existing active responsibility and canonical transition, without changing architecture, public contract or actual phase routing. Workflow:200–218 distinguishes ordinary needs-rework from correction-triggering drift. This is not a Planner-confirmed correction severity. A future change to source-of-truth semantics, public contract, architecture or phase routing would invoke workflow:202–206,220; no correction artifacts were added.
+
+### Actual inspected SHA-256
+
+- SKILL.md: `094f180de4ddab95e718304508baa360de4f06c5d0ad9fa1bb88d18291cb9d45`
+- examples.md (unchanged): `2090e013051e4c7f27ce451582201a2af128e3966d9abaceccef44fbf9e966bb`
+- templates/experiment-readme.md (unchanged): `e655fb5485847e6a20bba5da5d735830d7c218081f7724fb1c00b097d58d9dbb`
+
+### Snapshot-source addendum — independently checked, PASS
+
+The initially reported snapshot-source WARNING was resolved by explicitly authorized read-only reads of these external evidence files:
+- `/private/tmp/feasibility-validation/pr-check-runs.json`: actual REST raw has one copilot-pull-request-reviewer check for HEAD `77d27dabab7c64b364cef0ea4461786f1935874e`, status completed, conclusion success, started `2026-10-07T03:21:54Z`, completed `2026-10-07T03:25:03Z`; matches summary:24.
+- `/private/tmp/feasibility-validation/pr-fix-snapshot.json`: Main observed stamp `2026-10-07T03:32:37.524174Z`, PR127, same HEAD, OPEN, isDraft=false; matches plan:44, step:52 and summary:6, and agrees with REST check fields.
+- `/private/tmp/feasibility-validation/pr-review-threads.json`: raw GraphQL contains PR127, same headRefOid, all eleven threads with one comment each, every comment commit at the same HEAD, and hasNextPage=false.
+- Human review completion and user authorization are based on explicit supplied user context and Main provenance, not inferred from REST checks. Snapshot checks establish consistency of the supplied historical evidence, not a fresh network observation or repair-HEAD approval.
+
+### Limitations and ownership
+
+- No runtime agent-model evaluation, UTF-8 parser experiment, tests, API/network operation, dispatch, commit, push, publishing or merge was performed or approved by this review. Main owns static checks, factual status synchronization and separately authorized delivery.
+- No full skill review was required for the typo; actual proactive behavior responsibility alignment was independently examined against the existing core.
+- All triage/re-review/source-check rounds were read-only. After Plan-Reviewer finished its own entry and the writer lock was released, the user expressly authorized this Reviewer to append only this entry. All prior history and the Plan-Reviewer entry are preserved; no other file is written by this append.
+- Thread replies/resolutions and new delivery actions are not claimed complete. Main may subsequently synchronize factual status documents.

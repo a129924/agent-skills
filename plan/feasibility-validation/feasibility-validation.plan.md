@@ -1,6 +1,6 @@
 # feasibility-validation：可行性驗證 Skill 計畫
 
-Analysis-layer routing: `INCOMPLETE`（nonblocking semantic warning）。Optional `analysis/feasibility-validation/requirements.md` 與 `analysis/feasibility-validation/technical-spec.md` 均不存在；不建立 analysis。需求基線為使用者原草案、五項能力澄清及 2026-10-07 已核准 formal plan。最新授權只更新 Git 交付終點為 topic commit → push → Draft PR（base `dev`）→ human review。
+Analysis-layer routing: `INCOMPLETE`（nonblocking semantic warning）。Optional `analysis/feasibility-validation/requirements.md` 與 `analysis/feasibility-validation/technical-spec.md` 均不存在；不建立 analysis。需求基線為使用者原草案、五項能力澄清及 2026-10-07 已核准 formal plan。原 Git 交付終點為 topic commit → push → Draft PR（base `dev`）→ human review；human review 已完成，使用者已明確授權 comment fixes → commit → push → reply/resolve，無 merge 授權。
 
 ## Goal / Outcome
 
@@ -27,7 +27,7 @@ Analysis-layer routing: `INCOMPLETE`（nonblocking semantic warning）。Optiona
 - 按需啟用，結果回原決策位置，不新增必經 phase、gate 或 workflow binding。
 - 語言與工具不限定；選擇足以回答問題且容易重現的方式。
 - Complexity 採 `medium`；三份 skill 檔案為本題完整交付面。
-- 本題不涉及 stable-library promotion；允許經審查後 commit、push、Draft PR，停 human review。
+- 本題不涉及 stable-library promotion；原授權允許經審查後 commit、push、Draft PR 並停 human review；該交接及 human review 已完成，現授權 bounded comment fixes → commit → push → reply/resolve。
 
 ## Boundaries / Exclusions
 
@@ -41,14 +41,14 @@ Plan-Creator 落檔契約；獨立 Plan-Reviewer 核對落檔內容。Implemente
 
 ## Status / Allowed Transitions
 
-目前為 `pr-open`。Planning baseline 為 `85262e3`，實作 commit 為 `e48255a`；B1 已修正並獲獨立 Reviewer round 2 `approved`。Phase 4.5 alignment、reviewed hashes、YAML／links／模板 checks 與七檔 pre-commit 均通過。分支已 push，Draft PR [#127](https://github.com/a129924/agent-skills/pull/127) 已建立，base `dev`。本輪交付停在 human review，不推論 merge readiness。
+目前為 `pr-open`。Planning baseline 為 `85262e3`，實作 commit 為 `e48255a`；B1 已修正並獲獨立 Reviewer round 2 `approved`。Phase 4.5 alignment、reviewed hashes、YAML／links／模板 checks 與七檔 pre-commit 均通過。分支已 push，PR [#127](https://github.com/a129924/agent-skills/pull/127) 原以 Draft 建立，base `dev`。2026-10-07T03:32:37.524174Z、HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` 快照確認 OPEN、Ready（`isDraft=false`）；使用者已完成 human review 並明確授權 comment fixes → commit → push → reply/resolve。本輪 bounded comment fixes 已獲獨立 Plan-Reviewer 與 Reviewer approved；Main Agent 已核對契約 alignment、靜態檢查及七檔範圍，目前準備 commit、push 與 reply/resolve，不推論 merge readiness。
 
 - 2026-10-07 已建立 worktree `/Users/andrew/code/python/agent-skills.worktrees/agent-20261007-feasibility-validation`，branch `feat/andrew/feasibility-validation`，initial HEAD `60b3b5b77515c354ed355c1adb28a8ed349dda67`。
 - 使用者已核准 formal plan 與 bounded commit／push／Draft PR 授權；無須重問同一授權，但仍須完成獨立審查、scope preview 與必要 gates。
 - 先由獨立 Plan-Reviewer 核對 repo 四份 artifacts，解決 blocker，再由獲授權的 Main Agent commit planning artifacts；只有實際 commit 且 ready for execution 後才記 `planned`。
-- 允許轉換：`planned → creator-in-progress → review-ready → reviewer-in-progress → approved|needs-rework`；`needs-rework → creator-in-progress`；`approved → creator-in-progress|publish-in-progress`；`publish-in-progress → pr-open`。
+- 允許轉換：`planned → creator-in-progress → review-ready → reviewer-in-progress → approved|needs-rework`；`needs-rework → creator-in-progress`；`approved → creator-in-progress|publish-in-progress`；`publish-in-progress → pr-open`；`pr-open → needs-rework`。
 - 採標準 Phase 4.5 contract alignment；Main Agent 確認 Reviewer approval、plan alignment 與 pre-commit checks 後進 Git 交付。Stable-library handling 明確 skip。
-- Draft PR base `dev`；到 human review 即停止本次執行，不輪詢 merge。本授權不包含 `pr-open → merged`；merge 及後續須另有明確授權。
+- PR base `dev`；歷史 Draft 交付已停於 human review，現依明確授權進行 bounded comment repair，不輪詢 merge。本授權不包含 `pr-open → merged`；merge 及後續須另有明確授權。
 
 ## Artifact Paths
 
@@ -69,7 +69,7 @@ PR Lens 以真實 base/head diff 製作 local artifacts，置於 repo 外 `/priv
 ## Implementation Steps
 
 1. **建立 skill 入口。** 採 `medium` complexity，metadata 與正文一致，明列觸發、五項判斷、完成條件、權限邊界及 local references。
-2. **明定資訊不足的處理。** 問題、決策影響或判準缺失時，列出缺口，不依猜測執行。可恢復缺口採 `SOFT FAIL／INCOMPLETE`；繼續會造成誤導時採 `BLOCKED`。這些 skill 處理結果與實驗四狀態分開。
+2. **明定資訊不足的處理。** 先檢查來源與上下文；意圖及決策影響已知時，agent 主動設計缺少的假設、足以區分假設的最小輸入／操作／觀察方式，並在執行前固定成功、失敗與無法判定的可觀察判準，不因缺少現成技術判準而停止。只對仍未解決且會實質影響實驗的意圖、決策、權限或資源歧義阻擋執行並列出缺口；可恢復缺口採 `SOFT FAIL／INCOMPLETE`，繼續會造成誤導時採 `BLOCKED`。這些 skill 處理結果與實驗四狀態分開。
 3. **保留六步流程。** 定義問題 → 設定判準 → 設計最小實驗 → 執行並保存證據 → 判讀結果 → 寫回紀錄。補明決策影響、依賴假設、投入上限與停止條件。
 4. **保留 README 八段。** 驗證什麼、為什麼、成功與失敗判準、環境與前置條件、重現步驟、是否成功、結果與證據、結論與限制。
 5. **明定完成語意。** 「是否成功」保留未執行／成功／失敗／無法判定，同段記錄驗證任務是否完成及原因。取得足以支持決策的證據，或清楚交代無法判定原因、缺少證據與決策限制，皆可完成本次驗證。
@@ -86,7 +86,8 @@ PR Lens 以真實 base/head diff 製作 local artifacts，置於 repo 外 `/priv
 | 假設被否定 | 有效證據足以支持排除實作選擇，驗證仍可完成。 |
 | 環境或前置條件不足 | 記錄無法判定、缺少條件及決策限制，不誤判為假設失敗。 |
 | 有限或模擬證據 | 結論限定於實際測試條件，不宣稱普遍保證。 |
-| 問題、決策影響或判準缺失 | 指出缺口，不猜測執行。 |
+| 意圖及決策已知，但缺少技術假設或判準 | 先查來源與上下文，主動設計假設及能區分結果的最小輸入／操作／觀察方式，執行前固定成功／失敗／無法判定判準。 |
+| 仍有實質意圖、決策、權限或資源歧義 | 指出未解缺口，阻擋受影響的執行，不猜測意圖或越過邊界。 |
 | 文件一致性 | 指令、模板與例子一致，驗證結果與 skill 處理狀態不混用。 |
 
 ## Reviewer Handoff
@@ -105,8 +106,8 @@ PR Lens 以真實 base/head diff 製作 local artifacts，置於 repo 外 `/priv
 
 ## Post-merge / release actions
 
-Git endpoint 為 topic commit → push → Draft PR（base `dev`）→ human review，由 Main Agent 在審查及 alignment 通過後執行。無 stable promotion、merge、post-merge sync、release、tag 或 projection 授權；不安排延後發布。本次到 human review handoff 即停止。
+原 Git endpoint 為 topic commit → push → Draft PR（base `dev`）→ human review，已完成該交付及 human review；現由 Main Agent 在適用審查及 alignment 通過後完成已授權 comment fixes → commit → push → reply/resolve。無 stable promotion、merge、post-merge sync、release、tag 或 projection 授權；不安排延後發布。原 human review handoff 停點已完成；本輪修正交付後停止，不推論 merge 授權。
 
 ## Open Questions / Unresolved Items
 
-無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Planning baseline、Creator 實作、獨立 skill review round 2、contract alignment 與本機 checks 已完成。Git 交付與 human review handoff 已完成；實際 human review、Copilot 與外部 CI 尚無核准證據，不宣告 merge readiness。
+無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Planning baseline、Creator 實作、獨立 skill review round 2、contract alignment 與本機 checks 已完成。原 Git 交付、human review handoff 及實際 human review 已完成；指定 HEAD 的 Copilot check success 與 11 則留言已有快照證據，非修正版核准。本輪 comment correction 已獲新的獨立 planning／bounded diff approval，commit、push、reply/resolve 尚待執行；不宣告 merge readiness 或外部 CI 核准。

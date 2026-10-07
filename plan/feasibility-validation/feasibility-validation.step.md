@@ -36,7 +36,7 @@ created: 2026-10-07
 - [X] Implementer completed six plan steps within three skill paths; independent round 2 approved the actual files.
 - [X] Reviewer round 2 approved; Main Agent verified contract alignment and matching reviewed hashes.
 - [X] Main Agent validated scope, committed `e48255a`, pushed and opened Draft PR #127 against `dev`.
-- [X] Actual Draft PR #127 recorded; delivery handed to human review. Human review itself is pending; no merge polling or merge action.
+- [X] Actual Draft PR #127 recorded; delivery handed to human review. Human review subsequently completed and PR became Ready; user expressly authorized comment fixes → commit → push → reply/resolve. No merge polling or merge action.
 
 ## Implementation Steps
 
@@ -49,7 +49,7 @@ created: 2026-10-07
 
 ## Handoff / Gate Notes
 
-Current stage: `pr-open`; Draft PR #127 is OPEN and Draft, base `dev`, head `feat/andrew/feasibility-validation`. Independent round 2 approved, B1 resolved, local checks passed. Human-review handoff is complete; actual human approval and merge are not completed.
+Current stage: `pr-open`, bounded comment fixes approved; delivery pending. PR #127 originally opened as Draft; snapshot at 2026-10-07T03:32:37.524174Z for HEAD `77d27dabab7c64b364cef0ea4461786f1935874e` confirms OPEN and Ready (`isDraft=false`), base `dev`, head `feat/andrew/feasibility-validation`. Historical independent round 2 approval, B1 repair and local checks are retained. Human review completed; user expressly authorized comment fixes → commit → push → reply/resolve. This repair has independent Plan-Reviewer and bounded diff Reviewer approval; Main Agent verified alignment and static checks. Commit, push and reply/resolve remain pending. Merge remains unauthorized.
 Human authorization, planning, implementation review and local publishing checks are done. Existing bounded authorization satisfies STOP POINT 1; do not request it again. No merge authorization.
 Conversation independent plan-review PASS is historical conversation evidence only.
 Plan-Creator initializes these files; later facts belong to the responsible owners.
