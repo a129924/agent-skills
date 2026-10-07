@@ -41,7 +41,7 @@ Plan-Creator 落檔契約；獨立 Plan-Reviewer 核對落檔內容。Implemente
 
 ## Status / Allowed Transitions
 
-目前為 human-approved 執行基線已落檔、未 commit 的 planning preflight；尚未達 `planned` 的 committed 進入條件，也未進入 skill implementation 或獲 implementation approval。
+目前為 `creator-in-progress`（ordinary `needs-rework` 回修）。Planning baseline 為 `85262e3`；獨立 Reviewer 發現 B1：未提供判準時須由 agent 主動設計，不能要求使用者先填答案。Implementer 正在同範圍回修；implementation approval 尚未取得。
 
 - 2026-10-07 已建立 worktree `/Users/andrew/code/python/agent-skills.worktrees/agent-20261007-feasibility-validation`，branch `feat/andrew/feasibility-validation`，initial HEAD `60b3b5b77515c354ed355c1adb28a8ed349dda67`。
 - 使用者已核准 formal plan 與 bounded commit／push／Draft PR 授權；無須重問同一授權，但仍須完成獨立審查、scope preview 與必要 gates。
@@ -109,4 +109,4 @@ Git endpoint 為 topic commit → push → Draft PR（base `dev`）→ human rev
 
 ## Open Questions / Unresolved Items
 
-無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Repo planning review、planning commit、skill implementation、implementation review 及 Git 交付均待實際執行；不得將 conversation PASS 或人核准計畫當作這些階段完成證據。
+無待選實作問題。Optional analysis layer `INCOMPLETE` 為 nonblocking warning，不新增 analysis。Planning baseline、Creator 實作、獨立 skill review round 2、contract alignment 與本機 checks 已完成。Git 交付與 human review handoff 待實際執行；Copilot 與外部 CI 未驗證，不宣告 merge readiness。
