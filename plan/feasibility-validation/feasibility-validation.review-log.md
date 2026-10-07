@@ -336,3 +336,47 @@ The initially reported snapshot-source WARNING was resolved by explicitly author
 - PR body synchronized to Ready and completed human review. Replies cite the fix commit or canonical medium rules; resolution receipts saved externally in `/private/tmp/feasibility-validation/pr-thread-resolution-results.json`.
 - Repair-head check snapshot: no check runs reported for this head. No claim that a later record commit has passed the same checks.
 - Main only records observed delivery facts; this entry is not a reviewer verdict. No runtime parser/model experiment, merge, release, tag, projection or dev-worktree modification.
+
+
+## 2026-10-07 — Plan-Creator supplied Planner provenance: inventory repair
+
+- Provenance: explicit user handoff supplies the independent Planner classification; Plan-Creator records it without impersonating Planner or granting approval. 依使用者交接的獨立 Planner 判定，此留言為 `REQUIRED_CORRECTION / ADDRESS`，採普通 `needs-rework / IMPLEMENT_CONTINUE`，屬同一 authorized topic 的 derivative inventory sync，不新增 correction layer。此記錄為 Plan-Creator 引述 Planner provenance，非本輪獨立核准。
+- 2026-10-07T03:55:09.168860Z、HEAD `c0552e8b764eff64ffbd713a582695ed928ca847` 的外部快照確認 PR #127 OPEN／Ready；舊 11 threads resolved 為歷史，新 inventory thread `PRRT_kwDOSC_kWs6pv07c`（db `4202836714`）仍 unresolved，當前 unresolved = 1。使用者 renewed comment fixes → commit → push → reply/resolve 授權；無 merge 授權。
+- External source: `/private/tmp/feasibility-validation/observation-resumed.json`; existing generator previews `/private/tmp/feasibility-validation/skills-inventory-preview.jsonl` and `skills-inventory-preview-repeat.jsonl` were supplied as 60 records, only the new record added, existing 59 unchanged. Actual repo inventory remains 59 until approved implementation.
+- Revised contract: exact 3 skill + 4 planning + 1 generated `artifacts/skills-inventory.jsonl` = 8 paths; Implementer owns generation using unchanged `scripts/build_skills_inventory.py`. Inventory 驗收：輸出可解析為 60 筆 JSONL，60 個唯一 canonical roots 完整對應既有 generator 探索的 top-level `skills/`；每筆僅含 `canonical_path`、`tree_hash`，排序、UTF-8 與尾端換行遵循現有序列化契約。Hash 依 skill-root-relative 路徑穩定排序，以 UTF-8 relative path + NUL + file bytes + NUL 的 SHA-256 stream 計算，保留 generator 的 symlink／junk 排除規則。新 `skills/feasibility-validation` 的 `tree_hash` 必須為 `9f4ed20178d4bde9e8c12721a2393737d4d4ad7a9b11e3fc2b3190b5fb4a7100`；其餘既有 59 筆各行 bytes 與原 inventory 完全一致。相同 skill tree 重跑 generator，輸出 bytes 必須完全相同（idempotent）；差異只能新增該一筆。
+- Original Draft, seven-path approvals/checks, hashes and 11 resolved-thread snapshots above remain history. Current new thread unresolved; previous-head Codex Completed at 2026-10-07T03:43:07.787356Z and latest no-check-runs observation do not approve this repair.
+- This pass changes only plan/step/summary and appends this provenance entry. No skill/generator/tests/inventory/dev writes, API, dispatch, tests, commit or push. Independent Plan-Reviewer approval is pending before any inventory write; subsequent Reviewer verification/alignment/delivery remain pending. No new verdict or gate-completion claim.
+- Authoring workflow: current_step = Process 10 (contract and transition authoring); next_step = independent Plan-Reviewer actual-artifact review; status = COMPLETE (bounded authoring only, not topic completion).
+
+
+## 2026-10-07 — Independent Plan-Reviewer: inventory amendment
+
+- Review basis: actual canonical `skills/plan-reviewer/SKILL.md`, reference/checklist/examples, `AGENTS.md`, `plan/agent-handoff-workflow.md`, `plan/topic-plan-contract.md`; all four current topic artifacts and their actual working diff. Independent planning-contract review only.
+- PASS: canonical 11 sections, exact owner/role-labeled 3 skill + 4 planning + 1 inventory paths; explicit no stable promotion/release/merge; creator implementation and independent reviewer/Main ownership remain separated. Locked medium, functionality and six original steps remain unchanged. Existing generator and hashing behavior are outside the amendment. Supplied Planner ADDRESS / ordinary needs-rework / IMPLEMENT_CONTINUE provenance is recorded as supplied, not invented or reclassified by this reviewer; no correction layer is required by this bounded derivative sync.
+- Raw external observation independently read: `/private/tmp/feasibility-validation/observation-resumed.json`, observed 2026-10-07T03:55:09.168860Z, head c0552e8b764eff64ffbd713a582695ed928ca847, OPEN/Ready. Twelve threads: historical eleven resolved; sole unresolved PRRT_kwDOSC_kWs6pv07c. No check runs reported in that snapshot. Three current-state docs consistently retain needs-rework and pending current gates; historical Draft, approvals, hashes and delivery are preserved and do not approve current implementation.
+- Read-only independent SHA-256 calculation over all 60 canonical roots, using actual source-defined relative-path/NUL/file-bytes/NUL stream and symlink/junk exclusions, matches every preview record and complete UTF-8 deterministic serialized bytes. Exact two-field records, sorted paths and trailing newline verified. Both supplied preview files are byte-identical. Removing only skills/feasibility-validation from preview reproduces the existing 59-record inventory byte-for-byte. New tree_hash: 9f4ed20178d4bde9e8c12721a2393737d4d4ad7a9b11e3fc2b3190b5fb4a7100. Existing repo inventory remains 59; generator was not executed. Preview equality is supplied repeat-output evidence, not a claim that this reviewer reran generation.
+- Working diff contains only four planning artifacts; review-log HEAD history remains an exact byte prefix. This reviewer appends only its own evidence/verdict. No skill, generator, inventory or dev writes; no tests, API, dispatch or Git mutations.
+- Approved planning amendment permits the next authorized Implementer regeneration; independent generated-output Reviewer verification, Main alignment/checks and authorized delivery/reply-resolution remain pending. No implementation/delivery/CI/merge approval.
+- Coordination: current_step = Process 7 (fixed-schema verdict); next_step = DONE (review), authorized Implementer regeneration next; status = APPROVED (planning only).
+- Reviewed plan SHA-256: `6389712c241bcc484cc7d5ca7a628cb332f6cc661a5d1346b375640cc6aca86d`.
+- Reviewed step SHA-256: `8fe8684c7fddcce345f26779abc970d1c0c072ebdd627afb4cb44f2119169e58`.
+- Reviewed summary SHA-256: `e3274d2487356798080f4b923b994a88e08ca1a9563105fbea066eed01b99bf3`.
+- Review-log pre-append SHA-256: `f6fca7eb66b765cac83c7925873e16cec27f5289f6093c80d6ff0cf2ae828376`.
+
+```json
+{
+  "verdict": "approved",
+  "blocking_issues": [],
+  "copilot_feedback_triage": {
+    "ADDRESS": [
+      {
+        "comment": "PRRT_kwDOSC_kWs6pv07c：重新產生 canonical skills inventory。",
+        "location": "artifacts/skills-inventory.jsonl",
+        "why": "八路徑修訂已明確涵蓋既有 builder 衍生產物；60 roots、獨立 hash、deterministic bytes 與原 59 行不變驗收一致。此核准僅限 planning；再生及實作審查仍待執行。"
+      }
+    ],
+    "DISCUSS": [],
+    "SKIP": []
+  }
+}
+```
