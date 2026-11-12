@@ -2,42 +2,36 @@
 
 ## current state
 
-2026-11-12：四份 planning artifacts 已經獨立 repository Plan-Reviewer approved，blocking_issues 為空；Planner readiness 為 PASS。尚無 planning commit，目前等待 Main Agent 提交 planning baseline；不宣稱 canonical planned、creator-in-progress 或交付完成。
+2026-11-12：planning baseline 為 94c161f310ee0a6bf63f34808f07dc6c9451cdda；Main Agent 回報 baseline pre-commit 通過。Creator 已完成六份 skill 與 inventory，獨立 Reviewer approved、無 blockers／warnings。Planner Phase 4.5 boundedness PASS，已核對七份實作 hash 與 Reviewer snapshot 一致。可交 Main Agent 完成最終 scope／適用 checks 並提交 implementation；尚非 topic 完成。
 
-使用者已核准完整計畫並授權指定 feature-worktree 實現 → topic commit → push → Draft PR（base dev）→ human review；未授權 merge、stable promotion、post-merge sync、tag 或 release。
+使用者已授權指定 feature-worktree 實作 → topic commit → push → Draft PR（base dev）→ human review；不含 merge、stable promotion、post-merge sync、tag 或 release。
 
 ## completed
 
-- 使用者已確認按能力／決策辨識必要採用部分、比較方案、處理部分採用／重寫／排除／不確定；原任務已有實作授權時延續既有流程。
-- 已確認驗證與採用紀錄分離；不修改 feasibility-validation 的 skill、四狀態／完成語意、README 模板或 examples。
-- Main Agent 已建立指定 feature worktree；Plan-Creator 唯讀確認 branch feat/andrew/feasibility-adoption、initial HEAD 4c7e6afc2697c019ba12e6c74890c01923db6810，落盤前 clean。
-- 四份 plan-listed planning artifacts 已在 /Users/andrew/code/python/agent-skills.worktrees/agent-20261112-feasibility-adoption 新增；本次未寫 dev worktree。
-- 完整對話計畫及後續 bounded review corrections 已同步為 canonical 11-section execution contract，包含使用者九欄位、Graphify／PR Lens／Archify、分離的 Archify 修正規則及精確 tracked write-set。
-- Optional analysis layer 缺件已明示 nonblocking INCOMPLETE warning，不建立 analysis。
-- Main Agent 已提供 Archify 執行結果：/private/tmp/feasibility-adoption/archify/workflow.html，9 checks、0 errors、0 warnings、四 viewport 通過，visual review passed。此為 Main Agent 提供的執行 provenance，不是 Plan-Creator 自行測量或 correctness approval。
-- Plan-Creator 本輪未執行 skills 實作、inventory generation、工具、tests、commit 或 push。
-
-- 獨立 Plan-Reviewer /root/plan_reviewer 已追加 repository approved JSON，無 blocking issues；本輪 Planner 核對 plan、step、summary SHA-256 與 reviewer snapshot 一致。
-- Planner readiness PASS：branch 為 feat/andrew/feasibility-adoption，HEAD 仍為 4c7e6afc2697c019ba12e6c74890c01923db6810；僅四份 planning 新檔，兩個 target skill roots 均不存在，未有實作或其他異動。本輪僅同步本 step／summary 的真實進度，未改 plan 契約或 reviewer verdict，未執行測試／實作／commit。
+- Planning 四檔落盤、獨立 Plan-Reviewer approved、Planner readiness PASS 及 baseline commit 94c161f 均已完成。
+- 六份 canonical skill 檔案已完成：feasibility-adoption 為 high、feasibility-adoption-audit 為 medium；entrypoints／examples／templates 保留選擇性能力、依賴閉包、重用／重寫、原授權、證據分類與驗證／採用分離。
+- Inventory 再生為 62 roots，僅新增兩 roots、原 60 列不變；獨立 Reviewer 在記憶體用現有 generator 重建並核對 actual／inventory-repeat bytes 一致。
+- Independent implementation Reviewer 在 review-log 追加 approved JSON，記錄六份 skill 及 inventory 的 SHA-256；Planner 核對實際七檔相符，無 write-set／locked contract drift。
+- Reviewer 已核對結構、metadata、local links、行為情境與 git diff --check；未新增 production tests 或執行 runtime model evaluation。Implementer 回報通過的 pre-commit hooks 由 Main Agent 作最後 checks 確認。
+- Archify：/private/tmp/feasibility-adoption/archify/workflow.html；validation.json、delivery.json、workflow.visual-check.json、visual-review.json 及四張 1440×900／2048×1320 light／dark PNG 均存在。Reviewer 核對 spec／HTML SHA-256、9/9 showcase、0 errors／warnings、四 viewport containment 並檢視四張截圖。HTML SHA-256 為 7dd70662013432d0c02b8f969cc6a47314418ccf8b4072f2d146121b2ede2c32；人工 visual review passed，correction_rounds 0。
+- Graphify：Main Agent 回報 graphifyy 0.9.73；無 usable graph，採合規 targeted-source fallback，未 build／refresh。PR Lens 0.11.0 由 Main Agent 回報版本確認；實際 graph 交付仍 pending。
+- Feature branch 為 feat/andrew/feasibility-adoption。Main Agent 回報 ls-remote 確認遠端 dev=4c7e6af、無同名 feature branch；這是 Main Agent 的外部查證 provenance，非 Planner 重跑。
+- Planner 本輪僅更新 plan 的狀態／歷史時點敘述及 step／summary；未動 locked contract、skill、inventory 或 review-log，未跑測試、commit／push，也未寫 dev worktree。
 
 ## not completed
 
-- Planning baseline commit、六份 skill 檔案、inventory regeneration、獨立 implementation Reviewer、Phase 4.5 alignment 及必要 checks 未完成。
-- Main Agent 已報告 Archify 視覺交付完成；其最終 receipts／screenshots 與受信 HTML 的對應仍由交付者在 summary 提供真實路徑，Independent Reviewer 按計畫核對。
-- PR Lens 真實 diff／provenance、0.11.0 verify、graph validate/render 尚未執行。
-- Graphify runtime 版本未驗證；初始未找到 graph.json，不宣稱已有 usable graph。按計畫採 source fallback，不自動 build。
-- Topic commit、push、Draft PR URL／Draft state 及 human-review handoff 未完成。
-- 無 merge readiness、topic 完成或工具成功的宣稱。
+- Main Agent 的最終 exact-path scope／適用 checks 與 implementation commit 尚未完成。
+- PR Lens 的真實 implementation commit diff、provenance、graph validate／render／manifest 尚未完成；不得以 skill approval 或 Graphify fallback 代替。
+- Push、Draft PR URL／verified Draft state、最終 summary 同步及 human-review handoff 尚未完成。
+- 不宣稱 topic closure、merge readiness 或尚未執行的工具／Git 成功。
 
 ## required follow-up
 
-這是進行中的交接，不是 topic closure 或 close-with-follow-up。Independent Plan-Reviewer approved 與 Planner readiness PASS 已完成；下一步由 Main Agent 同步實際狀態、執行適用的 baseline commit checks 並提交 planning baseline，記錄真實 commit 後才進 planned／bounded implementation、獨立審查、檢查及已授權 Draft PR 交付。
+Main Agent 先核對本輪狀態同步 diff、受審七檔 hash 與列定 write-set，完成適用 checks，提交 implementation。之後以真實 commit diff 完成 PR Lens、保存 actual provenance／manifest 並更新 tool-status；必要工具交付未完成時仍須如實保留，不縮減 locked scope。PR Lens 是交付前 required follow-up，未新增成 implementation commit 的前置 gate。
 
-任何工具錯誤或未完成交付須保留在本節與外部 tool-status.md，不能用 source fallback 偽裝 PR Lens／Archify 交付完成。Graphify 在無 usable graph 時記錄合規 targeted-source fallback 是計畫允許的導航分支。
-
-Draft PR 交付時 Main Agent 必須將本檔更新為實際 commit／PR／checks／工具證據及剩餘事項，再交 human review 停止；不背景輪詢 merge。
+通過既有條件後完成已授權 push → Draft PR（base dev），記錄真實 commit／PR／checks／工具證據與剩餘事項，交 human review 並停止，不背景輪詢 merge。當前為進行中交接，並非 topic closure 或 close-with-follow-up。
 
 ## next handoff
 
 - next actor：Main Agent。
-- next step：提交四份 planning artifacts 的 baseline commit 並記錄真實 commit；確認 semantic feature branch 與 scoped worktree 後，進 planned，再派 Implementer。Planner readiness 不代替 baseline commit、implementation review 或 Git checks。
+- next step：最終 scope／適用 checks → implementation commit → PR Lens 真實 diff 交付 → 已授權 push／Draft PR／human review。Planner boundedness PASS 不代替 Main Agent checks 或工具交付。

@@ -11,11 +11,11 @@ created: 2026-11-12
 - [X] Feature worktree established and branch/HEAD verified.
 - [X] Materialize four planning artifacts.
 - [X] Independent repository Plan-Reviewer verdict: approved, no blocking issues; recorded by /root/plan_reviewer on 2026-11-12.
-- [X] Planner readiness / final boundedness for planning baseline: PASS on 2026-11-12; waiting for Main Agent baseline commit.
-- [ ] Main Agent commits planning baseline; enter planned.
-- [ ] Creator implementation: six skill files and generated inventory.
+- [X] Planner readiness for planning baseline PASS; baseline subsequently committed as 94c161f.
+- [X] Main Agent committed planning baseline 94c161f; entered planned before creator work.
+- [X] Creator implementation: six skill files and generated inventory, independently approved.
 - [ ] Required local tool outputs / truthful Graphify navigation fallback.
-- [ ] Independent implementation Reviewer verdict.
+- [X] Independent implementation Reviewer verdict: approved, no blockers or warnings; reviewed hashes retained in review-log.
 - [ ] Phase 4.5 alignment and appropriate local checks.
 - [ ] Topic commit → push → Draft PR, base dev.
 - [ ] Summary synchronized and human-review handoff.
@@ -31,20 +31,20 @@ created: 2026-11-12
 - [X] Materialize plan, step, review-log and summary using the plan-listed paths.
 - [X] Independent Plan-Reviewer read actual four files, returned approved fixed JSON and recorded its own verdict.
 - [X] Planner confirmed readiness PASS; reviewed plan/step/summary hashes match independent reviewer snapshot, only four planned new files are present, and both target skill roots are absent.
-- [ ] Main Agent commits reviewed planning baseline; record real commit and update canonical stage.
+- [X] Main Agent committed reviewed planning baseline 94c161f310ee0a6bf63f34808f07dc6c9451cdda; baseline pre-commit passed as reported by Main Agent.
 
 ### Implementation
 
-- [ ] Adoption SKILL.md, examples.md and templates/adoption-record.md.
-- [ ] Audit SKILL.md, examples.md and templates/adoption-audit.md.
-- [ ] Preserve verification/adoption separation, selective capabilities, dependency closure, reuse/rewrite, old-data traceability and current authorization.
-- [ ] Regenerate artifacts/skills-inventory.jsonl with existing generator; only two new roots, prior records unchanged, repeatable bytes.
-- [ ] Graphify: every CLI has GRAPHIFY_NO_AUTO_REFRESH=1; existing usable graph only, budget 1500 and source verification; otherwise report targeted-source fallback, no build.
+- [X] Adoption SKILL.md, examples.md and templates/adoption-record.md.
+- [X] Audit SKILL.md, examples.md and templates/adoption-audit.md.
+- [X] Preserve verification/adoption separation, selective capabilities, dependency closure, reuse/rewrite, old-data traceability and current authorization; independent Reviewer verified.
+- [X] Regenerated inventory: 62 roots, only two new roots, prior 60 records unchanged, repeatable bytes; independently verified.
+- [X] Graphify: Main Agent reported version 0.9.73; no usable graph, targeted-source fallback recorded, no build/refresh.
 - [ ] PR Lens: verify pinned 0.11.0, real base/head or bounded diff including new files, external graph validate/render and manifest.
-- [ ] Archify: schema/common/example → candidate first; showcase 9 checks / zero errors/warnings → deliver → four-viewport visual-check → actual screenshot inspection.
-- [ ] Keep Archify automatic and visual repair limits distinct; changes to candidate require renewed validate/deliver and fresh visual evidence.
-- [ ] Tool errors/nonzero/skipped and incomplete outputs recorded truthfully in external tool-status.md.
-- [ ] Independent Reviewer reviews actual snapshot and evidence; no self-approval.
+- [X] Archify: showcase 9 checks / zero errors/warnings, trusted delivery SHA-256 and four-viewport visual-check / screenshot inspection independently verified.
+- [X] Archify automatic and visual repair limits preserved; correction_rounds 0, unchanged delivered HTML independently verified.
+- [X] Current tool errors/fallback and pending PR Lens recorded truthfully in external tool-status.md; future execution results still require updates.
+- [X] Independent Reviewer approved actual seven-file snapshot and available evidence; PR Lens explicitly remains pending.
 
 ### Authorized delivery
 
@@ -56,14 +56,14 @@ created: 2026-11-12
 
 ## Handoff / Gate Notes
 
-Current: Phase 1 independent repository Plan-Reviewer approved the four-file snapshot, and Planner readiness is PASS. Main Agent must commit the reviewed planning baseline before entering planned / creator-in-progress; no planning commit exists yet. Planner only synchronized step/summary progress after checking the reviewed hashes; the plan contract and independent verdict were not changed.
+Current: Independent implementation Reviewer approved at baseline HEAD 94c161f, with no blockers/warnings. Planner Phase 4.5 boundedness PASS: actual six skill files and inventory match the reviewed seven hashes and locked write-set. Main Agent must finish final scope / applicable checks and implementation commit; PR Lens remains pending for the real implementation commit diff. This is ready for implementation commit, not topic completion.
 
 Readiness input is plan/feasibility-adoption/feasibility-adoption.plan.md. This step is required because the topic has multiple workflow-role handoffs. Review log preserves independent verdicts and rework; summary owns delivery/close truth, not this checklist.
 
-The current Plan-Creator assignment stops after four planning files. It does not implement skills, generate inventory, run tools/tests or commit/push.
+Historical Plan-Creator assignment stopped after four planning files; later Implementer and independent Reviewer work is now completed as recorded above. Planner only synchronized plan status / step / summary; no skill, inventory, review-log or Git mutation was performed by this sync.
 
 Existing human authorization satisfies STOP POINT 1 for the bounded topic commit/push/Draft PR endpoint after required reviews/checks. No repeated authorization question; no stable promotion, merge, post-merge sync, tag or release. Main Agent owns branch and publishing routing; Implementer owns bounded implementation; independent reviewers own their verdicts.
 
 No dev worktree writes. Only ten new tracked paths plus one modified inventory are allowed by the topic plan. New-file rework stays within those paths. External tool artifacts stay under /private/tmp/feasibility-adoption/ and are not added to Git. All nine requested fields (Goal, Non-Goal, In-Scope, Out-Of-Scope, ReadOnly, Written, Modify, Deleted, TestCase) are explicit in the parent plan.
 
-Tool runtime paths existed in initial inspection, but versions/runtime have not been verified. No graph.json or pr-lens.yml was found in initial bounded inspection; do not claim a usable graph, a tool pass or a created PR.
+Initial no-graph / no-pr-lens.yml observations remain historical. Main Agent reported Graphify 0.9.73 and PR Lens 0.11.0; Graphify source fallback and Archify evidence are available. PR Lens graph / provenance / render, implementation commit, push and Draft PR remain pending. No PR or topic completion is claimed.

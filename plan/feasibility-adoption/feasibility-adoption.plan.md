@@ -51,7 +51,9 @@ Plan-Creator 落盤及修訂 planning contract；Implementer 僅負責列定實�
 
 ## Status / Allowed Transitions
 
-**Current：**Phase 1，四份 planning artifacts 已落盤，等待獨立 repository Plan-Reviewer 審查。尚未有 planning commit，不宣稱已達 canonical planned entry；對話 PASS 與 human approval 為基線證據，不代替本次檔案審查。
+**Current（2026-11-12，implementation review 後）：**planning baseline 已提交為 94c161f310ee0a6bf63f34808f07dc6c9451cdda，Main Agent 回報 baseline pre-commit 通過；已經 planned → creator-in-progress → review-ready → reviewer-in-progress，獨立 Reviewer 現已 approved。六份 skill 與 inventory 共七檔 SHA-256 與 review-log 的受審 snapshot 相符；Planner boundedness PASS，可交 Main Agent 完成最終 scope／checks 並提交 implementation。PR Lens 尚待真實 implementation commit diff；不表示工具交付、Draft PR 或 topic 已完成。
+
+**歷史 planning 落盤時點：**當時 Phase 1 四份 artifacts 已落盤，等待 repository Plan-Reviewer，尚無 planning commit；此段只保存當時狀態，不描述目前進度。對話 PASS 與 human approval 未代替後續已完成的獨立檔案審查。
 
 - 2026-11-12 使用者核准完整計畫並授權 feature-worktree 實現 → topic commit → push → Draft PR（base dev）→ human review。此 bounded authorization 已涵蓋 STOP POINT 1，不重問同一授權，仍須完成審查、alignment、scope 與必要 checks。
 - 指定 worktree 已由 Main Agent 建立，branch 為 feat/andrew/feasibility-adoption；本輪唯讀確認 initial HEAD 4c7e6afc2697c019ba12e6c74890c01923db6810，落盤前 clean。
@@ -186,4 +188,6 @@ Independent Plan-Reviewer 檢查 canonical 11 sections、exact paths、九欄位
 
 無待使用者選擇的需求／偏好。Optional analysis layer INCOMPLETE 是 nonblocking warning，不建立 analysis。
 
-實際 repository plan review／Planner readiness、planning commit、skills 實作、inventory generation、獨立 implementation review、其餘工具版本與執行證據、checks、commit／push／Draft PR 均尚未完成，不能由對話 PASS 推定。初始未找到 graph.json／pr-lens.yml；Graphify 合規 source fallback 已定，PR Lens 實際交付待執行；Main Agent 已提供 Archify workflow.html 完成證據：9 checks、0 errors、0 warnings、四 viewport 通過及 visual review passed，位置為 /private/tmp/feasibility-adoption/archify/workflow.html。這是 Main Agent 提供的執行證據，不是 Plan-Creator 自行驗證或獨立 correctness approval。工具錯誤必實報，剩餘工作留在 summary，不以 scope 縮減掩蓋未完成。
+**歷史 planning 落盤時點：**repository plan review、Planner readiness、planning commit、skills／inventory、implementation review 及 Git 交付當時均未完成；不是目前未完成清單。
+
+**目前未完成（2026-11-12）：**Main Agent 最終 scope／適用 checks、implementation commit、PR Lens 真實 diff／provenance／validate／render、push、Draft PR 與 human-review handoff。Planning baseline 94c161f、六份 skill、62-root inventory（原 60 列不變、repeat bytes 相同）及獨立 implementation approved 已有實證。Graphify 無 usable graph 時採計畫允許的 targeted-source fallback；版本 0.9.73 與 PR Lens 0.11.0 由 Main Agent 回報。Archify workflow.html 的實際 bytes、delivery SHA-256、9/9 showcase、0 errors／warnings、四 viewport 及四張截圖已由 Reviewer 核對，詳見 review-log 與 /private/tmp/feasibility-adoption/tool-status.md。PR Lens 仍為必要後續交付，不以 source fallback 或 skill approval 冒充完成；工具錯誤必實報，不縮減 locked scope。
