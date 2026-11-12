@@ -51,7 +51,7 @@ Plan-Creator 落盤及修訂 planning contract；Implementer 僅負責列定實�
 
 ## Status / Allowed Transitions
 
-**Current（2026-11-12，implementation review 後）：**planning baseline 已提交為 94c161f310ee0a6bf63f34808f07dc6c9451cdda，Main Agent 回報 baseline pre-commit 通過；已經 planned → creator-in-progress → review-ready → reviewer-in-progress，獨立 Reviewer 現已 approved。六份 skill 與 inventory 共七檔 SHA-256 與 review-log 的受審 snapshot 相符；Planner boundedness PASS，可交 Main Agent 完成最終 scope／checks 並提交 implementation。PR Lens 尚待真實 implementation commit diff；不表示工具交付、Draft PR 或 topic 已完成。
+**Current（2026-11-12，Draft PR 交付後）：**狀態為 pr-open。Planning baseline 94c161f310ee0a6bf63f34808f07dc6c9451cdda；實作 commit a5abd634b61133e4f108d75dffd8d626ebe13799 已 push。Main Agent 透過 GitHub connector 建立 [Draft PR #129](https://github.com/a129924/agent-skills/pull/129)，base dev（4c7e6af）、head a5abd63、isDraft=true。獨立 Plan-Reviewer／implementation Reviewer approved，Planner boundedness PASS；Archify passed、Graphify 合規 source fallback、PR Lens validate／render passed。Human review pending；本題不宣稱 merge、release 或 topic merge completion。PR Lens 固定映射 base 4c7e6af…head a5abd63 的真實 11-file diff；後續只同步 planning 交付紀錄，不冒稱圖已涵蓋後續文件 commit。
 
 **歷史 planning 落盤時點：**當時 Phase 1 四份 artifacts 已落盤，等待 repository Plan-Reviewer，尚無 planning commit；此段只保存當時狀態，不描述目前進度。對話 PASS 與 human approval 未代替後續已完成的獨立檔案審查。
 
@@ -190,4 +190,4 @@ Independent Plan-Reviewer 檢查 canonical 11 sections、exact paths、九欄位
 
 **歷史 planning 落盤時點：**repository plan review、Planner readiness、planning commit、skills／inventory、implementation review 及 Git 交付當時均未完成；不是目前未完成清單。
 
-**目前未完成（2026-11-12）：**Main Agent 最終 scope／適用 checks、implementation commit、PR Lens 真實 diff／provenance／validate／render、push、Draft PR 與 human-review handoff。Planning baseline 94c161f、六份 skill、62-root inventory（原 60 列不變、repeat bytes 相同）及獨立 implementation approved 已有實證。Graphify 無 usable graph 時採計畫允許的 targeted-source fallback；版本 0.9.73 與 PR Lens 0.11.0 由 Main Agent 回報。Archify workflow.html 的實際 bytes、delivery SHA-256、9/9 showcase、0 errors／warnings、四 viewport 及四張截圖已由 Reviewer 核對，詳見 review-log 與 /private/tmp/feasibility-adoption/tool-status.md。PR Lens 仍為必要後續交付，不以 source fallback 或 skill approval 冒充完成；工具錯誤必實報，不縮減 locked scope。
+**目前未完成（2026-11-12）：**本次三份 planning 交付紀錄的 commit／push 由 Main Agent 接續處理，human review 尚待使用者進行。技能、inventory、獨立 reviews、Phase 4.5 boundedness、實作 commit／push、Draft PR 及三項輔助工具分支已有實證。PR Lens graph／provenance／diff.patch／manifest 與 SVG 位於 /private/tmp/feasibility-adoption/pr-lens/，固定 head a5abd63，不包含其後 planning-only delivery 記錄更新；工具詳見 tool-status.md。Graphify 無 usable graph 的 source fallback 是計畫允許分支，不冒稱建立 graph。交 human review 後停止，不輪詢 merge，不擴張 locked scope。

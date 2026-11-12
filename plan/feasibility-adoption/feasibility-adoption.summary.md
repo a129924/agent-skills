@@ -2,36 +2,33 @@
 
 ## current state
 
-2026-11-12：planning baseline 為 94c161f310ee0a6bf63f34808f07dc6c9451cdda；Main Agent 回報 baseline pre-commit 通過。Creator 已完成六份 skill 與 inventory，獨立 Reviewer approved、無 blockers／warnings。Planner Phase 4.5 boundedness PASS，已核對七份實作 hash 與 Reviewer snapshot 一致。可交 Main Agent 完成最終 scope／適用 checks 並提交 implementation；尚非 topic 完成。
-
-使用者已授權指定 feature-worktree 實作 → topic commit → push → Draft PR（base dev）→ human review；不含 merge、stable promotion、post-merge sync、tag 或 release。
+2026-11-12：pr-open。[Draft PR #129](https://github.com/a129924/agent-skills/pull/129) 已由 Main Agent 透過 GitHub connector 建立，isDraft=true，base dev（4c7e6af），head a5abd634b61133e4f108d75dffd8d626ebe13799；實作 commit 已 push。Human review pending。本次三份 planning delivery 紀錄更新待 Main Agent commit／push 及最終交接；不宣稱 merge、release 或 topic merge completion。
 
 ## completed
 
-- Planning 四檔落盤、獨立 Plan-Reviewer approved、Planner readiness PASS 及 baseline commit 94c161f 均已完成。
-- 六份 canonical skill 檔案已完成：feasibility-adoption 為 high、feasibility-adoption-audit 為 medium；entrypoints／examples／templates 保留選擇性能力、依賴閉包、重用／重寫、原授權、證據分類與驗證／採用分離。
-- Inventory 再生為 62 roots，僅新增兩 roots、原 60 列不變；獨立 Reviewer 在記憶體用現有 generator 重建並核對 actual／inventory-repeat bytes 一致。
-- Independent implementation Reviewer 在 review-log 追加 approved JSON，記錄六份 skill 及 inventory 的 SHA-256；Planner 核對實際七檔相符，無 write-set／locked contract drift。
-- Reviewer 已核對結構、metadata、local links、行為情境與 git diff --check；未新增 production tests 或執行 runtime model evaluation。Implementer 回報通過的 pre-commit hooks 由 Main Agent 作最後 checks 確認。
-- Archify：/private/tmp/feasibility-adoption/archify/workflow.html；validation.json、delivery.json、workflow.visual-check.json、visual-review.json 及四張 1440×900／2048×1320 light／dark PNG 均存在。Reviewer 核對 spec／HTML SHA-256、9/9 showcase、0 errors／warnings、四 viewport containment 並檢視四張截圖。HTML SHA-256 為 7dd70662013432d0c02b8f969cc6a47314418ccf8b4072f2d146121b2ede2c32；人工 visual review passed，correction_rounds 0。
-- Graphify：Main Agent 回報 graphifyy 0.9.73；無 usable graph，採合規 targeted-source fallback，未 build／refresh。PR Lens 0.11.0 由 Main Agent 回報版本確認；實際 graph 交付仍 pending。
-- Feature branch 為 feat/andrew/feasibility-adoption。Main Agent 回報 ls-remote 確認遠端 dev=4c7e6af、無同名 feature branch；這是 Main Agent 的外部查證 provenance，非 Planner 重跑。
-- Planner 本輪僅更新 plan 的狀態／歷史時點敘述及 step／summary；未動 locked contract、skill、inventory 或 review-log，未跑測試、commit／push，也未寫 dev worktree。
+- Planning baseline：94c161f310ee0a6bf63f34808f07dc6c9451cdda；獨立 repository Plan-Reviewer approved、Planner readiness PASS，Main Agent 回報 baseline pre-commit 通過。
+- 實作 commit：a5abd634b61133e4f108d75dffd8d626ebe13799。六份 canonical skill（adoption high／audit medium）與 generated inventory 已完成；62 roots、原 60 列不變，repeat bytes 一致。
+- 獨立 implementation Reviewer approved，無 blockers／warnings；review-log 保存七份實作 SHA-256，Planner 已核對相符，Phase 4.5 boundedness PASS，無 locked contract／write-set drift。
+- 已記錄的 local checks：metadata、required sections、local links、模板／案例與行為情境、inventory in-memory rebuild／byte equality、git diff --check；Main Agent 回報七實作檔 cached diff check 通過，Implementer 回報適用 pre-commit hooks 通過。未新增 production tests，未執行 runtime model evaluation。
+- Archify passed：/private/tmp/feasibility-adoption/archify/workflow.html；validation.json／delivery.json／workflow.visual-check.json／visual-review.json 與四張 light／dark 截圖。Reviewer 已核對 9/9 showcase、0 errors／warnings、四 viewport containment、實際截圖與 SHA-256；visual review passed，correction_rounds 0。HTML SHA-256：7dd70662013432d0c02b8f969cc6a47314418ccf8b4072f2d146121b2ede2c32。
+- Graphify：graphifyy 0.9.73，無 usable existing graph，採計畫允許的 targeted-source fallback，未 build／refresh。
+- PR Lens 0.11.0 passed：實際 base 4c7e6afc2697c019ba12e6c74890c01923db6810…head a5abd634b61133e4f108d75dffd8d626ebe13799，11 files、686 additions、0 deletions；validate／render 成功，4 lanes／8 nodes／9 edges／1 view／3 walkthrough steps。
+- PR Lens 證據：/private/tmp/feasibility-adoption/pr-lens/graph.json、provenance.json、diff.patch、validate.txt、render.txt、rendered/manifest.json；SVG 為 rendered/overview-light-6e61c2f211c119ae27722d9179017c58.svg。圖固定於 a5abd63，不冒稱包含後續 planning-only delivery 記錄 commit。全部工具證據彙整於 /private/tmp/feasibility-adoption/tool-status.md，未上傳圖資或修改工具設定。
+- Main Agent 已 push feature branch 並建立 Draft PR #129；本地 branch tracking 顯示 feat/andrew/feasibility-adoption 與 origin 同步。GitHub Draft／base／head 狀態採 Main Agent connector 查證 provenance。
+- 本輪 Planner 只同步 plan 狀態、step、summary；未改 locked contract、skill、inventory 或 review-log，未跑測試、commit／push，也未寫 dev worktree。
 
 ## not completed
 
-- Main Agent 的最終 exact-path scope／適用 checks 與 implementation commit 尚未完成。
-- PR Lens 的真實 implementation commit diff、provenance、graph validate／render／manifest 尚未完成；不得以 skill approval 或 Graphify fallback 代替。
-- Push、Draft PR URL／verified Draft state、最終 summary 同步及 human-review handoff 尚未完成。
-- 不宣稱 topic closure、merge readiness 或尚未執行的工具／Git 成功。
+- 本次三份 planning delivery 紀錄更新的 commit／push 及 Main Agent 最終 human-review handoff 尚待完成。
+- 使用者 human review pending；無 merge、post-merge sync、stable promotion、tag 或 release 授權／完成宣稱。
 
 ## required follow-up
 
-Main Agent 先核對本輪狀態同步 diff、受審七檔 hash 與列定 write-set，完成適用 checks，提交 implementation。之後以真實 commit diff 完成 PR Lens、保存 actual provenance／manifest 並更新 tool-status；必要工具交付未完成時仍須如實保留，不縮減 locked scope。PR Lens 是交付前 required follow-up，未新增成 implementation commit 的前置 gate。
+Main Agent 檢查本次僅三份 planning delivery 紀錄的 diff，完成適用 checks、commit／push，必要時同步 PR handoff 描述。此更新不改六份 skill 或 inventory，不冒稱既有 PR Lens map 已包含該文件 commit。
 
-通過既有條件後完成已授權 push → Draft PR（base dev），記錄真實 commit／PR／checks／工具證據與剩餘事項，交 human review 並停止，不背景輪詢 merge。當前為進行中交接，並非 topic closure 或 close-with-follow-up。
+隨後交使用者 review [Draft PR #129](https://github.com/a129924/agent-skills/pull/129)，停止本輪執行，不背景輪詢 merge。圖資均為 local-only；無必要工具交付缺口。這是 pr-open 的 human-review handoff，不是 merged／released 或 topic merge completion。
 
 ## next handoff
 
-- next actor：Main Agent。
-- next step：最終 scope／適用 checks → implementation commit → PR Lens 真實 diff 交付 → 已授權 push／Draft PR／human review。Planner boundedness PASS 不代替 Main Agent checks 或工具交付。
+- next actor：Main Agent，接續使用者 human reviewer。
+- next step：提交／push 三份 planning delivery 紀錄並交 human review；使用者檢視 Draft PR #129 後明確指示後續，未授權 merge 前停止。
