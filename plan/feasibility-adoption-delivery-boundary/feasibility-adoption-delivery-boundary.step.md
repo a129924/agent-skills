@@ -5,11 +5,11 @@
 - [x] 使用者核准對話範圍並授權 feature worktree、語意 commit、push 與 Draft PR。
 - [x] Feature branch 建立並核對起始 SHA 與工作樹狀態。
 - [x] 獨立 Plan-Reviewer 複審 approved，Planner readiness PASS。
-- [ ] Main Agent 提交獲准的四份 planning baseline，紀錄 commit SHA，移至 `planned`。
-- [ ] Implementer 完成 canonical skill、inventory 與工具證據。
-- [ ] Tester 完成必要檢查與案例覆蓋紀錄。
-- [ ] 獨立 skill verdict 通過，Planner 提供 boundedness evidence，Main Agent 完成 Phase 4.5 checkpoint 與路由。
-- [ ] 語意 commit、push、Draft PR 及 human review 交接。
+- [x] Planning baseline `75d75ae` 已提交，之後開始實作。
+- [x] Implementer 完成 canonical skill、inventory 與工具證據。
+- [x] Tester 完成必要檢查與案例覆蓋紀錄。
+- [x] 獨立 skill verdict 通過，Planner 提供 boundedness evidence，Main Agent 完成 Phase 4.5 checkpoint 與路由。
+- [x] 語意 commit、push、Draft PR 及 human review 交接。
 
 ## Actionable Steps
 
@@ -27,4 +27,4 @@
 
 ## Handoff / Gate Notes
 
-Plan-Reviewer 複審 approved，Planner readiness PASS，下一步為 P3 提交規劃基線。P1 如有 required fixes 交 Plan-Creator 修訂。P3 已提交 planning baseline 才能開始 I1。R1 若需回修由 Implementer 處理，Tester 補驗受影響項，Reviewer 核定。A2 由 Main Agent 判斷與路由。完成 Draft PR 後停止於 human review。Summary 記錄交付與下一責任人。
+P1 複審 `approved`，P2 readiness `PASS`，P3 規劃基線 `75d75ae`。I1／T1 符合列定範圍，R1 最終複審 `approved`。A1 由 Planner 提供範圍證據，A2 由 Main Agent 判定通過。實作 `6e5caf7` 已提交並推送。[Draft PR #130](https://github.com/a129924/agent-skills/pull/130) 已建立，狀態 `pr-open`。本輪停在 Human Review。
