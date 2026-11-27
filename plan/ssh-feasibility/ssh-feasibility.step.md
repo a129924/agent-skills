@@ -7,7 +7,7 @@
 | 建立隔離 worktree | 已完成 | 分支 `docs/andrew/ssh-feasibility`，起點 `c391870430a155480bb3b66238e9bcd7d36a323b`。 |
 | Phase 1 規劃與審查 | 已完成 | 獨立 Plan-Reviewer 回傳 `approved`，無阻擋問題。規劃基準已提交為 `fc218ce`，狀態為 `planned`。 |
 | 實驗與獨立證據審查 | `approved` | 終端 master 正在運行。Codex 在現行權限下被拒絕存取 socket，首輪未執行遠端指令，依判準停止。實驗結果為失敗，修正證據措辭後，獨立 Reviewer 回傳 `approved`。 |
-| 交接 | 待 Draft PR | 已請使用者在終端清理 master。獨立審查及範圍核對完成，依原授權交付 Draft PR。 |
+| 交接 | `pr-open` | 已推送 topic 分支，開立 [Draft PR #131](https://github.com/a129924/agent-skills/pull/131) 等待人工審閱。使用者端 master 清理已交回使用者。 |
 
 ## Actionable Steps
 

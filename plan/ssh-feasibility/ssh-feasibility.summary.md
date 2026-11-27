@@ -2,7 +2,7 @@
 
 ## current state
 
-Topic 1 實驗結果為失敗。本機終端確認 master 正在運行，Codex 現行權限拒絕存取該 socket。首輪呼叫依設計在本機停止。判定所需負向證據已取得並通過獨立審查。
+Topic 1 實驗結果為失敗。本機終端確認 master 正在運行，Codex 現行權限拒絕存取該 socket。首輪呼叫依設計在本機停止。判定所需負向證據已取得並通過獨立審查。已開立 [Draft PR #131](https://github.com/a129924/agent-skills/pull/131)，等待人工審閱。
 
 ## completed
 
@@ -21,5 +21,5 @@ Topic 1 實驗結果為失敗。本機終端確認 master 正在運行，Codex �
 
 ## next handoff
 
-- **next actor**　Main Agent 交付 Draft PR，接續由使用者進行 human review。
-- **next step**　依原授權提交已通過審查的負向結果，再交人工審閱。
+- **next actor**　人工審閱者。
+- **next step**　審閱負向證據、適用的權限範圍，以及 Topic 2 的決策限制。
