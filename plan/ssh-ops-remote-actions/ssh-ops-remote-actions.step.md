@@ -23,3 +23,5 @@ Independent Plan-Reviewer approved the corrected repo plan and progression contr
 The locked baseline was committed as 4297f45. The canonical skill and controlled tests are review-ready. Floorplan generated a local six-file blueprint. A search for a Graphify graph matching the topic found no applicable index, so source inspection used targeted reads.
 
 The reviewer requested three repairs and approved the corrected implementation. Phase 4.5 verified the exact artifact paths and accepted operation contract. The topic entered publish-in-progress. The local suite passed 27 tests and 7 subtests. A disposable loopback OpenSSH server verified real socket-only Codex sandbox command execution, single-file and recursive delivery, user-owned master preservation and dead-socket refusal. AppleScript compiled on macOS. The real graphical password entry and external SSH/Docker cases remain pending.
+
+GitHub readback verified Draft PR #134 is open against dev from feat/andrew/ssh-ops-remote-actions, with implementation head eb3a905. The topic reached pr-open and moved to human review.

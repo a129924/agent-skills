@@ -2,7 +2,7 @@
 
 ## Current state
 
-The feature worktree contains the reviewed implementation for one authorized SSH action per task. The planned handoff is the verified Draft PR against dev.
+The reviewed implementation is open for human review in [Draft PR #134](https://github.com/a129924/agent-skills/pull/134), with dev as the base.
 
 ## Completed
 
@@ -16,4 +16,4 @@ The real macOS Codex GUI password-entry and leak-canary test, native load of the
 
 ## Next handoff
 
-After confirming the Draft PR points to the reviewed feature head, hand off to the human reviewer with the local PR Lens map and pending acceptance list.
+The human reviewer receives the draft, the local PR Lens map based on the committed diff, and the pending acceptance list above.
