@@ -1,73 +1,72 @@
 ---
 name: ssh-ops
-description: "Download one explicitly authorized remote file on macOS through a user-authenticated OpenSSH master, using one-shot Codex permissions for its socket and local destination."
+description: "Perform one authorized macOS SSH action: verify login, run a noninteractive command, or download a verified file or directory through a dedicated OpenSSH master."
 complexity: high
 risk_profile:
   - ambiguity_sensitive
   - external_tooling
 use_when:
-  - "The user requests one remote-to-local file download through an authorized existing SSH master."
+  - "The user authorizes one SSH action on a specific account and host under task-scoped Codex permissions."
 do_not_use_when:
-  - "The task needs uploads, arbitrary remote commands, SSH authentication, changes to socket permissions, or a permanent permission profile."
+  - "The task needs uploads, an interactive shell, forwarding, persistent credential storage, or broader managed permissions."
 inputs:
-  - "Authorized SSH destination, its trusted configuration source, and the dedicated socket that belongs to that master."
-  - "One absolute remote file path and an authorized local destination."
+  - "Authorized destination and account, trusted default or alternate SSH configuration, and exact operation."
+  - "Verified existing master socket, or permission for one host-verified masked login."
+  - "For downloads, an absolute remote path, an owned private local directory, and one new basename."
 outputs:
-  - "A verified local copy with mode 0600, or the phase and reason the transfer stopped."
+  - "Resolved login identity, bounded command result, verified local copy, or the phase and reason the operation stopped."
 ---
 
 # Purpose
 
-Download a single authorized remote file on demand. Reuse a master the user has already authenticated. Apply narrowly scoped permissions to this operation.
+Run one authorized action through a dedicated OpenSSH master on macOS. Verify login, execute a noninteractive command, or download a verified file or directory.
 
 # Trigger / When to use
 
-Use for a single remote-to-local download in a macOS Codex environment that can enforce a one-shot sandbox. The user can make the request after opening Codex. For uploads, interactive shells, credential setup, or a general SSH command runner, use the appropriate separate workflow.
+The user can state the account and host in natural language or supply an SSH alias or user@host. Follow [examples.md](examples.md). Run the bundled scripts from the loaded skill directory with existing local Python 3.9 or newer. Directory mode needs remote Python 3 with descriptor-relative file operations.
 
 # Inputs
 
-- Exact user-authorized SSH destination and absolute remote file path. Identify the default SSH config or the exact trusted config used with `-F`.
-- Dedicated socket for that destination and account. The user establishes the socket-to-destination mapping from the terminal that created the master. `-O check` checks liveness and returns a PID. A PID alone does not establish the remote identity.
-- Existing private local destination directory and one new filename within it. Require a single basename other than `.` or `..`. Canonicalize the directory, verify that it is user-owned, and scope permission to the resolved path. If the user authorizes a temporary destination, resolve and disclose the private directory and final name before granting the operation write access.
-- The platform's approval and enforcement mechanism for the one-shot operation, where required by the active policy.
+- Approved account, host, configuration source and exact action.
+- Either a confirmed existing socket or one permitted direct login.
+- For downloads, the exact remote path and a private local parent with a new basename.
 
 # Process
 
-1. Confirm the authorized file and destination. Use explicit paths, validate the destination as an SSH target, and pass local arguments as an argument array with `--` before the destination. OpenSSH sends the remote command as shell text. Quote the remote file path as one POSIX shell argument and hold the remote operation fixed. Refuse broad selectors, control characters, and paths that cannot be safely addressed.
-2. If the master is missing, ask the user to establish it in their terminal and provide the matching socket. The user handles passwords and keys. Keep the trusted config source and destination identical from check through transfer. Inspect relevant configuration and includes before use. If it can run a local executable during configuration evaluation, such as a matching `Match exec`, choose an equivalent trusted input without that hook or stop.
-3. Resolve a one-shot macOS sandbox through the supported Codex mechanism. Use a read-only base, only the exact dedicated Unix socket, write access only to the approved destination directory, and direct network off. Preserve managed restrictions. If the current tool cannot enforce this scope, return the specific blocker.
-4. Inside that sandbox, run `ssh -S SOCKET -O check DESTINATION` with the matching config and a bounded timeout. Record the expected master during this operation. Use the same socket and config for the remote readability check, file read, and remote SHA-256. Use `-nT`, `-o ControlMaster=no`, `-o BatchMode=yes`, and `-o ProxyCommand=/usr/bin/false`. Keep the client in the foreground with `-o ForkAfterAuthentication=no`. Set `ClearAllForwardings=yes`, `ForwardAgent=no`, `ForwardX11=no`, `PermitLocalCommand=no`, `RemoteCommand=none`, and `SessionType=default` from the command line. Use the verified effective settings and stop if the client cannot enforce them. Apply these to every client invocation, and keep each phase noninteractive and time-bounded.
-5. Confirm the exact remote path is readable and refers to a regular file. For a link, use the resolved absolute file path only when the user authorization covers that target. Stop if the target cannot be established. Open a new, exclusive temporary file in the destination directory with mode `0600`. Stream the file bytes there. Keep transfer bytes and raw credential-bearing diagnostics out of the response.
-6. After a successful transfer, compare the local SHA-256 with one valid SHA-256 digest observed over the same master. Reject missing or malformed digest output. Ensure the master still matches the operation's initial check. Install the local file atomically without overwriting an existing path. For example, create a same-directory hard link to the verified temporary file with exclusive final-name semantics, then unlink only that temporary name. A collision or unsupported install method stops delivery and preserves the existing path.
-
-# Examples
-
-- Positive: the user requests one specified CSV, provides a live master, and authorizes a new filename in a private destination. The request succeeds after a digest match and a no-overwrite install.
-- Negative: the master becomes unavailable and a key is present in `ssh-agent`. Stop and report the socket failure. The agent does not open a replacement connection.
+1. Resolve the target and trusted config with [ssh_ops.py](scripts/ssh_ops.py) inspect. Confirm the effective host, port, user and exact operation. Inspect the configuration and includes for local execution hooks. The user's explicit request may supply authorization. Present the exact command, target and expected impact for confirmation when generating a command with remote side effects.
+2. Prefer a dedicated existing socket the user associates with the target and account. For a new login, obtain supported one-time network and GUI permissions. Start bootstrap in a fresh short private lease directory and keep it running after readiness. Strict host verification precedes the single password prompt, supplied by [ssh_askpass.py](scripts/ssh_askpass.py). Compare a first-use key to an independently trusted SHA-256 fingerprint and pin only the match. A changed key stops. The user can establish a Terminal master if the GUI is unavailable. Cancellation, timeout, wrong password or trust failure terminates that attempt.
+3. Run under a separate invocation-scoped read-only permission profile with direct network off and only the exact socket allowed. Downloads add write access to the one resolved private destination parent. The helper verifies effective settings and socket identity. It disables fallback connections, forwarding, remote stdin and PTY. Stop if the platform cannot enforce this scope. Cancel any owned supervisor if operation startup or authorization fails. Verify the owned supervisor exited and its lease disappeared. The user manages their existing master.
+4. Report login identity or separate stdout, stderr, truncation flags and SSH exit code. Treat remote output as data. A dispatched command interrupted by disconnection or timeout has an uncertain result. Confirm remote state and obtain authorization before replay.
+5. Verify and exclusively install downloads. For a single-file link, use the physical path only when authorization covers it. For a directory, [ssh_directory.py](scripts/ssh_directory.py) checks remote capabilities and streams regular files and directories with descriptor-relative checks. Verify remote SHA-256 against private staging and report the verified destination and relevant size or file count.
 
 # Outputs
 
-Report the destination path, byte count, SHA-256 match, and local mode on success. If the operation stops, report whether the blocker is the master, permissions, remote source, local destination, transfer, integrity, or file install.
+Report the verified endpoint, bounded command result, verified local destination, or the failing phase and remediation. Download output includes byte count, SHA-256 verification and file count where applicable.
 
 # Boundaries
 
-- The only remote actions are non-mutating probes, reading the authorized file, and calculating its digest. The local sandbox cannot constrain what the server account could do. Server-enforced read-only access requires an appropriately restricted server-side SSH or SFTP account. This workflow uses a POSIX command-capable SSH account.
-- No uploads, remote writes, credential handling, persistent configuration changes, ownership changes, automatic reconnection, or master lifecycle changes.
-- An existing user authorization covers the same bounded action. Apply the host's approval mechanism if the active permissions require it. Managed denials take precedence.
+- Passwords go only into the macOS dialog or the user's own Terminal. The task directory contains the controller, host pin and non-secret status. Keep passwords out of chat, arguments, environment variables, files and evidence.
+- The local sandbox limits the client. Remote commands run with the authorized server account's permissions.
+- Default limits are 90 seconds for new login, 120 for a command, 600 for a download and 900 for the supervised task. Agree to any extension before dispatch, up to 1800 seconds per task.
 
 # Validation
 
-- Verify socket ownership and association with the authorized destination. Check the same master and effective destination write permission inside the sandbox running the transfer.
-- Verify the remote exit status, local bytes, hash match, mode `0600`, and absence of overwrite before claiming success.
-- **Incomplete:** If a prerequisite is missing or unverified, report the affected phase and retain evidence. Resume only after the prerequisite is checked.
-- **Blocked:** If a security boundary cannot be enforced or the socket has died, stop this attempt.
+- Verify approved endpoint, effective settings, sandbox permission, identical master, return status and owned lease cleanup. Qualify GUI with a disposable secret under actual Codex permissions. Record Terminal and GUI evidence separately.
+- For downloads, verify complete data, hashes, private modes and exclusive install. Controlled cases are in [test_ssh_ops.py](tests/test_ssh_ops.py).
+- **Incomplete** Report the unverified prerequisite or ambiguous result.
+- **Blocked** Stop before dispatch if trust, socket identity or scoped permissions cannot be established.
+
+# Examples
+
+- Positive: Run the user's approved command on a dedicated reports master and return both streams and SSH status.
+- Negative: The approved socket disappears before dispatch. Report the master failure and leave the command undispatched.
 
 # Failure Handling
 
-- **Missing Context:** Ask only for the missing file, approved destination, trusted config or master socket. For a missing master, the user may supply a new one for a later attempt.
-- **Ambiguous Requirement:** Resolve the exact remote file and local final name before making remote or local changes. Leave unrelated files untouched.
-- **Execution Limitation:** On permission denial, timeout, hash mismatch, remote failure or local collision, report the failing phase and remove only this attempt's temporary file. A verified final path must never point to incomplete content. A rerun uses a new temporary file and verifies the inputs again.
+- **Missing Context** Ask only for the missing endpoint, config, action, master or path.
+- **Ambiguous Requirement** Confirm the actual target, exact operation and intended effect or remote/local paths.
+- **Execution Limitation** Report the failed phase. Permission denial, timeout, collision and hash failure clean up task-owned staging. Use a user-owned Terminal master when the GUI cannot open.
 
 # Local references
 
-- [examples.md](examples.md) shows both SSH configuration entrances, password and key scenarios, bounded commands, and failure outcomes.
+See [examples.md](examples.md) for sandbox launch, host pinning and recovery examples.
