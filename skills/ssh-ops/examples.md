@@ -6,7 +6,7 @@ All host, directory and file values below are illustrative. Execute a transfer o
 
 > Download the specified report at `reports.example:/exports/daily.csv` to a new file in my private temporary directory. Use the socket I created for my authenticated reports account.
 
-The agent resolves the exact file, shows the resolved private destination, and checks access under the one-shot sandbox used for the transfer. It checks the socket before reading the file. If the existing sandbox lacks permission, this exact operation goes through Codex's available per-operation approval mechanism. The user does not need to restart the CLI to identify the desired file.
+The agent resolves the exact file, shows the resolved private destination, and checks access under the one-shot sandbox used for the transfer. It checks the socket before reading the file. If the existing sandbox lacks permission, this exact operation goes through Codex's available per-operation approval mechanism. Use the existing dialogue. For native-load validation, confirm that `$ssh-ops` resolves to the reviewed version in that dialogue. Stop at loading if the version cannot be verified there.
 
 ## Establish the master in the user's terminal
 
@@ -27,10 +27,10 @@ ssh_cfg=()
 ssh_dir=$(mktemp -d /tmp/ssh-file.XXXXXXXX) &&
   socket="$ssh_dir/control" &&
   ssh "${ssh_cfg[@]}" -S "$socket" -M -N -f -o ControlPersist=15m "$destination" &&
-  ssh "${ssh_cfg[@]}" -S "$socket" -O check "$destination"
+  ssh "${ssh_cfg[@]}" -S "$socket" -o ForkAfterAuthentication=no -O check "$destination"
 ```
 
-The user associates the socket with the selected destination and account when sharing it with Codex. For an existing socket, reuse it after confirming that association and liveness. The user closes it when finished with the same config, socket and `-O exit`.
+The user associates the socket with the selected destination and account when sharing it with Codex. For an existing socket, reuse it after confirming that association and liveness. The user closes it when finished with the same config and socket, using `-o ForkAfterAuthentication=no -O exit`.
 
 ## Apply the one-shot boundary
 
@@ -52,9 +52,11 @@ Inside that sandbox, use the matching trusted SSH settings for every stage. The 
 ```text
 ssh = ["/usr/bin/ssh", *ssh_cfg, "-S", socket, "-nT",
        "-o", "ControlMaster=no", "-o", "BatchMode=yes",
+       "-o", "ForkAfterAuthentication=no",
        "-o", "ProxyCommand=/usr/bin/false",
        "-o", "ClearAllForwardings=yes", "-o", "ForwardAgent=no",
-       "-o", "ForwardX11=no", "-o", "PermitLocalCommand=no"]
+       "-o", "ForwardX11=no", "-o", "PermitLocalCommand=no",
+       "-o", "RemoteCommand=none", "-o", "SessionType=default"]
 master = require_success(ssh + ["-O", "check", "--", destination], timeout=10)
 path_arg = quote_one_posix_shell_argument(authorized_remote_path)
 remote = ssh + ["--", destination]
@@ -64,13 +66,13 @@ try:
     require_success(remote + ["cat < " + path_arg], stdout=stage, timeout=transfer_deadline)
     digest = require_success(remote + ["sha256sum < " + path_arg], timeout=digest_deadline)
     require_same_master(ssh, destination, master, timeout=10)
-    require_equal_sha256(stage, digest)
+    require_equal_sha256(stage, parse_one_sha256(digest))
     install_exclusively(stage, approved_final_name)
 finally:
     remove_only_this_attempts_temporary_name()
 ```
 
-Capture raw diagnostics privately and report only the failing phase and relevant details. File bytes flow to the open temporary file. This example uses a server with an approved `sha256sum` utility.
+Capture raw diagnostics privately and report only the failing phase and relevant details. File bytes flow to the open temporary file. This example uses a server with an approved `sha256sum` utility. Choose finite transfer and digest deadlines before staging and wait for the bounded client to exit before cleanup.
 
 ## Stops and outcomes
 
