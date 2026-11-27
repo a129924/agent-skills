@@ -27,10 +27,10 @@ ssh_cfg=()
 ssh_dir=$(mktemp -d /tmp/ssh-file.XXXXXXXX) &&
   socket="$ssh_dir/control" &&
   ssh "${ssh_cfg[@]}" -S "$socket" -M -N -f -o ControlPersist=15m "$destination" &&
-  ssh "${ssh_cfg[@]}" -S "$socket" -O check "$destination"
+  ssh "${ssh_cfg[@]}" -S "$socket" -o ForkAfterAuthentication=no -O check "$destination"
 ```
 
-The user associates the socket with the selected destination and account when sharing it with Codex. For an existing socket, reuse it after confirming that association and liveness. The user closes it when finished with the same config, socket and `-O exit`.
+The user associates the socket with the selected destination and account when sharing it with Codex. For an existing socket, reuse it after confirming that association and liveness. The user closes it when finished with the same config and socket, using `-o ForkAfterAuthentication=no -O exit`.
 
 ## Apply the one-shot boundary
 
@@ -52,6 +52,7 @@ Inside that sandbox, use the matching trusted SSH settings for every stage. The 
 ```text
 ssh = ["/usr/bin/ssh", *ssh_cfg, "-S", socket, "-nT",
        "-o", "ControlMaster=no", "-o", "BatchMode=yes",
+       "-o", "ForkAfterAuthentication=no",
        "-o", "ProxyCommand=/usr/bin/false",
        "-o", "ClearAllForwardings=yes", "-o", "ForwardAgent=no",
        "-o", "ForwardX11=no", "-o", "PermitLocalCommand=no",
