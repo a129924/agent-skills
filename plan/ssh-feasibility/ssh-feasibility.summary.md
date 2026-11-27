@@ -2,23 +2,24 @@
 
 ## current state
 
-規劃基準已於隔離 worktree 的 `docs/andrew/ssh-feasibility` 提交。Topic 1 實機驗證等待已授權測試主機，實驗狀態仍為未執行。
+Topic 1 實驗結果為失敗。本機終端確認 master 正在運行，Codex 現行權限拒絕存取該 socket。首輪呼叫依設計在本機停止。判定所需負向證據已取得並通過獨立審查。
 
 ## completed
 
-- 獨立 Plan-Reviewer 對 topic plan 回傳 `approved`，無阻擋。
-- 已核對 OpenSSH 10.2p1、參數解析與未建立 socket 的離線行為。遮蔽證據見 [E001](../../experiments/E001/README.md)。
+- 獨立 Plan-Reviewer 核准規劃基準。
+- 已核對 OpenSSH 10.2p1、選項解析與離線中止行為。
+- 已以獲授權主機為目標，自本機執行首輪驗證。兩項本機 SSH 呼叫均為 `255`。備援診斷顯示選用本機 `/usr/bin/false`，未回傳遠端身分。見 [E001](../../experiments/E001/README.md)。
 
 ## not completed
 
-- 跨兩輪重用及手動關線後重試的實機驗證。
-- 實機證據獨立審查、push 與 Draft PR。Topic 2 尚未開始。
+- 首輪已觸發停止條件。第二輪、遠端身分比對及手動關線後實機重試未執行。
+- 使用者端 master 清理待回報。Topic 2 尚未開始。
 
 ## required follow-up
 
-取得已授權的測試別名、設定入口及預期遠端身分。由使用者在本機終端登入並確認 master。完成實測後按證據更新 E001 及本摘要。
+請使用者關閉終端 master。若另開 Topic 2，須以此負向結果評估方案。直接重用此 socket 在現行權限下不可用。
 
 ## next handoff
 
-- **next actor**　使用者，接續由 Tester 執行計畫。
-- **next step**　確認測試目標與設定入口，在自己的終端機完成登入。密碼及金鑰解鎖資訊留在終端。
+- **next actor**　Main Agent 交付 Draft PR，接續由使用者進行 human review。
+- **next step**　依原授權提交已通過審查的負向結果，再交人工審閱。
